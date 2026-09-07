@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"Capability discovery preserves evidence-backed DETECTED, LIKELY, and UNKNOWN results without silently changing registry policy.","source":"next-milestone"},
+    {"id":"REQ-002","statement":"Discovery output identifies the rule and repository path evidence supporting each reported capability and bounds generated evidence.","source":"next-milestone"},
+    {"id":"REQ-003","statement":"Source-classification conflicts and unknown paths remain explicit and deterministic for review.","source":"next-milestone"}
+  ]
+}

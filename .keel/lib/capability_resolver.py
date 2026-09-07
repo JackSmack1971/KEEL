@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Iterable
 
 IGNORE_DIRS = {".git", ".keel", ".control-plane", "node_modules", "vendor", "dist", "build", "target", ".venv", "venv", "__pycache__"}
+RESOLVER_SCHEMA_VERSION = 2
+RESOLVER_RULES_VERSION = 1
 
 # Detection is intentionally conservative: evidence is reported, policy is never silently activated.
 RULES = {
@@ -87,6 +89,17 @@ def _match(path: str, pattern: str) -> bool:
     return False
 
 
+def _matched_evidence(paths: list[str], patterns: list[str], kind: str, limit: int) -> list[dict]:
+    rows = []
+    for path in paths:
+        matched = [pattern for pattern in patterns if _match(path, pattern)]
+        if matched:
+            rows.append({"path": path, "patterns": matched, "kind": kind})
+        if len(rows) >= limit:
+            break
+    return rows
+
+
 def iter_repo_paths(root: Path, ignore_dirs: Iterable[str] | None = None) -> list[str]:
     ignored = set(ignore_dirs or ()) | IGNORE_DIRS
     out: list[str] = []
@@ -130,30 +143,50 @@ def resolve(root: Path, config: dict | None = None) -> dict:
     paths = iter_repo_paths(root, ignore)
     caps: dict[str, dict] = {}
     for cap, rule in RULES.items():
-        detected = sorted({p for p in paths for pat in rule.get("detected", []) if _match(p, pat)})
-        likely = sorted({p for p in paths for pat in rule.get("likely", []) if _match(p, pat)})
-        if detected:
-            status, confidence, ev = "DETECTED", 1.0, detected
-        elif likely:
-            status, confidence, ev = "LIKELY", 0.65, likely
+        detected_details = _matched_evidence(paths, rule.get("detected", []), "detected", max_evidence)
+        likely_details = _matched_evidence(paths, rule.get("likely", []), "likely", max_evidence)
+        if detected_details:
+            status, confidence, details = "DETECTED", 1.0, detected_details
+        elif likely_details:
+            status, confidence, details = "LIKELY", 0.65, likely_details
         else:
-            status, confidence, ev = "UNKNOWN", 0.0, []
-        caps[cap] = {"status": status, "confidence": confidence, "evidence": ev[:max_evidence]}
+            status, confidence, details = "UNKNOWN", 0.0, []
+        caps[cap] = {
+            "status": status,
+            "confidence": confidence,
+            "evidence": [row["path"] for row in details],
+            "evidence_details": details,
+        }
 
     # Conflicts are explicit rather than silently resolved.
     conflicts = []
     source_classes = {p: classify_path(p, config) for p in paths}
+    explicit_source = (config.get("source_classification", {}) or {}).get("explicit_source_globs", [])
+    explicit_non = (config.get("source_classification", {}) or {}).get("explicit_non_source_globs", [])
     for p, cls in source_classes.items():
-        explicit_s = [pat for pat in (config.get("source_classification", {}) or {}).get("explicit_source_globs", []) if isinstance(pat, str) and _match(p, pat)]
-        explicit_n = [pat for pat in (config.get("source_classification", {}) or {}).get("explicit_non_source_globs", []) if isinstance(pat, str) and _match(p, pat)]
+        explicit_s = [pat for pat in explicit_source if isinstance(pat, str) and _match(p, pat)]
+        explicit_n = [pat for pat in explicit_non if isinstance(pat, str) and _match(p, pat)]
         if explicit_s and explicit_n:
-            conflicts.append({"path": p, "reason": "matches explicit source and non-source classifiers", "source_globs": explicit_s, "non_source_globs": explicit_n})
+            conflicts.append({"status": "CONFLICT", "path": p, "reason": "matches explicit source and non-source classifiers", "source_globs": explicit_s, "non_source_globs": explicit_n})
+
+    unknown_paths = [path for path, classification in source_classes.items() if classification == "UNKNOWN"]
+    classification_counts = {
+        "SOURCE": sum(1 for value in source_classes.values() if value == "SOURCE"),
+        "NON_SOURCE": sum(1 for value in source_classes.values() if value == "NON_SOURCE"),
+        "UNKNOWN": len(unknown_paths),
+    }
 
     return {
-        "schema_version": 1,
+        "schema_version": RESOLVER_SCHEMA_VERSION,
+        "rules_version": RESOLVER_RULES_VERSION,
         "capabilities": caps,
         "conflicts": conflicts,
         "path_count": len(paths),
+        "source_classification": {
+            "counts": classification_counts,
+            "unknown_paths": unknown_paths[:max_evidence],
+            "unknown_paths_truncated": len(unknown_paths) > max_evidence,
+        },
         "policy": "advisory-evidence-only",
     }
 

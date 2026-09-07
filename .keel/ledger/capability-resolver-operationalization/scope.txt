@@ -1,0 +1,6 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/capability_resolver.py
+.keel/tests/**
+.keel/config.json
+docs/control-plane/CAPABILITY_RESOLUTION.md
+.control-plane/bootstrap-manifest.json

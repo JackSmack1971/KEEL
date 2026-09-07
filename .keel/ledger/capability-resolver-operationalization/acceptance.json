@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Resolver tests prove advisory statuses and registry independence.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"capability-resolver-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Resolver tests prove rule-level evidence provenance and evidence bounds.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"capability-resolver-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Resolver tests prove explicit classifier conflicts, unknown paths, and deterministic repeated output.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"capability-resolver-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"The repository control-plane validator and KEEL doctor pass.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"control-plane-doctor"}]}
+  ]
+}

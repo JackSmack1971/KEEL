@@ -1,0 +1,105 @@
+{
+  "acceptance": {
+    "passed_required": 4,
+    "required": 4
+  },
+  "base_commit": "80e82d11ee1e877c339ce79276de1565dbae5569",
+  "change_id": "capability-resolver-operationalization",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/capability_resolver.py",
+    ".keel/tests/test_capability_resolver.py",
+    "docs/control-plane/CAPABILITY_RESOLUTION.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "80e82d11ee1e877c339ce79276de1565dbae5569",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.control-plane/bootstrap-manifest.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/lib/capability_resolver.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/CAPABILITY_RESOLUTION.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 320,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/bench/test_keelbench.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 300,
+      "excerpt": "KEELBench tests PASS",
+      "exit_code": 0,
+      "id": "keelbench-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keelbench.py",
+        "--root",
+        ".",
+        "validate"
+      ],
+      "cwd": ".",
+      "duration_ms": 167,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "keelbench-validate",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/scripts/validate_control_plane.py",
+        "--root",
+        ".",
+        "--strict-manifest",
+        "--require-keel-runtime"
+      ],
+      "cwd": ".",
+      "duration_ms": 1423,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
+      "exit_code": 0,
+      "id": "strict-control-plane-validation",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 162,
+      "excerpt": "Capability resolver tests PASS",
+      "exit_code": 0,
+      "id": "capability-resolver-tests",
+      "required": true
+    }
+  ],
+  "content_digest": "e81200a68eaee7c920cbe79c3a2933b50caca6f97e184188b125f4c2d90ffc53",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T05:40:12+00:00"
+}

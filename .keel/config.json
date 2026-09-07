@@ -127,6 +127,17 @@
       "id": "strict-control-plane-validation",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "id": "capability-resolver-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

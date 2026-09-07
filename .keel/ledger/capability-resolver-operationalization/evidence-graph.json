@@ -1,0 +1,98 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "capability-resolver-tests",
+          "detail": "check=capability-resolver-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Resolver tests prove advisory statuses and registry independence.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "capability-resolver-tests",
+          "detail": "check=capability-resolver-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Resolver tests prove rule-level evidence provenance and evidence bounds.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "capability-resolver-tests",
+          "detail": "check=capability-resolver-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Resolver tests prove explicit classifier conflicts, unknown paths, and deterministic repeated output.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The repository control-plane validator and KEEL doctor pass.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "next-milestone",
+      "statement": "Capability discovery preserves evidence-backed DETECTED, LIKELY, and UNKNOWN results without silently changing registry policy."
+    },
+    {
+      "id": "REQ-002",
+      "source": "next-milestone",
+      "statement": "Discovery output identifies the rule and repository path evidence supporting each reported capability and bounds generated evidence."
+    },
+    {
+      "id": "REQ-003",
+      "source": "next-milestone",
+      "statement": "Source-classification conflicts and unknown paths remain explicit and deterministic for review."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4
+  }
+}
