@@ -1,0 +1,7 @@
+{"details": {"base_commit": "ed40f8f2e91c191b81293a5b07df78e9d64e6007", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:15:04+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:17:13+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:17:14+00:00"}
+{"details": {"changed_paths": [".keel/bin/keel.py", ".keel/config.json", ".keel/lib/feedback_entropy.py", ".keel/tests/test_feedback_entropy.py", "docs/control-plane/FEEDBACK_EVALS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/feedback-entropy-loop.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:17:23+00:00"}
+{"details": {"content_digest": "0a6e458ea1f7b0ac33fedb66f6a7c4a0b90edad74ac9fae5af4ea24414e1cd09", "errors": ["verification command failed: strict-control-plane-validation exit=1", "acceptance criterion failed: AC-004"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T12:17:23+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/feedback_entropy.py", ".keel/tests/test_feedback_entropy.py", "docs/control-plane/FEEDBACK_EVALS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/feedback-entropy-loop.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:17:35+00:00"}
+{"details": {"content_digest": "89aa9059312d696ee762b69c398e3c31e16f6f95834e1e3ece58377e97a74131", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:17:35+00:00"}

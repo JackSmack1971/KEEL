@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"Feedback observations shall include provenance, review state, failure classification, and repository-contained evidence before promotion eligibility is reported.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"Feedback inspection shall distinguish observed, reviewed, evaluated, and promoted states and shall never promote automatically.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"Entropy scanning shall produce deterministic non-destructive findings for bounded repository decay signals.","source":"upgrade-audit"}
+  ]
+}

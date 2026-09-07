@@ -260,6 +260,17 @@
       "id": "engineering-protocols-skill-check",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_feedback_entropy.py"
+      ],
+      "cwd": ".",
+      "id": "feedback-entropy-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

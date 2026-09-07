@@ -15,6 +15,16 @@ Activation loop:
 
 A self-improvement loop must improve measurable outcomes, not merely produce more activity.
 
+The repository provides conservative local inspection:
+
+```text
+python3 .keel/bin/keel.py feedback validate <observation.json>
+python3 .keel/bin/keel.py feedback status <observation.json>
+python3 .keel/bin/keel.py entropy scan
+```
+
+These commands are read-only. An observation must retain provenance, repository-contained evidence, review state, and a failure class. Promotion to a permanent invariant requires a separate evaluated and authorized KEEL change; inspection never promotes or rewrites policy.
+
 ## KEELBench baseline gate
 
 The repository ships a benchmark contract under `.keel/bench/`. Use paired repeated runs from equivalent starting states to measure task success, acceptance coverage, regressions, scope/authorization violations, human intervention and execution cost. Deterministic KEEL self-tests demonstrate mechanism behavior only; G5 empirical value remains unvalidated until KEELBench or an equivalent representative baseline comparison demonstrates material uplift. See [KEELBENCH.md](KEELBENCH.md).

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Feedback tests reject missing provenance, invalid evidence paths, and unreviewed promotion claims.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"feedback-entropy-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Feedback tests prove state progression is reported but never mutated by inspection.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"feedback-entropy-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Entropy tests prove deterministic link/plan/derived-artifact findings and non-destructive behavior.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"feedback-entropy-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

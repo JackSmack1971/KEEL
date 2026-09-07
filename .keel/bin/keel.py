@@ -11,6 +11,7 @@ import upgrade_kernel as uk
 import mission_graph as mg
 import repository_map as rm
 import topology_router as tr
+import feedback_entropy as fe
 
 
 def main() -> int:
@@ -23,6 +24,8 @@ def main() -> int:
     p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status"]); p.add_argument("path", type=Path)
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
+    p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status"]); p.add_argument("path", type=Path)
+    p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -67,6 +70,12 @@ def main() -> int:
         if args.cmd == "route":
             result = tr.recommend(tr.load(args.path.resolve()), args.change)
             print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+        if args.cmd == "feedback":
+            observation = fe.load(args.path.resolve())
+            result = {"status": "PASS" if not fe.validate_observation(root, observation) else "FAIL", "errors": fe.validate_observation(root, observation)} if args.action == "validate" else fe.status(root, observation)
+            print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+        if args.cmd == "entropy":
+            result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":
