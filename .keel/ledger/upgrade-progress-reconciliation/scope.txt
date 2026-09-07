@@ -1,0 +1,6 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.control-plane/bootstrap-manifest.json
+docs/control-plane/UPGRADE_AUDIT.md
+docs/exec-plans/active/upgrade-remaining-plan.md
+docs/exec-plans/active/keel-upgrade-goal.md
+docs/exec-plans/active/upgrade-progress-reconciliation.md

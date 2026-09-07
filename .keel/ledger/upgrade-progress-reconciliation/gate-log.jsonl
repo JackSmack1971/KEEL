@@ -1,0 +1,5 @@
+{"details": {"base_commit": "0cdcc67335546e36a2716820d9a82069e59ea445", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:45:56+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:46:33+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:46:34+00:00"}
+{"details": {"changed_paths": ["docs/exec-plans/active/keel-upgrade-goal.md", "docs/exec-plans/active/upgrade-progress-reconciliation.md", "docs/exec-plans/active/upgrade-remaining-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:46:42+00:00"}
+{"details": {"content_digest": "85902e9ad52c73c768eb5dbe2acdfb4b2e1165a7d3e4f948f8ed57e6e3e3a96e", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:46:42+00:00"}
