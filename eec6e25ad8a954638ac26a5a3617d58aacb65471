@@ -1,0 +1,5 @@
+keel-change-id: manifest-correction
+sealed-candidate: eec6e25ad8a954638ac26a5a3617d58aacb65471
+landed-commit: eec6e25ad8a954638ac26a5a3617d58aacb65471
+integration-relation: candidate-ancestor
+verified-content-digest: aa38afc887ddb4ffdb0ee55dae1e97a02ba0e6c3b6cf1020b2a2b9b0ac6c837f
