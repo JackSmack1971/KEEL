@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "Every declared requirement is covered by at least one acceptance criterion before verification can pass.",
+      "source": "next-milestone"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "The evaluated evidence graph reports deterministic requirement coverage alongside criterion evidence results.",
+      "source": "next-milestone"
+    }
+  ]
+}

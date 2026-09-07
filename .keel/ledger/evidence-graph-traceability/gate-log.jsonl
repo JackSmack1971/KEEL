@@ -1,0 +1,5 @@
+{"details": {"base_commit": "60e7fa144ab32544bb055ed3e07a56b7bb49b23b", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T11:24:25+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T11:24:38+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T11:25:08+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/config.json", ".keel/lib/evidence_graph.py", ".keel/tests/test_evidence_graph.py", "docs/control-plane/ACCEPTANCE_EVIDENCE.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T11:26:10+00:00"}
+{"details": {"content_digest": "0b8c8e5fd1fc2e62450581a337a72a3cc3f59bc057157be18e0280fbb001f4c2", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T11:26:10+00:00"}

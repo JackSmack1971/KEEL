@@ -1,0 +1,10 @@
+{
+  "base_commit": "60e7fa144ab32544bb055ed3e07a56b7bb49b23b",
+  "change_id": "evidence-graph-traceability",
+  "created_at": "2026-09-07T11:24:25+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T11:26:10+00:00",
+  "verified_content_digest": "0b8c8e5fd1fc2e62450581a337a72a3cc3f59bc057157be18e0280fbb001f4c2"
+}

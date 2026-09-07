@@ -9,6 +9,8 @@ acceptance.json
 
 `requirements.json` contains stable `REQ-*` statements. `acceptance.json` contains `AC-*` criteria, each linked to a requirement and one or more evidence edges. Both files are part of KEEL's intent digest, so changing acceptance after verification makes evidence stale.
 
+Every declared requirement must be referenced by at least one acceptance criterion. An orphan requirement is a contract error and prevents verification; this keeps intent-to-evidence traceability explicit rather than treating an unreferenced requirement as implicitly satisfied.
+
 Current deterministic providers:
 
 - `command` — a configured verification check id must exit `0`;
@@ -18,6 +20,8 @@ Current deterministic providers:
 Unknown evidence providers do not silently pass. Extend provider support only when the new provider has a mechanically inspectable result contract.
 
 During `keel verify`, KEEL evaluates every required criterion and writes `evidence-graph.json`. Verification cannot PASS while a required acceptance criterion is unsatisfied.
+
+The evaluated graph also reports deterministic requirement coverage counts so reviewers can distinguish complete traceability from a merely green command check.
 
 ## Example
 

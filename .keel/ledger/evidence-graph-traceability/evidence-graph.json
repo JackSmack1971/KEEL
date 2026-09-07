@@ -1,0 +1,99 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-graph-tests",
+          "detail": "check=evidence-graph-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Focused evidence-graph tests prove an orphan requirement is rejected during contract validation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-graph-tests",
+          "detail": "check=evidence-graph-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Focused evidence-graph tests prove a complete graph reports requirement coverage counts and criterion statuses.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and KEEL doctor pass after the evidence-graph change.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "next-milestone",
+      "statement": "Every declared requirement is covered by at least one acceptance criterion before verification can pass."
+    },
+    {
+      "id": "REQ-002",
+      "source": "next-milestone",
+      "statement": "The evaluated evidence graph reports deterministic requirement coverage alongside criterion evidence results."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  }
+}

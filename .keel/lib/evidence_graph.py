@@ -42,6 +42,7 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         req_ids.add(rid)
         if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"requirement {rid} statement too thin")
     ac_ids = set()
+    covered_requirements = set()
     for c in criteria:
         if not isinstance(c, dict): errors.append("acceptance entries must be objects"); continue
         aid = c.get("id"); rid = c.get("requirement_id"); statement = c.get("statement")
@@ -49,6 +50,7 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         if aid in ac_ids: errors.append(f"duplicate acceptance id: {aid}")
         ac_ids.add(aid)
         if rid not in req_ids: errors.append(f"acceptance {aid} references unknown requirement {rid!r}")
+        else: covered_requirements.add(rid)
         if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"acceptance {aid} statement too thin")
         if c.get("policy", "all") not in {"all", "any"}: errors.append(f"acceptance {aid} policy must be all|any")
         if not isinstance(c.get("required", True), bool): errors.append(f"acceptance {aid} required must be boolean")
@@ -64,6 +66,8 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
                 errors.append(f"acceptance {aid} command evidence requires check_id")
             if provider in {"changed_path", "file_exists"} and not isinstance(edge.get("path"), str):
                 errors.append(f"acceptance {aid} {provider} evidence requires path")
+    for rid in sorted(req_ids - covered_requirements):
+        errors.append(f"requirement {rid} has no acceptance criterion")
     return errors
 
 
@@ -106,11 +110,28 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
         criterion_rows.append(row)
         if row["required"] and not passed:
             errors.append(f"acceptance criterion failed: {row['id']}")
+    requirement_coverage = []
+    for requirement in req["requirements"]:
+        rid = requirement["id"]
+        rows = [row for row in criterion_rows if row["requirement_id"] == rid]
+        requirement_coverage.append({
+            "requirement_id": rid,
+            "criterion_ids": [row["id"] for row in rows],
+            "criterion_count": len(rows),
+            "passed": bool(rows) and all(row["status"] == "PASS" for row in rows),
+        })
     return {
         "schema_version": 1,
         "status": "PASS" if not errors else "FAIL",
         "errors": errors,
         "requirements": req["requirements"],
         "criteria": criterion_rows,
-        "summary": {"required": sum(1 for c in criterion_rows if c["required"]), "passed_required": sum(1 for c in criterion_rows if c["required"] and c["status"] == "PASS")},
+        "requirement_coverage": requirement_coverage,
+        "summary": {
+            "required": sum(1 for c in criterion_rows if c["required"]),
+            "passed_required": sum(1 for c in criterion_rows if c["required"] and c["status"] == "PASS"),
+            "requirements_total": len(req["requirements"]),
+            "requirements_covered": sum(1 for row in requirement_coverage if row["criterion_count"] > 0),
+            "requirements_passing": sum(1 for row in requirement_coverage if row["passed"]),
+        },
     }

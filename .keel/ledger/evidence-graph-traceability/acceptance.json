@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC-001",
+      "requirement_id": "REQ-001",
+      "statement": "Focused evidence-graph tests prove an orphan requirement is rejected during contract validation.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "evidence-graph-tests"}]
+    },
+    {
+      "id": "AC-002",
+      "requirement_id": "REQ-002",
+      "statement": "Focused evidence-graph tests prove a complete graph reports requirement coverage counts and criterion statuses.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "evidence-graph-tests"}]
+    },
+    {
+      "id": "AC-003",
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and KEEL doctor pass after the evidence-graph change.",
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {"provider": "command", "check_id": "strict-control-plane-validation"},
+        {"provider": "command", "check_id": "control-plane-doctor"}
+      ]
+    }
+  ]
+}
