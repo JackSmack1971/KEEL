@@ -1,0 +1,5 @@
+keel-change-id: schema-evidence-adapter
+sealed-candidate: aaa9f76a5613d413bfe12d90625e0764c6cfde8f
+landed-commit: aaa9f76a5613d413bfe12d90625e0764c6cfde8f
+integration-relation: candidate-ancestor
+verified-content-digest: cb7a79dd59571f5f08aa471e0e44772056c21dfa1defa0f82dc25a6efaa6a350
