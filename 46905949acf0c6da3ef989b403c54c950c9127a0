@@ -1,0 +1,5 @@
+keel-change-id: telemetry-status-reconciliation
+sealed-candidate: 46905949acf0c6da3ef989b403c54c950c9127a0
+landed-commit: 46905949acf0c6da3ef989b403c54c950c9127a0
+integration-relation: candidate-ancestor
+verified-content-digest: 2cf11b1a4e22fe1a0b8b821323c86e22ca1d4bad52b500d0dbfb59e458cbac53
