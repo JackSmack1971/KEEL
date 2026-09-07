@@ -1,0 +1,7 @@
+# Conservative project defaults. Effective only when this project .codex layer is trusted.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# Keep Codex automatic KEY/SECRET/TOKEN-like environment filtering enabled.
+[shell_environment_policy]
+ignore_default_excludes = false

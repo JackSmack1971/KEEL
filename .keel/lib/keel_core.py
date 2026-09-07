@@ -1,0 +1,986 @@
+from __future__ import annotations
+
+import fnmatch
+import hashlib
+import json
+import os
+import re
+import subprocess
+import time
+from datetime import datetime, timezone
+from pathlib import Path, PurePosixPath
+
+import capability_resolver
+import context_compiler
+import evidence_graph
+
+ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
+PLACEHOLDER_RE = re.compile(r"<!--\s*FILL\b|\{\{[A-Z0-9_]+\}\}")
+INTEGRATION_PREFIXES = (
+    "git push", "git merge", "gh pr create", "gh pr merge", "gh release", "git tag -s", "git tag -a",
+)
+INTENT_FILES = ("proposal.md", "delta.md", "requirements.json", "acceptance.json", "scope.txt", "risk.json", "effects.json", "authorization.json", "risk-review.md")
+CONTROL_PLANE_PREFIXES = (".codex/", ".keel/", ".agents/skills/")
+CONTROL_PLANE_FILES = {"AGENTS.md", "CONTROL_PLANE.md", "WORKFLOW.md"}
+CANDIDATE_REF_PREFIX = "refs/keel/candidates/"
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def run_git(root: Path, args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["git", *args], cwd=root, text=True, capture_output=True, check=check)
+
+
+def run_git_bytes(root: Path, args: list[str], check: bool = True) -> subprocess.CompletedProcess[bytes]:
+    return subprocess.run(["git", *args], cwd=root, capture_output=True, check=check)
+
+
+def git_root(cwd: Path | None = None) -> Path:
+    p = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=cwd, text=True, capture_output=True)
+    if p.returncode != 0:
+        raise RuntimeError("KEEL requires a Git repository")
+    return Path(p.stdout.strip()).resolve()
+
+
+def head_commit(root: Path) -> str:
+    p = run_git(root, ["rev-parse", "HEAD"], check=False)
+    if p.returncode != 0:
+        raise RuntimeError("KEEL requires an initial baseline commit before the first write change")
+    return p.stdout.strip()
+
+
+def atomic_write(path: Path, data: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp-keel")
+    tmp.write_text(data, encoding="utf-8")
+    os.replace(tmp, path)
+
+
+def read_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json(path: Path, value) -> None:
+    atomic_write(path, json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def canonical_json_digest(value: dict) -> str:
+    data = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(data).hexdigest()
+
+
+def validate_id(change_id: str) -> str:
+    if not ID_RE.fullmatch(change_id) or ".." in change_id or change_id.endswith("."):
+        raise ValueError("change-id must match [a-z0-9][a-z0-9._-]{0,63}, without '..' or trailing '.'")
+    return change_id
+
+
+def ledger_dir(root: Path, change_id: str) -> Path:
+    validate_id(change_id)
+    p = (root / ".keel" / "ledger" / change_id).resolve()
+    p.relative_to((root / ".keel" / "ledger").resolve())
+    return p
+
+
+def active_file(root: Path) -> Path:
+    return root / ".keel" / "active-change"
+
+
+def active_change(root: Path) -> str | None:
+    p = active_file(root)
+    if not p.is_file():
+        return None
+    cid = p.read_text(encoding="utf-8").strip()
+    validate_id(cid)
+    return cid
+
+
+def state(root: Path, change_id: str):
+    return read_json(ledger_dir(root, change_id) / "state.json")
+
+
+def write_state(root: Path, change_id: str, st: dict) -> None:
+    st["updated_at"] = now()
+    write_json(ledger_dir(root, change_id) / "state.json", st)
+
+
+def append_event(root: Path, change_id: str, event: str, result: str, details: dict | None = None) -> None:
+    row = {"ts": now(), "event": event, "result": result}
+    if details:
+        row["details"] = details
+    p = ledger_dir(root, change_id) / "gate-log.jsonl"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with p.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, sort_keys=True) + "\n")
+        f.flush()
+        try:
+            os.fsync(f.fileno())
+        except OSError:
+            pass
+
+
+def meaningful_proposal(path: Path) -> tuple[bool, str]:
+    if not path.is_file():
+        return False, "proposal.md missing"
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if PLACEHOLDER_RE.search(text):
+        return False, "proposal contains unresolved placeholder"
+    material = " ".join(x.strip() for x in text.splitlines() if x.strip() and not x.lstrip().startswith("#"))
+    if len(material) < 40:
+        return False, "proposal is too thin; record problem/objective/success evidence"
+    return True, "ok"
+
+
+def delta_valid(path: Path) -> tuple[bool, str]:
+    if not path.is_file():
+        return False, "delta.md missing"
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if PLACEHOLDER_RE.search(text):
+        return False, "delta contains unresolved placeholder"
+    sections = {"ADDED": [], "MODIFIED": [], "REMOVED": []}
+    current = None
+    for line in text.splitlines():
+        m = re.match(r"^##\s+(ADDED|MODIFIED|REMOVED)\s*$", line.strip(), re.I)
+        if m:
+            current = m.group(1).upper()
+            continue
+        if current and line.lstrip().startswith("-"):
+            item = line.lstrip()[1:].strip()
+            if item and not item.startswith("<"):
+                sections[current].append(item)
+    if not any(sections.values()):
+        return False, "delta requires at least one populated ADDED/MODIFIED/REMOVED bullet"
+    return True, "ok"
+
+
+def parse_scope(path: Path) -> list[str]:
+    if not path.is_file():
+        raise ValueError("scope.txt missing")
+    out = []
+    for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        s = raw.strip()
+        if not s or s.startswith("#"):
+            continue
+        s = s.replace("\\", "/")
+        pp = PurePosixPath(s)
+        if pp.is_absolute() or ".." in pp.parts or s.startswith(".git/") or s == ".git":
+            raise ValueError(f"unsafe scope pattern: {s}")
+        if s not in out:
+            out.append(s)
+    if not out:
+        raise ValueError("scope.txt has no paths/globs")
+    return out
+
+
+def scope_match(rel: str, patterns: list[str]) -> bool:
+    rel = rel.replace("\\", "/")
+    for pat in patterns:
+        if fnmatch.fnmatchcase(rel, pat):
+            return True
+        if pat.endswith("/**") and rel.startswith(pat[:-3].rstrip("/") + "/"):
+            return True
+        if not any(c in pat for c in "*?[") and (rel == pat or rel.startswith(pat.rstrip("/") + "/")):
+            return True
+    return False
+
+
+def risk_valid(path: Path, scope: list[str]) -> tuple[bool, str, dict]:
+    if not path.is_file():
+        return False, "risk.json missing", {}
+    try:
+        r = read_json(path)
+    except Exception as e:
+        return False, f"risk.json invalid: {e}", {}
+    if r.get("risk_level") not in {"trivial", "standard", "high"}:
+        return False, "risk_level must be trivial|standard|high", r
+    for k in ("control_plane_change", "security_privacy_sensitive", "migration_or_release_sensitive", "high_blast_radius", "requires_exec_plan"):
+        if not isinstance(r.get(k), bool):
+            return False, f"{k} must be boolean", r
+    touches_cp = any(p in CONTROL_PLANE_FILES or p.startswith(CONTROL_PLANE_PREFIXES) for p in scope)
+    if touches_cp and not r.get("control_plane_change"):
+        return False, "scope touches control-plane files but control_plane_change=false", r
+    if r.get("risk_level") == "trivial" and any(r.get(k) for k in ("control_plane_change", "security_privacy_sensitive", "migration_or_release_sensitive", "high_blast_radius", "requires_exec_plan")):
+        return False, "trivial risk cannot carry consequential flags", r
+    return True, "ok", r
+
+
+def effects_valid(path: Path) -> tuple[bool, str, dict]:
+    if not path.is_file():
+        return False, "effects.json missing", {}
+    try:
+        e = read_json(path)
+    except Exception as ex:
+        return False, f"effects.json invalid: {ex}", {}
+    if not isinstance(e.get("external_effects"), list) or not all(isinstance(x, str) and x.strip() for x in e.get("external_effects", [])):
+        return False, "external_effects must be a list of non-empty strings", e
+    if not isinstance(e.get("irreversible"), bool) or not isinstance(e.get("authorization_required"), bool):
+        return False, "effects irreversible/authorization_required must be booleans", e
+    if (e.get("external_effects") or e.get("irreversible")) and not e.get("authorization_required"):
+        return False, "external or irreversible effects require authorization_required=true", e
+    return True, "ok", e
+
+
+def authorization_shape_valid(path: Path, authorization_required: bool, expected_effects_digest: str | None = None) -> tuple[bool, str, dict]:
+    if not path.is_file():
+        return False, "authorization.json missing", {}
+    try:
+        a = read_json(path)
+    except Exception as ex:
+        return False, f"authorization.json invalid: {ex}", {}
+    for key in ("required", "authorized"):
+        if not isinstance(a.get(key), bool):
+            return False, f"authorization {key} must be boolean", a
+    if bool(a.get("required")) != bool(authorization_required):
+        return False, "authorization.required must match effects.authorization_required", a
+    for key in ("authority", "scope", "evidence_reference"):
+        if not isinstance(a.get(key), str):
+            return False, f"authorization {key} must be a string", a
+    if not isinstance(a.get("effects_digest", ""), str):
+        return False, "authorization effects_digest must be a string", a
+    if expected_effects_digest is not None and a.get("effects_digest") != expected_effects_digest:
+        return False, "authorization is not bound to the current effects.json", a
+    return True, "ok", a
+
+
+def sync_authorization_shape(root: Path, change_id: str, invalidate: bool = False) -> dict:
+    """Make authorization shape follow effects deterministically without granting permission."""
+    d = ledger_dir(root, change_id)
+    ok, msg, effects = effects_valid(d / "effects.json")
+    if not ok:
+        raise RuntimeError(msg)
+    required = bool(effects.get("authorization_required"))
+    eff_digest = canonical_json_digest(effects)
+    current = {}
+    ap = d / "authorization.json"
+    if ap.is_file():
+        try:
+            current = read_json(ap)
+        except Exception:
+            current = {}
+    preserve = (
+        not invalidate
+        and required
+        and current.get("required") is True
+        and current.get("authorized") is True
+        and current.get("effects_digest") == eff_digest
+    )
+    if preserve:
+        return current
+    value = {
+        "required": required,
+        "authorized": False,
+        "authority": "",
+        "scope": "",
+        "evidence_reference": "",
+        "effects_digest": eff_digest,
+    }
+    write_json(ap, value)
+    return value
+
+
+def authorization_ship_errors(root: Path, change_id: str) -> list[str]:
+    d = ledger_dir(root, change_id)
+    ok, msg, e = effects_valid(d / "effects.json")
+    if not ok:
+        return [msg]
+    eff_digest = canonical_json_digest(e)
+    ok, msg, a = authorization_shape_valid(d / "authorization.json", bool(e.get("authorization_required")), eff_digest)
+    if not ok:
+        return [msg]
+    if not e.get("authorization_required"):
+        return []
+    errors = []
+    if not a.get("authorized"):
+        errors.append("external/irreversible effect authorization has not been recorded")
+    if len(a.get("authority", "").strip()) < 2:
+        errors.append("authorization authority is missing")
+    if len(a.get("scope", "").strip()) < 8:
+        errors.append("authorization scope is too vague")
+    if len(a.get("evidence_reference", "").strip()) < 3:
+        errors.append("authorization evidence_reference is missing")
+    return errors
+
+
+def risk_requires_review(r: dict) -> bool:
+    return r.get("risk_level") == "high" or any(r.get(k) for k in ("control_plane_change", "security_privacy_sensitive", "migration_or_release_sensitive", "high_blast_radius"))
+
+
+def validate_plan(root: Path, change_id: str) -> list[str]:
+    d = ledger_dir(root, change_id)
+    errors = []
+    ok, msg = meaningful_proposal(d / "proposal.md")
+    if not ok: errors.append(msg)
+    ok, msg = delta_valid(d / "delta.md")
+    if not ok: errors.append(msg)
+    mode = state(root, change_id).get("mode", "standard")
+    errors.extend(evidence_graph.validate_contract(d / "requirements.json", d / "acceptance.json", require_nonempty=(mode != "trivial")))
+    try:
+        scope = parse_scope(d / "scope.txt")
+    except Exception as e:
+        errors.append(str(e)); scope = []
+    ok, msg, r = risk_valid(d / "risk.json", scope)
+    if not ok: errors.append(msg)
+    ok, msg, e = effects_valid(d / "effects.json")
+    if not ok:
+        errors.append(msg)
+        e = {}
+    expected = canonical_json_digest(e) if e else None
+    ok, msg, _ = authorization_shape_valid(d / "authorization.json", bool(e.get("authorization_required")), expected)
+    if not ok: errors.append(msg)
+    if r and risk_requires_review(r):
+        rp = d / "risk-review.md"
+        material = "" if not rp.is_file() else " ".join(x.strip() for x in rp.read_text(encoding="utf-8", errors="replace").splitlines() if x.strip() and not x.startswith("#"))
+        if len(material) < 40 or material.startswith("Not required"):
+            errors.append("high/control-plane/sensitive change requires substantive risk-review.md")
+    if r and r.get("requires_exec_plan"):
+        ep = root / "docs" / "exec-plans" / "active" / f"{change_id}.md"
+        if not ep.is_file():
+            errors.append(f"required ExecPlan missing: {ep.relative_to(root)}")
+    return errors
+
+
+def changed_paths(root: Path, base: str) -> list[str]:
+    p = run_git(root, ["diff", "--name-only", "--diff-filter=ACMRDTUXB", base, "--"], check=False)
+    if p.returncode != 0:
+        raise RuntimeError(p.stderr.strip() or "git diff failed")
+    q = run_git(root, ["ls-files", "--others", "--exclude-standard"], check=False)
+    if q.returncode != 0:
+        raise RuntimeError(q.stderr.strip() or "git ls-files failed")
+    names = {x.strip().replace("\\", "/") for x in (p.stdout + "\n" + q.stdout).splitlines() if x.strip()}
+    return sorted(names)
+
+
+def is_system_artifact(rel: str, change_id: str) -> bool:
+    prefixes = [f".keel/ledger/{change_id}/"]
+    if change_id and not change_id.startswith("retro-"):
+        prefixes.append(f".keel/ledger/retro-{change_id}/")
+    return rel == ".keel/active-change" or rel.startswith(".keel/audit/") or any(rel.startswith(p) for p in prefixes)
+
+
+def diff_scope_errors(root: Path, change_id: str) -> tuple[list[str], list[str]]:
+    st = state(root, change_id)
+    base = st.get("base_commit")
+    if not base:
+        return ["state missing base_commit"], []
+    scope = parse_scope(ledger_dir(root, change_id) / "scope.txt")
+    paths = changed_paths(root, base)
+    material = [p for p in paths if not is_system_artifact(p, change_id)]
+    bad = [p for p in material if not scope_match(p, scope)]
+    return [f"out-of-scope path: {p}" for p in bad], material
+
+
+def content_digest(root: Path, change_id: str) -> str:
+    errs, paths = diff_scope_errors(root, change_id)
+    if errs:
+        raise RuntimeError("; ".join(errs))
+    h = hashlib.sha256()
+    for rel in sorted(paths):
+        h.update(("material:" + rel).encode()); h.update(b"\0")
+        mode, data = worktree_entry(root, rel)
+        h.update(mode.encode()); h.update(b"\0"); h.update(data)
+        h.update(b"\0")
+    d = ledger_dir(root, change_id)
+    for name in INTENT_FILES:
+        h.update(("intent:" + name).encode()); h.update(b"\0")
+        rel = f".keel/ledger/{change_id}/{name}"
+        mode, data = worktree_entry(root, rel)
+        h.update(mode.encode()); h.update(b"\0"); h.update(data)
+        h.update(b"\0")
+    return h.hexdigest()
+
+
+def worktree_entry(root: Path, rel: str) -> tuple[str, bytes]:
+    """Return the Git-relevant mode/content representation of a worktree path."""
+    p = root / rel
+    if p.is_symlink():
+        return "120000", os.readlink(p).encode("utf-8", errors="surrogateescape")
+    if p.is_file():
+        try:
+            # Windows reports DOS attributes through mode bits inconsistently;
+            # Git records ordinary Windows files as 100644.
+            executable = os.name != "nt" and bool(p.stat().st_mode & 0o111)
+        except OSError:
+            executable = False
+        data = p.read_bytes()
+        if os.name == "nt":
+            data = data.replace(b"\r\n", b"\n")
+        return ("100755" if executable else "100644"), data
+    if p.is_dir():
+        # A directory itself only appears in Git's changed-path set when it is a gitlink/submodule.
+        sub = subprocess.run(["git", "rev-parse", "HEAD"], cwd=p, text=True, capture_output=True)
+        if sub.returncode == 0 and re.fullmatch(r"[0-9a-fA-F]{40,64}", sub.stdout.strip()):
+            return "160000", sub.stdout.strip().lower().encode("ascii")
+    return "000000", b"<missing>"
+
+
+def commit_changed_paths(root: Path, base: str, commit: str, change_id: str) -> list[str]:
+    p = run_git(root, ["diff", "--name-only", "--diff-filter=ACMRDTUXB", base, commit, "--"], check=False)
+    if p.returncode != 0:
+        raise RuntimeError(p.stderr.strip() or "git diff for commit failed")
+    paths = sorted({x.strip().replace("\\", "/") for x in p.stdout.splitlines() if x.strip()})
+    return [x for x in paths if not is_system_artifact(x, change_id)]
+
+
+def git_tree_entry(root: Path, commit: str, rel: str) -> tuple[str, bytes]:
+    # `ls-tree -z` is path-safe for spaces and lets us distinguish blobs, symlinks,
+    # executable files, gitlinks, and verified deletions.
+    p = run_git_bytes(root, ["ls-tree", "-z", commit, "--", rel], check=False)
+    if p.returncode != 0:
+        raise RuntimeError(p.stderr.decode("utf-8", errors="replace").strip() or f"git ls-tree failed for {rel}")
+    if not p.stdout:
+        return "000000", b"<missing>"
+    row = p.stdout.rstrip(b"\0")
+    meta, _, path_bytes = row.partition(b"\t")
+    parts = meta.split()
+    if len(parts) != 3 or not path_bytes:
+        raise RuntimeError(f"unexpected git ls-tree result for {rel}")
+    mode = parts[0].decode("ascii")
+    typ = parts[1].decode("ascii")
+    oid = parts[2].decode("ascii")
+    if typ == "commit" and mode == "160000":
+        return mode, oid.lower().encode("ascii")
+    if typ != "blob":
+        raise RuntimeError(f"unsupported Git tree entry type for {rel}: {mode} {typ}")
+    blob = run_git_bytes(root, ["cat-file", "blob", oid], check=False)
+    if blob.returncode != 0:
+        raise RuntimeError(blob.stderr.decode("utf-8", errors="replace").strip() or f"git cat-file failed for {rel}")
+    return mode, blob.stdout
+
+
+def tree_digest(root: Path, change_id: str, commit: str, material_paths: list[str]) -> str:
+    """Recompute the verification digest from a Git tree, independent of working files."""
+    h = hashlib.sha256()
+    for rel in sorted(material_paths):
+        h.update(("material:" + rel).encode()); h.update(b"\0")
+        mode, data = git_tree_entry(root, commit, rel)
+        h.update(mode.encode()); h.update(b"\0"); h.update(data); h.update(b"\0")
+    for name in INTENT_FILES:
+        rel = f".keel/ledger/{change_id}/{name}"
+        h.update(("intent:" + name).encode()); h.update(b"\0")
+        mode, data = git_tree_entry(root, commit, rel)
+        h.update(mode.encode()); h.update(b"\0"); h.update(data); h.update(b"\0")
+    return h.hexdigest()
+
+
+def show_commit_json(root: Path, commit: str, change_id: str, name: str) -> dict:
+    raw = run_git_bytes(root, ["show", f"{commit}:.keel/ledger/{change_id}/{name}"], check=False)
+    if raw.returncode != 0:
+        raise RuntimeError(f"commit does not contain .keel/ledger/{change_id}/{name}")
+    try:
+        return json.loads(raw.stdout.decode("utf-8"))
+    except Exception as e:
+        raise RuntimeError(f"committed {name} is invalid JSON: {e}")
+
+
+def verify_commit_tree(root: Path, change_id: str, commit: str, require_exact_diff: bool) -> tuple[str, dict, dict, str]:
+    """Verify a committed tree against KEEL evidence; optionally require its whole diff to be the candidate."""
+    validate_id(change_id)
+    resolved = run_git(root, ["rev-parse", f"{commit}^{{commit}}"], check=False)
+    if resolved.returncode != 0:
+        raise RuntimeError(f"invalid commit: {commit}")
+    sha = resolved.stdout.strip()
+    st = show_commit_json(root, sha, change_id, "state.json")
+    ver = show_commit_json(root, sha, change_id, "verification.json")
+    if st.get("change_id") != change_id:
+        raise RuntimeError("committed state change_id mismatch")
+    if st.get("phase") != "SHIP":
+        raise RuntimeError(f"committed ledger phase must be SHIP, got {st.get('phase')}")
+    if ver.get("status") != "PASS":
+        raise RuntimeError("committed verification status is not PASS")
+    if st.get("base_commit") != ver.get("base_commit"):
+        raise RuntimeError("committed state/verification base commit mismatch")
+    if st.get("verified_content_digest") != ver.get("content_digest"):
+        raise RuntimeError("committed state/verification digest mismatch")
+    paths = ver.get("changed_paths")
+    if not isinstance(paths, list) or not paths or not all(isinstance(x, str) and x for x in paths):
+        raise RuntimeError("committed verification changed_paths invalid")
+    if len(paths) != len(set(paths)):
+        raise RuntimeError("committed verification changed_paths contains duplicates")
+    if require_exact_diff:
+        actual = commit_changed_paths(root, st["base_commit"], sha, change_id)
+        if actual != sorted(paths):
+            raise RuntimeError(f"candidate commit diff does not match verified changed_paths: expected={sorted(paths)} actual={actual}")
+    dig = tree_digest(root, change_id, sha, paths)
+    if dig != ver.get("content_digest"):
+        raise RuntimeError("independent Git-tree digest does not match verification evidence")
+    return sha, st, ver, dig
+
+
+def candidate_ref(change_id: str) -> str:
+    return CANDIDATE_REF_PREFIX + validate_id(change_id)
+
+
+def candidate_status(root: Path, change_id: str) -> dict:
+    ref = candidate_ref(change_id)
+    p = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
+    if p.returncode != 0:
+        raise RuntimeError(f"sealed candidate missing: {ref}")
+    sha, st, ver, dig = verify_commit_tree(root, change_id, p.stdout.strip(), require_exact_diff=True)
+    return {"change_id": change_id, "ref": ref, "commit": sha, "content_digest": dig, "base_commit": st.get("base_commit"), "changed_paths": ver.get("changed_paths")}
+
+
+def seal_candidate(root: Path, change_id: str, commit: str) -> dict:
+    ok, msg = current_verified(root, change_id)
+    if not ok:
+        raise RuntimeError("cannot seal stale/unverified working state: " + msg)
+    sha, _, _, dig = verify_commit_tree(root, change_id, commit, require_exact_diff=True)
+    head = head_commit(root)
+    if head != sha:
+        raise RuntimeError(f"seal candidate must name current HEAD ({head}), got {sha}")
+    ref = candidate_ref(change_id)
+    old = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
+    if old.returncode == 0 and old.stdout.strip() != sha:
+        raise RuntimeError(f"KEEL candidate ref collision: {ref} already points to {old.stdout.strip()}")
+    if old.returncode != 0:
+        z = "0" * 40
+        p = run_git(root, ["update-ref", ref, sha, z], check=False)
+        if p.returncode != 0:
+            raise RuntimeError(p.stderr.strip() or "git update-ref candidate failed")
+    audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
+    with (audit_dir / "candidates.jsonl").open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"ts": now(), "change_id": change_id, "candidate_commit": sha, "ref": ref, "content_digest": dig}, sort_keys=True) + "\n")
+    return candidate_status(root, change_id)
+
+
+def source_change_present(root: Path, change_id: str) -> bool:
+    """Conservatively decide whether changed material needs executable verification.
+
+    Explicit project classifiers win. Known source/toolchain patterns come next. Unknown
+    material is treated as substantive unless it is clearly documentation-only.
+    """
+    cfg = read_json(root / ".keel" / "config.json")
+    _, paths = diff_scope_errors(root, change_id)
+    for rel in paths:
+        cls = capability_resolver.classify_path(rel, cfg)
+        if cls == "SOURCE":
+            return True
+        if cls == "UNKNOWN":
+            # Conservative unknown: do not let an unfamiliar DSL/build/runtime artifact
+            # evade verification merely because KEEL has never seen its extension.
+            return True
+    return False
+
+
+def redact(text: str) -> str:
+    # Conservative line-level redaction for common secret assignments/tokens.
+    patterns = [
+        re.compile(r"(?i)(api[_-]?key|secret|token|password|passwd|authorization)(\s*[:=]\s*)([^\s,;]+)"),
+        re.compile(r"\b(sk-[A-Za-z0-9_-]{10,})\b"),
+    ]
+    out = text
+    for p in patterns:
+        if p.groups >= 3:
+            out = p.sub(lambda m: m.group(1) + m.group(2) + "<REDACTED>", out)
+        else:
+            out = p.sub("<REDACTED>", out)
+    return out
+
+
+def agents_lint(root: Path) -> list[str]:
+    cfg = read_json(root / ".keel" / "config.json")
+    max_bytes = int(cfg.get("max_agents_cascade_bytes", 32768))
+    max_lines = int(cfg.get("root_agents_max_lines", 100))
+    errors = []
+    root_agents = root / "AGENTS.md"
+    if not root_agents.is_file():
+        errors.append("root AGENTS.md missing")
+    else:
+        if len(root_agents.read_text(encoding="utf-8", errors="replace").splitlines()) > max_lines:
+            errors.append(f"root AGENTS.md exceeds {max_lines} lines")
+    chosen = {}
+    dirs = {root}
+    for p in root.rglob("AGENTS*.md"):
+        if ".git" in p.parts:
+            continue
+        dirs.add(p.parent)
+    for d in dirs:
+        override = d / "AGENTS.override.md"
+        normal = d / "AGENTS.md"
+        p = override if override.is_file() else normal if normal.is_file() else None
+        if p:
+            text = p.read_text(encoding="utf-8", errors="replace")
+            if PLACEHOLDER_RE.search(text):
+                errors.append(f"unresolved instruction placeholder: {p.relative_to(root)}")
+            chosen[d.resolve()] = (p, len(p.read_bytes()))
+    max_seen = 0
+    max_where = root
+    for d in dirs:
+        try:
+            rel_parts = d.resolve().relative_to(root.resolve()).parts
+        except ValueError:
+            continue
+        cur = root.resolve(); total = 0
+        if cur in chosen: total += chosen[cur][1]
+        for part in rel_parts:
+            cur = cur / part
+            if cur in chosen: total += chosen[cur][1]
+        if total > max_seen:
+            max_seen, max_where = total, d
+    if max_seen > max_bytes:
+        errors.append(f"AGENTS cascade reaches {max_seen} bytes at {max_where.relative_to(root)} > {max_bytes}")
+    return errors
+
+
+
+def preexisting_worktree_changes(root: Path) -> list[str]:
+    base = head_commit(root)
+    paths = changed_paths(root, base)
+    ignored_runtime = {".keel/active-change", ".control-plane/validation.json", ".control-plane/runtime-validation.json"}
+    return [p for p in paths if p not in ignored_runtime and not p.startswith(".keel/audit/")]
+
+def doctor(root: Path) -> list[str]:
+    errors = []
+    for rel in ("AGENTS.md", ".codex/hooks.json", ".codex/config.toml", ".keel/config.json", ".keel/bin/keel.py", ".keel/hooks/keel_hook.py", ".keel/lib/capability_resolver.py", ".keel/lib/context_compiler.py", ".keel/lib/evidence_graph.py", ".keel/bin/keelbench.py"):
+        if not (root / rel).is_file(): errors.append(f"missing {rel}")
+    try:
+        head_commit(root)
+    except Exception as e:
+        errors.append(str(e))
+    try:
+        json.loads((root / ".codex/hooks.json").read_text(encoding="utf-8"))
+    except Exception as e:
+        errors.append(f"hooks.json invalid: {e}")
+    try:
+        cfg = read_json(root / ".keel/config.json")
+        if cfg.get("schema_version") != 2: errors.append("unsupported .keel/config.json schema_version")
+        for c in cfg.get("verification_commands", []):
+            if not isinstance(c, dict) or not isinstance(c.get("id"), str) or not isinstance(c.get("argv"), list) or not c.get("argv"):
+                errors.append("invalid verification command entry")
+    except Exception as e:
+        errors.append(f"KEEL config invalid: {e}")
+    errors.extend(agents_lint(root))
+    return errors
+
+
+def start_change(root: Path, change_id: str, mode: str = "standard", summary: str | None = None, scopes: list[str] | None = None) -> None:
+    change_id = validate_id(change_id)
+    if mode not in {"standard", "trivial"}:
+        raise ValueError("mode must be standard|trivial")
+    scopes = scopes or []
+    if mode == "trivial" and (not summary or len(summary.strip()) < 12 or not scopes):
+        raise ValueError("trivial mode requires --summary and at least one --scope")
+    base = head_commit(root)
+    existing = active_change(root)
+    if existing and existing != change_id:
+        raise RuntimeError(f"another KEEL change is active: {existing}")
+    dirty = preexisting_worktree_changes(root)
+    if dirty:
+        raise RuntimeError("refusing to absorb pre-existing worktree changes into a new KEEL change: " + ", ".join(dirty[:12]))
+    d = ledger_dir(root, change_id)
+    if d.exists() and (d / "state.json").exists():
+        raise RuntimeError(f"ledger already exists: {change_id}; resume it instead of recreating")
+    d.mkdir(parents=True, exist_ok=True)
+    templates = root / ".keel" / "templates"
+    (d / "proposal.md").write_text((templates / "proposal.md").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "delta.md").write_text((templates / "delta.md").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "requirements.json").write_text((templates / "requirements.json").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "acceptance.json").write_text((templates / "acceptance.json").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "scope.txt").write_text("# One repo-relative file/glob per line. No absolute paths or '..'.\n", encoding="utf-8")
+    (d / "risk.json").write_text((templates / "risk.json").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "effects.json").write_text((templates / "effects.json").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "authorization.json").write_text((templates / "authorization.json").read_text(encoding="utf-8"), encoding="utf-8")
+    (d / "risk-review.md").write_text((templates / "risk-review.md").read_text(encoding="utf-8"), encoding="utf-8")
+    st = {"schema_version": 1, "change_id": change_id, "mode": mode, "phase": "DISCUSS", "base_commit": base, "created_at": now(), "updated_at": now()}
+    write_json(d / "state.json", st)
+    atomic_write(active_file(root), change_id + "\n")
+    append_event(root, change_id, "START", "PASS", {"mode": mode, "base_commit": base})
+    if mode == "trivial":
+        proposal = f"# Proposal\n\n## Problem / why\nLocalized low-risk change.\n\n## Objective\n{summary.strip()}\n\n## Non-goals\nNo architecture, security/privacy, migration/release, external-effect, or broad refactor change.\n\n## Success evidence\nScoped diff plus project verification for the affected behavior.\n\n## Open decisions\nNone known.\n"
+        delta = f"## ADDED\n\n## MODIFIED\n- {summary.strip()}\n\n## REMOVED\n"
+        atomic_write(d / "proposal.md", proposal)
+        atomic_write(d / "delta.md", delta)
+        atomic_write(d / "scope.txt", "\n".join(scopes) + "\n")
+        write_json(d / "requirements.json", {"schema_version": 1, "requirements": [{"id": "REQ-TRIVIAL", "statement": summary.strip(), "source": "trivial-fast-path"}]})
+        write_json(d / "acceptance.json", {"schema_version": 1, "criteria": [{"id": "AC-TRIVIAL", "requirement_id": "REQ-TRIVIAL", "statement": "At least one declared scoped path is materially changed", "required": True, "policy": "any", "evidence": [{"provider": "changed_path", "path": x} for x in scopes]}]})
+        risk = read_json(d / "risk.json"); risk["risk_level"] = "trivial"; write_json(d / "risk.json", risk)
+        sync_authorization_shape(root, change_id, invalidate=True)
+        errs = validate_plan(root, change_id)
+        if errs:
+            raise RuntimeError("trivial fast path invalid: " + "; ".join(errs))
+        st["phase"] = "EXECUTE"; write_state(root, change_id, st)
+        append_event(root, change_id, "DISCUSS", "PASS", {"mode": "trivial-fast-path"})
+        append_event(root, change_id, "PLAN", "PASS", {"mode": "trivial-fast-path"})
+
+
+def gate(root: Path, change_id: str, which: str) -> None:
+    st = state(root, change_id)
+    d = ledger_dir(root, change_id)
+    which = which.lower()
+    if which == "discuss":
+        if st.get("phase") != "DISCUSS": raise RuntimeError(f"discuss gate requires DISCUSS, got {st.get('phase')}")
+        ok, msg = meaningful_proposal(d / "proposal.md")
+        if not ok: append_event(root, change_id, "DISCUSS", "FAIL", {"reason": msg}); raise RuntimeError(msg)
+        st["phase"] = "PLAN"; write_state(root, change_id, st); append_event(root, change_id, "DISCUSS", "PASS")
+    elif which == "plan":
+        if st.get("phase") != "PLAN": raise RuntimeError(f"plan gate requires PLAN, got {st.get('phase')}")
+        # The model may declare effects during PLAN, but permission state is script-owned.
+        # Synchronization can only clear/invalidate authorization; it never grants it.
+        sync_authorization_shape(root, change_id, invalidate=False)
+        errs = validate_plan(root, change_id)
+        if errs: append_event(root, change_id, "PLAN", "FAIL", {"errors": errs}); raise RuntimeError("; ".join(errs))
+        st["phase"] = "EXECUTE"; write_state(root, change_id, st); append_event(root, change_id, "PLAN", "PASS")
+    else:
+        raise ValueError("supported gates: discuss, plan")
+
+
+
+def replan(root: Path, change_id: str) -> None:
+    st = state(root, change_id)
+    if st.get("phase") not in {"EXECUTE", "VERIFY", "SHIP"}:
+        raise RuntimeError(f"replan requires EXECUTE/VERIFY/SHIP, got {st.get('phase')}")
+    st["phase"] = "PLAN"
+    st.pop("verified_content_digest", None)
+    write_state(root, change_id, st)
+    for n in ("verification.json", "verification.md", "evidence-graph.json"):
+        p = ledger_dir(root, change_id) / n
+        if p.exists(): p.unlink()
+    # Any change to intent/scope requires fresh consequence authorization.
+    try:
+        sync_authorization_shape(root, change_id, invalidate=True)
+    except Exception:
+        # The PLAN phase may intentionally contain temporarily invalid effects while being edited.
+        ap = ledger_dir(root, change_id) / "authorization.json"
+        write_json(ap, {"required": False, "authorized": False, "authority": "", "scope": "", "evidence_reference": "", "effects_digest": ""})
+    append_event(root, change_id, "REPLAN", "PASS")
+
+
+def record_authorization(root: Path, change_id: str, authority: str, scope: str, evidence_reference: str) -> None:
+    d = ledger_dir(root, change_id)
+    _, msg, e = effects_valid(d / "effects.json")
+    if msg != "ok":
+        raise RuntimeError(msg)
+    if not e.get("authorization_required"):
+        raise RuntimeError("effects.json does not declare authorization_required=true")
+    if len(authority.strip()) < 2 or len(scope.strip()) < 8 or len(evidence_reference.strip()) < 3:
+        raise RuntimeError("authorization record requires concrete authority, scope, and evidence reference")
+    write_json(d / "authorization.json", {
+        "required": True,
+        "authorized": True,
+        "authority": authority.strip(),
+        "scope": scope.strip(),
+        "evidence_reference": evidence_reference.strip(),
+        "effects_digest": canonical_json_digest(e),
+        "recorded_at": now(),
+    })
+    append_event(root, change_id, "AUTHORIZATION", "RECORDED", {"authority": authority.strip(), "scope": scope.strip(), "evidence_reference": evidence_reference.strip()})
+
+def verify_change(root: Path, change_id: str) -> dict:
+    st = state(root, change_id)
+    if st.get("phase") not in {"EXECUTE", "VERIFY"}:
+        raise RuntimeError(f"verify requires EXECUTE/VERIFY, got {st.get('phase')}")
+    errs = validate_plan(root, change_id)
+    errs.extend(authorization_ship_errors(root, change_id))
+    scope_errs, material = diff_scope_errors(root, change_id)
+    errs.extend(scope_errs)
+    if not material:
+        errs.append("no material changed paths since KEEL base commit")
+    doc_errors = doctor(root)
+    # doctor baseline commit is expected and should pass during changes.
+    errs.extend(doc_errors)
+    commands = []
+    cfg = read_json(root / ".keel" / "config.json")
+    if source_change_present(root, change_id) and not cfg.get("verification_commands"):
+        errs.append("substantive source change has no configured verification_commands in .keel/config.json")
+    results = []
+    # Built-in whitespace/conflict check.
+    gd = run_git(root, ["diff", "--check", st["base_commit"], "--"], check=False)
+    results.append({"id": "git-diff-check", "argv": ["git", "diff", "--check", st["base_commit"], "--"], "exit_code": gd.returncode, "duration_ms": 0, "excerpt": redact((gd.stdout + gd.stderr)[-4000:])})
+    if gd.returncode != 0: errs.append("git diff --check failed")
+    for c in cfg.get("verification_commands", []):
+        cid = c.get("id"); argv = c.get("argv"); cwd_rel = c.get("cwd", "."); timeout = int(c.get("timeout_sec", 600)); required = bool(c.get("required", True))
+        if not isinstance(cid, str) or not isinstance(argv, list) or not argv or not all(isinstance(x, str) and x for x in argv):
+            errs.append(f"invalid verification command: {c!r}"); continue
+        cwd = (root / cwd_rel).resolve()
+        try: cwd.relative_to(root.resolve())
+        except ValueError: errs.append(f"verification cwd escapes root: {cwd_rel}"); continue
+        t0 = time.monotonic()
+        try:
+            p = subprocess.run(argv, cwd=cwd, text=True, capture_output=True, timeout=timeout)
+            code = p.returncode; out = p.stdout + ("\n" if p.stdout and p.stderr else "") + p.stderr
+        except subprocess.TimeoutExpired as e:
+            code = 124; out = (e.stdout or "") + "\n" + (e.stderr or "") + f"\nTIMEOUT after {timeout}s"
+        ms = int((time.monotonic() - t0) * 1000)
+        excerpt = redact("\n".join(out.splitlines()[-20:]))[-8000:]
+        results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt})
+        if required and code != 0: errs.append(f"verification command failed: {cid} exit={code}")
+    d = ledger_dir(root, change_id)
+    evidence_graph_result = evidence_graph.evaluate(root, d / "requirements.json", d / "acceptance.json", results, material)
+    write_json(d / "evidence-graph.json", evidence_graph_result)
+    if evidence_graph_result.get("status") != "PASS":
+        errs.extend(evidence_graph_result.get("errors") or ["acceptance/evidence graph failed"])
+    digest = None
+    if not scope_errs:
+        try: digest = content_digest(root, change_id)
+        except Exception as e: errs.append(f"content digest failed: {e}")
+    status = "PASS" if not errs else "FAIL"
+    evidence = {"schema_version": 2, "change_id": change_id, "base_commit": st["base_commit"], "verified_at": now(), "status": status, "content_digest": digest, "changed_paths": material, "errors": errs, "checks": results, "acceptance": evidence_graph_result.get("summary", {})}
+    write_json(d / "verification.json", evidence)
+    md = ["# Verification", "", f"Status: `{status}`", f"Base: `{st['base_commit']}`", f"Content digest: `{digest or 'UNAVAILABLE'}`", "", "## Checks"]
+    for r in results:
+        md.append(f"- `{r['id']}` exit `{r['exit_code']}` ({r.get('duration_ms', 0)} ms)")
+    md += ["", "## Acceptance evidence"]
+    for row in evidence_graph_result.get("criteria", []):
+        md.append(f"- `{row.get('id')}` `{row.get('status')}` — {row.get('statement')}")
+    if errs:
+        md += ["", "## Blockers"] + [f"- {e}" for e in errs]
+    atomic_write(d / "verification.md", "\n".join(md) + "\n")
+    append_event(root, change_id, "EXECUTE", "PASS" if not scope_errs else "FAIL", {"changed_paths": material, "scope_errors": scope_errs})
+    append_event(root, change_id, "VERIFY", status, {"content_digest": digest, "errors": errs})
+    if status == "PASS":
+        st["phase"] = "SHIP"; st["verified_content_digest"] = digest; write_state(root, change_id, st)
+    else:
+        st["phase"] = "EXECUTE"; st.pop("verified_content_digest", None); write_state(root, change_id, st)
+    return evidence
+
+
+def current_verified(root: Path, change_id: str) -> tuple[bool, str]:
+    st = state(root, change_id)
+    if st.get("phase") != "SHIP": return False, f"phase is {st.get('phase')}, not SHIP"
+    vpath = ledger_dir(root, change_id) / "verification.json"
+    if not vpath.is_file(): return False, "verification.json missing"
+    v = read_json(vpath)
+    if v.get("status") != "PASS": return False, "verification status is not PASS"
+    try: dig = content_digest(root, change_id)
+    except Exception as e: return False, str(e)
+    if dig != v.get("content_digest") or dig != st.get("verified_content_digest"):
+        return False, "content changed after verification; reopen and verify again"
+    return True, "ok"
+
+
+def reopen(root: Path, change_id: str) -> None:
+    st = state(root, change_id)
+    if st.get("phase") not in {"VERIFY", "SHIP"}:
+        raise RuntimeError(f"reopen requires VERIFY/SHIP, got {st.get('phase')}")
+    st["phase"] = "EXECUTE"; st.pop("verified_content_digest", None); write_state(root, change_id, st)
+    for n in ("verification.json", "verification.md", "evidence-graph.json"):
+        p = ledger_dir(root, change_id) / n
+        if p.exists(): p.unlink()
+    append_event(root, change_id, "REOPEN", "PASS")
+
+
+def record_bypass(root: Path, change_id: str | None, reason: str, session_id: str = "unknown") -> None:
+    reason = reason.strip()
+    if len(reason) < 8:
+        raise RuntimeError("KEEL_BYPASS_REASON must contain a concrete reason (>=8 chars)")
+    audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
+    key = hashlib.sha256(f"{session_id}\0{change_id}\0{reason}".encode()).hexdigest()
+    seen_path = audit_dir / "bypass-seen.json"
+    seen = read_json(seen_path) if seen_path.is_file() else {}
+    if key in seen: return
+    seen[key] = now(); write_json(seen_path, seen)
+    row = {"ts": now(), "session_id": session_id, "change_id": change_id, "reason": reason}
+    with (audit_dir / "bypass.jsonl").open("a", encoding="utf-8") as f: f.write(json.dumps(row, sort_keys=True) + "\n")
+    if change_id:
+        append_event(root, change_id, "BYPASS", "AUDIT", {"reason": reason, "session_id": session_id})
+        rid = "retro-" + change_id
+        base_commit = state(root, change_id).get("base_commit")
+    else:
+        rid = "retro-emergency-" + hashlib.sha256(f"{session_id}\0{reason}".encode()).hexdigest()[:12]
+        base_commit = head_commit(root)
+    rd = ledger_dir(root, rid)
+    if not rd.exists():
+        rd.mkdir(parents=True)
+        atomic_write(rd / "proposal.md", f"# Retro process debt\n\nEmergency KEEL bypass occurred{f' for `{change_id}`' if change_id else ''}. Reconstruct the actual delta, effects, evidence, authorization, and missing verification.\n\nReason: {reason}\n")
+        atomic_write(rd / "delta.md", "## ADDED\n\n## MODIFIED\n- Reconstruct and validate emergency change after stabilization.\n\n## REMOVED\n")
+        write_json(rd / "requirements.json", {"schema_version": 1, "requirements": [{"id":"REQ-RETRO","statement":"Reconstruct the emergency change intent, effects, and required recovery evidence","source":"emergency-bypass"}]})
+        write_json(rd / "acceptance.json", {"schema_version": 1, "criteria": [{"id":"AC-RETRO","requirement_id":"REQ-RETRO","statement":"Retrospective evidence must explicitly verify the reconstructed emergency change","required":True,"policy":"all","evidence":[{"provider":"file_exists","path":f"docs/exec-plans/active/{rid}.md"}]}]})
+        atomic_write(rd / "scope.txt", "# Populate from actual emergency diff during retrospective.\n")
+        write_json(rd / "risk.json", {"risk_level":"high","control_plane_change":False,"security_privacy_sensitive":False,"migration_or_release_sensitive":True,"high_blast_radius":True,"requires_exec_plan":True})
+        write_json(rd / "effects.json", {"external_effects":["Emergency action occurred; reconstruct exact effects"],"irreversible":False,"authorization_required":True})
+        write_json(rd / "authorization.json", {"required":True,"authorized":False,"authority":"","scope":"","evidence_reference":""})
+        atomic_write(rd / "risk-review.md", "# Risk review\n\nPending post-incident reconstruction; this file records unresolved process debt and is not evidence of approval.\n")
+        write_json(rd / "state.json", {"schema_version":1,"change_id":rid,"mode":"retro","phase":"DISCUSS","base_commit":base_commit,"created_at":now(),"updated_at":now()})
+        append_event(root, rid, "CREATED_FROM_BYPASS", "DEBT", {"source_change": change_id, "reason": reason})
+
+
+def anchor(root: Path, change_id: str, commit: str) -> None:
+    # Final anchoring is independent of the mutable working tree and requires a previously sealed candidate.
+    validate_id(change_id)
+    candidate = candidate_status(root, change_id)
+    resolved = run_git(root, ["rev-parse", f"{commit}^{{commit}}"], check=False)
+    if resolved.returncode != 0:
+        raise RuntimeError(f"invalid landed commit: {commit}")
+    sha = resolved.stdout.strip()
+    landed_state = show_commit_json(root, sha, change_id, "state.json")
+    landed_verification = show_commit_json(root, sha, change_id, "verification.json")
+    if landed_state.get("phase") != "SHIP":
+        raise RuntimeError(f"landed ledger phase must be SHIP, got {landed_state.get('phase')}")
+    if landed_verification.get("status") != "PASS":
+        raise RuntimeError("landed verification status is not PASS")
+    for key in ("base_commit", "content_digest", "changed_paths"):
+        if landed_verification.get(key) != show_commit_json(root, candidate["commit"], change_id, "verification.json").get(key):
+            raise RuntimeError(f"landed verification {key} differs from sealed candidate")
+    if landed_state.get("verified_content_digest") != candidate["content_digest"]:
+        raise RuntimeError("landed state digest differs from sealed candidate")
+    # Recompute exactly the candidate's verified material+intent bytes from the landed tree.
+    landed_digest = tree_digest(root, change_id, sha, candidate["changed_paths"])
+    if landed_digest != candidate["content_digest"]:
+        raise RuntimeError("landed Git-tree content does not match sealed candidate verification digest")
+    ancestry = run_git(root, ["merge-base", "--is-ancestor", candidate["commit"], sha], check=False).returncode == 0
+    relation = "candidate-ancestor" if ancestry else "content-equivalent"
+    ref = f"refs/keel/ledger/{change_id}"
+    old = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
+    if old.returncode == 0 and old.stdout.strip() != sha:
+        raise RuntimeError(f"KEEL ref collision: {ref} already points to {old.stdout.strip()}")
+    if old.returncode != 0:
+        z = "0" * 40
+        p = run_git(root, ["update-ref", ref, sha, z], check=False)
+        if p.returncode != 0: raise RuntimeError(p.stderr.strip() or "git update-ref failed")
+    note = run_git(root, ["notes", "--ref=keel", "show", sha], check=False)
+    note_text = (
+        f"keel-change-id: {change_id}\n"
+        f"sealed-candidate: {candidate['commit']}\n"
+        f"landed-commit: {sha}\n"
+        f"integration-relation: {relation}\n"
+        f"verified-content-digest: {candidate['content_digest']}\n"
+    )
+    if note.returncode == 0:
+        if f"keel-change-id: {change_id}" not in note.stdout:
+            raise RuntimeError("existing refs/notes/keel note belongs to different KEEL change")
+    else:
+        p = run_git(root, ["notes", "--ref=keel", "add", "-m", note_text, sha], check=False)
+        if p.returncode != 0: raise RuntimeError(p.stderr.strip() or "git notes add failed")
+    audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
+    with (audit_dir / "anchors.jsonl").open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"ts":now(),"change_id":change_id,"candidate_commit":candidate["commit"],"landed_commit":sha,"relation":relation,"ref":ref,"content_digest":candidate["content_digest"]}, sort_keys=True) + "\n")
+    if active_change(root) == change_id:
+        active_file(root).unlink(missing_ok=True)
+
+
+def discover_capabilities(root: Path) -> dict:
+    cfg = read_json(root / ".keel" / "config.json")
+    result = capability_resolver.resolve(root, cfg)
+    capability_resolver.write_resolution(root, result)
+    return result
+
+
+def compile_context(root: Path, change_id: str, write: bool = True) -> dict:
+    st = state(root, change_id)
+    cfg = read_json(root / ".keel" / "config.json")
+    try:
+        _, paths = diff_scope_errors(root, change_id)
+    except Exception:
+        paths = []
+    text, meta = context_compiler.compile_packet(root, change_id, st, cfg, ledger_dir(root, change_id), paths)
+    if write:
+        md, js = context_compiler.write_packet(root, change_id, text, meta)
+        meta = dict(meta, markdown=str(md.relative_to(root)), metadata=str(js.relative_to(root)))
+    meta["text"] = text
+    return meta
+
+
+def status_summary(root: Path, change_id: str | None = None) -> dict:
+    cid = change_id or active_change(root)
+    if not cid: return {"active_change": None, "keel": "IDLE"}
+    st = state(root, cid)
+    result = {"active_change": cid, "mode": st.get("mode"), "phase": st.get("phase"), "base_commit": st.get("base_commit")}
+    if st.get("phase") == "SHIP":
+        ok, msg = current_verified(root, cid); result["verified_current"] = ok; result["verification_message"] = msg
+    else:
+        try:
+            errs, paths = diff_scope_errors(root, cid); result["changed_paths"] = paths; result["scope_errors"] = errs
+        except Exception as e:
+            result["scope_errors"] = [str(e)]
+    return result

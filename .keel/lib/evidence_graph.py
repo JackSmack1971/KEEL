@@ -1,0 +1,116 @@
+from __future__ import annotations
+
+import fnmatch
+import json
+from pathlib import Path
+
+REQ_ID_PREFIX = "REQ-"
+AC_ID_PREFIX = "AC-"
+SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists"}
+
+
+def read_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def validate_contract(requirements_path: Path, acceptance_path: Path, require_nonempty: bool = True) -> list[str]:
+    errors: list[str] = []
+    try:
+        req = read_json(requirements_path)
+    except Exception as e:
+        return [f"requirements.json invalid: {e}"]
+    try:
+        acc = read_json(acceptance_path)
+    except Exception as e:
+        return [f"acceptance.json invalid: {e}"]
+    requirements = req.get("requirements")
+    criteria = acc.get("criteria")
+    if not isinstance(requirements, list):
+        errors.append("requirements.json requirements must be a list"); requirements = []
+    if not isinstance(criteria, list):
+        errors.append("acceptance.json criteria must be a list"); criteria = []
+    if require_nonempty and not requirements:
+        errors.append("standard change requires at least one requirement")
+    if require_nonempty and not criteria:
+        errors.append("standard change requires at least one acceptance criterion")
+    req_ids = set()
+    for r in requirements:
+        if not isinstance(r, dict): errors.append("requirement entries must be objects"); continue
+        rid = r.get("id"); statement = r.get("statement")
+        if not isinstance(rid, str) or not rid.startswith(REQ_ID_PREFIX): errors.append(f"invalid requirement id: {rid!r}"); continue
+        if rid in req_ids: errors.append(f"duplicate requirement id: {rid}")
+        req_ids.add(rid)
+        if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"requirement {rid} statement too thin")
+    ac_ids = set()
+    for c in criteria:
+        if not isinstance(c, dict): errors.append("acceptance entries must be objects"); continue
+        aid = c.get("id"); rid = c.get("requirement_id"); statement = c.get("statement")
+        if not isinstance(aid, str) or not aid.startswith(AC_ID_PREFIX): errors.append(f"invalid acceptance id: {aid!r}"); continue
+        if aid in ac_ids: errors.append(f"duplicate acceptance id: {aid}")
+        ac_ids.add(aid)
+        if rid not in req_ids: errors.append(f"acceptance {aid} references unknown requirement {rid!r}")
+        if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"acceptance {aid} statement too thin")
+        if c.get("policy", "all") not in {"all", "any"}: errors.append(f"acceptance {aid} policy must be all|any")
+        if not isinstance(c.get("required", True), bool): errors.append(f"acceptance {aid} required must be boolean")
+        evidence = c.get("evidence")
+        if not isinstance(evidence, list) or not evidence:
+            errors.append(f"acceptance {aid} requires at least one evidence edge"); continue
+        for edge in evidence:
+            if not isinstance(edge, dict): errors.append(f"acceptance {aid} evidence entries must be objects"); continue
+            provider = edge.get("provider")
+            if provider not in SUPPORTED_PROVIDERS:
+                errors.append(f"acceptance {aid} unsupported evidence provider: {provider!r}")
+            if provider == "command" and not isinstance(edge.get("check_id"), str):
+                errors.append(f"acceptance {aid} command evidence requires check_id")
+            if provider in {"changed_path", "file_exists"} and not isinstance(edge.get("path"), str):
+                errors.append(f"acceptance {aid} {provider} evidence requires path")
+    return errors
+
+
+def _path_match(path: str, pattern: str) -> bool:
+    if fnmatch.fnmatchcase(path, pattern): return True
+    if pattern.endswith("/**") and path.startswith(pattern[:-3].rstrip("/") + "/"): return True
+    if not any(c in pattern for c in "*?[") and (path == pattern or path.startswith(pattern.rstrip("/") + "/")): return True
+    return False
+
+
+def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks: list[dict], changed_paths: list[str]) -> dict:
+    contract_errors = validate_contract(requirements_path, acceptance_path, require_nonempty=True)
+    if contract_errors:
+        return {"schema_version": 1, "status": "FAIL", "errors": contract_errors, "criteria": []}
+    req = read_json(requirements_path); acc = read_json(acceptance_path)
+    check_map = {c.get("id"): c for c in checks if isinstance(c, dict) and isinstance(c.get("id"), str)}
+    criterion_rows = []
+    errors = []
+    for c in acc["criteria"]:
+        edge_rows = []
+        for edge in c["evidence"]:
+            provider = edge["provider"]
+            passed = False; detail = ""
+            if provider == "command":
+                check = check_map.get(edge["check_id"])
+                passed = bool(check and check.get("exit_code") == 0)
+                detail = f"check={edge['check_id']} exit={None if not check else check.get('exit_code')}"
+            elif provider == "changed_path":
+                matched = [p for p in changed_paths if _path_match(p, edge["path"])]
+                passed = bool(matched); detail = "matched=" + ",".join(matched[:8])
+            elif provider == "file_exists":
+                target = (root / edge["path"]).resolve()
+                try: target.relative_to(root.resolve()); passed = target.exists(); detail = f"exists={passed}"
+                except ValueError: passed = False; detail = "path escapes repository"
+            edge_rows.append({"provider": provider, "passed": passed, "detail": detail, **{k:v for k,v in edge.items() if k != "provider"}})
+        policy = c.get("policy", "all")
+        passed = all(x["passed"] for x in edge_rows) if policy == "all" else any(x["passed"] for x in edge_rows)
+        status = "PASS" if passed else "FAIL"
+        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence": edge_rows}
+        criterion_rows.append(row)
+        if row["required"] and not passed:
+            errors.append(f"acceptance criterion failed: {row['id']}")
+    return {
+        "schema_version": 1,
+        "status": "PASS" if not errors else "FAIL",
+        "errors": errors,
+        "requirements": req["requirements"],
+        "criteria": criterion_rows,
+        "summary": {"required": sum(1 for c in criterion_rows if c["required"]), "passed_required": sum(1 for c in criterion_rows if c["required"] and c["status"] == "PASS")},
+    }

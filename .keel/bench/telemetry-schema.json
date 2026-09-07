@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_types": [
+    "run_started", "routing_decision", "context_compiled", "capability_detected", "change_started",
+    "gate_result", "tool_invocation", "verification_check", "acceptance_result", "scope_violation",
+    "authorization_event", "failure_detected", "recovery_action", "candidate_sealed", "change_anchored",
+    "run_completed"
+  ],
+  "run_metrics": [
+    "task_success", "acceptance_coverage", "introduced_regressions", "scope_violations", "unauthorized_effects",
+    "human_interventions", "tokens", "wall_time_sec", "tool_calls", "commands", "retries", "merge_conflicts",
+    "ci_failures", "review_findings"
+  ],
+  "comparison_rule": "Preserve equivalent starting state and fixed rubric; repeat baseline and KEEL conditions. Never infer empirical uplift from deterministic self-tests."
+}

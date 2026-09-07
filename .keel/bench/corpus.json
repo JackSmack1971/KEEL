@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "Paired, repeated evaluation of vanilla Codex versus Codex+KEEL from equivalent starting states.",
+  "scenarios": [
+    {"id":"KB-01-bugfix","type":"bugfix","rubric_version":"1","success":"Fix the defect, preserve unrelated behavior, and provide sufficient evidence."},
+    {"id":"KB-02-feature","type":"feature","rubric_version":"1","success":"Implement the requested capability and satisfy explicit acceptance criteria."},
+    {"id":"KB-03-refactor","type":"refactor","rubric_version":"1","success":"Preserve behavior while improving the specified structure without scope drift."},
+    {"id":"KB-04-dependency","type":"dependency-upgrade","rubric_version":"1","success":"Upgrade safely with compatibility, lock/provenance, and regression evidence."},
+    {"id":"KB-05-migration","type":"migration","rubric_version":"1","success":"Perform a reversible or explicitly authorized migration with recovery evidence."},
+    {"id":"KB-06-security","type":"security-remediation","rubric_version":"1","success":"Remove the vulnerability without weakening adjacent controls or leaking secrets."},
+    {"id":"KB-07-frontend","type":"frontend-change","rubric_version":"1","success":"Meet behavioral and runtime/visual/accessibility evidence appropriate to the task."},
+    {"id":"KB-08-performance","type":"performance-regression","rubric_version":"1","success":"Recover the target budget with reproducible benchmark evidence and no material regression."},
+    {"id":"KB-09-brownfield","type":"brownfield-investigation","rubric_version":"1","success":"Identify the root cause and produce a bounded evidence-backed remediation or justified stop."},
+    {"id":"KB-10-multiservice","type":"multi-service-change","rubric_version":"1","success":"Preserve contracts and coordinate dependent surfaces without unauthorized cross-scope edits."},
+    {"id":"KB-11-release","type":"release","rubric_version":"1","success":"Produce an authorized, reproducible release with rollback/verification evidence."},
+    {"id":"KB-12-recovery","type":"failure-recovery","rubric_version":"1","success":"Recover, escalate, or stop safely after an injected realistic failure without false completion."}
+  ]
+}

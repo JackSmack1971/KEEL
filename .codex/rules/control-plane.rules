@@ -1,0 +1,24 @@
+# Escalation policy for destructive Git operations when Codex evaluates a command outside the sandbox.
+prefix_rule(
+    pattern=["git", "reset", "--hard"],
+    decision="prompt",
+    justification="Can discard local work; inspect status/diff and prefer targeted reversible restoration.",
+    match=["git reset --hard", "git reset --hard HEAD~1"],
+    not_match=["git reset --soft HEAD~1", "git status"],
+)
+
+prefix_rule(
+    pattern=["git", "clean"],
+    decision="prompt",
+    justification="Can delete untracked evidence/work; preview and scope deletion before proceeding.",
+    match=["git clean -f", "git clean -fd"],
+    not_match=["git status"],
+)
+
+prefix_rule(
+    pattern=["git", "push", ["--force", "-f"]],
+    decision="prompt",
+    justification="Can rewrite remote history; require explicit authorization and prefer --force-with-lease when appropriate.",
+    match=["git push --force origin main", "git push -f origin feature"],
+    not_match=["git push origin feature", "git push --force-with-lease origin feature"],
+)

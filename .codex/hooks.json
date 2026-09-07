@@ -1,0 +1,75 @@
+{
+  "description": "KEEL spec-ledger context and phase/scope/verification guardrails. Review and trust this exact definition with Codex /hooks before relying on it.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.keel/hooks/keel_hook.py\" context",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$r=(git rev-parse --show-toplevel); py -3 (Join-Path $r '.keel/hooks/keel_hook.py') context\"",
+            "timeout": 10,
+            "statusMessage": "Loading KEEL ledger state",
+            "additionalContextLimit": 1800
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.keel/hooks/keel_hook.py\" context",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$r=(git rev-parse --show-toplevel); py -3 (Join-Path $r '.keel/hooks/keel_hook.py') context\"",
+            "timeout": 10,
+            "statusMessage": "Restating KEEL decision state",
+            "additionalContextLimit": 1800
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.keel/hooks/keel_hook.py\" pre-tool",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$r=(git rev-parse --show-toplevel); py -3 (Join-Path $r '.keel/hooks/keel_hook.py') pre-tool\"",
+            "timeout": 15,
+            "statusMessage": "Checking KEEL phase and scope"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.keel/hooks/keel_hook.py\" post-tool",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$r=(git rev-parse --show-toplevel); py -3 (Join-Path $r '.keel/hooks/keel_hook.py') post-tool\"",
+            "timeout": 15,
+            "statusMessage": "Checking KEEL diff scope"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.keel/hooks/keel_hook.py\" stop",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$r=(git rev-parse --show-toplevel); py -3 (Join-Path $r '.keel/hooks/keel_hook.py') stop\"",
+            "timeout": 15,
+            "statusMessage": "Checking KEEL completion gate"
+          }
+        ]
+      }
+    ]
+  }
+}

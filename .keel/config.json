@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "verification_commands": [],
+  "source_classification": {
+    "explicit_source_globs": [],
+    "explicit_non_source_globs": []
+  },
+  "capability_resolver": {
+    "max_evidence_per_capability": 12,
+    "ignore_dirs": ["node_modules", "vendor", "dist", "build", "target", ".venv", "venv"]
+  },
+  "context_compiler": {
+    "max_chars": 12000,
+    "always_docs": [
+      "AGENTS.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/VERIFICATION.md"
+    ],
+    "capability_docs": {
+      "architecture-boundaries": ["ARCHITECTURE.md", "docs/control-plane/ARCHITECTURE_ENFORCEMENT.md"],
+      "build-toolchain": ["docs/control-plane/COMMANDS.md"],
+      "testing-evals": ["docs/control-plane/TESTING_CI_GENERATED.md", "docs/control-plane/VERIFICATION.md"],
+      "quality-static-analysis": ["docs/control-plane/ARCHITECTURE_ENFORCEMENT.md"],
+      "security": ["docs/SECURITY.md", "docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md"],
+      "privacy-data": ["docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md"],
+      "ui-browser-a11y-i18n": ["docs/FRONTEND.md", "docs/control-plane/VERIFICATION.md"],
+      "observability": ["docs/control-plane/OPERABILITY.md"],
+      "reliability-slos": ["docs/RELIABILITY.md"],
+      "release-deploy-rollback": ["docs/control-plane/RELEASE_OPERATIONS.md"],
+      "migrations-backup-dr": ["docs/control-plane/RELEASE_OPERATIONS.md"],
+      "infra-iac": ["docs/control-plane/ENVIRONMENTS.md", "docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md"],
+      "ml-data-agent-evals": ["docs/control-plane/FEEDBACK_EVALS.md"],
+      "environments-worktrees": ["docs/control-plane/ENVIRONMENTS.md", "docs/control-plane/KEEL_PARALLEL.md"]
+    }
+  },
+  "max_agents_cascade_bytes": 32768,
+  "root_agents_max_lines": 100,
+  "hook_summary_max_chars": 6000
+}
