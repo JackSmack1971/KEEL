@@ -1,0 +1,10 @@
+{
+  "base_commit": "46905949acf0c6da3ef989b403c54c950c9127a0",
+  "change_id": "typed-spec-metadata",
+  "created_at": "2026-09-07T13:05:19+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T13:08:26+00:00",
+  "verified_content_digest": "862348029538406de83bafe8c80a12d4df252627f0ba7cae82f2ac3323909a53"
+}

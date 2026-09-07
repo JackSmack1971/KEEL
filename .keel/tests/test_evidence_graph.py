@@ -72,9 +72,16 @@ def main() -> None:
         assert result["summary"]["requirements_covered"] == 2
         assert result["summary"]["requirements_passing"] == 2
         assert result["requirement_coverage"] == [
-            {"requirement_id": "REQ-001", "criterion_ids": ["AC-001"], "criterion_count": 1, "passed": True},
-            {"requirement_id": "REQ-002", "criterion_ids": ["AC-002"], "criterion_count": 1, "passed": True},
+            {"requirement_id": "REQ-001", "type": "behavior", "priority": "must", "implementation_paths": [], "criterion_ids": ["AC-001"], "criterion_count": 1, "passed": True},
+            {"requirement_id": "REQ-002", "type": "behavior", "priority": "must", "implementation_paths": [], "criterion_ids": ["AC-002"], "criterion_count": 1, "passed": True},
         ]
+        typed = json.loads(requirements.read_text(encoding="utf-8")); typed["requirements"][0].update({"type": "security", "priority": "must", "implementation_paths": ["src/auth/**"]})
+        acceptance_data = json.loads(acceptance.read_text(encoding="utf-8")); acceptance_data["criteria"][0].update({"evidence_type": "automated-test", "implementation_paths": ["src/auth/**"]})
+        requirements.write_text(json.dumps(typed), encoding="utf-8"); acceptance.write_text(json.dumps(acceptance_data), encoding="utf-8")
+        assert graph.validate_contract(requirements, acceptance) == []
+        typed["requirements"][0]["implementation_paths"] = ["../outside"]
+        requirements.write_text(json.dumps(typed), encoding="utf-8")
+        assert any("contains unsafe path" in error for error in graph.validate_contract(requirements, acceptance))
         print("Evidence graph tests PASS")
 
 

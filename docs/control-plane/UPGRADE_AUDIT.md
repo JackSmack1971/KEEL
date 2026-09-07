@@ -4,7 +4,7 @@ This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means ex
 
 | Upgrade area | Status | Evidence / remaining work |
 |---|---|---|
-| Requirements and acceptance traceability | Implemented | `requirements.json`, `acceptance.json`, evidence graph, and verification enforce coverage. |
+| Requirements and acceptance traceability | Partially implemented | `requirements.json`, `acceptance.json`, evidence graph, and verification enforce coverage; typed requirement/priority/evidence metadata and implementation-surface paths are now schema-checked, while richer automatic spec generation remains absent. |
 | Capability resolution | Implemented | `.keel/lib/capability_resolver.py`, `keel discover`, resolver tests; advisory statuses remain policy-neutral. |
 | Context compilation | Implemented | `.keel/lib/context_compiler.py`, provenance metadata, context tests. |
 | KEELBench | Implemented as harness | Paired-trial schema, validation, creation, and scoring exist; empirical superiority remains unvalidated until real trials are run. |
@@ -30,7 +30,7 @@ The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections
 |---|---|---|
 | 1-3 | Lifecycle, evidence graph, effects, and audit framing | Implemented foundation |
 | 4 | Missions / work DAG | Partial: validation/frontier and advisory dispatch contracts; runtime execution remains |
-| 5 | Requirements and acceptance traceability | Partial: machine-readable links exist; richer typed specification model remains |
+| 5 | Requirements and acceptance traceability | Partial: machine-readable links plus optional typed metadata and implementation surfaces; richer automatic spec generation remains |
 | 6 | Evidence graph | Implemented |
 | 7 | Capability resolver | Implemented local resolver; runtime discovery remains advisory |
 | 8 | Repository mapping / knowledge graph | Partial: classifications, Python imports, and CODEOWNERS source discovery; ownership policy/architecture relations remain |

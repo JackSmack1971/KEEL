@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import fnmatch
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 REQ_ID_PREFIX = "REQ-"
 AC_ID_PREFIX = "AC-"
 SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists", "unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "human_review", "external_ci"}
+REQUIREMENT_TYPES = {"behavior", "quality", "security", "migration", "performance", "architecture", "documentation"}
+PRIORITIES = {"must", "should", "could"}
+EVIDENCE_TYPES = {"automated-test", "human-review", "schema", "benchmark", "runtime", "changed-path"}
 
 
 def read_json(path: Path):
@@ -21,6 +24,19 @@ def _providers(contracts_path: Path | None) -> set[str]:
         return {"changed_path", "file_exists"} | {x for x in value if isinstance(x, str)}
     except Exception:
         return set()
+
+
+def _implementation_paths(value, label: str, errors: list[str]) -> None:
+    if value is None:
+        return
+    if not isinstance(value, list) or any(not isinstance(item, str) or not item.strip() for item in value):
+        errors.append(f"{label}.implementation_paths must be a list of non-empty strings")
+        return
+    for item in value:
+        normalized = item.replace("\\", "/")
+        parsed = PurePosixPath(normalized)
+        if parsed.is_absolute() or ".." in parsed.parts:
+            errors.append(f"{label}.implementation_paths contains unsafe path: {item}")
 
 
 def validate_contract(requirements_path: Path, acceptance_path: Path, require_nonempty: bool = True, contracts_path: Path | None = None) -> list[str]:
@@ -52,6 +68,9 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         if rid in req_ids: errors.append(f"duplicate requirement id: {rid}")
         req_ids.add(rid)
         if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"requirement {rid} statement too thin")
+        if r.get("type", "behavior") not in REQUIREMENT_TYPES: errors.append(f"requirement {rid} type must be one of {sorted(REQUIREMENT_TYPES)}")
+        if r.get("priority", "must") not in PRIORITIES: errors.append(f"requirement {rid} priority must be one of {sorted(PRIORITIES)}")
+        _implementation_paths(r.get("implementation_paths"), f"requirement {rid}", errors)
     ac_ids = set()
     covered_requirements = set()
     for c in criteria:
@@ -63,6 +82,8 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         if rid not in req_ids: errors.append(f"acceptance {aid} references unknown requirement {rid!r}")
         else: covered_requirements.add(rid)
         if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"acceptance {aid} statement too thin")
+        if "evidence_type" in c and c.get("evidence_type") not in EVIDENCE_TYPES: errors.append(f"acceptance {aid} evidence_type must be one of {sorted(EVIDENCE_TYPES)}")
+        _implementation_paths(c.get("implementation_paths"), f"acceptance {aid}", errors)
         if c.get("policy", "all") not in {"all", "any"}: errors.append(f"acceptance {aid} policy must be all|any")
         if not isinstance(c.get("required", True), bool): errors.append(f"acceptance {aid} required must be boolean")
         evidence = c.get("evidence")
@@ -139,7 +160,7 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
         policy = c.get("policy", "all")
         passed = all(x["passed"] for x in edge_rows) if policy == "all" else any(x["passed"] for x in edge_rows)
         status = "PASS" if passed else "FAIL"
-        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence": edge_rows}
+        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence_type": c.get("evidence_type"), "implementation_paths": c.get("implementation_paths", []), "evidence": edge_rows}
         criterion_rows.append(row)
         if row["required"] and not passed:
             errors.append(f"acceptance criterion failed: {row['id']}")
@@ -149,6 +170,9 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
         rows = [row for row in criterion_rows if row["requirement_id"] == rid]
         requirement_coverage.append({
             "requirement_id": rid,
+            "type": requirement.get("type", "behavior"),
+            "priority": requirement.get("priority", "must"),
+            "implementation_paths": requirement.get("implementation_paths", []),
             "criterion_ids": [row["id"] for row in rows],
             "criterion_count": len(rows),
             "passed": bool(rows) and all(row["status"] == "PASS" for row in rows),

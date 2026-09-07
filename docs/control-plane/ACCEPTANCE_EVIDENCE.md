@@ -7,7 +7,7 @@ requirements.json
 acceptance.json
 ```
 
-`requirements.json` contains stable `REQ-*` statements. `acceptance.json` contains `AC-*` criteria, each linked to a requirement and one or more evidence edges. Both files are part of KEEL's intent digest, so changing acceptance after verification makes evidence stale.
+`requirements.json` contains stable `REQ-*` statements and may add typed `type`, `priority`, and repository-relative `implementation_paths` metadata. `acceptance.json` contains `AC-*` criteria, each linked to a requirement and one or more evidence edges; criteria may declare `evidence_type` and implementation paths. Both files are part of KEEL's intent digest, so changing acceptance after verification makes evidence stale.
 
 Every declared requirement must be referenced by at least one acceptance criterion. An orphan requirement is a contract error and prevents verification; this keeps intent-to-evidence traceability explicit rather than treating an unreferenced requirement as implicitly satisfied.
 
