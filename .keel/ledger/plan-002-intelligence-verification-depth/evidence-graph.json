@@ -1,0 +1,332 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "repository-map-tests",
+          "detail": "check=repository-map-tests exit=0 expected=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": "automated-test",
+      "id": "AC-INTEL-001",
+      "implementation_matches": [
+        ".keel/lib/repository_map.py",
+        ".keel/tests/test_effect_inference.py",
+        ".keel/tests/test_evidence_graph.py",
+        ".keel/tests/test_intelligence_depth.py",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_map.py",
+        ".keel/tests/"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-INTEL-001",
+      "statement": "Repository intelligence provenance and uncertainty tests pass.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "repository-map-tests",
+          "detail": "check=repository-map-tests exit=0 expected=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "evidence-graph-tests",
+          "detail": "check=evidence-graph-tests exit=0 expected=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": "automated-test",
+      "id": "AC-INTEL-002",
+      "implementation_matches": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/repository_map.py",
+        ".keel/tests/test_effect_inference.py",
+        ".keel/tests/test_evidence_graph.py",
+        ".keel/tests/test_intelligence_depth.py",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_map.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-INTEL-002",
+      "statement": "Impact and semantic-risk tests pass.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-graph-tests",
+          "detail": "check=evidence-graph-tests exit=0 expected=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": "automated-test",
+      "id": "AC-INTEL-003",
+      "implementation_matches": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/test_effect_inference.py",
+        ".keel/tests/test_evidence_graph.py",
+        ".keel/tests/test_intelligence_depth.py",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-INTEL-003",
+      "statement": "Typed evidence and oracle-integrity tests pass.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "effect-inference-tests",
+          "detail": "check=effect-inference-tests exit=0 expected=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": "automated-test",
+      "id": "AC-INTEL-004",
+      "implementation_matches": [
+        ".keel/lib/effect_inference.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/test_effect_inference.py",
+        ".keel/tests/test_evidence_graph.py",
+        ".keel/tests/test_intelligence_depth.py",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/effect_inference.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-INTEL-004",
+      "statement": "Advisory effect inference tests pass.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "oracle_integrity": {
+    "independent_oracle_detected": true,
+    "policy": "proof changes may widen verification, never weaken it",
+    "proof_surface_changes": [
+      ".keel/lib/evidence_graph.py",
+      ".keel/tests/test_effect_inference.py",
+      ".keel/tests/test_evidence_graph.py",
+      ".keel/tests/test_intelligence_depth.py",
+      ".keel/tests/test_repository_map.py"
+    ],
+    "status": "CLEAR"
+  },
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-INTEL-001"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_map.py",
+        ".keel/tests/"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-INTEL-001",
+      "type": "architecture"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-INTEL-002"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_map.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-INTEL-002",
+      "type": "quality"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-INTEL-003"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-INTEL-003",
+      "type": "security"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-INTEL-004"
+      ],
+      "implementation_paths": [
+        ".keel/lib/effect_inference.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-INTEL-004",
+      "type": "security"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-INTEL-001",
+      "implementation_paths": [
+        ".keel/lib/repository_map.py",
+        ".keel/tests/"
+      ],
+      "priority": "must",
+      "statement": "Repository intelligence emits provenance-backed bounded facts and explicit unavailable or conflict states without becoming authoritative.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-INTEL-002",
+      "implementation_paths": [
+        ".keel/lib/repository_map.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "priority": "must",
+      "statement": "Impact and semantic classifications expose uncertainty and high-consequence verification surfaces as advisory risk inputs.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-INTEL-003",
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "priority": "must",
+      "statement": "Evidence assertions are typed and proof-mechanism changes cannot silently satisfy acceptance through the implementation's own oracle.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-INTEL-004",
+      "implementation_paths": [
+        ".keel/lib/effect_inference.py",
+        ".keel/lib/keel_core.py",
+        ".keel/tests/"
+      ],
+      "priority": "must",
+      "statement": "Effect inference and intelligence remain advisory and never grant authorization or remove mandatory verification obligations.",
+      "type": "security"
+    }
+  ],
+  "schema_version": 1,
+  "semantic_diff": [
+    {
+      "categories": [],
+      "consequence": "NORMAL",
+      "path": ".control-plane/bootstrap-manifest.json",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [],
+      "consequence": "NORMAL",
+      "path": ".keel/lib/effect_inference.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [
+        "verification_surface"
+      ],
+      "consequence": "HIGH",
+      "path": ".keel/lib/evidence_graph.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [],
+      "consequence": "NORMAL",
+      "path": ".keel/lib/keel_core.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [],
+      "consequence": "NORMAL",
+      "path": ".keel/lib/repository_map.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [
+        "verification_surface"
+      ],
+      "consequence": "HIGH",
+      "path": ".keel/tests/test_effect_inference.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [
+        "verification_surface"
+      ],
+      "consequence": "HIGH",
+      "path": ".keel/tests/test_evidence_graph.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [
+        "verification_surface"
+      ],
+      "consequence": "HIGH",
+      "path": ".keel/tests/test_intelligence_depth.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [
+        "verification_surface"
+      ],
+      "consequence": "HIGH",
+      "path": ".keel/tests/test_repository_map.py",
+      "provenance": "bounded path-marker classifier; advisory"
+    },
+    {
+      "categories": [],
+      "consequence": "NORMAL",
+      "path": "docs/exec-plans/active/plan-002-intelligence-verification-depth.md",
+      "provenance": "bounded path-marker classifier; advisory"
+    }
+  ],
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

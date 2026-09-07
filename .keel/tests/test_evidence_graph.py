@@ -34,6 +34,11 @@ def _write_contract(directory: Path, criteria: list[dict]) -> tuple[Path, Path]:
 
 def main() -> None:
     graph = _load_graph()
+    assert graph.classify_semantic_paths(["src/auth/policy.py"])[0]["consequence"] == "HIGH"
+    oracle = graph.oracle_integrity([".keel/tests/test_evidence_graph.py"], [".github/workflows/verify.yml"])
+    assert oracle["status"] == "CLEAR"
+    passed, _ = graph._assertion({"exit_code": 0, "excerpt": "PASS metric=9"}, {"type": "output_contains", "value": "PASS"})
+    assert passed
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory)
         orphan_requirements, orphan_acceptance = _write_contract(root, [{

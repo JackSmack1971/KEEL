@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id": "REQ-INTEL-001", "statement": "Repository intelligence emits provenance-backed bounded facts and explicit unavailable or conflict states without becoming authoritative.", "type": "architecture", "priority": "must", "implementation_paths": [".keel/lib/repository_map.py", ".keel/tests/"]},
+    {"id": "REQ-INTEL-002", "statement": "Impact and semantic classifications expose uncertainty and high-consequence verification surfaces as advisory risk inputs.", "type": "quality", "priority": "must", "implementation_paths": [".keel/lib/repository_map.py", ".keel/lib/keel_core.py", ".keel/tests/"]},
+    {"id": "REQ-INTEL-003", "statement": "Evidence assertions are typed and proof-mechanism changes cannot silently satisfy acceptance through the implementation's own oracle.", "type": "security", "priority": "must", "implementation_paths": [".keel/lib/evidence_graph.py", ".keel/lib/keel_core.py", ".keel/tests/"]},
+    {"id": "REQ-INTEL-004", "statement": "Effect inference and intelligence remain advisory and never grant authorization or remove mandatory verification obligations.", "type": "security", "priority": "must", "implementation_paths": [".keel/lib/effect_inference.py", ".keel/lib/keel_core.py", ".keel/tests/"]}
+  ]
+}

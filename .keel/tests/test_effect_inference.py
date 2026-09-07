@@ -10,6 +10,8 @@ import effect_inference as ei
 assert ei.infer_argv(["git", "push", "origin", "main"])[0]["capability"] == "git.remote.push"
 assert ei.infer_argv(["terraform", "apply", "plan.out"])[0]["capability"] == "infra.apply"
 assert ei.infer_argv(["python", "-B", "test.py"]) == []
+assert ei.infer_command(["unknown-tool", "check"])["status"] == "UNKNOWN"
+assert ei.infer_command(["git", "push"])["authorization"] == "not evaluated or granted"
 with tempfile.TemporaryDirectory() as directory:
     root = Path(directory)
     (root / ".keel").mkdir()

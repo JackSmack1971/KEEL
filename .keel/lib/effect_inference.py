@@ -34,9 +34,21 @@ def infer_argv(argv: list[str]) -> list[dict]:
     return [unique[key] for key in sorted(unique)]
 
 
+def infer_command(argv: list[str], providers: dict | None = None) -> dict:
+    """Return advisory semantics with explicit uncertainty for unknown providers."""
+    providers = providers or {}
+    inferred = infer_argv(argv)
+    executable = str(argv[0]).lower() if argv else ""
+    contract = providers.get(executable)
+    if contract is None and not inferred:
+        return {"status": "UNKNOWN", "argv": argv, "provider": executable or None, "confidence": 0.0, "capabilities": [], "authorization": "not evaluated or granted", "provenance": "no repository provider contract and no high-confidence argv rule"}
+    return {"status": "ADVISORY", "argv": argv, "provider": executable, "confidence": 1.0 if inferred else 0.5, "capabilities": inferred, "contract": contract, "authorization": "not evaluated or granted", "provenance": "argv rule and/or repository provider contract"}
+
+
 def audit(root: Path, change_id: str | None = None) -> dict:
     config = json.loads((root / ".keel" / "config.json").read_text(encoding="utf-8"))
     declared: list[str] = []
+    providers = config.get("effect_providers", {})
     if change_id:
         effects = root / ".keel" / "ledger" / change_id / "effects.json"
         if effects.is_file():
@@ -44,8 +56,10 @@ def audit(root: Path, change_id: str | None = None) -> dict:
     checks = []
     inferred = set()
     for check in config.get("verification_commands", []):
-        matches = infer_argv(check.get("argv", []))
+        command = infer_command(check.get("argv", []), providers)
+        matches = command["capabilities"]
         inferred.update(item["capability"] for item in matches)
-        checks.append({"id": check.get("id"), "argv": check.get("argv", []), "inferred": matches})
+        checks.append({"id": check.get("id"), "argv": check.get("argv", []), "inferred": matches, "status": command["status"], "confidence": command["confidence"], "provenance": command["provenance"]})
     undeclared = sorted(inferred - set(declared)) if change_id else []
-    return {"schema_version": 1, "status": "ADVISORY" if undeclared else "PASS", "read_only": True, "change_id": change_id, "declared_capabilities": sorted(declared), "inferred_capabilities": sorted(inferred), "undeclared_capabilities": undeclared, "checks": checks, "authorization": "not evaluated or granted"}
+    unknown = [row["id"] for row in checks if row["status"] == "UNKNOWN"]
+    return {"schema_version": 2, "status": "ADVISORY" if undeclared or unknown else "PASS", "read_only": True, "change_id": change_id, "declared_capabilities": sorted(declared), "inferred_capabilities": sorted(inferred), "undeclared_capabilities": undeclared, "unknown_commands": unknown, "checks": checks, "authorization": "not evaluated or granted", "policy": "inference cannot authorize or weaken mandatory checks"}

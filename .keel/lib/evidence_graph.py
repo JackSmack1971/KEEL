@@ -10,6 +10,8 @@ SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists", "unit_test", "b
 REQUIREMENT_TYPES = {"behavior", "quality", "security", "migration", "performance", "architecture", "documentation"}
 PRIORITIES = {"must", "should", "could"}
 EVIDENCE_TYPES = {"automated-test", "human-review", "schema", "benchmark", "runtime", "changed-path"}
+ASSERTION_TYPES = {"exit_code", "output_contains", "output_not_contains", "json_key", "metric_at_least", "metric_at_most"}
+PROOF_SURFACE_MARKERS = ("test", "verify", "evidence", "contract", "threshold", "config")
 
 
 def read_json(path: Path):
@@ -37,6 +39,60 @@ def _implementation_paths(value, label: str, errors: list[str]) -> None:
         parsed = PurePosixPath(normalized)
         if parsed.is_absolute() or ".." in parsed.parts:
             errors.append(f"{label}.implementation_paths contains unsafe path: {item}")
+
+
+def classify_semantic_paths(paths: list[str]) -> list[dict]:
+    markers = {
+        "public_api": ("api", "openapi", "schema"),
+        "permissions": ("auth", "permission", "policy"),
+        "dependencies": ("lock", "requirements", "package", "pyproject", "cargo"),
+        "security": ("security", "secret", "crypto"),
+        "deployment": ("docker", "deploy", "workflow"),
+        "verification_surface": PROOF_SURFACE_MARKERS,
+    }
+    rows = []
+    for path in sorted(set(paths)):
+        lower = path.lower()
+        categories = sorted(kind for kind, needles in markers.items() if any(needle in lower for needle in needles))
+        rows.append({"path": path, "categories": categories, "consequence": "HIGH" if categories else "NORMAL", "provenance": "bounded path-marker classifier; advisory"})
+    return rows
+
+
+def oracle_integrity(changed_paths: list[str], verification_paths: list[str] | None = None) -> dict:
+    verification_paths = verification_paths or []
+    changed = sorted(set(changed_paths))
+    proof_changes = [path for path in changed if any(marker in path.lower() for marker in PROOF_SURFACE_MARKERS)]
+    independent = any(path not in proof_changes and path not in changed and Path(path).suffix in {".py", ".js", ".ts", ".yml", ".yaml", ".json"} for path in verification_paths)
+    return {"status": "REQUIRES_INDEPENDENT_VERIFICATION" if proof_changes and not independent else "CLEAR", "proof_surface_changes": proof_changes, "independent_oracle_detected": independent, "policy": "proof changes may widen verification, never weaken it"}
+
+
+def _assertion(check: dict | None, assertion: dict) -> tuple[bool, str]:
+    if not check:
+        return False, "check missing"
+    kind = assertion.get("type")
+    if kind == "exit_code":
+        expected = assertion.get("equals", 0)
+        return check.get("exit_code") == expected, f"exit={check.get('exit_code')} expected={expected}"
+    text = str(check.get("excerpt", ""))
+    if kind == "output_contains":
+        value = str(assertion.get("value", "")); return bool(value and value in text), f"contains={value in text}"
+    if kind == "output_not_contains":
+        value = str(assertion.get("value", "")); return bool(value and value not in text), f"not_contains={value not in text}"
+    if kind == "json_key":
+        try:
+            document = json.loads(text)
+            current = document
+            for key in assertion.get("path", []): current = current[key]
+            expected = assertion.get("equals")
+            return (expected is None or current == expected), f"json_key={current!r}"
+        except (TypeError, KeyError, IndexError, json.JSONDecodeError):
+            return False, "json assertion could not parse output"
+    if kind in {"metric_at_least", "metric_at_most"}:
+        try: value = float(assertion["value"]); observed = float(assertion["observed"])
+        except (KeyError, TypeError, ValueError): return False, "metric assertion missing numeric values"
+        passed = observed >= value if kind == "metric_at_least" else observed <= value
+        return passed, f"metric={observed} bound={value}"
+    return False, f"unsupported assertion type={kind!r}"
 
 
 def validate_contract(requirements_path: Path, acceptance_path: Path, require_nonempty: bool = True, contracts_path: Path | None = None) -> list[str]:
@@ -132,8 +188,9 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
             passed = False; detail = ""
             if provider == "command":
                 check = check_map.get(edge["check_id"])
-                passed = bool(check and check.get("exit_code") == 0)
-                detail = f"check={edge['check_id']} exit={None if not check else check.get('exit_code')}"
+                assertion = edge.get("assertion", {"type": "exit_code", "equals": 0})
+                passed, detail = _assertion(check, assertion)
+                detail = f"check={edge['check_id']} {detail}"
             elif provider == "changed_path":
                 matched = [p for p in changed_paths if _path_match(p, edge["path"])]
                 passed = bool(matched); detail = "matched=" + ",".join(matched[:8])
@@ -154,8 +211,9 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
                     passed = False; detail = "invalid, missing, or out-of-repository JSON"
             else:
                 check = check_map.get(edge["check_id"])
-                passed = bool(check and check.get("exit_code") == 0)
-                detail = f"provider={provider} check={edge['check_id']} exit={None if not check else check.get('exit_code')}"
+                assertion = edge.get("assertion", {"type": "exit_code", "equals": 0})
+                passed, detail = _assertion(check, assertion)
+                detail = f"provider={provider} check={edge['check_id']} {detail}"
             edge_rows.append({"provider": provider, "passed": passed, "detail": detail, **{k:v for k,v in edge.items() if k != "provider"}})
         policy = c.get("policy", "all")
         passed = all(x["passed"] for x in edge_rows) if policy == "all" else any(x["passed"] for x in edge_rows)
@@ -183,10 +241,15 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
             "criterion_count": len(rows),
             "passed": bool(rows) and all(row["status"] == "PASS" for row in rows),
         })
+    oracle = oracle_integrity(changed_paths, [p for c in checks for p in c.get("verification_paths", [])])
+    if oracle["status"] != "CLEAR":
+        errors.append("oracle integrity requires an independent verification path: " + ", ".join(oracle["proof_surface_changes"]))
     return {
         "schema_version": 1,
         "status": "PASS" if not errors else "FAIL",
         "errors": errors,
+        "semantic_diff": classify_semantic_paths(changed_paths),
+        "oracle_integrity": oracle,
         "requirements": req["requirements"],
         "criteria": criterion_rows,
         "requirement_coverage": requirement_coverage,

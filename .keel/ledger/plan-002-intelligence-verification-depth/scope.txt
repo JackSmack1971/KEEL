@@ -1,0 +1,9 @@
+.keel/lib/repository_map.py
+.keel/lib/evidence_graph.py
+.keel/lib/effect_inference.py
+.keel/lib/keel_core.py
+.keel/bin/keel.py
+.keel/tests/
+.keel/contracts.json
+docs/exec-plans/active/plan-002-intelligence-verification-depth.md
+.control-plane/bootstrap-manifest.json

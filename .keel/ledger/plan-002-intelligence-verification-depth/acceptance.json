@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id": "AC-INTEL-001", "requirement_id": "REQ-INTEL-001", "statement": "Repository intelligence provenance and uncertainty tests pass.", "required": true, "policy": "all", "evidence_type": "automated-test", "implementation_paths": [".keel/lib/repository_map.py", ".keel/tests/"], "evidence": [{"provider": "command", "check_id": "repository-map-tests"}]},
+    {"id": "AC-INTEL-002", "requirement_id": "REQ-INTEL-002", "statement": "Impact and semantic-risk tests pass.", "required": true, "policy": "all", "evidence_type": "automated-test", "implementation_paths": [".keel/lib/repository_map.py", ".keel/lib/keel_core.py", ".keel/tests/"], "evidence": [{"provider": "command", "check_id": "repository-map-tests"}, {"provider": "command", "check_id": "evidence-graph-tests"}]},
+    {"id": "AC-INTEL-003", "requirement_id": "REQ-INTEL-003", "statement": "Typed evidence and oracle-integrity tests pass.", "required": true, "policy": "all", "evidence_type": "automated-test", "implementation_paths": [".keel/lib/evidence_graph.py", ".keel/lib/keel_core.py", ".keel/tests/"], "evidence": [{"provider": "command", "check_id": "evidence-graph-tests"}]},
+    {"id": "AC-INTEL-004", "requirement_id": "REQ-INTEL-004", "statement": "Advisory effect inference tests pass.", "required": true, "policy": "all", "evidence_type": "automated-test", "implementation_paths": [".keel/lib/effect_inference.py", ".keel/lib/keel_core.py", ".keel/tests/"], "evidence": [{"provider": "command", "check_id": "effect-inference-tests"}]}
+  ]
+}

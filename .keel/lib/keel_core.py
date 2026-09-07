@@ -55,7 +55,7 @@ def head_commit(root: Path) -> str:
 def atomic_write(path: Path, data: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + ".tmp-keel")
-    tmp.write_text(data, encoding="utf-8")
+    tmp.write_text(data, encoding="utf-8", newline="\n")
     os.replace(tmp, path)
 
 
@@ -113,7 +113,7 @@ def append_event(root: Path, change_id: str, event: str, result: str, details: d
         row["details"] = details
     p = ledger_dir(root, change_id) / "gate-log.jsonl"
     p.parent.mkdir(parents=True, exist_ok=True)
-    with p.open("a", encoding="utf-8") as f:
+    with p.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(row, sort_keys=True) + "\n")
         f.flush()
         try:
@@ -418,7 +418,8 @@ def worktree_entry(root: Path, rel: str) -> tuple[str, bytes]:
         except OSError:
             executable = False
         data = p.read_bytes()
-        if os.name == "nt":
+        autocrlf = run_git(root, ["config", "--get", "core.autocrlf"], check=False).stdout.strip().lower()
+        if os.name == "nt" and autocrlf in {"true", "1"}:
             data = data.replace(b"\r\n", b"\n")
         return ("100755" if executable else "100644"), data
     if p.is_dir():
@@ -780,6 +781,20 @@ def record_authorization(root: Path, change_id: str, authority: str, scope: str,
     })
     append_event(root, change_id, "AUTHORIZATION", "RECORDED", {"authority": authority.strip(), "scope": scope.strip(), "evidence_reference": evidence_reference.strip()})
 
+def select_verification(commands: list[dict], changed_paths: list[str], risk: dict | None = None) -> dict:
+    """Select additive checks; mandatory policy checks are always retained."""
+    risk = risk or {}
+    high_consequence = any(any(marker in path.lower() for marker in ("api", "schema", "auth", "permission", "security", "deploy", "test", "verify", "config")) for path in changed_paths)
+    selected = []
+    for command in commands:
+        cid = command.get("id")
+        if not isinstance(cid, str):
+            continue
+        mandatory = bool(command.get("required", True))
+        selected.append({"id": cid, "required": mandatory, "reason": "policy-required" if mandatory else ("high-consequence-impact" if high_consequence else "configured-advisory")})
+    return {"status": "AVAILABLE", "selected": selected, "mandatory_retained": all(row["required"] for row in selected if row["required"]), "uncertainty": "WIDEN" if high_consequence or risk.get("risk_level") == "high" else "NORMAL", "policy": "intelligence may add checks but may not remove mandatory checks"}
+
+
 def verify_change(root: Path, change_id: str) -> dict:
     st = state(root, change_id)
     if st.get("phase") not in {"EXECUTE", "VERIFY"}:
@@ -795,6 +810,7 @@ def verify_change(root: Path, change_id: str) -> dict:
     errs.extend(doc_errors)
     commands = []
     cfg = read_json(root / ".keel" / "config.json")
+    verification_selection = select_verification(cfg.get("verification_commands", []), material, read_json(ledger_dir(root, change_id) / "risk.json"))
     if source_change_present(root, change_id) and not cfg.get("verification_commands"):
         errs.append("substantive source change has no configured verification_commands in .keel/config.json")
     results = []
@@ -817,7 +833,8 @@ def verify_change(root: Path, change_id: str) -> dict:
             code = 124; out = (e.stdout or "") + "\n" + (e.stderr or "") + f"\nTIMEOUT after {timeout}s"
         ms = int((time.monotonic() - t0) * 1000)
         excerpt = redact("\n".join(out.splitlines()[-20:]))[-8000:]
-        results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt})
+        verification_paths = [token.replace('\\', '/') for token in argv if isinstance(token, str) and (token.startswith('.keel/') or token.startswith('docs/'))]
+        results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt, "verification_paths": verification_paths})
         if required and code != 0: errs.append(f"verification command failed: {cid} exit={code}")
     d = ledger_dir(root, change_id)
     evidence_graph_result = evidence_graph.evaluate(root, d / "requirements.json", d / "acceptance.json", results, material, contracts_path=root / ".keel" / "contracts.json")
@@ -829,7 +846,7 @@ def verify_change(root: Path, change_id: str) -> dict:
         try: digest = content_digest(root, change_id)
         except Exception as e: errs.append(f"content digest failed: {e}")
     status = "PASS" if not errs else "FAIL"
-    evidence = {"schema_version": 2, "change_id": change_id, "base_commit": st["base_commit"], "verified_at": now(), "status": status, "content_digest": digest, "changed_paths": material, "errors": errs, "checks": results, "acceptance": evidence_graph_result.get("summary", {})}
+    evidence = {"schema_version": 2, "change_id": change_id, "base_commit": st["base_commit"], "verified_at": now(), "status": status, "content_digest": digest, "changed_paths": material, "errors": errs, "checks": results, "verification_selection": verification_selection, "acceptance": evidence_graph_result.get("summary", {})}
     write_json(d / "verification.json", evidence)
     md = ["# Verification", "", f"Status: `{status}`", f"Base: `{st['base_commit']}`", f"Content digest: `{digest or 'UNAVAILABLE'}`", "", "## Checks"]
     for r in results:

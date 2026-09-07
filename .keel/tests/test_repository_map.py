@@ -20,6 +20,11 @@ assert all(row["analyzer"] == "python-ast" and row["source"] for row in first["s
 assert any(row["kind"] == "local" for row in first["semantic_imports"])
 assert any(row["kind"] == "external" for row in first["semantic_imports"])
 assert first["ownership"]["status"] == "UNAVAILABLE"
+assert "command_intelligence" in first and all(row["provenance"] for row in first["command_intelligence"])
+assert "symbols" in first and all(row["provenance"] for row in first["symbols"])
+assert first["architecture"]["status"] == "UNAVAILABLE"
+impact = repository_map.analyze_impact(first, [".keel/lib/repository_map.py", ".keel/config.json"])
+assert impact["policy"] == "advisory-only" and impact["risk"] == "WIDEN_VERIFICATION"
 before = json.dumps(first, sort_keys=True)
 assert json.dumps(repository_map.build(ROOT), sort_keys=True) == before
 with tempfile.TemporaryDirectory() as directory:
