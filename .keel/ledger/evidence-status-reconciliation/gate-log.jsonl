@@ -1,0 +1,5 @@
+{"details": {"base_commit": "aaa9f76a5613d413bfe12d90625e0764c6cfde8f", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:57:53+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:58:24+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:58:25+00:00"}
+{"details": {"changed_paths": ["docs/exec-plans/active/evidence-status-reconciliation.md", "docs/exec-plans/active/keel-upgrade-goal.md", "docs/exec-plans/active/upgrade-remaining-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:58:32+00:00"}
+{"details": {"content_digest": "13a80aab379dd18efda11958b5531531d52bac9e471582daad8c295fb4cb4228", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:58:32+00:00"}
