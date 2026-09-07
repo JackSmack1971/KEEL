@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"Mission contracts shall validate required identity, objective, success criteria, change identifiers, dependency references, and risk values.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"Mission dependency graphs shall reject self-dependencies, missing nodes, duplicate dependencies, and cycles deterministically.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"The planner shall report a deterministic runnable frontier whose nodes have completed dependencies, without mutating mission or child ledgers.","source":"upgrade-audit"},
+    {"id":"REQ-004","statement":"Mission status shall project child KEEL ledger phases while preserving per-change governance as the source of truth.","source":"upgrade-audit"}
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "mission-work-graph-tests",
+          "detail": "check=mission-work-graph-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Mission tests validate required fields and risk values.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "mission-work-graph-tests",
+          "detail": "check=mission-work-graph-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Mission tests reject malformed and cyclic graphs.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "mission-work-graph-tests",
+          "detail": "check=mission-work-graph-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Mission tests prove stable frontier ordering and read-only behavior.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "mission-work-graph-tests",
+          "detail": "check=mission-work-graph-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-004",
+      "statement": "Mission tests project child ledger phases without allowing mission status to override them.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-005",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Doctor, strict control-plane validation, and KEELBench remain passing.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-005"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-003"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-004"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-004"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Mission contracts shall validate required identity, objective, success criteria, change identifiers, dependency references, and risk values."
+    },
+    {
+      "id": "REQ-002",
+      "source": "upgrade-audit",
+      "statement": "Mission dependency graphs shall reject self-dependencies, missing nodes, duplicate dependencies, and cycles deterministically."
+    },
+    {
+      "id": "REQ-003",
+      "source": "upgrade-audit",
+      "statement": "The planner shall report a deterministic runnable frontier whose nodes have completed dependencies, without mutating mission or child ledgers."
+    },
+    {
+      "id": "REQ-004",
+      "source": "upgrade-audit",
+      "statement": "Mission status shall project child KEEL ledger phases while preserving per-change governance as the source of truth."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 5,
+    "required": 5,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

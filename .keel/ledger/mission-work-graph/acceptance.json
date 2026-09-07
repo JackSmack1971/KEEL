@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Mission tests validate required fields and risk values.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-work-graph-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Mission tests reject malformed and cyclic graphs.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-work-graph-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Mission tests prove stable frontier ordering and read-only behavior.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-work-graph-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-004","statement":"Mission tests project child ledger phases without allowing mission status to override them.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-work-graph-tests"}]},
+    {"id":"AC-005","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

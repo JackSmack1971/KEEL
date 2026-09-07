@@ -2,7 +2,9 @@
 
 Status: `DEFERRED` until issue tracker, unattended runtime, demand, and trust/workspace policy exist.
 
-KEEL is **not** the ticket scheduler. It is the per-change execution/governance contract that a future Symphony-style scheduler dispatches into isolated workspaces.
+KEEL is **not** the ticket scheduler. It is the per-change execution/governance contract that a future Symphony-style scheduler dispatches into isolated workspaces. The repository now also provides a read-only mission DAG/frontier planner; this is planning evidence, not unattended orchestration.
+
+Mission contracts use `python3 .keel/bin/keel.py mission validate|frontier|status <mission.json>`. They preserve one normal KEEL change per work item and never mutate child ledgers.
 
 When orchestration activates, preserve:
 1. each task/change-id gets an isolated persistent workspace/worktree;

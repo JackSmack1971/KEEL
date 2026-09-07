@@ -1,0 +1,10 @@
+{
+  "base_commit": "1797b3692ad977227250ab37add694ef2b6303f9",
+  "change_id": "mission-work-graph",
+  "created_at": "2026-09-07T12:00:29+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:02:53+00:00",
+  "verified_content_digest": "b1aea3723ffd6737b97db8e0e04e17c5a58f726b9c784313b4a44e0e29b0d231"
+}

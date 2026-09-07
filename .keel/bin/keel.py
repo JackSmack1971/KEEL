@@ -8,6 +8,7 @@ HERE = Path(__file__).resolve()
 sys.path.insert(0, str(HERE.parents[1] / "lib"))
 import keel_core as k
 import upgrade_kernel as uk
+import mission_graph as mg
 
 
 def main() -> int:
@@ -17,6 +18,7 @@ def main() -> int:
     sub.add_parser("version")
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
+    p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status"]); p.add_argument("path", type=Path)
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -44,6 +46,13 @@ def main() -> int:
         if args.cmd == "reconcile": print(json.dumps(uk.reconcile(root, args.change), indent=2)); return 0
         if args.cmd == "contracts":
             result = uk.contract_report(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+        if args.cmd == "mission":
+            mission = mg.load(args.path.resolve())
+            if args.action == "validate":
+                errors = mg.validate(mission); result = {"status": "PASS" if not errors else "FAIL", "errors": errors}
+            else:
+                result = mg.plan(root, mission)
+            print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":

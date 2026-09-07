@@ -205,6 +205,17 @@
       "id": "upgrade-kernel-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "cwd": ".",
+      "id": "mission-work-graph-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }
