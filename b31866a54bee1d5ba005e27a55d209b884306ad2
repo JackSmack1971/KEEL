@@ -1,0 +1,5 @@
+keel-change-id: typed-spec-metadata
+sealed-candidate: b31866a54bee1d5ba005e27a55d209b884306ad2
+landed-commit: b31866a54bee1d5ba005e27a55d209b884306ad2
+integration-relation: candidate-ancestor
+verified-content-digest: 862348029538406de83bafe8c80a12d4df252627f0ba7cae82f2ac3323909a53
