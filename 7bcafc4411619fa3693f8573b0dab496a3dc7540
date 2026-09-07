@@ -1,0 +1,5 @@
+keel-change-id: evidence-status-reconciliation
+sealed-candidate: 7bcafc4411619fa3693f8573b0dab496a3dc7540
+landed-commit: 7bcafc4411619fa3693f8573b0dab496a3dc7540
+integration-relation: candidate-ancestor
+verified-content-digest: 13a80aab379dd18efda11958b5531531d52bac9e471582daad8c295fb4cb4228
