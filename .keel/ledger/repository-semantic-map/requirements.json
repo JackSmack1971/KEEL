@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id": "REQ-001", "statement": "keel map includes deterministic Python import facts with provenance", "priority": "must"},
+    {"id": "REQ-002", "statement": "parse failures and unsupported analyzers remain explicit and non-fatal", "priority": "must"}
+  ]
+}

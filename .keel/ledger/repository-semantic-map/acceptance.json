@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id": "AC-001", "requirement_id": "REQ-001", "statement": "repository map tests prove local, external, unresolved, and provenance-bearing import facts", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "repository-map-tests"}]},
+    {"id": "AC-002", "requirement_id": "REQ-002", "statement": "repository map tests prove read-only deterministic build and explicit analyzer status", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "repository-map-tests"}]},
+    {"id": "AC-003", "requirement_id": "REQ-001", "statement": "strict control-plane validation passes", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}
+  ]
+}

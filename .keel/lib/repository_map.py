@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 
@@ -16,6 +17,43 @@ def _ignored(path: Path, root: Path) -> bool:
 
 def _row(path: str, rule: str) -> dict:
     return {"path": path, "rule": rule}
+
+
+def _python_semantics(root: Path, files: list[str]) -> tuple[dict, list[dict]]:
+    python_files = [path for path in files if path.endswith(".py")]
+    modules = {}
+    for path in python_files:
+        rel = Path(path).with_suffix("").as_posix()
+        if rel.endswith("/__init__"):
+            rel = rel[:-9]
+        modules[rel.replace("/", ".")] = path
+        modules.setdefault(Path(path).stem, path)
+    imports = []
+    failures = []
+    for path in python_files:
+        source = root / path
+        try:
+            tree = ast.parse(source.read_text(encoding="utf-8"), filename=path)
+        except (OSError, SyntaxError) as exc:
+            failures.append({"path": path, "error": type(exc).__name__, "analyzer": "python-ast"})
+            continue
+        for node in ast.walk(tree):
+            names = []
+            if isinstance(node, ast.Import):
+                names = [(item.name, 0) for item in node.names]
+            elif isinstance(node, ast.ImportFrom):
+                prefix = "." * node.level + (node.module or "")
+                names = [(prefix + ("." if prefix and node.module else "") + item.name, node.level) for item in node.names]
+            for target, level in names:
+                lookup = target.lstrip(".")
+                if level:
+                    parent = Path(path).parent.parts
+                    base = list(parent[: max(0, len(parent) - level + 1)])
+                    lookup = ".".join(base + ([lookup] if lookup else []))
+                local = modules.get(lookup) or modules.get(lookup.split(".")[0])
+                kind = "local" if local else ("relative-unresolved" if level else "external")
+                imports.append({"source": path, "target": target, "resolved": local, "kind": kind, "line": node.lineno, "analyzer": "python-ast"})
+    return {"status": "PARTIAL" if failures else "COMPLETE", "analyzer": "python-ast", "files_analyzed": len(python_files) - len(failures), "files_failed": len(failures), "provenance": "stdlib-ast; repository source bytes"}, sorted(imports, key=lambda row: (row["source"], row["line"], row["target"]))
 
 
 def build(root: Path) -> dict:
@@ -41,7 +79,8 @@ def build(root: Path) -> dict:
     commands = [_row(path, "command-file") for path in files if Path(path).name in COMMAND_FILES or path in {".keel/config.json", ".codex/config.toml"} or path.startswith(("scripts/", ".github/workflows/"))]
     dependencies = [_row(path, "dependency-manifest") for path in files if Path(path).name in DEPENDENCY_MANIFESTS or Path(path).name in {"package-lock.json", "pnpm-lock.yaml", "yarn.lock", "Cargo.lock", "poetry.lock", "uv.lock", "go.sum", "Gemfile.lock"}]
     source = [_row(path, "source-classification") for path in files if path.startswith(("src/", "app/", "lib/", "packages/", "services/", "cmd/"))]
-    return {"schema_version": 1, "root": ".", "rules_version": 1, "counts": {"files": len(files), "directories": len(dirs)}, "topology": topology, "modules": modules, "entrypoints": entrypoints, "tests": tests, "commands": commands, "dependencies": dependencies, "source": source, "policy": "derived-navigation-evidence-only"}
+    analyzer, semantic_imports = _python_semantics(root, files)
+    return {"schema_version": 2, "root": ".", "rules_version": 1, "counts": {"files": len(files), "directories": len(dirs)}, "topology": topology, "modules": modules, "entrypoints": entrypoints, "tests": tests, "commands": commands, "dependencies": dependencies, "source": source, "semantic_imports": semantic_imports, "analyzers": {"python": analyzer}, "policy": "derived-navigation-evidence-only"}
 
 
 def write(root: Path, result: dict) -> Path:

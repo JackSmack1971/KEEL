@@ -1,0 +1,10 @@
+{
+  "base_commit": "7137dccb4b1cf3e5e45547167ea0d951d26c378e",
+  "change_id": "repository-semantic-map",
+  "created_at": "2026-09-07T12:27:46+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:31:28+00:00",
+  "verified_content_digest": "0eed003e437e4727775ebfe6d12f89ee120993f76dc4967ce603c803d459b0c4"
+}

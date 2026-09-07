@@ -48,6 +48,8 @@ python3 .keel/bin/keel.py map
 
 `map --stdout` is read-only. The default writes only the derived `.keel/knowledge/repository-map.json` artifact.
 
+The map includes Python AST import facts when Python sources are present. Facts identify local, external, and unresolved-relative imports and carry analyzer/source provenance; they are navigation evidence, not architecture or authorization decisions.
+
 Advisory topology routing:
 
 ```text
