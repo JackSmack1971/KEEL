@@ -29,7 +29,7 @@ The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections
 | Source sections | Mapped audit evidence | Current status |
 |---|---|---|
 | 1-3 | Lifecycle, evidence graph, effects, and audit framing | Implemented foundation |
-| 4 | Missions / work DAG | Partial: validation/frontier only |
+| 4 | Missions / work DAG | Partial: validation/frontier and advisory dispatch contracts; runtime execution remains |
 | 5 | Requirements and acceptance traceability | Partial: machine-readable links exist; richer typed specification model remains |
 | 6 | Evidence graph | Implemented |
 | 7 | Capability resolver | Implemented local resolver; runtime discovery remains advisory |
