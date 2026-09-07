@@ -56,7 +56,8 @@ def head_commit(root: Path) -> str:
 def atomic_write(path: Path, data: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + ".tmp-keel")
-    tmp.write_text(data, encoding="utf-8")
+    with tmp.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(data)
     os.replace(tmp, path)
 
 
@@ -118,7 +119,7 @@ def append_event(root: Path, change_id: str, event: str, result: str, details: d
         row["details"] = details
     p = ledger_dir(root, change_id) / "gate-log.jsonl"
     p.parent.mkdir(parents=True, exist_ok=True)
-    with p.open("a", encoding="utf-8") as f:
+    with p.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(row, sort_keys=True) + "\n")
         f.flush()
         try:
