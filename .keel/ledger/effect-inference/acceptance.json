@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id": "AC-001", "requirement_id": "REQ-001", "statement": "Effect inference tests prove recognized mappings, deterministic output, and unknown-command neutrality.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "effect-inference-tests"}]},
+    {"id": "AC-002", "requirement_id": "REQ-002", "statement": "Effect inference tests prove mismatch reporting is advisory and read-only.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "effect-inference-tests"}]},
+    {"id": "AC-003", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}
+  ]
+}

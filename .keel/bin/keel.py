@@ -14,6 +14,7 @@ import topology_router as tr
 import feedback_entropy as fe
 import lifecycle
 import developer_ux as ux
+import effect_inference as effects
 
 
 def main() -> int:
@@ -33,6 +34,7 @@ def main() -> int:
     p = sub.add_parser("init"); p.add_argument("--check", action="store_true")
     p = sub.add_parser("review"); p.add_argument("--change")
     p = sub.add_parser("ship"); p.add_argument("--change")
+    p = sub.add_parser("effects"); p.add_argument("--change")
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -90,6 +92,8 @@ def main() -> int:
         if args.cmd == "review": print(json.dumps(ux.review(root, args.change), indent=2)); return 0
         if args.cmd == "ship":
             result = ux.ship_eligibility(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] == "ELIGIBLE" else 1
+        if args.cmd == "effects":
+            result = effects.audit(root, args.change); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":

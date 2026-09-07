@@ -289,6 +289,13 @@
       "id": "developer-ux-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_effect_inference.py"],
+      "cwd": ".",
+      "id": "effect-inference-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

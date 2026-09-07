@@ -1,0 +1,10 @@
+{
+  "base_commit": "61c8fa82a6cce85a43e60da90e70d18593f219e8",
+  "change_id": "effect-inference",
+  "created_at": "2026-09-07T12:32:57+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:35:47+00:00",
+  "verified_content_digest": "a5e8c2c0e51e69ac75b40c26ac0fe245e2e693a8fca5ea52a7f71e6d4d1a46ec"
+}

@@ -1,0 +1,10 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/effect_inference.py
+.keel/tests/test_effect_inference.py
+.keel/bin/keel.py
+.keel/lib/keel_core.py
+.keel/config.json
+docs/control-plane/COMMANDS.md
+docs/control-plane/UPGRADE_AUDIT.md
+.control-plane/bootstrap-manifest.json
+docs/exec-plans/active/effect-inference.md

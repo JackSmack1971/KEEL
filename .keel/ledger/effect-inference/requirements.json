@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id": "REQ-001", "statement": "The effect projection conservatively infers declared capability vocabulary from configured argv tokens without executing them.", "source": "upgrade-audit"},
+    {"id": "REQ-002", "statement": "Inference remains separate from authorization and reports undeclared inferred capabilities as advisory mismatches.", "source": "upgrade-audit"}
+  ]
+}
