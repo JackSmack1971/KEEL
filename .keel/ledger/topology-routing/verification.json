@@ -1,0 +1,228 @@
+{
+  "acceptance": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  },
+  "base_commit": "5e4825c1621aec3b2889882c2613b2729dae7674",
+  "change_id": "topology-routing",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/bin/keel.py",
+    ".keel/config.json",
+    ".keel/lib/topology_router.py",
+    ".keel/tests/test_topology_routing.py",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/UPGRADE_AUDIT.md",
+    "docs/exec-plans/active/topology-routing.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "5e4825c1621aec3b2889882c2613b2729dae7674",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.keel/bin/keel.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/config.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/COMMANDS.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/UPGRADE_AUDIT.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 286,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/bench/test_keelbench.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 206,
+      "excerpt": "KEELBench tests PASS",
+      "exit_code": 0,
+      "id": "keelbench-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keelbench.py",
+        "--root",
+        ".",
+        "validate"
+      ],
+      "cwd": ".",
+      "duration_ms": 143,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "keelbench-validate",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/scripts/validate_control_plane.py",
+        "--root",
+        ".",
+        "--strict-manifest",
+        "--require-keel-runtime"
+      ],
+      "cwd": ".",
+      "duration_ms": 880,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
+      "exit_code": 0,
+      "id": "strict-control-plane-validation",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 139,
+      "excerpt": "Capability resolver tests PASS",
+      "exit_code": 0,
+      "id": "capability-resolver-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_context_compiler.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 162,
+      "excerpt": "Context compiler tests PASS",
+      "exit_code": 0,
+      "id": "context-compiler-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 135,
+      "excerpt": "Evidence graph tests PASS",
+      "exit_code": 0,
+      "id": "evidence-graph-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_next_action.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 179,
+      "excerpt": "Next-action tests PASS",
+      "exit_code": 0,
+      "id": "next-action-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_worktree_lifecycle.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 718,
+      "excerpt": "Worktree lifecycle tests PASS",
+      "exit_code": 0,
+      "id": "worktree-lifecycle-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_environment_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 142,
+      "excerpt": "Environment contract tests PASS",
+      "exit_code": 0,
+      "id": "environment-contract-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_upgrade_kernel.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 423,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
+      "exit_code": 0,
+      "id": "upgrade-kernel-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 118,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "mission-work-graph-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 256,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"ignored-directories\", \"derived-only\"]}",
+      "exit_code": 0,
+      "id": "repository-map-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_topology_routing.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 70,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"complexity\", \"capability-only\", \"deterministic\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "topology-routing-tests",
+      "required": true
+    }
+  ],
+  "content_digest": "1f111d36c91b8ddfd8c261891734d58a7249809db20f35d27fd1becba75167e0",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T12:07:54+00:00"
+}

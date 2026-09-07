@@ -1,0 +1,7 @@
+{"details": {"base_commit": "5e4825c1621aec3b2889882c2613b2729dae7674", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:05:51+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:07:35+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:07:36+00:00"}
+{"details": {"changed_paths": [".keel/bin/keel.py", ".keel/config.json", ".keel/lib/topology_router.py", ".keel/tests/test_topology_routing.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/topology-routing.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:07:45+00:00"}
+{"details": {"content_digest": "1bd3dff33051b084ad729cef340973bfec34fc0959e9ba8824e883c59a16cdd1", "errors": ["verification command failed: strict-control-plane-validation exit=1", "acceptance criterion failed: AC-004"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T12:07:45+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/topology_router.py", ".keel/tests/test_topology_routing.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/topology-routing.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:07:54+00:00"}
+{"details": {"content_digest": "1f111d36c91b8ddfd8c261891734d58a7249809db20f35d27fd1becba75167e0", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:07:54+00:00"}

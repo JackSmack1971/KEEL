@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"Routing shall classify valid mission work items into trivial, standard, complex, or critical complexity using declared risk and dependency structure.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"Routing shall emit model-independent effort capabilities, roles, and verification breadth without naming or selecting a model.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"Routing shall be deterministic, fail closed on invalid missions, and never mutate the mission contract.","source":"upgrade-audit"}
+  ]
+}

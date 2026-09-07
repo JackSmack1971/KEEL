@@ -10,6 +10,7 @@ import keel_core as k
 import upgrade_kernel as uk
 import mission_graph as mg
 import repository_map as rm
+import topology_router as tr
 
 
 def main() -> int:
@@ -21,6 +22,7 @@ def main() -> int:
     sub.add_parser("contracts")
     p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status"]); p.add_argument("path", type=Path)
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
+    p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -62,6 +64,9 @@ def main() -> int:
             else:
                 print(json.dumps({"status": "WRITTEN", "path": str(rm.write(root, result).relative_to(root))}, indent=2))
             return 0
+        if args.cmd == "route":
+            result = tr.recommend(tr.load(args.path.resolve()), args.change)
+            print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":

@@ -227,6 +227,13 @@
       "id": "repository-map-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_topology_routing.py"],
+      "cwd": ".",
+      "id": "topology-routing-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

@@ -15,7 +15,7 @@ This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means ex
 | Reconciliation | Implemented as read-only kernel | `keel reconcile` compares Git, ledger, environment, compatibility, contracts, and next action; repair/retry/integration adapters remain future work. |
 | Evidence providers | Contract only | Provider-neutral names are defined and validated; browser/log/metric/trace/device adapters are not implemented. |
 | Effect capabilities | Contract only | Capability vocabulary is declared and validated; command/tool capability declaration and enforcement are not yet wired into authorization. |
-| Dynamic topology / compute routing | Missing | No complexity estimator or capability-based routing output. |
+| Dynamic topology / compute routing | Partially implemented | `keel route` emits deterministic complexity, model-independent effort capabilities, roles, and verification breadth; runtime dispatch and provider/model mapping remain external. |
 | Reusable engineering protocols | Missing | Only lifecycle/control-plane skills are repository-owned; debugging, migration, security, performance, and release protocols remain to be designed. |
 | Learning loop / entropy service | Policy only | Durable feedback and entropy doctrine exists; reviewed observation intake, promotion, and scheduled scans are absent. |
 | Developer UX | Partial | Core inspection commands are present; `init`, `run`, `review`, `ship`, and mission UX are absent. |

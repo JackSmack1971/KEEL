@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Routing tests cover all complexity classes and dependency-sensitive escalation.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"topology-routing-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Routing tests prove capability, roles, and verification recommendations contain no model selection.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"topology-routing-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Routing tests prove deterministic output, invalid-input rejection, and read-only behavior.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"topology-routing-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "topology-routing-tests",
+          "detail": "check=topology-routing-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Routing tests cover all complexity classes and dependency-sensitive escalation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "topology-routing-tests",
+          "detail": "check=topology-routing-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Routing tests prove capability, roles, and verification recommendations contain no model selection.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "topology-routing-tests",
+          "detail": "check=topology-routing-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Routing tests prove deterministic output, invalid-input rejection, and read-only behavior.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Doctor, strict control-plane validation, and KEELBench remain passing.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-004"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-003"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Routing shall classify valid mission work items into trivial, standard, complex, or critical complexity using declared risk and dependency structure."
+    },
+    {
+      "id": "REQ-002",
+      "source": "upgrade-audit",
+      "statement": "Routing shall emit model-independent effort capabilities, roles, and verification breadth without naming or selecting a model."
+    },
+    {
+      "id": "REQ-003",
+      "source": "upgrade-audit",
+      "statement": "Routing shall be deterministic, fail closed on invalid missions, and never mutate the mission contract."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  }
+}

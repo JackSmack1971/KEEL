@@ -48,6 +48,14 @@ python3 .keel/bin/keel.py map
 
 `map --stdout` is read-only. The default writes only the derived `.keel/knowledge/repository-map.json` artifact.
 
+Advisory topology routing:
+
+```text
+python3 .keel/bin/keel.py route <mission.json> [--change <change-id>]
+```
+
+This emits model-independent complexity, effort capability, role, and verification recommendations; it does not launch agents or select models.
+
 Cover setup/bootstrap, build, format, lint/static checks, type checks, unit/integration/e2e/evals, local run, generated-artifact refresh, security checks, benchmarks, release validation, and cleanup only when those commands actually exist.
 
 Prefer repository scripts/task runners when they reduce cross-platform ambiguity. Any destructive or external command must state its authorization/recovery boundary. `keel verify` executes only commands explicitly configured in `.keel/config.json`; absence is a blocker for substantive source changes, not an invitation to guess.
