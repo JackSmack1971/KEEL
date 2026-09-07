@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"The upgrade audit partitions every relevant docs/KEEL_UPGRADES.md source section exactly once as an executable requirement, contextual/strategic material, superseded material, or justified deferred/out-of-scope material, with status, evidence, and workstream ownership where unresolved.","source":"readiness-gate"},
+    {"id":"REQ-002","statement":"The active upgrade roadmap requires every future authorized workstream ExecPlan to include complete implementation and verification safety fields, while preserving P0–P7, D1 deferral, dependency boundaries, and blockers.","source":"readiness-gate"},
+    {"id":"REQ-003","statement":"The remediation changes only planning/documentation artifacts and its KEEL ledger; it does not instantiate or implement P0.","source":"readiness-gate"}
+  ]
+}

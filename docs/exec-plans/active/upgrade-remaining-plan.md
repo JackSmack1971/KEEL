@@ -1,18 +1,74 @@
-# Remaining KEEL upgrade workstreams
+# KEEL upgrade remaining plan
 
-This plan is the durable handoff for the rows still marked partial or deferred in `docs/control-plane/UPGRADE_AUDIT.md`.
+This is the sole active top-level KEEL upgrade roadmap. The authoritative classifications are in [`docs/control-plane/UPGRADE_AUDIT.md`](../../control-plane/UPGRADE_AUDIT.md). A workstream is not authorized for implementation merely because it appears here.
 
-| Workstream | Boundary | Prerequisite | Acceptance evidence | Status |
-|---|---|---|---|---|
-| Repository ownership/architecture facts | Add explicit ownership sources and bounded architecture relations to the derived map; never infer authority from filenames alone. | Repository ownership policy and authoritative source files. | Deterministic map tests, provenance, conflict findings, strict validation. | Partial: CODEOWNERS discovery implemented; policy/architecture relations remain |
-| Typed specifications and implementation surfaces | Validate typed requirement/acceptance metadata and require declared implementation paths to match material changes. | Future richer spec generation and policy for mandatory metadata. | Evidence-graph contract tests, surface-match evidence, strict validation. | Partial: metadata and surface enforcement implemented; generation remains |
-| Behavioral protocol evaluation | Evaluate the routed engineering-protocols skill on representative debugging, migration, security, and release tasks, including failure recovery. | Approved task corpus, no-skill baseline, fixed rubric, and evaluation authority. | Repeated paired trials, routing/completion/failure-recovery evidence, and regression review. | Planned; corpus/evaluation authority required |
-| Economics / telemetry evidence | Measure wall time, tool/command use, retries, human intervention, tokens, and cost where the runtime exposes them; keep unavailable metrics explicit. | Authorized runtime instrumentation and cost/token source. | Reproducible telemetry records, metric completeness, and paired comparison. | Partial: lifecycle duration/outcome projection implemented; runtime token/cost/human metrics remain |
-| Feedback promotion/scheduling/target evaluation | Queue valid observations for evaluation/promotion; promotion remains a reviewed KEEL write and target execution remains separate. | Reviewed observations and a representative target corpus. | Queue eligibility, provenance, target-eval result, authorized change ledger. | Partial: queue implemented; corpus/scheduling/target execution remain |
-| Schema migration and rollback | Add versioned repository-owned migrations with preflight, backup/rollback contract, and recovery tests. | Operator-approved live migration policy and additional real legacy fixtures. | Fixture migration, rollback restoration, compatibility verification. | Partial: config 1→2 engine implemented; live orchestration/installer remain |
-| Agent `run` and mission dispatch | Connect advisory dispatch contracts to an authorized execution runtime, worktree allocator, retry policy, and integration boundary. | Runtime/provider, credentials, and operator authorization. | Isolated dry run, failure recovery, evidence graph, no unauthorized integration. | Partial: dispatch contracts implemented; runtime execution deferred |
-| Evidence adapters | Native local file/schema evidence exists; implement browser/log/metric/trace/device adapters behind configured provider contracts. | Project-specific connector/runtime and data-access authorization for runtime providers. | Native adapter tests plus real provider evidence. | Partial: local adapters implemented; runtime providers deferred |
-| External tracker/PR integration | Add issue/PR read/write adapters with explicit effects and authorization. | Tracker identity, credentials, API contract, and integration policy. | Mock contract tests plus authorized sandbox operation. | Deferred |
-| KEELBench empirical value | Run paired repeated trials from equivalent starts using a fixed representative corpus and rubric. | Representative tasks, baseline, and evaluation authority. | Reproducible trial artifacts and statistically defensible comparison. | Empirical prerequisite |
+## Execution sequence
 
-The effect-capability inference slice is implemented and anchored; runtime tool/API inference and authorization enforcement remain separate from this advisory analyzer.
+### P0 — Portable verification and bootstrap contract
+Objective: Remove creator-machine dependencies and establish reliable package/bootstrap/version states.
+
+### P1 — Repository intelligence foundation
+Objective: Build deterministic, provenance-bearing repository graph, command, ownership, architecture, dependency, impact, and generated-artifact intelligence.
+
+### P2 — Mission schema and planning
+Objective: Create expressive, deterministic, decomposable mission contracts without executing them.
+
+### P3 — Runtime capability handshake
+Objective: Observe actual runtime capabilities, trust state, hook readiness, and graceful-degradation state before dispatch.
+
+### P4 — Mission execution
+Objective: Execute bounded mission waves through an authorized runtime.
+
+Status: **BLOCKED** until an authorized runtime/provider and operator authorization exist.
+
+### P5 — Adaptive workflow and context/routing
+Objective: Make workflow obligations, role-specific context, capability routing, uncertainty handling, and blast-radius reasoning evidence-driven and deterministic.
+
+### P6 — Verification and lifecycle integrity
+Objective: Strengthen typed assertions, verification selection, semantic diff protection, lifecycle/property invariants, effect semantics, independent evidence, and reproducibility.
+
+### P7 — Non-benchmark feedback and observability
+Objective: Improve lifecycle traceability, correlations, CLI/API projections, invariant ownership, and non-benchmark observation without performing empirical evaluation.
+
+### D1 — Benchmark and evaluation
+Status: **DEFERRED**. D1 is paused and is not a prerequisite for P0–P7.
+
+Deferred scope includes benchmark implementation; corpus construction or expansion; evaluation authority; baseline-vs-KEEL paired trials; scoring; empirical comparison; benchmark-driven promotion; and benchmark telemetry experiments. Existing `.keel/bench/` contracts, schemas, ledgers, preparation, telemetry, and historical evidence remain preserved.
+
+## Dependencies
+
+```text
+P0 → P1 → P2 → P3 → P4
+
+P1 → P5
+P2 → P5
+P3 → P5
+P1 + P2 + P5 → P6
+P6 → P7
+```
+
+D1 is paused and is not a dependency of any active workstream.
+
+## Execution-safety contract
+
+- There is one active plan per authorized workstream.
+- Every implementation plan has an explicit KEEL change ID and exact repository-relative scope.
+- Every implementation plan names its dependencies and prerequisites, and a blocked plan cannot start until each named prerequisite is evidenced.
+- Every implementation plan states concrete implementation requirements and distinguishes required behavior from optional design suggestions.
+- Every implementation plan names the exact repository-native verification command or commands for each acceptance check wherever known. If a command is not knowable at planning time, the plan defines deterministic command discovery and requires the resolved command to be recorded before completion.
+- Every implementation plan defines expected result and exit behavior for each positive and negative acceptance command, including required status/artifact transitions and prohibited findings that must be absent.
+- Every implementation plan contains acceptance criteria, exact acceptance evidence, and at least one negative/failure acceptance case.
+- Every implementation plan states the durable completion evidence required; plan status, documentation claims, or ledger phase alone never constitute completion evidence.
+- Every implementation plan explicitly handles unavailable runtime, platform, provider, authorization, or external verification using an established classification such as `VERIFIED`, `FAILED`, `BLOCKED`, or `UNVERIFIED_RUNTIME`. Unavailable verification must never silently become `PASS`, and runtime behavior cannot be `VERIFIED` without direct runtime evidence.
+- Plans do not authorize implementation merely by existing.
+- Benchmark-related paths are excluded from active scopes.
+- Runtime, external, and empirical behavior cannot be claimed without direct evidence.
+- Generated artifacts are changed only through their declared producer where applicable.
+- Completion requires repository-native verification and durable completion evidence, not plan status or ledger phase.
+- Individual workstream ExecPlans are created only when that workstream is authorized for implementation.
+
+P0 is not instantiated by this roadmap. A later authorized P0 plan must satisfy every contract above before implementation begins. P4 remains blocked pending its runtime/provider and authorization prerequisites; D1 remains deferred and outside all active dependencies.
+
+## Current handoff
+
+Completed bounded slices remain historical evidence in [`docs/exec-plans/completed/`](../completed/). The next authorized change must create one scoped workstream plan and change ID, identify prerequisite evidence, and satisfy the contract above. P4 remains blocked, and all D1 work remains deferred.

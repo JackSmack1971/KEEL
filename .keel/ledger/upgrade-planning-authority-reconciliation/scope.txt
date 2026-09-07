@@ -1,0 +1,5 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+docs/control-plane/UPGRADE_AUDIT.md
+docs/exec-plans/active/**
+docs/exec-plans/completed/**
+docs/exec-plans/README.md

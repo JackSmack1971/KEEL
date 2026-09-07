@@ -1,0 +1,147 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Deterministic source-section audit checks prove no relevant source section is omitted or double-counted and verify explicit reconciliation, section 27, section 11, sections 35\u201336, mutation-testing, and D1 classifications.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Deterministic roadmap checks prove the complete future-ExecPlan contract, P0\u2013P7/D1 structure, dependencies, P4 BLOCKED state, and D1 exclusion from active prerequisites.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Git path inspection proves no implementation-bearing file changed and no P0 workstream plan was created or executed.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Negative checks prove duplicate source-section IDs, an active benchmark authorization, and an omitted reconciliation row would fail the reconciliation rules.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-003",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "readiness-gate",
+      "statement": "The upgrade audit partitions every relevant docs/KEEL_UPGRADES.md source section exactly once as an executable requirement, contextual/strategic material, superseded material, or justified deferred/out-of-scope material, with status, evidence, and workstream ownership where unresolved."
+    },
+    {
+      "id": "REQ-002",
+      "source": "readiness-gate",
+      "statement": "The active upgrade roadmap requires every future authorized workstream ExecPlan to include complete implementation and verification safety fields, while preserving P0\u2013P7, D1 deferral, dependency boundaries, and blockers."
+    },
+    {
+      "id": "REQ-003",
+      "source": "readiness-gate",
+      "statement": "The remediation changes only planning/documentation artifacts and its KEEL ledger; it does not instantiate or implement P0."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  }
+}

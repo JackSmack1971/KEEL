@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Deterministic source-section audit checks prove no relevant source section is omitted or double-counted and verify explicit reconciliation, section 27, section 11, sections 35–36, mutation-testing, and D1 classifications.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Deterministic roadmap checks prove the complete future-ExecPlan contract, P0–P7/D1 structure, dependencies, P4 BLOCKED state, and D1 exclusion from active prerequisites.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Git path inspection proves no implementation-bearing file changed and no P0 workstream plan was created or executed.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Negative checks prove duplicate source-section IDs, an active benchmark authorization, and an omitted reconciliation row would fail the reconciliation rules.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]}
+  ]
+}
