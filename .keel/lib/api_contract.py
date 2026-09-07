@@ -4,6 +4,7 @@ import hashlib, json, re
 
 API_VERSION = 1
 _ID = re.compile(r"^[a-z0-9][a-z0-9._:-]{0,127}$")
+_ENVELOPE_KEYS = {"api_version", "status", "correlation", "result", "errors"}
 
 def identifier(value: str, field: str) -> str:
     if not isinstance(value, str) or not _ID.fullmatch(value):
@@ -25,6 +26,17 @@ def envelope(result: dict, correlation_ids: dict | None = None) -> dict:
 
 def render(result: dict, correlation_ids: dict | None = None) -> str:
     return json.dumps(envelope(result, correlation_ids), indent=2, sort_keys=True)
+
+def validate_envelope(value: object) -> list[str]:
+    if not isinstance(value, dict): return ["API response must be an object"]
+    errors = []
+    if value.get("api_version") != API_VERSION: errors.append(f"unsupported api_version: {value.get('api_version')!r}")
+    unknown = sorted(set(value) - _ENVELOPE_KEYS)
+    if unknown: errors.append("unknown envelope fields: " + ", ".join(unknown))
+    if value.get("status") not in {"PASS", "FAIL", "UNAVAILABLE", "INVALID"}: errors.append("invalid envelope status")
+    if not isinstance(value.get("correlation"), dict): errors.append("correlation must be an object")
+    if not isinstance(value.get("errors"), list) or any(not isinstance(x, str) for x in value.get("errors", [])): errors.append("errors must be a list of strings")
+    return errors
 
 def digest(document: dict) -> str:
     return hashlib.sha256(json.dumps(document, sort_keys=True, separators=(",", ":")).encode()).hexdigest()

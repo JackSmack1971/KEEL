@@ -42,7 +42,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 315,
+      "duration_ms": 256,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -55,7 +55,7 @@
         ".keel/bench/test_keelbench.py"
       ],
       "cwd": ".",
-      "duration_ms": 203,
+      "duration_ms": 175,
       "excerpt": "KEELBench tests PASS",
       "exit_code": 0,
       "id": "keelbench-tests",
@@ -70,7 +70,7 @@
         "validate"
       ],
       "cwd": ".",
-      "duration_ms": 149,
+      "duration_ms": 121,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "keelbench-validate",
@@ -86,7 +86,7 @@
         "--require-keel-runtime"
       ],
       "cwd": ".",
-      "duration_ms": 932,
+      "duration_ms": 876,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
       "exit_code": 0,
       "id": "strict-control-plane-validation",
@@ -99,7 +99,7 @@
         ".keel/tests/test_capability_resolver.py"
       ],
       "cwd": ".",
-      "duration_ms": 149,
+      "duration_ms": 145,
       "excerpt": "Capability resolver tests PASS",
       "exit_code": 0,
       "id": "capability-resolver-tests",
@@ -112,7 +112,7 @@
         ".keel/tests/test_context_compiler.py"
       ],
       "cwd": ".",
-      "duration_ms": 225,
+      "duration_ms": 187,
       "excerpt": "Context compiler tests PASS",
       "exit_code": 0,
       "id": "context-compiler-tests",
@@ -125,7 +125,7 @@
         ".keel/tests/test_evidence_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 174,
+      "duration_ms": 141,
       "excerpt": "Evidence graph tests PASS",
       "exit_code": 0,
       "id": "evidence-graph-tests",
@@ -138,7 +138,7 @@
         ".keel/tests/test_next_action.py"
       ],
       "cwd": ".",
-      "duration_ms": 262,
+      "duration_ms": 199,
       "excerpt": "Next-action tests PASS",
       "exit_code": 0,
       "id": "next-action-tests",
@@ -151,7 +151,7 @@
         ".keel/tests/test_worktree_lifecycle.py"
       ],
       "cwd": ".",
-      "duration_ms": 841,
+      "duration_ms": 863,
       "excerpt": "Worktree lifecycle tests PASS",
       "exit_code": 0,
       "id": "worktree-lifecycle-tests",
@@ -164,7 +164,7 @@
         ".keel/tests/test_environment_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 154,
+      "duration_ms": 173,
       "excerpt": "Environment contract tests PASS",
       "exit_code": 0,
       "id": "environment-contract-tests",
@@ -177,7 +177,7 @@
         ".keel/tests/test_upgrade_kernel.py"
       ],
       "cwd": ".",
-      "duration_ms": 524,
+      "duration_ms": 540,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
       "exit_code": 0,
       "id": "upgrade-kernel-tests",
@@ -190,7 +190,7 @@
         ".keel/tests/test_mission_work_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 134,
+      "duration_ms": 149,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"dispatch-contract\", \"read-only\"]}",
       "exit_code": 0,
       "id": "mission-work-graph-tests",
@@ -203,7 +203,7 @@
         ".keel/tests/test_repository_map.py"
       ],
       "cwd": ".",
-      "duration_ms": 696,
+      "duration_ms": 632,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"semantic-imports\", \"ownership-source\", \"ignored-directories\", \"derived-only\"]}",
       "exit_code": 0,
       "id": "repository-map-tests",
@@ -216,7 +216,7 @@
         ".keel/tests/test_topology_routing.py"
       ],
       "cwd": ".",
-      "duration_ms": 81,
+      "duration_ms": 96,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"complexity\", \"capability-only\", \"deterministic\", \"read-only\"]}",
       "exit_code": 0,
       "id": "topology-routing-tests",
@@ -229,7 +229,7 @@
         ".keel/tests/test_provider_effect_contracts.py"
       ],
       "cwd": ".",
-      "duration_ms": 218,
+      "duration_ms": 221,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provider-binding\", \"provider-failure\", \"schema-adapter\", \"effect-vocabulary\", \"authorization-preserved\"]}",
       "exit_code": 0,
       "id": "provider-effect-contract-tests",
@@ -242,7 +242,7 @@
         ".agents/skills/engineering-protocols"
       ],
       "cwd": ".",
-      "duration_ms": 94,
+      "duration_ms": 108,
       "excerpt": "Skill is valid!",
       "exit_code": 0,
       "id": "engineering-protocols-skill-check",
@@ -255,7 +255,7 @@
         ".keel/tests/test_feedback_entropy.py"
       ],
       "cwd": ".",
-      "duration_ms": 121,
+      "duration_ms": 127,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provenance\", \"review-gate\", \"goal-record\", \"deterministic-scan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "feedback-entropy-tests",
@@ -268,7 +268,7 @@
         ".keel/tests/test_lifecycle_compatibility.py"
       ],
       "cwd": ".",
-      "duration_ms": 123,
+      "duration_ms": 142,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "lifecycle-compatibility-tests",
@@ -281,7 +281,7 @@
         ".keel/tests/test_developer_ux.py"
       ],
       "cwd": ".",
-      "duration_ms": 2117,
+      "duration_ms": 2146,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"init\", \"review\", \"eligibility-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "developer-ux-tests",
@@ -294,7 +294,7 @@
         ".keel/tests/test_effect_inference.py"
       ],
       "cwd": ".",
-      "duration_ms": 104,
+      "duration_ms": 89,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"mapping\", \"unknown-neutrality\", \"advisory-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "effect-inference-tests",
@@ -307,7 +307,7 @@
         ".keel/tests/test_schema_migrations.py"
       ],
       "cwd": ".",
-      "duration_ms": 136,
+      "duration_ms": 125,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"preflight\", \"atomic-apply\", \"backup\", \"rollback\", \"unsupported-version\"]}",
       "exit_code": 0,
       "id": "schema-migration-tests",
@@ -320,7 +320,7 @@
         ".keel/tests/test_telemetry.py"
       ],
       "cwd": ".",
-      "duration_ms": 110,
+      "duration_ms": 91,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"aggregation\", \"unavailable-metrics\", \"missing-input\", \"read-only\"]}",
       "exit_code": 0,
       "id": "lifecycle-telemetry-tests",
@@ -333,16 +333,16 @@
         ".keel/tests/test_api_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 193,
+      "duration_ms": 160,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"versioned-envelope\", \"correlation-validation\", \"provider-disabled\", \"redaction\", \"event-correlation\"]}",
       "exit_code": 0,
       "id": "api-contract-tests",
       "required": true
     }
   ],
-  "content_digest": "1e1a754562018de02646721eec2389ed65aad856026cc13be93c30a6aada23a5",
+  "content_digest": "3e14f6bf7abe4f8cd359e1c003c22e584c075c0ff73b6cde8ffc3a0b4b9b7254",
   "errors": [],
   "schema_version": 2,
   "status": "PASS",
-  "verified_at": "2026-09-07T16:20:31+00:00"
+  "verified_at": "2026-09-07T16:21:27+00:00"
 }

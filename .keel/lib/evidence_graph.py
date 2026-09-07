@@ -22,6 +22,11 @@ def redact_provider_result(value: object) -> object:
     if isinstance(value, list):
         return [redact_provider_result(v) for v in value]
     return value
+
+def capability_handshake(advertised: object, requested: object) -> dict:
+    """Return explicit intersection; configuration presence is not capability proof."""
+    supported = sorted(set(advertised) & set(requested)) if isinstance(advertised, list) and isinstance(requested, list) else []
+    return {"status": "PASS", "supported": supported, "advertised": sorted(advertised) if isinstance(advertised, list) else [], "requested": sorted(requested) if isinstance(requested, list) else [], "configured_is_capability": False}
 REQUIREMENT_TYPES = {"behavior", "quality", "security", "migration", "performance", "architecture", "documentation"}
 PRIORITIES = {"must", "should", "could"}
 EVIDENCE_TYPES = {"automated-test", "human-review", "schema", "benchmark", "runtime", "changed-path"}

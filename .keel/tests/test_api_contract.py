@@ -5,12 +5,15 @@ import api_contract, evidence_graph, keel_core
 
 ids = api_contract.correlation("change-1", mission_id="mission:one", run_id="run:one", evidence_id="evidence:one")
 assert api_contract.envelope({"status":"PASS", "value": 1}, ids)["api_version"] == 1
+assert api_contract.validate_envelope(api_contract.envelope({"status":"PASS"})) == []
+assert api_contract.validate_envelope({"api_version": 99, "status":"PASS", "correlation":{}, "result":None, "errors":[], "forged":True})
 try: api_contract.correlation("../forged")
 except ValueError: pass
 else: raise AssertionError("invalid correlation identifier accepted")
 declaration = evidence_graph.provider_declaration("browser")
 assert declaration["enabled"] is False and declaration["authorization"] == "domain-only"
 assert evidence_graph.redact_provider_result({"token":"secret"})["token"] == "[REDACTED]"
+assert evidence_graph.capability_handshake(["browser"], ["browser", "cloud"])["supported"] == ["browser"]
 try: evidence_graph.provider_declaration("browser", enabled=True)
 except ValueError: pass
 else: raise AssertionError("enabled provider declaration accepted")
