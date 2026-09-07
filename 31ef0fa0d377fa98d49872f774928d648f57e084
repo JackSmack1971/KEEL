@@ -1,0 +1,5 @@
+keel-change-id: provider-effect-contracts
+sealed-candidate: 31ef0fa0d377fa98d49872f774928d648f57e084
+landed-commit: 31ef0fa0d377fa98d49872f774928d648f57e084
+integration-relation: candidate-ancestor
+verified-content-digest: f6ea2a87b7b1bc51828a83c98fc73a43808fc6b0659edaacd73dd2310ccc3cef
