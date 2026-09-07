@@ -1,0 +1,3 @@
+# Risk review
+
+This is high-risk control-plane/runtime work because Mission execution could otherwise create a second policy authority or perform unverified integration. The implementation is contained to repository-local Python, isolated worktree primitives, explicit runtime capability records, and deterministic fixtures. External/provider capability is never inferred; absent capability returns a structured blocked result. Retry state is bounded and idempotent, and integration remains outside the runtime unless a child Change has independently reached the existing sealed/authorized boundary. Rollback is a Git revert plus removal of the isolated worktree and runtime state.

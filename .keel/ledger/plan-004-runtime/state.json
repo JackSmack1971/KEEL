@@ -1,0 +1,10 @@
+{
+  "base_commit": "388610e97a49dde460e6fb278aa8aaa01ee4ddd3",
+  "change_id": "plan-004-runtime",
+  "created_at": "2026-09-07T14:24:58+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T14:36:58+00:00",
+  "verified_content_digest": "2da79509319ab2c57fbe9b4ad18c8e0e9ecca8c843002dcfec245bdb4940ace8"
+}

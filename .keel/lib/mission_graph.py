@@ -110,5 +110,5 @@ def dispatch_plan(root: Path, mission: dict) -> dict:
     for node in result["runnable"]:
         item = mission["work"][node]
         risk = item["risk"]
-        contracts.append({"change_id": node, "depends_on": sorted(item.get("depends_on", [])), "risk": risk, "isolation": "dedicated-worktree", "roles": ["executor", "verifier"] if risk == "trivial" else ["executor", "verifier", "reviewer"] if risk == "standard" else ["risk-reviewer", "executor", "verifier", "reviewer"], "verification_breadth": "focused" if risk == "trivial" else "standard" if risk == "standard" else "full", "execution": "DEFERRED", "authorization": "REQUIRED"})
-    return {**result, "dispatch": contracts, "dispatch_policy": "advisory-isolated-worktree-contracts-only"}
+        contracts.append({"change_id": node, "depends_on": sorted(item.get("depends_on", [])), "risk": risk, "isolation": "dedicated-worktree", "roles": ["executor", "verifier"] if risk == "trivial" else ["executor", "verifier", "reviewer"] if risk == "standard" else ["risk-reviewer", "executor", "verifier", "reviewer"], "verification_breadth": "focused" if risk == "trivial" else "standard" if risk == "standard" else "full", "execution": "READY", "authorization": "REQUIRED"})
+    return {**result, "dispatch": contracts, "dispatch_policy": "shared-mission-runtime"}

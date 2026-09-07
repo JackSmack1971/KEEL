@@ -17,6 +17,7 @@ import developer_ux as ux
 import effect_inference as effects
 import schema_migrations as migrations
 import telemetry
+import mission_runtime
 
 
 def main() -> int:
@@ -26,7 +27,7 @@ def main() -> int:
     sub.add_parser("version")
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
-    p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status", "dispatch"]); p.add_argument("path", type=Path)
+    p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status", "dispatch", "run"]); p.add_argument("path", type=Path); p.add_argument("--max-retries", type=int, default=0)
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
     p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
@@ -34,6 +35,8 @@ def main() -> int:
     sub.add_parser("compat")
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true"); p.add_argument("--plan", type=Path)
     p = sub.add_parser("init"); p.add_argument("--check", action="store_true")
+    p = sub.add_parser("adopt"); p.add_argument("--check", action="store_true")
+    p = sub.add_parser("upgrade"); p.add_argument("--check", action="store_true")
     p = sub.add_parser("review"); p.add_argument("--change")
     p = sub.add_parser("ship"); p.add_argument("--change")
     p = sub.add_parser("effects"); p.add_argument("--change")
@@ -70,7 +73,9 @@ def main() -> int:
             if args.action == "validate":
                 errors = mg.validate(mission); result = {"status": "PASS" if not errors else "FAIL", "errors": errors}
             elif args.action == "dispatch":
-                result = mg.dispatch_plan(root, mission)
+                result = mission_runtime.dispatch(root, mission)
+            elif args.action == "run":
+                result = mission_runtime.run(root, mission, max_retries=args.max_retries)
             else:
                 result = mg.plan(root, mission)
             print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
@@ -99,6 +104,10 @@ def main() -> int:
             result = lifecycle.inventory(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "COMPATIBLE" else 1
         if args.cmd == "init":
             result = ux.init_check(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "READY" else 1
+        if args.cmd == "adopt":
+            result = lifecycle.adoption_plan(root); print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "upgrade":
+            result = lifecycle.upgrade_plan(root); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "review": print(json.dumps(ux.review(root, args.change), indent=2)); return 0
         if args.cmd == "ship":
             result = ux.ship_eligibility(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] == "ELIGIBLE" else 1

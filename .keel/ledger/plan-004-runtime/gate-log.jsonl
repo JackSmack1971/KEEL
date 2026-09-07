@@ -1,0 +1,17 @@
+{"details": {"base_commit": "388610e97a49dde460e6fb278aa8aaa01ee4ddd3", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T14:24:58+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T14:25:07+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T14:25:23+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-07T14:25:46+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T14:25:59+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/lib/mission_runtime.py", ".keel/tests/test_mission_runtime.py", "docs/control-plane/RELEASE_OPERATIONS.md", "docs/exec-plans/active/plan-004-runtime.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T14:26:24+00:00"}
+{"details": {"content_digest": "0dcbb510305915c460c7a57ebca217039f728e32d8b8bdee30f2ef0f22cebbee", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T14:26:24+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-07T14:29:46+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T14:30:27+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/lifecycle.py", ".keel/lib/mission_graph.py", ".keel/lib/mission_runtime.py", ".keel/lib/upgrade_kernel.py", ".keel/tests/test_lifecycle_compatibility.py", ".keel/tests/test_mission_runtime.py", "docs/control-plane/RELEASE_OPERATIONS.md", "docs/exec-plans/active/plan-004-runtime.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T14:32:13+00:00"}
+{"details": {"content_digest": "cc89f0ea433b924c2497373568e6b50698ac2f356faaa844e55e07156b07f37d", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T14:32:13+00:00"}
+{"event": "REOPEN", "result": "PASS", "ts": "2026-09-07T14:33:22+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/lifecycle.py", ".keel/lib/mission_graph.py", ".keel/lib/mission_runtime.py", ".keel/lib/upgrade_kernel.py", ".keel/tests/test_lifecycle_compatibility.py", ".keel/tests/test_mission_runtime.py", "docs/control-plane/RELEASE_OPERATIONS.md", "docs/exec-plans/active/plan-004-runtime.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T14:33:32+00:00"}
+{"details": {"content_digest": "3e800ce7c3718c2804426b6d5f104356ac072b90e201a9771ecfc464bf89cddd", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T14:33:32+00:00"}
+{"event": "REOPEN", "result": "PASS", "ts": "2026-09-07T14:36:48+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/lifecycle.py", ".keel/lib/mission_graph.py", ".keel/lib/mission_runtime.py", ".keel/lib/upgrade_kernel.py", ".keel/tests/test_lifecycle_compatibility.py", ".keel/tests/test_mission_runtime.py", "docs/control-plane/RELEASE_OPERATIONS.md", "docs/exec-plans/active/plan-004-runtime.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T14:36:58+00:00"}
+{"details": {"content_digest": "2da79509319ab2c57fbe9b4ad18c8e0e9ecca8c843002dcfec245bdb4940ace8", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T14:36:58+00:00"}

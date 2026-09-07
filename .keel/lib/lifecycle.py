@@ -37,3 +37,25 @@ def inventory(root: Path) -> dict:
             findings.append({"kind": "skill-version", "path": skill_path.relative_to(root).as_posix(), "expected": str(SUPPORTED["skill_schema"]), "actual": version, "action": "add or migrate the skill version metadata"})
     findings.sort(key=lambda row: (row["kind"], row["path"]))
     return {"schema_version": 1, "status": "COMPATIBLE" if not findings else "MIGRATION_REQUIRED", "supported": SUPPORTED, "repository": {"framework": SUPPORTED["framework"], "config_schema": config.get("schema_version"), "contract_schema": contracts.get("schema_version"), "bootstrap_manifest_schema": manifest.get("schema_version")}, "ledgers": ledgers, "skills": skills, "external": {"codex_version": "UNVERIFIED", "runtime_hooks": "UNVERIFIED"}, "findings": findings, "read_only": True}
+
+
+def adoption_plan(root: Path) -> dict:
+    """Classify a clean, existing, or incomplete repository without mutating it."""
+    markers = {
+        "config": (root / ".keel/config.json").is_file(),
+        "contracts": (root / ".keel/contracts.json").is_file(),
+        "manifest": (root / ".control-plane/bootstrap-manifest.json").is_file(),
+    }
+    if all(markers.values()):
+        status, action = "EXISTING", "ADOPT"
+    elif not any(markers.values()):
+        status, action = "CLEAN", "BOOTSTRAP"
+    else:
+        status, action = "INCOMPLETE", "REPAIR"
+    return {"schema_version": 1, "status": status, "action": action, "markers": markers, "read_only": True, "mutation": "NONE", "external": {"codex_version": "UNKNOWN", "runtime_hooks": "UNKNOWN"}}
+
+
+def upgrade_plan(root: Path) -> dict:
+    """Return a deterministic upgrade/migration plan; never applies it implicitly."""
+    compatibility = inventory(root)
+    return {"schema_version": 1, "status": "CURRENT" if compatibility["status"] == "COMPATIBLE" else "READY", "read_only": True, "mutation": "NONE", "compatibility": compatibility, "actions": [] if compatibility["status"] == "COMPATIBLE" else [row["action"] for row in compatibility["findings"]]}

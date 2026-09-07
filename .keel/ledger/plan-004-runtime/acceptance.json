@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Compatibility and runtime tests report explicit capability states and do not infer external Codex/hooks from generated files.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"lifecycle-compatibility-tests"},{"provider":"command","check_id":"mission-runtime-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Migration tests prove preflight, atomic apply, backup, byte-for-byte rollback, and unsupported-version rejection.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"schema-migration-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Mission runtime tests prove isolated child scheduling, bounded retry state, and no automatic integration.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-runtime-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-004","statement":"The complete Mission/Change adversarial boundary family rejects all seven prohibited bypasses and leaves durable state unchanged.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-runtime-tests"},{"provider":"command","check_id":"mission-work-graph-tests"}]},
+    {"id":"AC-005","requirement_id":"REQ-003","statement":"Existing mission graph behavior remains deterministic and read-only at the planning surface.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"mission-work-graph-tests"}]},
+    {"id":"AC-006","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

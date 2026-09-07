@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import lifecycle
 
 FRAMEWORK_VERSION = "0.1.0"
 SUPPORTED_EVIDENCE_PROVIDERS = {"command", "unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "human_review", "external_ci", "changed_path"}
@@ -22,7 +23,7 @@ def version_report(root: Path) -> dict:
     compatible = config.get("schema_version") == 2 and contracts["status"] == "PASS"
     from lifecycle import inventory
     life = inventory(root)
-    return {"framework": "KEEL", "framework_version": FRAMEWORK_VERSION, "supported_config_schema": [2], "config_schema": config.get("schema_version"), "contract_schema": contracts["schema_version"], "compatibility": "COMPATIBLE" if compatible and life["status"] == "COMPATIBLE" else "INCOMPATIBLE", "lifecycle": life, "errors": ([] if compatible and life["status"] == "COMPATIBLE" else ["repository metadata is outside the supported KEEL compatibility envelope"]) + contracts["errors"]}
+    return {"framework": "KEEL", "framework_version": FRAMEWORK_VERSION, "supported_config_schema": [2], "config_schema": config.get("schema_version"), "contract_schema": contracts["schema_version"], "compatibility": "COMPATIBLE" if compatible and life["status"] == "COMPATIBLE" else "INCOMPATIBLE", "lifecycle": life, "adoption": lifecycle.adoption_plan(root), "upgrade": lifecycle.upgrade_plan(root), "errors": ([] if compatible and life["status"] == "COMPATIBLE" else ["repository metadata is outside the supported KEEL compatibility envelope"]) + contracts["errors"]}
 
 def reconcile(root: Path, change_id: str | None = None) -> dict:
     import keel_core

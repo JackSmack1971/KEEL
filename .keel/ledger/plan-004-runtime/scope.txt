@@ -1,0 +1,16 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/bin/keel.py
+.control-plane/bootstrap-manifest.json
+.keel/config.json
+.keel/mission/**
+.keel/lib/mission_graph.py
+.keel/lib/lifecycle.py
+.keel/lib/upgrade_kernel.py
+.keel/lib/schema_migrations.py
+.keel/lib/mission_runtime.py
+.keel/tests/test_mission_work_graph.py
+.keel/tests/test_lifecycle_compatibility.py
+.keel/tests/test_schema_migrations.py
+.keel/tests/test_mission_runtime.py
+docs/control-plane/RELEASE_OPERATIONS.md
+docs/exec-plans/active/plan-004-runtime.md
