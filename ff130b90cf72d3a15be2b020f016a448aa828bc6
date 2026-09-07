@@ -1,0 +1,5 @@
+keel-change-id: next-action-anchored-inactive-reconciliation
+sealed-candidate: ff130b90cf72d3a15be2b020f016a448aa828bc6
+landed-commit: ff130b90cf72d3a15be2b020f016a448aa828bc6
+integration-relation: candidate-ancestor
+verified-content-digest: 2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9
