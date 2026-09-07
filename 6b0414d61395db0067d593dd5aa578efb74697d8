@@ -1,0 +1,5 @@
+keel-change-id: p0-portable-verification-bootstrap-contract
+sealed-candidate: 6b0414d61395db0067d593dd5aa578efb74697d8
+landed-commit: 6b0414d61395db0067d593dd5aa578efb74697d8
+integration-relation: candidate-ancestor
+verified-content-digest: f195c1d0e72e2a70476aeae8f642a3e72e8e2dfdae7a8566d52450437a919296
