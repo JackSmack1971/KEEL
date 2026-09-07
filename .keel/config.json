@@ -93,6 +93,7 @@
     {
       "argv": [
         "python",
+        "-B",
         ".keel/bench/test_keelbench.py"
       ],
       "cwd": ".",
@@ -110,6 +111,20 @@
       ],
       "cwd": ".",
       "id": "keelbench-validate",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/scripts/validate_control_plane.py",
+        "--root",
+        ".",
+        "--strict-manifest",
+        "--require-keel-runtime"
+      ],
+      "cwd": ".",
+      "id": "strict-control-plane-validation",
       "required": true,
       "timeout_sec": 120
     }

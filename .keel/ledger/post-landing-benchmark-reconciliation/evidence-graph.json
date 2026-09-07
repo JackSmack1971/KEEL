@@ -1,0 +1,61 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-validate",
+          "detail": "check=keelbench-validate exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "KEELBench tests and corpus validation pass.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Strict control-plane validation has no findings.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "post-landing-validation",
+      "statement": "The paired benchmark output retains the repository's relative-error-reduction compatibility marker without making an empirical claim."
+    },
+    {
+      "id": "REQ-002",
+      "source": "post-landing-validation",
+      "statement": "Bootstrap provenance hashes match the current accepted control-plane files."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 2,
+    "required": 2
+  }
+}

@@ -213,7 +213,8 @@ def score_trials(paths: list[Path], root: Path) -> dict:
     if trial_results:
         baseline_rate = statistics.mean(t["conditions"]["baseline"]["task_success_rate"] for t in trial_results)
         keel_rate = statistics.mean(t["conditions"]["keel"]["task_success_rate"] for t in trial_results)
-        output["comparison"] = {"paired_trial_count": len(trial_results), "baseline_task_success_rate": baseline_rate, "keel_task_success_rate": keel_rate, "absolute_task_success_uplift": keel_rate - baseline_rate, "paired_task_success_deltas": [pair["task_success_delta"] for t in trial_results for pair in t["pairs"]]}
+        error_reduction = None if baseline_rate >= 1 else ((1 - baseline_rate) - (1 - keel_rate)) / (1 - baseline_rate)
+        output["comparison"] = {"paired_trial_count": len(trial_results), "baseline_task_success_rate": baseline_rate, "keel_task_success_rate": keel_rate, "absolute_task_success_uplift": keel_rate - baseline_rate, "relative_error_reduction": error_reduction, "paired_task_success_deltas": [pair["task_success_delta"] for t in trial_results for pair in t["pairs"]]}
     return output
 
 
@@ -232,7 +233,9 @@ def legacy_score(paths: list[Path]) -> dict:
         successes = [1.0 if value.get("task_success") is True else 0.0 for value in values if value.get("task_success") is not None]
         output["conditions"][condition] = {"task_success_rate": None if not successes else sum(successes) / len(successes)}
     if all(output["conditions"][condition]["task_success_rate"] is not None for condition in CONDITIONS):
-        output["comparison"] = {"absolute_task_success_uplift": output["conditions"]["keel"]["task_success_rate"] - output["conditions"]["baseline"]["task_success_rate"], "paired": False}
+        baseline_rate = output["conditions"]["baseline"]["task_success_rate"]
+        keel_rate = output["conditions"]["keel"]["task_success_rate"]
+        output["comparison"] = {"absolute_task_success_uplift": keel_rate - baseline_rate, "relative_error_reduction": None if baseline_rate >= 1 else ((1 - baseline_rate) - (1 - keel_rate)) / (1 - baseline_rate), "paired": False}
     return output
 
 

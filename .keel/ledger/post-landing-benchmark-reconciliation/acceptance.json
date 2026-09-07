@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"KEELBench tests and corpus validation pass.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"keelbench-tests"},{"provider":"command","check_id":"keelbench-validate"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Strict control-plane validation has no findings.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"The paired benchmark output retains the repository's relative-error-reduction compatibility marker without making an empirical claim.","source":"post-landing-validation"},
+    {"id":"REQ-002","statement":"Bootstrap provenance hashes match the current accepted control-plane files.","source":"post-landing-validation"}
+  ]
+}

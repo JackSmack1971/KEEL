@@ -1,0 +1,4 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/bin/keelbench.py
+.control-plane/bootstrap-manifest.json
+.keel/config.json

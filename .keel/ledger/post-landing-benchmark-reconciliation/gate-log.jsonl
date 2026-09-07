@@ -1,0 +1,7 @@
+{"details": {"base_commit": "a486856d39e06852bf32b7a56c03e8a7b93dae12", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T05:15:37+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T05:15:46+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T05:16:47+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keelbench.py", ".keel/config.json"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T05:18:15+00:00"}
+{"details": {"content_digest": "c60885084d7530867d9d51eb08da2f474e3ffdb329586c915f5d4e2beac1638d", "errors": ["verification command failed: strict-control-plane-validation exit=1", "acceptance criterion failed: AC-002"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T05:18:15+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keelbench.py", ".keel/config.json"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T05:18:30+00:00"}
+{"details": {"content_digest": "9c1cc676eecb059038a4fb67283345d4a33643d5bf3b08777fb99d8eb5598598", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T05:18:30+00:00"}
