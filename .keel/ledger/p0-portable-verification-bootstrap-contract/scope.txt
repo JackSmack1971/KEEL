@@ -1,0 +1,15 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/bin/keel.py
+.keel/config.json
+.keel/lib/keel_core.py
+.keel/lib/lifecycle.py
+.keel/lib/p0_contract.py
+.keel/tests/test_p0_contract.py
+.control-plane/bootstrap-manifest.json
+docs/control-plane/COMMANDS.md
+docs/control-plane/CAPABILITY_REGISTRY.md
+docs/control-plane/ENVIRONMENTS.md
+docs/control-plane/TESTING_CI_GENERATED.md
+docs/control-plane/UPGRADE_AUDIT.md
+docs/exec-plans/active/p0-portable-verification-bootstrap-contract.md
+docs/exec-plans/active/upgrade-remaining-plan.md

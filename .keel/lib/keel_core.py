@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import capability_resolver
 import context_compiler
 import evidence_graph
+import p0_contract
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
 PLACEHOLDER_RE = re.compile(r"<!--\s*FILL\b|\{\{[A-Z0-9_]+\}\}")
@@ -55,7 +56,7 @@ def head_commit(root: Path) -> str:
 def atomic_write(path: Path, data: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + ".tmp-keel")
-    tmp.write_text(data, encoding="utf-8")
+    tmp.write_bytes(data.encode("utf-8"))
     os.replace(tmp, path)
 
 
@@ -113,7 +114,7 @@ def append_event(root: Path, change_id: str, event: str, result: str, details: d
         row["details"] = details
     p = ledger_dir(root, change_id) / "gate-log.jsonl"
     p.parent.mkdir(parents=True, exist_ok=True)
-    with p.open("a", encoding="utf-8") as f:
+    with p.open("a", encoding="utf-8", newline="") as f:
         f.write(json.dumps(row, sort_keys=True) + "\n")
         f.flush()
         try:
@@ -460,7 +461,10 @@ def git_tree_entry(root: Path, commit: str, rel: str) -> tuple[str, bytes]:
     blob = run_git_bytes(root, ["cat-file", "blob", oid], check=False)
     if blob.returncode != 0:
         raise RuntimeError(blob.stderr.decode("utf-8", errors="replace").strip() or f"git cat-file failed for {rel}")
-    return mode, blob.stdout
+    data = blob.stdout
+    if os.name == "nt":
+        data = data.replace(b"\r\n", b"\n")
+    return mode, data
 
 
 def tree_digest(root: Path, change_id: str, commit: str, material_paths: list[str]) -> str:
@@ -799,13 +803,21 @@ def verify_change(root: Path, change_id: str) -> dict:
         errs.append("substantive source change has no configured verification_commands in .keel/config.json")
     results = []
     # Built-in whitespace/conflict check.
-    gd = run_git(root, ["diff", "--check", st["base_commit"], "--"], check=False)
-    results.append({"id": "git-diff-check", "argv": ["git", "diff", "--check", st["base_commit"], "--"], "exit_code": gd.returncode, "duration_ms": 0, "excerpt": redact((gd.stdout + gd.stderr)[-4000:])})
+    ledger_prefix = f".keel/ledger/{change_id}/"
+    gd_argv = ["diff", "--check", "--ignore-space-at-eol", st["base_commit"], "--", ".", f":(exclude){ledger_prefix}**"]
+    gd = run_git(root, gd_argv, check=False)
+    results.append({"id": "git-diff-check", "argv": ["git", *gd_argv], "exit_code": gd.returncode, "duration_ms": 0, "excerpt": redact((gd.stdout + gd.stderr)[-4000:])})
     if gd.returncode != 0: errs.append("git diff --check failed")
     for c in cfg.get("verification_commands", []):
         cid = c.get("id"); argv = c.get("argv"); cwd_rel = c.get("cwd", "."); timeout = int(c.get("timeout_sec", 600)); required = bool(c.get("required", True))
         if not isinstance(cid, str) or not isinstance(argv, list) or not argv or not all(isinstance(x, str) and x for x in argv):
             errs.append(f"invalid verification command: {c!r}"); continue
+        resolution = p0_contract.resolve_command(root, c, authorized=bool(c.get("authorized", True)))
+        if resolution["status"] != p0_contract.PASS:
+            results.append({"id": cid, "argv": argv, "resolution": resolution, "exit_code": None, "required": required})
+            if required:
+                errs.append(f"verification command is not runnable: {cid} status={resolution['status']}")
+            continue
         cwd = (root / cwd_rel).resolve()
         try: cwd.relative_to(root.resolve())
         except ValueError: errs.append(f"verification cwd escapes root: {cwd_rel}"); continue
@@ -817,7 +829,7 @@ def verify_change(root: Path, change_id: str) -> dict:
             code = 124; out = (e.stdout or "") + "\n" + (e.stderr or "") + f"\nTIMEOUT after {timeout}s"
         ms = int((time.monotonic() - t0) * 1000)
         excerpt = redact("\n".join(out.splitlines()[-20:]))[-8000:]
-        results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt})
+        results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "resolution": resolution, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt})
         if required and code != 0: errs.append(f"verification command failed: {cid} exit={code}")
     d = ledger_dir(root, change_id)
     evidence_graph_result = evidence_graph.evaluate(root, d / "requirements.json", d / "acceptance.json", results, material, contracts_path=root / ".keel" / "contracts.json")

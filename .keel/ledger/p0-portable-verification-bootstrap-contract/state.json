@@ -1,0 +1,10 @@
+{
+  "base_commit": "ab248cf21817dd683607e5671bbdb6ac03e0b5f3",
+  "change_id": "p0-portable-verification-bootstrap-contract",
+  "created_at": "2026-09-07T19:23:30+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T19:55:29+00:00",
+  "verified_content_digest": "f195c1d0e72e2a70476aeae8f642a3e72e8e2dfdae7a8566d52450437a919296"
+}

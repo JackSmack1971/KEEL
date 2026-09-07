@@ -32,15 +32,15 @@
     ".keel/bench/corpus.json": "fb31cce34947fc737b71c2ee0220077fe849c6c346b8eac6f25f27af953ed64a",
     ".keel/bench/README.md": "1d417becdc28597d62b44b7ec59f18b585cde7805131b5e664780237e4ce28b3",
     ".keel/bench/telemetry-schema.json": "9d8f25e4f97582f62e40699753541984957d5477a43dd94308b9b9653645a31e",
-    ".keel/bin/keel.py": "0ba7e084976b52f963bc06cd966986f39043e09e12e61114d29fe5ce9bbfea9c",
+    ".keel/bin/keel.py": "78ce82b01d2676bd810a4407eff3f88a3be465656dbc65100fdbaa7b432c99df",
     ".keel/bin/keelbench.py": "899a078a4b7ce171a2ee8fccc9bf0974def644246a725f274c2a14f17ec54ef4",
-    ".keel/config.json": "269b7e66e72b56ee09b910299421d3b024763596d7514143adb3f030e892258f",
+    ".keel/config.json": "b32af6d4d7cf5075b2b1eeddfd3e23e174f7228fce4699369817c5b8d20aafb0",
     ".keel/hooks/keel_hook.py": "52588ea78ba5c7ff7bbee34309d0af5d9286c5614bcba4731a5aa59c4f2f7ff9",
     ".keel/ledger/README.md": "31fc981e970ea5521402af2874e311b6cc07093850de29d077f6166c5f8cae8e",
     ".keel/lib/capability_resolver.py": "310a930fc73f272480dc80e8a918d536d46fd6585009139481931b1e4d767735",
     ".keel/lib/context_compiler.py": "1fa3f51ff0d5da59e625003c5f1c8f300265e8aaa03a8d0c86b99d984133d8ce",
     ".keel/lib/evidence_graph.py": "d95e0222b1f6a4a470afc393b02e6805d511f6129619d639f04dd401ec409cf6",
-    ".keel/lib/keel_core.py": "f2c33122dd28d2ab39f204405fc7db02e12cd961d5efe064eb759188f323cde5",
+    ".keel/lib/keel_core.py": "e92f18f0c9a431d66a4a2ab25825b9be28ea48a84f95a7a6d6d431138678fd9c",
     ".keel/lint/agents_md_lint.py": "134af897d0c64f750ec57e65b525b62aa598a243e4231db682f9b1682e33d571",
     ".keel/README.md": "cf7f0bb335bfa4fbae470b302f418db797c90ee9b5088c8902b0e4ebf37e8566",
     ".keel/templates/acceptance.json": "4809975cacb733edebe81ad71ba190eb2a62466583312011e441545185d13ae3",
@@ -56,15 +56,15 @@
     "CONTROL_PLANE.md": "f30c8aa42ca615c85f30e45bc5761fc03847f5c01cee979a7de14601647a17de",
     "docs/control-plane/ACCEPTANCE_EVIDENCE.md": "c6594e972abde0e87a306fa24f5978e38302597061e583477e5e44ab817344a5",
     "docs/control-plane/ARCHITECTURE_ENFORCEMENT.md": "e565adb1831b2ea97470cb10860c1fafd225f6de544bcdeccb4fc2fa3a341414",
-    "docs/control-plane/CAPABILITY_REGISTRY.md": "bd6dd5d1b6d6af3f9d80c6a68d9a2eb29e0880b398c80df3ad06cf6c081b1f19",
+    "docs/control-plane/CAPABILITY_REGISTRY.md": "ad870271bf8c48bde5fb42468a4d54ca1331a8546d1d90af8620591206d0c481",
     "docs/control-plane/CAPABILITY_RESOLUTION.md": "7f69764525f92868e96e9ea77d8a006e40131f70b9a6dd18f9745e4abe3e3136",
     "docs/control-plane/CODEX_NATIVE.md": "ca2bd645d6a746f6c9ad4bba98fcd5f8ee18f29efdd04fce183a93af50279c98",
-    "docs/control-plane/COMMANDS.md": "09675c6c70c812c72a764cfdf228851eb1b0ed8e0c495df7c2447fc76616206b",
+    "docs/control-plane/COMMANDS.md": "5b7048749ea409444bcd177df671b1f1f0214aee93eea6243829526039cfa386",
     "docs/control-plane/CONTEXT_COMPILATION.md": "9099f46a169bf51ea2cb59438794951866c0c55ce18c866298717145580ca24e",
     "docs/control-plane/DECISION_MODEL.md": "7b2c8bfc89088f3585a520fb3c2954a61d9e41d63ea29f09d681b21c646686a0",
     "docs/control-plane/DOMAIN_SPECIALTIES.md": "dc1503e689b7c0bac1da06487c8916da7872929527554f9b94fdc311875ca506",
     "docs/control-plane/ENTROPY.md": "5c6a1d834452c6496bc2ee766f61ee719f51b99d37a5e758ba6f3842e50a767a",
-    "docs/control-plane/ENVIRONMENTS.md": "c03cae9fd5e80ca8f6f09203707241f550427e835e6f0e09ddb78d814986c866",
+    "docs/control-plane/ENVIRONMENTS.md": "48a16e8db67bcee516e2cdf1f0a57f2b4faada7bd9b309103307cd00e3c1365d",
     "docs/control-plane/FEEDBACK_EVALS.md": "9f1445f0d7a2584067e483188d401cc4b53d6cd2c5154bcaaf595cb9737b30d6",
     "docs/control-plane/KEEL.md": "28800c1dc53e56f75f6f33867dd7a8bfd6741ed7e44a8513baf47735e6d4ef16",
     "docs/control-plane/KEEL_CONTEXT.md": "41d8d5b33eb4bdebfe6d3d795fc81ea3e91a58d81e368c45a699c402e65ac9ac",
@@ -76,7 +76,7 @@
     "docs/control-plane/RELEASE_OPERATIONS.md": "e3438066f250fcca64095a02149a2b38dfd8ac0fb89928258490e72c57aa4586",
     "docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md": "b46fbb84a608e1d6aab4ed1a93142c70c79000e4648350f6cfaff7b9e49c5fd7",
     "docs/control-plane/SOURCES.md": "b82e62854a4cbcf501d45f8358b3d72d6e6e378b7817d712c9d3bd4f75c59b5d",
-    "docs/control-plane/TESTING_CI_GENERATED.md": "b4fc1cad0ce9dd0b870db17dc2efe29a14c1ba021834aa3479a37400d26515cf",
+    "docs/control-plane/TESTING_CI_GENERATED.md": "72ba10884f0bcca6af81b1bd50491790a815e0e0c703580f6c25f9d3e8f7d7dc",
     "docs/control-plane/VERIFICATION.md": "7dd70a7eecbeba6d6dc76a536ea2c34466c465de85b7af08fd664dd0eff8ec09",
     "docs/design-docs/README.md": "2e42a3aecd9c9fca973dd1da442ed0a9347dd8d75e30192994369c0e8130db8f",
     "docs/design-docs/TEMPLATE.md": "01f4f0d7f29fc0fd660f25a1cd7e8c84477302778540d33f5964c83bfa3a65ac",
@@ -98,5 +98,14 @@
     "docs/SECURITY.md": "cd2a1baa4a323bf83d3ac34819305fe137b4b55870fe9fe7138d7b569573e884",
     "WORKFLOW.md": "b90d997f2f11fce341149dba3a37b3d1c7ffa0b4577a2a1ab81a1aa94b190ca4"
   },
-  "note": "Hashes record original bootstrap output. Later user-maintained changes are valid but will be reported as drift by the validator rather than overwritten."
+  "note": "Hashes record original bootstrap output. Later user-maintained changes are valid but will be reported as drift by the validator rather than overwritten.",
+  "producer": {
+    "command": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest",
+      "--write"
+    ],
+    "source": ".keel/lib/p0_contract.py"
+  }
 }

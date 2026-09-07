@@ -1,0 +1,255 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "check=p0-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "canonical-config-portability",
+          "detail": "check=canonical-config-portability exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-P0-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P0-001",
+      "statement": "Portable command resolution returns only repository-owned, provenance-bearing literal argv and explicitly rejects absolute, unavailable, ambiguous, unproven, and unauthorized candidates.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "check=p0-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "lifecycle-compatibility-tests",
+          "detail": "check=lifecycle-compatibility-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "schema-migration-tests",
+          "detail": "check=schema-migration-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-P0-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P0-002",
+      "statement": "Git/bootstrap and compatibility inspection distinguish valid, non-Git, ordinary Git failure, incomplete, malformed, copied/extracted, compatible, incompatible, unsupported, missing-metadata, and migration-required states.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "check=p0-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-P0-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P0-003",
+      "statement": "Package-boundary inspection rejects consumer, generated-consumer, machine-local, historical, and runtime leakage from framework artifacts.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "check=p0-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "canonical-config-portability",
+          "detail": "check=canonical-config-portability exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-P0-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P0-004",
+      "statement": "Portable attestation is deterministic, repository-relative, provenance-bearing, and explicitly classifies unavailable runtime evidence without D1 execution.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "manifest-producer-check",
+          "detail": "check=manifest-producer-check exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "check=p0-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-P0-005",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P0-005",
+      "statement": "The bootstrap manifest has a repository-owned producer and its generated output is reproducible and drift-checked.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-config-portability",
+          "detail": "check=canonical-config-portability exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-P0-006",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P0-004",
+      "statement": "D1 remains DEFERRED and P4 remains BLOCKED in authoritative roadmap/audit, and canonical verification does not execute benchmark/evaluation checks.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P0-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P0-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P0-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P0-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P0-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P0-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-P0-004",
+        "AC-P0-006"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P0-004",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P0-005"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P0-005",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-P0-001",
+      "source": "UPGRADE_AUDIT.md rows 14\u201315",
+      "statement": "Audit rows 14\u201315 are addressed by a portable verification and extracted-package contract that removes creator-machine command dependencies and classifies command resolution deterministically."
+    },
+    {
+      "id": "REQ-P0-002",
+      "source": "UPGRADE_AUDIT.md rows 16\u201317",
+      "statement": "Audit rows 16\u201317 are addressed by foundational version, compatibility, bootstrap, and migration-state interpretation needed before later installation/distribution work, without implementing the installer."
+    },
+    {
+      "id": "REQ-P0-003",
+      "source": "UPGRADE_AUDIT.md row 30",
+      "statement": "Audit row 30 is addressed by an explicit framework/consumer artifact boundary that prevents consumer, generated, machine-local, historical, and runtime state from leaking into a distributable KEEL package."
+    },
+    {
+      "id": "REQ-P0-004",
+      "source": "UPGRADE_AUDIT.md rows 39\u201340",
+      "statement": "Audit rows 39\u201340 are addressed by portable reproducibility and supply-chain/attestation foundations within the bounded P0 scope, with unavailable runtime/provider evidence classified rather than guessed."
+    },
+    {
+      "id": "REQ-P0-005",
+      "source": "P0 ExecPlan generated-dependent closure",
+      "statement": "The repository-owned bootstrap manifest producer deterministically regenerates declared generated state and records producer provenance without hand edits."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 6,
+    "required": 6,
+    "requirements_covered": 5,
+    "requirements_passing": 5,
+    "requirements_total": 5
+  }
+}

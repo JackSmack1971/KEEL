@@ -17,12 +17,15 @@ import developer_ux as ux
 import effect_inference as effects
 import schema_migrations as migrations
 import telemetry
+import p0_contract
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="KEEL spec-ledger control plane")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("doctor")
+    p = sub.add_parser("bootstrap"); p.add_argument("action", choices=["status"]); p.add_argument("--requires-git", action="store_true")
+    p = sub.add_parser("manifest"); p.add_argument("--write", action="store_true")
     sub.add_parser("version")
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
@@ -57,9 +60,18 @@ def main() -> int:
     p = sub.add_parser("config-add-check"); p.add_argument("--id", required=True); p.add_argument("--cwd", default="."); p.add_argument("--timeout", type=int, default=600); p.add_argument("argv", nargs=argparse.REMAINDER)
     args = ap.parse_args()
     try:
-        root = k.git_root(Path.cwd())
+        try:
+            root = k.git_root(Path.cwd())
+        except RuntimeError:
+            if args.cmd != "bootstrap":
+                raise
+            root = Path.cwd().resolve()
         if args.cmd == "doctor":
             errs = k.doctor(root); print(json.dumps({"status":"PASS" if not errs else "FAIL", "errors":errs}, indent=2)); return 0 if not errs else 1
+        if args.cmd == "bootstrap":
+            result = p0_contract.classify_bootstrap(root, args.requires_git); print(json.dumps(result, indent=2)); return 0 if result["status"] in {"VALID_GIT_REPOSITORY", "COPIED_EXTRACTED_FRAMEWORK", "NOT_A_GIT_REPOSITORY"} else 1
+        if args.cmd == "manifest":
+            result = p0_contract.manifest_producer(root, args.write); print(json.dumps(result, indent=2)); return 0 if result["status"] in {"WRITTEN", "VERIFIED"} else 1
         if args.cmd == "version":
             result = uk.version_report(root); print(json.dumps(result, indent=2)); return 0 if result["compatibility"] == "COMPATIBLE" else 1
         if args.cmd == "reconcile": print(json.dumps(uk.reconcile(root, args.change), indent=2)); return 0

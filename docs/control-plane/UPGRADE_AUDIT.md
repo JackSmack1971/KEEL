@@ -16,8 +16,8 @@ This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Ever
 | 11 | First-class adaptive workflow engine | PARTIAL | P5 | Routed workflow/protocol capabilities exist; deterministic adaptive workflow obligations remain. |
 | 12 | Dynamically activated domain intelligence | PARTIAL | P1 | Capability registry and discovery exist; deeper domain activation/intelligence remains. |
 | 13 | Executable repository command discovery | PARTIAL | P1 | `keel map` exposes command facts; broader reliable command provenance remains. |
-| 14–15 | Portable verification and extracted-package behavior | PARTIAL | P0 | Local checks exist; creator-machine-independent package/bootstrap/version proof remains. |
-| 16–17 | Installation, upgrade, and compatibility contract | PARTIAL | P0 | Version/compatibility inspection and config migration primitives exist; installer/live orchestration remains. |
+| 14–15 | Portable verification and extracted-package behavior | COMPLETE | — | P0 provides repository-relative provenance-bearing command resolution, explicit unavailable/ambiguous/unproven/unauthorized states, and non-Git copied/extracted bootstrap classification; canonical config has no creator-machine path or D1 check. |
+| 16–17 | Installation, upgrade, and compatibility contract | COMPLETE | — | P0 adds deterministic compatible/incompatible/unsupported/missing-metadata/migration-required foundations while preserving read-only preflight, authorized apply, backup, rollback, and installer/live orchestration boundaries. |
 | 18 | Runtime capability detection and trust handshake | PARTIAL | P3 | Static/project capability evidence exists; actual runtime capability, trust, and hook readiness remain unobserved. |
 | 19 | Dynamic topology/router behavior | PARTIAL | P5 | `keel route` emits deterministic roles and verification breadth; runtime dispatch remains. |
 | 20 | Optional cross-model review policy | PARTIAL | P6 | Review/evidence boundaries exist; runtime/provider review policy remains unimplemented. |
@@ -28,13 +28,13 @@ This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Ever
 | 26 | `keel run` and mission dispatch | BLOCKED | P4 | Dispatch contracts exist, but authorized runtime/provider, credentials, and operator authorization are absent. |
 | 27 | No unnecessary ceremony for obvious changes | CONTEXTUAL | — | Durable doctrine already exists in repository workflow policy; this is not an independent upgrade requirement. |
 | 28–29 | Distinguish invariants from bureaucracy; reduce documentation entropy | CONTEXTUAL | — | Strategic design guidance, represented where appropriate by existing policy and maintenance practice. |
-| 30 | Separate framework history from consumer-repository state | PARTIAL | P0 | Historical plan archival exists; portable package/bootstrap separation remains. |
+| 30 | Separate framework history from consumer-repository state | COMPLETE | — | P0 classifies framework, consumer, generated-consumer, machine-local, and runtime/history artifacts and rejects prohibited package leakage. |
 | 31 | KEELBench strategic importance | CONTEXTUAL | — | Strategic rationale, not an executable requirement. |
 | 32–33 | KEELBench implementation, corpus, authority, trials, scoring, and empirical evaluation | DEFERRED | D1 | Existing `.keel/bench/` contracts/artifacts are preserved; no benchmark work is authorized. |
 | 34 | Mutation testing of control-plane invariants | PARTIAL | P6 | The source requires mutation testing; no mutation run is claimed here, so the gap remains active and independent of D1. |
 | 35–36 | Property-based lifecycle invariants and formal lifecycle state machine | PARTIAL | P6 | Lifecycle mechanisms and tests exist; property/state-machine coverage remains. |
 | 37–38 | Rich effect ontology and tool-semantic inference | PARTIAL | P6 | Contracts and conservative argv inference exist; semantic tool/API inference remains. |
-| 39–40 | Reproducible environment and supply-chain attestation | PARTIAL | P0 | Worktree/environment primitives exist; reproducible candidate environment and attestation remain. |
+| 39–40 | Reproducible environment and supply-chain attestation | COMPLETE | — | P0 provides deterministic repository-relative file attestation with provenance and explicit `UNVERIFIED_RUNTIME` when runtime evidence is unavailable; no supply-chain or D1 claim is fabricated. |
 | 41 | Brownfield repository intelligence | PARTIAL | P1 | Repository mapping exists; deeper brownfield intelligence remains. |
 | 42 | Continuously refreshed project context | PARTIAL | P5 | Bounded context compilation exists; continuous refresh remains. |
 | 43–44 | Self-improvement and reviewed mistake handling | PARTIAL | P7 | Observation validation and entropy scans exist; reviewed promotion/scheduling remains. |

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-P0-001","statement":"Audit rows 14–15 are addressed by a portable verification and extracted-package contract that removes creator-machine command dependencies and classifies command resolution deterministically.","source":"UPGRADE_AUDIT.md rows 14–15"},
+    {"id":"REQ-P0-002","statement":"Audit rows 16–17 are addressed by foundational version, compatibility, bootstrap, and migration-state interpretation needed before later installation/distribution work, without implementing the installer.","source":"UPGRADE_AUDIT.md rows 16–17"},
+    {"id":"REQ-P0-003","statement":"Audit row 30 is addressed by an explicit framework/consumer artifact boundary that prevents consumer, generated, machine-local, historical, and runtime state from leaking into a distributable KEEL package.","source":"UPGRADE_AUDIT.md row 30"},
+    {"id":"REQ-P0-004","statement":"Audit rows 39–40 are addressed by portable reproducibility and supply-chain/attestation foundations within the bounded P0 scope, with unavailable runtime/provider evidence classified rather than guessed.","source":"UPGRADE_AUDIT.md rows 39–40"},
+    {"id":"REQ-P0-005","statement":"The repository-owned bootstrap manifest producer deterministically regenerates declared generated state and records producer provenance without hand edits.","source":"P0 ExecPlan generated-dependent closure"}
+  ]
+}

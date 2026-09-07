@@ -7,6 +7,8 @@ This is the sole active top-level KEEL upgrade roadmap. The authoritative classi
 ### P0 — Portable verification and bootstrap contract
 Objective: Remove creator-machine dependencies and establish reliable package/bootstrap/version states.
 
+Status: **COMPLETE / LANDED** under KEEL change `p0-portable-verification-bootstrap-contract`. P1 remains unstarted.
+
 ### P1 — Repository intelligence foundation
 Objective: Build deterministic, provenance-bearing repository graph, command, ownership, architecture, dependency, impact, and generated-artifact intelligence.
 
@@ -67,8 +69,8 @@ D1 is paused and is not a dependency of any active workstream.
 - Completion requires repository-native verification and durable completion evidence, not plan status or ledger phase.
 - Individual workstream ExecPlans are created only when that workstream is authorized for implementation.
 
-P0 is not instantiated by this roadmap. A later authorized P0 plan must satisfy every contract above before implementation begins. P4 remains blocked pending its runtime/provider and authorization prerequisites; D1 remains deferred and outside all active dependencies.
+P0 is complete and independently landed under its single authorized KEEL change. P4 remains blocked pending its runtime/provider and authorization prerequisites; D1 remains deferred and outside all active dependencies.
 
 ## Current handoff
 
-Completed bounded slices remain historical evidence in [`docs/exec-plans/completed/`](../completed/). The next authorized change must create one scoped workstream plan and change ID, identify prerequisite evidence, and satisfy the contract above. P4 remains blocked, and all D1 work remains deferred.
+The P0 plan and ledger are the durable completion evidence for the landed work. The next authorized change may begin P1 only as a separate scoped workstream and change ID after reviewing this evidence. P4 remains blocked, and all D1 work remains deferred.

@@ -30,3 +30,5 @@ When Git and a runtime/toolchain exist:
 - never assume a branch can be checked out in multiple worktrees simultaneously.
 
 Record platform-specific deviations rather than hiding them in shell history.
+
+Portable verification records repository-relative argv, command provenance, Git/bootstrap classification, and a deterministic attestation of selected repository files. When a runtime or provider is unavailable, evidence is `UNVERIFIED_RUNTIME`; it is never promoted to `VERIFIED`.

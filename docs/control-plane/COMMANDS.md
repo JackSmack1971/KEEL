@@ -15,6 +15,16 @@ python3 .keel/bin/keel.py next
 
 `keel next` is a read-only advisor. It reports the active change phase, blockers, and the next legal command; it never advances a gate, records authorization, seals a candidate, or anchors a commit.
 
+Portable bootstrap and generated-state checks:
+
+```text
+python .keel/bin/keel.py bootstrap status
+python .keel/bin/keel.py manifest
+python .keel/bin/keel.py manifest --write
+```
+
+`bootstrap status` works without Git and distinguishes a copied/extracted framework from a Git-backed repository. `manifest --write` is the repository-owned producer for `.control-plane/bootstrap-manifest.json`; `manifest` is its deterministic drift check. Neither command fabricates Git provenance.
+
 Worktree isolation:
 
 ```text

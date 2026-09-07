@@ -16,7 +16,7 @@ Every consequential project specialty must map here or be added as a new domain.
 | dependencies-supply-chain | Dependency provenance/update/vulnerability policy | CONDITIONAL | Activate on first third-party dependency | Lock/provenance + update/security checks |
 | testing-evals | Unit/integration/e2e/simulation/eval strategy | CONDITIONAL | Activate on first executable behavior | Test taxonomy + deterministic commands + failure baseline |
 | quality-static-analysis | Format/lint/type/static/architecture checks | CONDITIONAL | Activate when languages/tooling chosen | Fast checks with agent-actionable remediation |
-| generated-artifacts | Source/generated boundaries and regeneration | CONDITIONAL | Activate when generator/source pair exists | Provenance + generator + freshness check |
+| generated-artifacts | Source/generated boundaries and regeneration | ACTIVE | `.control-plane/bootstrap-manifest.json` has a repository-owned producer and deterministic drift check | Producer provenance + generator + freshness check |
 | environments-worktrees | Reproducible dev env, isolated worktrees/instances | CONDITIONAL | Activate with Git/toolchain/runtime | Per-worktree bootability or documented equivalent |
 | platform-compatibility | OS/CPU/runtime/browser/device compatibility | CONDITIONAL | Activate when supported platforms are chosen | Compatibility matrix + executable evidence |
 | security | Threat boundaries, secrets, least privilege, secure defaults | ACTIVE | Baseline always applies | Threat model expands with architecture |
