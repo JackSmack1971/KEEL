@@ -1,0 +1,5 @@
+keel-change-id: upgrade-progress-reconciliation
+sealed-candidate: 92b21f2568729a427737c6b89a2230fbf75a413d
+landed-commit: 92b21f2568729a427737c6b89a2230fbf75a413d
+integration-relation: candidate-ancestor
+verified-content-digest: 85902e9ad52c73c768eb5dbe2acdfb4b2e1165a7d3e4f948f8ed57e6e3e3a96e
