@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Declared implementation surfaces are matched against material changed paths during evidence evaluation.", "source": "upgrade-audit"}]
+}

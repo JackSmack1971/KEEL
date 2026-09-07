@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Evidence tests prove matching surfaces pass, mismatched surfaces fail, and legacy contracts remain valid.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "evidence-graph-tests"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}

@@ -9,6 +9,8 @@ acceptance.json
 
 `requirements.json` contains stable `REQ-*` statements and may add typed `type`, `priority`, and repository-relative `implementation_paths` metadata. `acceptance.json` contains `AC-*` criteria, each linked to a requirement and one or more evidence edges; criteria may declare `evidence_type` and implementation paths. Both files are part of KEEL's intent digest, so changing acceptance after verification makes evidence stale.
 
+When an acceptance criterion declares `implementation_paths`, evidence evaluation requires at least one material changed path to match those patterns and records the matched paths in the evidence graph. Legacy criteria without surfaces retain their existing behavior.
+
 Every declared requirement must be referenced by at least one acceptance criterion. An orphan requirement is a contract error and prevents verification; this keeps intent-to-evidence traceability explicit rather than treating an unreferenced requirement as implicitly satisfied.
 
 Current deterministic providers:

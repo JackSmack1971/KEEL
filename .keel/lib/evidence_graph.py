@@ -159,8 +159,14 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
             edge_rows.append({"provider": provider, "passed": passed, "detail": detail, **{k:v for k,v in edge.items() if k != "provider"}})
         policy = c.get("policy", "all")
         passed = all(x["passed"] for x in edge_rows) if policy == "all" else any(x["passed"] for x in edge_rows)
+        surfaces = c.get("implementation_paths", [])
+        matched_surfaces = sorted({path for path in changed_paths for pattern in surfaces if _path_match(path, pattern)})
+        surface_passed = not surfaces or bool(matched_surfaces)
+        if surfaces and not surface_passed:
+            errors.append(f"acceptance criterion implementation surface unmatched: {c['id']}")
+        passed = passed and surface_passed
         status = "PASS" if passed else "FAIL"
-        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence_type": c.get("evidence_type"), "implementation_paths": c.get("implementation_paths", []), "evidence": edge_rows}
+        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence_type": c.get("evidence_type"), "implementation_paths": surfaces, "implementation_matches": matched_surfaces, "implementation_surface_passed": surface_passed, "evidence": edge_rows}
         criterion_rows.append(row)
         if row["required"] and not passed:
             errors.append(f"acceptance criterion failed: {row['id']}")

@@ -79,6 +79,8 @@ def main() -> None:
         acceptance_data = json.loads(acceptance.read_text(encoding="utf-8")); acceptance_data["criteria"][0].update({"evidence_type": "automated-test", "implementation_paths": ["src/auth/**"]})
         requirements.write_text(json.dumps(typed), encoding="utf-8"); acceptance.write_text(json.dumps(acceptance_data), encoding="utf-8")
         assert graph.validate_contract(requirements, acceptance) == []
+        assert graph.evaluate(root, requirements, acceptance, [], ["src/auth/tokens.py"])["status"] == "PASS"
+        assert graph.evaluate(root, requirements, acceptance, [], ["docs/README.md"])["status"] == "FAIL"
         typed["requirements"][0]["implementation_paths"] = ["../outside"]
         requirements.write_text(json.dumps(typed), encoding="utf-8")
         assert any("contains unsafe path" in error for error in graph.validate_contract(requirements, acceptance))
