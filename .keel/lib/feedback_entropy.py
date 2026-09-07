@@ -9,6 +9,13 @@ STATES = {"OBSERVED", "REVIEWED", "EVALUATED", "PROMOTED"}
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 
 
+def _is_goal_record(path: Path) -> bool:
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.strip():
+            return line.strip().startswith("# Long-horizon goal:")
+    return False
+
+
 def _repo_path(root: Path, value: str) -> Path | None:
     target = (root / value).resolve()
     try:
@@ -80,6 +87,8 @@ def entropy_scan(root: Path) -> dict:
     if active.is_dir():
         for path in sorted(active.glob("*.md")):
             if path.name == "README.md":
+                continue
+            if _is_goal_record(path):
                 continue
             ledger = root / ".keel" / "ledger" / path.stem / "state.json"
             if not ledger.is_file():

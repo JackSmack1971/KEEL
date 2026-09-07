@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Entropy scan distinguishes explicit long-horizon goal records from orphaned execution plans without weakening ordinary orphan detection.", "source": "upgrade-audit"}]
+}

@@ -20,4 +20,10 @@ with tempfile.TemporaryDirectory() as directory:
     assert first == second and first["read_only"] is True
     assert any(row["kind"] == "broken-link" for row in first["findings"])
     assert (root / "README.md").read_text(encoding="utf-8") == before
-print(json.dumps({"status": "PASS", "checks": ["provenance", "review-gate", "deterministic-scan", "read-only"]}))
+    (root / "docs/exec-plans/active").mkdir(parents=True)
+    (root / "docs/exec-plans/active/goal.md").write_text("# Long-horizon goal: durable objective\n", encoding="utf-8")
+    (root / "docs/exec-plans/active/orphan.md").write_text("# Ordinary plan\n", encoding="utf-8")
+    findings = fe.entropy_scan(root)["findings"]
+    assert not any(row["path"].endswith("goal.md") for row in findings)
+    assert any(row["path"].endswith("orphan.md") for row in findings)
+print(json.dumps({"status": "PASS", "checks": ["provenance", "review-gate", "goal-record", "deterministic-scan", "read-only"]}))

@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Feedback entropy tests prove goal records are recognized and ordinary orphan plans remain findings.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "feedback-entropy-tests"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}
