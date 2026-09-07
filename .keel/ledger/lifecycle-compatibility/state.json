@@ -1,0 +1,10 @@
+{
+  "base_commit": "58ae0818987b57789664d3e9de33b46c0984e3ab",
+  "change_id": "lifecycle-compatibility",
+  "created_at": "2026-09-07T12:18:01+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:20:08+00:00",
+  "verified_content_digest": "27308d4d3820e7ab5091b04bc3e1227847e59b70b68a5fe2b90317440821788a"
+}

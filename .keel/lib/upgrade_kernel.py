@@ -20,7 +20,9 @@ def version_report(root: Path) -> dict:
     config = json.loads((root / ".keel" / "config.json").read_text(encoding="utf-8"))
     contracts = contract_report(root)
     compatible = config.get("schema_version") == 2 and contracts["status"] == "PASS"
-    return {"framework": "KEEL", "framework_version": FRAMEWORK_VERSION, "supported_config_schema": [2], "config_schema": config.get("schema_version"), "contract_schema": contracts["schema_version"], "compatibility": "COMPATIBLE" if compatible else "INCOMPATIBLE", "errors": [] if compatible else ["repository metadata is outside the supported KEEL compatibility envelope"] + contracts["errors"]}
+    from lifecycle import inventory
+    life = inventory(root)
+    return {"framework": "KEEL", "framework_version": FRAMEWORK_VERSION, "supported_config_schema": [2], "config_schema": config.get("schema_version"), "contract_schema": contracts["schema_version"], "compatibility": "COMPATIBLE" if compatible and life["status"] == "COMPATIBLE" else "INCOMPATIBLE", "lifecycle": life, "errors": ([] if compatible and life["status"] == "COMPATIBLE" else ["repository metadata is outside the supported KEEL compatibility envelope"]) + contracts["errors"]}
 
 def reconcile(root: Path, change_id: str | None = None) -> dict:
     import keel_core

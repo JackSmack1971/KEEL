@@ -271,6 +271,17 @@
       "id": "feedback-entropy-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_lifecycle_compatibility.py"
+      ],
+      "cwd": ".",
+      "id": "lifecycle-compatibility-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

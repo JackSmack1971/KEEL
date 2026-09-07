@@ -12,6 +12,7 @@ import mission_graph as mg
 import repository_map as rm
 import topology_router as tr
 import feedback_entropy as fe
+import lifecycle
 
 
 def main() -> int:
@@ -26,6 +27,8 @@ def main() -> int:
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
     p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status"]); p.add_argument("path", type=Path)
     p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
+    sub.add_parser("compat")
+    p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true")
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -76,6 +79,8 @@ def main() -> int:
             print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "entropy":
             result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "compat" or args.cmd == "migrate":
+            result = lifecycle.inventory(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "COMPATIBLE" else 1
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":

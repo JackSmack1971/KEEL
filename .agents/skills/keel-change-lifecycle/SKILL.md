@@ -1,5 +1,7 @@
 ---
 name: keel-change-lifecycle
+metadata:
+  version: "1"
 description: Govern a repository write change with KEEL when implementation, refactoring, docs/control-plane edits, migrations, release preparation, infrastructure changes, or other engineering mutation is requested. Use standard mode by default, trivial fast path only for clearly low-risk localized writes, and operator-authorized emergency bypass only for time-critical incidents. Do not activate for purely read-only investigation/explanation.
 ---
 

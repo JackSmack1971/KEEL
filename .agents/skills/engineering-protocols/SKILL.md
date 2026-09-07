@@ -1,5 +1,7 @@
 ---
 name: engineering-protocols
+metadata:
+  version: "1"
 description: Route recurring debugging, architecture, dependency, migration, security, performance, frontend-runtime, test-remediation, incident, and release work to evidence-producing protocols. Do not activate for ordinary implementation without one of these protocol concerns.
 ---
 

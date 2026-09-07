@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"Compatibility inspection shall report supported framework, config, contract, ledger, skill, and manifest versions from repository evidence.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"Compatibility inspection shall identify unsupported or stale artifacts and produce deterministic migration actions without mutating them.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"Lifecycle commands shall not claim external Codex/runtime versions or perform network installation/upgrades without evidence and authorization.","source":"upgrade-audit"}
+  ]
+}

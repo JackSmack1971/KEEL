@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Lifecycle tests prove compatibility inventory includes all repository-owned version domains.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"lifecycle-compatibility-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Lifecycle tests prove stale artifacts become migration findings without file mutation.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"lifecycle-compatibility-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Lifecycle tests prove compatibility output does not invent external version evidence or perform network actions.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"lifecycle-compatibility-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

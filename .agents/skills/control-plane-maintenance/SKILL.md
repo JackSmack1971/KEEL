@@ -1,5 +1,7 @@
 ---
 name: control-plane-maintenance
+metadata:
+  version: "1"
 description: Maintain this repository's Codex control plane when architecture, toolchain, CI, deployment, data, UI, runtime observability, tracker/orchestration, integrations, or recurring review feedback changes. Use to activate/deactivate capability-registry domains, synchronize durable docs, and promote stable recurring rules into mechanical checks. Do not use for ordinary feature implementation that does not change control-plane contracts.
 ---
 

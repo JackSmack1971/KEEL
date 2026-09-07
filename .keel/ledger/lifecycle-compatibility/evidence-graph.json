@@ -1,0 +1,134 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "lifecycle-compatibility-tests",
+          "detail": "check=lifecycle-compatibility-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Lifecycle tests prove compatibility inventory includes all repository-owned version domains.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "lifecycle-compatibility-tests",
+          "detail": "check=lifecycle-compatibility-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Lifecycle tests prove stale artifacts become migration findings without file mutation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "lifecycle-compatibility-tests",
+          "detail": "check=lifecycle-compatibility-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Lifecycle tests prove compatibility output does not invent external version evidence or perform network actions.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Doctor, strict control-plane validation, and KEELBench remain passing.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-004"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-003"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Compatibility inspection shall report supported framework, config, contract, ledger, skill, and manifest versions from repository evidence."
+    },
+    {
+      "id": "REQ-002",
+      "source": "upgrade-audit",
+      "statement": "Compatibility inspection shall identify unsupported or stale artifacts and produce deterministic migration actions without mutating them."
+    },
+    {
+      "id": "REQ-003",
+      "source": "upgrade-audit",
+      "statement": "Lifecycle commands shall not claim external Codex/runtime versions or perform network installation/upgrades without evidence and authorization."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  }
+}
