@@ -1,0 +1,5 @@
+keel-change-id: effect-inference
+sealed-candidate: 02f1b25f5ac9026bc0b6d52a639f48418e4bddb6
+landed-commit: 02f1b25f5ac9026bc0b6d52a639f48418e4bddb6
+integration-relation: candidate-ancestor
+verified-content-digest: a5e8c2c0e51e69ac75b40c26ac0fe245e2e693a8fca5ea52a7f71e6d4d1a46ec
