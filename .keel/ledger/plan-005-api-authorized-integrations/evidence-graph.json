@@ -1,0 +1,216 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "api-contract-tests",
+          "detail": "check=api-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-API-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-API-001",
+      "statement": "API contract tests prove deterministic versioned envelopes and predictable unknown-version failure.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "api-contract-tests",
+          "detail": "check=api-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-API-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-API-002",
+      "statement": "Correlation tests prove identifiers survive lifecycle event creation and caller cannot forge authorization fields.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "api-contract-tests",
+          "detail": "check=api-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-API-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-API-003",
+      "statement": "Provider contract tests prove disabled-by-default, redaction, and no-authority behavior.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "provider-effect-contract-tests",
+          "detail": "check=provider-effect-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-API-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-API-004",
+      "statement": "Canonical doctor, strict control-plane validation, KEELBench, and existing provider/effect tests pass.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-API-001"
+      ],
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-API-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-API-002"
+      ],
+      "implementation_paths": [
+        ".keel/lib/keel_core.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-API-002",
+      "type": "security"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-API-003"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-API-003",
+      "type": "security"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-API-004"
+      ],
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/keel_core.py",
+        ".keel/lib/evidence_graph.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-API-004",
+      "type": "security"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-API-001",
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "priority": "must",
+      "source": "Plan 005 / attachment",
+      "statement": "Material CLI/domain results use a versioned deterministic response envelope and reject unsupported contract versions predictably.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-API-002",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py"
+      ],
+      "priority": "must",
+      "source": "Plan 005 / attachment",
+      "statement": "Lifecycle records carry validated mission, change, run, operation, and evidence correlation identifiers without allowing caller-supplied authority.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-API-003",
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "priority": "must",
+      "source": "Plan 005 / attachment",
+      "statement": "Provider adapter declarations are explicit, redacted, disabled by default, and cannot authorize or execute a durable mutation.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-API-004",
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/keel_core.py",
+        ".keel/lib/evidence_graph.py"
+      ],
+      "priority": "must",
+      "source": "Plan 005 / attachment",
+      "statement": "Existing evidence, authorization, and sealed-tree boundaries remain enforced through the new contract surfaces.",
+      "type": "security"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

@@ -10,5 +10,6 @@ When durable boundaries emerge, prefer mechanical checks over repeated prose. Ca
 - structured logging/telemetry shape;
 - naming/layout rules with real correctness or legibility value;
 - limits that prevent known pathological architecture.
+- `VERIFIED` transport outputs use the versioned domain envelope; authorization remains in domain/effect handling.
 
 Each lint/test error should say what is wrong and how to remediate it. Do not mechanize personal taste without recurrence/evidence.

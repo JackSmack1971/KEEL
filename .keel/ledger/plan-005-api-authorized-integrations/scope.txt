@@ -1,0 +1,12 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/bin/keel.py
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+.keel/lib/keel_core.py
+.keel/lib/evidence_graph.py
+.keel/lib/api_contract.py
+.keel/tests/**
+docs/control-plane/CAPABILITY_REGISTRY.md
+docs/control-plane/ARCHITECTURE_ENFORCEMENT.md
+ARCHITECTURE.md
+docs/exec-plans/active/plan-005-api-authorized-integrations.md

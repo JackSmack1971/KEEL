@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-API-001","requirement_id":"REQ-API-001","statement":"API contract tests prove deterministic versioned envelopes and predictable unknown-version failure.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"api-contract-tests"}]},
+    {"id":"AC-API-002","requirement_id":"REQ-API-002","statement":"Correlation tests prove identifiers survive lifecycle event creation and caller cannot forge authorization fields.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"api-contract-tests"}]},
+    {"id":"AC-API-003","requirement_id":"REQ-API-003","statement":"Provider contract tests prove disabled-by-default, redaction, and no-authority behavior.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"api-contract-tests"}]},
+    {"id":"AC-API-004","requirement_id":"REQ-API-004","statement":"Canonical doctor, strict control-plane validation, KEELBench, and existing provider/effect tests pass.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"},{"provider":"command","check_id":"provider-effect-contract-tests"}]}
+  ]
+}

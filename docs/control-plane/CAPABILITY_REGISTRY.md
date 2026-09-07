@@ -21,7 +21,7 @@ Every consequential project specialty must map here or be added as a new domain.
 | platform-compatibility | OS/CPU/runtime/browser/device compatibility | CONDITIONAL | Activate when supported platforms are chosen | Compatibility matrix + executable evidence |
 | security | Threat boundaries, secrets, least privilege, secure defaults | ACTIVE | Baseline always applies | Threat model expands with architecture |
 | privacy-data | Data classification, retention, access, sensitive data | CONDITIONAL | Activate when data/persistence exists | Classification + lifecycle + access evidence |
-| api-contracts | API/schema/protocol/interface compatibility | CONDITIONAL | Activate when interfaces exist | Versioned contracts + compatibility validation |
+| api-contracts | API/schema/protocol/interface compatibility | ACTIVE | `.keel/lib/api_contract.py` and versioned CLI envelope exist | Versioned contracts + compatibility validation + correlation tests |
 | ui-browser-a11y-i18n | UI runtime legibility, browser/device, accessibility/i18n | CONDITIONAL | Activate on human-facing interface | Reproduction + visual/DOM/device/a11y evidence as relevant |
 | performance-capacity-cost | Latency/throughput/resource/cost budgets | CONDITIONAL | Activate when measurable budgets matter | Benchmarks + budgets + regression evidence |
 | observability | Logs, metrics, traces, diagnostics, runtime inspection | CONDITIONAL | Activate with a running system | Queryable local/runtime evidence proportional to system |

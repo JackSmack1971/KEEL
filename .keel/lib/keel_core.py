@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import capability_resolver
 import context_compiler
 import evidence_graph
+import api_contract
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
 PLACEHOLDER_RE = re.compile(r"<!--\s*FILL\b|\{\{[A-Z0-9_]+\}\}")
@@ -108,7 +109,11 @@ def write_state(root: Path, change_id: str, st: dict) -> None:
 
 
 def append_event(root: Path, change_id: str, event: str, result: str, details: dict | None = None) -> None:
-    row = {"ts": now(), "event": event, "result": result}
+    current = state(root, change_id) if (ledger_dir(root, change_id) / "state.json").is_file() else {}
+    ids = dict(current.get("correlation", {})); ids.setdefault("change_id", change_id)
+    ids.setdefault("run_id", "run:" + hashlib.sha256(change_id.encode()).hexdigest()[:24])
+    ids["operation_id"] = "operation:" + hashlib.sha256((event + now()).encode()).hexdigest()[:24]
+    row = {"ts": now(), "event": event, "result": result, "correlation": api_contract.correlation(change_id, **{k:v for k,v in ids.items() if k != "change_id"})}
     if details:
         row["details"] = details
     p = ledger_dir(root, change_id) / "gate-log.jsonl"
@@ -696,7 +701,7 @@ def start_change(root: Path, change_id: str, mode: str = "standard", summary: st
     (d / "effects.json").write_text((templates / "effects.json").read_text(encoding="utf-8"), encoding="utf-8")
     (d / "authorization.json").write_text((templates / "authorization.json").read_text(encoding="utf-8"), encoding="utf-8")
     (d / "risk-review.md").write_text((templates / "risk-review.md").read_text(encoding="utf-8"), encoding="utf-8")
-    st = {"schema_version": 1, "change_id": change_id, "mode": mode, "phase": "DISCUSS", "base_commit": base, "created_at": now(), "updated_at": now()}
+    st = {"schema_version": 1, "change_id": change_id, "mode": mode, "phase": "DISCUSS", "base_commit": base, "created_at": now(), "updated_at": now(), "correlation": {"change_id": change_id, "run_id": "run:" + hashlib.sha256((change_id + base).encode()).hexdigest()[:24]}}
     write_json(d / "state.json", st)
     atomic_write(active_file(root), change_id + "\n")
     append_event(root, change_id, "START", "PASS", {"mode": mode, "base_commit": base})

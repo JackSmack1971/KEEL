@@ -1,0 +1,10 @@
+{
+  "base_commit": "4532bb43780cb45a025574403a8b4ae4ac7304ab",
+  "change_id": "plan-005-api-authorized-integrations",
+  "created_at": "2026-09-07T16:10:07+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T16:18:59+00:00",
+  "verified_content_digest": "e8410231246a018c3e15c763a991e441864d6f21fb43d1c2a5c9087774fb8563"
+}

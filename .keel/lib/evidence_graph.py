@@ -7,6 +7,21 @@ from pathlib import Path, PurePosixPath
 REQ_ID_PREFIX = "REQ-"
 AC_ID_PREFIX = "AC-"
 SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists", "unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "human_review", "external_ci"}
+
+def provider_declaration(provider: str, *, enabled: bool = False, effect_capabilities: list[str] | None = None) -> dict:
+    if provider not in SUPPORTED_PROVIDERS:
+        raise ValueError(f"unsupported provider: {provider}")
+    if enabled:
+        raise ValueError("provider adapters are disabled until separately authorized")
+    return {"provider": provider, "enabled": False, "effect_capabilities": list(effect_capabilities or []), "authorization": "domain-only", "redaction": "required"}
+
+def redact_provider_result(value: object) -> object:
+    secret = {"token", "password", "secret", "authorization", "api_key", "credential"}
+    if isinstance(value, dict):
+        return {k: "[REDACTED]" if k.lower() in secret else redact_provider_result(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [redact_provider_result(v) for v in value]
+    return value
 REQUIREMENT_TYPES = {"behavior", "quality", "security", "migration", "performance", "architecture", "documentation"}
 PRIORITIES = {"must", "should", "could"}
 EVIDENCE_TYPES = {"automated-test", "human-review", "schema", "benchmark", "runtime", "changed-path"}

@@ -1,6 +1,6 @@
 # Architecture
 
-Status: `GREENFIELD / NOT YET CHOSEN`
+Status: `PROPOSED domain contract; application/runtime architecture remains NOT YET CHOSEN`
 
 This file is the durable map of verified system structure. At bootstrap there is intentionally no invented stack.
 
@@ -9,6 +9,8 @@ This file is the durable map of verified system structure. At bootstrap there is
 - Control-plane doctrine sources: `control-plane-engineering-bible.md` and `control-plane-kb.md`.
 - Repository-owned control-plane scaffold exists.
 - Application/runtime architecture is not yet established.
+- `VERIFIED` `.keel/lib/api_contract.py` is the provider-neutral response/correlation contract; transports adapt it and do not own authorization.
+- `VERIFIED` provider declarations in `.keel/lib/evidence_graph.py` are disabled by default and descriptive only.
 
 ## Architecture contract
 When architecture is introduced, record:

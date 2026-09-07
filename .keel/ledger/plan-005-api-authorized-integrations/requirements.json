@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-API-001","statement":"Material CLI/domain results use a versioned deterministic response envelope and reject unsupported contract versions predictably.","source":"Plan 005 / attachment","type":"behavior","priority":"must","implementation_paths":[".keel/bin/keel.py",".keel/lib/keel_core.py"]},
+    {"id":"REQ-API-002","statement":"Lifecycle records carry validated mission, change, run, operation, and evidence correlation identifiers without allowing caller-supplied authority.","source":"Plan 005 / attachment","type":"security","priority":"must","implementation_paths":[".keel/lib/keel_core.py"]},
+    {"id":"REQ-API-003","statement":"Provider adapter declarations are explicit, redacted, disabled by default, and cannot authorize or execute a durable mutation.","source":"Plan 005 / attachment","type":"security","priority":"must","implementation_paths":[".keel/lib/evidence_graph.py",".keel/lib/keel_core.py"]},
+    {"id":"REQ-API-004","statement":"Existing evidence, authorization, and sealed-tree boundaries remain enforced through the new contract surfaces.","source":"Plan 005 / attachment","type":"security","priority":"must","implementation_paths":[".keel/bin/keel.py",".keel/lib/keel_core.py",".keel/lib/evidence_graph.py"]}
+  ]
+}

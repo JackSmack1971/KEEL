@@ -17,6 +17,7 @@ import developer_ux as ux
 import effect_inference as effects
 import schema_migrations as migrations
 import telemetry
+import api_contract
 
 
 def main() -> int:
@@ -61,10 +62,10 @@ def main() -> int:
         if args.cmd == "doctor":
             errs = k.doctor(root); print(json.dumps({"status":"PASS" if not errs else "FAIL", "errors":errs}, indent=2)); return 0 if not errs else 1
         if args.cmd == "version":
-            result = uk.version_report(root); print(json.dumps(result, indent=2)); return 0 if result["compatibility"] == "COMPATIBLE" else 1
+            result = uk.version_report(root); print(api_contract.render(result)); return 0 if result["compatibility"] == "COMPATIBLE" else 1
         if args.cmd == "reconcile": print(json.dumps(uk.reconcile(root, args.change), indent=2)); return 0
         if args.cmd == "contracts":
-            result = uk.contract_report(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+            result = uk.contract_report(root); print(api_contract.render(result)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "mission":
             mission = mg.load(args.path.resolve())
             if args.action == "validate":
@@ -73,48 +74,48 @@ def main() -> int:
                 result = mg.dispatch_plan(root, mission)
             else:
                 result = mg.plan(root, mission)
-            print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
+            print(api_contract.render(result)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
         if args.cmd == "map":
             result = rm.build(root)
             if args.stdout:
-                print(json.dumps(result, indent=2))
+                print(api_contract.render(result))
             else:
                 print(json.dumps({"status": "WRITTEN", "path": str(rm.write(root, result).relative_to(root))}, indent=2))
             return 0
         if args.cmd == "route":
             result = tr.recommend(tr.load(args.path.resolve()), args.change)
-            print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+            print(api_contract.render(result)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "feedback":
             if args.action == "queue":
                 result = fe.queue(root, args.path.resolve())
             else:
                 observation = fe.load(args.path.resolve())
                 result = {"status": "PASS" if not fe.validate_observation(root, observation) else "FAIL", "errors": fe.validate_observation(root, observation)} if args.action == "validate" else fe.status(root, observation)
-            print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+            print(api_contract.render(result)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "entropy":
-            result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
+            result = fe.entropy_scan(root); print(api_contract.render(result)); return 0
         if args.cmd == "migrate" and args.plan:
-            result = migrations.preflight(args.plan.resolve()); print(json.dumps(result, indent=2)); return 0
+            result = migrations.preflight(args.plan.resolve()); print(api_contract.render(result)); return 0
         if args.cmd == "compat" or args.cmd == "migrate":
-            result = lifecycle.inventory(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "COMPATIBLE" else 1
+            result = lifecycle.inventory(root); print(api_contract.render(result)); return 0 if result["status"] == "COMPATIBLE" else 1
         if args.cmd == "init":
-            result = ux.init_check(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "READY" else 1
+            result = ux.init_check(root); print(api_contract.render(result)); return 0 if result["status"] == "READY" else 1
         if args.cmd == "review": print(json.dumps(ux.review(root, args.change), indent=2)); return 0
         if args.cmd == "ship":
-            result = ux.ship_eligibility(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] == "ELIGIBLE" else 1
+            result = ux.ship_eligibility(root, args.change); print(api_contract.render(result)); return 0 if result["status"] == "ELIGIBLE" else 1
         if args.cmd == "effects":
-            result = effects.audit(root, args.change); print(json.dumps(result, indent=2)); return 0
+            result = effects.audit(root, args.change); print(api_contract.render(result)); return 0
         if args.cmd == "telemetry":
-            result = telemetry.for_change(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] in {"PASS", "UNAVAILABLE"} else 1
+            result = telemetry.for_change(root, args.change); print(api_contract.render(result)); return 0 if result["status"] in {"PASS", "UNAVAILABLE"} else 1
         if args.cmd == "discover":
-            result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
+            result = k.discover_capabilities(root); print(api_contract.render(result)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":
             cid = args.change or k.active_change(root)
             if not cid: raise RuntimeError("no active KEEL change")
             result = k.compile_context(root, cid, write=True)
             if args.stdout: print(result.pop("text"))
             else:
-                result.pop("text", None); print(json.dumps(result, indent=2))
+                result.pop("text", None); print(api_contract.render(result))
             return 0
         if args.cmd == "evidence":
             cid = args.change or k.active_change(root)
@@ -132,9 +133,9 @@ def main() -> int:
                 result = k.worktree_create(root, args.change, args.path, args.commit)
             else:
                 result = k.worktree_retire(root, args.path, args.force)
-            print(json.dumps(result, indent=2)); return 0
+            print(api_contract.render(result)); return 0
         if args.cmd == "environment":
-            result = k.environment_contract(root); print(json.dumps(result, indent=2)); return 0 if result["status"] != "INVALID" else 1
+            result = k.environment_contract(root); print(api_contract.render(result)); return 0 if result["status"] != "INVALID" else 1
         if args.cmd == "start": k.start_change(root, args.change, args.mode, args.summary, args.scope); print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
         cid = getattr(args, "change", None) or k.active_change(root)
         if args.cmd in {"gate","verify","reopen","replan","record-authorization","seal"} and not cid: raise RuntimeError("no active KEEL change")
@@ -157,7 +158,7 @@ def main() -> int:
             checks.append({"id": args.id, "argv": argv, "cwd": args.cwd, "timeout_sec": args.timeout, "required": True}); k.write_json(cfgp, cfg); print(json.dumps(cfg, indent=2)); return 0
         raise RuntimeError("unhandled command")
     except Exception as e:
-        print(f"KEEL ERROR: {e}", file=sys.stderr); return 2
+        print(api_contract.render({"status": "FAIL", "errors": [str(e)]})); return 2
 
 if __name__ == "__main__":
     raise SystemExit(main())
