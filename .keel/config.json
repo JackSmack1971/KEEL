@@ -182,6 +182,17 @@
       "id": "worktree-lifecycle-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_environment_contract.py"
+      ],
+      "cwd": ".",
+      "id": "environment-contract-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

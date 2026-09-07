@@ -1094,6 +1094,28 @@ def worktree_retire(root: Path, path: str, force: bool = False) -> dict:
     return {"path": str(target), "retired": True, "dirty": dirty, "forced": force}
 
 
+def environment_contract(root: Path) -> dict:
+    config_path = root / ".keel" / "config.json"
+    config = read_json(config_path) if config_path.is_file() else {}
+    contract = config.get("environment_contract")
+    if contract is None:
+        return {"schema_version": 1, "status": "UNCONFIGURED", "contract": None, "errors": []}
+    errors = []
+    if not isinstance(contract, dict):
+        return {"schema_version": 1, "status": "INVALID", "contract": contract, "errors": ["environment_contract must be an object"]}
+    if contract.get("schema_version", 1) != 1:
+        errors.append("environment_contract.schema_version must be 1")
+    for key in ("setup", "start", "stop"):
+        value = contract.get(key)
+        if value is not None and (not isinstance(value, list) or not value or not all(isinstance(item, str) and item.strip() for item in value)):
+            errors.append(f"environment_contract.{key} must be null or a non-empty argv list")
+    isolation = contract.get("isolation", {})
+    if not isinstance(isolation, dict) or not all(isinstance(key, str) and key.strip() and isinstance(value, str) and value.strip() for key, value in isolation.items()):
+        errors.append("environment_contract.isolation must map non-empty string keys to non-empty string values")
+    status = "INVALID" if errors else ("CONFIGURED" if any(contract.get(key) for key in ("setup", "start", "stop")) or bool(isolation) else "UNCONFIGURED")
+    return {"schema_version": 1, "status": status, "contract": contract, "errors": errors}
+
+
 def status_summary(root: Path, change_id: str | None = None) -> dict:
     cid = change_id or active_change(root)
     if not cid: return {"active_change": None, "keel": "IDLE"}

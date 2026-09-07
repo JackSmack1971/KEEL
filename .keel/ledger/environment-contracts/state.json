@@ -1,0 +1,10 @@
+{
+  "base_commit": "c17f963c153cb29f791e0f0447144b20a696ecec",
+  "change_id": "environment-contracts",
+  "created_at": "2026-09-07T11:41:19+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T11:43:14+00:00",
+  "verified_content_digest": "972cc08737ceb5721d2a94228acad18862af76e4fbe451018b4122f633bf3372"
+}

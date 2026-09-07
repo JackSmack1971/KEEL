@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC-001",
+      "requirement_id": "REQ-001",
+      "statement": "Focused tests prove absent and valid contracts produce stable read-only status with commands and isolation values preserved.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "environment-contract-tests"}]
+    },
+    {
+      "id": "AC-002",
+      "requirement_id": "REQ-002",
+      "statement": "Focused tests prove malformed command and isolation fields return explicit validation errors.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "environment-contract-tests"}]
+    },
+    {
+      "id": "AC-003",
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and KEEL doctor pass after the environment contract change.",
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {"provider": "command", "check_id": "strict-control-plane-validation"},
+        {"provider": "command", "check_id": "control-plane-doctor"}
+      ]
+    }
+  ]
+}

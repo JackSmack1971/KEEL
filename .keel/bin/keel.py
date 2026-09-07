@@ -19,6 +19,7 @@ def main() -> int:
     p = sub.add_parser("status"); p.add_argument("--change")
     p = sub.add_parser("next"); p.add_argument("--change")
     p = sub.add_parser("worktree"); p.add_argument("action", choices=["create", "status", "retire"]); p.add_argument("change", nargs="?"); p.add_argument("--path"); p.add_argument("--commit", default="HEAD"); p.add_argument("--force", action="store_true")
+    p = sub.add_parser("environment"); p.add_argument("action", choices=["status"])
     p = sub.add_parser("start"); p.add_argument("change"); p.add_argument("--mode", choices=["standard","trivial"], default="standard"); p.add_argument("--summary"); p.add_argument("--scope", action="append", default=[])
     p = sub.add_parser("gate"); p.add_argument("gate", choices=["discuss","plan"]); p.add_argument("--change")
     p = sub.add_parser("verify"); p.add_argument("--change")
@@ -61,6 +62,8 @@ def main() -> int:
             else:
                 result = k.worktree_retire(root, args.path, args.force)
             print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "environment":
+            result = k.environment_contract(root); print(json.dumps(result, indent=2)); return 0 if result["status"] != "INVALID" else 1
         if args.cmd == "start": k.start_change(root, args.change, args.mode, args.summary, args.scope); print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
         cid = getattr(args, "change", None) or k.active_change(root)
         if args.cmd in {"gate","verify","reopen","replan","record-authorization","seal"} and not cid: raise RuntimeError("no active KEEL change")

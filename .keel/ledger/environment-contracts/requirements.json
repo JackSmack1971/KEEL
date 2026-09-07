@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "KEEL reports an absent or valid environment contract deterministically without executing configured commands.",
+      "source": "next-milestone"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "KEEL rejects malformed environment contract fields rather than silently guessing runtime behavior.",
+      "source": "next-milestone"
+    }
+  ]
+}

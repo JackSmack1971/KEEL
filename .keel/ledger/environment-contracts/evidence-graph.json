@@ -1,0 +1,99 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "environment-contract-tests",
+          "detail": "check=environment-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Focused tests prove absent and valid contracts produce stable read-only status with commands and isolation values preserved.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "environment-contract-tests",
+          "detail": "check=environment-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Focused tests prove malformed command and isolation fields return explicit validation errors.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and KEEL doctor pass after the environment contract change.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "next-milestone",
+      "statement": "KEEL reports an absent or valid environment contract deterministically without executing configured commands."
+    },
+    {
+      "id": "REQ-002",
+      "source": "next-milestone",
+      "statement": "KEEL rejects malformed environment contract fields rather than silently guessing runtime behavior."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  }
+}
