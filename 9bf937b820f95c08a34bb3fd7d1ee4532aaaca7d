@@ -1,0 +1,5 @@
+keel-change-id: capability-resolver-operationalization
+sealed-candidate: 9bf937b820f95c08a34bb3fd7d1ee4532aaaca7d
+landed-commit: 9bf937b820f95c08a34bb3fd7d1ee4532aaaca7d
+integration-relation: candidate-ancestor
+verified-content-digest: e81200a68eaee7c920cbe79c3a2933b50caca6f97e184188b125f4c2d90ffc53
