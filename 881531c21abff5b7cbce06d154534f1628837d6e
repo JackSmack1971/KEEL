@@ -1,0 +1,5 @@
+keel-change-id: p0-portable-verification-bootstrap-reconciliation
+sealed-candidate: 881531c21abff5b7cbce06d154534f1628837d6e
+landed-commit: 881531c21abff5b7cbce06d154534f1628837d6e
+integration-relation: candidate-ancestor
+verified-content-digest: 2e7b42121b81579407403ca834ada7b53a1885a8d0d59083d4964d1cb55a56a6
