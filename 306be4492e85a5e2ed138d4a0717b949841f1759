@@ -1,0 +1,5 @@
+keel-change-id: upgrade-planning-authority-reconciliation
+sealed-candidate: 306be4492e85a5e2ed138d4a0717b949841f1759
+landed-commit: 306be4492e85a5e2ed138d4a0717b949841f1759
+integration-relation: candidate-ancestor
+verified-content-digest: 474e069fef82d1f03e57fcaf4d55a779bc13aac7ce1fcc34d7a902111abea3db
