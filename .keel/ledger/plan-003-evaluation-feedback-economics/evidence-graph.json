@@ -1,0 +1,173 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "provider=unit_test check=keelbench-tests exit=0",
+          "passed": true,
+          "path": ".keel/bench/test_keelbench.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-EVAL-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-EVAL-001",
+      "statement": "Valid and invalid paired trial manifests are distinguished deterministically.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "lifecycle-telemetry-tests",
+          "detail": "provider=unit_test check=lifecycle-telemetry-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_telemetry.py",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "provider=unit_test check=keelbench-tests exit=0",
+          "passed": true,
+          "path": ".keel/bench/test_keelbench.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-EVAL-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-EVAL-002",
+      "statement": "Scoring and telemetry tests cover adversarial penalties and explicit UNAVAILABLE metrics.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "feedback-entropy-tests",
+          "detail": "provider=unit_test check=feedback-entropy-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_feedback_entropy.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-EVAL-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-EVAL-003",
+      "statement": "Feedback tests prove evaluation is deferred and promotion is separate and state-gated.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "provider=unit_test check=keelbench-tests exit=0",
+          "passed": true,
+          "path": ".keel/bench/test_keelbench.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-EVAL-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-EVAL-004",
+      "statement": "Lifecycle transition tests reject unsupported or non-reproducible BENCHMARKED transitions.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-EVAL-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-EVAL-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-EVAL-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-EVAL-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-EVAL-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-EVAL-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-EVAL-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-EVAL-004",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-EVAL-001",
+      "source": "plans/003-evaluation-feedback-and-economics.md",
+      "statement": "Paired trials require equivalent starts, complete baseline/KEEL replicates, and fixed rubric metadata."
+    },
+    {
+      "id": "REQ-EVAL-002",
+      "source": "plans/003-evaluation-feedback-and-economics.md",
+      "statement": "Benchmark scoring exposes outcome, adversarial violation, and execution-cost metrics without fabricating unavailable telemetry."
+    },
+    {
+      "id": "REQ-EVAL-003",
+      "source": "plans/003-evaluation-feedback-and-economics.md",
+      "statement": "Reviewed observations may produce deferred evaluation targets, while promotion requires an evaluated result and a separate authorized KEEL change."
+    },
+    {
+      "id": "REQ-EVAL-004",
+      "source": "plans/003-evaluation-feedback-and-economics.md",
+      "statement": "A requirement reaches BENCHMARKED only with reproducible improvement evidence and remains VERIFIED otherwise."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

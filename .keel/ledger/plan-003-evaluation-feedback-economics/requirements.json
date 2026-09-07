@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-EVAL-001","statement":"Paired trials require equivalent starts, complete baseline/KEEL replicates, and fixed rubric metadata.","source":"plans/003-evaluation-feedback-and-economics.md"},
+    {"id":"REQ-EVAL-002","statement":"Benchmark scoring exposes outcome, adversarial violation, and execution-cost metrics without fabricating unavailable telemetry.","source":"plans/003-evaluation-feedback-and-economics.md"},
+    {"id":"REQ-EVAL-003","statement":"Reviewed observations may produce deferred evaluation targets, while promotion requires an evaluated result and a separate authorized KEEL change.","source":"plans/003-evaluation-feedback-and-economics.md"},
+    {"id":"REQ-EVAL-004","statement":"A requirement reaches BENCHMARKED only with reproducible improvement evidence and remains VERIFIED otherwise.","source":"plans/003-evaluation-feedback-and-economics.md"}
+  ]
+}

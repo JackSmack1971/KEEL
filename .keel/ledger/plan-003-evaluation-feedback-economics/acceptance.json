@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-EVAL-001","requirement_id":"REQ-EVAL-001","statement":"Valid and invalid paired trial manifests are distinguished deterministically.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/bench/test_keelbench.py","check_id":"keelbench-tests"}]},
+    {"id":"AC-EVAL-002","requirement_id":"REQ-EVAL-002","statement":"Scoring and telemetry tests cover adversarial penalties and explicit UNAVAILABLE metrics.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/tests/test_telemetry.py","check_id":"lifecycle-telemetry-tests"},{"provider":"unit_test","path":".keel/bench/test_keelbench.py","check_id":"keelbench-tests"}]},
+    {"id":"AC-EVAL-003","requirement_id":"REQ-EVAL-003","statement":"Feedback tests prove evaluation is deferred and promotion is separate and state-gated.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/tests/test_feedback_entropy.py","check_id":"feedback-entropy-tests"}]},
+    {"id":"AC-EVAL-004","requirement_id":"REQ-EVAL-004","statement":"Lifecycle transition tests reject unsupported or non-reproducible BENCHMARKED transitions.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/bench/test_keelbench.py","check_id":"keelbench-tests"}]}
+  ]
+}

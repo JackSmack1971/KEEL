@@ -15,4 +15,9 @@ with tempfile.TemporaryDirectory() as directory:
     assert result["metrics"]["checks_failed"]["value"] == 1 and result["metrics"]["cost"]["status"] == "UNAVAILABLE"
     assert path.read_bytes() == before
     assert telemetry.summarize(root / "missing.json")["status"] == "UNAVAILABLE"
+    runtime = root / "runtime.json"
+    runtime.write_text(json.dumps({"metrics": {"tokens": 42, "retries": 2}}), encoding="utf-8")
+    measured = telemetry.summarize(path, runtime)
+    assert measured["metrics"]["tokens"]["value"] == 42 and measured["metrics"]["retries"]["value"] == 2
+    assert measured["metrics"]["cost"]["status"] == "UNAVAILABLE"
 print(json.dumps({"status": "PASS", "checks": ["aggregation", "unavailable-metrics", "missing-input", "read-only"]}))

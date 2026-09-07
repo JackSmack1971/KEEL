@@ -7,7 +7,7 @@ from pathlib import Path
 UNAVAILABLE = {"value": None, "status": "UNAVAILABLE", "source": "runtime instrumentation not present"}
 
 
-def summarize(verification_path: Path) -> dict:
+def summarize(verification_path: Path, runtime_path: Path | None = None) -> dict:
     if not verification_path.is_file():
         return {"schema_version": 1, "status": "UNAVAILABLE", "read_only": True, "source": str(verification_path), "metrics": {"checks_total": {"value": None, "status": "UNAVAILABLE", "source": "verification.json missing"}}}
     try:
@@ -30,7 +30,17 @@ def summarize(verification_path: Path) -> dict:
         "retries": UNAVAILABLE,
         "merge_conflicts": UNAVAILABLE,
     }
-    return {"schema_version": 1, "status": "PASS", "read_only": True, "source": str(verification_path), "verification_status": document.get("status"), "metrics": metrics}
+    sources = [str(verification_path)]
+    if runtime_path is not None and runtime_path.is_file():
+        try: runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError): runtime = {}
+        supplied = runtime.get("metrics") if isinstance(runtime, dict) else {}
+        if isinstance(supplied, dict):
+            for key in ("tokens", "cost", "human_interventions", "retries", "merge_conflicts"):
+                value = supplied.get(key)
+                if isinstance(value, (int, float)) and not isinstance(value, bool): metrics[key] = {"value": value, "status": "MEASURED", "source": f"{runtime_path.name}.metrics.{key}"}
+            sources.append(str(runtime_path))
+    return {"schema_version": 1, "status": "PASS", "read_only": True, "source": sources, "verification_status": document.get("status"), "metrics": metrics}
 
 
 def for_change(root: Path, change_id: str | None) -> dict:

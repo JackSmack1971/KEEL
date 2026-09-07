@@ -14,6 +14,10 @@ with tempfile.TemporaryDirectory() as directory:
     assert fe.status(root, observation)["eligible_for_evaluation"] is True
     promoted = copy.deepcopy(observation); promoted["state"] = "PROMOTED"
     assert fe.validate_observation(root, promoted)
+    evaluated = copy.deepcopy(observation); evaluated.update({"state": "EVALUATED", "evaluation_reference": "eval-1", "evaluation_result": {"status": "PASS", "reproducible_improvement": True}})
+    assert fe.validate_observation(root, evaluated) == []
+    not_improved = copy.deepcopy(evaluated); not_improved["evaluation_result"]["reproducible_improvement"] = False
+    assert fe.validate_observation(root, not_improved)
     (root / "README.md").write_text("[missing](missing.md)\n", encoding="utf-8")
     before = (root / "README.md").read_text(encoding="utf-8")
     first, second = fe.entropy_scan(root), fe.entropy_scan(root)

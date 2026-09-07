@@ -44,6 +44,18 @@ def main() -> int:
         scored = KEELBENCH.score_trials([trial], root)
         assert scored["status"] == "PASS" and scored["comparison"]["paired_trial_count"] == 1
         assert scored["empirical_claim"] == "UNVALIDATED"
+        assert scored["trials"][0]["conditions"]["baseline"]["mean_penalty"] == scored["trials"][0]["conditions"]["keel"]["mean_penalty"]
+        assert KEELBENCH.benchmark_transition("VERIFIED", "REQ-1", {"status": "PASS", "requirement_id": "REQ-1", "paired_trial_count": 1, "reproducible_improvement": True})["status"] == "REJECTED"
+        assert KEELBENCH.benchmark_transition("IMPLEMENTED", "REQ-1", {"status": "PASS", "requirement_id": "REQ-1", "paired_trial_count": 2, "reproducible_improvement": True})["status"] == "REJECTED"
+
+        for entry in json.loads((trial / "trial.json").read_text())["runs"]:
+            path = trial / entry["path"]
+            run = json.loads(path.read_text())
+            run["metrics"]["task_success"] = entry["condition"] == "keel"
+            if entry["condition"] == "baseline": run["critical_violation"] = True
+            path.write_text(json.dumps(run, indent=2, sort_keys=True) + "\n")
+        improved = KEELBENCH.score_trials([trial], root)
+        assert improved["reproducible_improvement"] is True
 
         broken = root / "trial-b"
         copy_trial(trial, broken)

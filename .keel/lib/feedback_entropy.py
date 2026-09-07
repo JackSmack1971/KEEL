@@ -54,6 +54,10 @@ def validate_observation(root: Path, observation: dict) -> list[str]:
                 errors.append(f"{key} is required for state {state}")
     if state in {"EVALUATED", "PROMOTED"} and (not isinstance(observation.get("evaluation_reference"), str) or not observation.get("evaluation_reference", "").strip()):
         errors.append(f"evaluation_reference is required for state {state}")
+    if state in {"EVALUATED", "PROMOTED"}:
+        result = observation.get("evaluation_result")
+        if not isinstance(result, dict) or result.get("status") != "PASS": errors.append(f"evaluation_result PASS is required for state {state}")
+        elif result.get("reproducible_improvement") is not True: errors.append("evaluation_result must record reproducible_improvement=true")
     if state == "PROMOTED" and (not isinstance(observation.get("promotion_change_id"), str) or not ID_RE.fullmatch(observation.get("promotion_change_id", ""))):
         errors.append("promotion_change_id is required for state PROMOTED")
     return sorted(set(errors))

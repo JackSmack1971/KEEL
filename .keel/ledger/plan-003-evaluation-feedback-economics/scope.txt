@@ -1,0 +1,9 @@
+.keel/bench/**
+.control-plane/bootstrap-manifest.json
+.keel/bin/keelbench.py
+.keel/lib/keel_core.py
+.keel/lib/feedback_entropy.py
+.keel/lib/telemetry.py
+.keel/config.json
+.keel/tests/test_feedback_entropy.py
+.keel/tests/test_telemetry.py

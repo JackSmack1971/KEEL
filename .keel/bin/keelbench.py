@@ -14,6 +14,7 @@ ROOT_DEFAULT = HERE.parents[2]
 CONDITIONS = ("baseline", "keel")
 REQUIRED_SCENARIOS = {"bugfix", "feature", "refactor", "dependency-upgrade", "migration", "security-remediation", "frontend-change", "performance-regression", "brownfield-investigation", "multi-service-change", "release", "failure-recovery"}
 REQUIRED_METRICS = {"task_success", "acceptance_coverage", "introduced_regressions", "scope_violations", "unauthorized_effects", "human_interventions", "tokens", "wall_time_sec", "tool_calls", "commands", "retries", "merge_conflicts", "ci_failures", "review_findings"}
+PENALTY_METRICS = ("introduced_regressions", "scope_violations", "unauthorized_effects", "merge_conflicts", "ci_failures", "review_findings")
 
 
 def load(path: Path):
@@ -190,7 +191,21 @@ def _metric_summary(rows: list[dict]) -> dict:
     successes = [1.0 if row["metrics"].get("task_success") is True else 0.0 for row in rows]
     result["task_success_rate"] = None if not successes else sum(successes) / len(successes)
     result["mean_acceptance_coverage"] = statistics.mean(row["metrics"]["acceptance_coverage"] for row in rows)
+    result["critical_violation_rate"] = sum(1 for row in rows if row.get("critical_violation")) / len(rows)
+    result["mean_penalty"] = statistics.mean(sum(float(row["metrics"][key]) for key in PENALTY_METRICS) for row in rows)
     return result
+
+
+def benchmark_transition(current_state: str, requirement_id: str, result: dict, minimum_trials: int = 2) -> dict:
+    """Validate maturity promotion without changing repository state."""
+    errors = []
+    if current_state != "VERIFIED": errors.append("BENCHMARKED transition requires current state VERIFIED")
+    if not isinstance(requirement_id, str) or not requirement_id.strip(): errors.append("requirement_id is required")
+    if not isinstance(result, dict) or result.get("status") != "PASS": errors.append("benchmark result must be PASS")
+    if isinstance(result, dict) and result.get("requirement_id") != requirement_id: errors.append("benchmark result requirement_id does not match")
+    if not isinstance(result, dict) or result.get("reproducible_improvement") is not True: errors.append("reproducible improvement evidence is required")
+    if not isinstance(result, dict) or not isinstance(result.get("paired_trial_count"), int) or result["paired_trial_count"] < minimum_trials: errors.append(f"at least {minimum_trials} paired trials are required")
+    return {"status": "PASS" if not errors else "REJECTED", "from": current_state, "to": "BENCHMARKED" if not errors else current_state, "requirement_id": requirement_id, "errors": errors}
 
 
 def score_trials(paths: list[Path], root: Path) -> dict:
@@ -215,6 +230,7 @@ def score_trials(paths: list[Path], root: Path) -> dict:
         keel_rate = statistics.mean(t["conditions"]["keel"]["task_success_rate"] for t in trial_results)
         error_reduction = None if baseline_rate >= 1 else ((1 - baseline_rate) - (1 - keel_rate)) / (1 - baseline_rate)
         output["comparison"] = {"paired_trial_count": len(trial_results), "baseline_task_success_rate": baseline_rate, "keel_task_success_rate": keel_rate, "absolute_task_success_uplift": keel_rate - baseline_rate, "relative_error_reduction": error_reduction, "paired_task_success_deltas": [pair["task_success_delta"] for t in trial_results for pair in t["pairs"]]}
+        output["reproducible_improvement"] = bool(keel_rate > baseline_rate and all(pair["task_success_delta"] >= 0 for t in trial_results for pair in t["pairs"]))
     return output
 
 
