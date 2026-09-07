@@ -1,0 +1,5 @@
+{"details": {"base_commit": "e93ee94a6728d996a908d4ae1bc39993eb4c6edc", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:52:20+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:52:42+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:52:43+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/lib/mission_graph.py", ".keel/tests/test_mission_work_graph.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/mission-dispatch-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:53:39+00:00"}
+{"details": {"content_digest": "ace72630dbf7b2a1608f0f3fd5729634019930939e388413d1be476a8f4478d8", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:53:40+00:00"}

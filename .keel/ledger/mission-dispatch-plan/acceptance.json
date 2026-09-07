@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Mission tests prove deterministic dispatch plans for runnable nodes and no dispatch for blocked nodes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "mission-work-graph-tests"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}

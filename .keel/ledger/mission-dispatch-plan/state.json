@@ -1,0 +1,10 @@
+{
+  "base_commit": "e93ee94a6728d996a908d4ae1bc39993eb4c6edc",
+  "change_id": "mission-dispatch-plan",
+  "created_at": "2026-09-07T12:52:20+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:53:40+00:00",
+  "verified_content_digest": "ace72630dbf7b2a1608f0f3fd5729634019930939e388413d1be476a8f4478d8"
+}

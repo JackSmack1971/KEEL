@@ -100,3 +100,15 @@ def plan(root: Path, mission: dict) -> dict:
     complete = len(landed) == len(work)
     state = "COMPLETE" if complete else "READY" if runnable else "IN_PROGRESS" if in_progress else "BLOCKED"
     return {"schema_version": 1, "status": state, "mission_id": mission["mission_id"], "statuses": statuses, "runnable": runnable, "blocked": blocked, "in_progress": in_progress, "landed": sorted(landed), "errors": []}
+
+
+def dispatch_plan(root: Path, mission: dict) -> dict:
+    result = plan(root, mission)
+    if result["status"] == "INVALID":
+        return result
+    contracts = []
+    for node in result["runnable"]:
+        item = mission["work"][node]
+        risk = item["risk"]
+        contracts.append({"change_id": node, "depends_on": sorted(item.get("depends_on", [])), "risk": risk, "isolation": "dedicated-worktree", "roles": ["executor", "verifier"] if risk == "trivial" else ["executor", "verifier", "reviewer"] if risk == "standard" else ["risk-reviewer", "executor", "verifier", "reviewer"], "verification_breadth": "focused" if risk == "trivial" else "standard" if risk == "standard" else "full", "execution": "DEFERRED", "authorization": "REQUIRED"})
+    return {**result, "dispatch": contracts, "dispatch_policy": "advisory-isolated-worktree-contracts-only"}

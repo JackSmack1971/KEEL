@@ -15,7 +15,12 @@ assert any("missing node" in error for error in mission_graph.validate(missing))
 result = mission_graph.plan(ROOT, BASE)
 assert result["status"] == "READY" and result["runnable"] == ["contract"]
 assert result["statuses"] == {"backend": "NOT_STARTED", "contract": "NOT_STARTED", "cutover": "NOT_STARTED", "frontend": "NOT_STARTED"}
+dispatch = mission_graph.dispatch_plan(ROOT, BASE)
+assert dispatch["dispatch"][0]["change_id"] == "contract"
+assert dispatch["dispatch"][0]["isolation"] == "dedicated-worktree"
+invalid = copy.deepcopy(BASE); invalid["work"]["contract"]["depends_on"] = ["cutover"]
+assert mission_graph.dispatch_plan(ROOT, invalid)["status"] == "INVALID"
 before = json.dumps(BASE, sort_keys=True)
 mission_graph.plan(ROOT, BASE)
 assert json.dumps(BASE, sort_keys=True) == before
-print(json.dumps({"status": "PASS", "checks": ["schema", "cycle", "frontier", "read-only"]}))
+print(json.dumps({"status": "PASS", "checks": ["schema", "cycle", "frontier", "dispatch-contract", "read-only"]}))

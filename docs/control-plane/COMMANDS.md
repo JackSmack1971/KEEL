@@ -35,9 +35,10 @@ Mission dependency inspection:
 python3 .keel/bin/keel.py mission validate <mission.json>
 python3 .keel/bin/keel.py mission frontier <mission.json>
 python3 .keel/bin/keel.py mission status <mission.json>
+python3 .keel/bin/keel.py mission dispatch <mission.json>
 ```
 
-These commands are read-only. A mission planner validates a dependency DAG and projects child KEEL ledger phases; it does not dispatch agents, create worktrees, or transition changes.
+These commands are read-only. A mission planner validates a dependency DAG, projects child KEEL ledger phases, and emits advisory dispatch contracts; it does not dispatch agents, create worktrees, or transition changes.
 
 Repository mapping:
 

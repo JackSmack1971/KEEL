@@ -25,7 +25,7 @@ def main() -> int:
     sub.add_parser("version")
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
-    p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status"]); p.add_argument("path", type=Path)
+    p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status", "dispatch"]); p.add_argument("path", type=Path)
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
     p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
@@ -67,6 +67,8 @@ def main() -> int:
             mission = mg.load(args.path.resolve())
             if args.action == "validate":
                 errors = mg.validate(mission); result = {"status": "PASS" if not errors else "FAIL", "errors": errors}
+            elif args.action == "dispatch":
+                result = mg.dispatch_plan(root, mission)
             else:
                 result = mg.plan(root, mission)
             print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1

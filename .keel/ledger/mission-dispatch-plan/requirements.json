@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Runnable mission nodes receive deterministic isolation, dependency, role, and verification dispatch contracts without execution.", "source": "upgrade-audit"}]
+}
