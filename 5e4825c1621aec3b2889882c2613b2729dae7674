@@ -1,0 +1,5 @@
+keel-change-id: repository-map
+sealed-candidate: 5e4825c1621aec3b2889882c2613b2729dae7674
+landed-commit: 5e4825c1621aec3b2889882c2613b2729dae7674
+integration-relation: candidate-ancestor
+verified-content-digest: b323c7a613c9c48f1fc0805123187b849cc090cb483b113eb417248335bb7761
