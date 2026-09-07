@@ -40,7 +40,7 @@
     ".keel/lib/capability_resolver.py": "310a930fc73f272480dc80e8a918d536d46fd6585009139481931b1e4d767735",
     ".keel/lib/context_compiler.py": "1fa3f51ff0d5da59e625003c5f1c8f300265e8aaa03a8d0c86b99d984133d8ce",
     ".keel/lib/evidence_graph.py": "d95e0222b1f6a4a470afc393b02e6805d511f6129619d639f04dd401ec409cf6",
-    ".keel/lib/keel_core.py": "21359e7b96f20559ce722cff1a1745ff552ce7b77a39dae0268704f8658549f8",
+    ".keel/lib/keel_core.py": "f2c33122dd28d2ab39f204405fc7db02e12cd961d5efe064eb759188f323cde5",
     ".keel/lint/agents_md_lint.py": "134af897d0c64f750ec57e65b525b62aa598a243e4231db682f9b1682e33d571",
     ".keel/README.md": "cf7f0bb335bfa4fbae470b302f418db797c90ee9b5088c8902b0e4ebf37e8566",
     ".keel/templates/acceptance.json": "4809975cacb733edebe81ad71ba190eb2a62466583312011e441545185d13ae3",

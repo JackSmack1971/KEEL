@@ -1,0 +1,22 @@
+{"details": {"base_commit": "306be4492e85a5e2ed138d4a0717b949841f1759", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T18:27:19+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T18:27:40+00:00"}
+{"details": {"errors": ["acceptance AC-001 unit_test evidence requires check_id", "acceptance AC-001 command evidence requires check_id", "acceptance AC-002 unit_test evidence requires check_id", "acceptance AC-003 unit_test evidence requires check_id", "acceptance AC-004 unit_test evidence requires check_id", "acceptance AC-004 command evidence requires check_id", "acceptance AC-005 command evidence requires check_id", "acceptance AC-005 unit_test evidence requires check_id", "scope touches control-plane files but control_plane_change=false"]}, "event": "PLAN", "result": "FAIL", "ts": "2026-09-07T18:28:18+00:00"}
+{"details": {"errors": ["high/control-plane/sensitive change requires substantive risk-review.md"]}, "event": "PLAN", "result": "FAIL", "ts": "2026-09-07T18:29:01+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T18:29:16+00:00"}
+{"details": {"changed_paths": [".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:33:01+00:00"}
+{"details": {"content_digest": "5722ec542c96b7c1f5643fb0922c53de0d7bf6e4ec9e93ea0e1150793997a442", "errors": ["verification command failed: strict-control-plane-validation exit=1"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T18:33:01+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-07T18:45:02+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T18:45:19+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:45:54+00:00"}
+{"details": {"content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9", "errors": ["git diff --check failed"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T18:45:54+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:47:52+00:00"}
+{"details": {"content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9", "errors": ["git diff --check failed"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T18:47:52+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:48:40+00:00"}
+{"details": {"content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T18:48:40+00:00"}
+{"event": "REOPEN", "result": "PASS", "ts": "2026-09-07T18:53:30+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:53:45+00:00"}
+{"details": {"content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9", "errors": ["git diff --check failed", "verification command failed: strict-control-plane-validation exit=1"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T18:53:45+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:54:36+00:00"}
+{"details": {"content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9", "errors": ["verification command failed: strict-control-plane-validation exit=1"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T18:54:36+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/keel_core.py", ".keel/tests/test_next_action.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T18:55:14+00:00"}
+{"details": {"content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T18:55:14+00:00"}

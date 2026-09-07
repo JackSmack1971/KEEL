@@ -863,6 +863,55 @@ def current_verified(root: Path, change_id: str) -> tuple[bool, str]:
     return True, "ok"
 
 
+def anchored_status(root: Path, change_id: str) -> tuple[str, str]:
+    """Classify sealed-candidate evidence without rewriting the preserved ledger phase."""
+    try:
+        candidate = candidate_status(root, change_id)
+    except Exception as exc:
+        return "invalid", f"sealed candidate evidence is invalid: {exc}"
+
+    landed_ref = f"refs/keel/ledger/{change_id}"
+    landed = run_git(root, ["show-ref", "--hash", "--verify", landed_ref], check=False)
+    if landed.returncode != 0:
+        return "pending", f"landed ledger ref is missing: {landed_ref}"
+    landed_sha = landed.stdout.strip()
+
+    note = run_git(root, ["notes", "--ref=keel", "show", landed_sha], check=False)
+    if note.returncode != 0:
+        return "invalid", "landed commit KEEL note is missing"
+    expected = {
+        "keel-change-id": change_id,
+        "sealed-candidate": candidate["commit"],
+        "landed-commit": landed_sha,
+        "verified-content-digest": candidate["content_digest"],
+    }
+    note_values = {}
+    for line in note.stdout.splitlines():
+        key, separator, value = line.partition(": ")
+        if separator:
+            note_values[key] = value
+    mismatches = [key for key, value in expected.items() if note_values.get(key) != value]
+    if mismatches:
+        return "invalid", "landed KEEL note provenance mismatch: " + ", ".join(mismatches)
+
+    audit_path = root / ".keel" / "audit" / "anchors.jsonl"
+    if not audit_path.is_file():
+        return "invalid", "anchor audit evidence is missing"
+    for line in audit_path.read_text(encoding="utf-8").splitlines():
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if (
+            row.get("change_id") == change_id
+            and row.get("candidate_commit") == candidate["commit"]
+            and row.get("landed_commit") == landed_sha
+            and row.get("content_digest") == candidate["content_digest"]
+        ):
+            return "anchored", "candidate and landed anchor evidence are consistent"
+    return "invalid", "matching anchor audit evidence is missing"
+
+
 def reopen(root: Path, change_id: str) -> None:
     st = state(root, change_id)
     if st.get("phase") not in {"VERIFY", "SHIP"}:
@@ -1019,18 +1068,28 @@ def next_action(root: Path, change_id: str | None = None) -> dict:
     elif phase in {"EXECUTE", "VERIFY"}:
         result["recommended_action"] = action("verify", f"keel verify --change {cid}", "run canonical checks and evaluate the acceptance graph")
     elif phase == "SHIP":
+        ref = candidate_ref(cid)
+        sealed = run_git(root, ["show-ref", "--verify", ref], check=False).returncode == 0
+        if sealed:
+            anchor_state, message = anchored_status(root, cid)
+            if anchor_state == "anchored":
+                result["status"] = "IDLE"
+                result["phase"] = phase
+                return result
+            if anchor_state == "invalid":
+                result["status"] = "BLOCKED"
+                result["blockers"].append({"id": "invalid-anchor-evidence", "detail": message})
+                return result
+
         verified, message = current_verified(root, cid)
         if not verified:
             result["status"] = "BLOCKED"
             result["blockers"].append({"id": "stale-verification", "detail": message})
             result["recommended_action"] = action("reopen", f"keel reopen --change {cid}", "implementation must be reopened before changing stale verified content")
+        elif not sealed:
+            result["recommended_action"] = action("seal", f"keel seal --change {cid} --commit HEAD", "the verified commit must become a sealed candidate")
         else:
-            ref = candidate_ref(cid)
-            sealed = run_git(root, ["show-ref", "--verify", ref], check=False).returncode == 0
-            if not sealed:
-                result["recommended_action"] = action("seal", f"keel seal --change {cid} --commit HEAD", "the verified commit must become a sealed candidate")
-            else:
-                result["recommended_action"] = action("integrate-anchor", f"keel anchor --change {cid} --commit <landed-sha>", "the sealed candidate must be integrated and independently anchored after landing")
+            result["recommended_action"] = action("integrate-anchor", f"keel anchor --change {cid} --commit <landed-sha>", "the sealed candidate must be integrated and independently anchored after landing")
     else:
         result["status"] = "BLOCKED"
         result["blockers"].append({"id": "unknown-phase", "detail": f"unsupported KEEL phase: {phase!r}"})

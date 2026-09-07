@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Anchored SHIP next action returns IDLE with no integrate-anchor recommendation.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/tests/test_next_action.py","check_id":"next-action-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Unanchored SHIP next action still recommends integrate-anchor.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/tests/test_next_action.py","check_id":"next-action-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Incomplete and provenance-mismatched anchor evidence remains actionable or blocked, never falsely complete.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/tests/test_next_action.py","check_id":"next-action-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-004","statement":"Implicit next remains IDLE while explicit anchored next is inactive.","required":true,"policy":"all","evidence":[{"provider":"unit_test","path":".keel/tests/test_next_action.py","check_id":"next-action-tests"}]},
+    {"id":"AC-005","requirement_id":"REQ-005","statement":"Lifecycle and anchor integrity checks pass and no ledger phase is rewritten.","required":true,"policy":"all","evidence":[{"provider":"command","command":"python3 .keel/bin/keel.py doctor","check_id":"control-plane-doctor"},{"provider":"unit_test","path":".keel/tests/test_next_action.py","check_id":"next-action-tests"}]}
+  ]
+}

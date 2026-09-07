@@ -1,0 +1,10 @@
+{
+  "base_commit": "306be4492e85a5e2ed138d4a0717b949841f1759",
+  "change_id": "next-action-anchored-inactive-reconciliation",
+  "created_at": "2026-09-07T18:27:19+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T18:55:14+00:00",
+  "verified_content_digest": "2e8eee4c7d0177d034d7a2bd00c6746ecc2fa349fcdd564065848899baec31c9"
+}

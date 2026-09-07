@@ -1,0 +1,3 @@
+.control-plane/bootstrap-manifest.json
+.keel/lib/keel_core.py
+.keel/tests/test_next_action.py

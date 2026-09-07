@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"A fully anchored landed SHIP change is inactive and must not recommend integrate-anchor.","source":"user-objective"},
+    {"id":"REQ-002","statement":"An active unanchored SHIP change continues to recommend integrate-anchor after sealing.","source":"user-objective"},
+    {"id":"REQ-003","statement":"Missing or inconsistent anchor evidence is not treated as completion.","source":"user-objective"},
+    {"id":"REQ-004","statement":"Explicit and implicit next-action results agree for the same anchored inactive lifecycle state.","source":"user-objective"},
+    {"id":"REQ-005","statement":"Preserved ledger SHIP phase remains unchanged and anchor integrity checks remain enforced.","source":"user-objective"}
+  ]
+}

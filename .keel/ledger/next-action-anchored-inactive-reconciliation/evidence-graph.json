@@ -1,0 +1,210 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "next-action-tests",
+          "detail": "provider=unit_test check=next-action-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_next_action.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Anchored SHIP next action returns IDLE with no integrate-anchor recommendation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "next-action-tests",
+          "detail": "provider=unit_test check=next-action-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_next_action.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Unanchored SHIP next action still recommends integrate-anchor.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "next-action-tests",
+          "detail": "provider=unit_test check=next-action-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_next_action.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Incomplete and provenance-mismatched anchor evidence remains actionable or blocked, never falsely complete.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "next-action-tests",
+          "detail": "provider=unit_test check=next-action-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_next_action.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-004",
+      "statement": "Implicit next remains IDLE while explicit anchored next is inactive.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "command": "python3 .keel/bin/keel.py doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "next-action-tests",
+          "detail": "provider=unit_test check=next-action-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_next_action.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-005",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-005",
+      "statement": "Lifecycle and anchor integrity checks pass and no ledger phase is rewritten.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-004",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-005"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-005",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "user-objective",
+      "statement": "A fully anchored landed SHIP change is inactive and must not recommend integrate-anchor."
+    },
+    {
+      "id": "REQ-002",
+      "source": "user-objective",
+      "statement": "An active unanchored SHIP change continues to recommend integrate-anchor after sealing."
+    },
+    {
+      "id": "REQ-003",
+      "source": "user-objective",
+      "statement": "Missing or inconsistent anchor evidence is not treated as completion."
+    },
+    {
+      "id": "REQ-004",
+      "source": "user-objective",
+      "statement": "Explicit and implicit next-action results agree for the same anchored inactive lifecycle state."
+    },
+    {
+      "id": "REQ-005",
+      "source": "user-objective",
+      "statement": "Preserved ledger SHIP phase remains unchanged and anchor integrity checks remain enforced."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 5,
+    "required": 5,
+    "requirements_covered": 5,
+    "requirements_passing": 5,
+    "requirements_total": 5
+  }
+}
