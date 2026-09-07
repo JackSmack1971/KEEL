@@ -1,0 +1,5 @@
+keel-change-id: lifecycle-compatibility
+sealed-candidate: 6331982040e81fcde122358cf127551d15220d85
+landed-commit: 6331982040e81fcde122358cf127551d15220d85
+integration-relation: candidate-ancestor
+verified-content-digest: 27308d4d3820e7ab5091b04bc3e1227847e59b70b68a5fe2b90317440821788a
