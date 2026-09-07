@@ -73,7 +73,14 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
             provider = edge.get("provider")
             if provider not in providers:
                 errors.append(f"acceptance {aid} unsupported evidence provider: {provider!r}")
-            if provider not in {"changed_path", "file_exists"} and not isinstance(edge.get("check_id"), str):
+            if provider == "schema":
+                if not isinstance(edge.get("path"), str):
+                    errors.append(f"acceptance {aid} schema evidence requires path")
+                if "schema_version" in edge and not isinstance(edge.get("schema_version"), int):
+                    errors.append(f"acceptance {aid} schema_version must be an integer")
+                if "required_keys" in edge and (not isinstance(edge.get("required_keys"), list) or any(not isinstance(x, str) for x in edge.get("required_keys", []))):
+                    errors.append(f"acceptance {aid} required_keys must be a list of strings")
+            elif provider not in {"changed_path", "file_exists"} and not isinstance(edge.get("check_id"), str):
                 errors.append(f"acceptance {aid} {provider} evidence requires check_id")
             if provider in {"changed_path", "file_exists"} and not isinstance(edge.get("path"), str):
                 errors.append(f"acceptance {aid} {provider} evidence requires path")
@@ -113,6 +120,17 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
                 target = (root / edge["path"]).resolve()
                 try: target.relative_to(root.resolve()); passed = target.exists(); detail = f"exists={passed}"
                 except ValueError: passed = False; detail = "path escapes repository"
+            elif provider == "schema":
+                target = (root / edge["path"]).resolve()
+                try:
+                    target.relative_to(root.resolve())
+                    document = read_json(target)
+                    version_ok = "schema_version" not in edge or document.get("schema_version") == edge["schema_version"]
+                    keys_ok = all(key in document for key in edge.get("required_keys", []))
+                    passed = target.is_file() and isinstance(document, dict) and version_ok and keys_ok
+                    detail = f"parseable={target.is_file()} version={version_ok} required_keys={keys_ok}"
+                except (ValueError, OSError, json.JSONDecodeError):
+                    passed = False; detail = "invalid, missing, or out-of-repository JSON"
             else:
                 check = check_map.get(edge["check_id"])
                 passed = bool(check and check.get("exit_code") == 0)

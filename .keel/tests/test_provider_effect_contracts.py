@@ -15,7 +15,7 @@ graph = load("graph_under_test", ROOT / ".keel/lib/evidence_graph.py")
 core = load("core_under_test", ROOT / ".keel/lib/keel_core.py")
 
 with tempfile.TemporaryDirectory() as directory:
-    root = Path(directory); (root / ".keel").mkdir(); (root / ".keel/contracts.json").write_text(json.dumps({"evidence_providers": ["browser"], "effect_capabilities": ["cloud.deploy"]}), encoding="utf-8")
+    root = Path(directory); (root / ".keel").mkdir(); (root / ".keel/contracts.json").write_text(json.dumps({"evidence_providers": ["browser", "schema"], "effect_capabilities": ["cloud.deploy"]}), encoding="utf-8")
     req = root / "requirements.json"; acc = root / "acceptance.json"
     req.write_text(json.dumps({"requirements": [{"id": "REQ-001", "statement": "Browser evidence is required."}]}), encoding="utf-8")
     acc.write_text(json.dumps({"criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Browser check passes.", "evidence": [{"provider": "browser", "check_id": "browser-check"}]}]}), encoding="utf-8")
@@ -23,9 +23,15 @@ with tempfile.TemporaryDirectory() as directory:
     assert graph.validate_contract(req, acc, contracts_path=contracts) == []
     assert graph.evaluate(root, req, acc, [{"id": "browser-check", "exit_code": 0}], [], contracts_path=contracts)["status"] == "PASS"
     assert graph.evaluate(root, req, acc, [{"id": "browser-check", "exit_code": 1}], [], contracts_path=contracts)["status"] == "FAIL"
+    schema_req = root / "schema-requirements.json"; schema_acc = root / "schema-acceptance.json"; (root / "artifact.json").write_text(json.dumps({"schema_version": 3, "name": "ok"}), encoding="utf-8")
+    schema_req.write_text(json.dumps({"requirements": [{"id": "REQ-002", "statement": "Artifact schema is valid."}]}), encoding="utf-8")
+    schema_acc.write_text(json.dumps({"criteria": [{"id": "AC-002", "requirement_id": "REQ-002", "statement": "Schema evidence passes.", "evidence": [{"provider": "schema", "path": "artifact.json", "schema_version": 3, "required_keys": ["name"]}]}]}), encoding="utf-8")
+    assert graph.evaluate(root, schema_req, schema_acc, [], [], contracts_path=contracts)["status"] == "PASS"
+    schema_acc.write_text(json.dumps({"criteria": [{"id": "AC-002", "requirement_id": "REQ-002", "statement": "Schema evidence fails.", "evidence": [{"provider": "schema", "path": "../artifact.json", "schema_version": 3}]}]}), encoding="utf-8")
+    assert graph.evaluate(root, schema_req, schema_acc, [], [], contracts_path=contracts)["status"] == "FAIL"
     effects = root / ".keel/ledger/change/effects.json"; effects.parent.mkdir(parents=True)
     effects.write_text(json.dumps({"external_effects": ["deploy"], "effect_capabilities": ["cloud.deploy"], "irreversible": False, "authorization_required": True}), encoding="utf-8")
     assert core.effects_valid(effects)[0] is True
     effects.write_text(json.dumps({"external_effects": ["deploy"], "effect_capabilities": ["unknown"], "irreversible": False, "authorization_required": True}), encoding="utf-8")
     assert core.effects_valid(effects)[0] is False
-print(json.dumps({"status": "PASS", "checks": ["provider-binding", "provider-failure", "effect-vocabulary", "authorization-preserved"]}))
+print(json.dumps({"status": "PASS", "checks": ["provider-binding", "provider-failure", "schema-adapter", "effect-vocabulary", "authorization-preserved"]}))

@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Provider tests prove native schema evidence pass, fail, malformed, and path-boundary behavior.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "provider-effect-contract-tests"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}

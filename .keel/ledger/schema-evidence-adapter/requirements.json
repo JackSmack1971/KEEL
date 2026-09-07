@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Schema evidence can mechanically evaluate repository-contained JSON against declared version and required-key constraints.", "source": "upgrade-audit"}]
+}

@@ -1,0 +1,7 @@
+{"details": {"base_commit": "1186a7577c480827ca90de91bfd3c95cddf71f5d", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:55:22+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:55:44+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:55:44+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/evidence_graph.py", ".keel/tests/test_provider_effect_contracts.py", "docs/control-plane/ACCEPTANCE_EVIDENCE.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/schema-evidence-adapter.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:56:43+00:00"}
+{"details": {"content_digest": "a091fbaabcbce8d943955f1b9d7e6ae24130755851defa5a91893584ed4e984e", "errors": ["verification command failed: strict-control-plane-validation exit=1", "acceptance criterion failed: AC-002"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T12:56:43+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/evidence_graph.py", ".keel/tests/test_provider_effect_contracts.py", "docs/control-plane/ACCEPTANCE_EVIDENCE.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/schema-evidence-adapter.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:57:08+00:00"}
+{"details": {"content_digest": "cb7a79dd59571f5f08aa471e0e44772056c21dfa1defa0f82dc25a6efaa6a350", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:57:08+00:00"}
