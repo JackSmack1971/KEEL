@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Source traceability and goal state accurately reflect every anchored local implementation slice and remaining boundary.", "source": "upgrade-audit"}]
+}

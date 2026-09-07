@@ -24,4 +24,4 @@ Do not mark the objective complete while an actionable local gap lacks implement
 
 ## Next action after the current slices
 
-Execute the local ownership-map and feedback-evaluation slices from `upgrade-remaining-plan.md`; do not start external or empirical work until its recorded prerequisite exists.
+Continue with the remaining local evidence/protocol/economics slices only where repository-local behavior can be proven; do not start external or empirical work until its recorded prerequisite exists.

@@ -1,0 +1,5 @@
+{"details": {"base_commit": "7bcafc4411619fa3693f8573b0dab496a3dc7540", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:59:05+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:59:41+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:59:41+00:00"}
+{"details": {"changed_paths": ["docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/final-audit-trace-reconciliation.md", "docs/exec-plans/active/keel-upgrade-goal.md", "docs/exec-plans/active/upgrade-remaining-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:59:48+00:00"}
+{"details": {"content_digest": "774ebd6a6ab0e0dbe71ab58e92977d02bbbadcba9f7903242167df47ee18ef61", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:59:48+00:00"}

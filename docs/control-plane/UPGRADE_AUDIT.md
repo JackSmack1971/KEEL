@@ -33,7 +33,7 @@ The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections
 | 5 | Requirements and acceptance traceability | Partial: machine-readable links exist; richer typed specification model remains |
 | 6 | Evidence graph | Implemented |
 | 7 | Capability resolver | Implemented local resolver; runtime discovery remains advisory |
-| 8 | Repository mapping / knowledge graph | Partial: classifications and Python imports; ownership/architecture facts remain |
+| 8 | Repository mapping / knowledge graph | Partial: classifications, Python imports, and CODEOWNERS source discovery; ownership policy/architecture relations remain |
 | 9 | Context compiler | Implemented |
 | 10 | Reusable engineering protocols | Partial: routed skill; behavioral evaluation/deeper references remain |
 | 11 | Scope doctrine / avoid giant agent organization | Contextual design constraint |
@@ -48,7 +48,7 @@ The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections
 | 21 | KEEL Evals | Harness implemented; representative empirical trials remain |
 | 22-23 | Learning and entropy service | Partial: validated observations, queue, and deterministic scan; promotion/scheduling/target execution remain |
 | 24 | Developer experience | Partial: inspection and eligibility projections; authorized `run` remains |
-| 25 | Installation/version/migration | Partial: inventory and compatibility checks; installer/migrations/rollback remain |
+| 25 | Installation/version/migration | Partial: inventory, compatibility checks, and tested config migration/rollback primitives; installer/live orchestration remain |
 | 26-27 | Competitor synthesis and target architecture | Context plus constraints represented by the mapped rows; not independent executable features |
 | 28 | Recommended roadmap | Durable workstream plan in `docs/exec-plans/active/upgrade-remaining-plan.md` |
 
