@@ -1,0 +1,5 @@
+keel-change-id: mission-status-reconciliation
+sealed-candidate: 1186a7577c480827ca90de91bfd3c95cddf71f5d
+landed-commit: 1186a7577c480827ca90de91bfd3c95cddf71f5d
+integration-relation: candidate-ancestor
+verified-content-digest: 8ece46fa7e629f988c1e5690564ef0ff8e7042516d9749b0dd1d2e24c88c51de
