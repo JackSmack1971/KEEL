@@ -1,0 +1,5 @@
+keel-change-id: worktree-lifecycle
+sealed-candidate: c17f963c153cb29f791e0f0447144b20a696ecec
+landed-commit: c17f963c153cb29f791e0f0447144b20a696ecec
+integration-relation: candidate-ancestor
+verified-content-digest: c544134e20a53ef3289e06d211876f923d4bf204cb46d1de83ea5a1f59d25872
