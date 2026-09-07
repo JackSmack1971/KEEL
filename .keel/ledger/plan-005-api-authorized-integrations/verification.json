@@ -31,8 +31,8 @@
         "--"
       ],
       "duration_ms": 0,
-      "excerpt": "",
-      "exit_code": 0,
+      "excerpt": "lan-005-api-authorized-integrations\", \"operation_id\": \"operation:46ba2930b78b2b7da005fbe8\", \"run_id\": \"run:b9881d7b542e5af53732e79e\"}, \"details\": {\"content_digest\": \"f232f5fb93da322df9d217424dfe9fca24e5ae1e11f7f4ba59c6872853f01545\", \"errors\": [\"git diff --check failed\"]}, \"event\": \"VERIFY\", \"result\": \"FAIL\", \"ts\": \"2026-09-07T16:18:39+00:00\"}\n.keel/ledger/plan-005-api-authorized-integrations/gate-log.jsonl:13: trailing whitespace.\n+{\"correlation\": {\"change_id\": \"plan-005-api-authorized-integrations\", \"operation_id\": \"operation:0704cbbfe40e03deeac4bb59\", \"run_id\": \"run:b9881d7b542e5af53732e79e\"}, \"details\": {\"changed_paths\": [\".control-plane/bootstrap-manifest.json\", \".keel/bin/keel.py\", \".keel/config.json\", \".keel/lib/api_contract.py\", \".keel/lib/evidence_graph.py\", \".keel/lib/keel_core.py\", \".keel/tests/test_api_contract.py\", \"ARCHITECTURE.md\", \"docs/control-plane/ARCHITECTURE_ENFORCEMENT.md\", \"docs/control-plane/CAPABILITY_REGISTRY.md\", \"docs/exec-plans/active/plan-005-api-authorized-integrations.md\"], \"scope_errors\": []}, \"event\": \"EXECUTE\", \"result\": \"PASS\", \"ts\": \"2026-09-07T16:18:59+00:00\"}\n.keel/ledger/plan-005-api-authorized-integrations/gate-log.jsonl:14: trailing whitespace.\n+{\"correlation\": {\"change_id\": \"plan-005-api-authorized-integrations\", \"operation_id\": \"operation:454ed762b0a75b451230e3de\", \"run_id\": \"run:b9881d7b542e5af53732e79e\"}, \"details\": {\"content_digest\": \"e8410231246a018c3e15c763a991e441864d6f21fb43d1c2a5c9087774fb8563\", \"errors\": []}, \"event\": \"VERIFY\", \"result\": \"PASS\", \"ts\": \"2026-09-07T16:18:59+00:00\"}\n.keel/ledger/plan-005-api-authorized-integrations/gate-log.jsonl:15: trailing whitespace.\n+{\"correlation\": {\"change_id\": \"plan-005-api-authorized-integrations\", \"operation_id\": \"operation:e506e3e834c6a43374757f09\", \"run_id\": \"run:b9881d7b542e5af53732e79e\"}, \"event\": \"REOPEN\", \"result\": \"PASS\", \"ts\": \"2026-09-07T16:19:22+00:00\"}\n.keel/ledger/plan-005-api-authorized-integrations/proposal.md:1: trailing whitespace.\n+# Proposal\n.keel/ledger/plan-005-api-authorized-integrations/proposal.md:2: trailing whitespace.\n+\n.keel/ledger/plan-005-api-authorized-integrations/risk-review.md:1: trailing whitespace.\n+# Risk review\n.keel/ledger/plan-005-api-authorized-integrations/risk-review.md:2: trailing whitespace.\n+\n.keel/ledger/plan-005-api-authorized-integrations/risk.json:1: trailing whitespace.\n+{\n.keel/ledger/plan-005-api-authorized-integrations/risk.json:2: trailing whitespace.\n+  \"risk_level\": \"standard\",\n.keel/ledger/plan-005-api-authorized-integrations/risk.json:5: trailing whitespace.\n+  \"migration_or_release_sensitive\": false,\n.keel/ledger/plan-005-api-authorized-integrations/risk.json:6: trailing whitespace.\n+  \"high_blast_radius\": false,\n.keel/ledger/plan-005-api-authorized-integrations/risk.json:8: trailing whitespace.\n+}\n.keel/ledger/plan-005-api-authorized-integrations/scope.txt:1: trailing whitespace.\n+# One repo-relative file/glob per line. No absolute paths or '..'.\n.keel/ledger/plan-005-api-authorized-integrations/state.json:1: trailing whitespace.\n+{\n.keel/ledger/plan-005-api-authorized-integrations/state.json:2: trailing whitespace.\n+  \"base_commit\": \"4532bb43780cb45a025574403a8b4ae4ac7304ab\",\n.keel/ledger/plan-005-api-authorized-integrations/state.json:3: trailing whitespace.\n+  \"change_id\": \"plan-005-api-authorized-integrations\",\n.keel/ledger/plan-005-api-authorized-integrations/state.json:4: trailing whitespace.\n+  \"created_at\": \"2026-09-07T16:10:07+00:00\",\n.keel/ledger/plan-005-api-authorized-integrations/state.json:5: trailing whitespace.\n+  \"mode\": \"standard\",\n.keel/ledger/plan-005-api-authorized-integrations/state.json:6: trailing whitespace.\n+  \"phase\": \"EXECUTE\",\n.keel/ledger/plan-005-api-authorized-integrations/state.json:7: trailing whitespace.\n+  \"schema_version\": 1,\n.keel/ledger/plan-005-api-authorized-integrations/state.json:8: trailing whitespace.\n+  \"updated_at\": \"2026-09-07T16:19:22+00:00\"\n.keel/ledger/plan-005-api-authorized-integrations/state.json:9: trailing whitespace.\n+}\n",
+      "exit_code": 2,
       "id": "git-diff-check"
     },
     {
@@ -42,7 +42,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 257,
+      "duration_ms": 293,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -55,7 +55,7 @@
         ".keel/bench/test_keelbench.py"
       ],
       "cwd": ".",
-      "duration_ms": 186,
+      "duration_ms": 221,
       "excerpt": "KEELBench tests PASS",
       "exit_code": 0,
       "id": "keelbench-tests",
@@ -70,7 +70,7 @@
         "validate"
       ],
       "cwd": ".",
-      "duration_ms": 156,
+      "duration_ms": 151,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "keelbench-validate",
@@ -86,7 +86,7 @@
         "--require-keel-runtime"
       ],
       "cwd": ".",
-      "duration_ms": 908,
+      "duration_ms": 881,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
       "exit_code": 0,
       "id": "strict-control-plane-validation",
@@ -99,7 +99,7 @@
         ".keel/tests/test_capability_resolver.py"
       ],
       "cwd": ".",
-      "duration_ms": 150,
+      "duration_ms": 148,
       "excerpt": "Capability resolver tests PASS",
       "exit_code": 0,
       "id": "capability-resolver-tests",
@@ -112,7 +112,7 @@
         ".keel/tests/test_context_compiler.py"
       ],
       "cwd": ".",
-      "duration_ms": 163,
+      "duration_ms": 174,
       "excerpt": "Context compiler tests PASS",
       "exit_code": 0,
       "id": "context-compiler-tests",
@@ -125,7 +125,7 @@
         ".keel/tests/test_evidence_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 145,
+      "duration_ms": 136,
       "excerpt": "Evidence graph tests PASS",
       "exit_code": 0,
       "id": "evidence-graph-tests",
@@ -138,7 +138,7 @@
         ".keel/tests/test_next_action.py"
       ],
       "cwd": ".",
-      "duration_ms": 180,
+      "duration_ms": 186,
       "excerpt": "Next-action tests PASS",
       "exit_code": 0,
       "id": "next-action-tests",
@@ -151,7 +151,7 @@
         ".keel/tests/test_worktree_lifecycle.py"
       ],
       "cwd": ".",
-      "duration_ms": 773,
+      "duration_ms": 802,
       "excerpt": "Worktree lifecycle tests PASS",
       "exit_code": 0,
       "id": "worktree-lifecycle-tests",
@@ -164,7 +164,7 @@
         ".keel/tests/test_environment_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 165,
+      "duration_ms": 169,
       "excerpt": "Environment contract tests PASS",
       "exit_code": 0,
       "id": "environment-contract-tests",
@@ -177,7 +177,7 @@
         ".keel/tests/test_upgrade_kernel.py"
       ],
       "cwd": ".",
-      "duration_ms": 534,
+      "duration_ms": 529,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
       "exit_code": 0,
       "id": "upgrade-kernel-tests",
@@ -190,7 +190,7 @@
         ".keel/tests/test_mission_work_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 157,
+      "duration_ms": 144,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"dispatch-contract\", \"read-only\"]}",
       "exit_code": 0,
       "id": "mission-work-graph-tests",
@@ -203,7 +203,7 @@
         ".keel/tests/test_repository_map.py"
       ],
       "cwd": ".",
-      "duration_ms": 613,
+      "duration_ms": 635,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"semantic-imports\", \"ownership-source\", \"ignored-directories\", \"derived-only\"]}",
       "exit_code": 0,
       "id": "repository-map-tests",
@@ -216,7 +216,7 @@
         ".keel/tests/test_topology_routing.py"
       ],
       "cwd": ".",
-      "duration_ms": 85,
+      "duration_ms": 121,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"complexity\", \"capability-only\", \"deterministic\", \"read-only\"]}",
       "exit_code": 0,
       "id": "topology-routing-tests",
@@ -229,7 +229,7 @@
         ".keel/tests/test_provider_effect_contracts.py"
       ],
       "cwd": ".",
-      "duration_ms": 235,
+      "duration_ms": 205,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provider-binding\", \"provider-failure\", \"schema-adapter\", \"effect-vocabulary\", \"authorization-preserved\"]}",
       "exit_code": 0,
       "id": "provider-effect-contract-tests",
@@ -242,7 +242,7 @@
         ".agents/skills/engineering-protocols"
       ],
       "cwd": ".",
-      "duration_ms": 118,
+      "duration_ms": 85,
       "excerpt": "Skill is valid!",
       "exit_code": 0,
       "id": "engineering-protocols-skill-check",
@@ -255,7 +255,7 @@
         ".keel/tests/test_feedback_entropy.py"
       ],
       "cwd": ".",
-      "duration_ms": 137,
+      "duration_ms": 112,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provenance\", \"review-gate\", \"goal-record\", \"deterministic-scan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "feedback-entropy-tests",
@@ -268,7 +268,7 @@
         ".keel/tests/test_lifecycle_compatibility.py"
       ],
       "cwd": ".",
-      "duration_ms": 134,
+      "duration_ms": 124,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "lifecycle-compatibility-tests",
@@ -281,7 +281,7 @@
         ".keel/tests/test_developer_ux.py"
       ],
       "cwd": ".",
-      "duration_ms": 2140,
+      "duration_ms": 2024,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"init\", \"review\", \"eligibility-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "developer-ux-tests",
@@ -294,7 +294,7 @@
         ".keel/tests/test_effect_inference.py"
       ],
       "cwd": ".",
-      "duration_ms": 217,
+      "duration_ms": 90,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"mapping\", \"unknown-neutrality\", \"advisory-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "effect-inference-tests",
@@ -307,7 +307,7 @@
         ".keel/tests/test_schema_migrations.py"
       ],
       "cwd": ".",
-      "duration_ms": 210,
+      "duration_ms": 117,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"preflight\", \"atomic-apply\", \"backup\", \"rollback\", \"unsupported-version\"]}",
       "exit_code": 0,
       "id": "schema-migration-tests",
@@ -320,7 +320,7 @@
         ".keel/tests/test_telemetry.py"
       ],
       "cwd": ".",
-      "duration_ms": 124,
+      "duration_ms": 93,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"aggregation\", \"unavailable-metrics\", \"missing-input\", \"read-only\"]}",
       "exit_code": 0,
       "id": "lifecycle-telemetry-tests",
@@ -333,7 +333,7 @@
         ".keel/tests/test_api_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 204,
+      "duration_ms": 162,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"versioned-envelope\", \"correlation-validation\", \"provider-disabled\", \"redaction\", \"event-correlation\"]}",
       "exit_code": 0,
       "id": "api-contract-tests",
@@ -341,8 +341,10 @@
     }
   ],
   "content_digest": "e8410231246a018c3e15c763a991e441864d6f21fb43d1c2a5c9087774fb8563",
-  "errors": [],
+  "errors": [
+    "git diff --check failed"
+  ],
   "schema_version": 2,
-  "status": "PASS",
-  "verified_at": "2026-09-07T16:18:59+00:00"
+  "status": "FAIL",
+  "verified_at": "2026-09-07T16:19:30+00:00"
 }
