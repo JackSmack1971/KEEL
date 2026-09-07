@@ -15,12 +15,12 @@ Audit `docs/KEEL_UPGRADES.md` against executable repository evidence, implement 
 
 - Implemented: capability resolution, context compilation, evidence traceability, KEELBench harness, `next`, worktree/environment primitives, reconciliation, compatibility inspection.
 - Partial and implemented slices: repository map, mission DAG/frontier, topology routing, provider/effect contracts, engineering protocols, feedback/entropy inspection, lifecycle compatibility.
-- Remaining: actual runtime provider adapters, command/tool effect inference, mission dispatch/retry/integration, semantic import/ownership mapping, promotion/scheduling, real installer/schema migrations/rollback, `run`, external tracker/PR adapters, and empirical paired KEELBench trials.
+- Remaining: repository ownership facts, feedback promotion/evaluation, real installer/schema migrations/rollback, deeper protocol evaluation, mission dispatch/retry/integration, runtime provider adapters, `run`, external tracker/PR adapters, external Codex checks, and empirical paired KEELBench trials. Advisory command effect inference is implemented; runtime tool/API inference and authorization enforcement remain.
 
 ## Stopping rule
 
 Do not mark the objective complete while an actionable local gap lacks implementation and verification. Mark prerequisite-dependent external capabilities as deferred only when the missing runtime/provider/target is recorded as the blocker and no safe repository-local implementation can prove the behavior.
 
-## Next action after this UX slice
+## Next action after the current slices
 
-Reconcile the audit and determine whether remaining items are safely implementable locally or require explicit external prerequisites; run real KEELBench paired trials only when representative start states and a fixed rubric exist.
+Execute the local ownership-map and feedback-evaluation slices from `upgrade-remaining-plan.md`; do not start external or empirical work until its recorded prerequisite exists.

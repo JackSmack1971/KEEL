@@ -1,0 +1,7 @@
+{"details": {"base_commit": "02f1b25f5ac9026bc0b6d52a639f48418e4bddb6", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:36:28+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:37:11+00:00"}
+{"details": {"errors": ["acceptance.json invalid: Expecting ',' delimiter: line 7 column 3 (char 827)"]}, "event": "PLAN", "result": "FAIL", "ts": "2026-09-07T12:37:11+00:00"}
+{"details": {"errors": ["acceptance AC-001 changed_path evidence requires path", "acceptance AC-002 changed_path evidence requires path"]}, "event": "PLAN", "result": "FAIL", "ts": "2026-09-07T12:37:28+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:37:43+00:00"}
+{"details": {"changed_paths": ["docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/keel-upgrade-goal.md", "docs/exec-plans/active/upgrade-remaining-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:37:55+00:00"}
+{"details": {"content_digest": "9c8170af68b2f288554d2802f0eee63cd7c18e78137d7a8abe159ff4ab8f09d7", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:37:55+00:00"}

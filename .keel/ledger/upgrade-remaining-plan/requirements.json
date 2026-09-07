@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id": "REQ-001", "statement": "Every unresolved upgrade row has an explicit workstream, boundary, prerequisite, and acceptance evidence.", "source": "upgrade-audit"},
+    {"id": "REQ-002", "statement": "External or empirical work is deferred only with its missing prerequisite recorded.", "source": "upgrade-audit"}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id": "AC-001", "requirement_id": "REQ-001", "statement": "The remaining-upgrade plan covers all non-implemented audit areas and names observable acceptance evidence.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "git-diff-check"}]},
+    {"id": "AC-002", "requirement_id": "REQ-002", "statement": "The audit and goal record distinguish local next slices from external or empirical prerequisites.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "git-diff-check"}]},
+    {"id": "AC-003", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "git-diff-check",
+          "detail": "check=git-diff-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The remaining-upgrade plan covers all non-implemented audit areas and names observable acceptance evidence.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "git-diff-check",
+          "detail": "check=git-diff-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "The audit and goal record distinguish local next slices from external or empirical prerequisites.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Strict control-plane validation passes.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Every unresolved upgrade row has an explicit workstream, boundary, prerequisite, and acceptance evidence."
+    },
+    {
+      "id": "REQ-002",
+      "source": "upgrade-audit",
+      "statement": "External or empirical work is deferred only with its missing prerequisite recorded."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  }
+}
