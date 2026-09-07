@@ -1,0 +1,5 @@
+keel-change-id: keelbench-operationalization
+sealed-candidate: a486856d39e06852bf32b7a56c03e8a7b93dae12
+landed-commit: a486856d39e06852bf32b7a56c03e8a7b93dae12
+integration-relation: candidate-ancestor
+verified-content-digest: 8e391d79fc530d428f1c2da758f7bd7298429e5a966d9c20eaabd5d5f32fe28e
