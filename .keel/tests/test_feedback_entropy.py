@@ -33,5 +33,6 @@ with tempfile.TemporaryDirectory() as directory:
     (observations / "invalid.json").write_text("{bad", encoding="utf-8")
     queued = fe.queue(root, observations)
     assert queued["evaluation_candidates"] == ["reviewed-one"] and queued["promotion_candidates"] == []
+    assert queued["target_plans"][0]["kind"] == "evaluation" and queued["target_plans"][0]["execution"] == "DEFERRED"
     assert len(queued["blocked"]) == 1 and queued["read_only"] is True
 print(json.dumps({"status": "PASS", "checks": ["provenance", "review-gate", "goal-record", "deterministic-scan", "read-only"]}))

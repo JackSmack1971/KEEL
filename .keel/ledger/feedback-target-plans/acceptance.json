@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Feedback tests prove evaluation and promotion target plans and read-only output.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "feedback-entropy-tests"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}

@@ -1,0 +1,10 @@
+{
+  "base_commit": "ae1b973f5292f2e018bedbc9568ad238f2d82cc8",
+  "change_id": "feedback-target-plans",
+  "created_at": "2026-09-07T12:50:32+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:51:37+00:00",
+  "verified_content_digest": "f84a1313fa0fd774661396cd1dcf9ac6c25f64d4cc658ac0cb6e91c12854466e"
+}

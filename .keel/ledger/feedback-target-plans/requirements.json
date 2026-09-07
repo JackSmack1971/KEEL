@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Valid feedback candidates receive deterministic target plans with evidence inputs and explicit deferred execution boundaries.", "source": "upgrade-audit"}]
+}

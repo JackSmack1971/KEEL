@@ -1,0 +1,5 @@
+{"details": {"base_commit": "ae1b973f5292f2e018bedbc9568ad238f2d82cc8", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:50:32+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:50:54+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:50:55+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/feedback_entropy.py", ".keel/tests/test_feedback_entropy.py", "docs/control-plane/FEEDBACK_EVALS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/feedback-target-plans.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:51:37+00:00"}
+{"details": {"content_digest": "f84a1313fa0fd774661396cd1dcf9ac6c25f64d4cc658ac0cb6e91c12854466e", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:51:37+00:00"}

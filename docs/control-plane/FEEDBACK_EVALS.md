@@ -26,7 +26,7 @@ python3 .keel/bin/keel.py entropy scan
 
 These commands are read-only. An observation must retain provenance, repository-contained evidence, review state, and a failure class. Promotion to a permanent invariant requires a separate evaluated and authorized KEEL change; inspection never promotes or rewrites policy.
 
-`feedback queue` deterministically reports evaluation and promotion candidates and blocked observations; it does not schedule, evaluate, or promote them.
+`feedback queue` deterministically reports evaluation and promotion candidates, target plans, and blocked observations; it does not schedule, evaluate, or promote them. Target plans retain evidence inputs and explicitly require deferred execution or an authorized KEEL change.
 
 Entropy scanning treats an explicitly headed `# Long-horizon goal:` record as a durable goal plan rather than an orphaned execution plan. Ordinary active plans still require a matching KEEL ledger.
 

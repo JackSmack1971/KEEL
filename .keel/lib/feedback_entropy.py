@@ -65,6 +65,14 @@ def status(root: Path, observation: dict) -> dict:
     return {"schema_version": 1, "status": "INVALID" if errors else "PASS", "observation_id": observation.get("observation_id") if isinstance(observation, dict) else None, "state": state, "eligible_for_evaluation": not errors and state == "REVIEWED", "eligible_for_promotion": not errors and state == "EVALUATED", "errors": errors}
 
 
+def _target_plan(observation: dict, result: dict) -> dict | None:
+    if result["eligible_for_evaluation"]:
+        return {"kind": "evaluation", "target_id": f"eval-{observation['observation_id']}", "observation_id": observation["observation_id"], "evidence": list(observation["evidence"]), "required_outputs": ["evaluation_reference", "evaluation_result"], "execution": "DEFERRED", "promotion": "NOT_AUTHORIZED"}
+    if result["eligible_for_promotion"]:
+        return {"kind": "promotion", "target_id": f"promote-{observation['observation_id']}", "observation_id": observation["observation_id"], "evidence": list(observation["evidence"]), "required_outputs": ["promotion_change_id", "authorized_keel_change"], "execution": "DEFERRED", "promotion": "REQUIRES_AUTHORIZED_CHANGE"}
+    return None
+
+
 def queue(root: Path, directory: Path) -> dict:
     rows = []
     if directory.is_dir():
@@ -77,9 +85,12 @@ def queue(root: Path, directory: Path) -> dict:
             result = status(root, observation)
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             result = {"status": "INVALID", "observation_id": None, "state": None, "eligible_for_evaluation": False, "eligible_for_promotion": False, "errors": [f"load failed: {type(exc).__name__}"]}
-        rows.append({"path": path.relative_to(root).as_posix() if path.is_relative_to(root) else str(path), **result})
+        row = {"path": path.relative_to(root).as_posix() if path.is_relative_to(root) else str(path), **result}
+        if result["status"] == "PASS":
+            row["target_plan"] = _target_plan(observation, result)
+        rows.append(row)
     rows.sort(key=lambda row: (row["observation_id"] or "", row["path"]))
-    return {"schema_version": 1, "status": "PASS", "read_only": True, "directory": str(directory.relative_to(root).as_posix()) if directory.is_relative_to(root) else str(directory), "evaluation_candidates": [row["observation_id"] for row in rows if row["eligible_for_evaluation"]], "promotion_candidates": [row["observation_id"] for row in rows if row["eligible_for_promotion"]], "blocked": [row["path"] for row in rows if row["status"] == "INVALID"], "observations": rows}
+    return {"schema_version": 1, "status": "PASS", "read_only": True, "directory": str(directory.relative_to(root).as_posix()) if directory.is_relative_to(root) else str(directory), "evaluation_candidates": [row["observation_id"] for row in rows if row["eligible_for_evaluation"]], "promotion_candidates": [row["observation_id"] for row in rows if row["eligible_for_promotion"]], "target_plans": [row["target_plan"] for row in rows if row.get("target_plan")], "blocked": [row["path"] for row in rows if row["status"] == "INVALID"], "observations": rows}
 
 
 def entropy_scan(root: Path) -> dict:
