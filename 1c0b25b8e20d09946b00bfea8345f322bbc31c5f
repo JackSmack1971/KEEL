@@ -1,0 +1,5 @@
+keel-change-id: environment-contracts
+sealed-candidate: 1c0b25b8e20d09946b00bfea8345f322bbc31c5f
+landed-commit: 1c0b25b8e20d09946b00bfea8345f322bbc31c5f
+integration-relation: candidate-ancestor
+verified-content-digest: 972cc08737ceb5721d2a94228acad18862af76e4fbe451018b4122f633bf3372
