@@ -1,0 +1,5 @@
+keel-change-id: context-compiler-operationalization
+sealed-candidate: 60e7fa144ab32544bb055ed3e07a56b7bb49b23b
+landed-commit: 60e7fa144ab32544bb055ed3e07a56b7bb49b23b
+integration-relation: candidate-ancestor
+verified-content-digest: a60f11633b1a55326f3d503b8fbea1e8333004c5f9660ae84cbdea62e4216ebd
