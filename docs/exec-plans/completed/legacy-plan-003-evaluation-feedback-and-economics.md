@@ -1,5 +1,11 @@
 # Plan 003: Establish empirical evaluation, feedback promotion, and economics evidence
 
+> HISTORICAL / SUPERSEDED and DEFERRED. Preserved for audit provenance only;
+> its benchmark/evaluation TODOs, steps, gates, corpus, trials, scoring, and
+> promotion language are not executable and do not activate D1. Current
+> authority is only `docs/control-plane/UPGRADE_AUDIT.md` and
+> `docs/exec-plans/active/upgrade-remaining-plan.md`.
+
 ## Status
 
 - **Finding ID**: TEST-001
@@ -8,7 +14,7 @@
 - **Leverage**: 25.0
 - **Effort**: L
 - **Implementation risk**: MED
-- **Depends on**: `plans/001-source-and-plan-reconciliation.md`, `plans/004-portability-and-mission-runtime.md`, `plans/002-intelligence-and-verification-depth.md`, `plans/005-api-and-authorized-integrations.md`
+- **Historical dependencies**: `docs/exec-plans/completed/legacy-plan-001-source-and-plan-reconciliation.md`, `docs/exec-plans/completed/legacy-plan-004-portability-and-mission-runtime.md`, `docs/exec-plans/completed/legacy-plan-002-intelligence-and-verification-depth.md`, `docs/exec-plans/completed/legacy-plan-005-api-and-authorized-integrations.md`
 - **Planned at**: `4532bb43780cb45a025574403a8b4ae4ac7304ab`
 - **State**: TODO
 

@@ -1,5 +1,8 @@
 {
   "auditor": "repository-improvement-audit",
+  "authority_status": "HISTORICAL_NON_AUTHORITATIVE",
+  "superseded_by": ["docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/upgrade-remaining-plan.md"],
+  "execution_authorized": false,
   "scope_read": ["docs/KEEL_UPGRADES.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/**", ".keel/bin/keel.py", ".keel/lib/**", ".keel/tests/**", ".keel/config.json", "CONTROL_PLANE.md", "WORKFLOW.md"],
   "scope_skipped": ["application/runtime architecture: none established by repository evidence"],
   "playbook_sections_read": ["Correctness", "Tests and verification", "Architecture and maintainability", "Developer experience and operations", "Documentation integrity", "Product direction", "Finding Contract"],

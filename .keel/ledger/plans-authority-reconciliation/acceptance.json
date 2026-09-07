@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-PLANS-001","requirement_id":"REQ-PLANS-001","statement":"All five legacy plans are present in the completed archive and each states historical/superseded/non-authoritative status, including the old 1–28 assertion and old P0/order/benchmark roles where applicable.","required":true,"policy":"all","evidence":[{"provider":"changed_path","path":"docs/exec-plans/completed/legacy-plan-*.md"}]},
+    {"id":"AC-PLANS-002","requirement_id":"REQ-PLANS-002","statement":"The plans index points to the authoritative audit and roadmap, and configured strict validation passes.","required":true,"policy":"all","evidence":[{"provider":"changed_path","path":"plans/README.md"},{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-PLANS-003","requirement_id":"REQ-PLANS-003","statement":"Doctor passes and the material diff remains within the declared documentation/archive scope.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"changed_path","path":"plans/**"}]}
+  ]
+}

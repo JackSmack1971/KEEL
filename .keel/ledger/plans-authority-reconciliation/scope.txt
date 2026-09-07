@@ -1,0 +1,3 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+plans/**
+docs/exec-plans/completed/legacy-plan-*.md

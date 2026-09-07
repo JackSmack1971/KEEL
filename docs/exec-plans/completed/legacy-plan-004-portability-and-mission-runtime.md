@@ -1,5 +1,11 @@
 # Plan 004: Define portable installation and authorized mission execution
 
+> HISTORICAL / SUPERSEDED. Preserved for audit provenance only; its TODOs,
+> steps, gates, and prior sequencing/dependency language do not authorize
+> implementation and cannot govern P4. Current authority is only
+> `docs/control-plane/UPGRADE_AUDIT.md` and
+> `docs/exec-plans/active/upgrade-remaining-plan.md`.
+
 ## Status
 
 - **Finding ID**: PORT-001
@@ -8,7 +14,7 @@
 - **Leverage**: 20.0
 - **Effort**: L
 - **Implementation risk**: HIGH
-- **Depends on**: `plans/001-source-and-plan-reconciliation.md`
+- **Historical dependency**: `docs/exec-plans/completed/legacy-plan-001-source-and-plan-reconciliation.md`
 - **Planned at**: `4532bb43780cb45a025574403a8b4ae4ac7304ab`
 - **State**: TODO
 

@@ -1,0 +1,10 @@
+{
+  "base_commit": "ff130b90cf72d3a15be2b020f016a448aa828bc6",
+  "change_id": "plans-authority-reconciliation",
+  "created_at": "2026-09-07T19:04:28+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T19:10:45+00:00",
+  "verified_content_digest": "f27b62515cff948d33d9acc74855ffc88acfb6c5767f05270b3309af660aca1a"
+}

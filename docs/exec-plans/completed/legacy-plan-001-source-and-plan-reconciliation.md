@@ -1,5 +1,12 @@
 # Plan 001: Reconcile stale active plans against the authoritative upgrade brief
 
+> HISTORICAL / SUPERSEDED. This document preserves the 2026-09-07 audit-era
+> reasoning and is not current execution authority. Its P0 TODO, steps, gates,
+> and requirements are retired. The old claim that `UPGRADE_AUDIT.md` stopped
+> at sections 1–28 is superseded: the authoritative matrix now covers sections
+> 1–70. Current authority is only `docs/control-plane/UPGRADE_AUDIT.md` and
+> `docs/exec-plans/active/upgrade-remaining-plan.md`.
+
 > Follow this plan in order. This is a documentation/control-plane reconciliation change; do not implement runtime features in the same change.
 
 ## Status
@@ -23,7 +30,7 @@ The confirmed authoritative upgrade brief remains unchanged, its 1–70 sections
 ## Evidence and current behavior
 
 - `docs/KEEL_UPGRADES.md:1-5920` — user-confirmed authoritative upgrade brief for this audit.
-- `docs/control-plane/UPGRADE_AUDIT.md:1-45` — current traceability stops at sections 1–28.
+- `docs/control-plane/UPGRADE_AUDIT.md:1-45` — historical snapshot claimed traceability stopped at sections 1–28; that claim is obsolete because the current authoritative matrix covers sections 1–70.
 - `docs/exec-plans/active/` — multiple plan files remain active while recent commits indicate slices have landed; plan files lack a uniform lifecycle state.
 - `git status --short` — the upgrade brief is user-modified and must remain untouched.
 
@@ -133,7 +140,7 @@ Check for lost requirements, false completion claims, stale plan ownership, and 
 | ID | Source evidence | Current state | Target invariant | Implementation surface | Verification | Dependencies |
 |---|---|---|---|---|---|---|
 | KEEL-RECON-001 | `docs/KEEL_UPGRADES.md:1-5920` | User-confirmed authoritative brief | Downstream work references one unchanged source | `docs/KEEL_UPGRADES.md` | status/diff check | none |
-| KEEL-RECON-002 | `docs/control-plane/UPGRADE_AUDIT.md:1-45` | Trace stops at section 28 | Sections 1–70 each map exactly once | `docs/control-plane/UPGRADE_AUDIT.md` | section-count check | KEEL-RECON-001 |
+| KEEL-RECON-002 | `docs/control-plane/UPGRADE_AUDIT.md:1-45` | Historical snapshot incorrectly said trace stopped at section 28 | Current authoritative matrix covers sections 1–70 exactly once | `docs/control-plane/UPGRADE_AUDIT.md` | section-count check | KEEL-RECON-001 |
 | KEEL-RECON-003 | `docs/exec-plans/active/` | Lifecycle state is inconsistent | Active contains only unsatisfied work | `docs/exec-plans/**` | anchored commit review | KEEL-RECON-002 |
 | KEEL-RECON-004 | attachment recommendation | Downstream plans lack shared IDs | Every requirement has the mandatory evidence/invariant contract | `plans/**` | plan validator and review | KEEL-RECON-002 |
 | KEEL-RECON-005 | attachment requirement lifecycle | Implementation status is currently conflated with evidence maturity | Every requirement has exactly one lifecycle state from PROPOSED through SUPERSEDED | requirement records and plan metadata | schema/transition tests | KEEL-RECON-004 |

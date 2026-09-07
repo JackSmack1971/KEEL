@@ -1,0 +1,138 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/exec-plans/completed/legacy-plan-001-source-and-plan-reconciliation.md,docs/exec-plans/completed/legacy-plan-002-intelligence-and-verification-depth.md,docs/exec-plans/completed/legacy-plan-003-evaluation-feedback-and-economics.md,docs/exec-plans/completed/legacy-plan-004-portability-and-mission-runtime.md,docs/exec-plans/completed/legacy-plan-005-api-and-authorized-integrations.md",
+          "passed": true,
+          "path": "docs/exec-plans/completed/legacy-plan-*.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-PLANS-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-PLANS-001",
+      "statement": "All five legacy plans are present in the completed archive and each states historical/superseded/non-authoritative status, including the old 1\u201328 assertion and old P0/order/benchmark roles where applicable.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "matched=plans/README.md",
+          "passed": true,
+          "path": "plans/README.md",
+          "provider": "changed_path"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-PLANS-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-PLANS-002",
+      "statement": "The plans index points to the authoritative audit and roadmap, and configured strict validation passes.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "detail": "matched=plans/README.md,plans/findings.json",
+          "passed": true,
+          "path": "plans/**",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-PLANS-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-PLANS-003",
+      "statement": "Doctor passes and the material diff remains within the declared documentation/archive scope.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-PLANS-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-PLANS-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-PLANS-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-PLANS-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-PLANS-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-PLANS-003",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-PLANS-001",
+      "source": "user objective",
+      "statement": "Legacy plan documents and useful findings remain preserved as explicitly historical, superseded, non-authoritative evidence."
+    },
+    {
+      "id": "REQ-PLANS-002",
+      "source": "user objective",
+      "statement": "Current KEEL upgrade authority is unambiguous: the authoritative audit and sole active roadmap are named, and legacy TODO/order/benchmark language cannot govern execution."
+    },
+    {
+      "id": "REQ-PLANS-003",
+      "source": "user objective",
+      "statement": "No implementation-bearing files or P0/D1/P4 state are changed by the reconciliation."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  }
+}

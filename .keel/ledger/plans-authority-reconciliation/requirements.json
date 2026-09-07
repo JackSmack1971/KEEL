@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-PLANS-001","statement":"Legacy plan documents and useful findings remain preserved as explicitly historical, superseded, non-authoritative evidence.","source":"user objective"},
+    {"id":"REQ-PLANS-002","statement":"Current KEEL upgrade authority is unambiguous: the authoritative audit and sole active roadmap are named, and legacy TODO/order/benchmark language cannot govern execution.","source":"user objective"},
+    {"id":"REQ-PLANS-003","statement":"No implementation-bearing files or P0/D1/P4 state are changed by the reconciliation.","source":"user objective"}
+  ]
+}

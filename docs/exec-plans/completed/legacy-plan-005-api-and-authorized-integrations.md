@@ -1,5 +1,11 @@
 # Plan 005: Stabilize the CLI/API before external integrations and product surfaces
 
+> HISTORICAL / SUPERSEDED. Preserved for audit provenance only; its TODOs,
+> steps, gates, and prior sequencing/dependency language do not authorize
+> implementation or external integration. Current authority is only
+> `docs/control-plane/UPGRADE_AUDIT.md` and
+> `docs/exec-plans/active/upgrade-remaining-plan.md`.
+
 ## Status
 
 - **Finding ID**: PROD-001
@@ -8,7 +14,7 @@
 - **Leverage**: not ranked as a defect
 - **Effort**: L
 - **Implementation risk**: HIGH
-- **Depends on**: `plans/001-source-and-plan-reconciliation.md`, `plans/004-portability-and-mission-runtime.md`, `plans/002-intelligence-and-verification-depth.md`
+- **Historical dependencies**: `docs/exec-plans/completed/legacy-plan-001-source-and-plan-reconciliation.md`, `docs/exec-plans/completed/legacy-plan-004-portability-and-mission-runtime.md`, `docs/exec-plans/completed/legacy-plan-002-intelligence-and-verification-depth.md`
 - **Planned at**: `4532bb43780cb45a025574403a8b4ae4ac7304ab`
 - **State**: TODO
 

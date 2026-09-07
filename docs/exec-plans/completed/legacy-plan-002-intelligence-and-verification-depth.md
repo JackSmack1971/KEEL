@@ -1,5 +1,11 @@
 # Plan 002: Close repository-intelligence and verification-quality gaps
 
+> HISTORICAL / SUPERSEDED. Preserved for audit provenance only; its TODOs,
+> steps, gates, and implementation scope do not authorize current work and do
+> not supplement the active P0–P7 roadmap. Current authority is only
+> `docs/control-plane/UPGRADE_AUDIT.md` and
+> `docs/exec-plans/active/upgrade-remaining-plan.md`.
+
 ## Status
 
 - **Finding ID**: ARCH-001
@@ -8,7 +14,7 @@
 - **Leverage**: 40.0
 - **Effort**: L
 - **Implementation risk**: HIGH
-- **Depends on**: `plans/001-source-and-plan-reconciliation.md`, `plans/004-portability-and-mission-runtime.md`
+- **Historical dependencies**: `docs/exec-plans/completed/legacy-plan-001-source-and-plan-reconciliation.md`, `docs/exec-plans/completed/legacy-plan-004-portability-and-mission-runtime.md`
 - **Planned at**: `4532bb43780cb45a025574403a8b4ae4ac7304ab`
 - **State**: TODO
 
