@@ -229,16 +229,35 @@
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_topology_routing.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_topology_routing.py"
+      ],
       "cwd": ".",
       "id": "topology-routing-tests",
       "required": true,
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_provider_effect_contracts.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_provider_effect_contracts.py"
+      ],
       "cwd": ".",
       "id": "provider-effect-contract-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        ".agents/skills/engineering-protocols"
+      ],
+      "cwd": ".",
+      "id": "engineering-protocols-skill-check",
       "required": true,
       "timeout_sec": 120
     }

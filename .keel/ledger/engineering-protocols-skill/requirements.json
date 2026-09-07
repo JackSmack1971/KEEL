@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"The repository shall provide a discriminating skill that routes named recurring engineering protocol classes without activating for unrelated work.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"The skill shall require evidence-producing investigation, explicit risk boundaries, and verification appropriate to the selected protocol.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"The skill shall preserve KEEL lifecycle and authorization boundaries and shall not claim empirical uplift from static presence.","source":"upgrade-audit"}
+  ]
+}

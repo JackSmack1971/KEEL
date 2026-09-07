@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Skill validation and routing review prove the protocol boundary and named coverage.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"engineering-protocols-skill-check"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Skill content requires falsifiable evidence and protocol-specific verification.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"engineering-protocols-skill-check"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Skill content preserves KEEL and authorization boundaries and avoids unsupported performance claims.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"engineering-protocols-skill-check"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

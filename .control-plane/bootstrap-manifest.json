@@ -16,7 +16,7 @@
   "files": {
     ".agents/skills/control-plane-maintenance/SKILL.md": "0dd8de5fe4257607728bfc9e23dfda4f28dc59258f2236a99fa2059d1419dca7",
     ".agents/skills/keel-change-lifecycle/SKILL.md": "9a163a376c457170c7173e745017cc0c4c190f5e3ac807eaafa1bce4fc4e99d1",
-    ".agents/skills/README.md": "1f78448582323cf9a0165829bc7caefad80509cd11ef67cb7409817a7c163ad7",
+    ".agents/skills/README.md": "8f270c09d3899f53c363785651b86a200b0b2a568a5e605ec4447dcac708204a",
     ".codex/agents/explorer.toml": "d1452c69f9e21efab998f459e596e07f91539785ba83bc5baaf6fc7fb1e8e416",
     ".codex/agents/keel-discuss.toml": "f423e588fbb03b045ddee3f2ae37527c422013c48c3c1557c5d52f0f490d7045",
     ".codex/agents/keel-plan.toml": "139dddc5ff3056993deebccb26fa604fb7eaf1c9f88755af0f72d1a7076f292e",
@@ -34,7 +34,7 @@
     ".keel/bench/telemetry-schema.json": "9d8f25e4f97582f62e40699753541984957d5477a43dd94308b9b9653645a31e",
     ".keel/bin/keel.py": "6981ad2be44bc7f44d3e0f5c20d00e53d8c2e00d454a100bf22d7435aad00d75",
     ".keel/bin/keelbench.py": "899a078a4b7ce171a2ee8fccc9bf0974def644246a725f274c2a14f17ec54ef4",
-    ".keel/config.json": "1556c12ee073cac432478c0a3ecc94284b7275c7ec86fcc014965061b1274e95",
+    ".keel/config.json": "ebb482a04ecd37ce51295f4fb6b81646d36ef3e1e1eb9c4f2c75e9abb17b822c",
     ".keel/hooks/keel_hook.py": "6035f0a781d56b5c898ad85c5fc9f2b6d71a436beaa21db90a9ed81e5c477f40",
     ".keel/ledger/README.md": "31fc981e970ea5521402af2874e311b6cc07093850de29d077f6166c5f8cae8e",
     ".keel/lib/capability_resolver.py": "310a930fc73f272480dc80e8a918d536d46fd6585009139481931b1e4d767735",

@@ -1,0 +1,10 @@
+{
+  "base_commit": "31ef0fa0d377fa98d49872f774928d648f57e084",
+  "change_id": "engineering-protocols-skill",
+  "created_at": "2026-09-07T12:12:34+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:14:40+00:00",
+  "verified_content_digest": "dcd5d959c6edbba181a76de08124c0ddf6d483638edcc5d6afaa54e9a2176509"
+}

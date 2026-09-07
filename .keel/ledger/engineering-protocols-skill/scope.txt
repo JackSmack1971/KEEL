@@ -1,0 +1,5 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.agents/skills/**
+.keel/**
+docs/**
+.control-plane/**
