@@ -1,0 +1,5 @@
+{"details": {"base_commit": "3706e7ad2e1e43fbbd38f404da3d21342edf87e1", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T13:00:11+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T13:00:44+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T13:00:45+00:00"}
+{"details": {"changed_paths": ["docs/exec-plans/active/remaining-plan-completeness.md", "docs/exec-plans/active/upgrade-remaining-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T13:00:52+00:00"}
+{"details": {"content_digest": "4b165d1a12ff39f032318165f3857af4e2d60fa965714cf58ed0a3e6d2d3e12b", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T13:00:52+00:00"}

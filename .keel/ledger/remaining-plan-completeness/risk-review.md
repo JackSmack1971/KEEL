@@ -1,0 +1,5 @@
+# Risk review
+
+Documentation-only planning change. It explicitly prevents unsupported empirical or economic claims and does not contact external systems.
+
+Not required for ordinary standard/trivial changes. Required before plan gate for high/control-plane/security/privacy/migration/release/high-blast-radius changes.
