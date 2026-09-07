@@ -1,0 +1,5 @@
+keel-change-id: upgrades-audit-runtime-kernel
+sealed-candidate: 1797b3692ad977227250ab37add694ef2b6303f9
+landed-commit: 1797b3692ad977227250ab37add694ef2b6303f9
+integration-relation: candidate-ancestor
+verified-content-digest: 207712318717fefb4b990bb272d50e611dcb7317f0e5a21225d5fd1dcd4ef138
