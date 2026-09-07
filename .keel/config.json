@@ -310,6 +310,17 @@
       "id": "lifecycle-telemetry-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_hook_event_compatibility.py"
+      ],
+      "cwd": ".",
+      "id": "hook-event-compatibility-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

@@ -1,1598 +1,3006 @@
-After inspecting the current KEEL package and comparing it against current Codex engineering guidance and the strongest ideas in GSD, BMad, Spec Kit, Spec Kitty, OpenSpec, Tessl, Kiro, Superpowers, Conductor, and Zencoder/Zenflow, I think the project has a credible path to becoming something meaningfully better.
+KEEL v2 — Competitive Architecture Audit and Upgrade Strategy
+=============================================================
 
-But the path is not “add more process.” KEEL is already stronger than most of these systems in governance. The next leap is turning it from a governed change protocol into an adaptive engineering operating system.
+Executive conclusion
+--------------------
 
-Executive assessment
+KEEL should **not** try to become a larger Spec Kit, BMAD, or Superpowers.
 
-My current read:
+Its strongest opportunity is to become something those systems mostly are not:
 
-DimensionKEEL todayCompetitive position
+> **A repository-native engineering control plane that converts intent into governed autonomous work, proves what actually happened, and continuously improves the engineering environment itself.**
 
+That distinction matters.
 
-
-
-
-Intent preservation
-
-9/10
-
-Excellent
-
-Scope governance
-
-9.5/10
-
-Probably best-in-class
-
-Verification integrity
-
-9.5/10
-
-Distinctive advantage
-
-Authorization/effects control
-
-9.5/10
-
-Distinctive advantage
-
-Git-native auditability
-
-9/10
-
-Strong differentiator
-
-Stack agnosticism
-
-8.5/10
-
-Strong architecture, incomplete adapters
-
-Agent context engineering
-
-7/10
-
-Good foundation
-
-Spec/requirements ergonomics
-
-6.5/10
-
-Behind Spec Kit/Kiro/BMad
-
-Task decomposition
-
-5/10
-
-Behind GSD/Spec Kitty
-
-Parallel execution
-
-4.5/10
-
-Policy exists; runtime weak
-
-Autonomous orchestration
-
-3/10
-
-Major gap
-
-Codebase intelligence
-
-4/10
-
-Major gap
-
-Developer experience
-
-5/10
-
-Major gap
-
-Self-improvement/evals
-
-3/10
-
-Designed, not operational
-
-Installation/upgrades
-
-3/10
-
-Major productization gap
-
-Empirical evidence KEEL helps
-
-2/10
-
-Biggest strategic weakness
-
-So the paradox is:
-
-KEEL may already have the strongest safety/integrity substrate of the group, while being substantially behind several competitors as an end-to-end development experience.
-
-That is fixable.
-
-1. What KEEL actually is
-
-Most competitors you named are principally some mixture of:
-
-intent → specification → plan → tasks → implementation
-
-KEEL instead has something closer to:
-
-intent → governed change contract → bounded execution → independently evidenced state → sealed Git object → controlled integration
-
-That is much more interesting.
-
-Your current lifecycle:
-
-DISCUSS
-   ↓
-PLAN
-   ↓
-EXECUTE
-   ↓
-VERIFY
-   ↓
-SHIP
-   ↓
-SEAL
-   ↓
-INTEGRATE
-   ↓
-ANCHOR
-
-has several unusually strong properties.
-
-proposal.md, delta.md, scope.txt, risk.json, effects.json, and authorization.json separate different kinds of truth instead of mixing everything into a giant specification.
-
-Then KEEL binds verification to:
-
-base commit
-+
-material changed paths
-+
-stable intent artifacts
-+
-content digest
-
-and later verifies the committed tree before producing:
-
-refs/keel/candidates/<change-id>
-
-and verifies the landed tree before anchoring.
-
-That is far beyond the typical:
-
-“Agent says tests passed.”
-
-or even:
-
-“CI says this PR passed.”
-
-The sealed-candidate → landed-tree verification model is probably KEEL's clearest technical differentiator.
-
-The prior hardening work also materially strengthened this foundation: the static control-plane validation covered all 38 mandatory domains and specifically exercised sealed candidates, landed-tree digests, phase permissions, effects-bound authorization, Windows hooks, emergency debt, and cache hygiene. Actual Codex runtime hook behavior remained the major unverified runtime surface.
-
-The archive you gave me doesn't contain .git, so keel.py doctor correctly refuses to certify this extracted copy. That's a good failure mode rather than a defect.
-
-2. KEEL is solving a deeper problem than Spec Kit/OpenSpec
-
-Spec Kit currently describes its core default workflow as:
-
-Spec → Plan → Tasks → Implement → Converge
-
-and emphasizes structured cross-artifact reasoning. (GitHub Pages)
-
-OpenSpec emphasizes a lighter artifact-guided system and explicitly optimizes for being fluid, iterative, brownfield-friendly, and relatively easy to adopt. (GitHub)
-
-Tessl ties requirements to specs and tests, with approval before implementation. (Tessl Documentation)
-
-All are useful.
-
-KEEL asks a different question:
-
-How do we know that the thing an agent is about to land is exactly the thing that was authorized, scoped, implemented, and verified?
-
-That question becomes increasingly important as coding agents become more autonomous.
-
-OpenAI's own harness engineering experience strongly reinforces this philosophy: make the environment legible to agents, enforce invariants mechanically instead of relying exclusively on documentation, and give agents direct access to validation surfaces such as tests, browsers, logs, metrics, and traces. (OpenAI)
-
-KEEL is unusually aligned with that direction.
-
-3. The biggest architectural weakness: KEEL governs work but does not yet manage work
-
-This is the main distinction I would address.
-
-The existing implementation is excellent at:
-
-given change C,
-control C correctly
-
-It is much weaker at:
-
-given objective O,
-discover the optimal set of changes C1...Cn
-order them
-parallelize safe subsets
-manage dependencies
-recover failures
-coordinate reviews
-land them
-learn from the result
-
-GSD is considerably more mature here.
-
-It now has specialized research, mapping, planning, checking, execution, debugging, verification, UI, security, framework-selection, and synthesis agents. It also performs model-tier routing according to workload. (GitHub)
-
-Spec Kitty explicitly models:
-
-spec
-  ↓
-plan
-  ↓
-tasks
-  ↓
-next
-  ↓
-review
-  ↓
-accept
-  ↓
-merge
-
-and allocates isolated worktrees to agents. (GitHub)
-
-Symphony goes further:
-
-task tracker
+Most competing frameworks optimize some variant of:
+    intent
       ↓
-dependency DAG
+    specification
       ↓
-eligible tasks
+    plan
       ↓
-isolated agent workspaces
+    tasks
       ↓
-continuous execution
+    implementation
       ↓
-CI / review / rebase / retry
+    review
+
+KEEL's strongest existing mechanics instead approximate:
+    intent
       ↓
-land
+    governed change contract
+      ↓
+    bounded execution
+      ↓
+    evidence-bound verification
+      ↓
+    sealed Git candidate
+      ↓
+    controlled integration
+      ↓
+    landed-tree re-verification
+      ↓
+    durable provenance anchor
 
-OpenAI reports that this style of orchestration produced as much as a 500% increase in landed PRs in some teams. (OpenAI)
+That is a substantially stronger integrity model than simply asking an agent to follow a plan.
 
-KEEL currently documents orchestration as DEFERRED.
+The problem is that KEEL currently excels most strongly at **governing a known change**.
 
-That is architecturally reasonable for bootstrap.
+The next-generation system must excel at:
+    given an ambiguous engineering objective,
+    discover the necessary work,
+    understand the repository,
+    choose the right workflow,
+    decompose it,
+    route agents intelligently,
+    execute parallel-safe portions,
+    continuously verify,
+    recover from failures,
+    integrate safely,
+    measure the result,
+    and improve the harness.
 
-Competitively, it is now the largest missing subsystem.
+KEEL has pieces of that architecture already, but many remain advisory, skeletal, or deferred.
 
-4. Build KEEL Missions
+My overall assessment:
 
-I would introduce a level above a KEEL change.
+| Dimension                        | KEEL v2 | Competitive position                             |
+| -------------------------------- | ------- | ------------------------------------------------ |
+| Intent preservation              | 9/10    | Excellent                                        |
+| Scope containment                | 9.5/10  | Likely differentiator                            |
+| Git-verification integrity       | 9.5/10  | Likely best-in-class concept                     |
+| Effect/authorization governance  | 9/10    | Major differentiator                             |
+| Auditability/provenance          | 9/10    | Excellent                                        |
+| Stack neutrality                 | 8/10    | Architecturally strong, operationally incomplete |
+| Verification architecture        | 8.5/10  | Strong                                           |
+| Repository legibility            | 7/10    | Good doctrine, shallow intelligence              |
+| Context engineering              | 6.5/10  | Functional but primitive                         |
+| Spec ergonomics                  | 6/10    | Behind BMAD/Kiro/Spec Kit                        |
+| Adaptive workflow depth          | 5.5/10  | Behind BMAD                                      |
+| Task/work decomposition          | 5.5/10  | Behind GSD/Spec Kitty                            |
+| Multi-agent orchestration        | 4/10    | Major gap                                        |
+| Codebase intelligence            | 4.5/10  | Major gap                                        |
+| Developer UX                     | 4.5/10  | Major gap                                        |
+| Model/agent routing              | 4/10    | Early                                            |
+| Installation/upgrade portability | 3.5/10  | Serious weakness                                 |
+| Self-improvement                 | 4/10    | Architecture exists; loop incomplete             |
+| Empirical performance evidence   | 2/10    | Largest strategic weakness                       |
 
-Not:
+The important conclusion is therefore:
 
-User objective
-     ↓
-KEEL change
+> **KEEL has a stronger trust substrate than its current end-to-end development experience.**
 
-but:
+That is a good problem to have.
 
-                    MISSION
-                       │
-          ┌────────────┴────────────┐
-          │                         │
-      OBJECTIVES                 CONSTRAINTS
-          │                         │
-          └────────────┬────────────┘
-                       ↓
-                DISCOVERY / RESEARCH
-                       ↓
-                 WORK GRAPH
-                 ┌─────┴─────┐
-                 │           │
-              Change A    Change B
-                 │           │
-                 └────┬──────┘
-                      ↓
-                   Change C
-                      ↓
-               Mission Verify
-                      ↓
-                 Mission Close
+* * *
 
-Each leaf remains a normal KEEL change.
+1. What KEEL already gets unusually right
+   =========================================
 
-This is important.
+1.1 The ledger decomposes engineering truth correctly
+-----------------------------------------------------
 
-Do not weaken KEEL by allowing a giant autonomous mission to bypass the per-change ledger.
+Your change ledger separates:
 
-Instead:
+* proposal;
 
-KEEL Mission orchestrates; KEEL Change governs.
+* behavioral delta;
 
-That gives you Symphony/GSD/Spec Kitty scale without surrendering KEEL's strongest property.
+* scope;
 
-A mission artifact could eventually contain roughly:
+* requirements;
 
-mission_id: auth-redesign
+* acceptance criteria;
 
-objective: >
-  Replace legacy session authentication with OIDC.
+* risk;
 
-success_criteria:
-  - existing accounts remain usable
-  - token refresh survives restart
-  - old auth endpoints removed
-  - rollback tested
+* effects;
 
-constraints:
-  - no database downtime
-  - backward-compatible migration
-  - preserve mobile clients
+* authorization;
 
-work:
-  auth-contract:
-    risk: high
-    depends_on: []
+* verification;
 
-  migration:
-    risk: high
-    depends_on:
-      - auth-contract
+* candidate sealing;
 
-  backend:
-    depends_on:
-      - auth-contract
+* landing provenance.
 
-  frontend:
-    depends_on:
-      - auth-contract
+This is considerably better than a monolithic `SPEC.md`.
 
-  cutover:
-    depends_on:
-      - backend
-      - frontend
-      - migration
+Those artifacts answer different questions:
+    proposal.md
+        Why are we changing this?
 
-KEEL can then compute the runnable frontier.
+    delta.md
+        What behavior changes?
 
-5. Your specification model is durable but too weakly typed
+    scope.txt
+        What may implementation touch?
 
-delta.md is elegant:
+    requirements.json
+        What must remain/become true?
 
-ADDED
-MODIFIED
-REMOVED
+    acceptance.json
+        How can success be disproved?
 
-But prose deltas alone cannot carry everything a serious autonomous engineering system eventually needs.
+    risk.json
+        How dangerous is the change?
 
-You need machine-readable connections between:
+    effects.json
+        What consequential external actions may occur?
 
-requirement
-→ acceptance criterion
-→ implementation surface
-→ verification evidence
+    authorization.json
+        Which effects have actually been authorized?
 
-Today KEEL's scope.txt gives excellent file-level traceability.
+    verification.json
+        What evidence was observed?
 
-It does not yet give equally strong behavioral traceability.
+That separation enables mechanical invariants that prose-heavy frameworks struggle to enforce.
 
-I would therefore extend rather than replace the delta model.
+* * *
 
-For example:
+2. KEEL's strongest technical differentiator: verified candidates
+   =================================================================
 
-proposal.md
-delta.md
-requirements.json
-acceptance.json
-scope.txt
-risk.json
-effects.json
+The strongest part of the framework is the:
+    VERIFY
+      ↓
+    commit
+      ↓
+    SEAL
+      ↓
+    refs/keel/candidates/<change>
+      ↓
+    integration
+      ↓
+    ANCHOR
 
-An acceptance object might be:
+model.
 
-{
-  "id": "AC-004",
-  "requirement": "Expired refresh tokens are rejected",
-  "evidence_type": "automated-test",
-  "required": true,
-  "evidence": [
-    "tests/auth/refresh_expiration_test.py"
-  ]
-}
+The important property is not merely that tests ran.
 
-Then verification isn't merely:
+KEEL attempts to prove that the exact committed material corresponds to the verified material, and later that the landed material still corresponds to the sealed candidate.
 
-all configured commands passed
+That addresses an overlooked agentic-development failure mode:
+    agent verifies tree A
+            ↓
+    tree changes
+            ↓
+    commit/merge tree B
+            ↓
+    everyone assumes B was verified
 
-but can become:
+KEEL explicitly tries to close that gap.
 
-AC-001 PASS
-AC-002 PASS
-AC-003 PASS
-AC-004 PASS
+This is directionally aligned with OpenAI's harness-engineering philosophy: repository constraints should become mechanically enforceable rather than remaining prose instructions, and agents should be given observable feedback surfaces that can falsify their assumptions.
 
-This is one place where Tessl's explicit test/spec relationship contains a useful idea. (Tessl Documentation)
+I would preserve this system almost at all costs.
 
-6. Introduce an Evidence Graph
+It is part of KEEL's potential moat.
 
-This could become a major KEEL differentiator.
+* * *
 
-Instead of treating verification as a flat list of commands:
+3. Scope governance is another major advantage
+   ==============================================
 
-check A passed
-check B passed
-check C passed
+The combination of:
+    change ID
+    + declared scope
+    + isolated worktree
+    + pre/post tool enforcement
+    + verified changed paths
 
-model the evidence relationship:
+is excellent architecture.
 
-Requirement
-     │
-     ▼
-Acceptance Criterion
-     │
-     ├── Unit test
-     ├── Integration test
-     ├── Architecture invariant
-     ├── Browser evidence
-     ├── Security scan
-     └── Runtime observation
+Spec Kitty and Conductor both correctly recognize worktree isolation as foundational for parallel agents. Spec Kitty explicitly gives agents isolated Git worktrees as part of its governed `spec → plan → tasks → next → review → accept → merge` runtime.
 
-Then:
+Conductor similarly treats a worktree as the container for an agent's branch, environment, terminal, conversation, and review flow.
 
-KEEL VERIFY
+KEEL already has the conceptual substrate for this.
 
-calculates coverage of the acceptance graph.
+The missing layer is **automatic orchestration of those worktrees**.
 
-Example:
+* * *
 
-REQ-7
-└── AC-7.1: unauthorized request returns 403
-    ├── unit:test_policy_denial                PASS
-    ├── integration:test_api_policy            PASS
-    └── security-review:auth-boundary           PASS
+4. Authorization and effects are unusually sophisticated
+   ========================================================
 
-This is much more rigorous than conventional test orchestration.
+`.keel/contracts.json` defines explicit effect capabilities such as:
+    filesystem.write
+    git.local.commit
+    git.remote.push
+    vcs.merge
+    package.publish
+    database.migrate
+    cloud.deploy
+    infra.apply
+    issue.modify
+    email.send
+    secret.read
 
-It also prepares KEEL for nontraditional engineering:
+This is the beginning of something extremely valuable:
 
-ML
-firmware
-data pipelines
-infrastructure
-games
-frontend
-distributed systems
-security
-scientific software
+> **Capability-based engineering authorization.**
 
-where "tests passed" can mean radically different things.
+Most coding frameworks reason primarily about files.
 
-7. KEEL needs a Capability Resolver
+KEEL is starting to reason about **effects**.
 
-Your capability registry is conceptually excellent.
+That distinction matters enormously for autonomous engineering.
 
-The 38-domain model is one of the strongest things in the package.
+Changing:
+    deployment.yaml
 
-But right now it is mostly:
+is not equivalent to:
+    deploying production
 
-human/agent discovers project
-→ edits registry
-→ activates domains
+Likewise:
+    editing migration code
 
-The next version should mechanically infer evidence.
+is not equivalent to:
+    running the migration
 
-For example:
+KEEL's architecture recognizes this separation.
 
-package.json
-     ↓
-Node ecosystem
+I would expand it substantially rather than simplify it.
 
-Cargo.toml
-     ↓
-Rust ecosystem
+* * *
 
-pyproject.toml
-     ↓
-Python ecosystem
+5. The largest architectural gap: KEEL does not yet execute Missions
+   ====================================================================
 
-Dockerfile
-     ↓
-container build
+You have already introduced `.keel/lib/mission_graph.py`.
 
-terraform/
-     ↓
-IaC
+That is the correct abstraction.
 
-playwright.config.*
-     ↓
-browser verification
+But currently `dispatch_plan()` literally emits:
+    "execution": "DEFERRED"
 
-.github/workflows/
-     ↓
-CI
+Mission support therefore remains primarily an advisory DAG.
 
-prisma/schema.prisma
-     ↓
-persistent datastore / migrations
+This is the single most important subsystem to build next.
 
-src/**/*.tsx
-     ↓
-frontend / browser / a11y considerations
+OpenAI's Symphony architecture exists specifically because context switching and unattended orchestration became bottlenecks after individual Codex agents became capable enough. Symphony turns tracker work into isolated executable agent work, coordinating dependencies, workspaces, retries, and integration.
 
-But this must remain evidence based, not assumption based.
+Current Codex itself is explicitly designed for multi-agent workflows and built-in isolated worktree execution.
 
-So the resolver returns:
+KEEL should therefore evolve from:
+    MISSION
+      ↓
+    calculate runnable nodes
+      ↓
+    tell operator what could run
 
-DETECTED
-LIKELY
-UNKNOWN
-CONFLICT
+to:
+    MISSION CONTROLLER
+            │
+            ├── dependency resolver
+            ├── worktree allocator
+            ├── capability resolver
+            ├── context compiler
+            ├── topology router
+            ├── agent launcher
+            ├── verifier
+            ├── reviewer
+            ├── retry controller
+            ├── integration controller
+            └── mission verifier
 
-rather than silently changing policy.
+Each mission child should remain an ordinary KEEL change.
 
-Then:
+That preserves your trust model:
 
-keel doctor
+> **Mission orchestrates. Change governs.**
 
-could say:
+Do not create a parallel mission execution model that bypasses the ledger.
 
-Detected:
-  Node 24
-  TypeScript
-  React
-  Vite
-  Vitest
-  Playwright
-  GitHub Actions
+* * *
 
-Suggested domain activations:
-  build-toolchain
-  testing-evals
-  quality-static-analysis
-  ui-browser-a11y-i18n
-  ci-cd
+6. Mission graphs need far richer semantics
+   ===========================================
 
-Potential missing controls:
-  dependency supply-chain
-  frontend runtime evidence
-
-This would greatly improve the "drop KEEL into anything" story.
-
-8. KEEL does not yet have real codebase intelligence
-
-GSD has explicit parallel codebase mapping. Its mapper produces structured durable codebase context instead of repeatedly forcing agents to rediscover the repository. (GitHub)
-
-Zencoder emphasizes repository intelligence and cross-repository integration. (Zencoder Docs)
-
-KEEL currently provides:
-
-ARCHITECTURE.md
-docs/
-capability registry
-AGENTS.md
-
-but no active system for creating trustworthy architecture knowledge.
-
-That is insufficient for very large repositories.
-
-I would add:
-
-keel map
-
-with outputs like:
-
-.keel/knowledge/
-    topology.json
-    modules.json
-    boundaries.json
-    commands.json
-    tests.json
-    ownership.json
-    dependencies.json
-    entrypoints.json
-
-The important difference from generic RAG:
-
-These should be extracted facts with provenance.
-
-Example:
-
-{
-  "module": "payments",
-  "path": "src/payments",
-  "depends_on": [
+The present work graph supports essentially:
     {
-      "module": "ledger",
-      "evidence": "import graph"
+      "risk": "...",
+      "depends_on": [...]
     }
-  ]
-}
 
-Agents can query that compact representation instead of rereading 400 files.
-
-9. Make repository context compiled, not accumulated
-
-This is an especially important frontier-model insight.
-
-Current OpenAI model guidance warns that large or conflicting instruction surfaces can cause unnecessary pauses or divergence, while explicitly recommending clear delegation and verification guidance. (OpenAI Developers)
-
-KEEL should therefore avoid becoming:
-
-AGENTS.md
-+ 38 domain docs
-+ skills
-+ plans
-+ ledgers
-+ architecture
-+ generated knowledge
-+ historical decisions
-
-all loaded at once.
-
-Instead create a:
-
-KEEL Context Compiler
-
-Input:
-
-task
-+
-active change
-+
-scope
-+
-risk
-+
-capabilities
-+
-affected architecture
-
-Output:
-
-minimal task context
-
-For example:
-
-Task touches:
-  src/auth/**
-  migrations/**
-  tests/auth/**
-
-Relevant context:
-  auth architecture invariant
-  migration rules
-  DB commands
-  security contract
-  acceptance criteria
-  active delta
-
-Excluded:
-  frontend guidance
-  mobile docs
-  ML guidance
-  unrelated historical plans
-
-This attacks context rot much more elegantly than simply creating fresh sessions.
-
-10. Superpowers has something KEEL currently lacks: behavioral methodology
-
-Superpowers strongly dictates how engineering reasoning itself should occur:
-
-brainstorm
-→ design
-→ implementation plan
-→ TDD
-→ subagent implementation
-→ review
-
-and reinforces true red/green workflows. (GitHub)
-
-KEEL deliberately leaves more room for model judgment.
-
-I agree with that choice.
-
-However, KEEL currently has only two meaningful reusable skills:
-
-keel-change-lifecycle
-control-plane-maintenance
-
-That is too thin.
-
-Don't turn KEEL into BMad's huge role catalog.
-
-Instead add a small collection of engineering protocols:
-
-debugging
-root-cause-analysis
-architecture-investigation
-dependency-upgrade
-migration
-security-review
-performance-investigation
-frontend-runtime-verification
-test-remediation
-incident-response
-release
-
-These should be skills, not mandatory phases.
-
-So KEEL becomes:
-
-stable governance kernel
-+
-dynamically activated engineering protocols
-
-That is the right architecture.
-
-11. Do not copy BMad's giant agent organization
-
-BMad's advantage is breadth. It offers extensive agents, workflows, modules, customization, and scale-adaptive development guidance. (GitHub)
-
-The downside is conceptual surface area.
-
-KEEL shouldn't compete by saying:
-
-We have 45 agents instead of 34.
-
-I'd instead target:
-
-few persistent roles
-+
-many composable skills
-+
-dynamic topology
-
-For example:
-
-Coordinator
-Explorer
-Planner
-Executor
-Verifier
-Reviewer
-Risk Reviewer
-
-Then allow the coordinator to instantiate combinations.
-
-That is closer to the trajectory OpenAI describes for capable models: give agents objectives, sufficient tools and context, and avoid reducing them to unnecessarily rigid state-machine nodes. (OpenAI)
-
-12. Add a Subagent Topology Resolver
-
-Your current fixed agents are useful:
-
-explorer
-keel-discuss
-keel-plan
-keel-verify
-keel-ship
-reviewer
-risk-reviewer
-
-But KEEL should eventually compute delegation.
-
-Example:
-
-change scope:
-  backend
-  frontend
-  migration
-
-risk:
-  high
-
-resolver:
-  explorer[backend]
-  explorer[frontend]
-  migration-reviewer
-  security-reviewer
-  verifier
-
-For a tiny fix:
-
-executor
-verifier
-
-For investigation:
-
-3 explorers
-synthesizer
-
-This also aligns with current OpenAI model guidance that subagent delegation can materially improve both quality and latency when parallelizable work exists. (OpenAI Developers)
-
-13. Parallelism should become a first-class execution primitive
-
-Your current rule is correct:
-
-one change-id = one worktree = one primary writer.
-
-Keep it.
-
-Conductor and Zenflow both use isolated worktrees to make parallel sessions practical. (Conductor)
-
-KEEL should automate the lifecycle:
-
-keel worktree create C-102
-keel worktree status C-102
-keel worktree retire C-102
-
-Then:
-
-keel mission run
-
-could safely spawn:
-
-C-102 ─ worktree A
-C-103 ─ worktree B
-C-104 ─ blocked on A+B
-
-This would turn the existing parallelism policy into a parallelism capability.
-
-Big difference.
-
-14. You need environment isolation, not merely Git isolation
-
-OpenAI's harness-engineering article makes another critical point: their agents can run independent application instances, browser sessions, logs, traces, and metrics per worktree. (OpenAI)
-
-KEEL currently governs the source tree extremely well.
-
-It does not govern:
-
-ports
-databases
-containers
-temporary directories
-service names
-browser profiles
-runtime logs
-test fixtures
-cloud sandboxes
-
-Yet those frequently cause parallel-agent interference.
-
-Add:
-
-Environment Contract
-
-perhaps:
-
-environment:
-  setup: scripts/dev-setup
-  start: scripts/dev-start
-  stop: scripts/dev-stop
-
-isolation:
-  ports: dynamic
-  temp: per-change
-  database: per-change
-  browser_profile: per-change
-
-This should activate only when relevant.
-
-15. Verification needs to become multimodal
-
-Currently the deterministic command runner is good, but largely subprocess-oriented.
-
-For modern software, verification often requires:
-
-DOM
-screenshots
-browser console
-network requests
-logs
-metrics
-traces
-performance profiles
-database state
-mobile simulators
-hardware
-
-OpenAI explicitly describes making browser behavior and observability available to Codex because this dramatically increases autonomous engineering capability. (OpenAI)
-
-Kiro similarly exposes specs, hooks, MCP, permissions, subagents, checkpoints, and other runtime capabilities through one harness. (Kiro)
-
-KEEL should therefore define evidence providers.
-
-For example:
-
-command
-unit_test
-browser
-visual
-log_query
-metric_query
-trace_query
-schema
-security
-benchmark
-hardware
-human_review
-external_ci
-
-Then the core doesn't care which stack produced the evidence.
-
-That's genuine stack agnosticism.
-
-16. One implementation detail that weakens stack-agnostic claims
-
-.keel/config.json determines "source" using a list of extensions:
-
-.c
-.cpp
-.cs
-.go
-.java
-.js
-.py
-.rs
-.ts
-...
-
-That's practical, but it isn't truly stack agnostic.
-
-It can misclassify things such as:
-
-.vue
-.svelte
-astro
-proto
-graphql
-cue
-nix
-hcl
-Rmd
-notebooks
-shader files
-generated DSLs
-Makefiles
-Dockerfiles
-Bazel/Starlark
-
-More importantly, whether a file is substantive source is project-dependent.
-
-Replace extension heuristics with something layered:
-
-explicit project classification
+That will not be enough.
+
+A serious engineering DAG needs at least:
+    id:
+    objective:
+    depends_on:
+    blocks:
+    scope_hint:
+    capabilities_required:
+    environment:
+    risk:
+    estimated_complexity:
+    acceptance_refs:
+    resources:
+    exclusive_resources:
+    parallel_safe:
+    review_policy:
+    verification_policy:
+    retry_policy:
+    integration_policy:
+    effects:
+    authorization_class:
+    model_profile:
+    context_profile:
+    state:
+
+It should also distinguish dependency types:
+    HARD
+    SOFT
+    DATA
+    INTERFACE
+    ENVIRONMENT
+    REVIEW
+    AUTHORIZATION
+
+Otherwise the graph cannot intelligently schedule work.
+
+* * *
+
+7. Build dynamic mission decomposition, not just mission validation
+   ===================================================================
+
+The next missing primitive is:
+    objective
         ↓
-detected ecosystem classifiers
+    repository understanding
         ↓
-generic source heuristic
+    solution architecture
         ↓
-unknown = conservative
+    change decomposition
+        ↓
+    dependency graph
 
-The kernel shouldn't hard-code the universe of programming languages.
+GSD's major advantage is context and work decomposition. Its current design explicitly uses fresh-context research/planning/execution agents to combat context degradation.
 
-17. Effects enforcement is excellent conceptually, but command detection is necessarily incomplete
+BMAD similarly advertises scale-adaptive planning that changes according to problem complexity and offers specialized planning, architecture, product, UX, testing, and implementation workflows.
 
-The hook currently recognizes known integration command patterns.
+KEEL currently has the infrastructure to govern work once the decomposition exists.
 
-That works for:
+It needs a **Mission Planner** capable of producing the decomposition.
 
-git push
-git merge
-gh pr ...
+* * *
 
-But arbitrary effects can happen through:
+8. Repository intelligence is currently far too shallow
+   =======================================================
 
-curl
-terraform
-kubectl
-aws
-gcloud
-az
-database clients
-custom deploy scripts
-npm publish
-docker push
-MCP
-application-specific CLIs
+This is probably the second most important technical weakness.
 
-There is no universal reliable way to infer effect semantics from shell strings.
+`capability_resolver.py` largely detects capabilities using path globs:
+    package.json
+    pyproject.toml
+    Cargo.toml
+    tests/**
+    *.tf
+    playwright.config.*
 
-So don't keep expanding giant command blacklists.
+That is a useful bootstrap heuristic.
 
-Introduce an:
+It is not codebase understanding.
 
-Effect Capability Model
+Likewise, the Context Compiler operates largely through explicitly mapped documents and bounded character extraction.
 
-Commands/tools declare capabilities such as:
+This will become inadequate on large repositories.
 
-filesystem.write
-git.local.commit
-git.remote.push
-vcs.merge
-package.publish
-database.migrate
-cloud.deploy
-infra.apply
-issue.modify
-email.send
-secret.read
+Zenflow/Zencoder already emphasizes multi-repository indexing and context engines, while its agents execute inside isolated worktrees.
 
-Then authorization is against effects, not command spelling.
+Kiro generates persistent product, technology, and structural steering from repository analysis and supports codebase indexing across its surfaces.
 
-That's dramatically more scalable.
+KEEL needs a **Repository Intelligence Graph**.
 
-18. KEEL needs a first-class reconciliation engine
+At minimum:
+    FILES
+      ↓
+    SYMBOLS
+      ↓
+    IMPORTS / CALLS
+      ↓
+    MODULES
+      ↓
+    COMPONENTS
+      ↓
+    OWNERSHIP
+      ↓
+    RUNTIME PATHS
+      ↓
+    TESTS
+      ↓
+    CONFIGURATION
+      ↓
+    DEPLOYMENT SURFACES
 
-Long-running agents fail.
+Useful node types might include:
+    file
+    module
+    symbol
+    service
+    package
+    endpoint
+    database
+    table
+    queue
+    job
+    test
+    schema
+    config
+    deployment
+    workflow
+    generated-artifact
+    owner
 
-Machines reboot.
+Useful edges:
+    imports
+    calls
+    implements
+    tests
+    generates
+    deploys
+    reads
+    writes
+    owns
+    depends_on
+    configured_by
+    exposes
+    consumes
 
-Processes crash.
+This graph should be a **derived cache**, never policy.
 
-Branches move.
+That fits your existing doctrine perfectly.
 
-Review comments arrive.
+* * *
 
-CI flakes.
+9. Context compilation must become query-driven
+   ===============================================
 
-Dependencies get merged underneath you.
+Current context compilation has a hard bound of:
+    "max_chars": 12000
 
-Symphony's strength is not merely agent dispatch; it also reconciles continuously, restarts agents, reacts to state changes, rebases, retries checks, and shepherds work into landing. (OpenAI)
+Hard bounds are good.
 
-KEEL should introduce:
+The selection method is the problem.
 
-keel reconcile
+The next compiler should behave more like:
+    task
+     +
+    mission node
+     +
+    changed scope
+     +
+    repository graph
+     +
+    git history
+     +
+    capability evidence
+     +
+    acceptance obligations
+           ↓
+    relevance planner
+           ↓
+    bounded context packet
 
-which asks:
+Rather than:
+    known capability
+        ↓
+    predefined documents
 
-What does the ledger claim?
-What does Git say?
-What does the workspace say?
-What does CI say?
-What does the issue tracker say?
-What external effects occurred?
-What state transition is legal now?
+Each context fragment should carry provenance:
+    source:
+    digest:
+    reason_selected:
+    relevance:
+    freshness:
+    authority:
+    token_cost:
 
-Then repair the process state, not blindly modify code.
+Then context selection can itself be benchmarked.
 
-This will matter enormously for unattended runs.
+* * *
 
-19. Implement next-action computation
+10. Avoid excessive repeated prompt injection
+    =============================================
 
-BMad has bmad-help, which tells users what logically comes next. (GitHub)
+Your hooks inject KEEL context on both:
+    SessionStart
+    UserPromptSubmit
 
-Spec Kitty has next. (GitHub)
+This is understandable, but it deserves scrutiny.
 
-KEEL should have:
+The OpenAI Codex repository's own AGENTS guidance explicitly warns against frequent context changes that harm caching and requires injected context to remain bounded.
 
-keel next
-
-Examples:
-
-$ keel next
-
-C-184 is in PLAN.
-
-Blocking:
-  effects.json requires authorization
-  risk-review.md incomplete
-
-Next legal actions:
-  1. complete risk review
-  2. obtain authorization
-  3. record authorization
-  4. run `keel gate plan`
+KEEL should evolve toward **delta context injection**:
+    previous state digest
+            ↓
+    current state digest
+            ↓
+    unchanged?
+       YES → no injection
+       NO  → inject only changed decision state
 
 Or:
+    ACTIVE CHANGE: xyz
+    PHASE: EXECUTE → VERIFY
+    NEW REQUIREMENT: R-07
+    SCOPE CHANGE: none
+    NEW BLOCKER: CI failure
 
-$ keel next
+This is much more token-efficient than continuously restating the whole state.
 
-No active change.
+* * *
 
-Mission checkout-v2 has:
-  C-201 READY
-  C-202 READY
-  C-203 BLOCKED by C-201,C-202
+11. KEEL needs a first-class adaptive workflow engine
+    =====================================================
 
-Recommended:
-  start C-201 and C-202 in separate worktrees
+BMAD is currently stronger here.
 
-This looks simple but would radically improve usability.
+Its philosophy is explicitly scale-adaptive: small fixes can skip deep planning while larger efforts can invoke richer product, architecture, UX, and testing processes.
 
-20. KEEL currently over-indexes on correctness and under-indexes on economics
+Kiro likewise supports everything from conversational fixes to quick specs to full specification-driven workflows.
 
-A superior agent framework has to optimize:
+KEEL currently has:
+    read-only
+    trivial
+    standard
+    emergency
 
-quality
-latency
-token usage
-model cost
-human attention
-failure recovery
+Good foundation.
 
-GSD already has model tiers. (GitHub)
+But those are principally governance modes.
 
-KEEL currently has no meaningful compute-routing layer.
+You also need **execution archetypes**.
 
-Add a work complexity estimator:
+For example:
+    BUGFIX
+    FEATURE
+    REFACTOR
+    MIGRATION
+    SECURITY
+    PERFORMANCE
+    DEPENDENCY
+    RELEASE
+    INCIDENT
+    RESEARCH
+    UI
+    DATA
+    INFRA
+    API_CONTRACT
+    GENERATED_CODE
+    DOCUMENTATION
 
-trivial
-standard
-complex
-critical
+Each archetype should produce different obligations.
 
-and use it to select:
+Example:
+    BUGFIX
 
-reasoning effort
-model
-number of agents
-review depth
-verification breadth
-context budget
+    required:
+      reproduction
+      root-cause evidence
+      regression test
+      affected path trace
+      baseline comparison
 
-Not hard-coded model names.
+while:
+    DATABASE_MIGRATION
 
-Instead express capabilities:
+    required:
+      schema diff
+      forward migration
+      rollback strategy
+      data-loss analysis
+      production-volume estimate
+      compatibility window
+      backup evidence
 
-fast
-balanced
-deep
-max
+This is how KEEL becomes stack-agnostic without becoming task-agnostic.
 
-Then map them at runtime.
+* * *
 
-This keeps KEEL model-independent.
+12. Domain intelligence should be activated dynamically
+    =======================================================
 
-21. The most important missing subsystem is KEEL Evals
+Stack agnosticism should **not** mean one generic process.
 
-This is where I would be toughest on the project.
+It should mean:
 
-You want to say:
+> No technology assumptions until repository evidence establishes them.
 
-KEEL outperforms GSD, BMad, Spec Kit, Kiro, etc.
+Then activate specialized contracts.
 
-Right now that statement would be impossible to substantiate.
+Example:
+    repo discovery
+       │
+       ├─ detects React
+       ├─ detects Playwright
+       ├─ detects PostgreSQL
+       ├─ detects Terraform
+       └─ detects GitHub Actions
+              ↓
+    capability profile
+              ↓
+    domain contracts activated
 
-The framework needs its own benchmark.
+Possible modules:
+    frontend
+    backend
+    database
+    security
+    distributed systems
+    mobile
+    embedded
+    ML
+    data engineering
+    IaC
+    CI/CD
+    release engineering
+    game development
+    browser automation
+    accessibility
+    performance
 
-Create something like:
+The current resolver points toward this architecture but stops at detection.
 
-KEELBench
+The missing layer is:
+    DETECTION
+       ↓
+    CONTRACT SELECTION
+       ↓
+    WORKFLOW AUGMENTATION
+       ↓
+    VERIFICATION AUGMENTATION
 
-with representative repositories/tasks:
+without silently changing security policy.
 
-bugfix
-feature
-refactor
-dependency upgrade
-migration
-security remediation
-frontend change
-performance regression
-brownfield investigation
-multi-service change
-release
+* * *
 
-Measure:
+13. Codebase discovery should produce executable commands
+    =========================================================
 
-task success
-acceptance coverage
-introduced regressions
-scope violations
-architectural violations
-unauthorized effects
-human interventions
-tokens
-wall time
-retries
-merge conflicts
-CI failures
-review findings
-post-merge defects
+Another missing surface is reliable command discovery.
+
+An agent needs to know:
+    How do I build this?
+    How do I test the affected subsystem?
+    How do I lint it?
+    How do I run it?
+    How do I launch the browser?
+    How do I reproduce CI?
+
+Static manifest detection should evolve into **Command Intelligence**.
+
+Sources can include:
+    package scripts
+    Make targets
+    justfiles
+    taskfiles
+    CI definitions
+    Docker Compose
+    Cargo metadata
+    Gradle tasks
+    dotnet solutions
+    tox/nox
+    pytest config
+    README examples
+    historical successful KEEL runs
+
+Then KEEL can maintain:
+    commands:
+      test.unit:
+      test.integration:
+      test.browser:
+      lint:
+      typecheck:
+      build:
+      run:
+      package:
+
+with evidence and confidence.
+
+* * *
+
+14. Your current verification configuration is not portable
+    ===========================================================
+
+This is a concrete defect in the uploaded archive.
+
+`.keel/config.json` contains required commands referencing:
+    C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/...
+
+and:
+    C:/Users/click/.codex/skills/.system/skill-creator/...
+
+Those paths also appear repeatedly inside historical ledger verification artifacts.
+
+That means the current package cannot be copied to another developer machine and retain its canonical verification contract.
+
+For a framework whose goal is:
+
+> completely stack-agnostic and ready for any engineering task
+
+this is a P0 productization issue.
+
+The correct model is one of:
+    repository-owned validator
+
+or:
+    resolved capability:
+      executable:
+      discovery:
+      version constraint:
+
+Never:
+    absolute creator-machine path
+
+Canonical verification must be hermetic enough to reproduce.
+
+* * *
+
+15. Extracted-package behavior exposes another portability issue
+    ================================================================
+
+I executed all repository-local deterministic test scripts against the archive.
+
+Most passed.
+
+Two failed:
+    test_developer_ux.py
+    test_upgrade_kernel.py
+
+because the extracted archive lacks `.git`.
+
+The second failure specifically reaches:
+    git status --short
+
+with `check=True`, causing an exception.
+
+`keel.py doctor`, `keel.py init --check`, and `keel.py version` likewise refuse operation because the extracted directory is not a Git repository.
+
+Some commands absolutely should require Git.
+
+But bootstrap/introspection commands need clearer separation between:
+    UNINITIALIZED
+    NOT_A_GIT_REPOSITORY
+    BOOTSTRAPPABLE
+    ACTIVE
+    BROKEN
+
+rather than treating all of those as fatal runtime states.
+
+The installer should be able to inspect and bootstrap a directory before a valid repository lifecycle exists.
+
+* * *
+
+16. Build a real installation and upgrade system
+    ================================================
+
+Competitors are substantially ahead here.
+
+BMAD provides:
+    npx bmad-method install
+
+with stable/next/pinned channels, non-interactive CI installation, tool integrations, configuration overrides, and upgrade behavior.
+
+OpenSpec exposes straightforward installation and project updates.
+
+Spec Kitty provides explicit installation and upgrade documentation and a user-facing CLI.
+
+KEEL needs something equivalent to:
+    keel init
+    keel install
+    keel doctor
+    keel adopt
+    keel upgrade
+    keel migrate
+    keel uninstall
+    keel repair
+
+with:
+    dry-run
+    diff preview
+    backup
+    rollback
+    version pinning
+    compatibility matrix
+    schema migration
+    Codex capability detection
+
+The current migration engine is a good seed, but it is not yet a framework distribution system.
+
+* * *
+
+17. Upgrade compatibility needs a broader contract
+    ==================================================
+
+The current migration implementation principally recognizes a config schema migration:
+    config 1 → 2
+
+A mature KEEL will need versioned contracts for:
+    framework
+    ledger
+    mission
+    requirements
+    acceptance
+    effects
+    authorization
+    verification
+    repository-map
+    capability registry
+    context packet
+    telemetry
+    hook definitions
+    agent definitions
+    skills
+    benchmark corpus
+
+Each should have:
+    schema_version
+    minimum_reader_version
+    migration path
+    forward compatibility behavior
+    unknown-field policy
+
+This becomes critical once KEEL is installed across real repositories.
+
+* * *
+
+18. Runtime capability detection must replace static Codex assumptions
+    ======================================================================
+
+Your documentation correctly says generated `.codex/` files do not prove runtime activation.
+
+Excellent.
+
+Preserve that principle.
+
+But take it further.
+
+Codex is evolving quickly: multi-agent support, worktrees, skills, automation, model routing, and other surfaces change frequently. Current OpenAI materials explicitly emphasize shared repository guidance, approvals, sandboxing, MCP/tool connections, skills, automations, and worktrees as team-level Codex primitives.
+
+Therefore KEEL should establish:
+    Codex Capability Handshake
+
+at runtime.
+
+Example:
+    {
+      "codex": {
+        "version": "...",
+        "features": {
+          "subagents": true,
+          "worktrees": true,
+          "skills": true,
+          "hooks": true,
+          "mcp": true
+        }
+      }
+    }
+
+Any unavailable feature should degrade gracefully.
+
+Never infer support merely from config files.
+
+* * *
+
+19. Your topology router is too primitive
+    =========================================
+
+Current routing approximately maps:
+    risk + dependency count
+
+to:
+    roles + effort + verification breadth
+
+That is a reasonable v0.
+
+But it ignores:
+    task type
+    codebase familiarity
+    blast radius
+    test coverage
+    architecture depth
+    uncertainty
+    security exposure
+    novelty
+    history of failures
+    token budget
+    latency constraints
+    model strengths
+    parallelizability
+
+Zenflow already exposes phase-specific model/agent assignment and cross-model review, including isolated subagents and parallel reviewers.
+
+KEEL should eventually route on a richer feature vector:
+    work profile
+          ↓
+    complexity classifier
+          ↓
+    capability requirements
+          ↓
+    agent topology
+          ↓
+    model profile
+          ↓
+    verification depth
+
+For example:
+    simple localized edit
+        → single executor + deterministic verify
+
+    uncertain bug
+        → explorer → executor → verifier
+
+    cross-cutting refactor
+        → architecture explorer
+          + dependency explorer
+          → planner
+          → isolated implementers
+          → reviewer
+          → verifier
+
+    security-sensitive migration
+        → threat reviewer
+          + migration specialist
+          → executor
+          → independent adversarial reviewer
+          → full verifier
+
+* * *
+
+20. Cross-model review should become optional policy
+    ====================================================
+
+Zenflow makes a compelling point: independent reviewers using different models may catch different error classes than the implementation model.
+
+KEEL's conceptual separation of:
+    executor
+    verifier
+    reviewer
+    risk-reviewer
+
+is already ideal for this.
+
+Add policy such as:
+    review:
+      independence: required
+      model_diversity: preferred
+
+for high-risk changes.
+
+Do not hard-code vendor/model names into the core framework.
+
+Define capabilities instead:
+    FAST_EXECUTOR
+    DEEP_REASONER
+    SECURITY_REVIEWER
+    VISUAL_REVIEWER
+    LOW_COST_EXPLORER
+
+Adapters resolve those capabilities.
+
+* * *
+
+21. Make the Context Compiler topology-aware
+    ============================================
+
+Different agents should receive different context.
+
+Currently the system is moving toward one bounded context compiler.
+
+It should become role-sensitive:
+    Explorer Context
+        architecture + relevant code + history
+
+    Planner Context
+        intent + exploration findings + constraints
+
+    Executor Context
+        exact scope + contracts + implementation references
+
+    Verifier Context
+        acceptance contract + diff + test surfaces
+
+    Risk Reviewer Context
+        effects + trust boundaries + threat surfaces
+
+That prevents context overload.
+
+GSD's fresh-context approach exists precisely to resist accumulated context degradation.
+
+* * *
+
+22. KEEL's Evidence Graph is promising but needs typed assertions
+    =================================================================
+
+The current provider vocabulary is a good starting point:
+    command
+    unit_test
+    browser
+    visual
+    log_query
+    metric_query
+    trace_query
+    schema
+    security
+    benchmark
+    hardware
+    human_review
+    external_ci
+    changed_path
+
+But eventually the graph needs assertions stronger than:
+    check exited zero
+
+Examples:
+    provider: browser
+    assert:
+      selector_visible: "#dashboard"
+
+    provider: metric_query
+    assert:
+      p95_latency_ms:
+        lt: 200
+
+    provider: schema
+    assert:
+      backward_compatible: true
+
+    provider: benchmark
+    assert:
+      regression_percent:
+        lt: 3
+
+    provider: security
+    assert:
+      critical_findings: 0
+
+Then acceptance criteria become executable contracts rather than aliases for commands.
+
+* * *
+
+23. Verification should become change-aware
+    ===========================================
+
+Running every canonical check every time will eventually become expensive.
+
+KEEL already knows:
+    changed paths
+    repository graph
+    capabilities
+    requirements
+    risk
+
+Therefore it can construct:
+    minimum sufficient verification set
+
+Example:
+    changed authentication service
+           ↓
+    dependent modules
+           ↓
+    related integration tests
+           ↓
+    security checks
+           ↓
+    API contract checks
+
+For high risk, expand outward.
+
+For trivial changes, narrow inward.
+
+This produces something much better than blindly running a fixed verification list.
+
+* * *
+
+24. Verification commands need discovery + provenance
+    =====================================================
+
+Each verification command should eventually have:
+    id:
+    argv:
+    source:
+    version:
+    applies_when:
+    scope:
+    required:
+    timeout:
+    environment:
+    provenance:
+
+Example:
+    id: frontend-playwright
+    source: package.json/scripts
+    applies_when:
+      capability: ui-browser
+      paths:
+        - src/ui/**
+
+This would make KEEL genuinely stack-neutral.
+
+* * *
+
+25. Developer UX is currently far behind the architecture
+    =========================================================
+
+This may become KEEL's adoption bottleneck.
+
+Today the conceptual user experience includes commands like:
+    keel start
+    keel gate discuss
+    keel gate plan
+    keel verify
+    keel seal
+    keel candidate-status
+    keel anchor
+
+Technically sound.
+
+But users should rarely need to understand all of that.
+
+BMAD's `bmad-help` explicitly recommends what the user should do next.
+
+Spec Kitty exposes a visible workflow.
+
+Kiro presents specs, tasks, hooks, agents, and project context as integrated product surfaces.
+
+KEEL needs a first-class:
+    keel
+
+command that answers:
+    What am I doing?
+    What state am I in?
+    What blocks me?
+    What happens next?
+    What requires my approval?
+    What is running?
+    What failed?
+    What can run concurrently?
+
+For example:
+    KEEL · auth-redesign
+
+    MISSION
+    3 / 7 changes landed
+
+    RUNNING
+    △ refresh-token-storage    VERIFY
+
+    READY
+    ○ login-ui                  STANDARD
+    ○ logout-api                TRIVIAL
+
+    BLOCKED
+    × mobile-auth               waits: refresh-token-storage
+
+    AUTHORIZATION
+    ! production migration      REQUIRED
+
+    NEXT
+    keel run
+
+That experience would radically improve adoption.
+
+* * *
+
+26. Build `keel run`
+    ====================
+
+The framework currently exposes many primitives.
+
+What it needs is orchestration over them.
+
+Conceptually:
+    keel run <objective>
+
+should:
+
+1. inspect repository;
+
+2. determine whether read-only/trivial/change/mission is appropriate;
+
+3. construct or update the work contract;
+
+4. gather missing decisions;
+
+5. build the work graph;
+
+6. schedule safe work;
+
+7. create worktrees;
+
+8. launch appropriate agents;
+
+9. verify outputs;
+
+10. request authorization only where required;
+
+11. seal candidates;
+
+12. integrate according to configured policy;
+
+13. verify the mission;
+
+14. present final evidence.
+
+Advanced users keep direct commands.
+
+Ordinary users get a coherent front door.
+
+* * *
+
+27. Do not require ceremony for obvious changes
+    ===============================================
+
+OpenSpec's explicit philosophy is:
+    fluid not rigid
+    iterative not waterfall
+    easy not complex
+    brownfield-friendly
+
+and it positions reduced ceremony as a design advantage.
+
+That criticism could eventually be aimed directly at KEEL.
+
+Your trivial mode helps.
+
+But adaptive ceremony must go further.
+
+The system should infer:
+    1-file docs typo
+       → micro path
+
+    simple tested bug
+       → compact change
+
+    cross-service feature
+       → full change
+
+    multi-system migration
+       → mission
+
+The user should experience **proportional governance**.
+
+* * *
+
+28. The framework must distinguish invariants from bureaucracy
+    ==============================================================
+
+OpenAI's own Codex Security repository has an instructive principle:
+
+> keep protections for real risks, but do not add arbitrary checks merely because checks are possible.
+
+That principle should become foundational to KEEL.
+
+A mechanism deserves mandatory status only when it protects a demonstrated invariant.
+
+Otherwise it should be:
+    advisory
+    conditional
+    optional
+
+This protects KEEL from becoming enterprise theater.
+
+* * *
+
+29. Documentation has become too large relative to the runtime
+    ==============================================================
+
+The extracted package contains roughly:
+    732 files
+    3.7 MB
+    ~3,763 Python LOC under .keel
+    41 historical ledger changes
+    ~2.7 MB of ledger data
+
+The ratio is revealing.
+
+There is a substantial governance/documentation surface around a relatively compact runtime.
+
+That is not intrinsically bad, but it creates entropy risk.
+
+KEEL should eventually compile much of its human documentation from machine-readable contracts.
+
+For example:
+    contracts
+       ↓
+    generated docs
+       ↓
+    CLI help
+       ↓
+    agent context
+
+instead of maintaining all of them separately.
+
+* * *
+
+30. Separate framework history from consumer-repository state
+    =============================================================
+
+Shipping 41 internal KEEL development ledgers inside a reusable project control plane is useful as provenance for KEEL itself.
+
+It is less desirable for a consumer project.
+
+A distributed KEEL package should distinguish:
+    KEEL framework source/history
+
+from:
+    project-local KEEL state
+
+Otherwise every new adopter inherits KEEL's own construction history.
+
+A clean bootstrap should probably contain:
+    .keel/
+      runtime/
+      schemas/
+      config/
+      templates/
+      state/
+
+with no framework-development ledger unless explicitly installed as examples.
+
+* * *
+
+31. KEELBench is strategically vital
+    ====================================
+
+The strongest architectural feature you can build after orchestration may actually be the evaluation system.
+
+You already have a 12-scenario corpus:
+    bugfix
+    feature
+    refactor
+    dependency
+    migration
+    security
+    frontend
+    performance
+    brownfield
+    multiservice
+    release
+    recovery
+
+and paired baseline-vs-KEEL trial semantics.
+
+Excellent.
+
+But currently it is mostly an evaluation contract, not evidence of advantage.
+
+This is the biggest credibility gap.
+
+You cannot meaningfully say:
+
+> KEEL is better than BMAD/GSD/Spec Kit/etc.
+
+until you run reproducible evaluations.
+
+* * *
+
+32. Build KEELBench into a serious benchmark
+    ============================================
+
+Measure at least:
+
+### Correctness
+
+    acceptance pass rate
+    regression rate
+    hidden-test pass rate
+    requirement coverage
+
+### Efficiency
+
+    tokens
+    wall-clock time
+    tool calls
+    iterations
+    agent runs
+
+### Human burden
+
+    clarifications
+    approvals
+    interventions
+    manual corrections
+
+### Process quality
+
+    scope violations
+    unauthorized effects
+    merge conflicts
+    failed integrations
+    rework
+
+### Engineering quality
+
+    maintainability
+    architecture compliance
+    security findings
+    test quality
+
+### Recovery
+
+    time to recover
+    number of failed attempts
+    rollback success
 
 Then compare:
+    bare Codex
+    Codex + AGENTS
+    GSD
+    BMAD
+    Spec Kit
+    OpenSpec
+    Superpowers
+    KEEL
 
-Codex vanilla
-Codex + KEEL
-Codex + GSD
-Codex + Spec Kit
-Codex + OpenSpec
-...
+where licenses/tooling permit meaningful controlled trials.
 
-Ideally repeated trials.
+Without this, "superior" remains branding.
 
-Until this exists:
+With it, superiority becomes measurable.
 
-KEEL superiority is an architectural hypothesis.
+* * *
 
-Once it exists:
+33. Make evaluations adversarial
+    ================================
 
-KEEL superiority can become an engineering result.
+Ordinary feature tasks are not enough.
 
-This is the single most important strategic change I would make.
+KEEL's governance advantages should appear most clearly in difficult cases:
+    ambiguous requirements
+    dirty working tree
+    pre-existing test failure
+    malicious repository instructions
+    hidden dependency
+    generated file
+    out-of-scope tempting fix
+    failing flaky test
+    migration requiring rollback
+    secret accidentally exposed
+    deployment command
+    scope expansion halfway through work
+    conflicting documentation
+    parallel agents touching same subsystem
+    post-verification modification
 
-22. KEEL should learn from failures mechanically
+These cases test exactly what KEEL claims to improve.
 
-You already have the right doctrine:
+* * *
 
-repeated mistakes should become mechanical invariants.
+34. Add mutation tests for the control plane itself
+    ===================================================
 
-Now operationalize it.
+KEEL is sufficiently safety/integrity-oriented that normal unit tests are not enough.
 
-Imagine:
+Mutate:
+    gate predicates
+    scope checks
+    digest comparisons
+    authorization binding
+    Git ancestry logic
+    effect matching
+    acceptance evaluation
 
-production incident
-       ↓
-reviewed evidence
-       ↓
-finding
-       ↓
-failure class
-       ↓
-regression eval
-       ↓
-candidate invariant
-       ↓
-test / lint / hook / architecture rule
+If mutants survive, you have blind spots in the governance layer.
 
-That produces:
+Given KEEL's positioning, this should become mandatory for security-critical invariants.
 
-KEEL Learning Loop
+* * *
 
-EXECUTE
-   ↓
-VERIFY
-   ↓
-SHIP
-   ↓
-OPERATE
-   ↓
-OBSERVE
-   ↓
-LEARN
-   ↓
-HARDEN
-   ↺
+35. Build property-based tests around lifecycle invariants
+    ==========================================================
 
-Kiro already advertises learning from developer review feedback as a persistent steering mechanism. (Kiro)
+Useful invariants include:
+    A sealed candidate can never reference an unverified material state.
 
-KEEL's version should be more conservative:
+    Replanning invalidates incompatible authorization.
 
-never automatically convert arbitrary feedback into permanent instruction.
+    A scope-restricted change cannot verify with undeclared changed paths.
 
-Instead:
+    Anchoring cannot succeed when candidate material changed.
 
-observation
-→ proposal
-→ evaluation
-→ promotion
+    A landed state cannot precede a sealed candidate.
 
-That's much safer.
+    Mission nodes cannot execute before hard dependencies land.
 
-23. Turn entropy control into an actual service
+    No migration can silently discard unknown schema fields unless policy permits.
 
-Your ENTROPY.md direction is good but largely aspirational.
+Property testing these state machines would substantially increase confidence.
 
-Eventually KEEL should periodically detect:
+* * *
 
-stale architecture docs
-obsolete commands
-dead capabilities
-unused skills
-broken links
-drifting generated artifacts
-unreferenced decisions
-TODO debt
-orphaned plans
-stale dependencies
-duplicated instructions
-oversized AGENTS cascades
-repeated review findings
+36. Treat the lifecycle as a formal state machine
+    =================================================
 
-Then generate small KEEL-governed maintenance changes.
+Instead of distributing state transitions across command implementations, define:
+    DISCUSS
+    PLAN
+    EXECUTE
+    VERIFY
+    SHIP
+    SEALED
+    LANDED
+    CLOSED
 
-That produces a repository that actively resists agent-created decay.
+and transition guards centrally.
 
-This aligns extremely closely with OpenAI's observation that agent-first development shifts the human role toward building scaffolding and mechanically preventing recurring failures rather than repeatedly correcting individual outputs. (OpenAI)
+Then test the transition table exhaustively.
 
-24. Developer experience is currently KEEL's weakest visible surface
+This could later enable model checking.
 
-Competitors are polished.
+KEEL's value proposition warrants that rigor.
 
-Kiro offers one harness across IDE, CLI, web, and mobile, with specs, hooks, subagents, permissions, MCP, memory and isolated execution. (Kiro)
+* * *
 
-Zenflow provides worktrees, workflow cards, integrations, agent presets, review surfaces, and cross-service orchestration. (Zencoder Docs)
+37. Effects need a richer ontology
+    ==================================
 
-KEEL currently feels like:
+The current effect list is good but too coarse.
 
-excellent research prototype
-+
-excellent control plane
-+
-manual CLI plumbing
+Expand toward:
+    git.remote.push
+    git.remote.force_push
+    vcs.pr.create
+    vcs.pr.merge
+    vcs.branch.delete
 
-To win adoption, commands should eventually feel more like:
+    database.schema.migrate
+    database.data.mutate
+    database.drop
 
-keel init
-keel discover
-keel start
-keel status
-keel next
-keel run
-keel verify
-keel review
-keel ship
-keel mission
-keel doctor
+    cloud.deploy.staging
+    cloud.deploy.production
+    cloud.resource.create
+    cloud.resource.delete
 
-rather than requiring users to understand the internal state machine before becoming productive.
+    infra.plan
+    infra.apply
+    infra.destroy
 
-The sophisticated internals should remain available.
+    secret.read
+    secret.write
+    secret.rotate
 
-They shouldn't be required knowledge for ordinary usage.
+    package.publish
+    package.yank
 
-25. Installation, upgrades and schema migration are missing product primitives
+    issue.create
+    issue.modify
+    issue.close
 
-A real framework needs:
+    messaging.send
+    email.send
 
-version
-installer
-upgrade
-migration
-compatibility check
-rollback
+Capability hierarchy enables policies like:
+    cloud.deploy.*
 
-Today you have:
+without enumerating every provider.
 
-schema_version: 1
+* * *
 
-but not a mature lifecycle surrounding it.
+38. Effect inference must operate on tool semantics, not just argv
+    ==================================================================
 
-Eventually:
+Current `effect_inference.py` recognizes commands such as:
+    git push
+    git merge
+    terraform apply
+    kubectl apply
+    alembic upgrade
 
-keel version
-keel init
-keel upgrade
-keel migrate
-keel doctor --compat
+Useful.
 
-must understand:
+But modern agents invoke MCP tools, APIs, GitHub integrations, cloud connectors, database tools, and browser actions.
 
-Codex version
-hook schema
-KEEL schema
-skill version
-configuration version
-ledger version
+Kiro's current hook model explicitly exposes hooks around both built-in tools and MCP tool names.
 
-This becomes especially important because Codex itself evolves.
+KEEL needs:
+    Effect Adapter Registry
 
-Your current documentation is appropriately cautious about trusting project .codex/ configuration and hook definitions. Preserve that philosophy.
+for:
+    shell
+    GitHub
+    GitLab
+    AWS
+    Azure
+    GCP
+    Kubernetes
+    database
+    MCP
+    email
+    issue trackers
+    package registries
 
-26. What I would steal from each competitor
+Each adapter maps provider actions into KEEL's provider-neutral effect ontology.
 
-There are good ideas worth incorporating, without copying their architectures.
+* * *
 
-SystemSteal thisDo not copy
+39. Build environment reproducibility into the candidate
+    ========================================================
 
+Verification currently binds code/intention.
 
+Eventually it should also capture a reproducibility envelope:
+    OS
+    architecture
+    runtime versions
+    dependency lock digests
+    tool versions
+    container image
+    environment fingerprint
 
+Not necessarily for every trivial change.
 
+But for consequential builds/releases this becomes important.
+
+Otherwise:
+    same commit
+    ≠
+    same verified environment
+
+* * *
+
+40. Supply-chain attestation is a natural extension
+    ===================================================
+
+The seal mechanism could eventually create an attestation roughly equivalent to:
+    candidate SHA
+    intent digest
+    verification digest
+    environment digest
+    dependency digest
+    toolchain digest
+
+That could map naturally into signed provenance systems later.
+
+This would make KEEL relevant not merely to agent workflow but software supply-chain integrity.
+
+* * *
+
+41. Brownfield adoption needs explicit intelligence
+    ===================================================
+
+OpenSpec deliberately emphasizes brownfield usability.
+
+KEEL's clean-room architecture is strong.
+
+But real adoption means entering repositories containing:
+    undocumented commands
+    weak tests
+    architecture drift
+    dirty state
+    legacy scripts
+    conflicting docs
+    generated artifacts
+    partial CI
+    multiple languages
+
+A first-run:
+    keel adopt
+
+should produce:
+    repository profile
+    architecture map
+    command registry
+    capability profile
+    test profile
+    risk surfaces
+    documentation gaps
+    generated-artifact registry
+    recommended KEEL configuration
+
+without initially modifying anything.
+
+Then:
+    keel adopt --apply
+
+creates only accepted scaffolding.
+
+That would be a major competitive feature.
+
+* * *
+
+42. Project context should be continuously refreshed
+    ====================================================
+
+Kiro explicitly treats persistent project knowledge as a reusable steering surface.
+
+KEEL should go further:
+    repository changes
+          ↓
+    knowledge diff
+          ↓
+    derived repository map
+          ↓
+    staleness detection
+
+If a new runtime, database, or package manager appears, KEEL should notice.
+
+But the result remains advisory until policy/config explicitly adopts it.
+
+That preserves the no-silent-policy principle.
+
+* * *
+
+43. Self-improvement is architecturally present but functionally deferred
+    =========================================================================
+
+`feedback_entropy.py` currently emits target plans whose execution is:
+    DEFERRED
+
+Yet this area could become another differentiator.
+
+The full loop should be:
+    agent failure
+    human correction
+    production incident
+    review comment
+    CI regression
+          ↓
+    normalize observation
+          ↓
+    cluster repeated pattern
+          ↓
+    determine root class
+          ↓
+    create regression eval
+          ↓
+    prove failure
+          ↓
+    propose harness improvement
+          ↓
+    run baseline vs candidate
+          ↓
+    adopt only if statistically/materially better
+
+This is exactly the direction implied by OpenAI's harness-engineering approach: recurring failures should become improvements to the environment and mechanical feedback loops rather than repeated human reminders.
+
+* * *
+
+44. Do not automatically convert every mistake into policy
+    ==========================================================
+
+This is critical.
+
+An autonomous self-improvement system can ossify quickly.
+
+Require repeated evidence.
+
+For example:
+    ONE failure
+        → observation
+
+    REPEATED related failures
+        → candidate pattern
+
+    REPRODUCIBLE eval
+        → candidate intervention
+
+    MEASURED improvement
+        → promoted invariant
+
+That prevents rule explosion.
+
+* * *
+
+45. Introduce a Policy Compiler
+    ===============================
+
+Today policy exists across:
+    AGENTS.md
+    WORKFLOW.md
+    .keel/config.json
+    contracts.json
+    hooks
+    templates
+    docs
+
+Long term, many rules should derive from a smaller declarative policy source.
+
+For example:
+    risk:
+      high:
+        require:
+          - independent_review
+          - full_verification
+
+    effects:
+      cloud.deploy.production:
+        authorization: explicit
+
+    parallelism:
+      same_paths: forbidden
+
+Then compile that into:
+    hook logic
+    CLI checks
+    agent guidance
+    documentation
+
+This greatly reduces drift.
+
+* * *
+
+46. Introduce invariant ownership
+    =================================
+
+Every enforced rule should answer:
+    What failure does this prevent?
+    Who owns it?
+    How is it tested?
+    What evidence justified it?
+    Can it be removed?
+
+Example:
+    invariant: sealed-candidate-digest
+    reason: prevent post-verification material drift
+    owner: keel-core
+    tests:
+      - ...
+    introduced_by:
+      - incident/eval reference
+
+This turns governance into maintainable engineering.
+
+* * *
+
+47. Architecture enforcement needs executable dependency rules
+    ==============================================================
+
+You already document architecture enforcement.
+
+The next step is auto-discovery + mechanical checking.
+
+Examples:
+    domain cannot import infrastructure
+    UI cannot access database
+    core cannot depend on web framework
+    generated files cannot be manually edited
+
+Adapters could produce:
+    dependency-cruiser
+    ArchUnit
+    NetArchTest
+    cargo-deny/custom lint
+    go list analysis
+    Python import graph
+    Bazel queries
+
+Again:
+    stack detection
+        ↓
+    appropriate invariant adapter
+
+* * *
+
+48. Build "change impact analysis"
+    ==================================
+
+Before execution, KEEL should be able to answer:
+    You plan to modify X.
+
+    Likely impacted:
+      Y
+      Z
+
+    Tests:
+      A
+      B
+
+    Interfaces:
+      C
+
+    Owners:
+      team-D
+
+    Deployment:
+      service-E
+
+This is one of the highest-leverage functions possible for autonomous coding.
+
+It combines repository graph + Git history + test mapping.
+
+* * *
+
+49. Learn from Git history
+    ==========================
+
+The repository itself contains valuable implicit engineering knowledge.
+
+Mine:
+    files commonly changed together
+    tests commonly changed with implementation
+    modules causing regressions
+    revert frequency
+    review hotspots
+    ownership
+    historical migration patterns
+
+This should inform:
+    scope suggestions
+    risk classification
+    context compilation
+    verification selection
+
+Never turn history directly into mandatory policy without validation.
+
+* * *
+
+50. Risk should become evidence-derived
+    =======================================
+
+Currently risk is largely declared.
+
+Long term:
+    risk = f(
+      effect severity,
+      dependency fanout,
+      data sensitivity,
+      changed criticality,
+      coverage,
+      architecture centrality,
+      migration presence,
+      external interfaces,
+      historical failure rate
+    )
+
+The agent can propose the risk level.
+
+Policy sets the minimum.
+
+The user can raise it.
+
+The system should make lowering it require justification.
+
+* * *
+
+51. Add uncertainty explicitly
+    ==============================
+
+Engineering tasks differ not just in risk but epistemic uncertainty.
+
+Introduce something like:
+    LOW
+    MEDIUM
+    HIGH
+    UNKNOWN
+
+High uncertainty should trigger:
+    more exploration
+    more evidence
+    smaller execution slices
+
+rather than simply stronger verification after implementation.
+
+This would distinguish KEEL from risk-only workflow engines.
+
+* * *
+
+52. Build reversible execution into planning
+    ============================================
+
+One useful planner question should be:
+
+> What is the smallest reversible step that increases knowledge?
+
+For uncertain engineering:
+    investigate
+    → reproduce
+    → instrument
+    → write characterization test
+    → implement
+
+is often superior to:
+    plan entire solution
+    → execute
+
+KEEL's delta architecture supports this naturally.
+
+* * *
+
+53. Add experiment changes
+    ==========================
+
+Not every change should be treated as production intent.
+
+Introduce:
+    EXPERIMENT
+
+where:
+    learning objective
+    hypothesis
+    measurement
+    cleanup policy
+
+matter more than permanent requirements.
+
+This would broaden KEEL beyond standard feature engineering.
+
+* * *
+
+54. Verification should include semantic diff review
+    ====================================================
+
+Textual changed paths are necessary but insufficient.
+
+A verification layer could classify:
+    public API changes
+    schema changes
+    permission changes
+    dependency changes
+    configuration changes
+    test removal
+    generated artifacts
+    security controls
+
+A change touching:
+    authentication permissions
+
+deserves stronger review even if it is only three lines.
+
+* * *
+
+55. Protect verification quality itself
+    =======================================
+
+Agents can game weak tests unintentionally.
+
+Examples:
+    delete failing assertion
+    mock away behavior
+    relax threshold
+    skip test
+    weaken type
+
+KEEL should detect suspicious verification-surface changes.
+
+For important changes:
+    test changed?
+        ↓
+    independent review required
+
+Especially when acceptance evidence depends on that test.
+
+* * *
+
+56. Require independent verification where the executor controls the oracle
+    ===========================================================================
+
+General rule:
+    If the implementation agent also changes the mechanism used to prove success,
+    increase verification independence.
+
+That is a powerful generic invariant.
+
+* * *
+
+57. Detect scope laundering
+    ===========================
+
+Agentic systems sometimes discover an undeclared requirement and silently expand the implementation.
+
+KEEL already requires replan.
+
+Strengthen this by measuring:
+    scope expansion
+    requirement expansion
+    effect expansion
+
+after Plan.
+
+Unexpected expansion should become telemetry.
+
+That metric can reveal poorly specified planning.
+
+* * *
+
+58. The main CLI needs structured output everywhere
+    ===================================================
+
+Every command should support:
+    --json
+
+with stable schemas.
+
+That makes KEEL usable by:
+    Codex
+    CI
+    Symphony-like orchestrators
+    IDE integrations
+    web dashboards
+    third-party agents
+
+Human-readable CLI output should be a rendering layer over the API.
+
+* * *
+
+59. Treat the CLI as an API
+    ===========================
+
+Long-term layering:
+    KEEL DOMAIN LIBRARY
+            ↑
+        JSON API
+            ↑
+          CLI
+            ↑
+    ┌───────┼────────┐
+    Codex   IDE      CI
+
+Avoid encoding important behavior inside command-printing paths.
+
+* * *
+
+60. Build event sourcing around important lifecycle transitions
+    ===============================================================
+
+You already have JSONL audit artifacts.
+
+Expand this into an append-only lifecycle event stream:
+    {
+      "event": "PLAN_PASSED",
+      "change": "...",
+      "timestamp": "...",
+      "intent_digest": "...",
+      "actor": "...",
+      "evidence": [...]
+    }
+
+Derived state can then be reconstructed.
+
+Benefits:
+    audit
+    debugging
+    telemetry
+    replay
+    forensics
+
+* * *
+
+61. Add correlation IDs across agents and tools
+    ===============================================
+
+Mission:
+    mission_id
+
+Change:
+    change_id
+
+Agent run:
+    run_id
+
+Tool invocation:
+    operation_id
+
+Evidence:
+    evidence_id
+
+These should propagate throughout the system.
+
+Then KEEL can answer:
+    Which agent created this?
+    Which requirement caused the edit?
+    Which verification covered it?
+    Which mission required it?
+
+* * *
+
+62. Build a local dashboard eventually — but not yet
+    ====================================================
+
+Spec Kitty's visible dashboard is valuable.
+
+Kiro's integrated environment is valuable.
+
+Conductor's workspace model is valuable.
+
+KEEL will eventually benefit from a visual surface.
+
+But do **not** build it before the orchestration API.
+
+Correct order:
+    domain/runtime
+        ↓
+    stable event/state API
+        ↓
+    CLI
+        ↓
+    dashboard
+
+Otherwise the UI will fossilize premature concepts.
+
+* * *
+
+63. Product positioning should change
+    =====================================
+
+Avoid:
+
+> better Spec Kit.
+
+Prefer:
+
+> **KEEL is a stack-agnostic engineering control plane for autonomous coding agents.**
+
+Or more specifically:
+
+> **KEEL turns engineering intent into isolated, governed, verifiable work and proves exactly what was authorized, implemented, tested, and landed.**
+
+That communicates the actual differentiator.
+
+* * *
+
+64. Competitive comparison
+    ==========================
 
 GSD
+---
 
-codebase mapping, context engineering, model routing, fresh specialist agents
+Strong at:
+    context isolation
+    decomposition
+    fresh-agent execution
+    planning loops
 
-command/workflow proliferation
+KEEL advantage:
+    governance
+    effects
+    verification provenance
+    sealed candidates
 
-BMad
+KEEL must steal:
+    context lifecycle
+    decomposition ergonomics
+    fresh execution agents
 
-scale-adaptive workflow selection, discoverable “what next?” UX
+GSD's explicit focus on context rot is worth taking seriously.
 
-huge persona organization
+* * *
+
+BMAD
+----
+
+Strong at:
+    product thinking
+    planning ergonomics
+    specialized personas
+    scale adaptation
+    workflow catalog
+    developer onboarding
+
+KEEL advantage:
+    mechanical integrity
+    Git provenance
+    effect controls
+    candidate verification
+
+KEEL must steal:
+    adaptive workflow selection
+    user guidance
+    domain workflow libraries
+    product/design reasoning
+
+BMAD's current ecosystem includes 34+ workflows and specialist modules, which highlights how far KEEL still has to go in workflow breadth.
+
+* * *
 
 Spec Kit
+--------
 
-requirements → plan → tasks traceability and convergence
+Strong at:
+    specification discipline
+    artifact workflow
+    cross-artifact reasoning
+    tool portability
 
-dependence on an essentially linear SDD lifecycle
+Its documented default workflow is explicitly structured around Spec → Plan → Tasks → Implement.
+
+KEEL advantage:
+    post-plan governance
+    execution integrity
+    effects
+    Git sealing
+
+Steal:
+    spec ergonomics
+    artifact analysis
+    onboarding simplicity
+
+* * *
 
 Spec Kitty
+----------
 
-governed work packages, next, worktree execution
+Strong at:
+    mission/work-package execution
+    worktrees
+    next/review/accept/merge loop
+    multi-agent factory model
+    dashboard
 
-UI/process becoming the core abstraction
+KEEL advantage:
+    verification integrity
+    effects authorization
+    stronger candidate provenance
+
+Steal aggressively:
+    mission UX
+    work-package scheduling
+    parallel execution
+    operator visibility
+
+This is probably KEEL's closest architectural competitor.
+
+* * *
 
 OpenSpec
+--------
 
-lightweight delta/change philosophy, brownfield friendliness
+Strong at:
+    low ceremony
+    brownfield usability
+    fluid artifact editing
+    multi-agent compatibility
 
-mostly prose-level enforcement
+KEEL advantage:
+    mechanical enforcement
+    traceability
+    verification
+
+Steal:
+    simplicity
+    fast-path ergonomics
+    brownfield adoption
+
+OpenSpec's philosophy should serve as a constant warning against over-governing KEEL.
+
+* * *
 
 Tessl
+-----
 
-requirement ↔ test relationships, current library knowledge
+Strong at:
+    specification-to-test relationship
+    intent preservation
+    requirements before implementation
 
-ecosystem coupling
+Its core argument is closing the "intent-to-code chasm" through reviewed specifications.
+
+KEEL already goes further downstream.
+
+Steal:
+    spec/test synchronization
+
+* * *
 
 Kiro
+----
 
-unified harness, hooks, specs, permissions, subagents, runtime surfaces
+Strong at:
+    integrated UX
+    repository indexing
+    steering
+    specs
+    hooks
+    custom agents
+    skills
+    subagents
+    cross-surface continuity
 
-IDE/platform dependence
+Kiro now presents a unified harness across IDE, CLI, Web, and Mobile with specs, steering, hooks, permissions, skills, subagents, checkpoints, and compaction.
+
+This is the clearest reminder that KEEL cannot compete purely as Markdown + Python scripts.
+
+Steal:
+    context UX
+    hooks model
+    continuous project understanding
+    operator experience
+
+* * *
 
 Superpowers
+-----------
 
-reusable behavioral engineering skills, rigorous debugging/TDD protocols
+Strong at:
+    brainstorming
+    design-first development
+    TDD
+    subagent execution
+    focused composable skills
 
-overly prescriptive workflow for every task
+Its methodology explicitly forces design clarification before planning and uses subagent-driven implementation afterward.
+
+KEEL advantage:
+    formal governance
+    verification provenance
+    effect boundaries
+
+Steal:
+    skill simplicity
+    TDD discipline
+    focused agent transitions
+
+* * *
+
+Traycer
+-------
+
+Strong at:
+    file-level plans
+    phase mode
+    agent handoff
+    implementation verification
+
+Traycer specifically frames plans as executable guides for other agents and provides verification against those plans.
+
+Steal:
+    plan visualization
+    verification feedback ergonomics
+
+* * *
 
 Conductor
+---------
 
-excellent workspace/worktree ergonomics
+Strong at:
+    parallel workspace UX
+    worktree isolation
+    agent-session ownership
+    review flow
 
-dependency on a GUI orchestrator
+KEEL has the invariant.
 
-Zencoder/Zenflow
+Conductor has the product experience.
 
-workflow templates, integration graph, worktree automation
+Steal the experience, not necessarily the implementation.
 
-product-service dependency
+* * *
 
-Symphony
+Zencoder / Zenflow
+------------------
 
-objective/task orchestration, reconciliation, unattended agents
+Strong at:
+    multi-repository context
+    workflow definitions
+    model routing
+    cross-model verification
+    subagent orchestration
 
-tying KEEL itself to one tracker
+Zenflow's explicit ability to assign different agents/models to planning, implementation, and review is particularly relevant to KEEL's topology router.
 
-That combination starts becoming genuinely unusual.
+Steal:
+    capability-based model routing
+    cross-model review
+    multi-repo intelligence
 
-27. The architecture I would target
+* * *
 
-I would evolve KEEL toward this:
+65. The architecture I would target
+    ===================================
+    
+                             USER OBJECTIVE
+                                    │
+                                    ▼
+                         ┌────────────────────┐
+                         │ Intent Interpreter │
+                         └─────────┬──────────┘
+                                   │
+                                   ▼
+                      ┌──────────────────────────┐
+                      │ Repository Intelligence  │
+                      │ Graph + Capability State │
+                      └────────────┬─────────────┘
+                                   │
+                                   ▼
+                          ┌────────────────┐
+                          │ Workflow Router│
+                          └────────┬───────┘
+                                   │
+                      ┌────────────┴────────────┐
+                      │                         │
+                SINGLE CHANGE                MISSION
+                      │                         │
+                      │                  ┌──────▼──────┐
+                      │                  │ Work Graph  │
+                      │                  └──────┬──────┘
+                      │                         │
+                      └──────────────┬──────────┘
+                                     ▼
+                        ┌────────────────────────┐
+                        │ Context Compiler       │
+                        │ + Impact Analysis      │
+                        └────────────┬───────────┘
+                                     │
+                                     ▼
+                          ┌────────────────────┐
+                          │ Topology / Model   │
+                          │ Capability Router  │
+                          └─────────┬──────────┘
+                                    │
+                        ┌───────────┴─────────────┐
+                        ▼                         ▼
+                   EXPLORERS                 REVIEWERS
+                        │                         │
+                        └───────────┬─────────────┘
+                                    ▼
+                             EXECUTION AGENTS
+                                    │
+                                    ▼
+                          ┌────────────────────┐
+                          │ KEEL Change Ledger │
+                          └─────────┬──────────┘
+                                    │
+                                    ▼
+                         Scope / Effect Guards
+                                    │
+                                    ▼
+                           Verification Graph
+                                    │
+                                    ▼
+                            Candidate Seal
+                                    │
+                                    ▼
+                             Integration
+                                    │
+                                    ▼
+                           Landed Verification
+                                    │
+                                    ▼
+                              Mission Verify
+                                    │
+                                    ▼
+                             Telemetry / Eval
+                                    │
+                                    ▼
+                        Feedback / Entropy Loop
+                                    │
+                                    └───────► Harness improvement
 
-                         USER OBJECTIVE
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ Mission Contract    │
-                    │ intent + success    │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │ Capability Resolver │
-                    │ project discovery   │
-                    └──────────┬──────────┘
-                               │
-               ┌───────────────┴───────────────┐
-               ▼                               ▼
-      Repository Knowledge             Research Providers
-      / Context Compiler
-               │                               │
-               └───────────────┬───────────────┘
-                               ▼
-                    ┌─────────────────────┐
-                    │ Work Graph Planner  │
-                    │ DAG + dependencies  │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                 ┌──────────────────────────┐
-                 │ Subagent Topology        │
-                 │ + Compute Router         │
-                 └────────────┬─────────────┘
-                              │
-            ┌─────────────────┼──────────────────┐
-            ▼                 ▼                  ▼
-       WORKTREE A        WORKTREE B         WORKTREE C
-       KEEL C-01         KEEL C-02          KEEL C-03
-            │                 │                  │
-      DISCUSS/PLAN       DISCUSS/PLAN       DISCUSS/PLAN
-            │                 │                  │
-         EXECUTE            EXECUTE             ...
-            │                 │
-            ▼                 ▼
-      EVIDENCE GRAPH    EVIDENCE GRAPH
-            │                 │
-          VERIFY            VERIFY
-            │                 │
-           SEAL             SEAL
-            └──────────┬──────┘
-                       ▼
-               Integration Manager
-                       │
-                 CI / Review Loop
-                       │
-                    LAND
-                       │
-                    ANCHOR
-                       │
-                       ▼
-                Mission Verification
-                       │
-                       ▼
-                  Feedback/Evals
-                       │
-                       ▼
-                 Invariant Promotion
+That would be a formidable architecture.
 
-And across everything:
+* * *
 
-Authorization
-Risk
-Effects
-Observability
-Provenance
-Recovery
-Audit
+66. Proposed KEEL architectural layers
+    ======================================
 
-That is a much stronger thesis than merely "Spec Kit, but better."
+I would formalize six major subsystems.
+KEEL Core
+---------
 
-28. Recommended next-generation KEEL roadmap
+Immutable concepts:
+    changes
+    states
+    requirements
+    acceptance
+    effects
+    authorization
+    verification
+    sealing
+    anchoring
 
-I would prioritize the next work in this order:
+This should remain small and extremely well tested.
 
-KEELBench + telemetry schema — establish measurable baseline against vanilla Codex first. Without this, you cannot determine whether future sophistication actually helps.
+* * *
 
-Capability Resolver / project discovery — make stack agnosticism operational instead of documentary.
+KEEL Intelligence
+-----------------
 
-Context Compiler + repository knowledge graph — drastically improve large-repo performance and token economics.
+Derived understanding:
+    repository graph
+    capability detection
+    impact analysis
+    command discovery
+    test mapping
+    context compilation
+    risk inference
 
-Requirements/acceptance/evidence graph — upgrade verification from command passing to behavioral traceability.
+No permission authority.
 
-keel next + workflow recommender — dramatically improve user experience with relatively little architectural risk.
+* * *
 
-Worktree manager + environment contracts — convert safe parallelism from policy into capability.
+KEEL Planner
+------------
 
-Mission/work-DAG layer — move KEEL from single-change governance into end-to-end objective execution.
+Transforms objectives into executable contracts:
+    workflow selection
+    requirements
+    architecture decisions
+    change decomposition
+    mission graph
 
-Dynamic subagent topology + compute routing — let problem structure determine agents/model effort.
+* * *
 
-Reconciliation engine — make unattended and long-horizon execution resilient.
+KEEL Runtime
+------------
 
-Feedback/eval/invariant promotion loop — give KEEL controlled self-improvement.
+Executes work:
+    worktrees
+    subagents
+    agent topology
+    retries
+    scheduling
+    integration
 
-Provider-neutral effect capabilities — move authorization away from shell-command pattern recognition.
+* * *
 
-Installer/version/upgrader/schema migration system — productize the framework.
+KEEL Adapters
+-------------
 
-Runtime proof providers — browser, logs, traces, metrics, benchmarks, devices, external CI.
+Provider/stack-specific behavior:
+    Codex
+    GitHub
+    GitLab
+    Node
+    Python
+    Rust
+    .NET
+    Java
+    Docker
+    Kubernetes
+    AWS
+    databases
+    browser
 
-Issue/PR orchestration adapters — GitHub, Linear, Jira, etc., with Symphony-like scheduling sitting above KEEL rather than inside its kernel.
+Core remains provider-neutral.
 
-That sequence matters.
+* * *
 
-I would not build the autonomous scheduler first.
+KEEL Learning
+-------------
 
-A scheduler amplifies whatever system is beneath it. Build the intelligence, evidence, context, and evaluation layers first; then unleash parallel autonomous execution.
+Measures whether the framework works:
+    telemetry
+    benchmarks
+    feedback
+    failure clustering
+    eval generation
+    harness promotion
 
-Where I think KEEL can actually win
+* * *
 
-The winning positioning is not:
+67. Recommended priority order
+    ==============================
 
-“The most comprehensive spec-driven development framework.”
+Do **not** implement everything simultaneously.
+P0 — Portability and runtime correctness
+----------------------------------------
 
-Too many systems already compete there.
+Fix immediately:
+    absolute local paths
+    non-Git bootstrap behavior
+    hermetic self-validation
+    runtime capability handshake
+    version compatibility
 
-Nor:
+Because every later benchmark becomes questionable if the framework itself cannot reproduce cleanly elsewhere.
 
-“The most agents.”
+* * *
 
-Meaningless arms race.
+P1 — Repository Intelligence Graph
+----------------------------------
 
-Nor:
+Build:
+    symbol/module graph
+    dependency graph
+    test mapping
+    command discovery
+    impact analysis
+    ownership/provenance
 
-“The most autonomous coding framework.”
+This improves almost every downstream decision.
 
-Autonomy is rapidly becoming commodity functionality.
+* * *
 
-The compelling thesis is:
+P2 — Mission Runtime
+--------------------
 
-KEEL is a stack-agnostic engineering control plane that converts high-level objectives into bounded, parallelizable, evidence-backed changes and can prove that what landed is what was intended, authorized, and verified.
+Convert:
+    mission_graph execution = DEFERRED
 
-And eventually:
+into an actual scheduler:
+    frontier
+    → worktrees
+    → agents
+    → verify
+    → review
+    → seal
+    → integrate
+    → next frontier
 
-It continuously learns which capabilities, context, agents, checks, and invariants produce the best engineering outcomes.
+This is the most important competitive feature.
 
-That second sentence is where it goes from an unusually strong harness to something potentially category-defining.
+* * *
 
-The current system already possesses the hardest-to-retrofit part: a serious execution-integrity kernel. Most competing systems could add more agents tomorrow. Retrofitting effects-bound authorization, verification-bound Git objects, landed-tree validation, scope confinement, controlled replanning, emergency process debt, and a domain activation model into a loose workflow framework is considerably harder.
+P3 — Adaptive Workflow Engine
+-----------------------------
 
-The next milestone, therefore, should not be “KEEL v2 with more documentation.” It should be a focused architectural release centered on Capability Resolution + Context Compilation + Acceptance/Evidence Graph + KEELBench. Those four primitives would attack the largest weaknesses while strengthening the design you already have rather than diluting it. (OpenAI)
+Add:
+    bugfix
+    feature
+    refactor
+    migration
+    security
+    release
+    performance
+    incident
+
+with domain-specific obligations.
+
+* * *
+
+P4 — Topology and Model Capability Router
+-----------------------------------------
+
+Route:
+    task
+    → roles
+    → context
+    → model capability
+    → verification policy
+
+Avoid hard-coding model brands.
+
+* * *
+
+P5 — Developer UX
+-----------------
+
+Create:
+    keel
+    keel run
+    keel status
+    keel adopt
+
+with a clean dashboard-like terminal experience.
+
+* * *
+
+P6 — Verification intelligence
+------------------------------
+
+Build:
+    typed assertions
+    change-aware checks
+    impact-derived verification
+    oracle independence checks
+    semantic diff classification
+
+* * *
+
+P7 — Self-improvement loop
+--------------------------
+
+Operationalize:
+    observation
+    → failure cluster
+    → eval
+    → intervention
+    → benchmark
+    → promotion
+
+* * *
+
+P8 — Productization
+-------------------
+
+Add:
+    installer
+    version pinning
+    upgrade channels
+    migration system
+    plugin/adapter packaging
+    team distribution
+
+* * *
+
+68. One rule I would impose now
+    ===============================
+
+Every future KEEL feature should have to answer:
+
+> **Does this measurably improve correctness, autonomous capability, engineering efficiency, or human oversight?**
+
+If not, don't add it.
+
+KEEL's biggest strategic danger is not missing sophistication.
+
+It is **process accretion**.
+
+Because your framework already contains unusually strong governance primitives, it would be very easy to confuse additional mechanisms with additional capability.
+
+The next phase should optimize:
+    less human work
+    more agent autonomy
+    better decisions
+    stronger evidence
+    fewer failures
+
+not:
+    more files
+    more gates
+    more templates
+
+* * *
+
+69. The metric that should define KEEL
+    ======================================
+
+I would eventually define a composite metric such as:
+    Verified Engineering Yield
+
+Conceptually:
+    VEY =
+    verified accepted changes
+    ──────────────────────────
+    human effort × compute cost × elapsed time
+
+subject to hard penalties for:
+    regressions
+    scope violations
+    unauthorized effects
+    security failures
+    rework
+
+That would give KEEL a measurable optimization objective.
+
+You do not want:
+
+> maximum agent activity.
+
+You want:
+
+> **maximum trustworthy engineering output per unit of supervision and compute.**
+
+That is a much stronger thesis.
+
+* * *
+
+70. Final assessment
+    ====================
+
+KEEL v2 is not yet superior to all of the systems you named.
+
+But it **does possess a core idea that could make it superior in an important way**.
+
+GSD is currently stronger at context-driven execution.
+
+BMAD is stronger at lifecycle breadth and planning experience.
+
+Spec Kit is stronger at specification UX.
+
+Spec Kitty is stronger at mission orchestration.
+
+OpenSpec is stronger at low-friction adoption.
+
+Kiro is vastly stronger as an integrated product.
+
+Conductor is stronger at parallel-agent workspace UX.
+
+Zenflow is stronger at agent/model orchestration.
+
+Superpowers is stronger at focused skill methodology.
+
+Yet none of those advantages invalidate KEEL.
+
+KEEL's distinctive foundation is:
+    INTENT
+      +
+    SCOPE
+      +
+    RISK
+      +
+    EFFECTS
+      +
+    AUTHORIZATION
+      +
+    EVIDENCE
+      +
+    EXACT GIT STATE
+
+bound into one verifiable lifecycle.
+
+That is exactly the kind of control plane that becomes more valuable as coding agents become **more autonomous**, not less.
+
+The strategic path therefore is not to imitate every competitor.
+
+It is to combine:
+    GSD's context discipline
+
+    + BMAD's adaptive planning
+
+    + Spec Kit's intent ergonomics
+
+    + Spec Kitty's mission runtime
+
+    + OpenSpec's low ceremony
+
+    + Kiro's repository intelligence and UX
+
+    + Superpowers' composable execution skills
+
+    + Conductor's isolated parallelism
+
+    + Zenflow's model/agent routing
+
+    + KEEL's own verification and authorization substrate
+
+into one coherent system.
+
+If executed correctly, KEEL stops being a "Codex project setup."
+
+It becomes:
+
+> **a stack-independent operating system for trustworthy autonomous software engineering.**
+
+That is ambitious enough to justify the architecture you have already built.
+
+The first implementation wave I would pursue is **P0 portability → Repository Intelligence Graph → executable Mission Runtime**. Those three changes would eliminate the clearest weaknesses I found and move KEEL from an unusually rigorous governance framework toward a genuinely autonomous engineering system.
+
+71. Supplied competitive-audit reconciliation
+   =============================================
+
+The supplied competitive architecture audit confirms the direction above and adds four immediate trust-boundary findings that must remain explicit in the roadmap:
+
+* Canonical verification must be portable. Required validators may not depend on creator-machine absolute paths; they must resolve to repository-owned or discoverable, version-constrained capabilities.
+* Effect enforcement must cover the complete tool surface. Shell/apply-patch matching is not sufficient when MCP and function tools can perform consequential work. A Tool Capability Registry should classify structured invocations, fail closed for unknown mutating tools during protected work, and keep Codex rules as a complementary shell-enforcement lane.
+* Framework distribution must be separated from framework-development history. Consumer installs should not inherit the framework repository's historical ledger archaeology.
+* Hook configuration is not runtime proof. Installation, project trust, hook activation, compatibility, and failure behavior require an observable capability/guardrail handshake; configuration presence alone must never be reported as active enforcement.
+
+The audit also makes the execution gap concrete. Mission planning currently remains advisory where `dispatch_plan()` reports deferred execution. The target runtime is a bounded controller that uses native runtime subagents and worktrees where available, while KEEL remains responsible for intent, scope, effects, authorization, evidence, and lifecycle state:
+
+    mission objective
+        → repository intelligence and decomposition
+        → dependency waves and isolated child changes
+        → execute
+        → deterministic verify
+        → acceptance coverage and independent review
+        → bounded repair/reverify
+        → seal and authorized integration
+
+The governing boundary remains:
+
+> **KEEL decides what, why, allowed effects, and proof; the execution runtime decides how agents run; KEEL observes and validates the result.**
+
+The intelligence layer should evolve in parallel with that runtime, but must remain advisory. Its next contracts are:
+
+* a typed, provenance-bearing repository graph for symbols, modules, dependencies, runtime surfaces, tests, ownership, generated artifacts, and deployment/data boundaries;
+* query-driven, role-specific context compilation with priority/token allocation instead of raw character truncation, preserving objective, acceptance, scope, forbidden effects, authorization, and lifecycle state as non-droppable material;
+* capability-based routing using task/repository features, uncertainty, fan-out, test surface, historical outcomes, runtime capability, and cost/latency budgets—not only risk and dependency count;
+* a bounded convergence loop that classifies missing, partial, contradictory, and unrequested work before creating repair work;
+* domain-aware workflow obligations activated only from repository evidence, including bugfix, feature, migration, security, performance, dependency, API, UI/accessibility, infrastructure, and release work.
+
+Finally, KEELBench must decide whether these additions help. Future evaluation should compare vanilla Codex and KEEL across representative task classes and repeated runs, measuring correctness, intent fidelity, safety, quality, autonomy, efficiency, parallelism, resilience, context quality, proof quality, adaptability, and learning value. Component ablations should identify which controls produce the uplift; architectural complexity without measurable trustworthy-engineering yield should not be promoted.
+
+The consolidated strategic sequence is therefore:
+
+    portable trust boundary
+        → executable mission scheduler
+        → bounded convergence
+        → semantic repository/context engine
+        → empirical adaptive routing and learning
+
+This reconciliation updates the roadmap; it does not claim that any of these target capabilities are already implemented.
