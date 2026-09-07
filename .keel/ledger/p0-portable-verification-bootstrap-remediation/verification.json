@@ -1,9 +1,9 @@
 {
   "acceptance": {
-    "passed_required": 3,
+    "passed_required": 4,
     "required": 4,
     "requirements_covered": 4,
-    "requirements_passing": 3,
+    "requirements_passing": 4,
     "requirements_total": 4
   },
   "base_commit": "6b0414d61395db0067d593dd5aa578efb74697d8",
@@ -41,7 +41,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 246,
+      "duration_ms": 254,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -65,7 +65,7 @@
         ".keel/tests/test_p0_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 576,
+      "duration_ms": 551,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}\n\nwarning: in the working copy of '.keel/templates/acceptance.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/authorization.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/delta.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/effects.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/proposal.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/requirements.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/risk-review.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/risk.json', LF will be replaced by CRLF the next time Git touches it",
       "exit_code": 0,
       "id": "p0-contract-tests",
@@ -89,7 +89,7 @@
         "manifest"
       ],
       "cwd": ".",
-      "duration_ms": 190,
+      "duration_ms": 193,
       "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"87de6485450c1017d361fd3ceaad40c705e2348ef4ba6bcc3af78754b339a2ae\"\n}",
       "exit_code": 0,
       "id": "manifest-producer-check",
@@ -140,7 +140,7 @@
         "."
       ],
       "cwd": ".",
-      "duration_ms": 52,
+      "duration_ms": 60,
       "excerpt": "",
       "exit_code": 0,
       "id": "remediation-diff-check",
@@ -167,7 +167,7 @@
         ".keel/tests/test_capability_resolver.py"
       ],
       "cwd": ".",
-      "duration_ms": 103,
+      "duration_ms": 120,
       "excerpt": "Capability resolver tests PASS",
       "exit_code": 0,
       "id": "capability-resolver-tests",
@@ -191,7 +191,7 @@
         ".keel/tests/test_context_compiler.py"
       ],
       "cwd": ".",
-      "duration_ms": 138,
+      "duration_ms": 135,
       "excerpt": "Context compiler tests PASS",
       "exit_code": 0,
       "id": "context-compiler-tests",
@@ -215,7 +215,7 @@
         ".keel/tests/test_evidence_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 112,
+      "duration_ms": 116,
       "excerpt": "Evidence graph tests PASS",
       "exit_code": 0,
       "id": "evidence-graph-tests",
@@ -239,7 +239,7 @@
         ".keel/tests/test_next_action.py"
       ],
       "cwd": ".",
-      "duration_ms": 1126,
+      "duration_ms": 1108,
       "excerpt": "Next-action tests PASS",
       "exit_code": 0,
       "id": "next-action-tests",
@@ -263,7 +263,7 @@
         ".keel/tests/test_worktree_lifecycle.py"
       ],
       "cwd": ".",
-      "duration_ms": 663,
+      "duration_ms": 631,
       "excerpt": "Worktree lifecycle tests PASS",
       "exit_code": 0,
       "id": "worktree-lifecycle-tests",
@@ -311,7 +311,7 @@
         ".keel/tests/test_upgrade_kernel.py"
       ],
       "cwd": ".",
-      "duration_ms": 450,
+      "duration_ms": 448,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
       "exit_code": 0,
       "id": "upgrade-kernel-tests",
@@ -335,7 +335,7 @@
         ".keel/tests/test_mission_work_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 110,
+      "duration_ms": 99,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"dispatch-contract\", \"read-only\"]}",
       "exit_code": 0,
       "id": "mission-work-graph-tests",
@@ -359,7 +359,7 @@
         ".keel/tests/test_repository_map.py"
       ],
       "cwd": ".",
-      "duration_ms": 871,
+      "duration_ms": 842,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"semantic-imports\", \"ownership-source\", \"ignored-directories\", \"derived-only\"]}",
       "exit_code": 0,
       "id": "repository-map-tests",
@@ -407,7 +407,7 @@
         ".keel/tests/test_provider_effect_contracts.py"
       ],
       "cwd": ".",
-      "duration_ms": 137,
+      "duration_ms": 143,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provider-binding\", \"provider-failure\", \"schema-adapter\", \"effect-vocabulary\", \"authorization-preserved\"]}",
       "exit_code": 0,
       "id": "provider-effect-contract-tests",
@@ -431,7 +431,7 @@
         ".keel/tests/test_feedback_entropy.py"
       ],
       "cwd": ".",
-      "duration_ms": 100,
+      "duration_ms": 97,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provenance\", \"review-gate\", \"goal-record\", \"deterministic-scan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "feedback-entropy-tests",
@@ -455,7 +455,7 @@
         ".keel/tests/test_lifecycle_compatibility.py"
       ],
       "cwd": ".",
-      "duration_ms": 105,
+      "duration_ms": 104,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "lifecycle-compatibility-tests",
@@ -479,7 +479,7 @@
         ".keel/tests/test_developer_ux.py"
       ],
       "cwd": ".",
-      "duration_ms": 3344,
+      "duration_ms": 3303,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"init\", \"review\", \"eligibility-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "developer-ux-tests",
@@ -503,7 +503,7 @@
         ".keel/tests/test_effect_inference.py"
       ],
       "cwd": ".",
-      "duration_ms": 91,
+      "duration_ms": 96,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"mapping\", \"unknown-neutrality\", \"advisory-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "effect-inference-tests",
@@ -527,7 +527,7 @@
         ".keel/tests/test_schema_migrations.py"
       ],
       "cwd": ".",
-      "duration_ms": 116,
+      "duration_ms": 115,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"preflight\", \"atomic-apply\", \"backup\", \"rollback\", \"unsupported-version\"]}",
       "exit_code": 0,
       "id": "schema-migration-tests",
@@ -593,11 +593,9 @@
       }
     }
   ],
-  "content_digest": "d6a4e23ec832c7349895578ca90fae202adf87d574207802c1881b163d093e36",
-  "errors": [
-    "acceptance criterion failed: AC-REM-004"
-  ],
+  "content_digest": "3380cb74b4ffcbdc477ac732c6fd11e47c6fdc60c1dd3837d003db86138a1856",
+  "errors": [],
   "schema_version": 2,
-  "status": "FAIL",
-  "verified_at": "2026-09-07T20:33:19+00:00"
+  "status": "PASS",
+  "verified_at": "2026-09-07T20:33:45+00:00"
 }

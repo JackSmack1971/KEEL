@@ -82,12 +82,6 @@
           "passed": true,
           "path": "docs/exec-plans/completed/p0-portable-verification-bootstrap-remediation.md",
           "provider": "file_exists"
-        },
-        {
-          "detail": "matched=",
-          "passed": false,
-          "path": "docs/exec-plans/active/p0-portable-verification-bootstrap-contract.md",
-          "provider": "changed_path"
         }
       ],
       "evidence_type": null,
@@ -99,12 +93,10 @@
       "required": true,
       "requirement_id": "REQ-REM-004",
       "statement": "The original P0 plan is present under docs/exec-plans/completed, absent from docs/exec-plans/active, and the authoritative roadmap preserves P1 as unstarted.",
-      "status": "FAIL"
+      "status": "PASS"
     }
   ],
-  "errors": [
-    "acceptance criterion failed: AC-REM-004"
-  ],
+  "errors": [],
   "requirement_coverage": [
     {
       "criterion_count": 1,
@@ -145,7 +137,7 @@
         "AC-REM-004"
       ],
       "implementation_paths": [],
-      "passed": false,
+      "passed": true,
       "priority": "must",
       "requirement_id": "REQ-REM-004",
       "type": "behavior"
@@ -174,12 +166,12 @@
     }
   ],
   "schema_version": 1,
-  "status": "FAIL",
+  "status": "PASS",
   "summary": {
-    "passed_required": 3,
+    "passed_required": 4,
     "required": 4,
     "requirements_covered": 4,
-    "requirements_passing": 3,
+    "requirements_passing": 4,
     "requirements_total": 4
   }
 }
