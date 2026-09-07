@@ -1,0 +1,5 @@
+{"details": {"base_commit": "0d972beb0869fb22cede08111f9fc5ec85c5dfa3", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T20:36:18+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T20:36:57+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T20:36:57+00:00"}
+{"details": {"changed_paths": ["docs/exec-plans/completed/p0-portable-verification-bootstrap-contract.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T20:37:29+00:00"}
+{"details": {"content_digest": "2e7b42121b81579407403ca834ada7b53a1885a8d0d59083d4964d1cb55a56a6", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T20:37:29+00:00"}

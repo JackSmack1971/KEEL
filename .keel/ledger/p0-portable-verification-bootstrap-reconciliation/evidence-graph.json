@@ -1,0 +1,54 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "detail": "exists=True",
+          "passed": true,
+          "path": "docs/exec-plans/completed/p0-portable-verification-bootstrap-contract.md",
+          "provider": "file_exists"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-RECON-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-RECON-001",
+      "statement": "The archived P0 plan exists at its completed location and its repaired relative roadmap link is validated separately by the repository strict validator.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-RECON-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-RECON-001",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-RECON-001",
+      "source": "post-archive strict validation finding",
+      "statement": "Archived P0 documentation links resolve and strict control-plane validation passes without changing implementation or anchored P0 evidence."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 1,
+    "required": 1,
+    "requirements_covered": 1,
+    "requirements_passing": 1,
+    "requirements_total": 1
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id":"AC-RECON-001","requirement_id":"REQ-RECON-001","statement":"The archived P0 plan exists at its completed location and its repaired relative roadmap link is validated separately by the repository strict validator.","required":true,"policy":"all","evidence":[{"provider":"file_exists","path":"docs/exec-plans/completed/p0-portable-verification-bootstrap-contract.md"}]}]
+}

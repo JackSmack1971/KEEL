@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id":"REQ-RECON-001","statement":"Archived P0 documentation links resolve and strict control-plane validation passes without changing implementation or anchored P0 evidence.","source":"post-archive strict validation finding"}]
+}

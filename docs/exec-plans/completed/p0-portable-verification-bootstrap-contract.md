@@ -4,7 +4,7 @@ Status: `COMPLETE / LANDED`
 
 ## Authority and lifecycle boundary
 
-This is the one authoritative active ExecPlan for P0. It is subordinate to [`docs/control-plane/UPGRADE_AUDIT.md`](../../control-plane/UPGRADE_AUDIT.md) for requirement identity, classification, evidence, and unresolved gaps, and subordinate to [`upgrade-remaining-plan.md`](upgrade-remaining-plan.md) for roadmap boundaries and dependency order.
+This is the historical completed ExecPlan for P0. It is subordinate to [`docs/control-plane/UPGRADE_AUDIT.md`](../../control-plane/UPGRADE_AUDIT.md) for requirement identity, classification, evidence, and unresolved gaps, and subordinate to [`upgrade-remaining-plan.md`](../active/upgrade-remaining-plan.md) for roadmap boundaries and dependency order.
 
 KEEL change: `p0-portable-verification-bootstrap-contract`.
 
