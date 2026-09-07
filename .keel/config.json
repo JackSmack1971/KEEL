@@ -89,6 +89,29 @@
       "id": "control-plane-doctor",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bench/test_keelbench.py"
+      ],
+      "cwd": ".",
+      "id": "keelbench-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keelbench.py",
+        "--root",
+        ".",
+        "validate"
+      ],
+      "cwd": ".",
+      "id": "keelbench-validate",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

@@ -1,0 +1,92 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The deterministic KEELBench test suite passes for valid paired trial creation and metadata preservation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "The deterministic KEELBench test suite rejects missing, duplicate, and mismatched paired evidence.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "The deterministic KEELBench test suite verifies paired scoring and conservative incomplete-trial behavior.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-validate",
+          "detail": "check=keelbench-validate exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "The benchmark corpus and telemetry schema remain valid.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "milestone-assessment",
+      "statement": "KEELBench represents baseline and KEEL runs as reproducible pairs sharing scenario, replicate, rubric, seed, and starting-state identity."
+    },
+    {
+      "id": "REQ-002",
+      "source": "milestone-assessment",
+      "statement": "KEELBench refuses incomplete or mismatched trials before calculating comparative uplift."
+    },
+    {
+      "id": "REQ-003",
+      "source": "milestone-assessment",
+      "statement": "KEELBench reports paired and aggregate metrics without treating deterministic validation as empirical performance evidence."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"The deterministic KEELBench test suite passes for valid paired trial creation and metadata preservation.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"keelbench-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"The deterministic KEELBench test suite rejects missing, duplicate, and mismatched paired evidence.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"keelbench-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"The deterministic KEELBench test suite verifies paired scoring and conservative incomplete-trial behavior.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"keelbench-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-003","statement":"The benchmark corpus and telemetry schema remain valid.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"keelbench-validate"}]}
+  ]
+}

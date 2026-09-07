@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"KEELBench represents baseline and KEEL runs as reproducible pairs sharing scenario, replicate, rubric, seed, and starting-state identity.","source":"milestone-assessment"},
+    {"id":"REQ-002","statement":"KEELBench refuses incomplete or mismatched trials before calculating comparative uplift.","source":"milestone-assessment"},
+    {"id":"REQ-003","statement":"KEELBench reports paired and aggregate metrics without treating deterministic validation as empirical performance evidence.","source":"milestone-assessment"}
+  ]
+}
