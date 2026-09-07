@@ -116,6 +116,14 @@
       "provenance": ".keel/bin/keel.py"
     },
     {
+      "argv": ["git", "diff", "--check", "6b0414d61395db0067d593dd5aa578efb74697d8", "--", "."],
+      "cwd": ".",
+      "id": "remediation-diff-check",
+      "required": true,
+      "timeout_sec": 120,
+      "provenance": ".keel/config.json"
+    },
+    {
       "argv": [
         "python",
         "-B",

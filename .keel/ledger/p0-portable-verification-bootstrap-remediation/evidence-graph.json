@@ -1,0 +1,183 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "provider=unit_test check=p0-contract-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_p0_contract.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-REM-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-REM-001",
+      "statement": "Focused disposable manifest fixtures return VERIFIED only for matching inputs and after regeneration; changed, missing, and unrelated drift return explicit non-passing statuses.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "provider=unit_test check=p0-contract-tests exit=0",
+          "passed": true,
+          "path": ".keel/tests/test_p0_contract.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-REM-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-REM-002",
+      "statement": "Focused command-resolution tests show zero candidates as UNSUPPORTED and a present candidate without provenance as a distinct UNVERIFIED_RUNTIME or BLOCKED result, while preserving the other required distinctions.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "argv": [
+            "git",
+            "diff",
+            "--check",
+            "6b0414d61395db0067d593dd5aa578efb74697d8",
+            "HEAD"
+          ],
+          "check_id": "remediation-diff-check",
+          "detail": "check=remediation-diff-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-REM-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-REM-003",
+      "statement": "The final parent-to-remediation commit git diff --check passes with no exclusions or whitespace suppression.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "exists=True",
+          "passed": true,
+          "path": "docs/exec-plans/completed/p0-portable-verification-bootstrap-contract.md",
+          "provider": "file_exists"
+        },
+        {
+          "detail": "exists=True",
+          "passed": true,
+          "path": "docs/exec-plans/completed/p0-portable-verification-bootstrap-remediation.md",
+          "provider": "file_exists"
+        },
+        {
+          "detail": "matched=docs/exec-plans/active/p0-portable-verification-bootstrap-contract.md",
+          "passed": true,
+          "path": "docs/exec-plans/active/p0-portable-verification-bootstrap-contract.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-REM-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-REM-004",
+      "statement": "The original P0 plan is present under docs/exec-plans/completed, absent from docs/exec-plans/active, and the authoritative roadmap preserves P1 as unstarted.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-REM-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-REM-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-REM-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-REM-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-REM-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-REM-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-REM-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-REM-004",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-REM-001",
+      "source": "P0 remediation defect 1 / AC-005",
+      "statement": "A manifest-listed missing or changed input, or an unrelated generated drift, is never reported as VERIFIED; matching inputs and successful regeneration are verified."
+    },
+    {
+      "id": "REQ-REM-002",
+      "source": "P0 remediation defect 2 / AC-001",
+      "statement": "Zero discovered commands and present-but-unproven discovered commands have distinct non-passing classifications while proven, ambiguous, unavailable, and unauthorized cases remain distinct."
+    },
+    {
+      "id": "REQ-REM-003",
+      "source": "P0 remediation defect 3",
+      "statement": "The remediation's committed repository diff passes git diff --check without excluding ledger files or ignoring whitespace."
+    },
+    {
+      "id": "REQ-REM-004",
+      "source": "P0 remediation defect 4",
+      "statement": "The completed original P0 ExecPlan is archived under the completed convention only after remediation verification, with references reconciled and P1 unstarted."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

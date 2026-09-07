@@ -54,22 +54,30 @@ def resolve_command(root: Path, declaration: dict | None = None, candidates: lis
         return _finding(PASS, "declared repository-relative command is executable", source="declared", argv=argv, provenance=declaration.get("provenance", "runtime contract"))
 
     valid = []
+    proven_unavailable = []
+    unproven = []
     for candidate in candidates or []:
         if not isinstance(candidate, dict):
             continue
         argv = candidate.get("argv")
         ok, reason = _literal_argv(argv)
         provenance = candidate.get("provenance")
-        if not ok or not provenance:
+        if not ok or not provenance or candidate.get("repository_owned") is not True:
+            unproven.append(candidate)
             continue
         if any(Path(part).is_absolute() for part in argv):
+            unproven.append(candidate)
             continue
-        if candidate.get("repository_owned") is not True:
-            continue
-        if shutil.which(argv[0]) is None and not (argv[0].startswith(".") and (root / argv[0]).is_file()):
+        available = shutil.which(argv[0]) is not None or (argv[0].startswith(".") and (root / argv[0]).is_file())
+        if not available:
+            proven_unavailable.append(candidate)
             continue
         valid.append(candidate)
     if len(valid) == 0:
+        if unproven:
+            return _finding(UNVERIFIED_RUNTIME, "discovered command candidate exists but provenance/trust is unproven", candidates=unproven)
+        if proven_unavailable:
+            return _finding("UNAVAILABLE", "provenance-bearing discovered command is unavailable", candidates=proven_unavailable)
         return _finding("UNSUPPORTED", "zero valid provenance-bearing discovered commands", candidates=len(candidates or []))
     if len(valid) > 1:
         return _finding("AMBIGUOUS", "multiple valid discovered commands", candidates=valid)
@@ -174,12 +182,14 @@ def manifest_producer(root: Path, write: bool = False) -> dict:
     data["producer"] = {"command": ["python", ".keel/bin/keel.py", "manifest", "--write"], "source": ".keel/lib/p0_contract.py"}
     for rel in sorted(data.get("files", {})):
         target = root / rel
-        if target.is_file():
-            data["files"][rel] = hashlib.sha256(target.read_bytes()).hexdigest()
+        if not target.is_file():
+            return _finding("FAILED", "manifest-listed input is missing", path=rel)
+        data["files"][rel] = hashlib.sha256(target.read_bytes()).hexdigest()
     for seed in data.get("seed_sources", []):
         target = root / seed["path"]
-        if target.is_file():
-            seed["sha256"] = hashlib.sha256(target.read_bytes()).hexdigest()
+        if not target.is_file():
+            return _finding("FAILED", "manifest-listed seed input is missing", path=seed["path"])
+        seed["sha256"] = hashlib.sha256(target.read_bytes()).hexdigest()
     encoded = json.dumps(data, indent=2, sort_keys=False) + "\n"
     current = path.read_text(encoding="utf-8")
     if write:

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-REM-001","statement":"A manifest-listed missing or changed input, or an unrelated generated drift, is never reported as VERIFIED; matching inputs and successful regeneration are verified.","source":"P0 remediation defect 1 / AC-005"},
+    {"id":"REQ-REM-002","statement":"Zero discovered commands and present-but-unproven discovered commands have distinct non-passing classifications while proven, ambiguous, unavailable, and unauthorized cases remain distinct.","source":"P0 remediation defect 2 / AC-001"},
+    {"id":"REQ-REM-003","statement":"The remediation's committed repository diff passes git diff --check without excluding ledger files or ignoring whitespace.","source":"P0 remediation defect 3"},
+    {"id":"REQ-REM-004","statement":"The completed original P0 ExecPlan is archived under the completed convention only after remediation verification, with references reconciled and P1 unstarted.","source":"P0 remediation defect 4"}
+  ]
+}

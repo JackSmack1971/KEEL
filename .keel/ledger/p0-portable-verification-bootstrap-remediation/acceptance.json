@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-REM-001","requirement_id":"REQ-REM-001","statement":"Focused disposable manifest fixtures return VERIFIED only for matching inputs and after regeneration; changed, missing, and unrelated drift return explicit non-passing statuses.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"p0-contract-tests","path":".keel/tests/test_p0_contract.py"}]},
+    {"id":"AC-REM-002","requirement_id":"REQ-REM-002","statement":"Focused command-resolution tests show zero candidates as UNSUPPORTED and a present candidate without provenance as a distinct UNVERIFIED_RUNTIME or BLOCKED result, while preserving the other required distinctions.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"p0-contract-tests","path":".keel/tests/test_p0_contract.py"}]},
+    {"id":"AC-REM-003","requirement_id":"REQ-REM-003","statement":"The final parent-to-remediation commit git diff --check passes with no exclusions or whitespace suppression.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"remediation-diff-check","argv":["git","diff","--check","6b0414d61395db0067d593dd5aa578efb74697d8","HEAD"]}]},
+    {"id":"AC-REM-004","requirement_id":"REQ-REM-004","statement":"The original P0 plan is present under docs/exec-plans/completed, absent from docs/exec-plans/active, and the authoritative roadmap preserves P1 as unstarted.","required":true,"policy":"all","evidence":[{"provider":"file_exists","path":"docs/exec-plans/completed/p0-portable-verification-bootstrap-contract.md"},{"provider":"file_exists","path":"docs/exec-plans/completed/p0-portable-verification-bootstrap-remediation.md"},{"provider":"changed_path","path":"docs/exec-plans/active/p0-portable-verification-bootstrap-contract.md"}]}
+  ]
+}

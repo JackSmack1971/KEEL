@@ -1,0 +1,11 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/p0_contract.py
+.keel/lib/keel_core.py
+.keel/tests/test_p0_contract.py
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+docs/exec-plans/active/p0-portable-verification-bootstrap-remediation.md
+docs/exec-plans/completed/p0-portable-verification-bootstrap-remediation.md
+docs/exec-plans/active/p0-portable-verification-bootstrap-contract.md
+docs/exec-plans/completed/p0-portable-verification-bootstrap-contract.md
+docs/exec-plans/active/upgrade-remaining-plan.md
