@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"The upgrade audit contains a once-only authoritative matrix for executable docs/KEEL_UPGRADES.md requirements, with corrected classifications and evidence, while contextual or superseded material is distinguished.","source":"pasted-task"},
+    {"id":"REQ-002","statement":"The active upgrade roadmap is the sole authoritative top-level roadmap and contains P0–P7, their reviewed dependencies and safety contract, plus D1 explicitly deferred and non-prerequisite.","source":"pasted-task"},
+    {"id":"REQ-003","statement":"Completed bounded implementation slices, overlapping plans, and benchmark plans remain preserved as historical evidence but are no longer active execution authority.","source":"pasted-task"},
+    {"id":"REQ-004","statement":"No implementation-bearing file is changed by this reconciliation.","source":"pasted-task"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Audit inspection and manual deterministic document checks show every executable source requirement maps exactly once and required corrected statuses are present.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Roadmap inspection and manual deterministic document checks show P0–P7, P4 BLOCKED, D1 DEFERRED, the dependency graph, and all execution-safety rules, with no active phase depending on D1.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Active/completed plan inventory and cross-reference search show historical and benchmark plans are archived or explicitly deferred/superseded and only the consolidated roadmap is active top-level authority.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-004","requirement_id":"REQ-004","statement":"Git diff path inspection shows only planning/documentation artifacts and the KEEL ledger for this change were modified; implementation-bearing files are unchanged.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"}]},
+    {"id":"AC-005","requirement_id":"REQ-001","statement":"Manual negative check proves a stale active-plan filename or benchmark prerequisite cannot be treated as current authority.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]}
+  ]
+}

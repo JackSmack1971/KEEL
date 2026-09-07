@@ -1,55 +1,39 @@
 # KEEL upgrade audit
 
-This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means executable repository evidence exists, not merely a documented intention.
+This is the authoritative requirement matrix for the executable upgrade proposals in `docs/KEEL_UPGRADES.md`. Status is based on repository evidence, not plan or ledger phase. Strategic comparison, advice, and target architecture are recorded separately and are not silently promoted to executable requirements.
 
-| Upgrade area | Status | Evidence / remaining work |
-|---|---|---|
-| Requirements and acceptance traceability | Partially implemented | `requirements.json`, `acceptance.json`, evidence graph, and verification enforce coverage; typed requirement/priority/evidence metadata and implementation-surface paths are now schema-checked, while richer automatic spec generation remains absent. |
-| Capability resolution | Implemented | `.keel/lib/capability_resolver.py`, `keel discover`, resolver tests; advisory statuses remain policy-neutral. |
-| Context compilation | Implemented | `.keel/lib/context_compiler.py`, provenance metadata, context tests. |
-| KEELBench | Implemented as harness | Paired-trial schema, validation, creation, and scoring exist; empirical superiority remains unvalidated until real trials are run. |
-| `keel next` | Implemented | Read-only lifecycle guidance and focused tests. |
-| Worktrees and environment contracts | Implemented as local primitives | Safe worktree commands and declarative contract inspection exist; mission-level orchestration is absent. |
-| Repository mapping / knowledge graph | Partially implemented | `keel map` emits deterministic, provenance-bearing topology/module/entrypoint/test/command/dependency facts, Python AST imports, and literal CODEOWNERS rules when available; architecture inference and an actual ownership policy remain absent. |
-| Missions / work DAG | Partially implemented | `keel mission` validates contracts, computes a read-only dependency frontier/status projection, and emits isolated dispatch contracts; runtime dispatch, mission verification, retries, and integration remain absent. |
-| Reconciliation | Implemented as read-only kernel | `keel reconcile` compares Git, ledger, environment, compatibility, contracts, and next action; repair/retry/integration adapters remain future work. |
-| Evidence providers | Partially implemented | Declared provider types validate through configured check IDs and literal exit status; native repository `file_exists` and narrow JSON `schema` evidence now evaluate locally. Browser/log/metric/trace/device adapters remain project-specific. |
-| Effect capabilities | Partially implemented | Effect names are validated against `.keel/contracts.json`; `keel effects` conservatively infers recognized argv capabilities and reports undeclared mismatches without authorization. Runtime tool/API inference and capability-aware authorization enforcement remain absent. |
-| Dynamic topology / compute routing | Partially implemented | `keel route` emits deterministic complexity, model-independent effort capabilities, roles, and verification breadth; runtime dispatch and provider/model mapping remain external. |
-| Reusable engineering protocols | Partially implemented | The routed `engineering-protocols` skill covers debugging, architecture, dependency, migration, security, performance, frontend runtime, test remediation, incident, and release concerns; behavioral evaluation and deeper domain-specific references remain future work. |
-| Learning loop / entropy service | Partially implemented | Reviewed observation validation, deterministic queue and target-plan projections, and non-destructive entropy scans now exist; promotion, external ingestion, scheduled operation, and target eval execution remain. |
-| Developer UX | Partially implemented | `init --check`, `review`, `ship` eligibility, mission, map, route, compat, and entropy projections exist; `run`/agent dispatch remains deferred until an authorized execution runtime exists. |
-| Version / install / upgrade / migration | Partially implemented | `keel version`, `compat`, `migrate --check`, and `migrate --plan` inventory/preflight repository-owned versions; the tested migration registry supports config 1→2 with atomic backup/rollback primitives. Installer, live authorized migration orchestration, and external Codex version checks remain. |
-| Issue/PR integrations | Deferred | No external tracker adapter; correctly requires separate authorization and runtime prerequisites. |
+## Authoritative requirement matrix
 
-## Source-section traceability
+Each executable requirement is represented once. Rows combine source sections only when they describe one bounded capability.
 
-The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections that synthesize competitor observations are recorded as context, not treated as missing runtime features.
+| Source sections | Requirement | Status | Repository evidence / remaining boundary |
+|---|---|---|---|
+| 1–3 | Preserve governed changes, verified candidates, scope, and effects | COMPLETE | `.keel/ledger/`, `docs/control-plane/KEEL.md`, and lifecycle verification provide the existing control-plane substrate. |
+| 5 | Requirements and acceptance traceability | COMPLETE | `requirements.json`, `acceptance.json`, evidence graph, and verification enforce the currently defined contract. Richer automatic specification generation is a separate future capability. |
+| 6 | Typed evidence graph | PARTIAL | `.keel/lib/evidence_graph.py` and configured check IDs provide local typed coverage; richer providers and independent runtime evidence remain. |
+| 7 | Capability resolution | PARTIAL | `keel discover` and resolver tests provide local classification; runtime/provider discovery and policy activation remain outside the current evidence. |
+| 4 | Mission schema, decomposition, DAG, and planning | PARTIAL | `keel mission` validates contracts, computes a read-only frontier, and emits dispatch contracts; richer decomposition remains. |
+| 8, 13, 16, 41, 47–50 | Repository intelligence, commands, ownership, architecture, impact, history, and uncertainty | PARTIAL | `keel map` provides deterministic provenance-bearing facts, commands, Python imports, and CODEOWNERS discovery; policy and deeper architecture/impact/history intelligence remain. |
+| 9, 21, 42 | Context compilation and refresh | PARTIAL | `keel context` compiles bounded provenance-aware context; topology-aware refresh and continuous context remain. |
+| 10 | Reusable engineering protocols | PARTIAL | The routed `engineering-protocols` skill exists; behavioral effectiveness and deeper references remain unverified. |
+| 12, 19 | Dynamic topology and compute routing | PARTIAL | `keel route` emits deterministic roles, effort capabilities, and verification breadth; runtime provider/model dispatch remains. |
+| 14, 15, 39, 40 | Portable verification, environment/worktree reproducibility, and supply-chain evidence | PARTIAL | Local worktree and contract primitives exist; creator-machine-independent bootstrap/package/version proof and supply-chain attestation remain. |
+| 17, 37, 38 | Effect ontology, inference, and enforcement | PARTIAL | Effect contracts and conservative argv inference exist; tool/API semantic inference and runtime authorization remain. |
+| 18 | Runtime capability handshake | PARTIAL | Static/project capability evidence exists, but actual runtime capability, trust, hook readiness, and graceful degradation are not fully observed. |
+| 20, 60, 61 | Lifecycle telemetry, event/correlation projections, and economics | PARTIAL | Lifecycle duration/outcome and status projections exist; broader correlations and runtime token/cost/human-effort telemetry remain. |
+| 22–24, 54–57 | Verification selection, semantic diff, scope laundering, and independent evidence | PARTIAL | Typed assertions, configured evidence, scope checks, and lifecycle verification exist; change-aware selection, semantic diff and broader invariant enforcement remain. |
+| 25, 58, 59 | Developer UX and structured CLI/API projections | PARTIAL | `init --check`, `review`, `ship`, `map`, `route`, `compat`, `entropy`, `mission`, and `next` projections exist; full `run` UX and complete structured API remain. |
+| 26 | Mission execution and integration | BLOCKED | No authorized runtime/provider and operator authorization are evidenced. Planning may proceed; execution cannot. |
+| 27 | `keel next` | COMPLETE | `keel next` is a read-only legal-action/blocker projection with focused repository tests. |
+| 32–34 | KEELBench benchmark and empirical evaluation | DEFERRED | `.keel/bench/` contracts and historical artifacts are preserved; implementation, corpus, authority, paired trials, scoring, comparison, promotion, and benchmark telemetry are paused. |
+| 43–46 | Feedback, entropy, learning, policy compilation, and invariant ownership | PARTIAL | Observation validation, queue/target projections, entropy scans, and maintenance skills exist; promotion, scheduling, target execution, and policy/invariant ownership remain. |
+| 25, 30, 40 | Installation, version, upgrade, migration, and consumer portability | PARTIAL | Version/compatibility checks and tested config migration/rollback primitives exist; installer, live authorized orchestration, and external version checks remain. |
+| 4, 13 | External issue/PR integrations | DEFERRED | No tracker adapter or authorization exists; it is outside P0–P7 until integration prerequisites are supplied. |
 
-| Source sections | Mapped audit evidence | Current status |
-|---|---|---|
-| 1-3 | Lifecycle, evidence graph, effects, and audit framing | Implemented foundation |
-| 4 | Missions / work DAG | Partial: validation/frontier and advisory dispatch contracts; runtime execution remains |
-| 5 | Requirements and acceptance traceability | Partial: machine-readable links plus optional typed metadata and implementation surfaces; richer automatic spec generation remains |
-| 6 | Evidence graph | Implemented |
-| 7 | Capability resolver | Implemented local resolver; runtime discovery remains advisory |
-| 8 | Repository mapping / knowledge graph | Partial: classifications, Python imports, and CODEOWNERS source discovery; ownership policy/architecture relations remain |
-| 9 | Context compiler | Implemented |
-| 10 | Reusable engineering protocols | Partial: routed skill; behavioral evaluation/deeper references remain |
-| 11 | Scope doctrine / avoid giant agent organization | Contextual design constraint |
-| 12 | Dynamic topology / compute routing | Partial: deterministic recommendation; runtime dispatch remains |
-| 13 | Parallel execution | Partial: worktree primitives; automated orchestration remains |
-| 14 | Worktree/environment isolation | Implemented as local primitives |
-| 15 | Multimodal verification | Partial: provider contracts; real adapters remain |
-| 16 | Stack-agnostic source discovery | Partial: configurable classification; language-specific semantic analysis currently Python |
-| 17 | Effect detection/enforcement | Partial: conservative argv inference; runtime tool/API inference and authorization enforcement remain |
-| 18-19 | Reconciliation and `keel next` | Implemented read-only kernels |
-| 20 | Economics / telemetry | Partial: routing, benchmark schemas, and lifecycle verification telemetry now expose measured duration/outcomes; token/cost/human-effort telemetry remains runtime-dependent |
-| 21 | KEEL Evals | Harness implemented; representative empirical trials remain |
-| 22-23 | Learning and entropy service | Partial: validated observations, queue, and deterministic scan; promotion/scheduling/target execution remain |
-| 24 | Developer experience | Partial: inspection and eligibility projections; authorized `run` remains |
-| 25 | Installation/version/migration | Partial: inventory, compatibility checks, and tested config migration/rollback primitives; installer/live orchestration remain |
-| 26-27 | Competitor synthesis and target architecture | Context plus constraints represented by the mapped rows; not independent executable features |
-| 28 | Recommended roadmap | Durable workstream plan in `docs/exec-plans/active/upgrade-remaining-plan.md` |
+## Contextual or superseded material
 
-Remaining work is tracked in [the durable workstream plan](../exec-plans/active/upgrade-remaining-plan.md). Ownership-source discovery, feedback evaluation queueing, schema migration preflight/apply/rollback primitives, and advisory effect inference are implemented partial slices; their policy, corpus, live-orchestration, and runtime boundaries remain. Next local work is bounded to deeper target-evaluation planning and protocol/economics evidence. Execution runtime, evidence adapters, tracker/PR integration, external Codex checks, and KEELBench superiority require the prerequisites recorded in that plan.
+Sections 11 (scope doctrine), 28–29 (comparative recommendations and documentation-size guidance), 62 (eventual dashboard), 63–64 (product positioning and competitive comparison), and 65–70 (target architecture, layer-model proposals, metrics, and final assessment) are contextual strategy, not independent executable requirements. Any target architecture proposal that conflicts with intentionally unchosen architecture is superseded by the verified architecture/control-plane documents. Section 68 is a durable constraint only where already represented by repository policy.
+
+## Traceability and authority
+
+The executable gaps above map to the workstreams in [the sole active upgrade roadmap](../exec-plans/active/upgrade-remaining-plan.md). Historical bounded slices and superseded planning reasoning are indexed in [the completed-plan archive](../exec-plans/completed/upgrade-planning-archive.md). `.keel/ledger/*` remains implementation evidence for its own change IDs; it does not, by itself, prove a broader row COMPLETE.

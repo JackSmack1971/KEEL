@@ -1,0 +1,183 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Audit inspection and manual deterministic document checks show every executable source requirement maps exactly once and required corrected statuses are present.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Roadmap inspection and manual deterministic document checks show P0\u2013P7, P4 BLOCKED, D1 DEFERRED, the dependency graph, and all execution-safety rules, with no active phase depending on D1.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Active/completed plan inventory and cross-reference search show historical and benchmark plans are archived or explicitly deferred/superseded and only the consolidated roadmap is active top-level authority.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-004",
+      "statement": "Git diff path inspection shows only planning/documentation artifacts and the KEEL ledger for this change were modified; implementation-bearing files are unchanged.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-005",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Manual negative check proves a stale active-plan filename or benchmark prerequisite cannot be treated as current authority.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-005"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-004",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "pasted-task",
+      "statement": "The upgrade audit contains a once-only authoritative matrix for executable docs/KEEL_UPGRADES.md requirements, with corrected classifications and evidence, while contextual or superseded material is distinguished."
+    },
+    {
+      "id": "REQ-002",
+      "source": "pasted-task",
+      "statement": "The active upgrade roadmap is the sole authoritative top-level roadmap and contains P0\u2013P7, their reviewed dependencies and safety contract, plus D1 explicitly deferred and non-prerequisite."
+    },
+    {
+      "id": "REQ-003",
+      "source": "pasted-task",
+      "statement": "Completed bounded implementation slices, overlapping plans, and benchmark plans remain preserved as historical evidence but are no longer active execution authority."
+    },
+    {
+      "id": "REQ-004",
+      "source": "pasted-task",
+      "statement": "No implementation-bearing file is changed by this reconciliation."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 5,
+    "required": 5,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}
