@@ -26,4 +26,12 @@ with tempfile.TemporaryDirectory() as directory:
     findings = fe.entropy_scan(root)["findings"]
     assert not any(row["path"].endswith("goal.md") for row in findings)
     assert any(row["path"].endswith("orphan.md") for row in findings)
+    observations = root / "observations"; observations.mkdir()
+    (root / "evidence.txt").write_text("observed\n", encoding="utf-8")
+    reviewed = {"schema_version": 1, "observation_id": "reviewed-one", "source": "test", "observed_at": "2026-09-07T00:00:00Z", "summary": "reviewed", "failure_class": "gap", "state": "REVIEWED", "reviewer": "human", "reviewed_at": "2026-09-07T01:00:00Z", "evidence": ["evidence.txt"]}
+    (observations / "reviewed.json").write_text(json.dumps(reviewed), encoding="utf-8")
+    (observations / "invalid.json").write_text("{bad", encoding="utf-8")
+    queued = fe.queue(root, observations)
+    assert queued["evaluation_candidates"] == ["reviewed-one"] and queued["promotion_candidates"] == []
+    assert len(queued["blocked"]) == 1 and queued["read_only"] is True
 print(json.dumps({"status": "PASS", "checks": ["provenance", "review-gate", "goal-record", "deterministic-scan", "read-only"]}))

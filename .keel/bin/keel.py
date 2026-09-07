@@ -27,7 +27,7 @@ def main() -> int:
     p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status"]); p.add_argument("path", type=Path)
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
-    p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status"]); p.add_argument("path", type=Path)
+    p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
     p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
     sub.add_parser("compat")
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true")
@@ -80,8 +80,11 @@ def main() -> int:
             result = tr.recommend(tr.load(args.path.resolve()), args.change)
             print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "feedback":
-            observation = fe.load(args.path.resolve())
-            result = {"status": "PASS" if not fe.validate_observation(root, observation) else "FAIL", "errors": fe.validate_observation(root, observation)} if args.action == "validate" else fe.status(root, observation)
+            if args.action == "queue":
+                result = fe.queue(root, args.path.resolve())
+            else:
+                observation = fe.load(args.path.resolve())
+                result = {"status": "PASS" if not fe.validate_observation(root, observation) else "FAIL", "errors": fe.validate_observation(root, observation)} if args.action == "validate" else fe.status(root, observation)
             print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "entropy":
             result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0

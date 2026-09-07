@@ -65,6 +65,23 @@ def status(root: Path, observation: dict) -> dict:
     return {"schema_version": 1, "status": "INVALID" if errors else "PASS", "observation_id": observation.get("observation_id") if isinstance(observation, dict) else None, "state": state, "eligible_for_evaluation": not errors and state == "REVIEWED", "eligible_for_promotion": not errors and state == "EVALUATED", "errors": errors}
 
 
+def queue(root: Path, directory: Path) -> dict:
+    rows = []
+    if directory.is_dir():
+        paths = sorted(directory.glob("*.json"))
+    else:
+        paths = []
+    for path in paths:
+        try:
+            observation = load(path)
+            result = status(root, observation)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            result = {"status": "INVALID", "observation_id": None, "state": None, "eligible_for_evaluation": False, "eligible_for_promotion": False, "errors": [f"load failed: {type(exc).__name__}"]}
+        rows.append({"path": path.relative_to(root).as_posix() if path.is_relative_to(root) else str(path), **result})
+    rows.sort(key=lambda row: (row["observation_id"] or "", row["path"]))
+    return {"schema_version": 1, "status": "PASS", "read_only": True, "directory": str(directory.relative_to(root).as_posix()) if directory.is_relative_to(root) else str(directory), "evaluation_candidates": [row["observation_id"] for row in rows if row["eligible_for_evaluation"]], "promotion_candidates": [row["observation_id"] for row in rows if row["eligible_for_promotion"]], "blocked": [row["path"] for row in rows if row["status"] == "INVALID"], "observations": rows}
+
+
 def entropy_scan(root: Path) -> dict:
     findings = []
     for path in sorted(root.rglob("*.md")):

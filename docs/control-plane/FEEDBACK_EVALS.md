@@ -20,10 +20,13 @@ The repository provides conservative local inspection:
 ```text
 python3 .keel/bin/keel.py feedback validate <observation.json>
 python3 .keel/bin/keel.py feedback status <observation.json>
+python3 .keel/bin/keel.py feedback queue <observation-directory>
 python3 .keel/bin/keel.py entropy scan
 ```
 
 These commands are read-only. An observation must retain provenance, repository-contained evidence, review state, and a failure class. Promotion to a permanent invariant requires a separate evaluated and authorized KEEL change; inspection never promotes or rewrites policy.
+
+`feedback queue` deterministically reports evaluation and promotion candidates and blocked observations; it does not schedule, evaluate, or promote them.
 
 Entropy scanning treats an explicitly headed `# Long-horizon goal:` record as a durable goal plan rather than an orphaned execution plan. Ordinary active plans still require a matching KEEL ledger.
 
