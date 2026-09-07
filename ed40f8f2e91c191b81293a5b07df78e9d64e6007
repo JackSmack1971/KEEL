@@ -1,0 +1,5 @@
+keel-change-id: engineering-protocols-skill
+sealed-candidate: ed40f8f2e91c191b81293a5b07df78e9d64e6007
+landed-commit: ed40f8f2e91c191b81293a5b07df78e9d64e6007
+integration-relation: candidate-ancestor
+verified-content-digest: dcd5d959c6edbba181a76de08124c0ddf6d483638edcc5d6afaa54e9a2176509
