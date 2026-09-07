@@ -1,0 +1,98 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "context-compiler-tests",
+          "detail": "check=context-compiler-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Focused context compiler tests prove repeated compilation is identical and the packet honors the configured hard character budget.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "context-compiler-tests",
+          "detail": "check=context-compiler-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Focused context compiler tests prove selected document metadata includes repository-relative paths and SHA-256 hashes.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "context-compiler-tests",
+          "detail": "check=context-compiler-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Focused context compiler tests prove malformed discovery falls back to resolver evidence and does not copy injected content.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and doctor pass after the context compiler change.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "next-milestone",
+      "statement": "Compiled context remains deterministic and never exceeds its configured character budget."
+    },
+    {
+      "id": "REQ-002",
+      "source": "next-milestone",
+      "statement": "Compiled document pointers include repository-relative provenance and content hashes when the referenced file exists."
+    },
+    {
+      "id": "REQ-003",
+      "source": "next-milestone",
+      "statement": "Malformed or absent capability discovery cannot inject untrusted data or prevent safe resolver fallback."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4
+  }
+}

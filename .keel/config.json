@@ -138,6 +138,17 @@
       "id": "capability-resolver-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_context_compiler.py"
+      ],
+      "cwd": ".",
+      "id": "context-compiler-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

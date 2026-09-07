@@ -1,0 +1,10 @@
+{
+  "base_commit": "9bf937b820f95c08a34bb3fd7d1ee4532aaaca7d",
+  "change_id": "context-compiler-operationalization",
+  "created_at": "2026-09-07T05:53:00+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T05:55:39+00:00",
+  "verified_content_digest": "a60f11633b1a55326f3d503b8fbea1e8333004c5f9660ae84cbdea62e4216ebd"
+}

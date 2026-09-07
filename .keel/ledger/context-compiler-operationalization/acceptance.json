@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC-001",
+      "requirement_id": "REQ-001",
+      "statement": "Focused context compiler tests prove repeated compilation is identical and the packet honors the configured hard character budget.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "context-compiler-tests"}]
+    },
+    {
+      "id": "AC-002",
+      "requirement_id": "REQ-002",
+      "statement": "Focused context compiler tests prove selected document metadata includes repository-relative paths and SHA-256 hashes.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "context-compiler-tests"}]
+    },
+    {
+      "id": "AC-003",
+      "requirement_id": "REQ-003",
+      "statement": "Focused context compiler tests prove malformed discovery falls back to resolver evidence and does not copy injected content.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "context-compiler-tests"}]
+    },
+    {
+      "id": "AC-004",
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and doctor pass after the context compiler change.",
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {"provider": "command", "check_id": "strict-control-plane-validation"},
+        {"provider": "command", "check_id": "control-plane-doctor"}
+      ]
+    }
+  ]
+}

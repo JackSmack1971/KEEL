@@ -1,0 +1,6 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/context_compiler.py
+.keel/tests/test_context_compiler.py
+.keel/config.json
+docs/control-plane/CONTEXT_COMPILATION.md
+.control-plane/bootstrap-manifest.json

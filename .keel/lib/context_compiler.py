@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 from pathlib import Path
 
@@ -12,6 +13,30 @@ CORE_CAPABILITIES = ["repository-legibility", "keel-spec-ledger", "security", "p
 def _read(path: Path, limit: int = 4000) -> str:
     if not path.is_file(): return ""
     return path.read_text(encoding="utf-8", errors="replace")[:limit]
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _document_provenance(root: Path, docs: list[str]) -> list[dict]:
+    records = []
+    for document in docs:
+        candidate = (root / document).resolve()
+        try:
+            relative = candidate.relative_to(root.resolve()).as_posix()
+        except ValueError:
+            records.append({"path": document, "status": "OUTSIDE_REPOSITORY"})
+            continue
+        if not candidate.is_file():
+            records.append({"path": relative, "status": "MISSING"})
+            continue
+        records.append({"path": relative, "status": "PRESENT", "sha256": _sha256(candidate)})
+    return records
 
 
 def _material_lines(text: str, limit: int = 12) -> list[str]:
@@ -38,9 +63,11 @@ def _parse_registry(root: Path) -> dict[str,str]:
 
 def compile_packet(root: Path, change_id: str, state: dict, config: dict, ledger_dir: Path, changed_paths: list[str] | None = None) -> tuple[str, dict]:
     discovery_path=root/".keel/knowledge/capabilities.json"
+    discovery_source = "resolver"
     if discovery_path.is_file():
         try: discovery=json.loads(discovery_path.read_text(encoding="utf-8"))
-        except Exception: discovery=capability_resolver.resolve(root, config)
+        except (OSError, ValueError, TypeError): discovery=capability_resolver.resolve(root, config)
+        else: discovery_source = "cached"
     else:
         discovery=capability_resolver.resolve(root, config)
     registry=_parse_registry(root)
@@ -94,7 +121,17 @@ def compile_packet(root: Path, change_id: str, state: dict, config: dict, ledger
     max_chars=int((config.get("context_compiler",{}) or {}).get("max_chars",12000))
     if len(text)>max_chars:
         text=text[:max_chars-120]+"\n\n[TRUNCATED BY KEEL CONTEXT BUDGET — load referenced artifacts directly if required]\n"
-    meta={"schema_version":1,"change_id":change_id,"phase":state.get("phase"),"relevant_capabilities":rel,"documents":docs,"chars":len(text),"budget":max_chars}
+    meta={
+        "schema_version": 2,
+        "change_id": change_id,
+        "phase": state.get("phase"),
+        "relevant_capabilities": rel,
+        "documents": docs,
+        "document_provenance": _document_provenance(root, docs),
+        "discovery": {"source": discovery_source, "path": ".keel/knowledge/capabilities.json"},
+        "chars": len(text),
+        "budget": max_chars,
+    }
     return text,meta
 
 

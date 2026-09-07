@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "Compiled context remains deterministic and never exceeds its configured character budget.",
+      "source": "next-milestone"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "Compiled document pointers include repository-relative provenance and content hashes when the referenced file exists.",
+      "source": "next-milestone"
+    },
+    {
+      "id": "REQ-003",
+      "statement": "Malformed or absent capability discovery cannot inject untrusted data or prevent safe resolver fallback.",
+      "source": "next-milestone"
+    }
+  ]
+}
