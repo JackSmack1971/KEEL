@@ -6,14 +6,24 @@ from pathlib import Path
 
 REQ_ID_PREFIX = "REQ-"
 AC_ID_PREFIX = "AC-"
-SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists"}
+SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists", "unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "human_review", "external_ci"}
 
 
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def validate_contract(requirements_path: Path, acceptance_path: Path, require_nonempty: bool = True) -> list[str]:
+def _providers(contracts_path: Path | None) -> set[str]:
+    if contracts_path is None or not contracts_path.is_file():
+        return SUPPORTED_PROVIDERS
+    try:
+        value = read_json(contracts_path).get("evidence_providers", [])
+        return {"changed_path", "file_exists"} | {x for x in value if isinstance(x, str)}
+    except Exception:
+        return set()
+
+
+def validate_contract(requirements_path: Path, acceptance_path: Path, require_nonempty: bool = True, contracts_path: Path | None = None) -> list[str]:
     errors: list[str] = []
     try:
         req = read_json(requirements_path)
@@ -33,6 +43,7 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         errors.append("standard change requires at least one requirement")
     if require_nonempty and not criteria:
         errors.append("standard change requires at least one acceptance criterion")
+    providers = _providers(contracts_path)
     req_ids = set()
     for r in requirements:
         if not isinstance(r, dict): errors.append("requirement entries must be objects"); continue
@@ -60,10 +71,10 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         for edge in evidence:
             if not isinstance(edge, dict): errors.append(f"acceptance {aid} evidence entries must be objects"); continue
             provider = edge.get("provider")
-            if provider not in SUPPORTED_PROVIDERS:
+            if provider not in providers:
                 errors.append(f"acceptance {aid} unsupported evidence provider: {provider!r}")
-            if provider == "command" and not isinstance(edge.get("check_id"), str):
-                errors.append(f"acceptance {aid} command evidence requires check_id")
+            if provider not in {"changed_path", "file_exists"} and not isinstance(edge.get("check_id"), str):
+                errors.append(f"acceptance {aid} {provider} evidence requires check_id")
             if provider in {"changed_path", "file_exists"} and not isinstance(edge.get("path"), str):
                 errors.append(f"acceptance {aid} {provider} evidence requires path")
     for rid in sorted(req_ids - covered_requirements):
@@ -78,8 +89,8 @@ def _path_match(path: str, pattern: str) -> bool:
     return False
 
 
-def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks: list[dict], changed_paths: list[str]) -> dict:
-    contract_errors = validate_contract(requirements_path, acceptance_path, require_nonempty=True)
+def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks: list[dict], changed_paths: list[str], contracts_path: Path | None = None) -> dict:
+    contract_errors = validate_contract(requirements_path, acceptance_path, require_nonempty=True, contracts_path=contracts_path)
     if contract_errors:
         return {"schema_version": 1, "status": "FAIL", "errors": contract_errors, "criteria": []}
     req = read_json(requirements_path); acc = read_json(acceptance_path)
@@ -102,6 +113,10 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
                 target = (root / edge["path"]).resolve()
                 try: target.relative_to(root.resolve()); passed = target.exists(); detail = f"exists={passed}"
                 except ValueError: passed = False; detail = "path escapes repository"
+            else:
+                check = check_map.get(edge["check_id"])
+                passed = bool(check and check.get("exit_code") == 0)
+                detail = f"provider={provider} check={edge['check_id']} exit={None if not check else check.get('exit_code')}"
             edge_rows.append({"provider": provider, "passed": passed, "detail": detail, **{k:v for k,v in edge.items() if k != "provider"}})
         policy = c.get("policy", "all")
         passed = all(x["passed"] for x in edge_rows) if policy == "all" else any(x["passed"] for x in edge_rows)

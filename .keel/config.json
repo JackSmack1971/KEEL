@@ -234,6 +234,13 @@
       "id": "topology-routing-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_provider_effect_contracts.py"],
+      "cwd": ".",
+      "id": "provider-effect-contract-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

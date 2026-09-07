@@ -218,8 +218,21 @@ def effects_valid(path: Path) -> tuple[bool, str, dict]:
         return False, "external_effects must be a list of non-empty strings", e
     if not isinstance(e.get("irreversible"), bool) or not isinstance(e.get("authorization_required"), bool):
         return False, "effects irreversible/authorization_required must be booleans", e
+    capabilities = e.get("effect_capabilities", [])
+    if not isinstance(capabilities, list) or any(not isinstance(x, str) or not x.strip() for x in capabilities):
+        return False, "effect_capabilities must be a list of non-empty strings", e
+    contract_path = path.parents[3] / ".keel" / "contracts.json"
+    try:
+        allowed = set(read_json(contract_path).get("effect_capabilities", []))
+    except Exception as ex:
+        return False, f"effect capability contract invalid: {ex}", e
+    unknown = sorted(set(capabilities) - allowed)
+    if unknown:
+        return False, "unknown effect capabilities: " + ", ".join(unknown), e
     if (e.get("external_effects") or e.get("irreversible")) and not e.get("authorization_required"):
         return False, "external or irreversible effects require authorization_required=true", e
+    if (e.get("external_effects") or e.get("irreversible")) and not capabilities:
+        return False, "external or irreversible effects require effect_capabilities", e
     return True, "ok", e
 
 
@@ -316,7 +329,7 @@ def validate_plan(root: Path, change_id: str) -> list[str]:
     ok, msg = delta_valid(d / "delta.md")
     if not ok: errors.append(msg)
     mode = state(root, change_id).get("mode", "standard")
-    errors.extend(evidence_graph.validate_contract(d / "requirements.json", d / "acceptance.json", require_nonempty=(mode != "trivial")))
+    errors.extend(evidence_graph.validate_contract(d / "requirements.json", d / "acceptance.json", require_nonempty=(mode != "trivial"), contracts_path=root / ".keel" / "contracts.json"))
     try:
         scope = parse_scope(d / "scope.txt")
     except Exception as e:
@@ -807,7 +820,7 @@ def verify_change(root: Path, change_id: str) -> dict:
         results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt})
         if required and code != 0: errs.append(f"verification command failed: {cid} exit={code}")
     d = ledger_dir(root, change_id)
-    evidence_graph_result = evidence_graph.evaluate(root, d / "requirements.json", d / "acceptance.json", results, material)
+    evidence_graph_result = evidence_graph.evaluate(root, d / "requirements.json", d / "acceptance.json", results, material, contracts_path=root / ".keel" / "contracts.json")
     write_json(d / "evidence-graph.json", evidence_graph_result)
     if evidence_graph_result.get("status") != "PASS":
         errs.extend(evidence_graph_result.get("errors") or ["acceptance/evidence graph failed"])

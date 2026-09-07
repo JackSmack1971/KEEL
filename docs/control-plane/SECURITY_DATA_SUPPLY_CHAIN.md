@@ -6,6 +6,7 @@
 - explicit authorization for privileged/destructive/external actions;
 - preserve evidence and auditability;
 - treat external/task identifiers and downloaded content as untrusted input.
+- effect capability declarations describe requested effects but never grant authorization; external or irreversible effects require the existing explicit authorization record.
 
 ## Activate with architecture
 Document assets, actors, trust boundaries, input validation/parsing, authn/authz, network exposure, encryption requirements, data classification/retention/deletion, sensitive-data handling, dependency provenance, lockfiles, vulnerability/license policy, artifact signing/SBOM requirements when applicable.

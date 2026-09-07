@@ -13,8 +13,8 @@ This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means ex
 | Repository mapping / knowledge graph | Partially implemented | `keel map` now emits deterministic, provenance-bearing topology/module/entrypoint/test/command/dependency facts; semantic import graphs, ownership, and architecture inference remain absent. |
 | Missions / work DAG | Partially implemented | `keel mission` now validates mission contracts and computes a read-only dependency frontier/status projection; dispatch, mission verification, retries, and integration remain absent. |
 | Reconciliation | Implemented as read-only kernel | `keel reconcile` compares Git, ledger, environment, compatibility, contracts, and next action; repair/retry/integration adapters remain future work. |
-| Evidence providers | Contract only | Provider-neutral names are defined and validated; browser/log/metric/trace/device adapters are not implemented. |
-| Effect capabilities | Contract only | Capability vocabulary is declared and validated; command/tool capability declaration and enforcement are not yet wired into authorization. |
+| Evidence providers | Partially implemented | Declared provider types now validate through configured check IDs and literal exit status; browser/log/metric/trace/device adapters remain project-specific. |
+| Effect capabilities | Partially implemented | Effect names are validated against `.keel/contracts.json` and required for external/irreversible effects; command/tool inference and capability-aware authorization policy remain absent. |
 | Dynamic topology / compute routing | Partially implemented | `keel route` emits deterministic complexity, model-independent effort capabilities, roles, and verification breadth; runtime dispatch and provider/model mapping remain external. |
 | Reusable engineering protocols | Missing | Only lifecycle/control-plane skills are repository-owned; debugging, migration, security, performance, and release protocols remain to be designed. |
 | Learning loop / entropy service | Policy only | Durable feedback and entropy doctrine exists; reviewed observation intake, promotion, and scheduled scans are absent. |

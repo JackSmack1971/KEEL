@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"Declared evidence providers from the repository contract shall validate only when bound to a configured successful check identifier.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"Unknown evidence providers shall fail contract validation and supported provider failures shall fail evidence evaluation.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"Declared effect capabilities shall be validated against the repository capability contract, with unknown capabilities rejected.","source":"upgrade-audit"},
+    {"id":"REQ-004","statement":"External or irreversible effects shall still require authorization and capability declarations shall not grant authorization.","source":"upgrade-audit"}
+  ]
+}

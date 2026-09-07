@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Provider contract tests validate declared providers and configured check bindings.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"provider-effect-contract-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Provider contract tests reject unknown providers and failed provider checks.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"provider-effect-contract-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Effect contract tests reject unknown capabilities.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"provider-effect-contract-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-004","statement":"Effect contract tests preserve authorization-required behavior and prove capability declarations do not authorize effects.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"provider-effect-contract-tests"}]},
+    {"id":"AC-005","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

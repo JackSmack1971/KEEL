@@ -1,0 +1,10 @@
+{
+  "base_commit": "778b3b9221710fe64d1a62a9687f974e1d2df055",
+  "change_id": "provider-effect-contracts",
+  "created_at": "2026-09-07T12:09:12+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:11:29+00:00",
+  "verified_content_digest": "f6ea2a87b7b1bc51828a83c98fc73a43808fc6b0659edaacd73dd2310ccc3cef"
+}

@@ -1,0 +1,163 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "provider-effect-contract-tests",
+          "detail": "check=provider-effect-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Provider contract tests validate declared providers and configured check bindings.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "provider-effect-contract-tests",
+          "detail": "check=provider-effect-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Provider contract tests reject unknown providers and failed provider checks.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "provider-effect-contract-tests",
+          "detail": "check=provider-effect-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "Effect contract tests reject unknown capabilities.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "provider-effect-contract-tests",
+          "detail": "check=provider-effect-contract-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-004",
+      "statement": "Effect contract tests preserve authorization-required behavior and prove capability declarations do not authorize effects.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-005",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Doctor, strict control-plane validation, and KEELBench remain passing.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-005"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-003"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-004"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-004"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Declared evidence providers from the repository contract shall validate only when bound to a configured successful check identifier."
+    },
+    {
+      "id": "REQ-002",
+      "source": "upgrade-audit",
+      "statement": "Unknown evidence providers shall fail contract validation and supported provider failures shall fail evidence evaluation."
+    },
+    {
+      "id": "REQ-003",
+      "source": "upgrade-audit",
+      "statement": "Declared effect capabilities shall be validated against the repository capability contract, with unknown capabilities rejected."
+    },
+    {
+      "id": "REQ-004",
+      "source": "upgrade-audit",
+      "statement": "External or irreversible effects shall still require authorization and capability declarations shall not grant authorization."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 5,
+    "required": 5,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

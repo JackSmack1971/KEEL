@@ -17,6 +17,8 @@ Current deterministic providers:
 - `changed_path` — the material Git diff must include a declared path/glob;
 - `file_exists` — a repository-contained evidence artifact must exist.
 
+The repository contract also defines adapter-backed providers (`unit_test`, `browser`, `visual`, `log_query`, `metric_query`, `trace_query`, `schema`, `security`, `benchmark`, `hardware`, `human_review`, and `external_ci`). These providers require a configured `check_id`; KEEL evaluates the adapter's literal exit status but does not invent or execute a provider implementation.
+
 Unknown evidence providers do not silently pass. Extend provider support only when the new provider has a mechanically inspectable result contract.
 
 During `keel verify`, KEEL evaluates every required criterion and writes `evidence-graph.json`. Verification cannot PASS while a required acceptance criterion is unsatisfied.
