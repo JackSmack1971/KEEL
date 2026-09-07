@@ -56,6 +56,24 @@ def _python_semantics(root: Path, files: list[str]) -> tuple[dict, list[dict]]:
     return {"status": "PARTIAL" if failures else "COMPLETE", "analyzer": "python-ast", "files_analyzed": len(python_files) - len(failures), "files_failed": len(failures), "provenance": "stdlib-ast; repository source bytes"}, sorted(imports, key=lambda row: (row["source"], row["line"], row["target"]))
 
 
+def _ownership(root: Path) -> dict:
+    candidates = [Path("CODEOWNERS"), Path(".github/CODEOWNERS"), Path("docs/CODEOWNERS")]
+    for relative in candidates:
+        path = root / relative
+        if not path.is_file():
+            continue
+        rules = []
+        for number, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                continue
+            parts = stripped.split()
+            if len(parts) >= 2:
+                rules.append({"pattern": parts[0], "owners": parts[1:], "line": number})
+        return {"status": "AVAILABLE", "source": relative.as_posix(), "provenance": "literal CODEOWNERS rules; no identity validation", "rules": rules}
+    return {"status": "UNAVAILABLE", "source": None, "provenance": "no supported CODEOWNERS source found", "rules": []}
+
+
 def build(root: Path) -> dict:
     files = []
     dirs = set()
@@ -80,7 +98,7 @@ def build(root: Path) -> dict:
     dependencies = [_row(path, "dependency-manifest") for path in files if Path(path).name in DEPENDENCY_MANIFESTS or Path(path).name in {"package-lock.json", "pnpm-lock.yaml", "yarn.lock", "Cargo.lock", "poetry.lock", "uv.lock", "go.sum", "Gemfile.lock"}]
     source = [_row(path, "source-classification") for path in files if path.startswith(("src/", "app/", "lib/", "packages/", "services/", "cmd/"))]
     analyzer, semantic_imports = _python_semantics(root, files)
-    return {"schema_version": 2, "root": ".", "rules_version": 1, "counts": {"files": len(files), "directories": len(dirs)}, "topology": topology, "modules": modules, "entrypoints": entrypoints, "tests": tests, "commands": commands, "dependencies": dependencies, "source": source, "semantic_imports": semantic_imports, "analyzers": {"python": analyzer}, "policy": "derived-navigation-evidence-only"}
+    return {"schema_version": 3, "root": ".", "rules_version": 1, "counts": {"files": len(files), "directories": len(dirs)}, "topology": topology, "modules": modules, "entrypoints": entrypoints, "tests": tests, "commands": commands, "dependencies": dependencies, "source": source, "semantic_imports": semantic_imports, "ownership": _ownership(root), "analyzers": {"python": analyzer}, "policy": "derived-navigation-evidence-only"}
 
 
 def write(root: Path, result: dict) -> Path:

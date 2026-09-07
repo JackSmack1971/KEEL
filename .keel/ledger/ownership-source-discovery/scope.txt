@@ -1,0 +1,8 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/repository_map.py
+.keel/tests/test_repository_map.py
+.keel/bin/keel.py
+docs/control-plane/UPGRADE_AUDIT.md
+docs/control-plane/COMMANDS.md
+.control-plane/bootstrap-manifest.json
+docs/exec-plans/active/ownership-source-discovery.md

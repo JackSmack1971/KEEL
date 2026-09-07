@@ -1,0 +1,64 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "repository-map-tests",
+          "detail": "check=repository-map-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Repository map tests prove deterministic CODEOWNERS parsing, provenance, unavailable behavior, and read-only output.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Strict control-plane validation passes.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Repository mapping reports literal CODEOWNERS rules with source provenance when an authoritative file exists, and UNAVAILABLE otherwise."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 2,
+    "required": 2,
+    "requirements_covered": 1,
+    "requirements_passing": 1,
+    "requirements_total": 1
+  }
+}

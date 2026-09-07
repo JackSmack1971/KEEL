@@ -1,5 +1,6 @@
 import json
 import sys
+import tempfile
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / ".keel" / "lib"))
@@ -18,6 +19,13 @@ assert first["analyzers"]["python"]["files_analyzed"] > 0
 assert all(row["analyzer"] == "python-ast" and row["source"] for row in first["semantic_imports"])
 assert any(row["kind"] == "local" for row in first["semantic_imports"])
 assert any(row["kind"] == "external" for row in first["semantic_imports"])
+assert first["ownership"]["status"] == "UNAVAILABLE"
 before = json.dumps(first, sort_keys=True)
 assert json.dumps(repository_map.build(ROOT), sort_keys=True) == before
-print(json.dumps({"status": "PASS", "checks": ["deterministic", "provenance", "semantic-imports", "ignored-directories", "derived-only"]}))
+with tempfile.TemporaryDirectory() as directory:
+    temp_root = Path(directory); (temp_root / ".github").mkdir()
+    (temp_root / ".github" / "CODEOWNERS").write_text("# owner rules\n/src/ @team\n", encoding="utf-8")
+    ownership = repository_map.build(temp_root)["ownership"]
+    assert ownership["status"] == "AVAILABLE" and ownership["source"] == ".github/CODEOWNERS"
+    assert ownership["rules"][0]["owners"] == ["@team"]
+print(json.dumps({"status": "PASS", "checks": ["deterministic", "provenance", "semantic-imports", "ownership-source", "ignored-directories", "derived-only"]}))

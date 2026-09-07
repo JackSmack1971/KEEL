@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Repository mapping reports literal CODEOWNERS rules with source provenance when an authoritative file exists, and UNAVAILABLE otherwise.", "source": "upgrade-audit"}]
+}

@@ -1,0 +1,5 @@
+{"details": {"base_commit": "92b21f2568729a427737c6b89a2230fbf75a413d", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:47:26+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:47:47+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:47:47+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/lib/repository_map.py", ".keel/tests/test_repository_map.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/ownership-source-discovery.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:48:35+00:00"}
+{"details": {"content_digest": "43f1d93fdbd40dadbd4e13f18f7948f2db742c0b6f31ae98c2ccbf67008e235b", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:48:35+00:00"}
