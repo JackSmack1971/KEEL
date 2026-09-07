@@ -216,6 +216,17 @@
       "id": "mission-work-graph-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "cwd": ".",
+      "id": "repository-map-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

@@ -10,7 +10,7 @@ This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means ex
 | KEELBench | Implemented as harness | Paired-trial schema, validation, creation, and scoring exist; empirical superiority remains unvalidated until real trials are run. |
 | `keel next` | Implemented | Read-only lifecycle guidance and focused tests. |
 | Worktrees and environment contracts | Implemented as local primitives | Safe worktree commands and declarative contract inspection exist; mission-level orchestration is absent. |
-| Repository mapping / knowledge graph | Missing | No `keel map` or provenance-backed topology/module/dependency outputs. |
+| Repository mapping / knowledge graph | Partially implemented | `keel map` now emits deterministic, provenance-bearing topology/module/entrypoint/test/command/dependency facts; semantic import graphs, ownership, and architecture inference remain absent. |
 | Missions / work DAG | Partially implemented | `keel mission` now validates mission contracts and computes a read-only dependency frontier/status projection; dispatch, mission verification, retries, and integration remain absent. |
 | Reconciliation | Implemented as read-only kernel | `keel reconcile` compares Git, ledger, environment, compatibility, contracts, and next action; repair/retry/integration adapters remain future work. |
 | Evidence providers | Contract only | Provider-neutral names are defined and validated; browser/log/metric/trace/device adapters are not implemented. |

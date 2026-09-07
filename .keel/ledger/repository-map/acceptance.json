@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"Repository-map tests prove deterministic topology and category output.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"repository-map-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Repository-map tests prove path and rule provenance on emitted facts.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"repository-map-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"Repository-map tests prove ignored directories and non-execution behavior.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"repository-map-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-004","statement":"Map generation leaves capability registry and authoritative docs unchanged.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"repository-map-tests"}]},
+    {"id":"AC-005","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

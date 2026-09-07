@@ -1,0 +1,10 @@
+{
+  "base_commit": "88aa0480cd74d04af0adc2327883144e1ceace1a",
+  "change_id": "repository-map",
+  "created_at": "2026-09-07T12:03:27+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:05:24+00:00",
+  "verified_content_digest": "b323c7a613c9c48f1fc0805123187b849cc090cb483b113eb417248335bb7761"
+}

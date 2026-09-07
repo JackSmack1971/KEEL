@@ -21,6 +21,7 @@ Start at root `AGENTS.md`; load detail only when relevant.
 ## Control-plane detail
 - [Capability registry](control-plane/CAPABILITY_REGISTRY.md)
 - [Capability resolution](control-plane/CAPABILITY_RESOLUTION.md)
+- [Upgrade audit](control-plane/UPGRADE_AUDIT.md)
 - [Context compilation](control-plane/CONTEXT_COMPILATION.md)
 - [Acceptance/evidence graph](control-plane/ACCEPTANCE_EVIDENCE.md)
 - [KEELBench](control-plane/KEELBENCH.md)
