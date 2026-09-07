@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"init --check shall report repository-owned KEEL readiness and compatibility without mutation or external version claims.","source":"upgrade-audit"},
+    {"id":"REQ-002","statement":"review shall aggregate current lifecycle, next-action, evidence, and candidate state for a named or active change without mutation.","source":"upgrade-audit"},
+    {"id":"REQ-003","statement":"ship shall report verified-and-sealed eligibility separately from authorization and integration permission.","source":"upgrade-audit"}
+  ]
+}

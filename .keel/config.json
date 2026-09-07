@@ -282,6 +282,13 @@
       "id": "lifecycle-compatibility-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_developer_ux.py"],
+      "cwd": ".",
+      "id": "developer-ux-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

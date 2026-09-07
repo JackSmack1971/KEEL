@@ -1,0 +1,10 @@
+{
+  "base_commit": "6331982040e81fcde122358cf127551d15220d85",
+  "change_id": "developer-ux-surface",
+  "created_at": "2026-09-07T12:21:07+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:27:06+00:00",
+  "verified_content_digest": "7a93cc127e9ca9c28a085eef03401b50a8693ca44065dad622fe17ce0bada620"
+}

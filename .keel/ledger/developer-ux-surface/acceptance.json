@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"UX tests prove init check reports readiness and external versions remain unverified.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"developer-ux-tests"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"UX tests prove review aggregates state and does not alter repository state.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"developer-ux-tests"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"UX tests prove ship eligibility requires verification and a sealed candidate while permission remains separate.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"developer-ux-tests"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Doctor, strict control-plane validation, and KEELBench remain passing.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"strict-control-plane-validation"},{"provider":"command","check_id":"keelbench-tests"}]}
+  ]
+}

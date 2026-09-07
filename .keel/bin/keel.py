@@ -13,6 +13,7 @@ import repository_map as rm
 import topology_router as tr
 import feedback_entropy as fe
 import lifecycle
+import developer_ux as ux
 
 
 def main() -> int:
@@ -29,6 +30,9 @@ def main() -> int:
     p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
     sub.add_parser("compat")
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true")
+    p = sub.add_parser("init"); p.add_argument("--check", action="store_true")
+    p = sub.add_parser("review"); p.add_argument("--change")
+    p = sub.add_parser("ship"); p.add_argument("--change")
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -81,6 +85,11 @@ def main() -> int:
             result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "compat" or args.cmd == "migrate":
             result = lifecycle.inventory(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "COMPATIBLE" else 1
+        if args.cmd == "init":
+            result = ux.init_check(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "READY" else 1
+        if args.cmd == "review": print(json.dumps(ux.review(root, args.change), indent=2)); return 0
+        if args.cmd == "ship":
+            result = ux.ship_eligibility(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] == "ELIGIBLE" else 1
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":

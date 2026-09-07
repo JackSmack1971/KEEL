@@ -1,0 +1,134 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "developer-ux-tests",
+          "detail": "check=developer-ux-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "UX tests prove init check reports readiness and external versions remain unverified.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "developer-ux-tests",
+          "detail": "check=developer-ux-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "UX tests prove review aggregates state and does not alter repository state.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "developer-ux-tests",
+          "detail": "check=developer-ux-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "UX tests prove ship eligibility requires verification and a sealed candidate while permission remains separate.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Doctor, strict control-plane validation, and KEELBench remain passing.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-004"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-003"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "init --check shall report repository-owned KEEL readiness and compatibility without mutation or external version claims."
+    },
+    {
+      "id": "REQ-002",
+      "source": "upgrade-audit",
+      "statement": "review shall aggregate current lifecycle, next-action, evidence, and candidate state for a named or active change without mutation."
+    },
+    {
+      "id": "REQ-003",
+      "source": "upgrade-audit",
+      "statement": "ship shall report verified-and-sealed eligibility separately from authorization and integration permission."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  }
+}
