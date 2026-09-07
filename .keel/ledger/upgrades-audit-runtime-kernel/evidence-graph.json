@@ -1,0 +1,163 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "upgrade-kernel-tests",
+          "detail": "check=upgrade-kernel-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "reconcile reports ledger phase, Git state, scope, and next action without mutation",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "upgrade-kernel-tests",
+          "detail": "check=upgrade-kernel-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "provider and effect capability contracts validate known and unknown values deterministically",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "upgrade-kernel-tests",
+          "detail": "check=upgrade-kernel-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "source classification follows explicit, detected, generic, unknown precedence",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "upgrade-kernel-tests",
+          "detail": "check=upgrade-kernel-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-004",
+      "statement": "version and compatibility inspection returns repository metadata and schema status",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-005",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "doctor, strict control-plane validation, and KEELBench remain passing",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-005"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-001"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-002"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-003"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-004"
+      ],
+      "passed": true,
+      "requirement_id": "REQ-004"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "required": true,
+      "statement": "The repository shall expose a deterministic read-only reconciliation report for an active or named change."
+    },
+    {
+      "id": "REQ-002",
+      "required": true,
+      "statement": "Verification contracts shall name provider-neutral evidence types and effect capabilities without executing providers."
+    },
+    {
+      "id": "REQ-003",
+      "required": true,
+      "statement": "Source classification shall honor explicit project rules before detected and generic heuristics and remain conservative for unknown files."
+    },
+    {
+      "id": "REQ-004",
+      "required": true,
+      "statement": "The CLI shall report framework and schema compatibility from repository-owned metadata."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 5,
+    "required": 5,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  }
+}

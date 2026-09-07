@@ -39,6 +39,7 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [Feedback/self-improvement](control-plane/FEEDBACK_EVALS.md)
 - [Entropy/doc gardening](control-plane/ENTROPY.md)
 - [Source provenance](control-plane/SOURCES.md)
+- [KEEL upgrade audit](control-plane/UPGRADE_AUDIT.md)
 
 ## KEEL
 - [Spec-anchored change control](control-plane/KEEL.md)

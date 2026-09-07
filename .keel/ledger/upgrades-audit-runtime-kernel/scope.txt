@@ -1,0 +1,6 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/**
+docs/**
+CONTROL_PLANE.md
+WORKFLOW.md
+.control-plane/**

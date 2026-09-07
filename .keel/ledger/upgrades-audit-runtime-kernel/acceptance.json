@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id": "AC-001", "requirement_id": "REQ-001", "statement": "reconcile reports ledger phase, Git state, scope, and next action without mutation", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "upgrade-kernel-tests"}]},
+    {"id": "AC-002", "requirement_id": "REQ-002", "statement": "provider and effect capability contracts validate known and unknown values deterministically", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "upgrade-kernel-tests"}]},
+    {"id": "AC-003", "requirement_id": "REQ-003", "statement": "source classification follows explicit, detected, generic, unknown precedence", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "upgrade-kernel-tests"}]},
+    {"id": "AC-004", "requirement_id": "REQ-004", "statement": "version and compatibility inspection returns repository metadata and schema status", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "upgrade-kernel-tests"}]},
+    {"id": "AC-005", "requirement_id": "REQ-001", "statement": "doctor, strict control-plane validation, and KEELBench remain passing", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "control-plane-doctor"}, {"provider": "command", "check_id": "strict-control-plane-validation"}, {"provider": "command", "check_id": "keelbench-tests"}]}
+  ]
+}

@@ -70,6 +70,7 @@
     },
     "max_chars": 12000
   },
+  "contracts_file": ".keel/contracts.json",
   "hook_summary_max_chars": 6000,
   "max_agents_cascade_bytes": 32768,
   "root_agents_max_lines": 100,
@@ -191,6 +192,17 @@
       ],
       "cwd": ".",
       "id": "environment-contract-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_upgrade_kernel.py"
+      ],
+      "cwd": ".",
+      "id": "upgrade-kernel-tests",
       "required": true,
       "timeout_sec": 120
     }

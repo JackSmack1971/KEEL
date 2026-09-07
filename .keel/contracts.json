@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "evidence_providers": ["command", "unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "human_review", "external_ci", "changed_path"],
+  "effect_capabilities": ["filesystem.write", "git.local.commit", "git.remote.push", "vcs.merge", "package.publish", "database.migrate", "cloud.deploy", "infra.apply", "issue.modify", "email.send", "secret.read"]
+}

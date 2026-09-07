@@ -121,12 +121,16 @@ def classify_path(path: str, config: dict | None = None) -> str:
     cls = config.get("source_classification", {}) if isinstance(config, dict) else {}
     explicit_source = cls.get("explicit_source_globs", []) if isinstance(cls, dict) else []
     explicit_non = cls.get("explicit_non_source_globs", []) if isinstance(cls, dict) else []
+    detected_source = cls.get("detected_source_globs", []) if isinstance(cls, dict) else []
     for pat in explicit_source:
         if isinstance(pat, str) and _match(path, pat):
             return "SOURCE"
     for pat in explicit_non:
         if isinstance(pat, str) and _match(path, pat):
             return "NON_SOURCE"
+    for pat in detected_source:
+        if isinstance(pat, str) and _match(path, pat):
+            return "SOURCE"
     for pat in NON_SOURCE_GLOBS:
         if _match(path, pat):
             return "NON_SOURCE"

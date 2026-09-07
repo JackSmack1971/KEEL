@@ -1,0 +1,10 @@
+{
+  "base_commit": "1c0b25b8e20d09946b00bfea8345f322bbc31c5f",
+  "change_id": "upgrades-audit-runtime-kernel",
+  "created_at": "2026-09-07T11:54:50+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T11:59:26+00:00",
+  "verified_content_digest": "207712318717fefb4b990bb272d50e611dcb7317f0e5a21225d5fd1dcd4ef138"
+}

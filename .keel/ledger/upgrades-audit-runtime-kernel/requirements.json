@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id": "REQ-001", "statement": "The repository shall expose a deterministic read-only reconciliation report for an active or named change.", "required": true},
+    {"id": "REQ-002", "statement": "Verification contracts shall name provider-neutral evidence types and effect capabilities without executing providers.", "required": true},
+    {"id": "REQ-003", "statement": "Source classification shall honor explicit project rules before detected and generic heuristics and remain conservative for unknown files.", "required": true},
+    {"id": "REQ-004", "statement": "The CLI shall report framework and schema compatibility from repository-owned metadata.", "required": true}
+  ]
+}

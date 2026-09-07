@@ -7,12 +7,16 @@ from pathlib import Path
 HERE = Path(__file__).resolve()
 sys.path.insert(0, str(HERE.parents[1] / "lib"))
 import keel_core as k
+import upgrade_kernel as uk
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="KEEL spec-ledger control plane")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("doctor")
+    sub.add_parser("version")
+    p = sub.add_parser("reconcile"); p.add_argument("--change")
+    sub.add_parser("contracts")
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -35,6 +39,11 @@ def main() -> int:
         root = k.git_root(Path.cwd())
         if args.cmd == "doctor":
             errs = k.doctor(root); print(json.dumps({"status":"PASS" if not errs else "FAIL", "errors":errs}, indent=2)); return 0 if not errs else 1
+        if args.cmd == "version":
+            result = uk.version_report(root); print(json.dumps(result, indent=2)); return 0 if result["compatibility"] == "COMPATIBLE" else 1
+        if args.cmd == "reconcile": print(json.dumps(uk.reconcile(root, args.change), indent=2)); return 0
+        if args.cmd == "contracts":
+            result = uk.contract_report(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":
