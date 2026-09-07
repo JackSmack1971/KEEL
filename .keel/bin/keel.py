@@ -15,6 +15,7 @@ import feedback_entropy as fe
 import lifecycle
 import developer_ux as ux
 import effect_inference as effects
+import schema_migrations as migrations
 
 
 def main() -> int:
@@ -30,7 +31,7 @@ def main() -> int:
     p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
     p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
     sub.add_parser("compat")
-    p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true")
+    p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true"); p.add_argument("--plan", type=Path)
     p = sub.add_parser("init"); p.add_argument("--check", action="store_true")
     p = sub.add_parser("review"); p.add_argument("--change")
     p = sub.add_parser("ship"); p.add_argument("--change")
@@ -88,6 +89,8 @@ def main() -> int:
             print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "entropy":
             result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "migrate" and args.plan:
+            result = migrations.preflight(args.plan.resolve()); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "compat" or args.cmd == "migrate":
             result = lifecycle.inventory(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "COMPATIBLE" else 1
         if args.cmd == "init":

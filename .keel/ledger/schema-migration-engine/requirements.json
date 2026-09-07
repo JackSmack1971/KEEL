@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Supported repository schema migrations have preflight, atomic apply, backup, and exact rollback behavior.", "source": "upgrade-audit"}, {"id": "REQ-002", "statement": "Unsupported or live-control-plane migrations are not applied implicitly.", "source": "upgrade-audit"}]
+}

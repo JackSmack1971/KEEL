@@ -68,6 +68,8 @@ python3 .keel/bin/keel.py migrate --check
 
 These commands inspect repository-owned versions and report migration actions. They do not query external Codex versions, download updates, or rewrite schemas.
 
+`migrate --plan <artifact.json>` performs read-only preflight for a registered migration. Applying or rolling back a live control-plane artifact requires an explicitly authorized KEEL change; no CLI path performs that implicitly.
+
 Developer UX projections:
 
 ```text

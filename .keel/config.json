@@ -296,6 +296,13 @@
       "id": "effect-inference-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_schema_migrations.py"],
+      "cwd": ".",
+      "id": "schema-migration-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

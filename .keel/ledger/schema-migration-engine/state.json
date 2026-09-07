@@ -1,0 +1,10 @@
+{
+  "base_commit": "e6da0f1cc5405200c77b65cc67897d90c6e8c45e",
+  "change_id": "schema-migration-engine",
+  "created_at": "2026-09-07T12:43:41+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:45:29+00:00",
+  "verified_content_digest": "401b1190b1970339e67928cf800090a65ec26c716f69d4471a6a33cb6dbed372"
+}

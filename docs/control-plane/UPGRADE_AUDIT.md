@@ -19,7 +19,7 @@ This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means ex
 | Reusable engineering protocols | Partially implemented | The routed `engineering-protocols` skill covers debugging, architecture, dependency, migration, security, performance, frontend runtime, test remediation, incident, and release concerns; behavioral evaluation and deeper domain-specific references remain future work. |
 | Learning loop / entropy service | Partially implemented | Reviewed observation validation, deterministic queue projections, and non-destructive entropy scans now exist; promotion, external ingestion, scheduled operation, and target eval execution remain. |
 | Developer UX | Partially implemented | `init --check`, `review`, `ship` eligibility, mission, map, route, compat, and entropy projections exist; `run`/agent dispatch remains deferred until an authorized execution runtime exists. |
-| Version / install / upgrade / migration | Partially implemented | `keel version`, `compat`, and `migrate --check` inventory framework/config/contract/ledger/skill/manifest versions and produce read-only migration findings; installer, actual migrations, rollback, and external Codex version checks remain. |
+| Version / install / upgrade / migration | Partially implemented | `keel version`, `compat`, `migrate --check`, and `migrate --plan` inventory/preflight repository-owned versions; the tested migration registry supports config 1→2 with atomic backup/rollback primitives. Installer, live authorized migration orchestration, and external Codex version checks remain. |
 | Issue/PR integrations | Deferred | No external tracker adapter; correctly requires separate authorization and runtime prerequisites. |
 
 ## Source-section traceability

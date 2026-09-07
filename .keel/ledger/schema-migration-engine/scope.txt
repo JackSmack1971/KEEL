@@ -1,0 +1,10 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/schema_migrations.py
+.keel/tests/test_schema_migrations.py
+.keel/bin/keel.py
+.keel/lib/lifecycle.py
+.keel/config.json
+docs/control-plane/UPGRADE_AUDIT.md
+docs/control-plane/COMMANDS.md
+docs/exec-plans/active/schema-migration-engine.md
+.control-plane/bootstrap-manifest.json
