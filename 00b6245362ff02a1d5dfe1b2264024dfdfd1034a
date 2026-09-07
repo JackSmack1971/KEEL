@@ -1,0 +1,5 @@
+keel-change-id: lifecycle-telemetry
+sealed-candidate: 00b6245362ff02a1d5dfe1b2264024dfdfd1034a
+landed-commit: 00b6245362ff02a1d5dfe1b2264024dfdfd1034a
+integration-relation: candidate-ancestor
+verified-content-digest: 750432fff649a21d2c7ccb03e0563ad1fb78209c94b8e092b170f81d4c01053c
