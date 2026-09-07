@@ -987,14 +987,17 @@ def discover_capabilities(root: Path) -> dict:
     return result
 
 
-def compile_context(root: Path, change_id: str, write: bool = True) -> dict:
+def compile_context(root: Path, change_id: str, write: bool = True, *, v2: bool = False, role: str = "executor", query=None) -> dict:
     st = state(root, change_id)
     cfg = read_json(root / ".keel" / "config.json")
     try:
         _, paths = diff_scope_errors(root, change_id)
     except Exception:
         paths = []
-    text, meta = context_compiler.compile_packet(root, change_id, st, cfg, ledger_dir(root, change_id), paths)
+    if v2:
+        text, meta = context_compiler.compile_packet_v2(root, change_id, st, cfg, ledger_dir(root, change_id), paths, role=role, query=query)
+    else:
+        text, meta = context_compiler.compile_packet(root, change_id, st, cfg, ledger_dir(root, change_id), paths)
     if write:
         md, js = context_compiler.write_packet(root, change_id, text, meta)
         meta = dict(meta, markdown=str(md.relative_to(root)), metadata=str(js.relative_to(root)))

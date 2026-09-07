@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-CONTEXT-001","statement":"Context Compiler v2 selects context from query, role, and impact inputs with provenance and confidence while remaining derived and non-authoritative.","type":"architecture","priority":"must","implementation_paths":[".keel/lib/context_compiler.py",".keel/tests/"]},
+    {"id":"REQ-CONTEXT-002","statement":"Context uncertainty widens warnings and context and never removes mandatory configured documents or ledger obligations.","type":"security","priority":"must","implementation_paths":[".keel/lib/context_compiler.py",".keel/lib/keel_core.py",".keel/tests/"]},
+    {"id":"REQ-CONTEXT-003","statement":"The v2 context surface is deterministic, provenance-aware, and available through the CLI without breaking the v1 packet contract.","type":"behavior","priority":"must","implementation_paths":[".keel/bin/keel.py",".keel/lib/keel_core.py",".keel/tests/"]}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-CONTEXT-001","requirement_id":"REQ-CONTEXT-001","statement":"Context v2 selection tests prove query, role, impact, provenance, and confidence behavior.","required":true,"policy":"all","evidence_type":"automated-test","implementation_paths":[".keel/lib/context_compiler.py",".keel/tests/"],"evidence":[{"provider":"command","check_id":"context-compiler-tests"}]},
+    {"id":"AC-CONTEXT-002","requirement_id":"REQ-CONTEXT-002","statement":"Context v2 monotonicity and uncertainty tests pass.","required":true,"policy":"all","evidence_type":"automated-test","implementation_paths":[".keel/lib/context_compiler.py",".keel/lib/keel_core.py",".keel/tests/"],"evidence":[{"provider":"command","check_id":"context-compiler-tests"}]},
+    {"id":"AC-CONTEXT-003","requirement_id":"REQ-CONTEXT-003","statement":"Context CLI and compatibility tests pass.","required":true,"policy":"all","evidence_type":"automated-test","implementation_paths":[".keel/bin/keel.py",".keel/lib/keel_core.py",".keel/tests/"],"evidence":[{"provider":"command","check_id":"context-compiler-tests"},{"provider":"command","check_id":"control-plane-doctor"}]}
+  ]
+}

@@ -60,6 +60,16 @@ def main() -> None:
         assert provenance[1] == {"path": "missing.md", "status": "MISSING"}
         assert provenance[2] == {"path": "../outside.md", "status": "OUTSIDE_REPOSITORY"}
         assert "injected" not in first_text
+        v2_config = {"context_compiler": {**config["context_compiler"], "max_chars": 2000}}
+        v2_text, v2_meta = compiler.compile_packet_v2(root, "test-change", state, v2_config, ledger, ["src/auth/policy.py"], role="verifier", query=["testing"])
+        selection = v2_meta["selection"]
+        assert v2_meta["schema_version"] == 3
+        assert selection["role"] == "verifier"
+        assert selection["monotonicity"]["mandatory_documents_retained"] is True
+        assert any(row["path"] == "docs/guide.md" for row in selection["documents"])
+        assert selection["graph"]["status"] == "UNAVAILABLE"
+        assert any(row["code"] == "graph-uncertain" for row in selection["warnings"])
+        assert "derived navigation evidence only" in v2_text
         print("Context compiler tests PASS")
 
 

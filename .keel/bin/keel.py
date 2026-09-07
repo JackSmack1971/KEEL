@@ -39,7 +39,7 @@ def main() -> int:
     p = sub.add_parser("effects"); p.add_argument("--change")
     p = sub.add_parser("telemetry"); p.add_argument("--change")
     sub.add_parser("discover")
-    p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
+    p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true"); p.add_argument("--v2", action="store_true"); p.add_argument("--role", default="executor"); p.add_argument("--query", action="append", default=[])
     p = sub.add_parser("evidence"); p.add_argument("--change")
     p = sub.add_parser("status"); p.add_argument("--change")
     p = sub.add_parser("next"); p.add_argument("--change")
@@ -111,7 +111,7 @@ def main() -> int:
         if args.cmd == "context":
             cid = args.change or k.active_change(root)
             if not cid: raise RuntimeError("no active KEEL change")
-            result = k.compile_context(root, cid, write=True)
+            result = k.compile_context(root, cid, write=True, v2=args.v2, role=args.role, query=args.query)
             if args.stdout: print(result.pop("text"))
             else:
                 result.pop("text", None); print(json.dumps(result, indent=2))

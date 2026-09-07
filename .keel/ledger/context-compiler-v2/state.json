@@ -1,0 +1,10 @@
+{
+  "base_commit": "c9c96f4d21101d9b0622436a595d6b79ad790d7e",
+  "change_id": "context-compiler-v2",
+  "created_at": "2026-09-07T15:39:04+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T15:44:13+00:00",
+  "verified_content_digest": "133cb78a0950a9fab50279b634731931ef3f929e750cb1c1a2769639f4593ad0"
+}

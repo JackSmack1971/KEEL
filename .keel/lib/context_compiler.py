@@ -8,6 +8,12 @@ from pathlib import Path
 import capability_resolver
 
 CORE_CAPABILITIES = ["repository-legibility", "keel-spec-ledger", "security", "provenance-audit", "autonomy-permissions"]
+ROLE_PROFILES = {
+    "executor": ["docs/control-plane/COMMANDS.md", "docs/control-plane/ENVIRONMENTS.md"],
+    "verifier": ["docs/control-plane/VERIFICATION.md", "docs/control-plane/TESTING_CI_GENERATED.md"],
+    "reviewer": ["ARCHITECTURE.md", "docs/control-plane/ARCHITECTURE_ENFORCEMENT.md"],
+    "risk-reviewer": ["docs/control-plane/DECISION_MODEL.md", "docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md"],
+}
 
 
 def _read(path: Path, limit: int = 4000) -> str:
@@ -140,3 +146,108 @@ def write_packet(root: Path, change_id: str, text: str, meta: dict) -> tuple[Pat
     md=out/f"{change_id}.md"; js=out/f"{change_id}.json"
     md.write_text(text,encoding="utf-8"); js.write_text(json.dumps(meta,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     return md,js
+
+
+def _query_tokens(query) -> list[str]:
+    if isinstance(query, str):
+        values = query.split()
+    elif isinstance(query, list):
+        values = query
+    else:
+        values = []
+    return sorted({str(value).strip().lower() for value in values if str(value).strip()})
+
+
+def select_v2(root: Path, config: dict, role: str, query, changed_paths: list[str], graph: dict | None = None, impact: dict | None = None) -> dict:
+    """Select additive context from explicit role/query/impact inputs."""
+    from repository_map import analyze_impact, build
+
+    compiler = config.get("context_compiler", {}) or {}
+    requested_role = role
+    role = role if role in ROLE_PROFILES else "executor"
+    tokens = _query_tokens(query)
+    graph = graph if isinstance(graph, dict) else build(root)
+    impact = impact if isinstance(impact, dict) else analyze_impact(graph, changed_paths)
+    selected: dict[str, dict] = {}
+
+    def add(path: str, reason: str, confidence: str) -> None:
+        if not isinstance(path, str) or not path.strip():
+            return
+        normalized = path.replace("\\", "/")
+        row = selected.setdefault(normalized, {"path": normalized, "reasons": [], "confidence": confidence, "provenance": "context compiler configuration"})
+        if reason not in row["reasons"]:
+            row["reasons"].append(reason)
+        if confidence == "HIGH":
+            row["confidence"] = confidence
+
+    for document in compiler.get("always_docs", []):
+        add(document, "mandatory-configured-context", "HIGH")
+    role_docs = compiler.get("role_docs", {}) or {}
+    for document in role_docs.get(role, ROLE_PROFILES[role]):
+        add(document, f"role-profile:{role}", "HIGH")
+
+    category_docs = compiler.get("impact_docs", {}) or {}
+    categories = {category for row in impact.get("classifications", []) for category in row.get("categories", [])}
+    for category in sorted(categories):
+        for document in category_docs.get(category, []):
+            add(document, f"impact:{category}", "MEDIUM")
+
+    capability_docs = compiler.get("capability_docs", {}) or {}
+    changed_text = " ".join(changed_paths).lower()
+    for capability, documents in capability_docs.items():
+        if any(token in capability.lower() for token in tokens) or any(token in changed_text for token in capability.lower().split("-")):
+            for document in documents:
+                add(document, f"query-or-impact-capability:{capability}", "MEDIUM")
+
+    warnings = []
+    graph_status = graph.get("architecture", {}).get("status", "UNAVAILABLE")
+    if graph_status in {"UNAVAILABLE", "CONFLICT"}:
+        warnings.append({"code": "graph-uncertain", "status": graph_status, "action": "widen-context-and-verification"})
+        add("ARCHITECTURE.md", "uncertain-architecture-fallback", "HIGH")
+    if impact.get("risk") in {"UNKNOWN", "WIDEN_VERIFICATION"}:
+        warnings.append({"code": "impact-uncertain", "status": impact.get("risk"), "action": "widen-context-and-verification"})
+        add("docs/control-plane/VERIFICATION.md", "uncertain-impact-fallback", "HIGH")
+    if requested_role not in ROLE_PROFILES:
+        warnings.append({"code": "unsupported-role", "status": "UNAVAILABLE", "action": "fallback-to-executor"})
+
+    rows = [selected[path] for path in sorted(selected)]
+    provenance = _document_provenance(root, [row["path"] for row in rows])
+    return {
+        "schema_version": 1,
+        "status": "AVAILABLE",
+        "role": role,
+        "query": tokens,
+        "documents": rows,
+        "document_provenance": provenance,
+        "graph": {"schema_version": graph.get("schema_version"), "policy": graph.get("policy"), "status": graph_status, "provenance": "repository_map.build; derived-only"},
+        "impact": {"status": impact.get("status", "UNAVAILABLE"), "risk": impact.get("risk", "UNKNOWN"), "probable_dependents": impact.get("probable_dependents", [])[:20], "probable_tests": impact.get("probable_tests", [])[:20], "provenance": impact.get("policy", "advisory-only")},
+        "warnings": warnings,
+        "monotonicity": {"mandatory_documents_retained": all(any(row["path"] == document for row in rows) for document in compiler.get("always_docs", [])), "policy": "intelligence may add context and warnings but may not remove mandatory context"},
+        "policy": "derived-navigation-evidence-only",
+    }
+
+
+def compile_packet_v2(root: Path, change_id: str, state: dict, config: dict, ledger_dir: Path, changed_paths: list[str] | None = None, role: str = "executor", query=None) -> tuple[str, dict]:
+    changed_paths = changed_paths or []
+    selection = select_v2(root, config, role, query, changed_paths)
+    proposal = " ".join(_material_lines(_read(ledger_dir / "proposal.md", 5000), 8))
+    lines = [
+        f"# KEEL Context Packet v2 — {change_id}", "",
+        f"Phase: {state.get('phase')}  Role: {selection['role']}  Base: {state.get('base_commit')}", "",
+        "## Objective", proposal or "UNRESOLVED", "",
+        "## Selection basis", f"Query: {', '.join(selection['query']) or 'none'}",
+        f"Graph: {selection['graph']['status']}  Impact risk: {selection['impact']['risk']}", "",
+        "## Selected context",
+    ]
+    for row in selection["documents"]:
+        lines.append(f"- {row['path']} ({row['confidence']}) — {'; '.join(row['reasons'])}")
+    if selection["warnings"]:
+        lines += ["", "## Warnings"] + [f"- {row['code']}: {row['action']}" for row in selection["warnings"]]
+    lines += ["", "## Monotonicity", "- Mandatory configured documents retained.", "- Intelligence is derived navigation evidence only.", ""]
+    text = "\n".join(lines)
+    max_chars = int((config.get("context_compiler", {}) or {}).get("max_chars", 12000))
+    if len(text) > max_chars:
+        text = text[:max_chars - 80] + "\n\n[TRUNCATED BY KEEL CONTEXT BUDGET]\n"
+    selection["chars"] = len(text)
+    selection["budget"] = max_chars
+    return text, {"schema_version": 3, "change_id": change_id, "phase": state.get("phase"), "selection": selection}
