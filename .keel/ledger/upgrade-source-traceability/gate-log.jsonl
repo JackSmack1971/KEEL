@@ -1,0 +1,5 @@
+{"details": {"base_commit": "f7e86318b0d4840dc714402529fcd3e1eb724b8a", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:41:59+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:42:46+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:42:47+00:00"}
+{"details": {"changed_paths": ["docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/keel-upgrade-goal.md", "docs/exec-plans/active/upgrade-source-traceability.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:42:54+00:00"}
+{"details": {"content_digest": "54059a5d6d87ed350bc57a3acb44b6eb7408a047eaefcaa532a6c7d804a208f6", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:42:54+00:00"}

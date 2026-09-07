@@ -1,0 +1,10 @@
+{
+  "base_commit": "f7e86318b0d4840dc714402529fcd3e1eb724b8a",
+  "change_id": "upgrade-source-traceability",
+  "created_at": "2026-09-07T12:41:59+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T12:42:55+00:00",
+  "verified_content_digest": "54059a5d6d87ed350bc57a3acb44b6eb7408a047eaefcaa532a6c7d804a208f6"
+}

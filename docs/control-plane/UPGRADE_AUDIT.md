@@ -22,4 +22,34 @@ This is the current-state audit against `docs/KEEL_UPGRADES.md`. Status means ex
 | Version / install / upgrade / migration | Partially implemented | `keel version`, `compat`, and `migrate --check` inventory framework/config/contract/ledger/skill/manifest versions and produce read-only migration findings; installer, actual migrations, rollback, and external Codex version checks remain. |
 | Issue/PR integrations | Deferred | No external tracker adapter; correctly requires separate authorization and runtime prerequisites. |
 
+## Source-section traceability
+
+The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections that synthesize competitor observations are recorded as context, not treated as missing runtime features.
+
+| Source sections | Mapped audit evidence | Current status |
+|---|---|---|
+| 1-3 | Lifecycle, evidence graph, effects, and audit framing | Implemented foundation |
+| 4 | Missions / work DAG | Partial: validation/frontier only |
+| 5 | Requirements and acceptance traceability | Partial: machine-readable links exist; richer typed specification model remains |
+| 6 | Evidence graph | Implemented |
+| 7 | Capability resolver | Implemented local resolver; runtime discovery remains advisory |
+| 8 | Repository mapping / knowledge graph | Partial: classifications and Python imports; ownership/architecture facts remain |
+| 9 | Context compiler | Implemented |
+| 10 | Reusable engineering protocols | Partial: routed skill; behavioral evaluation/deeper references remain |
+| 11 | Scope doctrine / avoid giant agent organization | Contextual design constraint |
+| 12 | Dynamic topology / compute routing | Partial: deterministic recommendation; runtime dispatch remains |
+| 13 | Parallel execution | Partial: worktree primitives; automated orchestration remains |
+| 14 | Worktree/environment isolation | Implemented as local primitives |
+| 15 | Multimodal verification | Partial: provider contracts; real adapters remain |
+| 16 | Stack-agnostic source discovery | Partial: configurable classification; language-specific semantic analysis currently Python |
+| 17 | Effect detection/enforcement | Partial: conservative argv inference; runtime tool/API inference and authorization enforcement remain |
+| 18-19 | Reconciliation and `keel next` | Implemented read-only kernels |
+| 20 | Economics / telemetry | Partial: routing and benchmark schemas; real cost/latency telemetry remains |
+| 21 | KEEL Evals | Harness implemented; representative empirical trials remain |
+| 22-23 | Learning and entropy service | Partial: validated observations, queue, and deterministic scan; promotion/scheduling/target execution remain |
+| 24 | Developer experience | Partial: inspection and eligibility projections; authorized `run` remains |
+| 25 | Installation/version/migration | Partial: inventory and compatibility checks; installer/migrations/rollback remain |
+| 26-27 | Competitor synthesis and target architecture | Context plus constraints represented by the mapped rows; not independent executable features |
+| 28 | Recommended roadmap | Durable workstream plan in `docs/exec-plans/active/upgrade-remaining-plan.md` |
+
 Remaining work is tracked in [the durable workstream plan](../exec-plans/active/upgrade-remaining-plan.md). The effect-capability inference slice is now implemented; runtime tool/API inference and authorization enforcement remain. Repository ownership facts, feedback promotion/evaluation, and schema migration are the next local slices, while execution runtime, evidence adapters, tracker/PR integration, external Codex checks, and KEELBench superiority require the prerequisites recorded in that plan.

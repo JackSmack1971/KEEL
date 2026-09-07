@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Every numbered recommendation in docs/KEEL_UPGRADES.md and the roadmap conclusion is mapped to current evidence and status.", "source": "upgrade-audit"}]
+}

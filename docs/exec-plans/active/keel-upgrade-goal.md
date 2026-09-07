@@ -16,6 +16,7 @@ Audit `docs/KEEL_UPGRADES.md` against executable repository evidence, implement 
 - Implemented: capability resolution, context compilation, evidence traceability, KEELBench harness, `next`, worktree/environment primitives, reconciliation, compatibility inspection.
 - Partial and implemented slices: repository map, mission DAG/frontier, topology routing, provider/effect contracts, engineering protocols, feedback/entropy inspection, lifecycle compatibility.
 - Remaining: repository ownership facts, feedback promotion/evaluation, real installer/schema migrations/rollback, deeper protocol evaluation, mission dispatch/retry/integration, runtime provider adapters, `run`, external tracker/PR adapters, external Codex checks, and empirical paired KEELBench trials. Advisory command effect inference is implemented; runtime tool/API inference and authorization enforcement remain.
+- Source coverage: numbered recommendations 1-28 are explicitly mapped in `docs/control-plane/UPGRADE_AUDIT.md`; contextual competitor sections are separated from executable capability claims.
 
 ## Stopping rule
 
