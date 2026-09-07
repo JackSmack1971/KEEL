@@ -1,0 +1,5 @@
+keel-change-id: plan-005-api-authorized-integrations
+sealed-candidate: 9e8cfb326487cad7a3e7b9c1bc14d77fdf66e715
+landed-commit: 9e8cfb326487cad7a3e7b9c1bc14d77fdf66e715
+integration-relation: candidate-ancestor
+verified-content-digest: 3e14f6bf7abe4f8cd359e1c003c22e584c075c0ff73b6cde8ffc3a0b4b9b7254
