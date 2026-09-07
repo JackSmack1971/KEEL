@@ -1,0 +1,10 @@
+{"details": {"base_commit": "c57ceea50e7af869a1e517eada12d7af27b064c9", "mode": "trivial"}, "event": "START", "result": "PASS", "ts": "2026-09-07T04:58:08+00:00"}
+{"details": {"mode": "trivial-fast-path"}, "event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T04:58:08+00:00"}
+{"details": {"mode": "trivial-fast-path"}, "event": "PLAN", "result": "PASS", "ts": "2026-09-07T04:58:08+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T04:58:17+00:00"}
+{"details": {"content_digest": "6754464d570135835e6a5b78e1cbc7600feb7048e3943626f5831754f2d08667", "errors": ["substantive source change has no configured verification_commands in .keel/config.json"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T04:58:17+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-07T04:58:45+00:00"}
+{"details": {"errors": ["scope touches control-plane files but control_plane_change=false"]}, "event": "PLAN", "result": "FAIL", "ts": "2026-09-07T04:58:55+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T04:59:48+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/config.json"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T04:59:49+00:00"}
+{"details": {"content_digest": "aa38afc887ddb4ffdb0ee55dae1e97a02ba0e6c3b6cf1020b2a2b9b0ac6c837f", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T04:59:49+00:00"}

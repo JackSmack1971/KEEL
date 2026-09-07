@@ -1,0 +1,34 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "detail": "matched=.control-plane/bootstrap-manifest.json",
+          "passed": true,
+          "path": ".control-plane/bootstrap-manifest.json",
+          "provider": "changed_path"
+        }
+      ],
+      "id": "AC-TRIVIAL",
+      "policy": "any",
+      "required": true,
+      "requirement_id": "REQ-TRIVIAL",
+      "statement": "At least one declared scoped path is materially changed",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirements": [
+    {
+      "id": "REQ-TRIVIAL",
+      "source": "trivial-fast-path",
+      "statement": "Record the corrected generated KEEL runtime hash in bootstrap provenance"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 1,
+    "required": 1
+  }
+}

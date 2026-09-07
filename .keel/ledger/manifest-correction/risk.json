@@ -1,0 +1,8 @@
+{
+  "control_plane_change": true,
+  "high_blast_radius": false,
+  "migration_or_release_sensitive": false,
+  "requires_exec_plan": false,
+  "risk_level": "standard",
+  "security_privacy_sensitive": false
+}

@@ -1,0 +1,2 @@
+.control-plane/bootstrap-manifest.json
+.keel/config.json

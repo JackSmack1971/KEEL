@@ -1,0 +1,45 @@
+{
+  "acceptance": {
+    "passed_required": 1,
+    "required": 1
+  },
+  "base_commit": "c57ceea50e7af869a1e517eada12d7af27b064c9",
+  "change_id": "manifest-correction",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/config.json"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c57ceea50e7af869a1e517eada12d7af27b064c9",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.control-plane/bootstrap-manifest.json', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 278,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    }
+  ],
+  "content_digest": "aa38afc887ddb4ffdb0ee55dae1e97a02ba0e6c3b6cf1020b2a2b9b0ac6c837f",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T04:59:49+00:00"
+}

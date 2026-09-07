@@ -1,0 +1,10 @@
+{
+  "base_commit": "c57ceea50e7af869a1e517eada12d7af27b064c9",
+  "change_id": "manifest-correction",
+  "created_at": "2026-09-07T04:58:08+00:00",
+  "mode": "trivial",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T04:59:49+00:00",
+  "verified_content_digest": "aa38afc887ddb4ffdb0ee55dae1e97a02ba0e6c3b6cf1020b2a2b9b0ac6c837f"
+}

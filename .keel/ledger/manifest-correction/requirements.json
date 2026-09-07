@@ -1,0 +1,10 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-TRIVIAL",
+      "source": "trivial-fast-path",
+      "statement": "Record the corrected generated KEEL runtime hash in bootstrap provenance"
+    }
+  ],
+  "schema_version": 1
+}
