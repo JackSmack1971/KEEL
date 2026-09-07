@@ -1,0 +1,75 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "git-diff-check",
+          "detail": "check=git-diff-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Plan and goal records include typed specifications, implementation surfaces, and lifecycle telemetry with remaining boundaries.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Strict control-plane validation passes.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-001",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "upgrade-audit",
+      "statement": "Durable plan and goal records include every current partial slice and its remaining boundary."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 2,
+    "required": 2,
+    "requirements_covered": 1,
+    "requirements_passing": 1,
+    "requirements_total": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "base_commit": "f0875d7eddc9fd71c20aea9722d7d93c151832c0",
+  "change_id": "final-plan-reconciliation",
+  "created_at": "2026-09-07T13:11:02+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T13:11:55+00:00",
+  "verified_content_digest": "7e3fa782eb1fabeb964049f371b27e9456f2e920b852940e7e45b5ac67e0abfd"
+}

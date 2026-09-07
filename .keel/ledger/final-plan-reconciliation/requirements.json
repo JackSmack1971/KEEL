@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Durable plan and goal records include every current partial slice and its remaining boundary.", "source": "upgrade-audit"}]
+}
