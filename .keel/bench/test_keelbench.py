@@ -35,6 +35,9 @@ def main() -> int:
         (root / ".keel/bench").mkdir(parents=True)
         for name in ("corpus.json", "telemetry-schema.json"):
             (root / ".keel/bench" / name).write_text((ROOT / ".keel/bench" / name).read_text())
+        assert not KEELBENCH.validate(root)
+        historical = json.loads((ROOT / ".keel/bench/historical-plan-002.json").read_text())
+        assert historical["paired"] is False and historical["empirical_claim"] == "UNVALIDATED"
 
         trial = root / "trial-a"
         KEELBENCH.new_trial(root, "KB-01-bugfix", 2, "seed-1", "state-1", "digest-1", trial)

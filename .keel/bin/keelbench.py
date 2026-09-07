@@ -13,6 +13,7 @@ HERE = Path(__file__).resolve()
 ROOT_DEFAULT = HERE.parents[2]
 CONDITIONS = ("baseline", "keel")
 REQUIRED_SCENARIOS = {"bugfix", "feature", "refactor", "dependency-upgrade", "migration", "security-remediation", "frontend-change", "performance-regression", "brownfield-investigation", "multi-service-change", "release", "failure-recovery"}
+REQUIRED_ADVERSARIAL_CASES = {"dirty worktree", "scope temptation", "forged authorization", "weakening tests", "post-verification mutation", "alternate API bypass", "ambiguous requirements", "generated-file edits", "failing baseline", "parallel conflicting work", "migration rollback", "external-effect request"}
 REQUIRED_METRICS = {"task_success", "acceptance_coverage", "introduced_regressions", "scope_violations", "unauthorized_effects", "human_interventions", "tokens", "wall_time_sec", "tool_calls", "commands", "retries", "merge_conflicts", "ci_failures", "review_findings"}
 PENALTY_METRICS = ("introduced_regressions", "scope_violations", "unauthorized_effects", "merge_conflicts", "ci_failures", "review_findings")
 
@@ -51,6 +52,9 @@ def validate(root: Path) -> list[str]:
         errors.append("telemetry schema missing metrics: " + ", ".join(missing_metrics))
     if "equivalent starting state" not in schema.get("comparison_rule", ""):
         errors.append("telemetry schema comparison_rule must require equivalent starting state")
+    missing_adversarial = sorted(REQUIRED_ADVERSARIAL_CASES - set(corpus.get("adversarial_cases", [])))
+    if missing_adversarial:
+        errors.append("corpus missing adversarial cases: " + ", ".join(missing_adversarial))
     return errors
 
 

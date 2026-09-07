@@ -1,0 +1,92 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "provider=unit_test check=keelbench-tests exit=0",
+          "passed": true,
+          "path": ".keel/bench/test_keelbench.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-HIST-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-HIST-001",
+      "statement": "Historical seed validation rejects empirical claims and preserves the supplied Plan 002 measurements.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "detail": "provider=unit_test check=keelbench-tests exit=0",
+          "passed": true,
+          "path": ".keel/bench/test_keelbench.py",
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-HIST-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-HIST-002",
+      "statement": "Corpus validation requires the complete hostile-case inventory.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-HIST-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-HIST-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-HIST-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-HIST-002",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-HIST-001",
+      "source": "user-provided Plan 003 brief",
+      "statement": "Plan 002 measurements are preserved as historical, non-paired telemetry with provenance and explicit claim status."
+    },
+    {
+      "id": "REQ-HIST-002",
+      "source": "user-provided Plan 003 brief",
+      "statement": "The benchmark corpus records all hostile evaluation cases named by the Plan 003 brief."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 2,
+    "required": 2,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  }
+}

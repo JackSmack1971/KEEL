@@ -1,0 +1,16 @@
+{"details": {"base_commit": "f45c0068076e7f6d6002cdfea81711286fade64d", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T16:42:05+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T16:42:51+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T16:42:51+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-07T16:43:02+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T16:43:20+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bench/corpus.json", ".keel/bench/historical-plan-002.json", ".keel/bench/test_keelbench.py", ".keel/bin/keelbench.py"], "scope_errors": ["out-of-scope path: .control-plane/bootstrap-manifest.json"]}, "event": "EXECUTE", "result": "FAIL", "ts": "2026-09-07T16:43:30+00:00"}
+{"details": {"content_digest": null, "errors": ["out-of-scope path: .control-plane/bootstrap-manifest.json"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T16:43:30+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-07T16:43:51+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T16:43:56+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bench/corpus.json", ".keel/bench/historical-plan-002.json", ".keel/bench/test_keelbench.py", ".keel/bin/keelbench.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T16:44:05+00:00"}
+{"details": {"content_digest": "b85e3a98d5c830acba6ec9b2c3de5b4510aac4955caac643746f4b587efa05b9", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T16:44:05+00:00"}
+{"event": "REOPEN", "result": "PASS", "ts": "2026-09-07T16:44:34+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bench/corpus.json", ".keel/bench/historical-plan-002.json", ".keel/bench/test_keelbench.py", ".keel/bin/keelbench.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T16:44:42+00:00"}
+{"details": {"content_digest": "b85e3a98d5c830acba6ec9b2c3de5b4510aac4955caac643746f4b587efa05b9", "errors": ["verification command failed: strict-control-plane-validation exit=1"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T16:44:42+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bench/corpus.json", ".keel/bench/historical-plan-002.json", ".keel/bench/test_keelbench.py", ".keel/bin/keelbench.py"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T16:44:59+00:00"}
+{"details": {"content_digest": "b85e3a98d5c830acba6ec9b2c3de5b4510aac4955caac643746f4b587efa05b9", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T16:44:59+00:00"}

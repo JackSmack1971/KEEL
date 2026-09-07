@@ -1,0 +1,10 @@
+{
+  "base_commit": "f45c0068076e7f6d6002cdfea81711286fade64d",
+  "change_id": "plan-003-historical-baselines",
+  "created_at": "2026-09-07T16:42:05+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T16:44:59+00:00",
+  "verified_content_digest": "b85e3a98d5c830acba6ec9b2c3de5b4510aac4955caac643746f4b587efa05b9"
+}

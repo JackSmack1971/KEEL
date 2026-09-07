@@ -1,0 +1,4 @@
+.keel/bench/**
+.keel/tests/test_keelbench.py
+.keel/bin/keelbench.py
+.control-plane/bootstrap-manifest.json

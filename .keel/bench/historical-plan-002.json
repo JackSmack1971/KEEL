@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "record_type": "historical_seed",
+  "source": "user-provided Plan 003 brief",
+  "source_date": "2026-09-07",
+  "mission": "Plan 002 Mission",
+  "metrics": {
+    "children": 1,
+    "retries": 0,
+    "checks": 24,
+    "verification_sec": 42.851
+  },
+  "paired": false,
+  "empirical_claim": "UNVALIDATED",
+  "notes": "Preserved as historical seed data; not a baseline-vs-KEEL trial."
+}

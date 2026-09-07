@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-HIST-001","statement":"Plan 002 measurements are preserved as historical, non-paired telemetry with provenance and explicit claim status.","source":"user-provided Plan 003 brief"},
+    {"id":"REQ-HIST-002","statement":"The benchmark corpus records all hostile evaluation cases named by the Plan 003 brief.","source":"user-provided Plan 003 brief"}
+  ]
+}
