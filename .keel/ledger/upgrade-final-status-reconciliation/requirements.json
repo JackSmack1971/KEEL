@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "The audit closing roadmap reflects all anchored local slices and their remaining boundaries.", "source": "upgrade-audit"}]
+}

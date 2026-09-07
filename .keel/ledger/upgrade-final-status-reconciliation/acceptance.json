@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Audit and workstream plan status wording matches current anchored implementation evidence.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "git-diff-check"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}

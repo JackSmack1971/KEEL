@@ -1,0 +1,5 @@
+{"details": {"base_commit": "af69bbc9c24e40cc86cc4b75bae92643a3864273", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T12:49:00+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T12:49:39+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T12:49:40+00:00"}
+{"details": {"changed_paths": ["docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/upgrade-final-status-reconciliation.md", "docs/exec-plans/active/upgrade-remaining-plan.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T12:49:47+00:00"}
+{"details": {"content_digest": "2869f2766b4e5eab23dd15c46be205a5f3b4d87436712a8fbaa6b133ae4f3377", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T12:49:47+00:00"}
