@@ -1,0 +1,333 @@
+{
+  "acceptance": {
+    "passed_required": 2,
+    "required": 2,
+    "requirements_covered": 1,
+    "requirements_passing": 1,
+    "requirements_total": 1
+  },
+  "base_commit": "1a288093e7819c551d6f003f9f6b5c12e86719a6",
+  "change_id": "lifecycle-telemetry",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/bin/keel.py",
+    ".keel/config.json",
+    ".keel/lib/telemetry.py",
+    ".keel/tests/test_telemetry.py",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/KEELBENCH.md",
+    "docs/control-plane/UPGRADE_AUDIT.md",
+    "docs/exec-plans/active/lifecycle-telemetry.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "1a288093e7819c551d6f003f9f6b5c12e86719a6",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.keel/bin/keel.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/config.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/COMMANDS.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/KEELBENCH.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/UPGRADE_AUDIT.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 255,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/bench/test_keelbench.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 162,
+      "excerpt": "KEELBench tests PASS",
+      "exit_code": 0,
+      "id": "keelbench-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keelbench.py",
+        "--root",
+        ".",
+        "validate"
+      ],
+      "cwd": ".",
+      "duration_ms": 117,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "keelbench-validate",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/scripts/validate_control_plane.py",
+        "--root",
+        ".",
+        "--strict-manifest",
+        "--require-keel-runtime"
+      ],
+      "cwd": ".",
+      "duration_ms": 787,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
+      "exit_code": 0,
+      "id": "strict-control-plane-validation",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 112,
+      "excerpt": "Capability resolver tests PASS",
+      "exit_code": 0,
+      "id": "capability-resolver-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_context_compiler.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 141,
+      "excerpt": "Context compiler tests PASS",
+      "exit_code": 0,
+      "id": "context-compiler-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 105,
+      "excerpt": "Evidence graph tests PASS",
+      "exit_code": 0,
+      "id": "evidence-graph-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_next_action.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 150,
+      "excerpt": "Next-action tests PASS",
+      "exit_code": 0,
+      "id": "next-action-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_worktree_lifecycle.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 627,
+      "excerpt": "Worktree lifecycle tests PASS",
+      "exit_code": 0,
+      "id": "worktree-lifecycle-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_environment_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 127,
+      "excerpt": "Environment contract tests PASS",
+      "exit_code": 0,
+      "id": "environment-contract-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_upgrade_kernel.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 403,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
+      "exit_code": 0,
+      "id": "upgrade-kernel-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 108,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"dispatch-contract\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "mission-work-graph-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 635,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"semantic-imports\", \"ownership-source\", \"ignored-directories\", \"derived-only\"]}",
+      "exit_code": 0,
+      "id": "repository-map-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_topology_routing.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 66,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"complexity\", \"capability-only\", \"deterministic\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "topology-routing-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_provider_effect_contracts.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 154,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provider-binding\", \"provider-failure\", \"schema-adapter\", \"effect-vocabulary\", \"authorization-preserved\"]}",
+      "exit_code": 0,
+      "id": "provider-effect-contract-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        ".agents/skills/engineering-protocols"
+      ],
+      "cwd": ".",
+      "duration_ms": 82,
+      "excerpt": "Skill is valid!",
+      "exit_code": 0,
+      "id": "engineering-protocols-skill-check",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_feedback_entropy.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 99,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provenance\", \"review-gate\", \"goal-record\", \"deterministic-scan\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "feedback-entropy-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_lifecycle_compatibility.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 107,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "lifecycle-compatibility-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_developer_ux.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 1875,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"init\", \"review\", \"eligibility-boundary\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "developer-ux-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_effect_inference.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 85,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"mapping\", \"unknown-neutrality\", \"advisory-boundary\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "effect-inference-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_schema_migrations.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 107,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"preflight\", \"atomic-apply\", \"backup\", \"rollback\", \"unsupported-version\"]}",
+      "exit_code": 0,
+      "id": "schema-migration-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_telemetry.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 81,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"aggregation\", \"unavailable-metrics\", \"missing-input\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "lifecycle-telemetry-tests",
+      "required": true
+    }
+  ],
+  "content_digest": "750432fff649a21d2c7ccb03e0563ad1fb78209c94b8e092b170f81d4c01053c",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T13:03:18+00:00"
+}

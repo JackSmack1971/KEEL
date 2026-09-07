@@ -1,0 +1,10 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/telemetry.py
+.keel/tests/test_telemetry.py
+.keel/bin/keel.py
+.keel/config.json
+docs/control-plane/COMMANDS.md
+docs/control-plane/UPGRADE_AUDIT.md
+docs/control-plane/KEELBENCH.md
+.control-plane/bootstrap-manifest.json
+docs/exec-plans/active/lifecycle-telemetry.md

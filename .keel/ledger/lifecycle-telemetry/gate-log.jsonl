@@ -1,0 +1,7 @@
+{"details": {"base_commit": "1a288093e7819c551d6f003f9f6b5c12e86719a6", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T13:01:22+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T13:01:47+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T13:01:47+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/telemetry.py", ".keel/tests/test_telemetry.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/KEELBENCH.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/lifecycle-telemetry.md"], "scope_errors": ["out-of-scope path: .keel/config.json"]}, "event": "EXECUTE", "result": "FAIL", "ts": "2026-09-07T13:02:51+00:00"}
+{"details": {"content_digest": null, "errors": ["out-of-scope path: .keel/config.json"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-07T13:02:51+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/telemetry.py", ".keel/tests/test_telemetry.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/KEELBENCH.md", "docs/control-plane/UPGRADE_AUDIT.md", "docs/exec-plans/active/lifecycle-telemetry.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T13:03:18+00:00"}
+{"details": {"content_digest": "750432fff649a21d2c7ccb03e0563ad1fb78209c94b8e092b170f81d4c01053c", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T13:03:18+00:00"}

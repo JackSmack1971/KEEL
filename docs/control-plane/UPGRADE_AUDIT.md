@@ -44,7 +44,7 @@ The numbered recommendations in `docs/KEEL_UPGRADES.md` map as follows; sections
 | 16 | Stack-agnostic source discovery | Partial: configurable classification; language-specific semantic analysis currently Python |
 | 17 | Effect detection/enforcement | Partial: conservative argv inference; runtime tool/API inference and authorization enforcement remain |
 | 18-19 | Reconciliation and `keel next` | Implemented read-only kernels |
-| 20 | Economics / telemetry | Partial: routing and benchmark schemas; real cost/latency telemetry remains |
+| 20 | Economics / telemetry | Partial: routing, benchmark schemas, and lifecycle verification telemetry now expose measured duration/outcomes; token/cost/human-effort telemetry remains runtime-dependent |
 | 21 | KEEL Evals | Harness implemented; representative empirical trials remain |
 | 22-23 | Learning and entropy service | Partial: validated observations, queue, and deterministic scan; promotion/scheduling/target execution remain |
 | 24 | Developer experience | Partial: inspection and eligibility projections; authorized `run` remains |

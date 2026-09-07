@@ -89,6 +89,14 @@ python3 .keel/bin/keel.py effects [--change <change-id>]
 
 This is read-only and advisory. It recognizes only explicit argv patterns, reports inferred capabilities and undeclared mismatches, and never executes or authorizes a command.
 
+Lifecycle telemetry:
+
+```text
+python3 .keel/bin/keel.py telemetry --change <change-id>
+```
+
+This reports measured verification counts, exit outcomes, command count, and wall time. Token, cost, human-intervention, retry, and conflict metrics remain explicitly unavailable unless runtime instrumentation supplies them.
+
 Cover setup/bootstrap, build, format, lint/static checks, type checks, unit/integration/e2e/evals, local run, generated-artifact refresh, security checks, benchmarks, release validation, and cleanup only when those commands actually exist.
 
 Prefer repository scripts/task runners when they reduce cross-platform ambiguity. Any destructive or external command must state its authorization/recovery boundary. `keel verify` executes only commands explicitly configured in `.keel/config.json`; absence is a blocker for substantive source changes, not an invitation to guess.

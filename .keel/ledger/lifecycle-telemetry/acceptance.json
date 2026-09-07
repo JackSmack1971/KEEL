@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "criteria": [{"id": "AC-001", "requirement_id": "REQ-001", "statement": "Telemetry tests prove measured duration/outcome aggregation, explicit unavailable metrics, malformed input handling, and read-only behavior.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "lifecycle-telemetry-tests"}]}, {"id": "AC-002", "requirement_id": "REQ-001", "statement": "Strict control-plane validation passes.", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "strict-control-plane-validation"}]}]
+}

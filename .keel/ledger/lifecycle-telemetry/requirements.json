@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "requirements": [{"id": "REQ-001", "statement": "Lifecycle telemetry aggregates measured verification outcomes and represents unavailable metrics explicitly without mutation.", "source": "upgrade-audit"}]
+}

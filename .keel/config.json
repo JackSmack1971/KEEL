@@ -303,6 +303,13 @@
       "id": "schema-migration-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_telemetry.py"],
+      "cwd": ".",
+      "id": "lifecycle-telemetry-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

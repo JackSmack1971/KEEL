@@ -16,6 +16,7 @@ import lifecycle
 import developer_ux as ux
 import effect_inference as effects
 import schema_migrations as migrations
+import telemetry
 
 
 def main() -> int:
@@ -36,6 +37,7 @@ def main() -> int:
     p = sub.add_parser("review"); p.add_argument("--change")
     p = sub.add_parser("ship"); p.add_argument("--change")
     p = sub.add_parser("effects"); p.add_argument("--change")
+    p = sub.add_parser("telemetry"); p.add_argument("--change")
     sub.add_parser("discover")
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
@@ -102,6 +104,8 @@ def main() -> int:
             result = ux.ship_eligibility(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] == "ELIGIBLE" else 1
         if args.cmd == "effects":
             result = effects.audit(root, args.change); print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "telemetry":
+            result = telemetry.for_change(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] in {"PASS", "UNAVAILABLE"} else 1
         if args.cmd == "discover":
             result = k.discover_capabilities(root); print(json.dumps(result, indent=2)); return 0 if not result.get("conflicts") else 1
         if args.cmd == "context":
