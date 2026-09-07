@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id": "AC-001", "requirement_id": "REQ-001", "statement": "The manifest path is materially changed", "required": true, "policy": "any", "evidence": [{"provider": "changed_path", "path": ".control-plane/bootstrap-manifest.json"}]},
+    {"id": "AC-002", "requirement_id": "REQ-001", "statement": "The KEEL doctor verification command passes", "required": true, "policy": "all", "evidence": [{"provider": "command", "check_id": "control-plane-doctor"}]}
+  ]
+}

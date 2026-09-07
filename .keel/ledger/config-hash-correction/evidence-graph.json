@@ -1,0 +1,50 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "detail": "matched=.control-plane/bootstrap-manifest.json",
+          "passed": true,
+          "path": ".control-plane/bootstrap-manifest.json",
+          "provider": "changed_path"
+        }
+      ],
+      "id": "AC-001",
+      "policy": "any",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The manifest path is materially changed",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "id": "AC-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The KEEL doctor verification command passes",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "bootstrap-correction",
+      "statement": "Bootstrap provenance matches the current KEEL configuration"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 2,
+    "required": 2
+  }
+}

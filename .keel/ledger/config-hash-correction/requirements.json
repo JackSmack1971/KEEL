@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id": "REQ-001", "statement": "Bootstrap provenance matches the current KEEL configuration", "source": "bootstrap-correction"}
+  ]
+}

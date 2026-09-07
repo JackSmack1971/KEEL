@@ -1,0 +1,10 @@
+{
+  "base_commit": "eec6e25ad8a954638ac26a5a3617d58aacb65471",
+  "change_id": "config-hash-correction",
+  "created_at": "2026-09-07T05:00:46+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T05:01:22+00:00",
+  "verified_content_digest": "d834abebbd86ea38ff1fa2078d48439d397d7d085f8e702c54b4a803b80d6853"
+}

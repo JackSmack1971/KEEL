@@ -1,0 +1,44 @@
+{
+  "acceptance": {
+    "passed_required": 2,
+    "required": 2
+  },
+  "base_commit": "eec6e25ad8a954638ac26a5a3617d58aacb65471",
+  "change_id": "config-hash-correction",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "eec6e25ad8a954638ac26a5a3617d58aacb65471",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.control-plane/bootstrap-manifest.json', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 317,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    }
+  ],
+  "content_digest": "d834abebbd86ea38ff1fa2078d48439d397d7d085f8e702c54b4a803b80d6853",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T05:01:22+00:00"
+}

@@ -34,7 +34,7 @@
     ".keel/bench/telemetry-schema.json": "9d8f25e4f97582f62e40699753541984957d5477a43dd94308b9b9653645a31e",
     ".keel/bin/keel.py": "cb04b10646da98b9083145ff0cc39eb1d31590b7b9ff5c25065b86e06fdce710",
     ".keel/bin/keelbench.py": "937388e571c448ecff6f6c71f7f74f027ac8299b4f4f1768bd6251afe821f37e",
-    ".keel/config.json": "cd8e67d13234558b903eeb2a6b62040210eb92472ee4b0f4a82074510b653150",
+    ".keel/config.json": "fbedfe900be4e9895415be53f574ec61900d9673e78f7d14492ed59aa9935624",
     ".keel/hooks/keel_hook.py": "6035f0a781d56b5c898ad85c5fc9f2b6d71a436beaa21db90a9ed81e5c477f40",
     ".keel/ledger/README.md": "31fc981e970ea5521402af2874e311b6cc07093850de29d077f6166c5f8cae8e",
     ".keel/lib/capability_resolver.py": "61d98dc49a68eef5ced2e57cc947a3fda228e1c0b804831840c73a4342bccfc6",

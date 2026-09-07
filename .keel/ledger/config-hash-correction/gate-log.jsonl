@@ -1,0 +1,5 @@
+{"details": {"base_commit": "eec6e25ad8a954638ac26a5a3617d58aacb65471", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T05:00:46+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T05:01:12+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T05:01:12+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T05:01:22+00:00"}
+{"details": {"content_digest": "d834abebbd86ea38ff1fa2078d48439d397d7d085f8e702c54b4a803b80d6853", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T05:01:22+00:00"}
