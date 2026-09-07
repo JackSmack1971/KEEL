@@ -1,0 +1,5 @@
+keel-change-id: feedback-entropy-loop
+sealed-candidate: 58ae0818987b57789664d3e9de33b46c0984e3ab
+landed-commit: 58ae0818987b57789664d3e9de33b46c0984e3ab
+integration-relation: candidate-ancestor
+verified-content-digest: 89aa9059312d696ee762b69c398e3c31e16f6f95834e1e3ece58377e97a74131
