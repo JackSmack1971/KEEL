@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {"id":"REQ-001","statement":"The upgrade audit maps every numbered source section 1 through 70 exactly once and labels contextual sections without inventing executable requirements.","source":"plans/001-source-and-plan-reconciliation.md"},
+    {"id":"REQ-002","statement":"Plan navigation distinguishes active resumable work from completed historical work without deleting plan artifacts.","source":"plans/001-source-and-plan-reconciliation.md"},
+    {"id":"REQ-003","statement":"The reconciliation preserves the authoritative upgrade brief and does not modify runtime or KEEL implementation files.","source":"plans/001-source-and-plan-reconciliation.md"}
+  ]
+}

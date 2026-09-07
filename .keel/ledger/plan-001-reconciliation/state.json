@@ -1,0 +1,10 @@
+{
+  "base_commit": "4532bb43780cb45a025574403a8b4ae4ac7304ab",
+  "change_id": "plan-001-reconciliation",
+  "created_at": "2026-09-07T14:08:56+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-07T14:11:51+00:00",
+  "verified_content_digest": "f28b02f231ff45efe0090749f2103bc7f66aae2b2e6d29b96ccbfde735eb3277"
+}

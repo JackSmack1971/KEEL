@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-001","requirement_id":"REQ-001","statement":"The source-section traceability table covers sections 1–70 exactly once and strict control-plane validation passes.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-002","requirement_id":"REQ-002","statement":"Active and completed plan indexes state their lifecycle boundary and preserve historical artifacts.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"strict-control-plane-validation"}]},
+    {"id":"AC-003","requirement_id":"REQ-003","statement":"The authoritative brief is outside the changed path set and the change remains within its declared documentation scope.","required":true,"policy":"all","evidence":[{"provider":"changed_path","path":"docs/control-plane/UPGRADE_AUDIT.md"},{"provider":"changed_path","path":"docs/exec-plans/completed/**"}]},
+    {"id":"AC-004","requirement_id":"REQ-001","statement":"Doctor, KEELBench, and configured control-plane checks pass after reconciliation.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"keelbench-tests"},{"provider":"command","check_id":"strict-control-plane-validation"}]}
+  ]
+}

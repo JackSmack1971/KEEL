@@ -1,0 +1,165 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-001",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "The source-section traceability table covers sections 1\u201370 exactly once and strict control-plane validation passes.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-002",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Active and completed plan indexes state their lifecycle boundary and preserve historical artifacts.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/control-plane/UPGRADE_AUDIT.md",
+          "passed": true,
+          "path": "docs/control-plane/UPGRADE_AUDIT.md",
+          "provider": "changed_path"
+        },
+        {
+          "detail": "matched=docs/exec-plans/completed/developer-ux-surface.md,docs/exec-plans/completed/effect-inference.md,docs/exec-plans/completed/engineering-protocols-skill.md,docs/exec-plans/completed/evidence-status-reconciliation.md,docs/exec-plans/completed/feedback-entropy-loop.md,docs/exec-plans/completed/feedback-evaluation-queue.md,docs/exec-plans/completed/feedback-target-plans.md,docs/exec-plans/completed/final-audit-trace-reconciliation.md",
+          "passed": true,
+          "path": "docs/exec-plans/completed/**",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-003",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "The authoritative brief is outside the changed path set and the change remains within its declared documentation scope.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "detail": "check=keelbench-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "strict-control-plane-validation",
+          "detail": "check=strict-control-plane-validation exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_type": null,
+      "id": "AC-004",
+      "implementation_matches": [],
+      "implementation_paths": [],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "Doctor, KEELBench, and configured control-plane checks pass after reconciliation.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-001",
+        "AC-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-003",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "plans/001-source-and-plan-reconciliation.md",
+      "statement": "The upgrade audit maps every numbered source section 1 through 70 exactly once and labels contextual sections without inventing executable requirements."
+    },
+    {
+      "id": "REQ-002",
+      "source": "plans/001-source-and-plan-reconciliation.md",
+      "statement": "Plan navigation distinguishes active resumable work from completed historical work without deleting plan artifacts."
+    },
+    {
+      "id": "REQ-003",
+      "source": "plans/001-source-and-plan-reconciliation.md",
+      "statement": "The reconciliation preserves the authoritative upgrade brief and does not modify runtime or KEEL implementation files."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  }
+}
