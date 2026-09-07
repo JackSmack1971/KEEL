@@ -1,0 +1,5 @@
+keel-change-id: goal-plan-entropy
+sealed-candidate: 441c1151ec6b6c109a031f69bbdbbf68817b18ec
+landed-commit: 441c1151ec6b6c109a031f69bbdbbf68817b18ec
+integration-relation: candidate-ancestor
+verified-content-digest: 760eb768e60450418c0d44bb88985f1cc041a91a5c8b447906b01321dc282149
