@@ -1,0 +1,5 @@
+keel-change-id: typed-surface-enforcement
+sealed-candidate: f0875d7eddc9fd71c20aea9722d7d93c151832c0
+landed-commit: f0875d7eddc9fd71c20aea9722d7d93c151832c0
+integration-relation: candidate-ancestor
+verified-content-digest: c0d32dfbcea8b357f763a56b6e11b187f9be68059112221f9a7998b7b247edfb
