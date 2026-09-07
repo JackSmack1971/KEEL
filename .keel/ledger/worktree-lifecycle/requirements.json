@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "KEEL can create and report an explicitly targeted Git worktree without changing the primary worktree.",
+      "source": "next-milestone"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "KEEL refuses to retire a dirty worktree unless the caller explicitly requests force removal.",
+      "source": "next-milestone"
+    }
+  ]
+}

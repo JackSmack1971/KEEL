@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC-001",
+      "requirement_id": "REQ-001",
+      "statement": "Focused worktree tests prove explicit-path creation and status reporting while the primary repository remains unchanged.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "worktree-lifecycle-tests"}]
+    },
+    {
+      "id": "AC-002",
+      "requirement_id": "REQ-002",
+      "statement": "Focused worktree tests prove dirty retirement fails without force and succeeds with explicit force.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "worktree-lifecycle-tests"}]
+    },
+    {
+      "id": "AC-003",
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and KEEL doctor pass after the worktree lifecycle change.",
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {"provider": "command", "check_id": "strict-control-plane-validation"},
+        {"provider": "command", "check_id": "control-plane-doctor"}
+      ]
+    }
+  ]
+}

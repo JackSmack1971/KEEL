@@ -4,6 +4,7 @@ import fnmatch
 import hashlib
 import json
 import os
+import os
 import re
 import subprocess
 import time
@@ -1024,6 +1025,73 @@ def next_action(root: Path, change_id: str | None = None) -> dict:
     if result["recommended_action"]:
         result["legal_actions"].append(result["recommended_action"])
     return result
+
+
+def worktree_records(root: Path) -> list[dict]:
+    raw = run_git(root, ["worktree", "list", "--porcelain"]).stdout
+    records = []
+    current: dict = {}
+    for line in raw.splitlines() + [""]:
+        if line.startswith("worktree "):
+            if current:
+                records.append(current)
+            current = {"path": str(Path(line[9:]).resolve())}
+        elif line.startswith("HEAD "):
+            current["head"] = line[5:].strip()
+        elif line.startswith("branch "):
+            branch = line[7:].strip()
+            current["branch"] = branch.removeprefix("refs/heads/")
+        elif line == "detached":
+            current["detached"] = True
+        elif line == "bare":
+            current["bare"] = True
+        elif not line and current:
+            records.append(current)
+            current = {}
+    unique = {item["path"]: item for item in records}
+    for item in unique.values():
+        item.setdefault("branch", None)
+        item.setdefault("detached", False)
+        item.setdefault("bare", False)
+    return [unique[path] for path in sorted(unique)]
+
+
+def worktree_create(root: Path, change_id: str, path: str, commit: str = "HEAD") -> dict:
+    validate_id(change_id)
+    target = Path(path)
+    if not target.is_absolute():
+        target = root / target
+    target = target.resolve()
+    if target == root.resolve():
+        raise RuntimeError("worktree path cannot be the primary worktree")
+    if target.exists():
+        raise RuntimeError(f"worktree path already exists: {target}")
+    run_git(root, ["worktree", "add", "--detach", str(target), commit])
+    record = next((item for item in worktree_records(root) if os.path.normcase(item["path"]) == os.path.normcase(str(target))), None)
+    if not record:
+        raise RuntimeError("Git created the worktree but it was not present in registered worktree status")
+    return {"change_id": change_id, **record}
+
+
+def worktree_retire(root: Path, path: str, force: bool = False) -> dict:
+    target = Path(path)
+    if not target.is_absolute():
+        target = root / target
+    target = target.resolve()
+    if target == root.resolve():
+        raise RuntimeError("refusing to retire the primary worktree")
+    record = next((item for item in worktree_records(root) if os.path.normcase(item["path"]) == os.path.normcase(str(target))), None)
+    if not record:
+        raise RuntimeError(f"path is not a registered Git worktree: {target}")
+    dirty = bool(run_git(target, ["status", "--porcelain", "--untracked-files=all"], check=True).stdout.strip())
+    if dirty and not force:
+        raise RuntimeError("worktree is dirty; pass --force to retire it")
+    args = ["worktree", "remove"]
+    if force:
+        args.append("--force")
+    args.append(str(target))
+    run_git(root, args)
+    return {"path": str(target), "retired": True, "dirty": dirty, "forced": force}
 
 
 def status_summary(root: Path, change_id: str | None = None) -> dict:

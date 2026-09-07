@@ -1,0 +1,5 @@
+{"details": {"base_commit": "53337fdc322333b0a230fa77a99b47bd4ff8570a", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-07T11:31:02+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-07T11:31:14+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-07T11:31:48+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/bin/keel.py", ".keel/config.json", ".keel/lib/keel_core.py", ".keel/tests/test_worktree_lifecycle.py", "docs/control-plane/COMMANDS.md", "docs/control-plane/KEEL_PARALLEL.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-07T11:33:11+00:00"}
+{"details": {"content_digest": "c544134e20a53ef3289e06d211876f923d4bf204cb46d1de83ea5a1f59d25872", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-07T11:33:11+00:00"}

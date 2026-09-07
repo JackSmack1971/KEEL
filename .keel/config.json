@@ -171,6 +171,17 @@
       "id": "next-action-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_worktree_lifecycle.py"
+      ],
+      "cwd": ".",
+      "id": "worktree-lifecycle-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

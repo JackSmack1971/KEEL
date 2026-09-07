@@ -1,0 +1,162 @@
+{
+  "acceptance": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  },
+  "base_commit": "53337fdc322333b0a230fa77a99b47bd4ff8570a",
+  "change_id": "worktree-lifecycle",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/bin/keel.py",
+    ".keel/config.json",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_worktree_lifecycle.py",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/KEEL_PARALLEL.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "53337fdc322333b0a230fa77a99b47bd4ff8570a",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.control-plane/bootstrap-manifest.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/bin/keel.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/lib/keel_core.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/COMMANDS.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/KEEL_PARALLEL.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 321,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/bench/test_keelbench.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 225,
+      "excerpt": "KEELBench tests PASS",
+      "exit_code": 0,
+      "id": "keelbench-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keelbench.py",
+        "--root",
+        ".",
+        "validate"
+      ],
+      "cwd": ".",
+      "duration_ms": 148,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "keelbench-validate",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/scripts/validate_control_plane.py",
+        "--root",
+        ".",
+        "--strict-manifest",
+        "--require-keel-runtime"
+      ],
+      "cwd": ".",
+      "duration_ms": 901,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
+      "exit_code": 0,
+      "id": "strict-control-plane-validation",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 146,
+      "excerpt": "Capability resolver tests PASS",
+      "exit_code": 0,
+      "id": "capability-resolver-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_context_compiler.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 152,
+      "excerpt": "Context compiler tests PASS",
+      "exit_code": 0,
+      "id": "context-compiler-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 122,
+      "excerpt": "Evidence graph tests PASS",
+      "exit_code": 0,
+      "id": "evidence-graph-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_next_action.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 185,
+      "excerpt": "Next-action tests PASS",
+      "exit_code": 0,
+      "id": "next-action-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_worktree_lifecycle.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 851,
+      "excerpt": "Worktree lifecycle tests PASS",
+      "exit_code": 0,
+      "id": "worktree-lifecycle-tests",
+      "required": true
+    }
+  ],
+  "content_digest": "c544134e20a53ef3289e06d211876f923d4bf204cb46d1de83ea5a1f59d25872",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T11:33:11+00:00"
+}

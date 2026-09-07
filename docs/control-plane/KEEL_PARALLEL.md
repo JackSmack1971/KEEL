@@ -5,6 +5,16 @@
 
 Parallelize across independent changes by creating independent Git/Codex worktrees. Keep each change's `.keel/ledger/<id>/` on its branch/worktree. After Verify reaches SHIP, commit and `keel.py seal` the exact candidate; the shared Git ref `refs/keel/candidates/<id>` is the integration handoff. Merge/squash/rebase remains repository policy, but final `anchor` must prove the landed tree is content-equivalent to the sealed candidate for every verified path and intent artifact.
 
+KEEL provides the local lifecycle surface:
+
+```text
+python3 .keel/bin/keel.py worktree create <change-id> --path <explicit-path>
+python3 .keel/bin/keel.py worktree status
+python3 .keel/bin/keel.py worktree retire --path <registered-path> [--force]
+```
+
+Creation and status are reversible/read-only operations. Retirement refuses the primary worktree and dirty worktrees unless `--force` is explicitly supplied; it never acts on an unregistered path.
+
 Codex-managed worktrees commonly begin detached at the selected starting commit. That is compatible with KEEL: the candidate ref is independent of whether the worktree later receives a branch. Do not rely on the same branch being checked out in multiple worktrees; Git intentionally prevents that.
 
 ## Read-heavy fan-out
