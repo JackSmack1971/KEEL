@@ -971,6 +971,61 @@ def compile_context(root: Path, change_id: str, write: bool = True) -> dict:
     return meta
 
 
+def next_action(root: Path, change_id: str | None = None) -> dict:
+    cid = change_id or active_change(root)
+    if not cid:
+        return {
+            "schema_version": 1,
+            "status": "IDLE",
+            "change_id": None,
+            "phase": None,
+            "blockers": [],
+            "legal_actions": [],
+            "recommended_action": None,
+        }
+    st = state(root, cid)
+    phase = st.get("phase")
+    result = {
+        "schema_version": 1,
+        "status": "ACTIONABLE",
+        "change_id": cid,
+        "phase": phase,
+        "blockers": [],
+        "legal_actions": [],
+        "recommended_action": None,
+    }
+
+    def action(action_id: str, command: str, reason: str) -> dict:
+        return {"id": action_id, "command": command, "reason": reason}
+
+    if phase == "DISCUSS":
+        result["recommended_action"] = action("gate-discuss", f"keel gate discuss --change {cid}", "proposal must pass the DISCUSS gate")
+    elif phase == "PLAN":
+        result["recommended_action"] = action("gate-plan", f"keel gate plan --change {cid}", "intent, scope, risk, and effects must pass the PLAN gate")
+    elif phase in {"EXECUTE", "VERIFY"}:
+        result["recommended_action"] = action("verify", f"keel verify --change {cid}", "run canonical checks and evaluate the acceptance graph")
+    elif phase == "SHIP":
+        verified, message = current_verified(root, cid)
+        if not verified:
+            result["status"] = "BLOCKED"
+            result["blockers"].append({"id": "stale-verification", "detail": message})
+            result["recommended_action"] = action("reopen", f"keel reopen --change {cid}", "implementation must be reopened before changing stale verified content")
+        else:
+            ref = candidate_ref(cid)
+            sealed = run_git(root, ["show-ref", "--verify", ref], check=False).returncode == 0
+            if not sealed:
+                result["recommended_action"] = action("seal", f"keel seal --change {cid} --commit HEAD", "the verified commit must become a sealed candidate")
+            else:
+                result["recommended_action"] = action("integrate-anchor", f"keel anchor --change {cid} --commit <landed-sha>", "the sealed candidate must be integrated and independently anchored after landing")
+    else:
+        result["status"] = "BLOCKED"
+        result["blockers"].append({"id": "unknown-phase", "detail": f"unsupported KEEL phase: {phase!r}"})
+
+    if result["recommended_action"]:
+        result["legal_actions"].append(result["recommended_action"])
+    return result
+
+
 def status_summary(root: Path, change_id: str | None = None) -> dict:
     cid = change_id or active_change(root)
     if not cid: return {"active_change": None, "keel": "IDLE"}

@@ -91,5 +91,6 @@ Until those are observed, report KEEL as installed but not fully runtime-validat
 
 - `keel.py discover` emits evidence-backed capability suggestions without silently activating policy. See [CAPABILITY_RESOLUTION.md](CAPABILITY_RESOLUTION.md).
 - `keel.py context` compiles a bounded derived context packet for the current decision surface. See [CONTEXT_COMPILATION.md](CONTEXT_COMPILATION.md).
+- `keel.py next` reports the next legal action and blockers for the active change; it is read-only guidance and never advances lifecycle state.
 - Required `REQ-*`/`AC-*` contracts are evaluated through `evidence-graph.json`. See [ACCEPTANCE_EVIDENCE.md](ACCEPTANCE_EVIDENCE.md).
 - `.keel/bench/` provides KEELBench paired-run schemas and scoring. See [KEELBENCH.md](KEELBENCH.md).

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "The next-action advisor reports deterministic legal guidance for idle and active KEEL lifecycle states without mutating state.",
+      "source": "next-milestone"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "The next-action advisor surfaces blockers and stale verification rather than recommending an unsafe transition.",
+      "source": "next-milestone"
+    }
+  ]
+}

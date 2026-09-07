@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC-001",
+      "requirement_id": "REQ-001",
+      "statement": "Focused tests prove stable guidance for idle, DISCUSS, PLAN, EXECUTE, and SHIP states without changing state files.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "next-action-tests"}]
+    },
+    {
+      "id": "AC-002",
+      "requirement_id": "REQ-002",
+      "statement": "Focused tests prove stale verification produces a blocker and reopen guidance instead of seal guidance.",
+      "required": true,
+      "policy": "all",
+      "evidence": [{"provider": "command", "check_id": "next-action-tests"}]
+    },
+    {
+      "id": "AC-003",
+      "requirement_id": "REQ-001",
+      "statement": "The strict control-plane validator and KEEL doctor pass after the next-action change.",
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {"provider": "command", "check_id": "strict-control-plane-validation"},
+        {"provider": "command", "check_id": "control-plane-doctor"}
+      ]
+    }
+  ]
+}

@@ -160,6 +160,17 @@
       "id": "evidence-graph-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_next_action.py"
+      ],
+      "cwd": ".",
+      "id": "next-action-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

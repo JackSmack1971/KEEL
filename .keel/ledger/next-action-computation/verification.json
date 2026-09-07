@@ -1,0 +1,149 @@
+{
+  "acceptance": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  },
+  "base_commit": "e413308dd12aed9ca8275d53f5104a0f29a5a94f",
+  "change_id": "next-action-computation",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/bin/keel.py",
+    ".keel/config.json",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_next_action.py",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/KEEL.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "e413308dd12aed9ca8275d53f5104a0f29a5a94f",
+        "--"
+      ],
+      "duration_ms": 0,
+      "excerpt": "warning: in the working copy of '.control-plane/bootstrap-manifest.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/bin/keel.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/lib/keel_core.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/COMMANDS.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/control-plane/KEEL.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 233,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/bench/test_keelbench.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 179,
+      "excerpt": "KEELBench tests PASS",
+      "exit_code": 0,
+      "id": "keelbench-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keelbench.py",
+        "--root",
+        ".",
+        "validate"
+      ],
+      "cwd": ".",
+      "duration_ms": 119,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "keelbench-validate",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "C:/Users/click/.agents/skills/codex-control-plane-bootstrapper/scripts/validate_control_plane.py",
+        "--root",
+        ".",
+        "--strict-manifest",
+        "--require-keel-runtime"
+      ],
+      "cwd": ".",
+      "duration_ms": 668,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"capabilities_count\": 38,\n  \"keel_runtime_required\": true,\n  \"findings\": []\n}",
+      "exit_code": 0,
+      "id": "strict-control-plane-validation",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 109,
+      "excerpt": "Capability resolver tests PASS",
+      "exit_code": 0,
+      "id": "capability-resolver-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_context_compiler.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 134,
+      "excerpt": "Context compiler tests PASS",
+      "exit_code": 0,
+      "id": "context-compiler-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 92,
+      "excerpt": "Evidence graph tests PASS",
+      "exit_code": 0,
+      "id": "evidence-graph-tests",
+      "required": true
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_next_action.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 142,
+      "excerpt": "Next-action tests PASS",
+      "exit_code": 0,
+      "id": "next-action-tests",
+      "required": true
+    }
+  ],
+  "content_digest": "da022fc8f8c7812ba968d7ca4dbeee98b9f171429be787960b38567454d22414",
+  "errors": [],
+  "schema_version": 2,
+  "status": "PASS",
+  "verified_at": "2026-09-07T11:29:36+00:00"
+}

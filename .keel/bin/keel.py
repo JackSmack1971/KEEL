@@ -17,6 +17,7 @@ def main() -> int:
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
     p = sub.add_parser("status"); p.add_argument("--change")
+    p = sub.add_parser("next"); p.add_argument("--change")
     p = sub.add_parser("start"); p.add_argument("change"); p.add_argument("--mode", choices=["standard","trivial"], default="standard"); p.add_argument("--summary"); p.add_argument("--scope", action="append", default=[])
     p = sub.add_parser("gate"); p.add_argument("gate", choices=["discuss","plan"]); p.add_argument("--change")
     p = sub.add_parser("verify"); p.add_argument("--change")
@@ -49,6 +50,7 @@ def main() -> int:
             if not p.is_file(): raise RuntimeError("evidence-graph.json missing; run verify first")
             print(p.read_text(encoding="utf-8"), end=""); return 0
         if args.cmd == "status": print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
+        if args.cmd == "next": print(json.dumps(k.next_action(root, args.change), indent=2)); return 0
         if args.cmd == "start": k.start_change(root, args.change, args.mode, args.summary, args.scope); print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
         cid = getattr(args, "change", None) or k.active_change(root)
         if args.cmd in {"gate","verify","reopen","replan","record-authorization","seal"} and not cid: raise RuntimeError("no active KEEL change")
