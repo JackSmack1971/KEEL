@@ -1,0 +1,5 @@
+keel-change-id: plans-authority-reconciliation
+sealed-candidate: ab248cf21817dd683607e5671bbdb6ac03e0b5f3
+landed-commit: ab248cf21817dd683607e5671bbdb6ac03e0b5f3
+integration-relation: candidate-ancestor
+verified-content-digest: f27b62515cff948d33d9acc74855ffc88acfb6c5767f05270b3309af660aca1a
