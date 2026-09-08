@@ -154,8 +154,8 @@ def main() -> int:
         if args.cmd == "evidence":
             cid = args.change or k.active_change(root)
             if not cid: raise RuntimeError("no active KEEL change")
-            p = k.ledger_dir(root, cid) / "evidence-graph.json"
-            if not p.is_file(): raise RuntimeError("evidence-graph.json missing; run verify first")
+            p = k.ledger_dir(root, cid) / "evidence-receipts.json"
+            if not p.is_file(): raise RuntimeError("evidence-receipts.json missing; run verify first")
             print(p.read_text(encoding="utf-8"), end=""); return 0
         if args.cmd == "status": print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
         if args.cmd == "next": print(json.dumps(k.next_action(root, args.change), indent=2)); return 0

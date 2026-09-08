@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "Verification uses a validated provenance-bearing verifier registry with explicit authority, applicability, and runtime contracts.",
+      "type": "architecture",
+      "priority": "must",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py"
+      ],
+      "minimum_evidence_authority": "TESTED"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "A deterministic planner selects minimal sufficient applicable evidence from requirements, impact, risk, repository facts, and the mandatory kernel.",
+      "type": "behavior",
+      "priority": "must",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py"
+      ],
+      "minimum_evidence_authority": "TESTED"
+    },
+    {
+      "id": "REQ-003",
+      "statement": "Executed verifiers emit exact-subject immutable-content receipts and only establish declared requirements within authority.",
+      "type": "security",
+      "priority": "must",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "minimum_evidence_authority": "TESTED"
+    },
+    {
+      "id": "REQ-004",
+      "statement": "Receipt coverage, not a green command suite, is the primary verification authority while legacy views remain compatible.",
+      "type": "architecture",
+      "priority": "must",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py"
+      ],
+      "minimum_evidence_authority": "TESTED"
+    },
+    {
+      "id": "REQ-005",
+      "statement": "Normal verification removes duplicate and historical SHA-pinned checks and preserves only a justified self-integrity kernel.",
+      "type": "quality",
+      "priority": "must",
+      "implementation_paths": [
+        ".keel/config.json"
+      ],
+      "minimum_evidence_authority": "INSPECTED"
+    },
+    {
+      "id": "REQ-006",
+      "statement": "Durable governance documentation identifies receipt authority and compatibility boundaries.",
+      "type": "documentation",
+      "priority": "must",
+      "implementation_paths": [
+        "docs/control-plane/VERIFICATION.md"
+      ],
+      "minimum_evidence_authority": "INSPECTED"
+    }
+  ]
+}

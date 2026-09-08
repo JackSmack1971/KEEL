@@ -1,46 +1,9 @@
-# Acceptance and Evidence Graph
+# Requirements and receipt evidence
 
-A KEEL standard change binds behavior to evidence through two intent artifacts:
+A standard change records normative `REQ-*` entries in `requirements.json` and acceptance mappings in `acceptance.json`. Each required property declares `minimum_evidence_authority`; acceptance identifies permitted verifier/provider evidence. Both files are portable intent and changing either invalidates prior receipts.
 
-```text
-requirements.json
-acceptance.json
-```
+Verification derives one `EvidenceRequirement` per requirement and an impact-selected `EvidencePlan`. Registry Verifiers can be selected only when their declared provider, requirement type, authority, path/risk applicability, and runtime contract are sufficient. Every selected execution emits an exact-subject `EvidenceReceipt`; receipt coverage is the primary authority.
 
-`requirements.json` contains stable `REQ-*` statements and may add typed `type`, `priority`, and repository-relative `implementation_paths` metadata. `acceptance.json` contains `AC-*` criteria, each linked to a requirement and one or more evidence edges; criteria may declare `evidence_type` and implementation paths. Both files are part of KEEL's intent digest, so changing acceptance after verification makes evidence stale.
+A literal command exit zero is only an observation. It establishes a requirement only when the receipt is intact, matches the exact subject and intent, has sufficient declared authority, and names the planned EvidenceRequirement. An unrelated green check cannot grant completion.
 
-When an acceptance criterion declares `implementation_paths`, evidence evaluation requires at least one material changed path to match those patterns and records the matched paths in the evidence graph. Legacy criteria without surfaces retain their existing behavior.
-
-Every declared requirement must be referenced by at least one acceptance criterion. An orphan requirement is a contract error and prevents verification; this keeps intent-to-evidence traceability explicit rather than treating an unreferenced requirement as implicitly satisfied.
-
-Current deterministic providers:
-
-- `command` — a configured verification check id must exit `0`;
-- `changed_path` — the material Git diff must include a declared path/glob;
-- `file_exists` — a repository-contained evidence artifact must exist.
-- `schema` — a repository-contained JSON artifact must parse and satisfy declared `schema_version` and `required_keys` constraints.
-
-The repository contract also defines adapter-backed providers (`unit_test`, `browser`, `visual`, `log_query`, `metric_query`, `trace_query`, `security`, `benchmark`, `hardware`, `human_review`, and `external_ci`). These providers require a configured `check_id`; KEEL evaluates the adapter's literal exit status but does not invent or execute a provider implementation.
-
-Unknown evidence providers do not silently pass. Extend provider support only when the new provider has a mechanically inspectable result contract.
-
-During `keel verify`, KEEL evaluates every required criterion and writes `evidence-graph.json`. Verification cannot PASS while a required acceptance criterion is unsatisfied.
-
-The evaluated graph also reports deterministic requirement coverage counts so reviewers can distinguish complete traceability from a merely green command check.
-
-## Example
-
-```json
-{
-  "id": "AC-004",
-  "requirement_id": "REQ-002",
-  "statement": "Expired refresh tokens are rejected",
-  "required": true,
-  "policy": "all",
-  "evidence": [
-    {"provider": "command", "check_id": "auth-integration-tests"}
-  ]
-}
-```
-
-This changes the completion question from "did tests run?" to "what explicit behavior does each piece of evidence establish?"
+During migration, `evidence-graph.json` is a deterministic compatibility projection over receipt coverage. Historical graph records remain readable; new graph projections do not carry independent evidence-edge truth. See [VERIFICATION.md](VERIFICATION.md).

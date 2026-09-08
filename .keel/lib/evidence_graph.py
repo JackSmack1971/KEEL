@@ -11,6 +11,7 @@ REQUIREMENT_TYPES = {"behavior", "quality", "security", "migration", "performanc
 PRIORITIES = {"must", "should", "could"}
 EVIDENCE_TYPES = {"automated-test", "human-review", "schema", "benchmark", "runtime", "changed-path"}
 EVIDENCE_CLASSES = {"PLAN_READINESS", "IMPLEMENTATION_ACCEPTANCE", "LANDED_COMPLETION"}
+EVIDENCE_AUTHORITIES = {"ASSERTED", "INSPECTED", "TESTED", "RUNTIME_OBSERVED", "INDEPENDENTLY_REVIEWED", "FORMALLY_VERIFIED"}
 CHANGE_TYPES = {"implementation", "planning_only"}
 BEHAVIORAL_PROVIDERS = {"unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "external_ci"}
 
@@ -83,6 +84,8 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         if r.get("priority", "must") not in PRIORITIES: errors.append(f"requirement {rid} priority must be one of {sorted(PRIORITIES)}")
         _implementation_paths(r.get("implementation_paths"), f"requirement {rid}", errors)
         _evidence_class(r.get("evidence_class"), f"requirement {rid}", errors)
+        if r.get("minimum_evidence_authority", "TESTED") not in EVIDENCE_AUTHORITIES:
+            errors.append(f"requirement {rid} minimum_evidence_authority must be one of {sorted(EVIDENCE_AUTHORITIES)}")
     ac_ids = set()
     covered_requirements = set()
     for c in criteria:

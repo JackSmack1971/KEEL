@@ -39,6 +39,5 @@ Universal coverage does not mean universal tooling. Every domain is represented,
 Repository evidence flows through read-only adapters into the canonical FactGraph;
 capability resolution (`DETECTED/LIKELY/UNKNOWN/CONFLICT` evidence only), bounded
 context, repository maps, and impact are projections rather than parallel repository
-models. Requirements/acceptance Evidence Graph and KEELBench retain their current
-separate migration-stage behavior. These mechanisms increase decision quality without
+models. Requirement-to-receipt verification is authoritative; legacy evidence-graph views are compatibility projections. KEELBench retains its separate evaluation behavior. These mechanisms increase decision quality without
 silently changing project policy.

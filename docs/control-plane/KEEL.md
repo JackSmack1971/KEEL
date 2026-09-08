@@ -21,7 +21,9 @@ Each active change owns:
   gate-log.jsonl       # append-only-in-normal-use gate/audit events
   verification.json    # structured command/exit-code/digest evidence
   verification.md      # concise human/agent-readable summary
-  evidence-graph.json  # requirement/acceptance/evidence pass/fail graph
+  evidence-plan.json  # requirement/impact-selected verifier plan
+  evidence-receipts.json # exact-subject authoritative verifier receipts
+  evidence-graph.json  # temporary compatibility projection
   evidence/            # bounded/redacted command excerpts when produced
   risk-review.md       # required for high/control-plane/sensitive changes
 ```
@@ -48,7 +50,7 @@ At least one section must contain a real bullet. The prose delta states behavior
 - `DISCUSS`: proposal is meaningful.
 - `PLAN`: delta, requirements, acceptance criteria, scope, risk, and effects are structurally valid; KEEL synchronizes authorization shape without granting permission; high-risk work has a risk review and ExecPlan where required.
 - `EXECUTE`: writes may occur only in declared scope; direct file tools are pre-checked and all Git diff paths are post/stop checked.
-- `VERIFY`: scope and required authorization pass, canonical project checks run, every required acceptance criterion resolves through the evidence graph, literal exit status is recorded, and the verified digest covers both changed content and stable intent artifacts.
+- `VERIFY`: scope and required authorization pass, canonical project checks run, every required property resolves through sufficient exact-subject receipts, literal exit status is recorded, and the verified digest covers both changed content and stable intent artifacts.
 - `SHIP`: verified content is eligible for authorized integration only after implementation acceptance passes (or an explicit planning-only change completes through readiness); planning readiness alone never reaches this phase. It is not authorization itself.
 
 After Plan passes, intent/scope changes require `keel.py replan`; re-plan invalidates prior effect authorization. After verification, implementation changes require `keel.py reopen`. This prevents silent spec drift.
@@ -92,6 +94,6 @@ Until those are observed, report KEEL as installed but not fully runtime-validat
 - `keel.py discover` emits evidence-backed capability suggestions without silently activating policy. See [CAPABILITY_RESOLUTION.md](CAPABILITY_RESOLUTION.md).
 - `keel.py context` compiles a bounded derived context packet for the current decision surface. See [CONTEXT_COMPILATION.md](CONTEXT_COMPILATION.md).
 - `keel.py next` reports the next legal action and blockers for the active change; it is read-only guidance and never advances lifecycle state.
-- Required `REQ-*`/`AC-*` contracts are evaluated through `evidence-graph.json`. See [ACCEPTANCE_EVIDENCE.md](ACCEPTANCE_EVIDENCE.md).
+- Required `REQ-*`/`AC-*` contracts derive EvidenceRequirements, a selected EvidencePlan, and authoritative EvidenceReceipts. `evidence-graph.json` is a compatibility projection. See [ACCEPTANCE_EVIDENCE.md](ACCEPTANCE_EVIDENCE.md).
 - `.keel/bench/` provides KEELBench paired-run schemas and scoring. See [KEELBENCH.md](KEELBENCH.md).
 - `keel change-graph` and the stable `keel mission` alias validate or normalize canonical planning graphs and report a read-only frontier from typed hard-dependency edges plus explicitly supplied state. Mission v1/v2 reads pass through compatibility adapters; the hidden `mission-v2` alias is temporary. Planning does not schedule, dispatch, observe runtime state, or grant requested effects.

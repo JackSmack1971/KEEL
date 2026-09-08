@@ -1,34 +1,54 @@
 # Verification Model
 
-A change is not complete because an edit or command succeeded.
+A change is not complete because an edit or command succeeded. Verification authority follows:
 
-## Evidence loop
-`goal -> action -> observation -> independent verification -> completion`
+`Requirement -> EvidenceRequirement -> EvidencePlan -> Verifier -> EvidenceReceipt`
+
+A green command suite is insufficient while any required property is unestablished.
+
+## Authority model
+
+Evidence strength is ordered: `ASSERTED < INSPECTED < TESTED < RUNTIME_OBSERVED < INDEPENDENTLY_REVIEWED < FORMALLY_VERIFIED`. A requirement declares `minimum_evidence_authority`. A verifier and its receipt cannot establish a stronger or unrelated property than its registry declaration permits. Unsupported, weak, stale, mismatched, or missing evidence is `INCONCLUSIVE`, never an optimistic pass.
+
+## Verifier registry
+
+`.keel/config.json.verifier_registry` declares every available Verifier with stable identity/version, provider type, evidence authority, supported requirement/provider classes, path/risk applicability, normalized command runtime contract, provenance, and whether it belongs to the mandatory kernel. Duplicate identities or invocations and malformed declarations fail closed.
+
+The mandatory kernel is intentionally small: repository health, portable bootstrap contract, manifest producer, and compatibility inventory. Kernel success preserves self-integrity but does not satisfy unrelated EvidenceRequirements.
+
+## EvidenceRequirement and EvidencePlan
+
+Each requirement yields an `EvidenceRequirement` containing its exact requirement identity, minimum authority, type, impacted implementation surfaces, and acceptance-authorized verifier/provider choices. The EvidencePlanner combines these contracts with changed paths, risk, repository facts, and registry applicability. It deterministically chooses the least sufficient authority (then stable identity) for each requirement and adds mandatory kernel verifiers. Uncovered requirements make the plan `INCONCLUSIVE` before execution.
+
+The selected `evidence-plan.json` replaces the flat run-every-command model. Checks are selected by requirement and impact; historical, irrelevant checks do not run forever.
+
+## EvidenceReceipt
+
+Every executed verifier emits a receipt in `evidence-receipts.json` containing:
+
+- verifier identity, version, provider, declared authority, and provenance;
+- exact Git/worktree subject including base/head, changed paths, and content digest;
+- intent digest;
+- environment/runtime fingerprint;
+- normalized argv/cwd/timeout invocation without shell interpolation;
+- literal `PASS`, `FAIL`, or `INCONCLUSIVE` result;
+- bounded observations and artifact references;
+- the EvidenceRequirements it is allowed to establish;
+- start/end runtime metadata; and
+- an immutable-content receipt digest.
+
+Receipt evaluation rechecks integrity, exact subject, intent, result, declared authority, and planned establishment scope. A passing verifier cannot satisfy a requirement it was not selected and authorized to establish.
 
 ## KEEL write-change rule
-`python3 .keel/bin/keel.py verify` is the deterministic gate for an active write change. It:
-1. validates proposal/delta/scope/risk/effects/authorization state;
-2. compares all Git-changed/untracked paths since the recorded base commit against `scope.txt`;
-3. runs built-in structural checks and `git diff --check`;
-4. runs configured canonical project commands from `.keel/config.json` without shell interpolation;
-5. records literal exit codes, durations, redacted bounded excerpts, and a digest covering scoped changed content plus stable intent files;
-6. reaches `SHIP` only if required checks pass and the evidence graph grants the change's required authority class.
 
-Substantive source changes cannot pass with no configured project verification commands. Populate commands once the toolchain exists; never guess them.
+`python3 .keel/bin/keel.py verify` validates governance/scope/authorization, derives the plan, executes only selected verifiers, emits receipts, evaluates requirement coverage, and reaches `SHIP` only when every required property is established. Changed implementation or intent invalidates the exact subject and requires fresh receipts.
 
-## Selection rule
-Use the narrowest high-signal checks first, then broaden proportional to coupling/blast radius. Add independent review for consequential changes. Runtime/UI/infra/hardware claims need direct evidence when available.
+## Compatibility during migration
 
-## Pre-existing failures
-Capture a baseline before implementation. A pre-existing failure may be documented and isolated, but a newly introduced or unexplained failure blocks completion.
+`verification.json`, `verification.md`, and `evidence-graph.json` remain generated compatibility projections for seal/anchor and existing views. They are not verification authority. `python3 .keel/bin/keel.py evidence` reads the receipt set. Historical ledgers remain readable and are not rewritten.
+
+Candidate sealing semantics remain unchanged: sealing consumes the compatibility projection's exact content digest and independently checks the committed tree. Landed anchoring remains a distinct boundary.
 
 ## Completion blockers
-Missing evidence, missing required authorization, out-of-scope diffs, changed code or intent after verification, inconclusive checks, architecture/source-of-truth conflicts, unreviewed high-risk change, or unauthorized external effects block a success claim.
 
-## Acceptance/evidence graph
-
-A standard KEEL change must define `requirements.json` and `acceptance.json`. Verification evaluates each required AC through deterministic evidence providers and writes `evidence-graph.json`. A green command suite is insufficient when required acceptance edges remain unsatisfied. Because requirements/acceptance are included in the intent digest, changing them after verification invalidates the candidate. See [ACCEPTANCE_EVIDENCE.md](ACCEPTANCE_EVIDENCE.md).
-
-### Evidence classes
-
-Contracts use `PLAN_READINESS`, `IMPLEMENTATION_ACCEPTANCE`, and `LANDED_COMPLETION`. An implementation change defaults to `change_type: implementation`; a planning-only change must explicitly declare `change_type: planning_only`. Legacy criteria with only non-behavioral providers such as `changed_path`, `file_exists`, or control-plane `command` checks are recorded as `PLAN_READINESS`. Implementation criteria must name changed implementation paths and include a behavioral provider such as `unit_test`, `schema`, `runtime`, or an equivalent direct behavior provider. Readiness PASS is preserved in the evidence graph, but it cannot set implementation verification PASS, `SHIP`, seal eligibility, or completion authority. Landed anchoring is the `LANDED_COMPLETION` boundary.
+Missing evidence, uncovered requirements, insufficient authority, `FAIL` or `INCONCLUSIVE` receipts, subject/intent drift, invalid registry/plan/receipt integrity, missing authorization, out-of-scope changes, or unauthorized effects block completion.
