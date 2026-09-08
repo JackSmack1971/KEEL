@@ -11,8 +11,8 @@ Read root `AGENTS.md`, `WORKFLOW.md`, and `docs/control-plane/KEEL.md`.
 
 ## Mandatory
 1. For a write change, ensure Git has a baseline commit and start/resume exactly one KEEL change-id.
-2. Standard mode: proposal -> discuss gate -> delta + requirements/acceptance + scope/risk/effects -> plan gate -> execute -> deterministic `keel verify` with required evidence-graph coverage -> commit verified tree -> `keel seal` -> authorized integration -> landed `anchor`.
-3. One primary writer per worktree. Delegate only read-heavy bounded work unless each writer has a separate worktree/change.
+2. Standard mode calls deterministic kernel operations in order: proposal -> discuss gate -> delta + requirements/acceptance + scope/risk/effects -> plan gate -> execute -> `keel verify` / `keel evidence` receipt coverage -> commit verified tree -> `keel seal` -> authorized integration -> landed `anchor`. This skill is routing knowledge, not lifecycle authority.
+3. One primary writer per worktree. Dynamically use generic explorer/reviewer/risk-reviewer roles only when missing facts, evidence requirements, impact, or risk justify them. Delegate only read-heavy bounded work unless each writer has a separate worktree/change; agent output never grants permission or changes lifecycle state.
 4. Never edit outside `scope.txt`; update/re-gate the plan if scope legitimately changes.
 5. High/control-plane/security/privacy/migration/release/high-blast-radius work requires substantive risk review; require ExecPlan when `risk.json` says so.
 6. Verification truth comes from `.keel/ledger/<id>/verification.json` plus `evidence-graph.json`, not model prose. Every required AC must resolve through deterministic evidence before PASS. Before integration, seal the exact committed tree; final anchor independently re-hashes the landed tree for the verified paths+intent.

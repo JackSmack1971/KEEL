@@ -16,12 +16,12 @@ If uncertain between trivial and standard, use standard. High-risk/control-plane
 ## Standard lifecycle
 
 ### 1. Start / Discuss
-`python3 .keel/bin/keel.py start <change-id>` creates a ledger rooted at `.keel/ledger/<change-id>/` and records the current Git baseline commit. Use the `keel_discuss` read-only agent when useful. Write a concrete `proposal.md`: problem, objective, non-goals, success evidence, unresolved decisions.
+`python3 .keel/bin/keel.py start <change-id>` creates a ledger rooted at `.keel/ledger/<change-id>/` and records the current Git baseline commit. Use `keel.py context` plus a generic explorer only when unresolved repository facts justify it. Write a concrete `proposal.md`: problem, objective, non-goals, success evidence, unresolved decisions.
 
 Pass: `python3 .keel/bin/keel.py gate discuss`.
 
 ### 2. Plan
-Use `keel_plan` for read-heavy planning. Maintain:
+Use bounded kernel context and repository evidence for planning; a generic explorer may gather missing facts but does not decide lifecycle or policy. Maintain:
 - `delta.md` — ADDED / MODIFIED / REMOVED behavior;
 - `scope.txt` — exact repo-relative files/globs the implementation may touch;
 - `risk.json` — risk level and consequential-change flags;
@@ -39,7 +39,7 @@ If proposal/delta/scope/risk/effects intent must change after Plan passes, run `
 ### 4. Verify
 Run `python3 .keel/bin/keel.py verify`. KEEL performs structural/scope checks, derives an impact- and requirement-selected EvidencePlan from the verifier registry, executes selected verifiers, and records exact-subject EvidenceReceipts. Compatibility projections remain in `verification.json` / `verification.md`; receipt coverage is authoritative and an unrelated green command cannot satisfy a requirement. Required external/irreversible authorization must be recorded before the legacy Verify path can pass; the record is effects-bound evidence, but its boolean is not a `CapabilityGrant`. Effect execution additionally requires a valid intent-bound grant and sufficient observed runtime enforcement. Within Codex, the pre-tool hook blocks agent-initiated `record-authorization` unless the parent session explicitly carries `KEEL_AUTHORIZATION_CHANGE=<exact-change-id>`; an operator may also run the recorder directly outside the agent session.
 
-Use the `keel_verify` agent for independent interpretation/review of evidence, not as the source of pass/fail truth.
+Select the generic reviewer when evidence requirements, impact, or risk call for independent interpretation. Its prose is not the source of pass/fail truth; authoritative receipts come from `keel.py verify` / `keel.py evidence`.
 
 ### 5. Seal / Ship / handoff
 `SHIP` means the working content is verified and eligible to become a candidate; it does not itself grant permission to push, merge, release, deploy, migrate, or mutate external systems. A task may stop at review/handoff.
@@ -71,7 +71,7 @@ Candidate/landed refs and notes are versioned Git anchors, not immutable securit
 One change-id = one worktree = one primary writer. Separate changes may run in separate worktrees. Do not use subagent concurrency for write-heavy edits in the same tree. Runtime-detected batch-agent facilities may be used for bounded read-heavy fan-out or worktree-isolated rows only.
 
 ## Context discipline
-The main thread keeps requirements, decisions, gate state, and final evidence. Exploration/log/test detail belongs in bounded subagent/tool artifacts. KEEL session/prompt hooks inject a short active-ledger summary when trusted. Memories remain supplementary.
+The main thread keeps requirements, decisions, gate state, and final evidence. Exploration/log/test detail belongs in bounded subagent/tool artifacts. KEEL session/prompt hooks request a bounded decision-relevant projection from the kernel when trusted. Generic explorer/reviewer/risk-reviewer invocation is dynamic: unresolved facts, evidence requirements, and consequence/risk determine whether they are useful. Agent prompts, memories, and injected context remain supplementary adapters rather than policy authority.
 
 ## Integration authorization
 Local investigation/edits/commits are generally reversible. Remote pushes, PR transitions/merges, releases, deployments, migrations, issue changes, cloud/hardware operations, and other external effects follow explicit user/domain authorization and the active risk contract.

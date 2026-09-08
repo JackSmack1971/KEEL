@@ -36,6 +36,12 @@ class EffectBoundary(str, Enum):
     UNCONFINED = "UNCONFINED"
 
 
+class RepositoryAuthority(str, Enum):
+    APPLIES = "APPLIES"
+    OUTSIDE = "OUTSIDE"
+    UNKNOWN = "UNKNOWN"
+
+
 @dataclass(frozen=True)
 class TrustFactors:
     consequence: str
@@ -51,6 +57,13 @@ class TrustFactors:
 @dataclass(frozen=True)
 class PolicyDecision:
     decision: AutonomyDecision
+    reasons: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class EnforcementDecision:
+    permitted: bool
+    fail_closed: bool
     reasons: tuple[str, ...]
 
 
@@ -108,6 +121,28 @@ def observe_runtime(*, identity: str, runtime: str, source: str,
         providers=tuple(sorted(providers)), tools=tuple(sorted(tools)),
         unsupported_surfaces=tuple(sorted(unsupported)), unobservable_surfaces=tuple(sorted(unobservable)),
         knowledge=knowledge, support=support)
+
+
+def runtime_profile_digest(profile: sk.RuntimeProfile) -> str:
+    return sk.content_digest(profile)
+
+
+def evaluate_repository_enforcement(*, authority: RepositoryAuthority,
+                                    enforcement_expected: bool,
+                                    trusted_state: bool,
+                                    policy_permits: bool = False) -> EnforcementDecision:
+    """Decide adapter failure polarity without treating a hook as confinement."""
+    if authority is RepositoryAuthority.OUTSIDE:
+        return EnforcementDecision(True, False, ("KEEL is conclusively outside repository authority",))
+    if policy_permits:
+        return EnforcementDecision(True, False, ("kernel policy explicitly permits the query",))
+    if authority is RepositoryAuthority.UNKNOWN:
+        return EnforcementDecision(False, enforcement_expected,
+            ("repository authority could not be established",))
+    if enforcement_expected and not trusted_state:
+        return EnforcementDecision(False, True,
+            ("trusted KEEL state is unavailable while enforcement is expected",))
+    return EnforcementDecision(True, False, ("trusted repository state is available",))
 
 
 def _instant(value: str | None) -> datetime | None:

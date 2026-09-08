@@ -1,0 +1,10 @@
+{
+  "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+  "change_id": "codex-kernel-adapter-refactor",
+  "created_at": "2026-09-08T17:11:25+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-08T17:30:56+00:00",
+  "verified_content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095"
+}

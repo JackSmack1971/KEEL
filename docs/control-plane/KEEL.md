@@ -57,7 +57,7 @@ After Plan passes, intent/scope changes require `keel.py replan`; re-plan invali
 
 Direct mutation permissions are phase-specific: DISCUSS permits only `proposal.md`; PLAN permits proposal/delta/requirements/acceptance/scope/risk/effects/risk-review plus the matching active ExecPlan; authorization/state/gate/verification records are script-owned; EXECUTE permits only declared implementation scope; VERIFY/SHIP permit no direct content writes without reopen/replan.
 
-Hooks do not provide total confinement. Specialized tool paths may bypass hook coverage; therefore `keel verify` rechecks the Git diff independently and Codex sandbox/approval/rules/domain controls remain load-bearing.
+Hooks do not provide total confinement. The thin Codex adapter sends delivered local and MCP function events to the deterministic kernel query, but specialized tools, alternate clients, direct processes, or runtime/configuration drift may bypass delivery. `PostToolUse` can report or block continuation but cannot undo an already-executed effect. Therefore `keel verify` independently rechecks the Git diff and Codex sandbox/approval/rules/domain controls remain load-bearing.
 
 Canonical runtime/effect decisions consume conservative `RuntimeProfile` and
 intent-bound `CapabilityGrant` objects. Legacy effects normalize to independent
@@ -101,7 +101,7 @@ The future Landing Transaction is not implemented by this subsystem.
 2. `python3 .keel/bin/keel.py doctor` passes.
 3. Project `.codex/` layer is trusted.
 4. `.codex/hooks.json` exact definition has been reviewed/trusted through Codex `/hooks` (or managed policy supplies equivalent enforcement).
-5. A runtime smoke test demonstrates SessionStart/UserPrompt context and a blocked out-of-phase write/Stop gate.
+5. A live runtime smoke test (not a static fixture) demonstrates SessionStart/UserPrompt context, delivered local/MCP tool observation, and a blocked out-of-phase write/Stop gate.
 6. Once substantive source exists, `.keel/config.json` contains real canonical verification commands.
 
 Until those are observed, report KEEL as installed but not fully runtime-validated.

@@ -1,0 +1,584 @@
+{
+  "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+  "receipts": [
+    {
+      "ended_at": "2026-09-08T17:30:52.871480+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 376,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "08dba4351eb92a3d976c482874a78f97378b94569050473209d1833402107ff7",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T17:30:52.494309+00:00",
+      "subject": {
+        "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "changed_paths": [
+          ".agents/skills/README.md",
+          ".agents/skills/control-plane-maintenance/SKILL.md",
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".codex/agents/explorer.toml",
+          ".codex/agents/keel-discuss.toml",
+          ".codex/agents/keel-plan.toml",
+          ".codex/agents/keel-ship.toml",
+          ".codex/agents/keel-verify.toml",
+          ".codex/agents/reviewer.toml",
+          ".codex/agents/risk-reviewer.toml",
+          ".codex/hooks.json",
+          ".codex/rules/control-plane.rules",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/hooks/keel_hook.py",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/p0_contract.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_hook_wire_contract.py",
+          ".keel/tests/test_hook_event_compatibility.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/CODEX_NATIVE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+        ],
+        "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+        "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T17:30:53.098423+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-001",
+        "ER-REQ-002",
+        "ER-REQ-004",
+        "ER-REQ-005"
+      ],
+      "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_adapter_kernel.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 225,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_codex_adapter_kernel.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "c14901538604c63193977275978f3b5df90b0439e36b123aec61a14d25248306",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T17:30:52.872789+00:00",
+      "subject": {
+        "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "changed_paths": [
+          ".agents/skills/README.md",
+          ".agents/skills/control-plane-maintenance/SKILL.md",
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".codex/agents/explorer.toml",
+          ".codex/agents/keel-discuss.toml",
+          ".codex/agents/keel-plan.toml",
+          ".codex/agents/keel-ship.toml",
+          ".codex/agents/keel-verify.toml",
+          ".codex/agents/reviewer.toml",
+          ".codex/agents/risk-reviewer.toml",
+          ".codex/hooks.json",
+          ".codex/rules/control-plane.rules",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/hooks/keel_hook.py",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/p0_contract.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_hook_wire_contract.py",
+          ".keel/tests/test_hook_event_compatibility.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/CODEX_NATIVE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+        ],
+        "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+        "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "codex-adapter-tests",
+        "provenance": ".keel/tests/test_codex_adapter_kernel.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T17:30:55.144345+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-003"
+      ],
+      "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_hook_wire_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 2045,
+          "excerpt": "{\"status\": \"PASS\", \"evidence_class\": \"STATIC_WIRE_FIXTURE_ONLY\", \"installed_runtime_enforcement_proven\": false, \"checks\": [\"current-shaped-local\", \"mcp-function\", \"deny-output\", \"post-effect-output\", \"malformed-fail-closed\", \"outside-authority-fail-open\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_codex_hook_wire_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "52d7b7edf774ba855cfd282315f1d539e73b51ba41dcff5447e5db9c5dc09dd9",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T17:30:53.098856+00:00",
+      "subject": {
+        "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "changed_paths": [
+          ".agents/skills/README.md",
+          ".agents/skills/control-plane-maintenance/SKILL.md",
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".codex/agents/explorer.toml",
+          ".codex/agents/keel-discuss.toml",
+          ".codex/agents/keel-plan.toml",
+          ".codex/agents/keel-ship.toml",
+          ".codex/agents/keel-verify.toml",
+          ".codex/agents/reviewer.toml",
+          ".codex/agents/risk-reviewer.toml",
+          ".codex/hooks.json",
+          ".codex/rules/control-plane.rules",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/hooks/keel_hook.py",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/p0_contract.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_hook_wire_contract.py",
+          ".keel/tests/test_hook_event_compatibility.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/CODEX_NATIVE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+        ],
+        "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+        "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "codex-hook-wire-tests",
+        "provenance": ".keel/tests/test_codex_hook_wire_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T17:30:55.525560+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 380,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "1695d12c26e04f93b80ae476cf4b2d2d357929db87716d01da13a8651369b3bf",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T17:30:55.144753+00:00",
+      "subject": {
+        "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "changed_paths": [
+          ".agents/skills/README.md",
+          ".agents/skills/control-plane-maintenance/SKILL.md",
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".codex/agents/explorer.toml",
+          ".codex/agents/keel-discuss.toml",
+          ".codex/agents/keel-plan.toml",
+          ".codex/agents/keel-ship.toml",
+          ".codex/agents/keel-verify.toml",
+          ".codex/agents/reviewer.toml",
+          ".codex/agents/risk-reviewer.toml",
+          ".codex/hooks.json",
+          ".codex/rules/control-plane.rules",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/hooks/keel_hook.py",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/p0_contract.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_hook_wire_contract.py",
+          ".keel/tests/test_hook_event_compatibility.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/CODEX_NATIVE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+        ],
+        "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+        "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T17:30:55.931182+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 405,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"08b9e81e449a4c0f2a79d07f21aee3528c36d9e142b68d5f68c2bfa71aaeb55c\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "b5c6ed4b2aad47da1bb7c05d4552b76444be98fc0b5f79046f1daaff0388f1f7",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T17:30:55.525994+00:00",
+      "subject": {
+        "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "changed_paths": [
+          ".agents/skills/README.md",
+          ".agents/skills/control-plane-maintenance/SKILL.md",
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".codex/agents/explorer.toml",
+          ".codex/agents/keel-discuss.toml",
+          ".codex/agents/keel-plan.toml",
+          ".codex/agents/keel-ship.toml",
+          ".codex/agents/keel-verify.toml",
+          ".codex/agents/reviewer.toml",
+          ".codex/agents/risk-reviewer.toml",
+          ".codex/hooks.json",
+          ".codex/rules/control-plane.rules",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/hooks/keel_hook.py",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/p0_contract.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_hook_wire_contract.py",
+          ".keel/tests/test_hook_event_compatibility.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/CODEX_NATIVE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+        ],
+        "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+        "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T17:30:56.415539+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "7f4c108fd3afd69f225ee1c7ac5da5d3ffbf9b81da0c73da5bff9dd7fa9356aa",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 483,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "3f514c23037a8ccea7b33a936e69a6418c37329ba2822647395d4723409aedf1",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T17:30:55.931559+00:00",
+      "subject": {
+        "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "changed_paths": [
+          ".agents/skills/README.md",
+          ".agents/skills/control-plane-maintenance/SKILL.md",
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".codex/agents/explorer.toml",
+          ".codex/agents/keel-discuss.toml",
+          ".codex/agents/keel-plan.toml",
+          ".codex/agents/keel-ship.toml",
+          ".codex/agents/keel-verify.toml",
+          ".codex/agents/reviewer.toml",
+          ".codex/agents/risk-reviewer.toml",
+          ".codex/hooks.json",
+          ".codex/rules/control-plane.rules",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/hooks/keel_hook.py",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/p0_contract.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_hook_wire_contract.py",
+          ".keel/tests/test_hook_event_compatibility.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/CODEX_NATIVE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+        ],
+        "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+        "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+    "changed_paths": [
+      ".agents/skills/README.md",
+      ".agents/skills/control-plane-maintenance/SKILL.md",
+      ".agents/skills/keel-change-lifecycle/SKILL.md",
+      ".codex/agents/explorer.toml",
+      ".codex/agents/keel-discuss.toml",
+      ".codex/agents/keel-plan.toml",
+      ".codex/agents/keel-ship.toml",
+      ".codex/agents/keel-verify.toml",
+      ".codex/agents/reviewer.toml",
+      ".codex/agents/risk-reviewer.toml",
+      ".codex/hooks.json",
+      ".codex/rules/control-plane.rules",
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/hooks/keel_hook.py",
+      ".keel/lib/codex_adapter_kernel.py",
+      ".keel/lib/p0_contract.py",
+      ".keel/lib/runtime_authorization.py",
+      ".keel/tests/test_codex_adapter_kernel.py",
+      ".keel/tests/test_codex_hook_wire_contract.py",
+      ".keel/tests/test_hook_event_compatibility.py",
+      ".keel/tests/test_p0_contract.py",
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/codex-kernel-adapter-refactor.md"
+    ],
+    "content_digest": "30e4ab7713d74b27df279efa59e2fdaffbff24f1434dadcd77152495578e5095",
+    "head_commit": "84419a3f57874a93011d84e117da2eb92af51a24",
+    "kind": "git-worktree"
+  }
+}
