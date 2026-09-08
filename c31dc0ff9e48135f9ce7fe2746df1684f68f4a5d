@@ -1,0 +1,6 @@
+keel-change-id: p1-repository-intelligence-foundation
+sealed-candidate: c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d
+landed-commit: c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d
+integration-relation: candidate-ancestor
+verification-class: LANDED_COMPLETION
+verified-content-digest: ef14d5dd48eb0f14306aa2932364697b470ec5b833f0c0194bd0ec64bd2165bb
