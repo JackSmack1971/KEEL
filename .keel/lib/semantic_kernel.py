@@ -259,9 +259,14 @@ class EffectRequest(Record):
     effect_type: str = ""
     subject_id: str = ""
     resources: tuple[ResourceIdentity, ...] = ()
+    action: str = ""
+    resource: str = ""
+    intent_digest: str = ""
 
     def __post_init__(self) -> None:
         super().__post_init__(); _nonempty(self.effect_type, "effect_type"); validate_identity(self.subject_id)
+        _nonempty(self.action or self.effect_type, "effect action")
+        if self.intent_digest: validate_digest(self.intent_digest)
         if not all(isinstance(r, ResourceIdentity) for r in self.resources): raise ModelError("effect resources must be ResourceIdentity values")
         if len({r.identity for r in self.resources}) != len(self.resources): raise ModelError("effect resources must be unique")
 
@@ -273,9 +278,28 @@ class CapabilityGrant(Record):
     effect_request_id: str = ""
     issuer: str = ""
     conditions: tuple[str, ...] = ()
+    work_id: str = ""
+    change_id: str = ""
+    action: str = ""
+    resource: str = ""
+    constraints: Mapping[str, Any] = field(default_factory=dict)
+    intent_digest: str = ""
+    evidence_reference: str = ""
+    valid_from: str | None = None
+    expires_at: str | None = None
+    max_uses: int | None = None
+    uses: int = 0
 
     def __post_init__(self) -> None:
         super().__post_init__(); validate_identity(self.subject_id); validate_identity(self.effect_request_id, "effect-request"); _nonempty(self.issuer, "issuer")
+        _nonempty(self.work_id, "grant work_id"); _nonempty(self.change_id, "grant change_id")
+        _nonempty(self.action, "grant action"); _nonempty(self.resource, "grant resource")
+        validate_digest(self.intent_digest); _nonempty(self.evidence_reference, "grant evidence_reference")
+        if not isinstance(self.constraints, Mapping): raise ModelError("grant constraints must be a mapping")
+        if self.max_uses is not None and (type(self.max_uses) is not int or self.max_uses < 1): raise ModelError("grant max_uses must be a positive integer")
+        if type(self.uses) is not int or self.uses < 0: raise ModelError("grant uses must be a non-negative integer")
+        if self.max_uses is not None and self.uses > self.max_uses: raise ModelError("grant uses exceed max_uses")
+        object.__setattr__(self, "constraints", _freeze(self.constraints))
 
 
 @dataclass(frozen=True)
@@ -332,9 +356,25 @@ class RuntimeProfile(Record):
     KIND: ClassVar[str] = "runtime-profile"
     runtime: str = ""
     observations: tuple[str, ...] = ()
+    runtime_version: str | None = None
+    surfaces: Mapping[str, str] = field(default_factory=dict)
+    hook_coverage: tuple[str, ...] = ()
+    tool_coverage: tuple[str, ...] = ()
+    providers: tuple[str, ...] = ()
+    tools: tuple[str, ...] = ()
+    unsupported_surfaces: tuple[str, ...] = ()
+    unobservable_surfaces: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         super().__post_init__(); _nonempty(self.runtime, "runtime")
+        if self.runtime_version is not None: _nonempty(self.runtime_version, "runtime_version")
+        if not isinstance(self.surfaces, Mapping): raise ModelError("runtime surfaces must be a mapping")
+        allowed = {"OBSERVED", "UNOBSERVED", "UNSUPPORTED", "STALE", "CONFLICTING"}
+        if any(not isinstance(k, str) or not k.strip() or v not in allowed for k, v in self.surfaces.items()):
+            raise ModelError("runtime surfaces require named conservative observation states")
+        for values, label in ((self.observations, "observations"), (self.hook_coverage, "hook_coverage"), (self.tool_coverage, "tool_coverage"), (self.providers, "providers"), (self.tools, "tools"), (self.unsupported_surfaces, "unsupported_surfaces"), (self.unobservable_surfaces, "unobservable_surfaces")):
+            if len(set(values)) != len(values) or any(not isinstance(v, str) or not v.strip() for v in values): raise ModelError(f"runtime {label} must contain unique non-empty strings")
+        object.__setattr__(self, "surfaces", _freeze(self.surfaces))
 
 
 RECORD_TYPES = {cls.KIND: cls for cls in (Fact, Requirement, WorkUnit, Edge, EffectRequest, CapabilityGrant, EvidenceRequirement, EvidenceReceipt, Decision, Attestation, RuntimeProfile)}
@@ -387,7 +427,7 @@ def decode(document: Mapping[str, Any]) -> Record:
             values[name] = enum(values[name])
         if "resources" in values:
             values["resources"] = tuple(_decode_resource(v) for v in values["resources"])
-        for name in ("conditions", "receipt_ids", "observations"):
+        for name in ("conditions", "receipt_ids", "observations", "hook_coverage", "tool_coverage", "providers", "tools", "unsupported_surfaces", "unobservable_surfaces"):
             if name in values: values[name] = tuple(values[name])
         return cls(**values)
     except (KeyError, TypeError, ValueError) as exc:

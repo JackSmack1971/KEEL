@@ -23,3 +23,19 @@
 Use agent judgment for implementation details, investigation order, refactoring shape, validation breadth beyond mandatory checks, and tool choice when multiple reasonable paths satisfy constraints.
 
 Choose autonomy by reversibility, blast radius, authorization, external effects, privacy/security impact, recovery speed, observability, and uncertainty. Emergency KEEL bypass changes process timing only; it does not change those consequence controls.
+
+## Runtime trust policy
+
+The implemented policy evaluates consequence, reversibility, uncertainty,
+observability, evidence strength, runtime enforcement, authorization, and recovery
+cost. Its ordered outcomes are `ALLOW_AUTONOMOUS`,
+`ALLOW_WITH_STRONGER_VERIFICATION`, `REQUIRE_CAPABILITY`,
+`REQUIRE_INDEPENDENT_REVIEW`, `REQUIRE_HUMAN_DECISION`, and `PROHIBIT`.
+Missing or invalid authority and unknown/unconfined runtime surfaces lower the
+ceiling; unavailable observations never receive optimistic defaults.
+
+A `CapabilityGrant` is valid only for its bound subject, work/change, effect
+request, action, resource, constraints, intent digest, accepted issuer evidence,
+validity window, and remaining use count. Changed intent invalidates an
+incompatible grant. A plan, effect declaration, legacy `authorized=true`, adapter
+availability, or receipt is not a grant.

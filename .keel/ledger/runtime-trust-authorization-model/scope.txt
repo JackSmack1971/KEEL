@@ -1,0 +1,14 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/semantic_kernel.py
+.keel/lib/runtime_authorization.py
+.keel/tests/test_semantic_kernel.py
+.keel/tests/test_runtime_authorization.py
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+ARCHITECTURE.md
+CONTROL_PLANE.md
+WORKFLOW.md
+docs/control-plane/DECISION_MODEL.md
+docs/control-plane/KEEL.md
+docs/control-plane/COMMANDS.md
+docs/exec-plans/active/runtime-trust-authorization-model.md

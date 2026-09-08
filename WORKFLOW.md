@@ -26,7 +26,7 @@ Use `keel_plan` for read-heavy planning. Maintain:
 - `scope.txt` — exact repo-relative files/globs the implementation may touch;
 - `risk.json` — risk level and consequential-change flags;
 - `effects.json` — declared external/irreversible effects, if any;
-- `authorization.json` — KEEL-owned record of permission already obtained when `effects.json` requires it. Do **not** hand-edit it; the Plan gate synchronizes required/not-required shape from `effects.json`, and `record-authorization` is the only normal path to `authorized=true`;
+- `authorization.json` — legacy KEEL-owned evidence record for permission reported as obtained when `effects.json` requires it. Do **not** hand-edit it; its boolean is not a canonical grant and cannot independently authorize an effect;
 - durable ExecPlan when risk/cross-cutting criteria require one.
 
 Pass: `python3 .keel/bin/keel.py gate plan`.
@@ -37,7 +37,7 @@ Trace the actual code/data/runtime path before editing. One primary write owner 
 If proposal/delta/scope/risk/effects intent must change after Plan passes, run `python3 .keel/bin/keel.py replan` and pass Plan again before continuing. Re-plan invalidates previously recorded effect authorization. After verification, use `keel.py reopen` for implementation edits or `replan` for intent changes.
 
 ### 4. Verify
-Run `python3 .keel/bin/keel.py verify`. KEEL performs structural/scope checks, derives an impact- and requirement-selected EvidencePlan from the verifier registry, executes selected verifiers, and records exact-subject EvidenceReceipts. Compatibility projections remain in `verification.json` / `verification.md`; receipt coverage is authoritative and an unrelated green command cannot satisfy a requirement. Required external/irreversible authorization must be recorded before Verify can pass; the record is bound to the current canonical `effects.json` content, documents authorization already received, and is not itself permission. Within Codex, the pre-tool hook blocks agent-initiated `record-authorization` unless the parent session explicitly carries `KEEL_AUTHORIZATION_CHANGE=<exact-change-id>`; an operator may also run the recorder directly outside the agent session.
+Run `python3 .keel/bin/keel.py verify`. KEEL performs structural/scope checks, derives an impact- and requirement-selected EvidencePlan from the verifier registry, executes selected verifiers, and records exact-subject EvidenceReceipts. Compatibility projections remain in `verification.json` / `verification.md`; receipt coverage is authoritative and an unrelated green command cannot satisfy a requirement. Required external/irreversible authorization must be recorded before the legacy Verify path can pass; the record is effects-bound evidence, but its boolean is not a `CapabilityGrant`. Effect execution additionally requires a valid intent-bound grant and sufficient observed runtime enforcement. Within Codex, the pre-tool hook blocks agent-initiated `record-authorization` unless the parent session explicitly carries `KEEL_AUTHORIZATION_CHANGE=<exact-change-id>`; an operator may also run the recorder directly outside the agent session.
 
 Use the `keel_verify` agent for independent interpretation/review of evidence, not as the source of pass/fail truth.
 
