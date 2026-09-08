@@ -3,7 +3,7 @@
   "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
   "receipts": [
     {
-      "ended_at": "2026-09-08T23:56:40.916414+00:00",
+      "ended_at": "2026-09-08T23:58:00.963441+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -25,7 +25,7 @@
       },
       "observations": [
         {
-          "duration_ms": 405,
+          "duration_ms": 375,
           "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -42,10 +42,10 @@
           }
         }
       ],
-      "receipt_digest": "e0f9e22315909b98e96ba378e98a53060830244252adc95a4a75c91a2266be88",
+      "receipt_digest": "d0b9d429b8ef55b3aa52e55d9c61dbd852a389ccd45af2e8c3da0b4c35f4a2d5",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-08T23:56:40.511129+00:00",
+      "started_at": "2026-09-08T23:58:00.588173+00:00",
       "subject": {
         "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
         "changed_paths": [
@@ -65,8 +65,8 @@
           "docs/control-plane/KEEL.md",
           "docs/exec-plans/active/landing-transaction.md"
         ],
-        "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-        "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+        "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+        "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -78,7 +78,7 @@
       }
     },
     {
-      "ended_at": "2026-09-08T23:56:41.170636+00:00",
+      "ended_at": "2026-09-08T23:58:01.133120+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -100,7 +100,7 @@
       },
       "observations": [
         {
-          "duration_ms": 95,
+          "duration_ms": 98,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -117,10 +117,10 @@
           }
         }
       ],
-      "receipt_digest": "cea1a134d210bf95e4bd87f094a2c5dbd73c6aa618db0809c7d550bd2e6484fb",
+      "receipt_digest": "3955230fbe083f71c34deaba1c39ad74dc2ff10ea427fef70ae2b21266c4d410",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-08T23:56:41.075549+00:00",
+      "started_at": "2026-09-08T23:58:01.034333+00:00",
       "subject": {
         "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
         "changed_paths": [
@@ -140,8 +140,8 @@
           "docs/control-plane/KEEL.md",
           "docs/exec-plans/active/landing-transaction.md"
         ],
-        "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-        "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+        "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+        "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -153,7 +153,7 @@
       }
     },
     {
-      "ended_at": "2026-09-08T23:56:41.579739+00:00",
+      "ended_at": "2026-09-08T23:58:01.537134+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -175,7 +175,7 @@
       },
       "observations": [
         {
-          "duration_ms": 407,
+          "duration_ms": 401,
           "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -192,10 +192,10 @@
           }
         }
       ],
-      "receipt_digest": "330d51abf744691db424303f1f93846526f2fd5211a91693dc4492f4de384236",
+      "receipt_digest": "4118d0ad51fae2402caa7936b0b4f08f19a0b0f86d0ad559501d6a31b6a0282e",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-08T23:56:41.172696+00:00",
+      "started_at": "2026-09-08T23:58:01.135368+00:00",
       "subject": {
         "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
         "changed_paths": [
@@ -215,8 +215,8 @@
           "docs/control-plane/KEEL.md",
           "docs/exec-plans/active/landing-transaction.md"
         ],
-        "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-        "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+        "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+        "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -228,7 +228,7 @@
       }
     },
     {
-      "ended_at": "2026-09-08T23:56:45.541353+00:00",
+      "ended_at": "2026-09-08T23:58:05.493615+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -258,7 +258,7 @@
       },
       "observations": [
         {
-          "duration_ms": 3959,
+          "duration_ms": 3953,
           "excerpt": "Landing transaction tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -275,10 +275,10 @@
           }
         }
       ],
-      "receipt_digest": "a9e2e319b8756903a1f9430bb36bcc4d35bc9b045e95b3a48e23ed134a98723d",
+      "receipt_digest": "cfacaee533a3758e7abc7a64b8dcc17c3127f6456396724c1fa8ba79d0167a2f",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-08T23:56:41.582149+00:00",
+      "started_at": "2026-09-08T23:58:01.540144+00:00",
       "subject": {
         "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
         "changed_paths": [
@@ -298,8 +298,8 @@
           "docs/control-plane/KEEL.md",
           "docs/exec-plans/active/landing-transaction.md"
         ],
-        "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-        "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+        "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+        "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -311,7 +311,7 @@
       }
     },
     {
-      "ended_at": "2026-09-08T23:56:45.965422+00:00",
+      "ended_at": "2026-09-08T23:58:05.930454+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -333,7 +333,7 @@
       },
       "observations": [
         {
-          "duration_ms": 420,
+          "duration_ms": 433,
           "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"fb3525d9ac950b9346d5ef08d907ed65a44b50acd7d429a2c5592e30d1477102\"\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -350,10 +350,10 @@
           }
         }
       ],
-      "receipt_digest": "1efb2347280bd2ac5804e2991ca6e9b6db793b8591b7ab49326db6ab1b15c1ca",
+      "receipt_digest": "7ebeb9cfb3fec810a571a48ee546d5e22da74969e77d758e8622af39045d2b3a",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-08T23:56:45.545294+00:00",
+      "started_at": "2026-09-08T23:58:05.497079+00:00",
       "subject": {
         "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
         "changed_paths": [
@@ -373,8 +373,8 @@
           "docs/control-plane/KEEL.md",
           "docs/exec-plans/active/landing-transaction.md"
         ],
-        "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-        "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+        "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+        "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -386,7 +386,7 @@
       }
     },
     {
-      "ended_at": "2026-09-08T23:56:46.775918+00:00",
+      "ended_at": "2026-09-08T23:58:06.973853+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -408,7 +408,7 @@
       },
       "observations": [
         {
-          "duration_ms": 807,
+          "duration_ms": 1041,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -425,10 +425,10 @@
           }
         }
       ],
-      "receipt_digest": "a7965ef41cbaa1e307228ef0fd0e9e073f2cbac1a41667b30a21a7f08c5c36cf",
+      "receipt_digest": "1b7e63a74420924122732c7917f85f49bc8f3c87d752d4ae2cf49d70420a18c2",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-08T23:56:45.968741+00:00",
+      "started_at": "2026-09-08T23:58:05.932676+00:00",
       "subject": {
         "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
         "changed_paths": [
@@ -448,8 +448,8 @@
           "docs/control-plane/KEEL.md",
           "docs/exec-plans/active/landing-transaction.md"
         ],
-        "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-        "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+        "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+        "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -481,8 +481,8 @@
       "docs/control-plane/KEEL.md",
       "docs/exec-plans/active/landing-transaction.md"
     ],
-    "content_digest": "6072f2e6eb34843f25ef0827d0b2baa217048177706d9aee58bb86bb12824020",
-    "head_commit": "de4b0aa6afe474cbbda3523e28b8b3af6d11dfef",
+    "content_digest": "25f28348e6f6e457da276ba255a1d97a82c54de751570387bf9432ee4cf274bb",
+    "head_commit": "b596d81d986083e45b81eab52cbd6e9b5566957c",
     "kind": "git-worktree"
   }
 }

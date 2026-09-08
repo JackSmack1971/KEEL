@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / ".keel/lib"))
 import candidate_attestation as ca
+import evidence_system
 import git_proof
 import keel_core as core
 
@@ -90,6 +91,14 @@ def main() -> None:
         assert "conflicts" in str(exc)
     else:
         raise AssertionError("conflicting concurrent changes were accepted")
+    verifier = {"id": "v", "version": "1", "provider": "unit_test", "provenance": "fixture", "authority": "TESTED"}
+    step = {"verifier_id": "v", "runtime": {"argv": ["true"], "cwd": ".", "timeout_sec": 10}, "establishes": ["ER-1"]}
+    candidate_subject = {"kind": "git-worktree", "head_commit": candidate}
+    integration_subject = {"kind": "git-integration-tree", "integration_tree": tree}
+    receipt = evidence_system.receipt(verifier, step, candidate_subject, "b" * 64, "PASS", [], "s", "e")
+    plan = {"errors": [], "steps": [step], "assignments": [{"evidence_requirement_id": "ER-1", "verifier_id": "v"}]}
+    requirement = {"id": "ER-1", "minimum_authority": "TESTED"}
+    assert evidence_system.evaluate(plan, [receipt], [requirement], integration_subject, "b" * 64)["status"] == "INCONCLUSIVE"
     print("Landing transaction tests PASS")
 
 
