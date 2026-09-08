@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "change_type": "implementation",
+  "requirements": [
+    {"id":"REQ-001","statement":"Codex runtime events and local/MCP tool invocations normalize into deterministic KEEL kernel queries whose decisions come from trusted lifecycle, scope, evidence, RuntimeProfile, and policy state.","source":"user-intent; KEEL-KERNEL-REDESIGN-v1 M4"},
+    {"id":"REQ-002","statement":"The adapter fails closed when enforcement is expected but trusted KEEL state is unavailable, and fails open only when repository authority is conclusively inapplicable or kernel policy explicitly permits the action.","source":"user-intent; KEEL-KERNEL-REDESIGN-v1 sections 7 and 11"},
+    {"id":"REQ-003","statement":"Hook output and documentation accurately distinguish pre-effect denial from post-effect observation, expose event/tool coverage, and never claim hooks or static fixtures provide complete confinement or installed-runtime enforcement.","source":"user-intent; KEEL-KERNEL-REDESIGN-v1 section 7"},
+    {"id":"REQ-004","statement":"Codex rules, skills, and agents remain adapters: phase agents are removed and generic exploration/review roles are invoked dynamically from kernel evidence and risk while preserving least privilege.","source":"user-intent; KEEL-KERNEL-REDESIGN-v1 sections 3 and 12"},
+    {"id":"REQ-005","statement":"Legacy lifecycle behavior and a safe bootstrap path remain compatible while the M4 adapter replaces hook-local policy, and no reconciler, scheduler, executor, confinement layer, or landing transaction is introduced.","source":"user-intent; KEEL-KERNEL-REDESIGN-v1 sections 9-11"}
+  ]
+}

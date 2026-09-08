@@ -11,6 +11,12 @@ from pathlib import Path
 PASS = "VERIFIED"
 UNVERIFIED_RUNTIME = "UNVERIFIED_RUNTIME"
 WINDOWS_ABSOLUTE_RE = re.compile(r"^[A-Za-z]:[\\/]")
+RETIRED_BOOTSTRAP_FILES = frozenset({
+    ".codex/agents/keel-discuss.toml",
+    ".codex/agents/keel-plan.toml",
+    ".codex/agents/keel-ship.toml",
+    ".codex/agents/keel-verify.toml",
+})
 
 
 def _finding(status: str, reason: str, **details) -> dict:
@@ -182,6 +188,8 @@ def manifest_producer(root: Path, write: bool = False) -> dict:
     path = root / ".control-plane" / "bootstrap-manifest.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     data["producer"] = {"command": ["python", ".keel/bin/keel.py", "manifest", "--write"], "source": ".keel/lib/p0_contract.py"}
+    for rel in RETIRED_BOOTSTRAP_FILES:
+        data.get("files", {}).pop(rel, None)
     for rel in sorted(data.get("files", {})):
         target = root / rel
         if not target.is_file():

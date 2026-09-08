@@ -67,3 +67,13 @@ resource, constraints, intent digest, issuer evidence, validity, and use limits.
 Effect adapters classify boundaries as `MEDIATED`, `OBSERVED`, or `UNCONFINED`;
 none currently executes provider effects. Planning validity remains independent
 from execution readiness. This does not implement a scheduler or hook confinement.
+
+## Codex adapter boundary
+
+`.keel/lib/codex_adapter_kernel.py` owns deterministic normalization targets and
+policy queries for Codex hook events. It consumes conservative `RuntimeProfile`
+observations plus lifecycle/context/evidence compatibility APIs and returns explicit
+adapter-neutral outcomes. `.keel/hooks/keel_hook.py` is only the Codex JSON/Git-root
+bootstrap and output renderer. Post-tool outcomes are observations after an effect and
+cannot undo it. Declared event delivery is not complete confinement, and static wire
+fixtures are not evidence that an installed Codex runtime loaded or enforced hooks.

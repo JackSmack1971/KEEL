@@ -1,0 +1,49 @@
+{
+  "change_type": "implementation",
+  "criteria": [],
+  "errors": [],
+  "implementation_status": "PASS",
+  "projection_of": "evidence-receipts.json",
+  "requirement_coverage": [
+    {
+      "evidence_requirement_id": "ER-REQ-001",
+      "requirement_id": "REQ-001",
+      "status": "PASS",
+      "verifier_id": "codex-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-002",
+      "requirement_id": "REQ-002",
+      "status": "PASS",
+      "verifier_id": "codex-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-003",
+      "requirement_id": "REQ-003",
+      "status": "PASS",
+      "verifier_id": "codex-hook-wire-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-004",
+      "requirement_id": "REQ-004",
+      "status": "PASS",
+      "verifier_id": "codex-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-005",
+      "requirement_id": "REQ-005",
+      "status": "PASS",
+      "verifier_id": "codex-adapter-tests"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 5,
+    "required": 5,
+    "requirements_covered": 5,
+    "requirements_passing": 5,
+    "requirements_total": 5
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

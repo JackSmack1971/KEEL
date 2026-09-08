@@ -22,6 +22,7 @@ Build and maintain **KEEL-v2** as a legible, verifiable engineering repository. 
 - Do not weaken security, sandbox, approvals, hooks, or rules merely to get work through a gate.
 - External, irreversible, privileged, security/privacy-sensitive, migration, release, or high-blast-radius effects require explicit authorization and stronger evidence.
 - Repeated consequential mistakes should become tested mechanical invariants, not repeated prose reminders.
+- Codex hooks, rules, skills, and subagents are adapters: query the deterministic KEEL kernel for lifecycle, scope, policy, context, and evidence decisions; never treat adapter prose/configuration as authority or hooks as confinement.
 
 ## Change entry points
 - Read-only investigation: no KEEL ledger required; return concise evidence.
@@ -33,6 +34,7 @@ Build and maintain **KEEL-v2** as a legible, verifiable engineering repository. 
 - `python3 .keel/bin/keel.py discover` — evidence-backed capability detection; never silent policy activation.
 - `python3 .keel/bin/keel.py context` — compile a bounded current-change context packet.
 - `python3 .keel/bin/keel.py evidence` — inspect the latest evidence receipts.
+- Generic explorer/reviewer/risk-reviewer roles may be selected dynamically from unresolved facts, evidence requirements, impact, and risk; they never replace kernel decisions.
 - `python3 .keel/bin/keelbench.py validate` — validate the paired-evaluation corpus; benchmark results are separate from deterministic self-tests.
 
 ## Before declaring done

@@ -47,3 +47,7 @@ Runtime trust and authorization now have a canonical M4 policy boundary:
 replaces boolean permission semantics, and effect contracts distinguish mediated,
 observed, and unconfined boundaries. This is not proof that a session is confined,
 and it supplies neither an effect executor nor a scheduler.
+Codex hook/rule/skill/agent surfaces are adapters over that boundary: the hook queries
+the kernel, generic read-only roles are selected from evidence/risk, and no adapter is
+an independent lifecycle, scope, evidence, or permission authority. Live hook trust and
+coverage still require per-runtime observation.

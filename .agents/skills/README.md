@@ -5,3 +5,5 @@ Keep only coherent recurring workflows that add project-specific policy, knowled
 Repository skills:
 
 - `engineering-protocols` — routes recurring debugging, architecture, dependency, migration, security, performance, frontend-runtime, test-remediation, incident, and release concerns.
+- `keel-change-lifecycle` — calls deterministic lifecycle/context/evidence operations; it does not carry an independent phase policy or fixed phase-agent roster.
+- `control-plane-maintenance` — maintains adapter/configuration surfaces while deferring semantic decisions to the kernel.

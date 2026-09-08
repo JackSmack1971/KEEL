@@ -57,6 +57,14 @@ with tempfile.TemporaryDirectory() as directory:
     (root / "unrelated.txt").write_text("unlisted", encoding="utf-8")
     manifest.write_text(manifest.read_text(encoding="utf-8").replace("input.txt", "unrelated.txt"), encoding="utf-8")
     assert p.generated_artifact_status(root)["status"] == "FAILED"
+
+with tempfile.TemporaryDirectory() as directory:
+    root = Path(directory); (root / ".control-plane").mkdir()
+    retired = next(iter(p.RETIRED_BOOTSTRAP_FILES))
+    manifest = root / ".control-plane/bootstrap-manifest.json"
+    manifest.write_text(json.dumps({"schema_version": 2, "files": {retired: "old"}}), encoding="utf-8")
+    assert p.manifest_producer(root, write=True)["status"] == "WRITTEN"
+    assert retired not in json.loads(manifest.read_text(encoding="utf-8"))["files"]
 with tempfile.TemporaryDirectory() as directory:
     root = Path(directory); (root / ".control-plane").mkdir()
     (root / ".control-plane/bootstrap-manifest.json").write_text(json.dumps({"schema_version": 2, "files": {}}), encoding="utf-8")
