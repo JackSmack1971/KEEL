@@ -1,5 +1,5 @@
 {
-  "change_type": "implementation",
+  "change_type": "planning_only",
   "criteria": [
     {
       "evidence": [
@@ -48,7 +48,6 @@
       "id": "AC-RECON-002",
       "implementation_matches": [
         "docs/exec-plans/active/README.md",
-        "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
         "docs/exec-plans/completed/p1-repository-intelligence-foundation.md"
       ],
       "implementation_paths": [
@@ -90,7 +89,7 @@
     }
   ],
   "errors": [],
-  "implementation_status": "NOT_VERIFIED",
+  "implementation_status": "NOT_APPLICABLE",
   "planning_status": "PASS",
   "requirement_coverage": [
     {
