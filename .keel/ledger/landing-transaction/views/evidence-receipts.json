@@ -1,0 +1,488 @@
+{
+  "generated": true,
+  "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+  "receipts": [
+    {
+      "ended_at": "2026-09-08T23:54:18.380029+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 450,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "aaa18efcb07c711db456125fc402573eea6d1105c915f1f8cc49290f8120003d",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:54:17.929791+00:00",
+      "subject": {
+        "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "changed_paths": [
+          ".keel/README.md",
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_landing_transaction.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/landing-transaction.md"
+        ],
+        "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+        "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:54:18.564430+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 110,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_compatibility_retirement.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "aace68116b29f3ee7db74647d78739049153ec0f46d9183cb8ac705d99c21cab",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:54:18.453530+00:00",
+      "subject": {
+        "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "changed_paths": [
+          ".keel/README.md",
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_landing_transaction.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/landing-transaction.md"
+        ],
+        "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+        "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "compatibility-retirement-tests",
+        "provenance": ".keel/tests/test_compatibility_retirement.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:54:19.097696+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 530,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "2b96e77c1e50f3e5b68ba5581cb6fc303780a41f572ba369cd43c1fc32e485d4",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:54:18.566883+00:00",
+      "subject": {
+        "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "changed_paths": [
+          ".keel/README.md",
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_landing_transaction.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/landing-transaction.md"
+        ],
+        "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+        "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:54:21.164015+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-1",
+        "ER-REQ-2",
+        "ER-REQ-3",
+        "ER-REQ-4",
+        "ER-REQ-5",
+        "ER-REQ-6",
+        "ER-REQ-7"
+      ],
+      "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_landing_transaction.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 2062,
+          "excerpt": "Landing transaction tests PASS",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_landing_transaction.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "378978101fad9e443256135e6337059e5fbbbd61ff521c05bc48f415045fded5",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:54:19.101594+00:00",
+      "subject": {
+        "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "changed_paths": [
+          ".keel/README.md",
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_landing_transaction.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/landing-transaction.md"
+        ],
+        "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+        "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "landing-transaction-tests",
+        "provenance": ".keel/tests/test_landing_transaction.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:54:21.528144+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 361,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"fb3525d9ac950b9346d5ef08d907ed65a44b50acd7d429a2c5592e30d1477102\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "1f510ae77b986e4314fa625a56b2443dd4f144e4fc04d5eca6b3f17d52636cc9",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:54:21.166579+00:00",
+      "subject": {
+        "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "changed_paths": [
+          ".keel/README.md",
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_landing_transaction.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/landing-transaction.md"
+        ],
+        "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+        "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:54:22.412570+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 881,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "210bba7df28128e4334f8c5f542882a0494e9918b970ba8464a2a5da0b79c381",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:54:21.530659+00:00",
+      "subject": {
+        "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "changed_paths": [
+          ".keel/README.md",
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_landing_transaction.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/landing-transaction.md"
+        ],
+        "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+        "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "changed_paths": [
+      ".keel/README.md",
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_landing_transaction.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/landing-transaction.md"
+    ],
+    "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+    "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "kind": "git-worktree"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-1",
+      "requirement_id": "REQ-1",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-2",
+      "requirement_id": "REQ-2",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-3",
+      "requirement_id": "REQ-3",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-4",
+      "requirement_id": "REQ-4",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-5",
+      "requirement_id": "REQ-5",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-6",
+      "requirement_id": "REQ-6",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-7",
+      "requirement_id": "REQ-7",
+      "verifier_id": "landing-transaction-tests"
+    }
+  ],
+  "changed_paths": [
+    ".keel/README.md",
+    ".keel/bin/keel.py",
+    ".keel/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/candidate_attestation.py",
+    ".keel/lib/git_proof.py",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_git_attestation_lifecycle.py",
+    ".keel/tests/test_landing_transaction.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/KEEL.md",
+    "docs/exec-plans/active/landing-transaction.md"
+  ],
+  "errors": [],
+  "plan_digest": "3bb1d6919aa91d5fac6a9af1ff26fbbabfc52c11adf429c235e8c361b7732a6d",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-1",
+        "ER-REQ-2",
+        "ER-REQ-3",
+        "ER-REQ-4",
+        "ER-REQ-5",
+        "ER-REQ-6",
+        "ER-REQ-7"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_landing_transaction.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}

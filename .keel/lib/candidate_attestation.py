@@ -14,6 +14,9 @@ VERSION = 1
 CANDIDATE_REF_PREFIX = "refs/keel/candidates/"
 ATTESTATION_REF_PREFIX = "refs/keel/attestations/candidates/"
 LANDED_REF_PREFIX = "refs/keel/ledger/"
+LANDING_ATTESTATION_REF_PREFIX = "refs/keel/attestations/landings/"
+LANDING_SCHEMA = "keel.landing-attestation"
+LANDING_VERSION = 1
 
 
 def canonical_digest(value) -> str:
@@ -70,6 +73,62 @@ class CandidateAttestation:
         for path in value["changed_paths"]:
             git_proof.normalize_repo_path(path)
         return cls(**{**value, "evidence_receipts": tuple(receipts), "changed_paths": tuple(value["changed_paths"])})
+
+
+@dataclass(frozen=True)
+class LandingAttestation:
+    change_id: str
+    target_ref: str
+    target_base: str
+    candidate_attestation_digest: str
+    candidate_commit: str
+    candidate_tree: str
+    integration_tree: str
+    intent_digest: str
+    evidence_plan_digest: str
+    evidence_receipts: tuple[dict, ...]
+    policy_runtime_profile_digest: str | None
+    expected_landing_mechanism: str
+    strategy: str
+    status: str = "PREPARED"
+    stale_reason: str | None = None
+    landed_commit: str | None = None
+    schema: str = LANDING_SCHEMA
+    version: int = LANDING_VERSION
+
+    def as_dict(self) -> dict:
+        value = dict(self.__dict__)
+        value["evidence_receipts"] = list(self.evidence_receipts)
+        return value
+
+    @property
+    def digest(self) -> str:
+        return canonical_digest(self.as_dict())
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "LandingAttestation":
+        if value.get("schema") != LANDING_SCHEMA or value.get("version") != LANDING_VERSION:
+            raise RuntimeError("unsupported LandingAttestation schema/version")
+        required = ("change_id", "target_ref", "target_base", "candidate_attestation_digest", "candidate_commit",
+                    "candidate_tree", "integration_tree", "intent_digest", "evidence_plan_digest",
+                    "evidence_receipts", "expected_landing_mechanism", "strategy", "status")
+        if any(key not in value for key in required):
+            raise RuntimeError("LandingAttestation is incomplete")
+        for key in ("target_base", "candidate_commit", "candidate_tree", "integration_tree", "intent_digest", "evidence_plan_digest"):
+            raw = value[key]
+            lengths = {40, 64} if key in {"target_base", "candidate_commit", "candidate_tree", "integration_tree"} else {64}
+            if not isinstance(raw, str) or len(raw) not in lengths or any(char not in "0123456789abcdef" for char in raw):
+                raise RuntimeError(f"LandingAttestation {key} is invalid")
+        receipts = value["evidence_receipts"]
+        if not isinstance(receipts, list) or any(not isinstance(row, dict) or set(row) != {"receipt_id", "receipt_digest"} for row in receipts):
+            raise RuntimeError("LandingAttestation evidence_receipts are invalid")
+        if value["strategy"] not in {"merge", "squash", "rebase"} or value["status"] not in {"PREPARED", "STALE", "LANDED"}:
+            raise RuntimeError("LandingAttestation strategy/status is invalid")
+        if value["status"] == "STALE" and not isinstance(value.get("stale_reason"), str):
+            raise RuntimeError("stale LandingAttestation must record a reason")
+        value = {**value, "evidence_receipts": tuple(receipts)}
+        value.setdefault("landed_commit", None)
+        return cls(**value)
 
 
 def _path(change_id: str, name: str) -> str:
@@ -132,3 +191,19 @@ def read_attestation(root: Path, change_id: str) -> CandidateAttestation:
     raw = git_proof.run(root, ["cat-file", "blob", ref], check=False, binary=True)
     if raw.returncode: raise RuntimeError(f"candidate attestation missing: {ref}")
     return CandidateAttestation.from_dict(json.loads(raw.stdout.decode()))
+
+
+def landing_ref(change_id: str) -> str:
+    return LANDING_ATTESTATION_REF_PREFIX + git_proof.normalize_repo_path(change_id)
+
+
+def write_landing_attestation(root: Path, attestation: LandingAttestation, *, replace_existing: bool = False) -> str:
+    return write_attestation_object(root, attestation, landing_ref(attestation.change_id), replace_existing=replace_existing)
+
+
+def read_landing_attestation(root: Path, change_id: str) -> LandingAttestation:
+    ref = landing_ref(change_id)
+    raw = git_proof.run(root, ["cat-file", "blob", ref], check=False, binary=True)
+    if raw.returncode:
+        raise RuntimeError(f"landing attestation missing: {ref}")
+    return LandingAttestation.from_dict(json.loads(raw.stdout.decode()))

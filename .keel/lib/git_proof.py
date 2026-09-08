@@ -135,6 +135,43 @@ def commit_tree(root: Path, commit: str) -> str:
     return run(root, ["rev-parse", f"{resolve_commit(root, commit)}^{{tree}}"]).stdout.strip()
 
 
+def tree_changed_paths(root: Path, left: str, right: str) -> list[str]:
+    """Return the exact repository paths changed between two Git tree-ish values."""
+    result = run(root, ["diff", "--name-only", "--diff-filter=ACMRDTUXB", resolve_commit(root, left), resolve_commit(root, right), "--"], check=False)
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip() or "git tree diff failed")
+    return sorted({normalize_repo_path(x) for x in result.stdout.splitlines() if x})
+
+
+def synthetic_integration_tree(root: Path, target: str, candidate: str, strategy: str = "merge") -> tuple[str, list[str]]:
+    """Construct an isolated merge result without changing the caller's index/worktree."""
+    if strategy not in {"merge", "squash", "rebase"}:
+        raise ValueError("unsupported landing strategy")
+    target_sha = resolve_commit(root, target)
+    candidate_sha = resolve_commit(root, candidate)
+    # Git's tree merger is deterministic and reports conflicts without writing an
+    # index or changing HEAD. Squash/rebase still require the same final tree
+    # equivalence proof; the landing mechanism is recorded separately.
+    result = run(root, ["merge-tree", "--write-tree", target_sha, candidate_sha], check=False)
+    if result.returncode:
+        detail = (result.stdout + "\n" + result.stderr).strip()
+        raise RuntimeError("synthetic integration has conflicts" + (f": {detail[:4000]}" if detail else ""))
+    tree = result.stdout.splitlines()[0].strip()
+    if not OID_RE.fullmatch(tree):
+        raise RuntimeError("synthetic integration did not produce a valid tree")
+    return tree, tree_changed_paths(root, target_sha, candidate_sha)
+
+
+def materialize_tree(root: Path, tree: str, destination: Path) -> None:
+    """Materialize a Git tree in a disposable directory for integration verifiers."""
+    import tarfile
+    destination.mkdir(parents=True, exist_ok=False)
+    archive = run(root, ["archive", "--format=tar", tree], binary=True)
+    import io
+    with tarfile.open(fileobj=io.BytesIO(archive.stdout), mode="r:") as tar:
+        tar.extractall(destination, filter="data")
+
+
 def show_json(root: Path, commit: str, rel: str) -> dict:
     rel = normalize_repo_path(rel)
     raw = run(root, ["show", f"{resolve_commit(root, commit)}:{rel}"], check=False, binary=True)

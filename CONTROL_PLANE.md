@@ -2,7 +2,7 @@
 
 State: `CANONICAL_KERNEL_M6`; live Codex/hook enforcement remains pending per-session observation.
 
-The control plane is the repository's information architecture, change-governance spine, and feedback system. It remains stack-neutral until project evidence activates specialized domains.
+The control plane is the repository's information architecture, change-governance spine, and feedback system. It remains stack-neutral until project evidence activates specialized domains. Candidate and landing attestations report only properties established by exact evidence; they are not proof of behavioral correctness.
 
 ## Layer map
 1. Repository legibility — thin entry points, indexed durable knowledge.

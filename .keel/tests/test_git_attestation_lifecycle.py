@@ -51,7 +51,7 @@ def main():
  with tempfile.TemporaryDirectory() as td:
   root,base,candidate=fixture(Path(td)); core.seal_candidate(root,CID,candidate); (root/'material.txt').write_text('drift\n'); drift=commit(root,'drift'); raises('content does not match',lambda:core.anchor(root,CID,drift))
  with tempfile.TemporaryDirectory() as td:
-  root,base,candidate=fixture(Path(td)); core.seal_candidate(root,CID,candidate); git(root,'notes','--ref=keel','add','-m','keel-change-id: proof-test\nwrong: note',candidate); raises('note collides',lambda:core.anchor(root,CID,candidate))
+  root,base,candidate=fixture(Path(td)); core.seal_candidate(root,CID,candidate); git(root,'notes','--ref=keel','add','-m','wrong note',candidate); raises('note collides',lambda:core.anchor(root,CID,candidate))
  with tempfile.TemporaryDirectory() as td:
   root,base,candidate=fixture(Path(td)); core.seal_candidate(root,CID,candidate); git(root,'update-ref',f'refs/keel/ledger/{CID}',base); raises('ref collision',lambda:core.anchor(root,CID,candidate))
  print('Git attestation lifecycle tests PASS')

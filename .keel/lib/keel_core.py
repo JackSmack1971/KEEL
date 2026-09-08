@@ -7,6 +7,8 @@ import os
 import os
 import re
 import subprocess
+import tempfile
+import tarfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -868,6 +870,134 @@ def current_verified(root: Path, change_id: str) -> tuple[bool, str]:
     return True, "ok"
 
 
+def _integration_intent(root: Path, change_id: str, candidate: candidate_attestation.CandidateAttestation) -> tuple[dict, dict, str]:
+    d = ledger_dir(root, change_id)
+    intent = canonical_ledger.load_intent(d) if (d / "intent.json").is_file() else None
+    requirements, acceptance = canonical_ledger.contracts(intent) if intent else (read_json(d / "requirements.json"), read_json(d / "acceptance.json"))
+    intent_value = {name: git_proof.tree_entry(root, candidate.candidate_commit, f".keel/ledger/{change_id}/{name}")[1].decode("utf-8", errors="surrogateescape") for name in intent_files(root, change_id)}
+    return requirements, acceptance, evidence_system.canonical_digest(intent_value)
+
+
+def _integration_receipts(root: Path, plan_value: dict, subject: dict, intent_digest: str, tree: str) -> list[dict]:
+    """Run selected verifiers in a disposable checkout of the exact integration tree."""
+    cfg = read_json(root / ".keel/config.json")
+    by_id = {v["id"]: v for v in cfg.get("verifier_registry", []) if isinstance(v, dict) and v.get("id")}
+    receipts = []
+    with tempfile.TemporaryDirectory(prefix="keel-landing-") as raw:
+        workspace = Path(raw)
+        git_proof.materialize_tree(root, tree, workspace)
+        subprocess.run(["git", "init", "-q"], cwd=workspace, check=True, capture_output=True)
+        subprocess.run(["git", "config", "user.name", "KEEL Landing"], cwd=workspace, check=True, capture_output=True)
+        subprocess.run(["git", "config", "user.email", "keel-landing@localhost"], cwd=workspace, check=True, capture_output=True)
+        subprocess.run(["git", "add", "-A"], cwd=workspace, check=True, capture_output=True)
+        subprocess.run(["git", "commit", "-qm", "synthetic KEEL landing"], cwd=workspace, check=True, capture_output=True)
+        for step in plan_value.get("steps", []):
+            verifier = by_id.get(step.get("verifier_id"))
+            if not verifier:
+                continue
+            runtime = dict(step.get("runtime", {})); argv = list(runtime.get("argv", []))
+            started = evidence_system.utc_now(); t0 = time.monotonic(); code = None; output = ""
+            cwd = (workspace / runtime.get("cwd", ".")).resolve()
+            try:
+                cwd.relative_to(workspace.resolve())
+                proc = subprocess.run(argv, cwd=cwd, text=True, capture_output=True, timeout=int(runtime.get("timeout_sec", 600)))
+                code = proc.returncode; output = proc.stdout + ("\n" if proc.stdout and proc.stderr else "") + proc.stderr
+            except subprocess.TimeoutExpired as exc:
+                code = 124; output = (exc.stdout or "") + "\n" + (exc.stderr or "")
+            except Exception as exc:
+                output = str(exc)
+            ended = evidence_system.utc_now()
+            literal = "PASS" if code == 0 else "FAIL"
+            step_for_receipt = {**step, "runtime": {**runtime, "argv": argv}}
+            observations = [{"kind": "integration-command-result", "exit_code": code, "duration_ms": int((time.monotonic() - t0) * 1000), "excerpt": redact("\n".join(output.splitlines()[-20:]))[-8000:], "tree": tree}]
+            receipts.append(evidence_system.receipt(verifier, step_for_receipt, subject, intent_digest, literal, observations, started, ended))
+    return receipts
+
+
+def prepare_landing(root: Path, change_id: str, target_ref: str, strategy: str = "merge") -> dict:
+    """Observe T0 and produce a LandingAttestation for an isolated integration tree."""
+    validate_id(change_id)
+    candidate = candidate_status(root, change_id)
+    candidate_att = candidate_attestation.read_attestation(root, change_id)
+    target_base = git_proof.resolve_commit(root, target_ref)
+    tree, candidate_paths = git_proof.synthetic_integration_tree(root, target_base, candidate["commit"], strategy)
+    requirements, acceptance, intent_digest = _integration_intent(root, change_id, candidate_att)
+    target_paths = git_proof.tree_changed_paths(root, target_base, candidate["commit"])
+    changed = sorted(set(candidate_paths) | set(target_paths) | set(candidate.get("changed_paths", [])))
+    cfg = read_json(root / ".keel/config.json")
+    ers = evidence_system.evidence_requirements(requirements, acceptance)
+    risk = canonical_ledger.risk(canonical_ledger.load_intent(ledger_dir(root, change_id))).get("risk_level", "standard")
+    plan_value = evidence_system.plan(cfg.get("verifier_registry", []), ers, changed, risk, {"target_ref": target_ref, "target_base": target_base, "candidate_commit": candidate["commit"], "integration_tree": tree})
+    if plan_value.get("status") != "PASS":
+        raise RuntimeError("integration EvidencePlan is not executable: " + "; ".join(plan_value.get("errors", [])))
+    subject = {"kind": "git-integration-tree", "target_ref": target_ref, "target_base": target_base, "candidate_commit": candidate["commit"], "integration_tree": tree, "changed_paths": changed}
+    receipts = _integration_receipts(root, plan_value, subject, intent_digest, tree)
+    evaluation = evidence_system.evaluate(plan_value, receipts, ers, subject, intent_digest)
+    if evaluation["status"] != "PASS":
+        raise RuntimeError("integration evidence is not accepted: " + "; ".join(evaluation.get("errors", [])))
+    profile = {key: cfg.get(key) for key in ("schema_version", "verifier_registry") if key in cfg}
+    att = candidate_attestation.LandingAttestation(
+        change_id, target_ref, target_base, candidate_att.digest, candidate["commit"], candidate_att.candidate_tree,
+        tree, intent_digest, plan_value["plan_digest"],
+        tuple({"receipt_id": r["receipt_digest"], "receipt_digest": r["receipt_digest"]} for r in receipts),
+        candidate_att.policy_runtime_profile_digest or candidate_attestation.canonical_digest(profile),
+        {"merge": "git-merge-tree", "squash": "git-commit-tree", "rebase": "git-rebase-equivalent"}[strategy], strategy)
+    ref_oid = candidate_attestation.write_landing_attestation(root, att)
+    audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
+    with (audit_dir / "landings.jsonl").open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"ts": now(), "change_id": change_id, "target_ref": target_ref, "target_base": target_base, "candidate_commit": candidate["commit"], "integration_tree": tree, "landing_attestation_digest": att.digest, "landing_attestation_object": ref_oid, "status": att.status}, sort_keys=True) + "\n")
+    return {"status": att.status, "attestation": att.as_dict(), "attestation_digest": att.digest, "attestation_ref": candidate_attestation.landing_ref(change_id), "evidence": evaluation}
+
+
+def _mark_landing_stale(root: Path, att: candidate_attestation.LandingAttestation, reason: str) -> None:
+    stale = candidate_attestation.LandingAttestation(**{**att.__dict__, "status": "STALE", "stale_reason": reason})
+    candidate_attestation.write_landing_attestation(root, stale, replace_existing=True)
+
+
+def verify_landing(root: Path, change_id: str, landed_commit: str, attestation: candidate_attestation.LandingAttestation | None = None) -> dict:
+    att = attestation or candidate_attestation.read_landing_attestation(root, change_id)
+    sha = git_proof.resolve_commit(root, landed_commit)
+    actual_tree = git_proof.commit_tree(root, sha)
+    if att.status not in {"PREPARED", "LANDED"}:
+        raise RuntimeError("landing attestation is stale")
+    if actual_tree != att.integration_tree:
+        raise RuntimeError("landed Git tree does not match LandingAttestation integration tree")
+    return {"status": "PASS", "landed_commit": sha, "integration_tree": actual_tree, "attestation_digest": att.digest}
+
+
+def integrate_landing(root: Path, change_id: str, target_ref: str | None = None, landed_commit: str | None = None) -> dict:
+    """CAS-land an attested tree, then independently verify and mark it LANDED."""
+    att = candidate_attestation.read_landing_attestation(root, change_id)
+    target_ref = target_ref or att.target_ref
+    current = git_proof.resolve_commit(root, target_ref)
+    if current != att.target_base:
+        _mark_landing_stale(root, att, f"target drifted from {att.target_base} to {current}")
+        prepare_landing(root, change_id, target_ref, att.strategy)
+        raise RuntimeError("landing attestation is stale; integration was reconstructed and must be retried")
+    if landed_commit is None:
+        parents = [att.target_base] if att.strategy in {"squash", "rebase"} else [att.target_base, att.candidate_commit]
+        args = ["-c", "user.name=KEEL Landing", "-c", "user.email=keel-landing@localhost", "commit-tree", att.integration_tree] + sum((["-p", p] for p in parents), []) + ["-m", "KEEL landing"]
+        created = run_git(root, args, check=False)
+        if created.returncode:
+            raise RuntimeError(created.stderr.strip() or "could not create landing commit")
+        landed_commit = created.stdout.strip()
+    check = verify_landing(root, change_id, landed_commit, att)
+    full_ref = run_git(root, ["rev-parse", "--symbolic-full-name", target_ref], check=False)
+    ref = full_ref.stdout.strip() if full_ref.returncode == 0 else target_ref
+    if not ref.startswith("refs/"):
+        raise RuntimeError("landing target must resolve to a full ref for compare-and-swap")
+    updated = run_git(root, ["update-ref", ref, check["landed_commit"], att.target_base], check=False)
+    if updated.returncode:
+        _mark_landing_stale(root, att, "target moved during compare-and-swap")
+        raise RuntimeError("target moved during landing compare-and-swap")
+    if git_proof.resolve_commit(root, ref) != check["landed_commit"]:
+        raise RuntimeError("landed target ref does not point to the attested commit")
+    landed = candidate_attestation.LandingAttestation(**{**att.__dict__, "status": "LANDED", "landed_commit": check["landed_commit"]})
+    candidate_attestation.write_landing_attestation(root, landed, replace_existing=True)
+    anchor(root, change_id, check["landed_commit"])
+    return {"status": "LANDED", "target_ref": ref, "landed_commit": check["landed_commit"], "attestation_digest": landed.digest}
+
+
 def anchored_status(root: Path, change_id: str) -> tuple[str, str]:
     """Classify sealed-candidate evidence without rewriting the preserved ledger phase."""
     try:
@@ -967,6 +1097,51 @@ def anchor(root: Path, change_id: str, commit: str) -> None:
     # Final anchoring is independent of the mutable working tree and requires a previously sealed candidate.
     validate_id(change_id)
     candidate = candidate_status(root, change_id)
+    landing = None
+    try:
+        landing = candidate_attestation.read_landing_attestation(root, change_id)
+    except RuntimeError:
+        pass
+    if landing is not None:
+        if landing.status != "LANDED" or landing.landed_commit is None:
+            raise RuntimeError("landing attestation is not LANDED")
+        check = verify_landing(root, change_id, commit, landing)
+        if check["landed_commit"] != landing.landed_commit:
+            raise RuntimeError("landed commit differs from LandingAttestation")
+        target = git_proof.resolve_commit(root, landing.target_ref)
+        if target != check["landed_commit"]:
+            raise RuntimeError("target ref does not point to the attested landed commit")
+        if landing.candidate_attestation_digest != candidate.get("attestation_digest"):
+            raise RuntimeError("LandingAttestation does not bind the current CandidateAttestation")
+        ref = f"refs/keel/ledger/{change_id}"
+        old = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
+        if old.returncode == 0 and old.stdout.strip() != check["landed_commit"]:
+            raise RuntimeError(f"KEEL ref collision: {ref} already points to {old.stdout.strip()}")
+        if old.returncode != 0:
+            p = run_git(root, ["update-ref", ref, check["landed_commit"], "0" * 40], check=False)
+            if p.returncode != 0: raise RuntimeError(p.stderr.strip() or "git update-ref failed")
+        note = run_git(root, ["notes", "--ref=keel", "show", check["landed_commit"]], check=False)
+        note_text = (
+            f"keel-change-id: {change_id}\n"
+            f"sealed-candidate: {candidate['commit']}\n"
+            f"landed-commit: {check['landed_commit']}\n"
+            f"landing-attestation: {landing.digest}\n"
+            f"target-base: {landing.target_base}\n"
+            f"integration-tree: {landing.integration_tree}\n"
+            f"landing-strategy: {landing.strategy}\n"
+            "verification-class: LANDED_COMPLETION\n"
+        )
+        if note.returncode == 0:
+            if note.stdout != note_text:
+                raise RuntimeError("existing KEEL landing note collides with expected attestation anchor")
+        else:
+            p = run_git(root, ["notes", "--ref=keel", "add", "-m", note_text, check["landed_commit"]], check=False)
+            if p.returncode != 0: raise RuntimeError(p.stderr.strip() or "git notes add failed")
+        audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
+        with (audit_dir / "anchors.jsonl").open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"ts": now(), "change_id": change_id, "candidate_commit": candidate["commit"], "landed_commit": check["landed_commit"], "landing_attestation_digest": landing.digest, "relation": "landing-transaction", "ref": ref, "integration_tree": landing.integration_tree, "verification_class": "LANDED_COMPLETION"}, sort_keys=True) + "\n")
+        if active_change(root) == change_id: active_file(root).unlink(missing_ok=True)
+        return
     resolved = run_git(root, ["rev-parse", f"{commit}^{{commit}}"], check=False)
     if resolved.returncode != 0:
         raise RuntimeError(f"invalid landed commit: {commit}")

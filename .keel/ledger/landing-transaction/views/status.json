@@ -1,0 +1,12 @@
+{
+  "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+  "change_id": "landing-transaction",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "f888ebd65c523a7b9acc201a8160673bcc9a703e1cad2b2da73d122511a3af59",
+    "last_event_digest": "0cf8ff9cce1562cb510fdf9094072d9cdcec5fdbf1efcc90e02c496cf407a011"
+  }
+}

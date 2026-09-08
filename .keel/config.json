@@ -1330,6 +1330,13 @@
       "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "architecture", "security"]}, "version": "1"
     },
     {
+      "applicability": {"paths": [".keel/lib/**", ".keel/bin/keel.py", ".keel/tests/**", "ARCHITECTURE.md", "WORKFLOW.md", "CONTROL_PLANE.md", "docs/control-plane/**"], "risk_levels": ["high"]},
+      "authority": "TESTED", "id": "landing-transaction-tests", "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_landing_transaction.py", "provider": "unit_test",
+      "runtime": {"argv": ["python", "-B", ".keel/tests/test_landing_transaction.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "architecture", "security", "documentation"]}, "version": "1"
+    },
+    {
       "applicability": {"paths": [".keel/lib/scheduler.py", ".keel/tests/smoke_scheduler.py"], "risk_levels": ["high"]},
       "authority": "RUNTIME_OBSERVED", "id": "scheduler-smoke", "mandatory_kernel": false,
       "provenance": ".keel/tests/smoke_scheduler.py", "provider": "command",

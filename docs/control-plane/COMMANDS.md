@@ -6,12 +6,14 @@ Run commands from the repository root with `python3 .keel/bin/keel.py`.
 
 - `start`, `gate discuss`, `gate plan`, `replan`, `reopen`
 - `status`, `next`, `context`, `evidence`
-- `verify`, `seal`, `candidate-status`, `anchor`
+- `verify`, `seal`, `candidate-status`, `landing prepare|integrate|verify`, `anchor`
 - `worktree create|status|retire`, `environment status`
 
 These commands query or transition the canonical ledger. `verify` writes exact-subject
-receipts. `seal` binds the committed candidate; `anchor` independently checks the
-landed tree. SHIP eligibility is not external permission.
+receipts. `seal` binds the committed candidate; `landing prepare` binds a target
+base and synthetic integration tree, while `landing integrate` uses compare-and-
+swap and independently checks the actual landed tree before anchoring. SHIP
+eligibility is not external permission.
 
 ## Canonical model queries
 

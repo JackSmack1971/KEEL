@@ -1,0 +1,78 @@
+{
+  "ended_at": "2026-09-08T23:54:09.001754+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_p0_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 488,
+      "excerpt": "Traceback (most recent call last):\n  File \"G:\\KEEL\\.keel\\tests\\test_p0_contract.py\", line 41, in <module>\n    assert p.generated_artifact_status(ROOT)[\"status\"] == \"VERIFIED\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError",
+      "exit_code": 1,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "913abc7967e78a2ed71d056d59d5624d9920c966f53b9cb04b3385de019a75f3",
+  "receipt_id": "913abc7967e78a2ed71d056d59d5624d9920c966f53b9cb04b3385de019a75f3",
+  "record_digest": "102cc0a7a97489d481cd0a9b9bcaa877ebcbef95aff08984132c09c4043bbbf2",
+  "result": "FAIL",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:54:08.513567+00:00",
+  "subject": {
+    "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "changed_paths": [
+      ".keel/README.md",
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_landing_transaction.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/landing-transaction.md"
+    ],
+    "content_digest": "be342a07b475948981e4e4683f6aac4697bfd4555cdd49e93df6b9d80234ea55",
+    "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "p0-contract-tests",
+    "provenance": ".keel/tests/test_p0_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

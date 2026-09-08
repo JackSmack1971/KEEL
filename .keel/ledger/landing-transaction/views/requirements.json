@@ -1,0 +1,85 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "implementation_paths": [
+        ".keel/lib/**",
+        ".keel/bin/keel.py"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "Landing observes and binds target T0, combines sealed candidate C with T0 in an isolated synthetic integration workspace, produces exact integration tree I, and derives an integration-specific EvidencePlan.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-2",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "Candidate EvidenceReceipts are reused only when their subjects and assumptions remain valid; invalidated and integration-sensitive verifiers run against I.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-3",
+      "implementation_paths": [
+        ".keel/lib/candidate_attestation.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "LandingAttestation binds T0, CandidateAttestation C, I, intent digest, integration receipts, policy/runtime profile, and expected landing mechanism.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-4",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/git_proof.py"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "Integration uses compare-and-swap target protection, marks target drift stale, reconstructs and reverifies, and rejects conflicting or behavior-breaking integration.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-5",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/candidate_attestation.py"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "Authorized merge, squash, and rebase strategies are accepted only when exact resulting-state equivalence is established, while existing candidate refs and CandidateAttestation semantics remain compatible.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-6",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/bin/keel.py"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "After integration, the actual landed state is independently checked against the LandingAttestation before LANDED completion and anchor are recorded.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-7",
+      "implementation_paths": [
+        "ARCHITECTURE.md",
+        "WORKFLOW.md",
+        "CONTROL_PLANE.md",
+        "docs/control-plane/**"
+      ],
+      "minimum_evidence_authority": "TESTED",
+      "source": "user",
+      "statement": "Durable control-plane documentation distinguishes candidate and landing attestation from proof of correctness and records the explicit transaction boundary.",
+      "type": "documentation"
+    }
+  ],
+  "schema_version": 1
+}

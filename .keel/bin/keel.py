@@ -51,6 +51,7 @@ def main() -> int:
     p = sub.add_parser("seal"); p.add_argument("--change"); p.add_argument("--commit", default="HEAD")
     p = sub.add_parser("candidate-status"); p.add_argument("--change", required=True)
     p = sub.add_parser("anchor"); p.add_argument("--change", required=True); p.add_argument("--commit", required=True)
+    p = sub.add_parser("landing"); p.add_argument("action", choices=["prepare", "integrate", "verify"]); p.add_argument("--change", required=True); p.add_argument("--target-ref"); p.add_argument("--strategy", choices=["merge", "squash", "rebase"], default="merge"); p.add_argument("--commit")
     p = sub.add_parser("config-add-check"); p.add_argument("--id", required=True); p.add_argument("--cwd", default="."); p.add_argument("--timeout", type=int, default=600); p.add_argument("argv", nargs=argparse.REMAINDER)
     args = ap.parse_args()
     try:
@@ -151,6 +152,16 @@ def main() -> int:
             result = k.seal_candidate(root, cid, args.commit); print(json.dumps({"status":"SEALED", **result}, indent=2)); return 0
         if args.cmd == "candidate-status":
             print(json.dumps(k.candidate_status(root, args.change), indent=2)); return 0
+        if args.cmd == "landing":
+            if args.action == "prepare":
+                if not args.target_ref: raise RuntimeError("landing prepare requires --target-ref")
+                result = k.prepare_landing(root, args.change, args.target_ref, args.strategy)
+            elif args.action == "verify":
+                if not args.commit: raise RuntimeError("landing verify requires --commit")
+                result = k.verify_landing(root, args.change, args.commit)
+            else:
+                result = k.integrate_landing(root, args.change, args.target_ref, args.commit)
+            print(json.dumps(result, indent=2)); return 0
         if args.cmd == "anchor": k.anchor(root, args.change, args.commit); print(json.dumps({"status":"ANCHORED","change":args.change,"commit":args.commit}, indent=2)); return 0
         if args.cmd == "config-add-check":
             argv = args.argv[1:] if args.argv and args.argv[0] == "--" else args.argv

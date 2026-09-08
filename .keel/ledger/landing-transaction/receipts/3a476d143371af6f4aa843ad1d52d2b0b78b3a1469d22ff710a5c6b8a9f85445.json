@@ -1,0 +1,84 @@
+{
+  "ended_at": "2026-09-08T23:52:31.557747+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-1",
+    "ER-REQ-2",
+    "ER-REQ-3",
+    "ER-REQ-4",
+    "ER-REQ-5",
+    "ER-REQ-6",
+    "ER-REQ-7"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "aa4c58ded3f6a10cd57427eed7b0a260b44e8d82bdf87e4bf0808d39503299f9",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_landing_transaction.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 2106,
+      "excerpt": "Landing transaction tests PASS",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_landing_transaction.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "3a476d143371af6f4aa843ad1d52d2b0b78b3a1469d22ff710a5c6b8a9f85445",
+  "receipt_id": "3a476d143371af6f4aa843ad1d52d2b0b78b3a1469d22ff710a5c6b8a9f85445",
+  "record_digest": "7b25e0e92ff26bb14c37d2f2d6dcd785e1c75f0dd8eebeb15ae13b9d3ab093d6",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:52:29.451315+00:00",
+  "subject": {
+    "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_landing_transaction.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/landing-transaction.md"
+    ],
+    "content_digest": "f2bc4494779a17348466374f1b36a15f19d236759a04702b0f1c7cdcf4e26f2f",
+    "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "landing-transaction-tests",
+    "provenance": ".keel/tests/test_landing_transaction.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

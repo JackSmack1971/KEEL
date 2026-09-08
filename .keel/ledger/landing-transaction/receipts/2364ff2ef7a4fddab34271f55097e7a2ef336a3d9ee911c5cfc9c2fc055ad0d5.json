@@ -1,0 +1,75 @@
+{
+  "ended_at": "2026-09-08T23:51:40.611049+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "70bc36bed6225e6426f511fe81f49a8c07513d0a31d7e6c24a7f8340a5bd34db",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 534,
+      "excerpt": "{\n  \"status\": \"FAILED\",\n  \"reason\": \"generated manifest drift requires producer regeneration\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"17224c3791eb6a7d9aa3627ab34b9492076c86a64458b77fbc2092330cb80a38\"\n}",
+      "exit_code": 1,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "2364ff2ef7a4fddab34271f55097e7a2ef336a3d9ee911c5cfc9c2fc055ad0d5",
+  "receipt_id": "2364ff2ef7a4fddab34271f55097e7a2ef336a3d9ee911c5cfc9c2fc055ad0d5",
+  "record_digest": "828d5c3b98c300ce08716ef3661dec7c1256941067ad880e24d8f4cf8d7e35da",
+  "result": "FAIL",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:51:40.076167+00:00",
+  "subject": {
+    "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_landing_transaction.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/landing-transaction.md"
+    ],
+    "content_digest": "fa51a0a7de9557582b7ca7b25aee5d159a3cd296ec9db02baaeee74366af7581",
+    "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "manifest-producer-check",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "acceptance": {
+    "passed_required": 7,
+    "required": 7,
+    "requirements_covered": 7,
+    "requirements_passing": 7,
+    "requirements_total": 7
+  },
+  "authority": "evidence-receipts.json",
+  "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+  "change_id": "landing-transaction",
+  "change_type": "implementation",
+  "changed_paths": [
+    ".keel/README.md",
+    ".keel/bin/keel.py",
+    ".keel/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/candidate_attestation.py",
+    ".keel/lib/git_proof.py",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_git_attestation_lifecycle.py",
+    ".keel/tests/test_landing_transaction.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/KEEL.md",
+    "docs/exec-plans/active/landing-transaction.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "compat"
+      ],
+      "cwd": ".",
+      "duration_ms": 450,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "id": "canonical-config-portability",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_compatibility_retirement.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 110,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "id": "compatibility-retirement-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 530,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_landing_transaction.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 2062,
+      "excerpt": "Landing transaction tests PASS",
+      "exit_code": 0,
+      "id": "landing-transaction-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_landing_transaction.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "manifest"
+      ],
+      "cwd": ".",
+      "duration_ms": 361,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"fb3525d9ac950b9346d5ef08d907ed65a44b50acd7d429a2c5592e30d1477102\"\n}",
+      "exit_code": 0,
+      "id": "manifest-producer-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p0_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 881,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+      "exit_code": 0,
+      "id": "p0-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "compatibility_projection": true,
+  "content_digest": "464e80d1db1847ab601aac0e1c36065a06f7b58872dad414cbf199f2f520402c",
+  "errors": [],
+  "evidence_plan_digest": "3bb1d6919aa91d5fac6a9af1ff26fbbabfc52c11adf429c235e8c361b7732a6d",
+  "implementation_status": "PASS",
+  "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+  "schema_version": 4,
+  "status": "PASS",
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE",
+  "verified_at": "2026-09-08T23:54:22+00:00"
+}

@@ -1,0 +1,61 @@
+{
+  "change_type": "implementation",
+  "criteria": [],
+  "errors": [],
+  "implementation_status": "PASS",
+  "projection_of": "evidence-receipts.json",
+  "requirement_coverage": [
+    {
+      "evidence_requirement_id": "ER-REQ-1",
+      "requirement_id": "REQ-1",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-2",
+      "requirement_id": "REQ-2",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-3",
+      "requirement_id": "REQ-3",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-4",
+      "requirement_id": "REQ-4",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-5",
+      "requirement_id": "REQ-5",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-6",
+      "requirement_id": "REQ-6",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-7",
+      "requirement_id": "REQ-7",
+      "status": "PASS",
+      "verifier_id": "landing-transaction-tests"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 7,
+    "required": 7,
+    "requirements_covered": 7,
+    "requirements_passing": 7,
+    "requirements_total": 7
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

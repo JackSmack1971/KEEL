@@ -1,0 +1,96 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-1",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "Landing observes and binds target T0, combines sealed candidate C with T0 into an isolated integration tree I, and records an integration-specific EvidencePlan."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-2",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Candidate receipts are reused only when their subjects and assumptions remain valid; invalidated and integration-sensitive verifiers run against I."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-3",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "LandingAttestation binds T0, CandidateAttestation C, I, intent digest, integration receipts, policy/runtime profile, and expected landing mechanism."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-4",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "Integration uses compare-and-swap target protection, marks drift stale, reconstructs and reverifies, and rejects conflicting or behavior-breaking integration."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-5",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Authorized merge, squash, and rebase strategies are accepted only when exact resulting-state equivalence is established; candidate refs and CandidateAttestation semantics remain compatible."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-6",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "After integration, actual landed state is independently checked against the LandingAttestation before LANDED completion and anchor are recorded."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "landing-transaction-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-7",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Control-plane documentation reports attestation/proof boundaries accurately and does not claim proof of correctness beyond recorded evidence."
+    }
+  ],
+  "schema_version": 1
+}

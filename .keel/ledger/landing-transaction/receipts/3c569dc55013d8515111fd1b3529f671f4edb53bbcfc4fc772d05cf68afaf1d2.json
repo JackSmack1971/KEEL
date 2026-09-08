@@ -1,0 +1,76 @@
+{
+  "ended_at": "2026-09-08T23:52:07.760574+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "db8d090850effa12462af603ff6fdb8bfe055ae3bc515e8a0611d2e75f6d5efa",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_compatibility_retirement.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 129,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "3c569dc55013d8515111fd1b3529f671f4edb53bbcfc4fc772d05cf68afaf1d2",
+  "receipt_id": "3c569dc55013d8515111fd1b3529f671f4edb53bbcfc4fc772d05cf68afaf1d2",
+  "record_digest": "c7c7b59f5240a6461cbb043429463b592fccd4b08935adaf051d89fd0120de64",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:52:07.630945+00:00",
+  "subject": {
+    "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_landing_transaction.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/landing-transaction.md"
+    ],
+    "content_digest": null,
+    "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "compatibility-retirement-tests",
+    "provenance": ".keel/tests/test_compatibility_retirement.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

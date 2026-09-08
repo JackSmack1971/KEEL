@@ -1,0 +1,78 @@
+{
+  "ended_at": "2026-09-08T23:54:05.495257+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "131bf770873f206a4343b164e87d137eeccaac2c604f7f4781e90238f0b32f64",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "doctor"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 482,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "26a17a0d2cd64ea512db5234df63787b1acb15131a82dae52d676fc102cac64d",
+  "receipt_id": "26a17a0d2cd64ea512db5234df63787b1acb15131a82dae52d676fc102cac64d",
+  "record_digest": "58469b1d7fcc4f80741fd204558362e95323c476e71d34aecb2b2cdc7dab8720",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:54:05.013148+00:00",
+  "subject": {
+    "base_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "changed_paths": [
+      ".keel/README.md",
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_landing_transaction.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/landing-transaction.md"
+    ],
+    "content_digest": "be342a07b475948981e4e4683f6aac4697bfd4555cdd49e93df6b9d80234ea55",
+    "head_commit": "41ae8e79be9a3934c902518fc5898bd51676b986",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "control-plane-doctor",
+    "provenance": ".keel/config.json",
+    "provider": "command",
+    "version": "1"
+  }
+}

@@ -18,7 +18,7 @@ is no v1 mission/runtime product path.
 - `.keel/lib/runtime_authorization.py` owns RuntimeProfile observations and
   CapabilityGrant evaluation without claiming confinement or executing effects.
 - `.keel/lib/git_proof.py` and `.keel/lib/candidate_attestation.py` own repository,
-  worktree, tree, commit, candidate, landed, ref, note, and attestation proof.
+  worktree, tree, commit, candidate, landing, landed, ref, note, and attestation proof.
 - `.keel/lib/canonical_ledger.py` owns intent/events/grants/receipts/attestations and
   the narrow `keel.legacy-ledger/v1` migration reader.
 - `.keel/lib/keel_core.py` orchestrates lifecycle transitions. The Codex hook is a
@@ -33,7 +33,10 @@ Facts and generated views do not become policy. Plans and EffectRequests do not 
 permission. Hooks are not confinement. SHIP is eligibility rather than integration
 permission. Malformed canonical or legacy state fails closed; absence and uncertainty
 remain explicit. Repository-relative path normalization and one-writer-per-worktree
-isolation are enforced mechanically.
+isolation are enforced mechanically. A sealed candidate attests only to its own
+verified material. A LandingAttestation separately binds target base T0, synthetic
+integration tree I, integration evidence, and the expected landing mechanism;
+landing completion is recorded only after the actual landed tree matches I.
 
 Optional maintenance lives under `.keel/maintenance/`. Reusable consumer-project
 policy templates live under `policies/templates/`. Historical bootstrap research
