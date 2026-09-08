@@ -14,7 +14,13 @@
     ".keel/bin/keel.py",
     ".keel/config.json",
     ".keel/lib/mission_v2.py",
+    ".keel/tests/fixtures/mission-v2/decomposition.json",
+    ".keel/tests/fixtures/mission-v2/effects.json",
+    ".keel/tests/fixtures/mission-v2/frontier.json",
+    ".keel/tests/fixtures/mission-v2/negative.json",
     ".keel/tests/fixtures/mission-v2/oracle.json",
+    ".keel/tests/fixtures/mission-v2/prohibited.json",
+    ".keel/tests/fixtures/mission-v2/v1-normalization.json",
     ".keel/tests/fixtures/mission-v2/v1.json",
     ".keel/tests/fixtures/mission-v2/valid.json",
     ".keel/tests/test_mission_v2.py",
@@ -47,7 +53,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 351,
+      "duration_ms": 331,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -71,7 +77,7 @@
         ".keel/tests/test_p0_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 744,
+      "duration_ms": 783,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}\n\nwarning: in the working copy of '.keel/templates/acceptance.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/authorization.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/delta.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/effects.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/proposal.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/requirements.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/risk-review.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/risk.json', LF will be replaced by CRLF the next time Git touches it",
       "exit_code": 0,
       "id": "p0-contract-tests",
@@ -95,7 +101,7 @@
         "manifest"
       ],
       "cwd": ".",
-      "duration_ms": 248,
+      "duration_ms": 266,
       "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"6fe42a30459e20ef4b6828ebff4dae02f58809b8e563e185b5471d4cd41a4292\"\n}",
       "exit_code": 0,
       "id": "manifest-producer-check",
@@ -119,7 +125,7 @@
         "compat"
       ],
       "cwd": ".",
-      "duration_ms": 262,
+      "duration_ms": 253,
       "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
       "exit_code": 0,
       "id": "canonical-config-portability",
@@ -146,7 +152,7 @@
         "."
       ],
       "cwd": ".",
-      "duration_ms": 75,
+      "duration_ms": 74,
       "excerpt": "",
       "exit_code": 0,
       "id": "remediation-diff-check",
@@ -173,7 +179,7 @@
         ".keel/tests/test_capability_resolver.py"
       ],
       "cwd": ".",
-      "duration_ms": 154,
+      "duration_ms": 164,
       "excerpt": "Capability resolver tests PASS",
       "exit_code": 0,
       "id": "capability-resolver-tests",
@@ -197,7 +203,7 @@
         ".keel/tests/test_context_compiler.py"
       ],
       "cwd": ".",
-      "duration_ms": 164,
+      "duration_ms": 170,
       "excerpt": "Context compiler tests PASS",
       "exit_code": 0,
       "id": "context-compiler-tests",
@@ -221,7 +227,7 @@
         ".keel/tests/test_evidence_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 165,
+      "duration_ms": 168,
       "excerpt": "Evidence graph tests PASS",
       "exit_code": 0,
       "id": "evidence-graph-tests",
@@ -245,7 +251,7 @@
         ".keel/tests/test_next_action.py"
       ],
       "cwd": ".",
-      "duration_ms": 1570,
+      "duration_ms": 1634,
       "excerpt": "Next-action tests PASS",
       "exit_code": 0,
       "id": "next-action-tests",
@@ -269,7 +275,7 @@
         ".keel/tests/test_worktree_lifecycle.py"
       ],
       "cwd": ".",
-      "duration_ms": 875,
+      "duration_ms": 861,
       "excerpt": "Worktree lifecycle tests PASS",
       "exit_code": 0,
       "id": "worktree-lifecycle-tests",
@@ -293,7 +299,7 @@
         ".keel/tests/test_environment_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 162,
+      "duration_ms": 159,
       "excerpt": "Environment contract tests PASS",
       "exit_code": 0,
       "id": "environment-contract-tests",
@@ -317,7 +323,7 @@
         ".keel/tests/test_upgrade_kernel.py"
       ],
       "cwd": ".",
-      "duration_ms": 1381,
+      "duration_ms": 642,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
       "exit_code": 0,
       "id": "upgrade-kernel-tests",
@@ -341,7 +347,7 @@
         ".keel/tests/test_mission_work_graph.py"
       ],
       "cwd": ".",
-      "duration_ms": 157,
+      "duration_ms": 138,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"dispatch-contract\", \"read-only\"]}",
       "exit_code": 0,
       "id": "mission-work-graph-tests",
@@ -365,7 +371,7 @@
         ".keel/tests/test_repository_map.py"
       ],
       "cwd": ".",
-      "duration_ms": 1128,
+      "duration_ms": 1116,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"semantic-imports\", \"ownership-source\", \"ignored-directories\", \"derived-only\"]}",
       "exit_code": 0,
       "id": "repository-map-tests",
@@ -389,7 +395,7 @@
         ".keel/tests/test_topology_routing.py"
       ],
       "cwd": ".",
-      "duration_ms": 101,
+      "duration_ms": 88,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"complexity\", \"capability-only\", \"deterministic\", \"read-only\"]}",
       "exit_code": 0,
       "id": "topology-routing-tests",
@@ -413,7 +419,7 @@
         ".keel/tests/test_provider_effect_contracts.py"
       ],
       "cwd": ".",
-      "duration_ms": 217,
+      "duration_ms": 183,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provider-binding\", \"provider-failure\", \"schema-adapter\", \"effect-vocabulary\", \"authorization-preserved\"]}",
       "exit_code": 0,
       "id": "provider-effect-contract-tests",
@@ -437,7 +443,7 @@
         ".keel/tests/test_feedback_entropy.py"
       ],
       "cwd": ".",
-      "duration_ms": 166,
+      "duration_ms": 155,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provenance\", \"review-gate\", \"goal-record\", \"deterministic-scan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "feedback-entropy-tests",
@@ -461,7 +467,7 @@
         ".keel/tests/test_lifecycle_compatibility.py"
       ],
       "cwd": ".",
-      "duration_ms": 145,
+      "duration_ms": 148,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
       "exit_code": 0,
       "id": "lifecycle-compatibility-tests",
@@ -485,7 +491,7 @@
         ".keel/tests/test_developer_ux.py"
       ],
       "cwd": ".",
-      "duration_ms": 4358,
+      "duration_ms": 4591,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"init\", \"review\", \"eligibility-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "developer-ux-tests",
@@ -509,7 +515,7 @@
         ".keel/tests/test_effect_inference.py"
       ],
       "cwd": ".",
-      "duration_ms": 139,
+      "duration_ms": 102,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"mapping\", \"unknown-neutrality\", \"advisory-boundary\", \"read-only\"]}",
       "exit_code": 0,
       "id": "effect-inference-tests",
@@ -533,7 +539,7 @@
         ".keel/tests/test_schema_migrations.py"
       ],
       "cwd": ".",
-      "duration_ms": 149,
+      "duration_ms": 129,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"preflight\", \"atomic-apply\", \"backup\", \"rollback\", \"unsupported-version\"]}",
       "exit_code": 0,
       "id": "schema-migration-tests",
@@ -581,7 +587,7 @@
         ".keel/tests/test_hook_event_compatibility.py"
       ],
       "cwd": ".",
-      "duration_ms": 118,
+      "duration_ms": 99,
       "excerpt": "{'status': 'PASS', 'checks': ['SessionStart', 'UserPromptSubmit', 'strict-unrelated-event']}",
       "exit_code": 0,
       "id": "hook-event-compatibility-tests",
@@ -605,7 +611,7 @@
         ".keel/tests/test_evidence_class_lifecycle.py"
       ],
       "cwd": ".",
-      "duration_ms": 424,
+      "duration_ms": 374,
       "excerpt": "Evidence-class lifecycle tests PASS",
       "exit_code": 0,
       "id": "evidence-class-tests",
@@ -629,7 +635,7 @@
         ".keel/tests/test_evidence_class_lifecycle.py"
       ],
       "cwd": ".",
-      "duration_ms": 393,
+      "duration_ms": 351,
       "excerpt": "Evidence-class lifecycle tests PASS",
       "exit_code": 0,
       "id": "evidence-class-lifecycle-tests",
@@ -653,7 +659,7 @@
         ".keel/tests/test_repository_intelligence.py"
       ],
       "cwd": ".",
-      "duration_ms": 154,
+      "duration_ms": 164,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"determinism\", \"provenance\", \"commands\", \"authority\", \"dependencies\", \"impact\", \"generated\", \"negative-cases\", \"read-only\", \"independent-oracles\"]}",
       "exit_code": 0,
       "id": "p1-repository-intelligence-tests",
@@ -677,7 +683,7 @@
         ".keel/tests/test_p1_plan_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 79,
+      "duration_ms": 80,
       "excerpt": "{'status': 'PASS', 'checks': ['authority', 'schema', 'negative-matrix', 'downstream-locks']}",
       "exit_code": 0,
       "id": "p1-plan-contract-check",
@@ -701,7 +707,7 @@
         ".keel/tests/test_mission_v2.py"
       ],
       "cwd": ".",
-      "duration_ms": 120,
+      "duration_ms": 113,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"graph\", \"resources\", \"capabilities\", \"effects\", \"decomposition\", \"frontier\", \"v1-normalization\", \"determinism\", \"p1-uncertainty\", \"prohibited-execution\", \"independent-oracle\"]}",
       "exit_code": 0,
       "id": "p2-mission-v2-tests",
@@ -719,11 +725,11 @@
       }
     }
   ],
-  "content_digest": "00470b2c12819a389e67113a6c3cfca8f8cbe9315ceb5002546d8f176161b274",
+  "content_digest": "b586d4f726376fc9a74877c787aacbcd91ddb25ede24a179a15683f5b76cf588",
   "errors": [],
   "implementation_status": "PASS",
   "schema_version": 3,
   "status": "PASS",
   "verification_class": "IMPLEMENTATION_ACCEPTANCE",
-  "verified_at": "2026-09-08T11:29:09+00:00"
+  "verified_at": "2026-09-08T11:31:08+00:00"
 }

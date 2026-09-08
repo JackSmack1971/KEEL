@@ -17,7 +17,13 @@
       "id": "AC-P2-001",
       "implementation_matches": [
         ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/decomposition.json",
+        ".keel/tests/fixtures/mission-v2/effects.json",
+        ".keel/tests/fixtures/mission-v2/frontier.json",
+        ".keel/tests/fixtures/mission-v2/negative.json",
         ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/prohibited.json",
+        ".keel/tests/fixtures/mission-v2/v1-normalization.json",
         ".keel/tests/fixtures/mission-v2/v1.json",
         ".keel/tests/fixtures/mission-v2/valid.json",
         ".keel/tests/test_mission_v2.py"
@@ -50,7 +56,13 @@
       "id": "AC-P2-002",
       "implementation_matches": [
         ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/decomposition.json",
+        ".keel/tests/fixtures/mission-v2/effects.json",
+        ".keel/tests/fixtures/mission-v2/frontier.json",
+        ".keel/tests/fixtures/mission-v2/negative.json",
         ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/prohibited.json",
+        ".keel/tests/fixtures/mission-v2/v1-normalization.json",
         ".keel/tests/fixtures/mission-v2/v1.json",
         ".keel/tests/fixtures/mission-v2/valid.json",
         ".keel/tests/test_mission_v2.py"
@@ -83,7 +95,13 @@
       "id": "AC-P2-003",
       "implementation_matches": [
         ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/decomposition.json",
+        ".keel/tests/fixtures/mission-v2/effects.json",
+        ".keel/tests/fixtures/mission-v2/frontier.json",
+        ".keel/tests/fixtures/mission-v2/negative.json",
         ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/prohibited.json",
+        ".keel/tests/fixtures/mission-v2/v1-normalization.json",
         ".keel/tests/fixtures/mission-v2/v1.json",
         ".keel/tests/fixtures/mission-v2/valid.json",
         ".keel/tests/test_mission_v2.py"
@@ -116,7 +134,13 @@
       "id": "AC-P2-004",
       "implementation_matches": [
         ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/decomposition.json",
+        ".keel/tests/fixtures/mission-v2/effects.json",
+        ".keel/tests/fixtures/mission-v2/frontier.json",
+        ".keel/tests/fixtures/mission-v2/negative.json",
         ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/prohibited.json",
+        ".keel/tests/fixtures/mission-v2/v1-normalization.json",
         ".keel/tests/fixtures/mission-v2/v1.json",
         ".keel/tests/fixtures/mission-v2/valid.json",
         ".keel/tests/test_mission_v2.py"
@@ -155,7 +179,13 @@
       "id": "AC-P2-005",
       "implementation_matches": [
         ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/decomposition.json",
+        ".keel/tests/fixtures/mission-v2/effects.json",
+        ".keel/tests/fixtures/mission-v2/frontier.json",
+        ".keel/tests/fixtures/mission-v2/negative.json",
         ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/prohibited.json",
+        ".keel/tests/fixtures/mission-v2/v1-normalization.json",
         ".keel/tests/fixtures/mission-v2/v1.json",
         ".keel/tests/fixtures/mission-v2/valid.json",
         ".keel/tests/test_mission_v2.py"
@@ -189,7 +219,13 @@
       "id": "AC-P2-006",
       "implementation_matches": [
         ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/decomposition.json",
+        ".keel/tests/fixtures/mission-v2/effects.json",
+        ".keel/tests/fixtures/mission-v2/frontier.json",
+        ".keel/tests/fixtures/mission-v2/negative.json",
         ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/prohibited.json",
+        ".keel/tests/fixtures/mission-v2/v1-normalization.json",
         ".keel/tests/fixtures/mission-v2/v1.json",
         ".keel/tests/fixtures/mission-v2/valid.json",
         ".keel/tests/test_mission_v2.py"
