@@ -19,7 +19,7 @@ P6 → P7
 
 - P0 → **VERIFIED COMPLETE**, landed under `p0-portable-verification-bootstrap-contract`.
 - P1 → **VERIFIED COMPLETE / LANDED**, under KEEL change `p1-repository-intelligence-foundation`, anchored at `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`.
-- P2 → **NOT INSTANTIATED / LOCKED**, requires a separate authorized workstream and must not be inferred from P1 completion.
+- P2 → **VERIFIED COMPLETE / LANDED**, under KEEL change `p2-mission-schema-planning`; schema/planning is complete and execution remains excluded.
 - P3 → **FUTURE**, with no dependency shortcut.
 - P4 → **BLOCKED** until an authorized runtime/provider and operator authorization exist.
 - P5 → **FUTURE**, unavailable through dependency shortcuts.
@@ -42,4 +42,4 @@ Plans do not authorize implementation merely by existing. Every implementation p
 
 ## Current handoff
 
-P1 is landed and its subordinate plan is archived with its completion evidence. No downstream workstream is activated by this reconciliation: P2 remains uninstantiated/locked, P4 remains blocked, P5–P7 remain future/locked, and D1 remains deferred.
+P1 is landed and P2 schema/planning is implemented under its subordinate plan with completion evidence. No execution runtime is activated by this reconciliation: P4 remains blocked, P5–P7 remain future/locked, and D1 remains deferred.

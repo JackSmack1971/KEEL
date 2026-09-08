@@ -1,0 +1,17 @@
+{
+  "schema_id":"keel.mission",
+  "schema_version":2,
+  "identity":"keel.mission/v2",
+  "mission_id":"checkout-v2",
+  "objective":"Deliver checkout v2",
+  "success_criteria":["checkout remains usable"],
+  "nodes":[
+    {"node_id":"contract","objective":"Define contract","scope":"src/checkout","acceptance_criteria":["contract reviewed"],"dependencies":[],"required_capabilities":["python"],"capability_state":{"python":"STATIC_VERIFIED"},"allowed_effects":["filesystem.write"],"authorization_refs":["auth-local"],"resources":[{"id":"checkout-contract","exclusive":true}],"exclusivity":true,"inputs":[],"expected_outputs":["contract.json"],"verification_policy":{"checks":["unit"]},"review_policy":{"required":true},"retry_policy":{"max_attempts":1},"integration_policy":{"mode":"manual"},"lifecycle_expectations":{"phase":"SHIP"},"provenance":{"source_schema":"keel.mission/v2","source_digest":"fixture","adapter":"fixture"},"uncertainty":[],"planning_status":"VALID"},
+    {"node_id":"backend","objective":"Implement backend","scope":"src/checkout/backend","acceptance_criteria":["backend verified"],"dependencies":["contract"],"required_capabilities":["python"],"capability_state":{"python":"STATIC_VERIFIED"},"allowed_effects":[],"authorization_refs":[],"resources":[],"exclusivity":false,"inputs":["contract.json"],"expected_outputs":["backend"],"verification_policy":{"checks":["unit"]},"review_policy":{"required":true},"retry_policy":{"max_attempts":1},"integration_policy":{"mode":"manual"},"lifecycle_expectations":{"phase":"SHIP"},"provenance":{"source_schema":"keel.mission/v2","source_digest":"fixture","adapter":"fixture"},"uncertainty":[],"planning_status":"VALID"}
+  ],
+  "dependencies":[{"from":"backend","to":"contract","type":"HARD_PREREQUISITE"}],
+  "planning_status":"VALID",
+  "provenance":{"source_schema":"keel.mission/v2","source_digest":"fixture","adapter":"fixture"},
+  "serialization_policy":{"encoding":"UTF-8","line_endings":"LF","ordering":"canonical","identity_values":"forbidden"},
+  "authorizations":{"auth-local":{"effects":["filesystem.write"]}}
+}

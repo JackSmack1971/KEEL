@@ -9,6 +9,7 @@ sys.path.insert(0, str(HERE.parents[1] / "lib"))
 import keel_core as k
 import upgrade_kernel as uk
 import mission_graph as mg
+import mission_v2 as mv2
 import repository_map as rm
 import topology_router as tr
 import feedback_entropy as fe
@@ -30,6 +31,7 @@ def main() -> int:
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
     p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status", "dispatch"]); p.add_argument("path", type=Path)
+    p = sub.add_parser("mission-v2"); p.add_argument("action", choices=["validate", "frontier", "normalize-v1"]); p.add_argument("path", type=Path)
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
     p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
@@ -86,6 +88,15 @@ def main() -> int:
             else:
                 result = mg.plan(root, mission)
             print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
+        if args.cmd == "mission-v2":
+            source = mv2.load(args.path.resolve()) if hasattr(mv2, "load") else json.loads(args.path.resolve().read_text(encoding="utf-8"))
+            if args.action == "normalize-v1":
+                result = mv2.normalize_v1(source)
+            elif args.action == "validate":
+                result = mv2.validate(source, root=root)
+            else:
+                result = mv2.frontier(source)
+            print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"INVALID", "UNSUPPORTED"} else 1
         if args.cmd == "map":
             result = rm.build(root)
             if args.stdout:

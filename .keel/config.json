@@ -92,36 +92,55 @@
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_p0_contract.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p0_contract.py"
+      ],
       "cwd": ".",
       "id": "p0-contract-tests",
+      "provenance": ".keel/tests/test_p0_contract.py",
       "required": true,
-      "timeout_sec": 120,
-      "provenance": ".keel/tests/test_p0_contract.py"
+      "timeout_sec": 120
     },
     {
-      "argv": ["python", ".keel/bin/keel.py", "manifest"],
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "manifest"
+      ],
       "cwd": ".",
       "id": "manifest-producer-check",
+      "provenance": ".keel/bin/keel.py",
       "required": true,
-      "timeout_sec": 120,
-      "provenance": ".keel/bin/keel.py"
+      "timeout_sec": 120
     },
     {
-      "argv": ["python", ".keel/bin/keel.py", "compat"],
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "compat"
+      ],
       "cwd": ".",
       "id": "canonical-config-portability",
+      "provenance": ".keel/bin/keel.py",
       "required": true,
-      "timeout_sec": 120,
-      "provenance": ".keel/bin/keel.py"
+      "timeout_sec": 120
     },
     {
-      "argv": ["git", "diff", "--check", "6b0414d61395db0067d593dd5aa578efb74697d8", "--", "."],
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "6b0414d61395db0067d593dd5aa578efb74697d8",
+        "--",
+        "."
+      ],
       "cwd": ".",
       "id": "remediation-diff-check",
+      "provenance": ".keel/config.json",
       "required": true,
-      "timeout_sec": 120,
-      "provenance": ".keel/config.json"
+      "timeout_sec": 120
     },
     {
       "argv": [
@@ -267,28 +286,44 @@
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_developer_ux.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_developer_ux.py"
+      ],
       "cwd": ".",
       "id": "developer-ux-tests",
       "required": true,
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_effect_inference.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_effect_inference.py"
+      ],
       "cwd": ".",
       "id": "effect-inference-tests",
       "required": true,
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_schema_migrations.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_schema_migrations.py"
+      ],
       "cwd": ".",
       "id": "schema-migration-tests",
       "required": true,
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_telemetry.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_telemetry.py"
+      ],
       "cwd": ".",
       "id": "lifecycle-telemetry-tests",
       "required": true,
@@ -306,34 +341,61 @@
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_evidence_class_lifecycle.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_class_lifecycle.py"
+      ],
       "cwd": ".",
       "id": "evidence-class-tests",
       "required": true,
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_evidence_class_lifecycle.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_class_lifecycle.py"
+      ],
       "cwd": ".",
       "id": "evidence-class-lifecycle-tests",
       "required": true,
       "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_repository_intelligence.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
       "cwd": ".",
       "id": "p1-repository-intelligence-tests",
+      "provenance": ".keel/tests/test_repository_intelligence.py",
       "required": true,
-      "timeout_sec": 120,
-      "provenance": ".keel/tests/test_repository_intelligence.py"
+      "timeout_sec": 120
     },
     {
-      "argv": ["python", "-B", ".keel/tests/test_p1_plan_contract.py"],
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p1_plan_contract.py"
+      ],
       "cwd": ".",
       "id": "p1-plan-contract-check",
+      "provenance": ".keel/tests/test_p1_plan_contract.py",
       "required": true,
-      "timeout_sec": 120,
-      "provenance": ".keel/tests/test_p1_plan_contract.py"
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "cwd": ".",
+      "id": "p2-mission-v2-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

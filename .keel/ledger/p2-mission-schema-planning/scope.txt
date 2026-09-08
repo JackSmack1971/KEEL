@@ -1,0 +1,11 @@
+.keel/bin/keel.py
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+.keel/lib/mission_v2.py
+.keel/tests/test_mission_v2.py
+.keel/tests/test_mission_work_graph.py
+.keel/tests/test_p1_plan_contract.py
+.keel/tests/fixtures/mission-v2/**
+docs/control-plane/UPGRADE_AUDIT.md
+docs/exec-plans/active/p2-mission-schema-planning.md
+docs/exec-plans/active/upgrade-remaining-plan.md

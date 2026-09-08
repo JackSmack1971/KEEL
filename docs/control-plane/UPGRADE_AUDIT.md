@@ -9,7 +9,7 @@ This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Ever
 | 1–3 | Governed change contracts, verified candidates, scope, effects, and landing integrity | COMPLETE | — | `.keel/ledger/`, `docs/control-plane/KEEL.md`, and lifecycle verification provide this substrate. |
 | 4 | Effect capabilities and authorization semantics | PARTIAL | P6 | `.keel/contracts.json` and effect checks exist; richer effect ontology and runtime enforcement remain. |
 | 5 | Mission execution through a governed runtime | BLOCKED | P4 | No authorized runtime/provider and operator authorization are evidenced. |
-| 6–7 | Mission graph semantics and deterministic decomposition/planning | PARTIAL | P2 | `keel mission` validates contracts and computes a read-only frontier; richer decomposition remains. |
+| 6–7 | Mission graph semantics and deterministic decomposition/planning | COMPLETE (P2 SCHEMA/PLANNING) | — | `keel.mission/v2` provides typed dependencies, deterministic serialization, bounded decomposition, P1 uncertainty propagation, and read-only advisory frontiers; execution remains outside P2. |
 | 8 | Repository intelligence and codebase mapping | COMPLETE (P1 FOUNDATION) | — | `.keel/lib/repository_intelligence.py`, independent P1 fixtures/tests, and landed KEEL evidence at `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d` / `refs/keel/ledger/p1-repository-intelligence-foundation`. |
 | 9 | Query-driven context compilation | PARTIAL | P5 | `keel context` compiles bounded provenance-aware context; query/topology-aware behavior remains. |
 | 10 | Avoid redundant context/prompt injection | PARTIAL | P5 | Bounded context compilation exists; broader adaptive context-budget policy remains. |
@@ -42,7 +42,7 @@ This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Ever
 | 46 | Invariant ownership | PARTIAL | P7 | Maintenance/control-plane ownership exists; broader invariant ownership remains. |
 | 47–49 | Architecture enforcement, impact analysis, and Git-history learning | PARTIAL | P7 | P1 landed architecture-source, dependency, and changed-path impact evidence; broader enforcement and Git-history learning remain outside P1. |
 | 50–51 | Evidence-derived risk and explicit uncertainty | PARTIAL | P5 | Risk/evidence contracts exist; richer evidence-derived uncertainty remains. |
-| 52–53 | Reversible execution and experiment changes | PARTIAL | P2 | Planning and effects boundaries exist; richer reversible/experiment contracts remain. |
+| 52–53 | Reversible execution and experiment changes | COMPLETE (P2 PLANNING BOUNDARY) | — | P2 represents effects, authorization references, reversibility/retry/integration expectations, inheritance, and unresolved execution prerequisites without granting or executing effects. |
 | 54–57 | Semantic diff, verification-quality protection, independent verification, and scope laundering detection | PARTIAL | P6 | Scope and lifecycle verification exist; semantic and independent verification strengthening remains. |
 | 58–59 | Structured CLI output and CLI-as-API | PARTIAL | P7 | Several structured projections exist; complete structured surface remains. |
 | 60–61 | Lifecycle event sourcing and correlation IDs | PARTIAL | P7 | Lifecycle telemetry/status projections exist; event/correlation breadth remains. |
@@ -66,4 +66,4 @@ Unresolved executable rows map to exactly one P0–P7 owner, except explicitly B
 
 ## Landed P1 evidence
 
-P1 implementation acceptance passed independently before commit `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`; the candidate was sealed and the landed tree was anchored at `refs/keel/ledger/p1-repository-intelligence-foundation` with `LANDED_COMPLETION`. The active roadmap remains the program authority; this reconciliation does not instantiate P2–P7 or execute D1.
+P1 implementation acceptance passed independently before commit `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`; the candidate was sealed and the landed tree was anchored at `refs/keel/ledger/p1-repository-intelligence-foundation` with `LANDED_COMPLETION`. P2 schema/planning is now implemented under its own KEEL change; this reconciliation does not instantiate P3–P7 or execute D1.

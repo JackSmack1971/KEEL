@@ -1,0 +1,1 @@
+{"schema_version":1,"mission_id":"legacy","objective":"Legacy work","success_criteria":["done"],"work":{"a":{"risk":"standard","depends_on":[]},"b":{"risk":"standard","depends_on":["a"]}}}

@@ -1,0 +1,447 @@
+{
+  "change_type": "implementation",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": ".keel/tests/fixtures/mission-v2/oracle.json",
+          "fixture": ".keel/tests/fixtures/mission-v2/valid.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-001",
+      "implementation_matches": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/v1.json",
+        ".keel/tests/fixtures/mission-v2/valid.json",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-001",
+      "statement": "Independent fixtures prove v2 schema identity, required fields, canonical serialization, provenance, normalized paths, and identity-value rejection.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": ".keel/tests/fixtures/mission-v2/oracle.json",
+          "fixture": ".keel/tests/fixtures/mission-v2/negative.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-002",
+      "implementation_matches": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/v1.json",
+        ".keel/tests/fixtures/mission-v2/valid.json",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-002",
+      "statement": "Independent negative fixtures prove graph, scope, acceptance, resource, capability, and blocked-dependency classifications.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": ".keel/tests/fixtures/mission-v2/oracle.json",
+          "fixture": ".keel/tests/fixtures/mission-v2/effects.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-003",
+      "implementation_matches": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/v1.json",
+        ".keel/tests/fixtures/mission-v2/valid.json",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-003",
+      "statement": "Effect-boundary fixtures prove unknown, missing, and exceeded authorization blockers and declaration-does-not-authorize behavior.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": ".keel/tests/fixtures/mission-v2/oracle.json",
+          "fixture": ".keel/tests/fixtures/mission-v2/decomposition.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-004",
+      "implementation_matches": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/v1.json",
+        ".keel/tests/fixtures/mission-v2/valid.json",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-004",
+      "statement": "Decomposition and inheritance fixtures prove deterministic child IDs/dependencies, bounded scope/effects, inherited uncertainty, and exact child escape/overreach blockers.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": ".keel/tests/fixtures/mission-v2/oracle.json",
+          "fixture": ".keel/tests/fixtures/mission-v2/v1-normalization.json",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "mission-work-graph-tests",
+          "detail": "provider=unit_test check=mission-work-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-005",
+      "implementation_matches": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/v1.json",
+        ".keel/tests/fixtures/mission-v2/valid.json",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/test_mission_work_graph.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-005",
+      "statement": "v1 normalization fixtures prove source identity/digest/provenance, explicit unknown defaults, rejection of unsupported extensions, and no execution claims while v1 tests remain green.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": ".keel/tests/fixtures/mission-v2/oracle.json",
+          "fixture": ".keel/tests/fixtures/mission-v2/frontier.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-006",
+      "implementation_matches": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/oracle.json",
+        ".keel/tests/fixtures/mission-v2/v1.json",
+        ".keel/tests/fixtures/mission-v2/valid.json",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-006",
+      "statement": "Frontier and determinism fixtures prove separate readiness fields, runtime-required/uncertain non-executable results, P1 conflict/unsupported propagation, and byte-identical repeated output.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "expected": "planning-only/no-execution",
+          "fixture": ".keel/tests/fixtures/mission-v2/prohibited.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P2-007",
+      "implementation_matches": [
+        ".keel/bin/keel.py",
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/bin/keel.py",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P2-007",
+      "statement": "Prohibited-execution tests prove P2 exposes planning projections only and does not dispatch, execute, allocate, authorize, seal, merge, or perform external effects.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "implementation_status": "PASS",
+  "planning_status": "FAIL",
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-001"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-002"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-003"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-004"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-004",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-005"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-005",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-006"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-006",
+      "type": "quality"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P2-007"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/bin/keel.py",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P2-007",
+      "type": "architecture"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-P2-001",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "priority": "must",
+      "source": "P2 mission schema and planning contract",
+      "statement": "Implement canonical keel.mission/v2 identity, required mission/node fields, deterministic UTF-8 JSON serialization, stable ordering, POSIX repository paths, and provenance-bearing uncertainty without identity-bearing local values.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P2-002",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "priority": "must",
+      "source": "P2 dependency/resource/capability contract",
+      "statement": "Validate typed dependency graphs, invalid scopes, malformed acceptance, resource conflicts, unsupported capabilities, and blocked dependencies with exact classifications.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P2-003",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "priority": "must",
+      "source": "P2 effects boundary",
+      "statement": "Represent effects and authorization separately, reject unknown/missing/excess effects, and never treat declarations as permission or execute planning inputs.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P2-004",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "priority": "must",
+      "source": "P2 decomposition contract",
+      "statement": "Produce deterministic decomposition with bounded child scope, inherited forbidden effects and uncertainty, narrowed acceptance/authorization, and exact escape/overreach blockers.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P2-005",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "priority": "must",
+      "source": "P2 v1 compatibility contract",
+      "statement": "Normalize v1 missions deterministically while preserving v1 meaning, attaching source schema/digest/provenance, marking absent v2 information unknown or documented defaults, and never claiming runtime readiness or execution.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P2-006",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/fixtures/mission-v2/**"
+      ],
+      "priority": "must",
+      "source": "P2 advisory frontier and uncertainty contract",
+      "statement": "Separate dependency, capability, authorization, runtime, and executable frontier fields; runtime-required/unobserved and P1 conflict/unsupported states remain non-executable; repeated canonical serialization is byte-identical.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-P2-007",
+      "implementation_paths": [
+        ".keel/lib/mission_v2.py",
+        ".keel/bin/keel.py",
+        ".keel/tests/test_mission_v2.py"
+      ],
+      "priority": "must",
+      "source": "P2 ownership and effects boundary",
+      "statement": "Keep P2 read-only and planning-only: do not dispatch workers, invoke providers, create worktrees, acquire locks, execute changes, authorize effects, seal, merge, or perform external effects; preserve mission_graph v1 behavior.",
+      "type": "architecture"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 7,
+    "required": 7,
+    "requirements_covered": 7,
+    "requirements_passing": 7,
+    "requirements_total": 7
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}
