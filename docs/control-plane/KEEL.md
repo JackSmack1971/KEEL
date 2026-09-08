@@ -49,7 +49,7 @@ At least one section must contain a real bullet. The prose delta states behavior
 - `PLAN`: delta, requirements, acceptance criteria, scope, risk, and effects are structurally valid; KEEL synchronizes authorization shape without granting permission; high-risk work has a risk review and ExecPlan where required.
 - `EXECUTE`: writes may occur only in declared scope; direct file tools are pre-checked and all Git diff paths are post/stop checked.
 - `VERIFY`: scope and required authorization pass, canonical project checks run, every required acceptance criterion resolves through the evidence graph, literal exit status is recorded, and the verified digest covers both changed content and stable intent artifacts.
-- `SHIP`: verified content is eligible for authorized integration. It is not authorization itself.
+- `SHIP`: verified content is eligible for authorized integration only after implementation acceptance passes (or an explicit planning-only change completes through readiness); planning readiness alone never reaches this phase. It is not authorization itself.
 
 After Plan passes, intent/scope changes require `keel.py replan`; re-plan invalidates prior effect authorization. After verification, implementation changes require `keel.py reopen`. This prevents silent spec drift.
 

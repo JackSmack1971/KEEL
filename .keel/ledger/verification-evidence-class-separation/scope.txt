@@ -1,0 +1,15 @@
+.keel/lib/evidence_graph.py
+.keel/lib/keel_core.py
+.keel/lib/developer_ux.py
+.keel/tests/test_evidence_graph.py
+.keel/tests/test_evidence_class_lifecycle.py
+.keel/tests/test_next_action.py
+.keel/tests/test_developer_ux.py
+.keel/config.json
+.keel/contracts.json
+.keel/templates/requirements.json
+.keel/templates/acceptance.json
+.control-plane/bootstrap-manifest.json
+docs/control-plane/VERIFICATION.md
+docs/control-plane/KEEL.md
+docs/exec-plans/active/verification-evidence-class-separation.md

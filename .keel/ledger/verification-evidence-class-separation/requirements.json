@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "change_type": "implementation",
+  "requirements": [
+    {"id":"REQ-VER-001","type":"behavior","priority":"must","statement":"Evidence classes and change types distinguish planning readiness, implementation acceptance, and landed completion authority.","implementation_paths":[".keel/lib/evidence_graph.py",".keel/contracts.json"]},
+    {"id":"REQ-VER-002","type":"behavior","priority":"must","statement":"Planning-only evidence is labeled as readiness and cannot grant implementation verification, SHIP, or seal eligibility.","implementation_paths":[".keel/lib/evidence_graph.py",".keel/lib/keel_core.py",".keel/lib/developer_ux.py"]},
+    {"id":"REQ-VER-003","type":"behavior","priority":"must","statement":"Implementation acceptance requires changed implementation paths and behavioral evidence rather than planning files or doctor checks alone.","implementation_paths":[".keel/lib/evidence_graph.py"]},
+    {"id":"REQ-VER-004","type":"behavior","priority":"must","statement":"Lifecycle and next-action decisions remain truthful for failed, unimplemented, verified, sealed, and anchored changes.","implementation_paths":[".keel/lib/keel_core.py",".keel/lib/developer_ux.py"]},
+    {"id":"REQ-VER-005","type":"behavior","priority":"must","statement":"Planning-only changes retain an explicit legitimate completion path without weakening implementation-change requirements.","implementation_paths":[".keel/lib/keel_core.py",".keel/lib/evidence_graph.py"]},
+    {"id":"REQ-VER-006","type":"quality","priority":"must","statement":"The evidence-class contract and lifecycle invariant are documented and enforced by focused repository-native tests.","implementation_paths":["docs/control-plane/VERIFICATION.md","docs/control-plane/KEEL.md",".keel/tests/test_evidence_class_lifecycle.py"]}
+  ]
+}

@@ -841,7 +841,9 @@ def verify_change(root: Path, change_id: str) -> dict:
         try: digest = content_digest(root, change_id)
         except Exception as e: errs.append(f"content digest failed: {e}")
     status = "PASS" if not errs else "FAIL"
-    evidence = {"schema_version": 2, "change_id": change_id, "base_commit": st["base_commit"], "verified_at": now(), "status": status, "content_digest": digest, "changed_paths": material, "errors": errs, "checks": results, "acceptance": evidence_graph_result.get("summary", {})}
+    implementation_status = evidence_graph_result.get("implementation_status", "NOT_VERIFIED")
+    change_type = evidence_graph_result.get("change_type", "implementation")
+    evidence = {"schema_version": 3, "change_id": change_id, "base_commit": st["base_commit"], "verified_at": now(), "status": status, "verification_class": evidence_graph_result.get("verification_class", "PLAN_READINESS"), "change_type": change_type, "implementation_status": implementation_status, "content_digest": digest, "changed_paths": material, "errors": errs, "checks": results, "acceptance": evidence_graph_result.get("summary", {})}
     write_json(d / "verification.json", evidence)
     md = ["# Verification", "", f"Status: `{status}`", f"Base: `{st['base_commit']}`", f"Content digest: `{digest or 'UNAVAILABLE'}`", "", "## Checks"]
     for r in results:
@@ -854,7 +856,8 @@ def verify_change(root: Path, change_id: str) -> dict:
     atomic_write(d / "verification.md", "\n".join(md) + "\n")
     append_event(root, change_id, "EXECUTE", "PASS" if not scope_errs else "FAIL", {"changed_paths": material, "scope_errors": scope_errs})
     append_event(root, change_id, "VERIFY", status, {"content_digest": digest, "errors": errs})
-    if status == "PASS":
+    authority = status == "PASS" and (change_type == "planning_only" or implementation_status == "PASS")
+    if authority:
         st["phase"] = "SHIP"; st["verified_content_digest"] = digest; write_state(root, change_id, st)
     else:
         st["phase"] = "EXECUTE"; st.pop("verified_content_digest", None); write_state(root, change_id, st)
@@ -868,6 +871,8 @@ def current_verified(root: Path, change_id: str) -> tuple[bool, str]:
     if not vpath.is_file(): return False, "verification.json missing"
     v = read_json(vpath)
     if v.get("status") != "PASS": return False, "verification status is not PASS"
+    if v.get("change_type", "implementation") != "planning_only" and v.get("implementation_status") != "PASS":
+        return False, "implementation acceptance is not PASS"
     try: dig = content_digest(root, change_id)
     except Exception as e: return False, str(e)
     if dig != v.get("content_digest") or dig != st.get("verified_content_digest"):
@@ -1009,6 +1014,7 @@ def anchor(root: Path, change_id: str, commit: str) -> None:
         f"sealed-candidate: {candidate['commit']}\n"
         f"landed-commit: {sha}\n"
         f"integration-relation: {relation}\n"
+        "verification-class: LANDED_COMPLETION\n"
         f"verified-content-digest: {candidate['content_digest']}\n"
     )
     if note.returncode == 0:
@@ -1019,7 +1025,7 @@ def anchor(root: Path, change_id: str, commit: str) -> None:
         if p.returncode != 0: raise RuntimeError(p.stderr.strip() or "git notes add failed")
     audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
     with (audit_dir / "anchors.jsonl").open("a", encoding="utf-8") as f:
-        f.write(json.dumps({"ts":now(),"change_id":change_id,"candidate_commit":candidate["commit"],"landed_commit":sha,"relation":relation,"ref":ref,"content_digest":candidate["content_digest"]}, sort_keys=True) + "\n")
+        f.write(json.dumps({"ts":now(),"change_id":change_id,"candidate_commit":candidate["commit"],"landed_commit":sha,"relation":relation,"ref":ref,"content_digest":candidate["content_digest"],"verification_class":"LANDED_COMPLETION"}, sort_keys=True) + "\n")
     if active_change(root) == change_id:
         active_file(root).unlink(missing_ok=True)
 
@@ -1078,7 +1084,12 @@ def next_action(root: Path, change_id: str | None = None) -> dict:
     elif phase == "PLAN":
         result["recommended_action"] = action("gate-plan", f"keel gate plan --change {cid}", "intent, scope, risk, and effects must pass the PLAN gate")
     elif phase in {"EXECUTE", "VERIFY"}:
-        result["recommended_action"] = action("verify", f"keel verify --change {cid}", "run canonical checks and evaluate the acceptance graph")
+        vpath = ledger_dir(root, cid) / "verification.json"
+        prior = read_json(vpath) if vpath.is_file() else {}
+        if prior.get("status") == "PASS" and prior.get("change_type", "implementation") != "planning_only" and prior.get("implementation_status") != "PASS":
+            result["recommended_action"] = action("implement", f"complete implementation and behavioral acceptance before keel verify --change {cid}", "planning readiness passed, but implementation acceptance is not verified")
+        else:
+            result["recommended_action"] = action("verify", f"keel verify --change {cid}", "run canonical checks and evaluate the acceptance graph")
     elif phase == "SHIP":
         ref = candidate_ref(cid)
         sealed = run_git(root, ["show-ref", "--verify", ref], check=False).returncode == 0
@@ -1092,6 +1103,13 @@ def next_action(root: Path, change_id: str | None = None) -> dict:
                 result["status"] = "BLOCKED"
                 result["blockers"].append({"id": "invalid-anchor-evidence", "detail": message})
                 return result
+
+        vpath = ledger_dir(root, cid) / "verification.json"
+        prior = read_json(vpath) if vpath.is_file() else {}
+        if prior.get("status") == "PASS" and prior.get("change_type", "implementation") != "planning_only" and prior.get("implementation_status") != "PASS":
+            result["recommended_action"] = action("implement", f"complete implementation and behavioral acceptance before keel verify --change {cid}", "historical readiness evidence does not provide implementation authority")
+            result["legal_actions"].append(result["recommended_action"])
+            return result
 
         verified, message = current_verified(root, cid)
         if not verified:

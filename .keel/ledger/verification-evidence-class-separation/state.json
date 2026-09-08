@@ -1,0 +1,10 @@
+{
+  "base_commit": "881531c21abff5b7cbce06d154534f1628837d6e",
+  "change_id": "verification-evidence-class-separation",
+  "created_at": "2026-09-08T03:27:58+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-08T03:39:14+00:00",
+  "verified_content_digest": "7f703201d6d8a8b74b5ae9fb78037dfabd83f837c793fbe03213d8b66463de99"
+}

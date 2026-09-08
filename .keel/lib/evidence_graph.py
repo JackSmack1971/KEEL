@@ -10,6 +10,9 @@ SUPPORTED_PROVIDERS = {"command", "changed_path", "file_exists", "unit_test", "b
 REQUIREMENT_TYPES = {"behavior", "quality", "security", "migration", "performance", "architecture", "documentation"}
 PRIORITIES = {"must", "should", "could"}
 EVIDENCE_TYPES = {"automated-test", "human-review", "schema", "benchmark", "runtime", "changed-path"}
+EVIDENCE_CLASSES = {"PLAN_READINESS", "IMPLEMENTATION_ACCEPTANCE", "LANDED_COMPLETION"}
+CHANGE_TYPES = {"implementation", "planning_only"}
+BEHAVIORAL_PROVIDERS = {"unit_test", "browser", "visual", "log_query", "metric_query", "trace_query", "schema", "security", "benchmark", "hardware", "external_ci"}
 
 
 def read_json(path: Path):
@@ -39,6 +42,11 @@ def _implementation_paths(value, label: str, errors: list[str]) -> None:
             errors.append(f"{label}.implementation_paths contains unsafe path: {item}")
 
 
+def _evidence_class(value, label: str, errors: list[str]) -> None:
+    if value is not None and value not in EVIDENCE_CLASSES:
+        errors.append(f"{label}.evidence_class must be one of {sorted(EVIDENCE_CLASSES)}")
+
+
 def validate_contract(requirements_path: Path, acceptance_path: Path, require_nonempty: bool = True, contracts_path: Path | None = None) -> list[str]:
     errors: list[str] = []
     try:
@@ -51,6 +59,9 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         return [f"acceptance.json invalid: {e}"]
     requirements = req.get("requirements")
     criteria = acc.get("criteria")
+    change_type = req.get("change_type", "implementation")
+    if change_type not in CHANGE_TYPES:
+        errors.append(f"requirements.json change_type must be one of {sorted(CHANGE_TYPES)}")
     if not isinstance(requirements, list):
         errors.append("requirements.json requirements must be a list"); requirements = []
     if not isinstance(criteria, list):
@@ -71,6 +82,7 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         if r.get("type", "behavior") not in REQUIREMENT_TYPES: errors.append(f"requirement {rid} type must be one of {sorted(REQUIREMENT_TYPES)}")
         if r.get("priority", "must") not in PRIORITIES: errors.append(f"requirement {rid} priority must be one of {sorted(PRIORITIES)}")
         _implementation_paths(r.get("implementation_paths"), f"requirement {rid}", errors)
+        _evidence_class(r.get("evidence_class"), f"requirement {rid}", errors)
     ac_ids = set()
     covered_requirements = set()
     for c in criteria:
@@ -84,6 +96,7 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
         if not isinstance(statement, str) or len(statement.strip()) < 8: errors.append(f"acceptance {aid} statement too thin")
         if "evidence_type" in c and c.get("evidence_type") not in EVIDENCE_TYPES: errors.append(f"acceptance {aid} evidence_type must be one of {sorted(EVIDENCE_TYPES)}")
         _implementation_paths(c.get("implementation_paths"), f"acceptance {aid}", errors)
+        _evidence_class(c.get("evidence_class"), f"acceptance {aid}", errors)
         if c.get("policy", "all") not in {"all", "any"}: errors.append(f"acceptance {aid} policy must be all|any")
         if not isinstance(c.get("required", True), bool): errors.append(f"acceptance {aid} required must be boolean")
         evidence = c.get("evidence")
@@ -105,6 +118,15 @@ def validate_contract(requirements_path: Path, acceptance_path: Path, require_no
                 errors.append(f"acceptance {aid} {provider} evidence requires check_id")
             if provider in {"changed_path", "file_exists"} and not isinstance(edge.get("path"), str):
                 errors.append(f"acceptance {aid} {provider} evidence requires path")
+            for field in ("fixture", "expected"):
+                if field in edge and (not isinstance(edge[field], str) or not edge[field].strip()):
+                    errors.append(f"acceptance {aid} evidence {field} must be a non-empty string")
+        declared_class = c.get("evidence_class")
+        if declared_class == "IMPLEMENTATION_ACCEPTANCE":
+            if not c.get("implementation_paths"):
+                errors.append(f"acceptance {aid} implementation evidence requires implementation_paths")
+            if not any(isinstance(edge, dict) and edge.get("provider") in BEHAVIORAL_PROVIDERS for edge in evidence):
+                errors.append(f"acceptance {aid} implementation evidence requires a behavioral evidence provider")
     for rid in sorted(req_ids - covered_requirements):
         errors.append(f"requirement {rid} has no acceptance criterion")
     return errors
@@ -122,6 +144,7 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
     if contract_errors:
         return {"schema_version": 1, "status": "FAIL", "errors": contract_errors, "criteria": []}
     req = read_json(requirements_path); acc = read_json(acceptance_path)
+    change_type = req.get("change_type", "implementation")
     check_map = {c.get("id"): c for c in checks if isinstance(c, dict) and isinstance(c.get("id"), str)}
     criterion_rows = []
     errors = []
@@ -166,7 +189,11 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
             errors.append(f"acceptance criterion implementation surface unmatched: {c['id']}")
         passed = passed and surface_passed
         status = "PASS" if passed else "FAIL"
-        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence_type": c.get("evidence_type"), "implementation_paths": surfaces, "implementation_matches": matched_surfaces, "implementation_surface_passed": surface_passed, "evidence": edge_rows}
+        requirement = next(item for item in req["requirements"] if item["id"] == c["requirement_id"])
+        declared_class = c.get("evidence_class", requirement.get("evidence_class"))
+        if declared_class is None:
+            declared_class = "IMPLEMENTATION_ACCEPTANCE" if any(edge.get("provider") in BEHAVIORAL_PROVIDERS for edge in edge_rows) else "PLAN_READINESS"
+        row = {"id": c["id"], "requirement_id": c["requirement_id"], "statement": c["statement"], "required": c.get("required", True), "policy": policy, "status": status, "evidence_class": declared_class, "evidence_type": c.get("evidence_type"), "implementation_paths": surfaces, "implementation_matches": matched_surfaces, "implementation_surface_passed": surface_passed, "evidence": edge_rows}
         criterion_rows.append(row)
         if row["required"] and not passed:
             errors.append(f"acceptance criterion failed: {row['id']}")
@@ -183,9 +210,16 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
             "criterion_count": len(rows),
             "passed": bool(rows) and all(row["status"] == "PASS" for row in rows),
         })
+    implementation_rows = [row for row in criterion_rows if row["evidence_class"] == "IMPLEMENTATION_ACCEPTANCE" and row["required"]]
+    readiness_rows = [row for row in criterion_rows if row["evidence_class"] == "PLAN_READINESS" and row["required"]]
+    implementation_status = "NOT_APPLICABLE" if change_type == "planning_only" else ("PASS" if implementation_rows and all(row["status"] == "PASS" for row in implementation_rows) else "NOT_VERIFIED" if not implementation_rows else "FAIL")
     return {
         "schema_version": 1,
         "status": "PASS" if not errors else "FAIL",
+        "change_type": change_type,
+        "verification_class": "IMPLEMENTATION_ACCEPTANCE" if implementation_status == "PASS" else "PLAN_READINESS",
+        "implementation_status": implementation_status,
+        "planning_status": "PASS" if readiness_rows and all(row["status"] == "PASS" for row in readiness_rows) else "FAIL",
         "errors": errors,
         "requirements": req["requirements"],
         "criteria": criterion_rows,

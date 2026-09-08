@@ -304,6 +304,20 @@
       "id": "hook-event-compatibility-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_evidence_class_lifecycle.py"],
+      "cwd": ".",
+      "id": "evidence-class-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_evidence_class_lifecycle.py"],
+      "cwd": ".",
+      "id": "evidence-class-lifecycle-tests",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

@@ -1,0 +1,336 @@
+{
+  "change_type": "implementation",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-class-tests",
+          "detail": "provider=unit_test check=evidence-class-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-VER-001",
+      "implementation_matches": [
+        ".keel/contracts.json",
+        ".keel/lib/evidence_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/contracts.json"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-VER-001",
+      "statement": "Evidence classes and change types are validated and preserved in graph output.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-class-tests",
+          "detail": "provider=unit_test check=evidence-class-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-VER-002",
+      "implementation_matches": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/developer_ux.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-VER-002",
+      "statement": "Planning-only evidence cannot produce implementation authority or seal eligibility.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-class-tests",
+          "detail": "provider=unit_test check=evidence-class-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-VER-003",
+      "implementation_matches": [
+        ".keel/lib/evidence_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-VER-003",
+      "statement": "Behavioral implementation criteria reject planning paths and non-behavioral control-plane checks.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-class-lifecycle-tests",
+          "detail": "provider=unit_test check=evidence-class-lifecycle-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "next-action-tests",
+          "detail": "provider=unit_test check=next-action-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-VER-004",
+      "implementation_matches": [
+        ".keel/lib/keel_core.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/developer_ux.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-VER-004",
+      "statement": "Lifecycle next actions and historical anchors retain their required semantics.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-class-lifecycle-tests",
+          "detail": "provider=unit_test check=evidence-class-lifecycle-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-VER-005",
+      "implementation_matches": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/evidence_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-VER-005",
+      "statement": "Explicit planning-only changes can complete through readiness evidence while implementation changes cannot.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-class-lifecycle-tests",
+          "detail": "provider=unit_test check=evidence-class-lifecycle-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-VER-006",
+      "implementation_matches": [
+        ".keel/tests/test_evidence_class_lifecycle.py",
+        "docs/control-plane/KEEL.md",
+        "docs/control-plane/VERIFICATION.md"
+      ],
+      "implementation_paths": [
+        ".keel/tests/test_evidence_class_lifecycle.py",
+        "docs/control-plane/VERIFICATION.md",
+        "docs/control-plane/KEEL.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-VER-006",
+      "statement": "Focused tests and durable documentation describe and enforce the evidence-class invariant.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "implementation_status": "PASS",
+  "planning_status": "FAIL",
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-VER-001"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/contracts.json"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-VER-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-VER-002"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py",
+        ".keel/lib/developer_ux.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-VER-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-VER-003"
+      ],
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-VER-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-VER-004"
+      ],
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/developer_ux.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-VER-004",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-VER-005"
+      ],
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/evidence_graph.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-VER-005",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-VER-006"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/VERIFICATION.md",
+        "docs/control-plane/KEEL.md",
+        ".keel/tests/test_evidence_class_lifecycle.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-VER-006",
+      "type": "quality"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-VER-001",
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/contracts.json"
+      ],
+      "priority": "must",
+      "statement": "Evidence classes and change types distinguish planning readiness, implementation acceptance, and landed completion authority.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-VER-002",
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py",
+        ".keel/lib/keel_core.py",
+        ".keel/lib/developer_ux.py"
+      ],
+      "priority": "must",
+      "statement": "Planning-only evidence is labeled as readiness and cannot grant implementation verification, SHIP, or seal eligibility.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-VER-003",
+      "implementation_paths": [
+        ".keel/lib/evidence_graph.py"
+      ],
+      "priority": "must",
+      "statement": "Implementation acceptance requires changed implementation paths and behavioral evidence rather than planning files or doctor checks alone.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-VER-004",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/developer_ux.py"
+      ],
+      "priority": "must",
+      "statement": "Lifecycle and next-action decisions remain truthful for failed, unimplemented, verified, sealed, and anchored changes.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-VER-005",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py",
+        ".keel/lib/evidence_graph.py"
+      ],
+      "priority": "must",
+      "statement": "Planning-only changes retain an explicit legitimate completion path without weakening implementation-change requirements.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-VER-006",
+      "implementation_paths": [
+        "docs/control-plane/VERIFICATION.md",
+        "docs/control-plane/KEEL.md",
+        ".keel/tests/test_evidence_class_lifecycle.py"
+      ],
+      "priority": "must",
+      "statement": "The evidence-class contract and lifecycle invariant are documented and enforced by focused repository-native tests.",
+      "type": "quality"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 6,
+    "required": 6,
+    "requirements_covered": 6,
+    "requirements_passing": 6,
+    "requirements_total": 6
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}
