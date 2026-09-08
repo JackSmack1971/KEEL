@@ -103,6 +103,13 @@ Candidate verification and integration verification are distinct:
 
 A seal is a candidate-bound operation. An anchor is a landed-state operation. The future landing transaction may coordinate operations, but this planning turn neither defines its implementation nor permits integration to skip either boundary.
 
+The current migration now factors exact Git proof into `.keel/lib/git_proof.py` and a
+versioned `CandidateAttestation` into `.keel/lib/candidate_attestation.py`. The
+attestation is a canonical Git blob indexed separately from the preserved candidate
+commit ref; refs and notes remain mutable anchors. This extraction preserves the
+existing seal/anchor integration boundary and explicitly does not implement the
+Landing Transaction planned for a later turn.
+
 ## 9. Canonical intent and reconciliation
 
 Human intent enters as source-attributed `Requirement`, `Decision`, policy, and requested outcomes. `WorkUnit` decomposition is a deterministic/provenance-bearing interpretation of that intent, not authority to broaden it. Scope, effects, evidence obligations, and allowed uncertainty narrow through decomposition unless an accepted authority explicitly decides otherwise.

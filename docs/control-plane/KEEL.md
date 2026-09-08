@@ -72,12 +72,21 @@ KEEL bypass never changes Codex permission mode, sandbox, rules, hook trust, hos
 After verification, commit the candidate in its worktree and run `seal`. KEEL recomputes the content+intent digest from the **commit tree**, requires the committed material diff to match the verified changed-path set, and creates:
 
 - `refs/keel/candidates/<change-id>` -> exact verified candidate commit.
+- `refs/keel/attestations/candidates/<change-id>` -> canonical
+  `CandidateAttestation` blob binding work/base and candidate commit/tree identity,
+  independent material and intent digests, combined content digest, EvidencePlan
+  digest, supporting EvidenceReceipt identities/digests, and available policy/runtime
+  profile digest.
 
 An integration checkout can then merge that exact ref. After landing, use `anchor` to create:
 - `refs/keel/ledger/<change-id>` -> landed commit;
 - `refs/notes/keel` note on the landed commit.
 
 Anchoring requires the sealed candidate, re-reads the landed ledger, and recomputes the candidate's verified changed-path + intent digest from the landed Git tree. This permits unrelated mainline changes and supports either candidate ancestry or content-equivalent squash/rebase landing while refusing candidate-content drift. The operation refuses collisions to a different commit/note. Refs/notes are mutable Git metadata, not an immutable ledger; protected remote history/audit systems are required when stronger tamper resistance matters.
+
+The Git blob is the payload and refs/notes are mutable indexes/anchors; none is claimed
+immutable. Existing anchor behavior continues unchanged at the integration boundary.
+The future Landing Transaction is not implemented by this subsystem.
 
 ## Definition of KEEL-ready
 1. Git repository exists with an initial baseline commit.

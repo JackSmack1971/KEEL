@@ -15,6 +15,8 @@ import capability_resolver
 import context_compiler
 import evidence_graph
 import evidence_system
+import git_proof
+import candidate_attestation
 import p0_contract
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
@@ -41,17 +43,11 @@ def run_git_bytes(root: Path, args: list[str], check: bool = True) -> subprocess
 
 
 def git_root(cwd: Path | None = None) -> Path:
-    p = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=cwd, text=True, capture_output=True)
-    if p.returncode != 0:
-        raise RuntimeError("KEEL requires a Git repository")
-    return Path(p.stdout.strip()).resolve()
+    return git_proof.repository_root(cwd)
 
 
 def head_commit(root: Path) -> str:
-    p = run_git(root, ["rev-parse", "HEAD"], check=False)
-    if p.returncode != 0:
-        raise RuntimeError("KEEL requires an initial baseline commit before the first write change")
-    return p.stdout.strip()
+    return git_proof.head_commit(root)
 
 
 def atomic_write(path: Path, data: str) -> None:
@@ -358,14 +354,7 @@ def validate_plan(root: Path, change_id: str) -> list[str]:
 
 
 def changed_paths(root: Path, base: str) -> list[str]:
-    p = run_git(root, ["diff", "--name-only", "--diff-filter=ACMRDTUXB", base, "--"], check=False)
-    if p.returncode != 0:
-        raise RuntimeError(p.stderr.strip() or "git diff failed")
-    q = run_git(root, ["ls-files", "--others", "--exclude-standard"], check=False)
-    if q.returncode != 0:
-        raise RuntimeError(q.stderr.strip() or "git ls-files failed")
-    names = {x.strip().replace("\\", "/") for x in (p.stdout + "\n" + q.stdout).splitlines() if x.strip()}
-    return sorted(names)
+    return git_proof.changed_paths(root, base)
 
 
 def is_system_artifact(rel: str, change_id: str) -> bool:
@@ -409,63 +398,17 @@ def content_digest(root: Path, change_id: str) -> str:
 
 def worktree_entry(root: Path, rel: str) -> tuple[str, bytes]:
     """Return the Git-relevant mode/content representation of a worktree path."""
-    p = root / rel
-    if p.is_symlink():
-        return "120000", os.readlink(p).encode("utf-8", errors="surrogateescape")
-    if p.is_file():
-        try:
-            # Windows reports DOS attributes through mode bits inconsistently;
-            # Git records ordinary Windows files as 100644.
-            executable = os.name != "nt" and bool(p.stat().st_mode & 0o111)
-        except OSError:
-            executable = False
-        data = p.read_bytes()
-        if os.name == "nt":
-            data = data.replace(b"\r\n", b"\n")
-        return ("100755" if executable else "100644"), data
-    if p.is_dir():
-        # A directory itself only appears in Git's changed-path set when it is a gitlink/submodule.
-        sub = subprocess.run(["git", "rev-parse", "HEAD"], cwd=p, text=True, capture_output=True)
-        if sub.returncode == 0 and re.fullmatch(r"[0-9a-fA-F]{40,64}", sub.stdout.strip()):
-            return "160000", sub.stdout.strip().lower().encode("ascii")
-    return "000000", b"<missing>"
+    return git_proof.worktree_entry(root, rel)
 
 
 def commit_changed_paths(root: Path, base: str, commit: str, change_id: str) -> list[str]:
-    p = run_git(root, ["diff", "--name-only", "--diff-filter=ACMRDTUXB", base, commit, "--"], check=False)
-    if p.returncode != 0:
-        raise RuntimeError(p.stderr.strip() or "git diff for commit failed")
-    paths = sorted({x.strip().replace("\\", "/") for x in p.stdout.splitlines() if x.strip()})
-    return [x for x in paths if not is_system_artifact(x, change_id)]
+    return [x for x in git_proof.changed_paths(root, base, commit) if not is_system_artifact(x, change_id)]
 
 
 def git_tree_entry(root: Path, commit: str, rel: str) -> tuple[str, bytes]:
     # `ls-tree -z` is path-safe for spaces and lets us distinguish blobs, symlinks,
     # executable files, gitlinks, and verified deletions.
-    p = run_git_bytes(root, ["ls-tree", "-z", commit, "--", rel], check=False)
-    if p.returncode != 0:
-        raise RuntimeError(p.stderr.decode("utf-8", errors="replace").strip() or f"git ls-tree failed for {rel}")
-    if not p.stdout:
-        return "000000", b"<missing>"
-    row = p.stdout.rstrip(b"\0")
-    meta, _, path_bytes = row.partition(b"\t")
-    parts = meta.split()
-    if len(parts) != 3 or not path_bytes:
-        raise RuntimeError(f"unexpected git ls-tree result for {rel}")
-    mode = parts[0].decode("ascii")
-    typ = parts[1].decode("ascii")
-    oid = parts[2].decode("ascii")
-    if typ == "commit" and mode == "160000":
-        return mode, oid.lower().encode("ascii")
-    if typ != "blob":
-        raise RuntimeError(f"unsupported Git tree entry type for {rel}: {mode} {typ}")
-    blob = run_git_bytes(root, ["cat-file", "blob", oid], check=False)
-    if blob.returncode != 0:
-        raise RuntimeError(blob.stderr.decode("utf-8", errors="replace").strip() or f"git cat-file failed for {rel}")
-    data = blob.stdout
-    if os.name == "nt":
-        data = data.replace(b"\r\n", b"\n")
-    return mode, data
+    return git_proof.tree_entry(root, commit, rel)
 
 
 def tree_digest(root: Path, change_id: str, commit: str, material_paths: list[str]) -> str:
@@ -484,22 +427,13 @@ def tree_digest(root: Path, change_id: str, commit: str, material_paths: list[st
 
 
 def show_commit_json(root: Path, commit: str, change_id: str, name: str) -> dict:
-    raw = run_git_bytes(root, ["show", f"{commit}:.keel/ledger/{change_id}/{name}"], check=False)
-    if raw.returncode != 0:
-        raise RuntimeError(f"commit does not contain .keel/ledger/{change_id}/{name}")
-    try:
-        return json.loads(raw.stdout.decode("utf-8"))
-    except Exception as e:
-        raise RuntimeError(f"committed {name} is invalid JSON: {e}")
+    return git_proof.show_json(root, commit, f".keel/ledger/{change_id}/{name}")
 
 
 def verify_commit_tree(root: Path, change_id: str, commit: str, require_exact_diff: bool) -> tuple[str, dict, dict, str]:
     """Verify a committed tree against KEEL evidence; optionally require its whole diff to be the candidate."""
     validate_id(change_id)
-    resolved = run_git(root, ["rev-parse", f"{commit}^{{commit}}"], check=False)
-    if resolved.returncode != 0:
-        raise RuntimeError(f"invalid commit: {commit}")
-    sha = resolved.stdout.strip()
+    sha = git_proof.resolve_commit(root, commit)
     st = show_commit_json(root, sha, change_id, "state.json")
     ver = show_commit_json(root, sha, change_id, "verification.json")
     if st.get("change_id") != change_id:
@@ -537,14 +471,23 @@ def candidate_status(root: Path, change_id: str) -> dict:
     if p.returncode != 0:
         raise RuntimeError(f"sealed candidate missing: {ref}")
     sha, st, ver, dig = verify_commit_tree(root, change_id, p.stdout.strip(), require_exact_diff=True)
-    return {"change_id": change_id, "ref": ref, "commit": sha, "content_digest": dig, "base_commit": st.get("base_commit"), "changed_paths": ver.get("changed_paths")}
+    result = {"change_id": change_id, "ref": ref, "commit": sha, "content_digest": dig, "base_commit": st.get("base_commit"), "changed_paths": ver.get("changed_paths")}
+    attestation_ref = candidate_attestation.ATTESTATION_REF_PREFIX + change_id
+    attestation_exists = run_git(root, ["show-ref", "--verify", attestation_ref], check=False).returncode == 0
+    if attestation_exists:
+        attestation = candidate_attestation.read_attestation(root, change_id)
+        expected = candidate_attestation.build(root, change_id, sha, st, ver, INTENT_FILES)
+        if attestation.digest != expected.digest:
+            raise RuntimeError("sealed CandidateAttestation differs from committed candidate proof")
+        result.update({"attestation_ref": attestation_ref, "attestation_digest": attestation.digest})
+    return result
 
 
 def seal_candidate(root: Path, change_id: str, commit: str) -> dict:
     ok, msg = current_verified(root, change_id)
     if not ok:
         raise RuntimeError("cannot seal stale/unverified working state: " + msg)
-    sha, _, _, dig = verify_commit_tree(root, change_id, commit, require_exact_diff=True)
+    sha, committed_state, committed_verification, dig = verify_commit_tree(root, change_id, commit, require_exact_diff=True)
     head = head_commit(root)
     if head != sha:
         raise RuntimeError(f"seal candidate must name current HEAD ({head}), got {sha}")
@@ -552,6 +495,9 @@ def seal_candidate(root: Path, change_id: str, commit: str) -> dict:
     old = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
     if old.returncode == 0 and old.stdout.strip() != sha:
         raise RuntimeError(f"KEEL candidate ref collision: {ref} already points to {old.stdout.strip()}")
+    attestation = candidate_attestation.build(root, change_id, sha, committed_state, committed_verification, INTENT_FILES)
+    attestation_ref = candidate_attestation.ATTESTATION_REF_PREFIX + change_id
+    candidate_attestation.write_attestation_object(root, attestation, attestation_ref)
     if old.returncode != 0:
         z = "0" * 40
         p = run_git(root, ["update-ref", ref, sha, z], check=False)
@@ -559,7 +505,9 @@ def seal_candidate(root: Path, change_id: str, commit: str) -> dict:
             raise RuntimeError(p.stderr.strip() or "git update-ref candidate failed")
     audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
     with (audit_dir / "candidates.jsonl").open("a", encoding="utf-8") as f:
-        f.write(json.dumps({"ts": now(), "change_id": change_id, "candidate_commit": sha, "ref": ref, "content_digest": dig}, sort_keys=True) + "\n")
+        f.write(json.dumps({"ts": now(), "change_id": change_id, "candidate_commit": sha, "ref": ref, "content_digest": dig,
+                            "attestation_ref": attestation_ref, "attestation_digest": attestation.digest,
+                            "attestation": attestation.as_dict()}, sort_keys=True) + "\n")
     return candidate_status(root, change_id)
 
 
@@ -1008,14 +956,14 @@ def anchor(root: Path, change_id: str, commit: str) -> None:
         f"verified-content-digest: {candidate['content_digest']}\n"
     )
     if note.returncode == 0:
-        if f"keel-change-id: {change_id}" not in note.stdout:
-            raise RuntimeError("existing refs/notes/keel note belongs to different KEEL change")
+        if note.stdout != note_text:
+            raise RuntimeError("existing refs/notes/keel note collides with expected KEEL attestation anchor")
     else:
         p = run_git(root, ["notes", "--ref=keel", "add", "-m", note_text, sha], check=False)
         if p.returncode != 0: raise RuntimeError(p.stderr.strip() or "git notes add failed")
     audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
     with (audit_dir / "anchors.jsonl").open("a", encoding="utf-8") as f:
-        f.write(json.dumps({"ts":now(),"change_id":change_id,"candidate_commit":candidate["commit"],"landed_commit":sha,"relation":relation,"ref":ref,"content_digest":candidate["content_digest"],"verification_class":"LANDED_COMPLETION"}, sort_keys=True) + "\n")
+        f.write(json.dumps({"ts":now(),"change_id":change_id,"candidate_commit":candidate["commit"],"landed_commit":sha,"relation":relation,"ref":ref,"content_digest":candidate["content_digest"],"attestation_digest":candidate.get("attestation_digest"),"verification_class":"LANDED_COMPLETION"}, sort_keys=True) + "\n")
     if active_change(root) == change_id:
         active_file(root).unlink(missing_ok=True)
 

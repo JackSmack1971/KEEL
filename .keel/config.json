@@ -1371,6 +1371,57 @@
         ]
       },
       "version": "1"
+    },
+    {
+      "applicability": {
+        "paths": [
+          ".keel/lib/git_proof.py",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_git_*.py",
+          ".keel/tests/test_candidate_attestation.py",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md"
+        ],
+        "risk_levels": [
+          "low",
+          "standard",
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "git-proof-attestation-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_git_attestation_lifecycle.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_git_attestation_lifecycle.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "security",
+          "migration",
+          "performance",
+          "architecture",
+          "documentation"
+        ]
+      },
+      "version": "1"
     }
   ]
 }

@@ -44,3 +44,15 @@ activate policy or authorize/execute a discovered command.
 ## Canonical semantic and planning boundary
 
 A dependency-free semantic model defines the kernel's eleven canonical primitive records, orthogonal state dimensions, strict identity/provenance/resource rules, and deterministic serialization/content digests in `.keel/lib/semantic_kernel.py`. Canonical planning now composes those records into one authoritative `ChangeGraph`: work dependencies exist only as typed edges, effects remain requests rather than grants, resource overlap affects later scheduling rather than validity, and frontier is a pure projection over supplied state. Mission v1/v2 documents remain read-compatible only through explicit normalization adapters. Repository-intelligence and runtime remain compatibility-stage subsystems. Verification now uses `.keel/lib/evidence_system.py` as its primary authority for EvidenceRequirements, impact-selected EvidencePlans, declared Verifiers, and exact-subject EvidenceReceipts. `.keel/lib/evidence_graph.py` remains a legacy contract reader and new `evidence-graph.json` output is a compatibility projection. Lifecycle seal and anchor boundaries retain their existing semantics under `KEEL-KERNEL-REDESIGN-v1`.
+
+## Git proof and attestation boundary
+
+Exact repository, worktree, path, diff, tree-entry, and commit identity proofs are now
+owned by the dependency-free `.keel/lib/git_proof.py`. The versioned
+`CandidateAttestation` and the compatible candidate/landed boundary are owned by
+`.keel/lib/candidate_attestation.py`; `keel_core.py` remains the lifecycle orchestrator
+and compatibility facade. Candidate attestations are stored as canonical Git blobs
+indexed by `refs/keel/attestations/candidates/<change-id>` and also recorded in local
+audit output. Candidate, attestation, landed, and note refs are mutable indexes/anchors,
+not immutable policy or the sole attestation payload. This boundary deliberately does
+not implement the future Landing Transaction.

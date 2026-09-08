@@ -1,0 +1,143 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-001",
+      "requirement_id": "REQ-001",
+      "verifier_id": "git-proof-attestation-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-002",
+      "requirement_id": "REQ-002",
+      "verifier_id": "git-proof-attestation-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-003",
+      "requirement_id": "REQ-003",
+      "verifier_id": "git-proof-attestation-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-004",
+      "requirement_id": "REQ-004",
+      "verifier_id": "git-proof-attestation-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-005",
+      "requirement_id": "REQ-005",
+      "verifier_id": "git-proof-attestation-tests"
+    }
+  ],
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/candidate_attestation.py",
+    ".keel/lib/git_proof.py",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_candidate_attestation.py",
+    ".keel/tests/test_git_attestation_lifecycle.py",
+    ".keel/tests/test_git_proof.py",
+    "ARCHITECTURE.md",
+    "WORKFLOW.md",
+    "docs/control-plane/KEEL.md",
+    "docs/control-plane/KERNEL_REDESIGN.md",
+    "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+  ],
+  "errors": [],
+  "plan_digest": "f2919e8e1a9be9967acfcd01dfb97610b528fbb6875f637c1180c1834fac130c",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-001",
+        "ER-REQ-002",
+        "ER-REQ-003",
+        "ER-REQ-004",
+        "ER-REQ-005"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_git_attestation_lifecycle.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "git-proof-attestation-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}
