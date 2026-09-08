@@ -1,0 +1,11 @@
+{
+  "schema_version": 2,
+  "change_type": "implementation",
+  "requirements": [
+    {"id":"REQ-001","statement":"Deterministic Git-proof interfaces preserve Git root and baseline identity, repository-relative path normalization, worktree isolation metadata, and scoped material diff calculation.","type":"architecture","priority":"must","implementation_paths":[".keel/lib/git_proof.py"],"minimum_evidence_authority":"TESTED"},
+    {"id":"REQ-002","statement":"CandidateAttestation formally binds change/work identity, candidate commit/tree, intent and material digests, EvidencePlan digest, supporting EvidenceReceipt identities/digests, available policy/runtime profile digests, and schema/version.","type":"security","priority":"must","implementation_paths":[".keel/lib/candidate_attestation.py"],"minimum_evidence_authority":"TESTED"},
+    {"id":"REQ-003","statement":"Sealing independently rejects stale verification, post-verification edits, changed intent, candidate content drift, and candidate ref collisions while preserving refs/keel/candidates/<change-id>.","type":"behavior","priority":"must","implementation_paths":[".keel/lib/keel_core.py",".keel/lib/git_proof.py",".keel/lib/candidate_attestation.py"],"minimum_evidence_authority":"TESTED"},
+    {"id":"REQ-004","statement":"Anchoring preserves landed ref and note semantics, rejects ref/note collisions and landed material or intent drift, and accepts candidate ancestry or content-equivalent squash/rebase with unrelated mainline changes.","type":"behavior","priority":"must","implementation_paths":[".keel/lib/keel_core.py",".keel/lib/git_proof.py",".keel/lib/candidate_attestation.py"],"minimum_evidence_authority":"TESTED"},
+    {"id":"REQ-005","statement":"Git refs and notes remain collision-checked indexes/anchors rather than the sole attestation payload or an immutability claim, and no Landing Transaction is implemented.","type":"documentation","priority":"must","implementation_paths":["ARCHITECTURE.md","WORKFLOW.md","docs/control-plane/KEEL.md","docs/control-plane/KERNEL_REDESIGN.md"],"minimum_evidence_authority":"INSPECTED"}
+  ]
+}

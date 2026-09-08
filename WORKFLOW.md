@@ -52,9 +52,18 @@ python3 .keel/bin/keel.py seal --change <id> --commit HEAD
 
 `seal` independently recomputes the verification digest from the committed Git tree, requires the candidate commit's material diff to equal `verification.json.changed_paths`, and creates collision-checked `refs/keel/candidates/<id>`. It does not modify the candidate commit after sealing.
 
+Seal also creates a formal, canonical `CandidateAttestation` Git blob, indexed by
+`refs/keel/attestations/candidates/<id>`. It binds the change/base identity, candidate
+commit and tree, independent material and intent digests, combined content digest,
+EvidencePlan digest, supporting EvidenceReceipt identities/digests, and the available
+policy/runtime-profile digest. The candidate ref remains commit-compatible; neither ref
+is an immutability guarantee or the sole attestation payload.
+
 An integration checkout with no active change may merge only a simple sealed-candidate ref (`git merge ... refs/keel/candidates/<id>`) through the KEEL hook path. This makes the handoff exact without forcing one global merge strategy; normal repository review/branch rules still decide whether merge, squash, rebase, PR, or another authorized integration mechanism is used.
 
 After landing, run `keel.py anchor --change <id> --commit <landed-sha>`. Anchoring requires the sealed candidate, re-reads the landed ledger, and independently recomputes the candidate's verified material+intent digest from the **landed Git tree**. Unrelated commits since the change's base are ignored; any changed candidate path or intent artifact must remain byte-equivalent. This supports ordinary merge ancestry and content-equivalent squash/rebase landing while detecting post-verification drift. Only then does KEEL create `refs/keel/ledger/<id>` plus the `refs/notes/keel` note.
+
+This remains the existing anchor operation, not the future Landing Transaction.
 
 Candidate/landed refs and notes are versioned Git anchors, not immutable security policy; protect remote history separately when required.
 

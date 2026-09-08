@@ -1,0 +1,398 @@
+{
+  "intent_digest": "3c9b457337522ae13beb81af7550a4e298c8e2785597b67cbb88f71e7ac89a34",
+  "receipts": [
+    {
+      "ended_at": "2026-09-08T16:48:21.401032+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "3c9b457337522ae13beb81af7550a4e298c8e2785597b67cbb88f71e7ac89a34",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 339,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "6d4e6f2743fbce98982e4930a59fd5a5cd726f209aa97adacc300c2d2ddd964b",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:48:21.061420+00:00",
+      "subject": {
+        "base_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_candidate_attestation.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_git_proof.py",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+        ],
+        "content_digest": "7c5ef94b53e9066f4a85c5c7d6580f5dfcf63cc575a17f1fbc5e8f5629ee9153",
+        "head_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:48:21.765837+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "3c9b457337522ae13beb81af7550a4e298c8e2785597b67cbb88f71e7ac89a34",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 363,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "8ac0b03ac173e0c04a6b546cbadf4ef349b72e079f57703461cf68f9d882238c",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:48:21.402592+00:00",
+      "subject": {
+        "base_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_candidate_attestation.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_git_proof.py",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+        ],
+        "content_digest": "7c5ef94b53e9066f4a85c5c7d6580f5dfcf63cc575a17f1fbc5e8f5629ee9153",
+        "head_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:48:44.539134+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-001",
+        "ER-REQ-002",
+        "ER-REQ-003",
+        "ER-REQ-004",
+        "ER-REQ-005"
+      ],
+      "intent_digest": "3c9b457337522ae13beb81af7550a4e298c8e2785597b67cbb88f71e7ac89a34",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_git_attestation_lifecycle.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 22772,
+          "excerpt": "Git proof tests PASS\nCandidate attestation tests PASS\nGit attestation lifecycle tests PASS",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_git_attestation_lifecycle.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "3de6931ad6bf0c49fbce3c400d2b2f8565166e41ffeecbdfce17bcaa9e632041",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:48:21.766393+00:00",
+      "subject": {
+        "base_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_candidate_attestation.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_git_proof.py",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+        ],
+        "content_digest": "7c5ef94b53e9066f4a85c5c7d6580f5dfcf63cc575a17f1fbc5e8f5629ee9153",
+        "head_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "git-proof-attestation-tests",
+        "provenance": ".keel/tests/test_git_attestation_lifecycle.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:48:44.869523+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "3c9b457337522ae13beb81af7550a4e298c8e2785597b67cbb88f71e7ac89a34",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 329,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"d62613ae2552cc18b985b1ac61ed700675e1ab95d22869a53e5ee68983bba021\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "3079232aa2d1bf93b97c0bffd91adb3dee8ff9c992612a55390ddee4b9814c92",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:48:44.539720+00:00",
+      "subject": {
+        "base_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_candidate_attestation.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_git_proof.py",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+        ],
+        "content_digest": "7c5ef94b53e9066f4a85c5c7d6580f5dfcf63cc575a17f1fbc5e8f5629ee9153",
+        "head_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:48:45.374735+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "3c9b457337522ae13beb81af7550a4e298c8e2785597b67cbb88f71e7ac89a34",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 504,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "d88c34080cc38c948b4f9f66358b46d8eff2fcc3061d6e8a072229ca24df5c3e",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:48:44.870097+00:00",
+      "subject": {
+        "base_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/git_proof.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_candidate_attestation.py",
+          ".keel/tests/test_git_attestation_lifecycle.py",
+          ".keel/tests/test_git_proof.py",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+        ],
+        "content_digest": "7c5ef94b53e9066f4a85c5c7d6580f5dfcf63cc575a17f1fbc5e8f5629ee9153",
+        "head_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+    "changed_paths": [
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_candidate_attestation.py",
+      ".keel/tests/test_git_attestation_lifecycle.py",
+      ".keel/tests/test_git_proof.py",
+      "ARCHITECTURE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/git-proof-attestation-subsystem.md"
+    ],
+    "content_digest": "7c5ef94b53e9066f4a85c5c7d6580f5dfcf63cc575a17f1fbc5e8f5629ee9153",
+    "head_commit": "597b63d7d0657cd4f1a749f625d8ee29498dc574",
+    "kind": "git-worktree"
+  }
+}

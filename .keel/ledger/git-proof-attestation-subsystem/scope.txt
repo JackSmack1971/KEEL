@@ -1,0 +1,15 @@
+.keel/lib/git_proof.py
+.keel/lib/candidate_attestation.py
+.keel/lib/keel_core.py
+.keel/tests/test_git_proof.py
+.keel/tests/test_candidate_attestation.py
+.keel/tests/test_git_attestation_lifecycle.py
+.keel/config.json
+.keel/ledger/git-proof-attestation-subsystem/**
+docs/exec-plans/active/git-proof-attestation-subsystem.md
+ARCHITECTURE.md
+WORKFLOW.md
+docs/control-plane/KEEL.md
+docs/control-plane/KERNEL_REDESIGN.md
+
+.control-plane/bootstrap-manifest.json
