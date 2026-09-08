@@ -1,0 +1,120 @@
+{
+  "schema_version": 2,
+  "criteria": [
+    {
+      "id": "AC-001",
+      "requirement_id": "REQ-001",
+      "statement": "Registry validation rejects malformed duplicate or unproven declarations.",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py"
+      ],
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "evidence-system-tests",
+          "fixture": "hostile evidence system fixtures",
+          "expected": "exit 0"
+        }
+      ]
+    },
+    {
+      "id": "AC-002",
+      "requirement_id": "REQ-002",
+      "statement": "Planner minimizes applicable evidence and fails closed on uncovered requirements.",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py"
+      ],
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "evidence-system-tests",
+          "fixture": "hostile evidence system fixtures",
+          "expected": "exit 0"
+        }
+      ]
+    },
+    {
+      "id": "AC-003",
+      "requirement_id": "REQ-003",
+      "statement": "Receipts bind subject intent invocation environment observations and established requirements.",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "implementation_paths": [
+        ".keel/lib/evidence_system.py",
+        ".keel/lib/keel_core.py"
+      ],
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "evidence-system-tests",
+          "fixture": "hostile evidence system fixtures",
+          "expected": "exit 0"
+        }
+      ]
+    },
+    {
+      "id": "AC-004",
+      "requirement_id": "REQ-004",
+      "statement": "Lifecycle authority derives from receipt coverage with compatibility projections.",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "implementation_paths": [
+        ".keel/lib/keel_core.py"
+      ],
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "evidence-system-tests",
+          "fixture": "hostile evidence system fixtures",
+          "expected": "exit 0"
+        }
+      ]
+    },
+    {
+      "id": "AC-005",
+      "requirement_id": "REQ-005",
+      "statement": "Active registry is duplicate-free and contains no SHA-pinned remediation invocation.",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "implementation_paths": [
+        ".keel/config.json"
+      ],
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "evidence-system-tests",
+          "fixture": "hostile evidence system fixtures",
+          "expected": "exit 0"
+        }
+      ]
+    },
+    {
+      "id": "AC-006",
+      "requirement_id": "REQ-006",
+      "statement": "Documentation specifies authority planning receipt and compatibility rules.",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "implementation_paths": [
+        "docs/control-plane/VERIFICATION.md"
+      ],
+      "required": true,
+      "policy": "all",
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "evidence-system-tests",
+          "fixture": "hostile evidence system fixtures",
+          "expected": "exit 0"
+        }
+      ]
+    }
+  ]
+}

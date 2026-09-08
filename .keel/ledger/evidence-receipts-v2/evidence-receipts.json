@@ -1,0 +1,423 @@
+{
+  "intent_digest": "62aa89b4ad6c1ffd86809ea59e2a777052aeb77cd43b7fa2497141dcd12978b1",
+  "receipts": [
+    {
+      "ended_at": "2026-09-08T16:28:38.154754+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "62aa89b4ad6c1ffd86809ea59e2a777052aeb77cd43b7fa2497141dcd12978b1",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 590,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "31f8e2c55131ae550f17cf87027ac7f0e7b4215ce715cdc8ba350198d24ac6d2",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:28:37.563694+00:00",
+      "subject": {
+        "base_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/contracts.json",
+          ".keel/lib/evidence_graph.py",
+          ".keel/lib/evidence_system.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_evidence_system.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/INDEX.md",
+          "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/evidence-receipts-v2.md"
+        ],
+        "content_digest": "02801e3f9c065e1b7d9e78c33ea0821da1578d196c06779f629341b8956a8614",
+        "head_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:28:38.831007+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "62aa89b4ad6c1ffd86809ea59e2a777052aeb77cd43b7fa2497141dcd12978b1",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 674,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "a9a511b6f63d8ef8199d9a8bac6e7bd93c9085c3cd561624c1b78edb34361113",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:28:38.156754+00:00",
+      "subject": {
+        "base_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/contracts.json",
+          ".keel/lib/evidence_graph.py",
+          ".keel/lib/evidence_system.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_evidence_system.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/INDEX.md",
+          "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/evidence-receipts-v2.md"
+        ],
+        "content_digest": "02801e3f9c065e1b7d9e78c33ea0821da1578d196c06779f629341b8956a8614",
+        "head_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:28:39.110341+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-001",
+        "ER-REQ-002",
+        "ER-REQ-003",
+        "ER-REQ-004",
+        "ER-REQ-005",
+        "ER-REQ-006"
+      ],
+      "intent_digest": "62aa89b4ad6c1ffd86809ea59e2a777052aeb77cd43b7fa2497141dcd12978b1",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_evidence_system.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 277,
+          "excerpt": "{\"status\": \"PASS\", \"hostile_checks\": [\"duplicates\", \"authority\", \"applicability\", \"determinism\", \"unrelated-green\", \"subject-drift\", \"tamper\", \"config\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_evidence_system.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "a97f46b1bf72e6f280f9f6865d48c52bb154fc539e5c1fa09472a868bd2afc17",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:28:38.832675+00:00",
+      "subject": {
+        "base_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/contracts.json",
+          ".keel/lib/evidence_graph.py",
+          ".keel/lib/evidence_system.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_evidence_system.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/INDEX.md",
+          "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/evidence-receipts-v2.md"
+        ],
+        "content_digest": "02801e3f9c065e1b7d9e78c33ea0821da1578d196c06779f629341b8956a8614",
+        "head_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "evidence-system-tests",
+        "provenance": ".keel/tests/test_evidence_system.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:28:39.753696+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "62aa89b4ad6c1ffd86809ea59e2a777052aeb77cd43b7fa2497141dcd12978b1",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 642,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"7695377cd6fc3d2636169ca79174c387789c9a90e7c2632c393252f28e540d75\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "3c630b69862193edbee9973b5c6060235bb28fd865c911fcf53415727c045860",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:28:39.110894+00:00",
+      "subject": {
+        "base_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/contracts.json",
+          ".keel/lib/evidence_graph.py",
+          ".keel/lib/evidence_system.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_evidence_system.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/INDEX.md",
+          "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/evidence-receipts-v2.md"
+        ],
+        "content_digest": "02801e3f9c065e1b7d9e78c33ea0821da1578d196c06779f629341b8956a8614",
+        "head_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T16:28:40.603572+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "62aa89b4ad6c1ffd86809ea59e2a777052aeb77cd43b7fa2497141dcd12978b1",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 849,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "aad3462d20f1543d6d842130b43cd51319b5f42ef1dfa6360d5385510b205e65",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T16:28:39.754297+00:00",
+      "subject": {
+        "base_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "changed_paths": [
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/contracts.json",
+          ".keel/lib/evidence_graph.py",
+          ".keel/lib/evidence_system.py",
+          ".keel/lib/keel_core.py",
+          ".keel/tests/test_evidence_system.py",
+          "AGENTS.md",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/INDEX.md",
+          "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/evidence-receipts-v2.md"
+        ],
+        "content_digest": "02801e3f9c065e1b7d9e78c33ea0821da1578d196c06779f629341b8956a8614",
+        "head_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+    "changed_paths": [
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/contracts.json",
+      ".keel/lib/evidence_graph.py",
+      ".keel/lib/evidence_system.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_evidence_system.py",
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/INDEX.md",
+      "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/evidence-receipts-v2.md"
+    ],
+    "content_digest": "02801e3f9c065e1b7d9e78c33ea0821da1578d196c06779f629341b8956a8614",
+    "head_commit": "35f9af704e5a82e6323a2345e733298c8af175bc",
+    "kind": "git-worktree"
+  }
+}

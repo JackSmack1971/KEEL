@@ -26,7 +26,7 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [Capability resolution](control-plane/CAPABILITY_RESOLUTION.md)
 - [Upgrade audit](control-plane/UPGRADE_AUDIT.md)
 - [Context compilation](control-plane/CONTEXT_COMPILATION.md)
-- [Acceptance/evidence graph](control-plane/ACCEPTANCE_EVIDENCE.md)
+- [Requirement and receipt evidence](control-plane/ACCEPTANCE_EVIDENCE.md)
 - [KEELBench](control-plane/KEELBENCH.md)
 - [Decision model](control-plane/DECISION_MODEL.md)
 - [Verification](control-plane/VERIFICATION.md)

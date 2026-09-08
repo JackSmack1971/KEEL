@@ -26,13 +26,13 @@ Build and maintain **KEEL-v2** as a legible, verifiable engineering repository. 
 ## Change entry points
 - Read-only investigation: no KEEL ledger required; return concise evidence.
 - Trivial write: `python3 .keel/bin/keel.py start <id> --mode trivial --summary "..." --scope <path-or-glob>`.
-- Standard write: start a change, produce proposal + delta + requirements/acceptance + scope + risk/effects state, pass discuss/plan gates, execute, verify the acceptance/evidence graph, commit the verified tree, `keel.py seal`, then authorized integration/handoff and landed `anchor`. Re-plan if intent/scope/acceptance changes; do not hand-edit authorization/state/gate/verification records.
+- Standard write: start a change, produce proposal + delta + requirements/acceptance + scope + risk/effects state, pass discuss/plan gates, execute, verify receipt-authoritative requirement coverage, commit the verified tree, `keel.py seal`, then authorized integration/handoff and landed `anchor`. Re-plan if intent/scope/acceptance changes; do not hand-edit authorization/state/gate/verification records.
 - Emergency: operator launches Codex with `KEEL_BYPASS_REASON`; KEEL gates become audit-only and create retro process debt. This never bypasses Codex/runtime/application authorization.
 
 ## Adaptive helpers
 - `python3 .keel/bin/keel.py discover` — evidence-backed capability detection; never silent policy activation.
 - `python3 .keel/bin/keel.py context` — compile a bounded current-change context packet.
-- `python3 .keel/bin/keel.py evidence` — inspect the latest acceptance/evidence graph.
+- `python3 .keel/bin/keel.py evidence` — inspect the latest evidence receipts.
 - `python3 .keel/bin/keelbench.py validate` — validate the paired-evaluation corpus; benchmark results are separate from deterministic self-tests.
 
 ## Before declaring done

@@ -1,0 +1,153 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-001",
+      "requirement_id": "REQ-001",
+      "verifier_id": "evidence-system-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-002",
+      "requirement_id": "REQ-002",
+      "verifier_id": "evidence-system-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-003",
+      "requirement_id": "REQ-003",
+      "verifier_id": "evidence-system-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-004",
+      "requirement_id": "REQ-004",
+      "verifier_id": "evidence-system-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-005",
+      "requirement_id": "REQ-005",
+      "verifier_id": "evidence-system-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-006",
+      "requirement_id": "REQ-006",
+      "verifier_id": "evidence-system-tests"
+    }
+  ],
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/bin/keel.py",
+    ".keel/config.json",
+    ".keel/contracts.json",
+    ".keel/lib/evidence_graph.py",
+    ".keel/lib/evidence_system.py",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_evidence_system.py",
+    "AGENTS.md",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/INDEX.md",
+    "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+    "docs/control-plane/KEEL.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/evidence-receipts-v2.md"
+  ],
+  "errors": [],
+  "plan_digest": "e4ea1ec85d4975af19a96916c8ffa7d614c226b07f171fd09921e41129a47df7",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-001",
+        "ER-REQ-002",
+        "ER-REQ-003",
+        "ER-REQ-004",
+        "ER-REQ-005",
+        "ER-REQ-006"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_evidence_system.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "evidence-system-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}

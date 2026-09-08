@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import capability_resolver
 import context_compiler
 import evidence_graph
+import evidence_system
 import p0_contract
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
@@ -650,7 +651,7 @@ def preexisting_worktree_changes(root: Path) -> list[str]:
 
 def doctor(root: Path) -> list[str]:
     errors = []
-    for rel in ("AGENTS.md", ".codex/hooks.json", ".codex/config.toml", ".keel/config.json", ".keel/bin/keel.py", ".keel/hooks/keel_hook.py", ".keel/lib/capability_resolver.py", ".keel/lib/context_compiler.py", ".keel/lib/evidence_graph.py", ".keel/bin/keelbench.py"):
+    for rel in ("AGENTS.md", ".codex/hooks.json", ".codex/config.toml", ".keel/config.json", ".keel/bin/keel.py", ".keel/hooks/keel_hook.py", ".keel/lib/capability_resolver.py", ".keel/lib/context_compiler.py", ".keel/lib/evidence_graph.py", ".keel/lib/evidence_system.py", ".keel/bin/keelbench.py"):
         if not (root / rel).is_file(): errors.append(f"missing {rel}")
     try:
         head_commit(root)
@@ -663,9 +664,7 @@ def doctor(root: Path) -> list[str]:
     try:
         cfg = read_json(root / ".keel/config.json")
         if cfg.get("schema_version") != 2: errors.append("unsupported .keel/config.json schema_version")
-        for c in cfg.get("verification_commands", []):
-            if not isinstance(c, dict) or not isinstance(c.get("id"), str) or not isinstance(c.get("argv"), list) or not c.get("argv"):
-                errors.append("invalid verification command entry")
+        errors.extend(evidence_system.validate_registry(cfg.get("verifier_registry", [])))
     except Exception as e:
         errors.append(f"KEEL config invalid: {e}")
     errors.extend(agents_lint(root))
@@ -751,7 +750,7 @@ def replan(root: Path, change_id: str) -> None:
     st["phase"] = "PLAN"
     st.pop("verified_content_digest", None)
     write_state(root, change_id, st)
-    for n in ("verification.json", "verification.md", "evidence-graph.json"):
+    for n in ("verification.json", "verification.md", "evidence-graph.json", "evidence-plan.json", "evidence-receipts.json"):
         p = ledger_dir(root, change_id) / n
         if p.exists(): p.unlink()
     # Any change to intent/scope requires fresh consequence authorization.
@@ -785,83 +784,74 @@ def record_authorization(root: Path, change_id: str, authority: str, scope: str,
     append_event(root, change_id, "AUTHORIZATION", "RECORDED", {"authority": authority.strip(), "scope": scope.strip(), "evidence_reference": evidence_reference.strip()})
 
 def verify_change(root: Path, change_id: str) -> dict:
+    """Plan and execute receipt-authoritative verification, then emit legacy views."""
     st = state(root, change_id)
     if st.get("phase") not in {"EXECUTE", "VERIFY"}:
         raise RuntimeError(f"verify requires EXECUTE/VERIFY, got {st.get('phase')}")
     errs = validate_plan(root, change_id)
     errs.extend(authorization_ship_errors(root, change_id))
-    scope_errs, material = diff_scope_errors(root, change_id)
-    errs.extend(scope_errs)
-    if not material:
-        errs.append("no material changed paths since KEEL base commit")
-    doc_errors = doctor(root)
-    # doctor baseline commit is expected and should pass during changes.
-    errs.extend(doc_errors)
-    commands = []
-    cfg = read_json(root / ".keel" / "config.json")
-    if source_change_present(root, change_id) and not cfg.get("verification_commands"):
-        errs.append("substantive source change has no configured verification_commands in .keel/config.json")
-    results = []
-    # Built-in whitespace/conflict check.
-    ledger_prefix = f".keel/ledger/{change_id}/"
-    gd_argv = ["diff", "--check", "--ignore-space-at-eol", st["base_commit"], "--", ".", f":(exclude){ledger_prefix}**"]
-    gd = run_git(root, gd_argv, check=False)
-    results.append({"id": "git-diff-check", "argv": ["git", *gd_argv], "exit_code": gd.returncode, "duration_ms": 0, "excerpt": redact((gd.stdout + gd.stderr)[-4000:])})
-    if gd.returncode != 0: errs.append("git diff --check failed")
-    for c in cfg.get("verification_commands", []):
-        cid = c.get("id"); argv = c.get("argv"); cwd_rel = c.get("cwd", "."); timeout = int(c.get("timeout_sec", 600)); required = bool(c.get("required", True))
-        if not isinstance(cid, str) or not isinstance(argv, list) or not argv or not all(isinstance(x, str) and x for x in argv):
-            errs.append(f"invalid verification command: {c!r}"); continue
-        resolution = p0_contract.resolve_command(root, c, authorized=bool(c.get("authorized", True)))
-        if resolution["status"] != p0_contract.PASS:
-            results.append({"id": cid, "argv": argv, "resolution": resolution, "exit_code": None, "required": required})
-            if required:
-                errs.append(f"verification command is not runnable: {cid} status={resolution['status']}")
-            continue
-        cwd = (root / cwd_rel).resolve()
-        try: cwd.relative_to(root.resolve())
-        except ValueError: errs.append(f"verification cwd escapes root: {cwd_rel}"); continue
-        t0 = time.monotonic()
-        try:
-            p = subprocess.run(argv, cwd=cwd, text=True, capture_output=True, timeout=timeout)
-            code = p.returncode; out = p.stdout + ("\n" if p.stdout and p.stderr else "") + p.stderr
-        except subprocess.TimeoutExpired as e:
-            code = 124; out = (e.stdout or "") + "\n" + (e.stderr or "") + f"\nTIMEOUT after {timeout}s"
-        ms = int((time.monotonic() - t0) * 1000)
-        excerpt = redact("\n".join(out.splitlines()[-20:]))[-8000:]
-        results.append({"id": cid, "argv": argv, "cwd": cwd_rel, "resolution": resolution, "exit_code": code, "duration_ms": ms, "required": required, "excerpt": excerpt})
-        if required and code != 0: errs.append(f"verification command failed: {cid} exit={code}")
-    d = ledger_dir(root, change_id)
-    evidence_graph_result = evidence_graph.evaluate(root, d / "requirements.json", d / "acceptance.json", results, material, contracts_path=root / ".keel" / "contracts.json")
-    write_json(d / "evidence-graph.json", evidence_graph_result)
-    if evidence_graph_result.get("status") != "PASS":
-        errs.extend(evidence_graph_result.get("errors") or ["acceptance/evidence graph failed"])
+    scope_errs, material = diff_scope_errors(root, change_id); errs.extend(scope_errs)
+    if not material: errs.append("no material changed paths since KEEL base commit")
+    errs.extend(doctor(root))
+    d = ledger_dir(root, change_id); cfg = read_json(root / ".keel/config.json")
+    registry = cfg.get("verifier_registry", [])
+    registry_errors = evidence_system.validate_registry(registry); errs.extend(registry_errors)
+    requirements = read_json(d / "requirements.json"); acceptance = read_json(d / "acceptance.json")
+    ers = evidence_system.evidence_requirements(requirements, acceptance)
+    risk = read_json(d / "risk.json").get("risk_level", "standard")
+    plan_value = evidence_system.plan(registry, ers, material, risk, {"source_change": source_change_present(root, change_id)})
+    write_json(d / "evidence-plan.json", plan_value)
+    if plan_value["status"] != "PASS": errs.extend(plan_value["errors"])
     digest = None
     if not scope_errs:
         try: digest = content_digest(root, change_id)
         except Exception as e: errs.append(f"content digest failed: {e}")
-    status = "PASS" if not errs else "FAIL"
-    implementation_status = evidence_graph_result.get("implementation_status", "NOT_VERIFIED")
-    change_type = evidence_graph_result.get("change_type", "implementation")
-    evidence = {"schema_version": 3, "change_id": change_id, "base_commit": st["base_commit"], "verified_at": now(), "status": status, "verification_class": evidence_graph_result.get("verification_class", "PLAN_READINESS"), "change_type": change_type, "implementation_status": implementation_status, "content_digest": digest, "changed_paths": material, "errors": errs, "checks": results, "acceptance": evidence_graph_result.get("summary", {})}
-    write_json(d / "verification.json", evidence)
-    md = ["# Verification", "", f"Status: `{status}`", f"Base: `{st['base_commit']}`", f"Content digest: `{digest or 'UNAVAILABLE'}`", "", "## Checks"]
-    for r in results:
-        md.append(f"- `{r['id']}` exit `{r['exit_code']}` ({r.get('duration_ms', 0)} ms)")
-    md += ["", "## Acceptance evidence"]
-    for row in evidence_graph_result.get("criteria", []):
-        md.append(f"- `{row.get('id')}` `{row.get('status')}` — {row.get('statement')}")
-    if errs:
-        md += ["", "## Blockers"] + [f"- {e}" for e in errs]
-    atomic_write(d / "verification.md", "\n".join(md) + "\n")
-    append_event(root, change_id, "EXECUTE", "PASS" if not scope_errs else "FAIL", {"changed_paths": material, "scope_errors": scope_errs})
-    append_event(root, change_id, "VERIFY", status, {"content_digest": digest, "errors": errs})
-    authority = status == "PASS" and (change_type == "planning_only" or implementation_status == "PASS")
-    if authority:
-        st["phase"] = "SHIP"; st["verified_content_digest"] = digest; write_state(root, change_id, st)
-    else:
-        st["phase"] = "EXECUTE"; st.pop("verified_content_digest", None); write_state(root, change_id, st)
-    return evidence
+    intent_value = {name: worktree_entry(root, f".keel/ledger/{change_id}/{name}")[1].decode("utf-8", errors="surrogateescape") for name in INTENT_FILES}
+    intent_digest = evidence_system.canonical_digest(intent_value)
+    head = run_git(root, ["rev-parse", "HEAD"], check=False).stdout.strip()
+    subject = {"kind":"git-worktree","base_commit":st["base_commit"],"head_commit":head,"content_digest":digest,"changed_paths":material}
+    by_id = {v["id"]:v for v in registry if isinstance(v,dict) and "id" in v}
+    results, receipts = [], []
+    for step in plan_value.get("steps", []) if plan_value["status"] == "PASS" else []:
+        v = by_id[step["verifier_id"]]; runtime = dict(step["runtime"])
+        argv = [x.replace("{base_commit}", st["base_commit"]) for x in runtime["argv"]]
+        runtime["argv"] = argv; executed_step = {**step, "runtime":runtime}
+        command = {"id":v["id"],"argv":argv,"cwd":runtime.get("cwd","."),"authorized":True}
+        resolution = p0_contract.resolve_command(root, command, authorized=True)
+        started = evidence_system.utc_now(); t0=time.monotonic(); code=None; out=""
+        if resolution["status"] == p0_contract.PASS:
+            cwd=(root/runtime.get("cwd",".")).resolve()
+            try: cwd.relative_to(root.resolve())
+            except ValueError: resolution={"status":"INVALID","reason":"cwd escapes root"}
+            else:
+                try:
+                    proc=subprocess.run(argv,cwd=cwd,text=True,capture_output=True,timeout=int(runtime.get("timeout_sec",600)))
+                    code=proc.returncode; out=proc.stdout+("\n" if proc.stdout and proc.stderr else "")+proc.stderr
+                except subprocess.TimeoutExpired as e:
+                    code=124; out=(e.stdout or "")+"\n"+(e.stderr or "")
+        elapsed=int((time.monotonic()-t0)*1000); ended=evidence_system.utc_now()
+        literal="PASS" if code == 0 else "FAIL" if code is not None else "INCONCLUSIVE"
+        excerpt=redact("\n".join(out.splitlines()[-20:]))[-8000:]
+        observations=[{"kind":"command-result","exit_code":code,"duration_ms":elapsed,"excerpt":excerpt,"resolution":resolution}]
+        receipts.append(evidence_system.receipt(v,executed_step,subject,intent_digest,literal,observations,started,ended))
+        results.append({"id":v["id"],"argv":argv,"cwd":runtime.get("cwd","."),"exit_code":code,"duration_ms":elapsed,"required":True,"excerpt":excerpt,"resolution":resolution})
+    write_json(d / "evidence-receipts.json", {"schema_version":1,"subject":subject,"intent_digest":intent_digest,"receipts":receipts})
+    evaluation=evidence_system.evaluate(plan_value,receipts,ers,subject,intent_digest)
+    if evaluation["status"] != "PASS": errs.extend(evaluation["errors"] or ["receipt evidence is inconclusive"])
+    # Compatibility only: old consumers may read these projections, but they grant no authority.
+    graph_projection={"schema_version":2,"projection_of":"evidence-receipts.json","status":"PASS" if evaluation["status"]=="PASS" else "FAIL","change_type":requirements.get("change_type","implementation"),"verification_class":"IMPLEMENTATION_ACCEPTANCE","implementation_status":"PASS" if evaluation["status"]=="PASS" else "NOT_VERIFIED","errors":evaluation["errors"],"criteria":[],"requirement_coverage":evaluation["coverage"],"summary":{"required":evaluation["summary"]["required"],"passed_required":evaluation["summary"]["established"],"requirements_total":len(ers),"requirements_covered":evaluation["summary"]["established"],"requirements_passing":evaluation["summary"]["established"]}}
+    write_json(d / "evidence-graph.json", graph_projection)
+    status="PASS" if not errs else "FAIL"; change_type=requirements.get("change_type","implementation"); implementation_status="PASS" if evaluation["status"]=="PASS" else "NOT_VERIFIED"
+    evidence={"schema_version":4,"authority":"evidence-receipts.json","compatibility_projection":True,"change_id":change_id,"base_commit":st["base_commit"],"verified_at":now(),"status":status,"verification_class":"IMPLEMENTATION_ACCEPTANCE","change_type":change_type,"implementation_status":implementation_status,"content_digest":digest,"intent_digest":intent_digest,"evidence_plan_digest":plan_value["plan_digest"],"changed_paths":material,"errors":sorted(set(errs)),"checks":results,"acceptance":graph_projection["summary"]}
+    write_json(d / "verification.json",evidence)
+    md=["# Verification","",f"Status: `{status}`",f"Authority: `evidence-receipts.json`",f"Subject digest: `{digest or 'UNAVAILABLE'}`",f"Intent digest: `{intent_digest}`","","## Selected verifiers"]+[f"- `{r['id']}` exit `{r['exit_code']}` ({r['duration_ms']} ms)" for r in results]+["","## Receipt coverage"]+[f"- `{c['evidence_requirement_id']}` `{c['status']}` via `{c['verifier_id']}`" for c in evaluation["coverage"]]
+    if errs: md += ["","## Blockers"]+[f"- {e}" for e in sorted(set(errs))]
+    atomic_write(d / "verification.md","\n".join(md)+"\n")
+    append_event(root,change_id,"EXECUTE","PASS" if not scope_errs else "FAIL",{"changed_paths":material,"scope_errors":scope_errs}); append_event(root,change_id,"VERIFY",status,{"content_digest":digest,"errors":sorted(set(errs)),"evidence_plan_digest":plan_value["plan_digest"]})
+    authority=status=="PASS" and (change_type=="planning_only" or implementation_status=="PASS")
+    if authority: st["phase"]="SHIP"; st["verified_content_digest"]=digest
+    else: st["phase"]="EXECUTE"; st.pop("verified_content_digest",None)
+    write_state(root,change_id,st); return evidence
 
 
 def current_verified(root: Path, change_id: str) -> tuple[bool, str]:
@@ -934,7 +924,7 @@ def reopen(root: Path, change_id: str) -> None:
     if st.get("phase") not in {"VERIFY", "SHIP"}:
         raise RuntimeError(f"reopen requires VERIFY/SHIP, got {st.get('phase')}")
     st["phase"] = "EXECUTE"; st.pop("verified_content_digest", None); write_state(root, change_id, st)
-    for n in ("verification.json", "verification.md", "evidence-graph.json"):
+    for n in ("verification.json", "verification.md", "evidence-graph.json", "evidence-plan.json", "evidence-receipts.json"):
         p = ledger_dir(root, change_id) / n
         if p.exists(): p.unlink()
     append_event(root, change_id, "REOPEN", "PASS")
