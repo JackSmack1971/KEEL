@@ -46,6 +46,8 @@ def repo() -> tuple[Path, str, str, str]:
 def main() -> None:
     root, base, candidate, target = repo()
     tree, changed = git_proof.synthetic_integration_tree(root, target, candidate, "merge")
+    assert git_proof.synthetic_integration_tree(root, target, candidate, "squash")[0] == tree
+    assert git_proof.synthetic_integration_tree(root, target, candidate, "rebase")[0] == tree
     assert git_proof.commit_tree(root, target) != tree
     assert changed == ["candidate.txt", "target.txt"]
     landing = ca.LandingAttestation(
@@ -53,6 +55,9 @@ def main() -> None:
         tree, "b" * 64, "c" * 64, ({"receipt_id": "r", "receipt_digest": "d" * 64},), "e" * 64,
         "git-merge-tree", "merge")
     assert ca.LandingAttestation.from_dict(json.loads(json.dumps(landing.as_dict()))) == landing
+    ca.write_landing_attestation(root, landing)
+    core._mark_landing_stale(root, landing, "concurrent target movement")
+    assert ca.read_landing_attestation(root, "landing-test").status == "STALE"
     landed = git(root, "commit-tree", tree, "-p", target, "-p", candidate, "-m", "landing")
     verified = core.verify_landing(root, "landing-test", landed, landing)
     assert verified["status"] == "PASS"
@@ -68,6 +73,23 @@ def main() -> None:
         pass
     else:
         raise AssertionError("unsupported strategy was accepted")
+    conflict = Path(tempfile.mkdtemp(prefix="keel-landing-conflict-"))
+    git(conflict, "init", "-q")
+    git(conflict, "config", "user.name", "T")
+    git(conflict, "config", "user.email", "t@x")
+    (conflict / "same.txt").write_text("base\n")
+    conflict_base = commit(conflict, "base")
+    (conflict / "same.txt").write_text("candidate\n")
+    conflict_candidate = commit(conflict, "candidate")
+    git(conflict, "checkout", "-q", conflict_base)
+    (conflict / "same.txt").write_text("target\n")
+    conflict_target = commit(conflict, "target")
+    try:
+        git_proof.synthetic_integration_tree(conflict, conflict_target, conflict_candidate)
+    except RuntimeError as exc:
+        assert "conflicts" in str(exc)
+    else:
+        raise AssertionError("conflicting concurrent changes were accepted")
     print("Landing transaction tests PASS")
 
 
