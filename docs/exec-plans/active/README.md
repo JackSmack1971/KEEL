@@ -1,7 +1,5 @@
-# Active ExecPlans
+# Active execution plans
 
-Place active resumable plans here.
-
-Program authority: [`upgrade-remaining-plan.md`](upgrade-remaining-plan.md).
-Requirement/status authority: [`../../control-plane/UPGRADE_AUDIT.md`](../../control-plane/UPGRADE_AUDIT.md).
-The completed P1 plan is archived at [`../completed/p1-repository-intelligence-foundation.md`](../completed/p1-repository-intelligence-foundation.md); it is evidence only and does not replace the roadmap.
+Only currently executing KEEL changes belong here. Canonical requirement/status
+authority is the matching `.keel/ledger/<change-id>/intent.json`; plans describe
+execution and risk controls but do not supersede intent.

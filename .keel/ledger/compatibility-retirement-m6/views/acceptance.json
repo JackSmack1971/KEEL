@@ -1,0 +1,112 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-1",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "Structural retirement and canonical CLI tests prove removed product modules and verbs have no active path."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "ledger-migration-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-2",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Frozen legacy-ledger migration tests prove deterministic loss-preserving compatibility."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-3",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "Retirement tests prove optional maintenance and policy-pack boundaries."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-4",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "P0/bootstrap and retirement tests prove canonical manifest provenance and removal of stale surfaces."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "git-proof-attestation-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "worktree-lifecycle-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-5",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Git attestation and worktree tests plus retirement guards prove protected invariants remain."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "provider": "command"
+        }
+      ],
+      "id": "AC-6",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "Complete deterministic regression, doctor, compatibility, and structural evidence pass."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-7",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Architecture and documentation authority are checked mechanically."
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,7 +1,0 @@
-{
-  "none": [],
-  "conflict": [{"authority_class":"explicit","value":"@a","source":"CODEOWNERS"},{"authority_class":"explicit","value":"@b","source":"KEEL"}],
-  "descriptive": [{"authority_class":"explicit","value":"layered","source":"ARCHITECTURE.md"},{"authority_class":"descriptive","value":"flat","source":"README.md"}],
-  "historical": [{"authority_class":"historical","freshness":"HISTORICAL/SUPERSEDED","value":"old","source":"old.md"}],
-  "stale": {"input":"a","current":"b"}
-}

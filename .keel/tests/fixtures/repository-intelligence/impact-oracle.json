@@ -1,8 +1,0 @@
-{
-  "unsupported": "UNSUPPORTED",
-  "malformed": "FAILED",
-  "cycle_edges": 2,
-  "unresolved_kind": "UNRESOLVED",
-  "unknown_changed_path": "UNKNOWN",
-  "impact_read_only": true
-}

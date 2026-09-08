@@ -1,79 +1,37 @@
 # Architecture
 
-Status: `APPLICATION GREENFIELD / KEEL KERNEL REDESIGN AUTHORIZED FOR PLANNING`
+Status: `VERIFIED — CANONICAL KEEL KERNEL`
 
-This file is the durable map of verified system structure. At bootstrap there is intentionally no invented stack.
+KEEL is a dependency-free, repository-local change-governance kernel. It has one
+normal CLI (`.keel/bin/keel.py`), one canonical change ledger, and one semantic
+vocabulary. Historical v1 *ledgers* are inputs to a versioned migration reader; there
+is no v1 mission/runtime product path.
 
-## Verified facts
-- Project root: `KEEL-v2`.
-- Control-plane doctrine sources: `control-plane-engineering-bible.md` and `control-plane-kb.md`.
-- Repository-owned control-plane scaffold exists.
-- Application/runtime architecture is not yet established.
+## Canonical components
 
-## KEEL target architecture
+- `.keel/lib/semantic_kernel.py` defines canonical primitive identity, provenance,
+  normalization, serialization, and explicit unknown states.
+- `.keel/lib/change_graph.py` owns requirement/work/effect planning and typed edges.
+- `.keel/lib/fact_graph.py` owns repository facts, dependency/ownership projections,
+  capability candidates, impact, and freshness. `keel.py facts` is its direct CLI view.
+- `.keel/lib/evidence_system.py` owns EvidencePlans and exact-subject receipts.
+- `.keel/lib/runtime_authorization.py` owns RuntimeProfile observations and
+  CapabilityGrant evaluation without claiming confinement or executing effects.
+- `.keel/lib/git_proof.py` and `.keel/lib/candidate_attestation.py` own repository,
+  worktree, tree, commit, candidate, landed, ref, note, and attestation proof.
+- `.keel/lib/canonical_ledger.py` owns intent/events/grants/receipts/attestations and
+  the narrow `keel.legacy-ledger/v1` migration reader.
+- `.keel/lib/keel_core.py` orchestrates lifecycle transitions. The Codex hook is a
+  thin adapter through `.keel/lib/codex_adapter_kernel.py`.
 
-[`docs/control-plane/KERNEL_REDESIGN.md`](docs/control-plane/KERNEL_REDESIGN.md) is the sole authoritative target architecture and migration contract for the KEEL kernel. The landed implementation remains current behavior until separately migrated; this link does not implement or authorize the target.
+## Boundaries
 
-## Architecture contract
-When architecture is introduced, record:
-- system purpose and users;
-- major components and trust boundaries;
-- dependency direction/layers;
-- public interfaces/contracts;
-- authoritative data stores and generated artifacts;
-- runtime/deployment topology;
-- cross-cutting concerns and their single entry points;
-- forbidden dependencies/cycles;
-- invariants that deserve structural tests or lints.
+Facts and generated views do not become policy. Plans and EffectRequests do not grant
+permission. Hooks are not confinement. SHIP is eligibility rather than integration
+permission. Malformed canonical or legacy state fails closed; absence and uncertainty
+remain explicit. Repository-relative path normalization and one-writer-per-worktree
+isolation are enforced mechanically.
 
-Every architecture claim must be either `VERIFIED`, `PROPOSED`, or `DEPRECATED`. Do not present proposals as current facts.
-
-See [docs/control-plane/ARCHITECTURE_ENFORCEMENT.md](docs/control-plane/ARCHITECTURE_ENFORCEMENT.md).
-
-## Control-plane intelligence boundary
-
-Repository discovery and context compilation are derived views. They may summarize evidence and route agents toward relevant source-of-truth artifacts, but they never replace Git-tracked policy, KEEL ledger intent, architecture contracts, or verification evidence.
-
-Repository understanding now has one implementation authority: the dependency-free
-FactGraph in `.keel/lib/fact_graph.py`. Read-only filesystem, Git, repository-structure,
-ecosystem-candidate, Python-AST, and CODEOWNERS adapters emit normalized Facts and
-Edges; repository intelligence, maps, capabilities, context inputs, and impact are
-compatibility projections over that graph. Heuristic facts remain candidates and never
-activate policy or authorize/execute a discovered command.
-
-## Canonical semantic and planning boundary
-
-A dependency-free semantic model defines the kernel's eleven canonical primitive records, orthogonal state dimensions, strict identity/provenance/resource rules, and deterministic serialization/content digests in `.keel/lib/semantic_kernel.py`. Canonical planning now composes those records into one authoritative `ChangeGraph`: work dependencies exist only as typed edges, effects remain requests rather than grants, resource overlap affects later scheduling rather than validity, and frontier is a pure projection over supplied state. Mission v1/v2 documents remain read-compatible only through explicit normalization adapters. Repository-intelligence and runtime remain compatibility-stage subsystems. Verification now uses `.keel/lib/evidence_system.py` as its primary authority for EvidenceRequirements, impact-selected EvidencePlans, declared Verifiers, and exact-subject EvidenceReceipts. `.keel/lib/evidence_graph.py` remains a legacy contract reader and new `evidence-graph.json` output is a compatibility projection. Lifecycle seal and anchor boundaries retain their existing semantics under `KEEL-KERNEL-REDESIGN-v1`.
-
-## Git proof and attestation boundary
-
-Exact repository, worktree, path, diff, tree-entry, and commit identity proofs are now
-owned by the dependency-free `.keel/lib/git_proof.py`. The versioned
-`CandidateAttestation` and the compatible candidate/landed boundary are owned by
-`.keel/lib/candidate_attestation.py`; `keel_core.py` remains the lifecycle orchestrator
-and compatibility facade. Candidate attestations are stored as canonical Git blobs
-indexed by `refs/keel/attestations/candidates/<change-id>` and also recorded in local
-audit output. Candidate, attestation, landed, and note refs are mutable indexes/anchors,
-not immutable policy or the sole attestation payload. This boundary deliberately does
-not implement the future Landing Transaction.
-
-## Runtime trust and authorization boundary
-
-The dependency-free `.keel/lib/runtime_authorization.py` implements the M4
-runtime-policy boundary over canonical `RuntimeProfile`, `EffectRequest`, and
-`CapabilityGrant` records. Profiles retain explicit negative observations rather
-than deriving trust from configuration. Grants bind subject, work/change, action,
-resource, constraints, intent digest, issuer evidence, validity, and use limits.
-Effect adapters classify boundaries as `MEDIATED`, `OBSERVED`, or `UNCONFINED`;
-none currently executes provider effects. Planning validity remains independent
-from execution readiness. This does not implement a scheduler or hook confinement.
-
-## Codex adapter boundary
-
-`.keel/lib/codex_adapter_kernel.py` owns deterministic normalization targets and
-policy queries for Codex hook events. It consumes conservative `RuntimeProfile`
-observations plus lifecycle/context/evidence compatibility APIs and returns explicit
-adapter-neutral outcomes. `.keel/hooks/keel_hook.py` is only the Codex JSON/Git-root
-bootstrap and output renderer. Post-tool outcomes are observations after an effect and
-cannot undo it. Declared event delivery is not complete confinement, and static wire
-fixtures are not evidence that an installed Codex runtime loaded or enforced hooks.
+Optional maintenance lives under `.keel/maintenance/`. Reusable consumer-project
+policy templates live under `policies/templates/`. Historical bootstrap research
+lives under `docs/references/research/`; neither surface is product authority.

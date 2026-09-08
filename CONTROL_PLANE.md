@@ -1,6 +1,6 @@
 # Codex Control Plane
 
-State: `BOOTSTRAPPED_WITH_CONSERVATIVE_RUNTIME_TRUST_MODEL`; live Codex/hook enforcement remains pending per-session observation.
+State: `CANONICAL_KERNEL_M6`; live Codex/hook enforcement remains pending per-session observation.
 
 The control plane is the repository's information architecture, change-governance spine, and feedback system. It remains stack-neutral until project evidence activates specialized domains.
 
@@ -15,9 +15,9 @@ The control plane is the repository's information architecture, change-governanc
 8. Production feedback — reviewed traces/corrections -> findings -> evals -> bounded tasks.
 9. Entropy control — recurring docs/quality gardening and promotion of repeated feedback into rules.
 
-## Kernel transition freeze
+## Canonical kernel
 
-Feature expansion above landed P2 is frozen. [`docs/control-plane/KERNEL_REDESIGN.md`](docs/control-plane/KERNEL_REDESIGN.md) is the sole forward architecture and migration authority; existing P0/P1/P2 surfaces remain governing current behavior until deterministic migration lands.
+The `KEEL-KERNEL-REDESIGN-v1` migration is complete through M6. Canonical semantics, ChangeGraph, FactGraph, receipt planning, runtime authorization, Codex adaptation, Git attestations, and the canonical ledger are the only active product path. Versioned v1 ledger reading exists solely for audit and migration.
 
 ## Core maps
 - [KEEL kernel redesign and migration authority](docs/control-plane/KERNEL_REDESIGN.md)

@@ -1,0 +1,41 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "source": "user",
+      "statement": "Remove the normal v1 mission runtime, mission-v2 compatibility product path, topology router, duplicate repository-map and developer-UX wrappers, and temporary upgrade kernel after all active consumers use ChangeGraph, FactGraph, EvidencePlanner, RuntimeProfile, canonical ledger, and kernel CLI semantics."
+    },
+    {
+      "id": "REQ-2",
+      "source": "user",
+      "statement": "Retain deterministic, fail-closed historical v1 ledger migration through a narrow versioned reader and minimal frozen fixtures, preserving source bytes, digests, unknown fields, absence, and explicit uncertainty without inventing grants or evidence."
+    },
+    {
+      "id": "REQ-3",
+      "source": "user",
+      "statement": "Move useful feedback and entropy inspection out of kernel core into explicitly optional maintenance tooling and move generic target-project frontend, reliability, security, and release guidance into an explicit policy-pack/template location."
+    },
+    {
+      "id": "REQ-4",
+      "source": "user",
+      "statement": "Replace .control-plane as an active runtime namespace with canonical .keel distribution metadata, archive bootstrap research away from product authority, and remove reconciled planning residue, stale verification configuration, obsolete phase-agent configuration, and obsolete architecture documentation."
+    },
+    {
+      "id": "REQ-5",
+      "source": "user",
+      "statement": "Preserve candidate and landed refs, Git notes indexing, candidate/landed attestations, exact committed-tree verification, worktree isolation, repository-relative normalization, fail-closed malformed-state handling, explicit uncertainty, and generic explorer/reviewer/risk-reviewer capabilities."
+    },
+    {
+      "id": "REQ-6",
+      "source": "user",
+      "statement": "Prove retirement safety by repository reference search, deterministic tests, migration round-trip and idempotence, CLI behavior, documentation validation, runtime entry-point inspection, and a mechanical no-dual-path regression check."
+    },
+    {
+      "id": "REQ-7",
+      "source": "user",
+      "statement": "Update the active architecture and governance documentation to describe one canonical architecture, one semantic vocabulary, one normal CLI, and no dual v1/v2 product path."
+    }
+  ],
+  "schema_version": 1
+}

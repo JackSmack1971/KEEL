@@ -112,16 +112,17 @@ def build(root: Path, change_id: str, commit: str, state: dict, verification: di
         canonical_digest(profile) if profile else None, tuple(paths))
 
 
-def write_attestation_object(root: Path, attestation: CandidateAttestation, ref: str) -> str:
+def write_attestation_object(root: Path, attestation: CandidateAttestation, ref: str, *, replace_existing: bool = False) -> str:
     payload = (json.dumps(attestation.as_dict(), indent=2, sort_keys=True) + "\n").encode()
     import subprocess
     written = subprocess.run(["git", "hash-object", "-w", "--stdin"], cwd=root, input=payload, capture_output=True, check=True)
     oid_text = written.stdout.decode().strip()
     old = git_proof.run(root, ["show-ref", "--hash", "--verify", ref], check=False)
-    if old.returncode == 0 and old.stdout.strip() != oid_text:
+    if old.returncode == 0 and old.stdout.strip() != oid_text and not replace_existing:
         raise RuntimeError(f"KEEL attestation ref collision: {ref} already points to {old.stdout.strip()}")
-    if old.returncode:
-        updated = git_proof.run(root, ["update-ref", ref, oid_text, "0" * 40], check=False)
+    if old.returncode or old.stdout.strip() != oid_text:
+        expected = "0" * 40 if old.returncode else old.stdout.strip()
+        updated = git_proof.run(root, ["update-ref", ref, oid_text, expected], check=False)
         if updated.returncode: raise RuntimeError(updated.stderr.strip() or "git update-ref attestation failed")
     return oid_text
 

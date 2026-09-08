@@ -7,9 +7,7 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [PRODUCT_SENSE.md](PRODUCT_SENSE.md) — objective/user/value assumptions.
 - [PLANS.md](PLANS.md) — execution-plan policy.
 - [QUALITY_SCORE.md](QUALITY_SCORE.md) — quality/entropy scorecard.
-- [RELIABILITY.md](RELIABILITY.md) — reliability/SLO policy.
-- [SECURITY.md](SECURITY.md) — security/privacy baseline.
-- [FRONTEND.md](FRONTEND.md) — conditional UI/browser contract.
+- [Policy packs](../policies/README.md) — non-authoritative target-project templates for frontend, reliability, security, and release concerns.
 
 ## Durable artifact collections
 - [design-docs/](design-docs/README.md)
@@ -24,7 +22,6 @@ Start at root `AGENTS.md`; load detail only when relevant.
 ## Control-plane detail
 - [Capability registry](control-plane/CAPABILITY_REGISTRY.md)
 - [Capability resolution](control-plane/CAPABILITY_RESOLUTION.md)
-- [Upgrade audit](control-plane/UPGRADE_AUDIT.md)
 - [Context compilation](control-plane/CONTEXT_COMPILATION.md)
 - [Requirement and receipt evidence](control-plane/ACCEPTANCE_EVIDENCE.md)
 - [KEELBench](control-plane/KEELBENCH.md)
@@ -37,13 +34,12 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [Security, data and supply chain](control-plane/SECURITY_DATA_SUPPLY_CHAIN.md)
 - [Observability, reliability, performance and cost](control-plane/OPERABILITY.md)
 - [UI/browser/platform specialties](control-plane/DOMAIN_SPECIALTIES.md)
-- [Release, migration, incident and recovery](control-plane/RELEASE_OPERATIONS.md)
+- [Release policy-pack template](../policies/templates/RELEASE.md)
 - [Codex-native configuration](control-plane/CODEX_NATIVE.md)
 - [Orchestration](control-plane/ORCHESTRATION.md)
 - [Feedback/self-improvement](control-plane/FEEDBACK_EVALS.md)
 - [Entropy/doc gardening](control-plane/ENTROPY.md)
 - [Source provenance](control-plane/SOURCES.md)
-- [KEEL upgrade audit](control-plane/UPGRADE_AUDIT.md)
 
 ## KEEL
 - [Spec-anchored change control](control-plane/KEEL.md)

@@ -7,15 +7,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve()
 sys.path.insert(0, str(HERE.parents[1] / "lib"))
 import keel_core as k
-import upgrade_kernel as uk
-import mission_graph as mg
-import mission_v2 as mv2
 import change_graph as cg
-import repository_map as rm
-import topology_router as tr
-import feedback_entropy as fe
+import fact_graph
 import lifecycle
-import developer_ux as ux
 import effect_inference as effects
 import schema_migrations as migrations
 import telemetry
@@ -32,22 +26,11 @@ def main() -> int:
     sub.add_parser("version")
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
-    for name in ("change-graph", "mission"):
-        p = sub.add_parser(name); p.add_argument("action", choices=["validate", "frontier", "status", "normalize", "serialize"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path)
-    # Temporary read-compatibility alias, accepted but intentionally omitted
-    # from the normal public command listing.
-    p = argparse.ArgumentParser(prog="keel.py mission-v2"); p.add_argument("action", choices=["validate", "frontier", "normalize-v1"]); p.add_argument("path", type=Path)
-    sub._name_parser_map["mission-v2"] = p
-    p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
-    p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
-    p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
-    p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
+    p = sub.add_parser("change-graph"); p.add_argument("action", choices=["validate", "frontier", "status", "normalize", "serialize"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path)
+    sub.add_parser("facts")
     sub.add_parser("compat")
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true"); p.add_argument("--plan", type=Path)
     p = sub.add_parser("ledger"); p.add_argument("action", choices=["migrate","project","validate"]); p.add_argument("--change", required=True); p.add_argument("--output", type=Path)
-    p = sub.add_parser("init"); p.add_argument("--check", action="store_true")
-    p = sub.add_parser("review"); p.add_argument("--change")
-    p = sub.add_parser("ship"); p.add_argument("--change")
     p = sub.add_parser("effects"); p.add_argument("--change")
     p = sub.add_parser("telemetry"); p.add_argument("--change")
     sub.add_parser("discover")
@@ -82,11 +65,11 @@ def main() -> int:
         if args.cmd == "manifest":
             result = p0_contract.manifest_producer(root, args.write); print(json.dumps(result, indent=2)); return 0 if result["status"] in {"WRITTEN", "VERIFIED"} else 1
         if args.cmd == "version":
-            result = uk.version_report(root); print(json.dumps(result, indent=2)); return 0 if result["compatibility"] == "COMPATIBLE" else 1
-        if args.cmd == "reconcile": print(json.dumps(uk.reconcile(root, args.change), indent=2)); return 0
+            result = lifecycle.version_report(root); print(json.dumps(result, indent=2)); return 0 if result["compatibility"] == "COMPATIBLE" else 1
+        if args.cmd == "reconcile": print(json.dumps(lifecycle.reconcile(root, args.change), indent=2)); return 0
         if args.cmd == "contracts":
-            result = uk.contract_report(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
-        if args.cmd in {"change-graph", "mission"}:
+            result = lifecycle.contract_report(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
+        if args.cmd == "change-graph":
             source = cg.load(args.path.resolve())
             try:
                 graph = cg.normalize(source)
@@ -102,34 +85,8 @@ def main() -> int:
             except (cg.GraphError, ValueError, TypeError) as exc:
                 result = {"status": "INVALID", "errors": [str(exc)]}
             print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
-        if args.cmd == "mission-v2":
-            source = mv2.load(args.path.resolve()) if hasattr(mv2, "load") else json.loads(args.path.resolve().read_text(encoding="utf-8"))
-            if args.action == "normalize-v1":
-                result = mv2.normalize_v1(source)
-            elif args.action == "validate":
-                result = mv2.validate(source, root=root)
-            else:
-                result = mv2.frontier(source)
-            print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"INVALID", "UNSUPPORTED"} else 1
-        if args.cmd == "map":
-            result = rm.build(root)
-            if args.stdout:
-                print(json.dumps(result, indent=2))
-            else:
-                print(json.dumps({"status": "WRITTEN", "path": str(rm.write(root, result).relative_to(root))}, indent=2))
-            return 0
-        if args.cmd == "route":
-            result = tr.recommend(tr.load(args.path.resolve()), args.change)
-            print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
-        if args.cmd == "feedback":
-            if args.action == "queue":
-                result = fe.queue(root, args.path.resolve())
-            else:
-                observation = fe.load(args.path.resolve())
-                result = {"status": "PASS" if not fe.validate_observation(root, observation) else "FAIL", "errors": fe.validate_observation(root, observation)} if args.action == "validate" else fe.status(root, observation)
-            print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
-        if args.cmd == "entropy":
-            result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "facts":
+            print(fact_graph.build(root).serialize(), end=""); return 0
         if args.cmd == "ledger":
             d=k.ledger_dir(root,args.change)
             if args.action == "migrate": result=canonical_ledger.migrate_legacy(d,args.output.resolve() if args.output else None)
@@ -141,11 +98,6 @@ def main() -> int:
             result = migrations.preflight(args.plan.resolve()); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "compat" or args.cmd == "migrate":
             result = lifecycle.inventory(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "COMPATIBLE" else 1
-        if args.cmd == "init":
-            result = ux.init_check(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "READY" else 1
-        if args.cmd == "review": print(json.dumps(ux.review(root, args.change), indent=2)); return 0
-        if args.cmd == "ship":
-            result = ux.ship_eligibility(root, args.change); print(json.dumps(result, indent=2)); return 0 if result["status"] == "ELIGIBLE" else 1
         if args.cmd == "effects":
             result = effects.audit(root, args.change); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "telemetry":

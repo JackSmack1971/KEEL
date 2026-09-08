@@ -1,0 +1,250 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-1",
+      "requirement_id": "REQ-1",
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-2",
+      "requirement_id": "REQ-2",
+      "verifier_id": "ledger-migration-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-3",
+      "requirement_id": "REQ-3",
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-4",
+      "requirement_id": "REQ-4",
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-5",
+      "requirement_id": "REQ-5",
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-6",
+      "requirement_id": "REQ-6",
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-7",
+      "requirement_id": "REQ-7",
+      "verifier_id": "compatibility-retirement-tests"
+    }
+  ],
+  "changed_paths": [
+    ".control-plane/.gitignore",
+    ".keel/bin/keel.py",
+    ".keel/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/candidate_attestation.py",
+    ".keel/lib/capability_resolver.py",
+    ".keel/lib/codex_adapter_kernel.py",
+    ".keel/lib/developer_ux.py",
+    ".keel/lib/keel_core.py",
+    ".keel/lib/lifecycle.py",
+    ".keel/lib/mission_graph.py",
+    ".keel/lib/mission_v2.py",
+    ".keel/lib/p0_contract.py",
+    ".keel/lib/repository_intelligence.py",
+    ".keel/lib/repository_map.py",
+    ".keel/lib/topology_router.py",
+    ".keel/lib/upgrade_kernel.py",
+    ".keel/maintenance/README.md",
+    ".keel/maintenance/feedback_entropy.py",
+    ".keel/maintenance/keel_maintenance.py",
+    ".keel/maintenance/test_feedback_entropy.py",
+    ".keel/templates/acceptance.json",
+    ".keel/templates/authorization.json",
+    ".keel/templates/delta.md",
+    ".keel/templates/effects.json",
+    ".keel/templates/proposal.md",
+    ".keel/templates/requirements.json",
+    ".keel/templates/risk-review.md",
+    ".keel/templates/risk.json",
+    ".keel/tests/fixtures/change-graph/valid.json",
+    ".keel/tests/fixtures/mission-v2/v1.json",
+    ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+    ".keel/tests/test_change_graph.py",
+    ".keel/tests/test_compatibility_retirement.py",
+    ".keel/tests/test_developer_ux.py",
+    ".keel/tests/test_lifecycle_compatibility.py",
+    ".keel/tests/test_mission_v2.py",
+    ".keel/tests/test_mission_work_graph.py",
+    ".keel/tests/test_p0_contract.py",
+    ".keel/tests/test_p1_plan_contract.py",
+    ".keel/tests/test_repository_intelligence.py",
+    ".keel/tests/test_repository_map.py",
+    ".keel/tests/test_topology_routing.py",
+    ".keel/tests/test_upgrade_kernel.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/INDEX.md",
+    "docs/control-plane/ACCEPTANCE_EVIDENCE.md",
+    "docs/control-plane/CAPABILITY_REGISTRY.md",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/FEEDBACK_EVALS.md",
+    "docs/control-plane/KEEL.md",
+    "docs/control-plane/KERNEL_REDESIGN.md",
+    "docs/control-plane/ORCHESTRATION.md",
+    "docs/control-plane/SOURCES.md",
+    "docs/exec-plans/active/README.md",
+    "docs/exec-plans/active/compatibility-retirement-m6.md",
+    "docs/exec-plans/active/upgrade-remaining-plan.md",
+    "docs/exec-plans/completed/canonical-change-graph.md",
+    "docs/exec-plans/completed/canonical-change-intent.md",
+    "docs/exec-plans/completed/codex-kernel-adapter-refactor.md",
+    "docs/exec-plans/completed/evidence-receipts-v2.md",
+    "docs/exec-plans/completed/factgraph-repository-adapters.md",
+    "docs/exec-plans/completed/git-proof-attestation-subsystem.md",
+    "docs/exec-plans/completed/kernel-redesign-migration-authority.md",
+    "docs/exec-plans/completed/p2-mission-schema-planning.md",
+    "docs/exec-plans/completed/runtime-trust-authorization-model.md",
+    "docs/exec-plans/completed/semantic-kernel-m1.md",
+    "docs/exec-plans/completed/verification-evidence-class-separation.md",
+    "docs/references/research/KEEL_UPGRADES.md",
+    "docs/references/research/UPGRADE_AUDIT.md",
+    "docs/references/research/control-plane-engineering-bible.md",
+    "docs/references/research/control-plane-kb.md",
+    "plans/README.md",
+    "plans/findings.json",
+    "policies/README.md",
+    "policies/templates/FRONTEND.md",
+    "policies/templates/RELEASE.md",
+    "policies/templates/RELIABILITY.md",
+    "policies/templates/SECURITY.md"
+  ],
+  "errors": [],
+  "plan_digest": "11cce5f77891f68259b0f174946589fdd4e3e5662aa73173aa15f054375c3220",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-1",
+        "ER-REQ-3",
+        "ER-REQ-4",
+        "ER-REQ-5",
+        "ER-REQ-6",
+        "ER-REQ-7"
+      ],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-2"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_ledger_migration.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "ledger-migration-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
-# Requirements and receipt evidence
+# Requirement and receipt evidence
 
-A standard change records normative `REQ-*` entries in `requirements.json` and acceptance mappings in `acceptance.json`. Each required property declares `minimum_evidence_authority`; acceptance identifies permitted verifier/provider evidence. Both files are portable intent and changing either invalidates prior receipts.
+Canonical `intent.json` contains both `REQ-*` Requirements and corresponding
+EvidenceRequirements. `.keel/lib/evidence_system.py` derives an EvidencePlan from
+impact and declared verifiers, then records immutable-content, exact-subject receipts
+under the kernel-owned `receipts/` directory. Generated views are navigation only.
 
-Verification derives one `EvidenceRequirement` per requirement and an impact-selected `EvidencePlan`. Registry Verifiers can be selected only when their declared provider, requirement type, authority, path/risk applicability, and runtime contract are sufficient. Every selected execution emits an exact-subject `EvidenceReceipt`; receipt coverage is the primary authority.
-
-A literal command exit zero is only an observation. It establishes a requirement only when the receipt is intact, matches the exact subject and intent, has sufficient declared authority, and names the planned EvidenceRequirement. An unrelated green check cannot grant completion.
-
-During migration, `evidence-graph.json` is a deterministic compatibility projection over receipt coverage. Historical graph records remain readable; new graph projections do not carry independent evidence-edge truth. See [VERIFICATION.md](VERIFICATION.md).
+A required acceptance property passes only when its declared provider/check receipts
+match the current subject, intent digest, and verifier declaration. Missing,
+unsupported, malformed, stale, or unrelated evidence does not pass. Editing intent
+invalidates previous coverage and requires replanning.

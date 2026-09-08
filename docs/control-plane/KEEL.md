@@ -25,7 +25,7 @@ DISCUSS validates a meaningful objective. PLAN validates canonical requirements,
 Planning and effect declaration never grant authority. CapabilityGrants are separate issuer-attributed, subject/effect/scope/condition-bound records. Legacy authorization booleans migrate only as explicitly labelled historical evidence, never as CapabilityGrants.
 
 ## Historical compatibility
-The versioned `keel.legacy-ledger/v1` reader continues to audit existing sealed/landed ledgers. `keel.py ledger migrate` is additive, deterministic, idempotent, source-digesting, and loss-preserving; missing requirements, authorization, acceptance, or evidence remain explicitly absent. Legacy source bytes are preserved in migration provenance and are never deleted by migration. Old templates and readers remain until corpus and hostile fixtures prove all supported states and M6 authorizes retirement.
+The versioned `keel.legacy-ledger/v1` reader continues to audit existing sealed/landed ledgers. `keel.py ledger migrate` is additive, deterministic, idempotent, source-digesting, and loss-preserving; missing requirements, authorization, acceptance, or evidence remain explicitly absent. Legacy source bytes are preserved in migration provenance and are never deleted by migration. M6 retired old split templates and product writers after corpus and hostile fixtures proved supported states. The narrow versioned reader remains for historical audit and migration only.
 
 ## Boundaries
 Hash chains and Git refs are not immutable security controls. Hooks are not confinement. SHIP is not permission to push, merge, release, deploy, migrate, or mutate an external system. Candidate and landed verification remain distinct; this change does not implement the future landing transaction.

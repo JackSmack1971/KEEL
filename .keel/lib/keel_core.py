@@ -553,16 +553,23 @@ def seal_candidate(root: Path, change_id: str, commit: str) -> dict:
         raise RuntimeError(f"seal candidate must name current HEAD ({head}), got {sha}")
     ref = candidate_ref(change_id)
     old = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
+    replace_existing = False
     if old.returncode == 0 and old.stdout.strip() != sha:
-        raise RuntimeError(f"KEEL candidate ref collision: {ref} already points to {old.stdout.strip()}")
+        try:
+            verify_commit_tree(root, change_id, old.stdout.strip(), require_exact_diff=True)
+        except RuntimeError as exc:
+            raise RuntimeError(f"KEEL candidate ref collision: {ref} already points to {old.stdout.strip()}") from exc
+        if run_git(root, ["merge-base", "--is-ancestor", old.stdout.strip(), sha], check=False).returncode != 0:
+            raise RuntimeError(f"KEEL candidate ref collision: {ref} already points to {old.stdout.strip()}")
+        replace_existing = True
     attestation = candidate_attestation.build(root, change_id, sha, committed_state, committed_verification, intent_files(root, change_id))
     attestation_ref = candidate_attestation.ATTESTATION_REF_PREFIX + change_id
-    candidate_attestation.write_attestation_object(root, attestation, attestation_ref)
-    if old.returncode != 0:
-        z = "0" * 40
-        p = run_git(root, ["update-ref", ref, sha, z], check=False)
+    if old.returncode != 0 or replace_existing:
+        expected = "0" * 40 if old.returncode != 0 else old.stdout.strip()
+        p = run_git(root, ["update-ref", ref, sha, expected], check=False)
         if p.returncode != 0:
             raise RuntimeError(p.stderr.strip() or "git update-ref candidate failed")
+    candidate_attestation.write_attestation_object(root, attestation, attestation_ref, replace_existing=replace_existing)
     audit_dir = root / ".keel" / "audit"; audit_dir.mkdir(parents=True, exist_ok=True)
     with (audit_dir / "candidates.jsonl").open("a", encoding="utf-8") as f:
         f.write(json.dumps({"ts": now(), "change_id": change_id, "candidate_commit": sha, "ref": ref, "content_digest": dig,
@@ -654,7 +661,7 @@ def agents_lint(root: Path) -> list[str]:
 def preexisting_worktree_changes(root: Path) -> list[str]:
     base = head_commit(root)
     paths = changed_paths(root, base)
-    ignored_runtime = {".keel/active-change", ".control-plane/validation.json", ".control-plane/runtime-validation.json"}
+    ignored_runtime = {".keel/active-change"}
     return [p for p in paths if p not in ignored_runtime and not p.startswith(".keel/audit/")]
 
 def doctor(root: Path) -> list[str]:
@@ -964,19 +971,23 @@ def anchor(root: Path, change_id: str, commit: str) -> None:
     if resolved.returncode != 0:
         raise RuntimeError(f"invalid landed commit: {commit}")
     sha = resolved.stdout.strip()
-    landed_state = show_commit_json(root, sha, change_id, "state.json")
-    landed_verification = show_commit_json(root, sha, change_id, "verification.json")
-    if landed_state.get("phase") != "SHIP":
-        raise RuntimeError(f"landed ledger phase must be SHIP, got {landed_state.get('phase')}")
-    if landed_verification.get("status") != "PASS":
-        raise RuntimeError("landed verification status is not PASS")
+    try:
+        _, landed_state, landed_verification, landed_digest = verify_commit_tree(
+            root, change_id, sha, require_exact_diff=False
+        )
+    except RuntimeError as exc:
+        if "digest does not match verification evidence" in str(exc):
+            raise RuntimeError("landed Git-tree content does not match sealed candidate verification digest") from exc
+        raise
+    _, _, candidate_verification, _ = verify_commit_tree(
+        root, change_id, candidate["commit"], require_exact_diff=True
+    )
     for key in ("base_commit", "content_digest", "changed_paths"):
-        if landed_verification.get(key) != show_commit_json(root, candidate["commit"], change_id, "verification.json").get(key):
+        if landed_verification.get(key) != candidate_verification.get(key):
             raise RuntimeError(f"landed verification {key} differs from sealed candidate")
     if landed_state.get("verified_content_digest") != candidate["content_digest"]:
         raise RuntimeError("landed state digest differs from sealed candidate")
     # Recompute exactly the candidate's verified material+intent bytes from the landed tree.
-    landed_digest = tree_digest(root, change_id, sha, candidate["changed_paths"])
     if landed_digest != candidate["content_digest"]:
         raise RuntimeError("landed Git-tree content does not match sealed candidate verification digest")
     ancestry = run_git(root, ["merge-base", "--is-ancestor", candidate["commit"], sha], check=False).returncode == 0

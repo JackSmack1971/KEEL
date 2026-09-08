@@ -12,7 +12,7 @@ import change_graph as cg
 
 
 def fixture(name: str) -> dict:
-    return json.loads((ROOT / ".keel/tests/fixtures/mission-v2" / name).read_text(encoding="utf-8"))
+    return json.loads((ROOT / ".keel/tests/fixtures/change-graph" / name).read_text(encoding="utf-8"))
 
 
 graph = cg.adapt_v2(fixture("valid.json"))
@@ -93,13 +93,8 @@ assert frontier["runnable"] == ["keel:work-unit:checkout-v2.contract"]
 advanced = cg.frontier(graph, {"keel:work-unit:checkout-v2.contract": "COMPLETE"})
 assert advanced["runnable"] == ["keel:work-unit:checkout-v2.backend"]
 
-for command in ("change-graph", "mission"):
-    result = subprocess.run([sys.executable, str(ROOT / ".keel/bin/keel.py"), command, "validate", str(ROOT / ".keel/tests/fixtures/mission-v2/valid.json")], cwd=ROOT, text=True, capture_output=True)
-    assert result.returncode == 0, result.stderr
-    assert json.loads(result.stdout)["status"] == "PASS"
-help_text = subprocess.run([sys.executable, str(ROOT / ".keel/bin/keel.py"), "mission", "--help"], cwd=ROOT, text=True, capture_output=True, check=True).stdout
-assert "dispatch" not in help_text and "mission-v2" not in help_text
-root_help = subprocess.run([sys.executable, str(ROOT / ".keel/bin/keel.py"), "--help"], cwd=ROOT, text=True, capture_output=True, check=True).stdout
-assert "mission-v2" not in root_help
+result = subprocess.run([sys.executable, str(ROOT / ".keel/bin/keel.py"), "change-graph", "validate", str(ROOT / ".keel/tests/fixtures/change-graph/valid.json")], cwd=ROOT, text=True, capture_output=True)
+assert result.returncode == 0, result.stderr
+assert json.loads(result.stdout)["status"] == "PASS"
 
 print(json.dumps({"status": "PASS", "checks": ["authority", "identities", "endpoints", "duplicate-edges", "self-dependency", "cycles", "resources", "requirements", "evidence", "provenance", "serialization", "frontier", "cli"]}, sort_keys=True))
