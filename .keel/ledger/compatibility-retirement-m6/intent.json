@@ -1,0 +1,208 @@
+{
+  "base_commit": "46bc820083a82da36cc02d4adafdd4f80071c297",
+  "change_id": "compatibility-retirement-m6",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-1",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "Structural retirement and canonical CLI tests prove removed product modules and verbs have no active path."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "ledger-migration-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-2",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Frozen legacy-ledger migration tests prove deterministic loss-preserving compatibility."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-3",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "Retirement tests prove optional maintenance and policy-pack boundaries."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p0-contract-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-4",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "P0/bootstrap and retirement tests prove canonical manifest provenance and removal of stale surfaces."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "git-proof-attestation-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "worktree-lifecycle-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-5",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Git attestation and worktree tests plus retirement guards prove protected invariants remain."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "provider": "command"
+        }
+      ],
+      "id": "ER-6",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "Complete deterministic regression, doctor, compatibility, and structural evidence pass."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "compatibility-retirement-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-7",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Architecture and documentation authority are checked mechanically."
+    }
+  ],
+  "mode": "standard",
+  "non_goals": [
+    "Do not remove candidate or landed refs, Git notes indexing, attestations, exact committed-tree verification, worktree isolation, repository-relative normalization, fail-closed malformed-state handling, explicit uncertainty, or useful generic explorer/reviewer/risk-reviewer roles.",
+    "Do not delete historical ledgers or the minimal frozen fixtures required to prove deterministic v1 ledger migration.",
+    "Do not claim hooks or Git refs are immutable confinement, and do not push, merge, release, deploy, or perform another external effect without separate authorization."
+  ],
+  "objective": "Complete KEEL-KERNEL-REDESIGN-v1 M6 by proving and removing superseded v1/core/bootstrap product paths, retaining only versioned ledger migration compatibility and protected Git lifecycle guarantees, relocating generic policy and optional maintenance material, and leaving one canonical kernel vocabulary and CLI.",
+  "provenance": {
+    "authority_id": "KEEL-KERNEL-REDESIGN-v1",
+    "kind": "human-authored",
+    "stage": "M6"
+  },
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "source": "user",
+      "statement": "Remove the normal v1 mission runtime, mission-v2 compatibility product path, topology router, duplicate repository-map and developer-UX wrappers, and temporary upgrade kernel after all active consumers use ChangeGraph, FactGraph, EvidencePlanner, RuntimeProfile, canonical ledger, and kernel CLI semantics."
+    },
+    {
+      "id": "REQ-2",
+      "source": "user",
+      "statement": "Retain deterministic, fail-closed historical v1 ledger migration through a narrow versioned reader and minimal frozen fixtures, preserving source bytes, digests, unknown fields, absence, and explicit uncertainty without inventing grants or evidence."
+    },
+    {
+      "id": "REQ-3",
+      "source": "user",
+      "statement": "Move useful feedback and entropy inspection out of kernel core into explicitly optional maintenance tooling and move generic target-project frontend, reliability, security, and release guidance into an explicit policy-pack/template location."
+    },
+    {
+      "id": "REQ-4",
+      "source": "user",
+      "statement": "Replace .control-plane as an active runtime namespace with canonical .keel distribution metadata, archive bootstrap research away from product authority, and remove reconciled planning residue, stale verification configuration, obsolete phase-agent configuration, and obsolete architecture documentation."
+    },
+    {
+      "id": "REQ-5",
+      "source": "user",
+      "statement": "Preserve candidate and landed refs, Git notes indexing, candidate/landed attestations, exact committed-tree verification, worktree isolation, repository-relative normalization, fail-closed malformed-state handling, explicit uncertainty, and generic explorer/reviewer/risk-reviewer capabilities."
+    },
+    {
+      "id": "REQ-6",
+      "source": "user",
+      "statement": "Prove retirement safety by repository reference search, deterministic tests, migration round-trip and idempotence, CLI behavior, documentation validation, runtime entry-point inspection, and a mechanical no-dual-path regression check."
+    },
+    {
+      "id": "REQ-7",
+      "source": "user",
+      "statement": "Update the active architecture and governance documentation to describe one canonical architecture, one semantic vocabulary, one normal CLI, and no dual v1/v2 product path."
+    }
+  ],
+  "risk": {
+    "consequences": [
+      "Removing a still-used entry point could break lifecycle or migration behavior.",
+      "Moving generated distribution metadata could create stale bootstrap or package contracts.",
+      "Overbroad cleanup could erase audit history or weaken Git, worktree, malformed-state, or uncertainty guarantees."
+    ],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": true,
+    "requires_exec_plan": true,
+    "review": "Independent review must inspect the complete diff and reference inventory, confirm only narrow v1 ledger migration remains, verify preserved Git/worktree/safety invariants, check relocation authority labels, and run the full deterministic and migration suites. Roll back through Git revert; never rewrite historical refs, notes, attestations, or ledgers.",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    ".keel/**",
+    ".codex/**",
+    ".agents/**",
+    "AGENTS.md",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/**",
+    "policies/**",
+    "archive/**",
+    "plans/**",
+    "control-plane-engineering-bible.md",
+    "control-plane-kb.md",
+    ".control-plane/**"
+  ],
+  "work": {
+    "edges": [],
+    "graph_references": [
+      "docs/exec-plans/active/compatibility-retirement-m6.md"
+    ],
+    "units": [
+      {
+        "id": "WU-M6",
+        "objective": "Audit, consolidate, retire, relocate, verify, and document M6 compatibility cleanup",
+        "scope_reference": "intent.scope"
+      }
+    ]
+  }
+}

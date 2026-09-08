@@ -18,13 +18,13 @@ A self-improvement loop must improve measurable outcomes, not merely produce mor
 The repository provides conservative local inspection:
 
 ```text
-python3 .keel/bin/keel.py feedback validate <observation.json>
-python3 .keel/bin/keel.py feedback status <observation.json>
-python3 .keel/bin/keel.py feedback queue <observation-directory>
-python3 .keel/bin/keel.py entropy scan
+python3 .keel/maintenance/keel_maintenance.py feedback validate <observation.json>
+python3 .keel/maintenance/keel_maintenance.py feedback status <observation.json>
+python3 .keel/maintenance/keel_maintenance.py feedback queue <observation-directory>
+python3 .keel/maintenance/keel_maintenance.py entropy
 ```
 
-These commands are read-only. An observation must retain provenance, repository-contained evidence, review state, and a failure class. Promotion to a permanent invariant requires a separate evaluated and authorized KEEL change; inspection never promotes or rewrites policy.
+These optional maintenance commands are read-only and outside the kernel/runtime path. An observation must retain provenance, repository-contained evidence, review state, and a failure class. Promotion to a permanent invariant requires a separate evaluated and authorized KEEL change; inspection never promotes or rewrites policy.
 
 `feedback queue` deterministically reports evaluation and promotion candidates, target plans, and blocked observations; it does not schedule, evaluate, or promote them. Target plans retain evidence inputs and explicitly require deferred execution or an authorized KEEL change.
 

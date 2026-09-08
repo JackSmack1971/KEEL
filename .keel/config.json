@@ -35,7 +35,7 @@
         "docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md"
       ],
       "migrations-backup-dr": [
-        "docs/control-plane/RELEASE_OPERATIONS.md"
+        "policies/templates/RELEASE.md"
       ],
       "ml-data-agent-evals": [
         "docs/control-plane/FEEDBACK_EVALS.md"
@@ -50,13 +50,13 @@
         "docs/control-plane/ARCHITECTURE_ENFORCEMENT.md"
       ],
       "release-deploy-rollback": [
-        "docs/control-plane/RELEASE_OPERATIONS.md"
+        "policies/templates/RELEASE.md"
       ],
       "reliability-slos": [
-        "docs/RELIABILITY.md"
+        "policies/templates/RELIABILITY.md"
       ],
       "security": [
-        "docs/SECURITY.md",
+        "policies/templates/SECURITY.md",
         "docs/control-plane/SECURITY_DATA_SUPPLY_CHAIN.md"
       ],
       "testing-evals": [
@@ -64,7 +64,7 @@
         "docs/control-plane/VERIFICATION.md"
       ],
       "ui-browser-a11y-i18n": [
-        "docs/FRONTEND.md",
+        "policies/templates/FRONTEND.md",
         "docs/control-plane/VERIFICATION.md"
       ]
     },
@@ -522,178 +522,6 @@
         ]
       },
       "authority": "TESTED",
-      "id": "upgrade-kernel-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_upgrade_kernel.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
-      "id": "mission-work-graph-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_mission_work_graph.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
-      "id": "repository-map-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_repository_map.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
-      "id": "topology-routing-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_topology_routing.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
       "id": "provider-effect-contract-tests",
       "mandatory_kernel": false,
       "provenance": ".keel/config.json",
@@ -737,49 +565,6 @@
         ]
       },
       "authority": "TESTED",
-      "id": "feedback-entropy-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_feedback_entropy.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
       "id": "lifecycle-compatibility-tests",
       "mandatory_kernel": false,
       "provenance": ".keel/config.json",
@@ -789,49 +574,6 @@
           "python",
           "-B",
           ".keel/tests/test_lifecycle_compatibility.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
-      "id": "developer-ux-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_developer_ux.py"
         ],
         "cwd": ".",
         "kind": "command",
@@ -1081,92 +823,6 @@
         ]
       },
       "authority": "TESTED",
-      "id": "p1-repository-intelligence-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/tests/test_repository_intelligence.py",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_repository_intelligence.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
-      "id": "p1-plan-contract-check",
-      "mandatory_kernel": false,
-      "provenance": ".keel/tests/test_p1_plan_contract.py",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_p1_plan_contract.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
       "id": "change-graph-tests",
       "mandatory_kernel": false,
       "provenance": ".keel/tests/test_change_graph.py",
@@ -1176,49 +832,6 @@
           "python",
           "-B",
           ".keel/tests/test_change_graph.py"
-        ],
-        "cwd": ".",
-        "kind": "command",
-        "timeout_sec": 120
-      },
-      "supports": {
-        "evidence_providers": [
-          "unit_test",
-          "command"
-        ],
-        "requirement_types": [
-          "behavior",
-          "quality",
-          "security",
-          "migration",
-          "performance",
-          "architecture",
-          "documentation"
-        ]
-      },
-      "version": "1"
-    },
-    {
-      "applicability": {
-        "paths": [
-          "**"
-        ],
-        "risk_levels": [
-          "low",
-          "standard",
-          "high"
-        ]
-      },
-      "authority": "TESTED",
-      "id": "p2-mission-v2-tests",
-      "mandatory_kernel": false,
-      "provenance": ".keel/config.json",
-      "provider": "unit_test",
-      "runtime": {
-        "argv": [
-          "python",
-          "-B",
-          ".keel/tests/test_mission_v2.py"
         ],
         "cwd": ".",
         "kind": "command",
@@ -1644,6 +1257,49 @@
           "python",
           "-B",
           ".keel/tests/test_ledger_migration.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "security",
+          "migration",
+          "performance",
+          "architecture",
+          "documentation"
+        ]
+      },
+      "version": "1"
+    },
+    {
+      "applicability": {
+        "paths": [
+          "**"
+        ],
+        "risk_levels": [
+          "low",
+          "standard",
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "compatibility-retirement-tests",
+      "mandatory_kernel": true,
+      "provenance": ".keel/tests/test_compatibility_retirement.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
         ],
         "cwd": ".",
         "kind": "command",

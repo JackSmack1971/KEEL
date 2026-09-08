@@ -1,7 +1,0 @@
-{
-  "verified": "VERIFIED",
-  "stale": "STALE",
-  "missing": "BLOCKED",
-  "conflict": "CONFLICTING",
-  "hand_maintained": "UNKNOWN"
-}

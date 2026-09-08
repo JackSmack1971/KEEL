@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Iterable
 import fact_graph
 
-IGNORE_DIRS = fact_graph.IGNORE_DIRS | {".keel", ".control-plane"}
+IGNORE_DIRS = fact_graph.IGNORE_DIRS | {".keel"}
 RESOLVER_SCHEMA_VERSION = 2
 RESOLVER_RULES_VERSION = 1
 RULES = fact_graph.CAPABILITY_RULES
@@ -15,7 +15,7 @@ _match = fact_graph.match
 
 
 def iter_repo_paths(root: Path, ignore_dirs: Iterable[str] | None = None) -> list[str]:
-    config = {"capability_resolver": {"ignore_dirs": list(ignore_dirs or ()) + [".keel", ".control-plane"]}}
+    config = {"capability_resolver": {"ignore_dirs": list(ignore_dirs or ()) + [".keel"]}}
     return list(fact_graph.snapshot(root, config).paths)
 
 

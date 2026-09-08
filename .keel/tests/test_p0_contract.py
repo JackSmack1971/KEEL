@@ -24,10 +24,10 @@ with tempfile.TemporaryDirectory() as directory:
     root = Path(directory)
     assert p.classify_git_state(root)["status"] == "NOT_A_GIT_REPOSITORY"
     assert p.classify_git_state(root, requires_git=True)["status"] == "BLOCKED"
-    (root / ".control-plane").mkdir()
-    (root / ".control-plane/bootstrap-manifest.json").write_text("{", encoding="utf-8")
+    (root / ".keel").mkdir()
+    (root / ".keel/bootstrap-manifest.json").write_text("{", encoding="utf-8")
     assert p.classify_bootstrap(root)["status"] == "MALFORMED_BOOTSTRAP"
-    (root / ".control-plane/bootstrap-manifest.json").write_text(json.dumps({"schema_version": 2, "bootstrapper": "x", "files": {}}), encoding="utf-8")
+    (root / ".keel/bootstrap-manifest.json").write_text(json.dumps({"schema_version": 2, "bootstrapper": "x", "files": {}}), encoding="utf-8")
     assert p.classify_bootstrap(root)["status"] == "COPIED_EXTRACTED_FRAMEWORK"
 
 assert p.artifact_boundary([".keel/config.json"])["status"] == "VERIFIED"
@@ -41,11 +41,11 @@ assert p.attest(ROOT, [".keel/config.json"])["status"] == "VERIFIED"
 assert p.attest(ROOT, [".keel/config.json"], runtime_available=False)["status"] == "UNVERIFIED_RUNTIME"
 assert p.generated_artifact_status(ROOT)["status"] == "VERIFIED"
 with tempfile.TemporaryDirectory() as directory:
-    root = Path(directory); (root / ".control-plane").mkdir()
+    root = Path(directory); (root / ".keel").mkdir()
     (root / ".keel/lib").mkdir(parents=True)
     (root / ".keel/lib/p0_contract.py").write_text("producer", encoding="utf-8")
     source = root / "input.txt"; source.write_text("original", encoding="utf-8")
-    manifest = root / ".control-plane/bootstrap-manifest.json"
+    manifest = root / ".keel/bootstrap-manifest.json"
     manifest.write_text(json.dumps({"schema_version": 2, "bootstrapper": "x", "files": {"input.txt": "stale"}}), encoding="utf-8")
     assert p.manifest_producer(root, write=False)["status"] == "FAILED"
     assert p.manifest_producer(root, write=True)["status"] == "WRITTEN"
@@ -59,15 +59,15 @@ with tempfile.TemporaryDirectory() as directory:
     assert p.generated_artifact_status(root)["status"] == "FAILED"
 
 with tempfile.TemporaryDirectory() as directory:
-    root = Path(directory); (root / ".control-plane").mkdir()
+    root = Path(directory); (root / ".keel").mkdir()
     retired = next(iter(p.RETIRED_BOOTSTRAP_FILES))
-    manifest = root / ".control-plane/bootstrap-manifest.json"
+    manifest = root / ".keel/bootstrap-manifest.json"
     manifest.write_text(json.dumps({"schema_version": 2, "files": {retired: "old"}}), encoding="utf-8")
     assert p.manifest_producer(root, write=True)["status"] == "WRITTEN"
     assert retired not in json.loads(manifest.read_text(encoding="utf-8"))["files"]
 with tempfile.TemporaryDirectory() as directory:
-    root = Path(directory); (root / ".control-plane").mkdir()
-    (root / ".control-plane/bootstrap-manifest.json").write_text(json.dumps({"schema_version": 2, "files": {}}), encoding="utf-8")
+    root = Path(directory); (root / ".keel").mkdir()
+    (root / ".keel/bootstrap-manifest.json").write_text(json.dumps({"schema_version": 2, "files": {}}), encoding="utf-8")
     assert p.generated_artifact_status(root)["status"] == "BLOCKED"
 
 with tempfile.TemporaryDirectory() as directory:

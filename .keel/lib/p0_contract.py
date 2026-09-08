@@ -117,7 +117,7 @@ def classify_git_state(path: Path, requires_git: bool = False) -> dict:
 
 
 def classify_bootstrap(root: Path, requires_git: bool = False) -> dict:
-    manifest = root / ".control-plane" / "bootstrap-manifest.json"
+    manifest = root / ".keel" / "bootstrap-manifest.json"
     if not manifest.is_file():
         return _finding("INCOMPLETE_BOOTSTRAP", "bootstrap manifest is missing")
     try:
@@ -140,9 +140,9 @@ def artifact_boundary(paths: list[str]) -> dict:
     prohibited = []
     for raw in sorted(paths):
         path = raw.replace("\\", "/")
-        if path.startswith((".keel/ledger/", ".keel/audit/", ".git/")) or path in {".keel/active-change", ".control-plane/runtime-validation.json"}:
+        if path.startswith((".keel/ledger/", ".keel/audit/", ".git/")) or path in {".keel/active-change"}:
             kind = "runtime_history"
-        elif path.startswith((".keel/", ".codex/", ".agents/skills/", ".control-plane/")):
+        elif path.startswith((".keel/", ".codex/", ".agents/skills/")):
             kind = "framework"
         elif path.startswith(("dist/", "build/", "coverage/", ".cache/")):
             kind = "generated_consumer"
@@ -185,7 +185,7 @@ def attest(root: Path, paths: list[str], runtime_available: bool = True) -> dict
 
 
 def manifest_producer(root: Path, write: bool = False) -> dict:
-    path = root / ".control-plane" / "bootstrap-manifest.json"
+    path = root / ".keel" / "bootstrap-manifest.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     data["producer"] = {"command": ["python", ".keel/bin/keel.py", "manifest", "--write"], "source": ".keel/lib/p0_contract.py"}
     for rel in RETIRED_BOOTSTRAP_FILES:
@@ -210,7 +210,7 @@ def manifest_producer(root: Path, write: bool = False) -> dict:
 
 
 def generated_artifact_status(root: Path) -> dict:
-    path = root / ".control-plane" / "bootstrap-manifest.json"
+    path = root / ".keel" / "bootstrap-manifest.json"
     if not path.is_file():
         return _finding("BLOCKED", "generated artifact is missing")
     try:

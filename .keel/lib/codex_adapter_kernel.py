@@ -145,7 +145,8 @@ def _dirty_violations(k: Any, root: Path, cid: str, phase: str) -> list[str]:
     paths = list(dict.fromkeys(normalize_path(root, str(p)) for p in k.changed_paths(root, base)))
     if phase in {"DISCUSS", "PLAN"}: return [p for p in paths if not _phase_write_allowed(root, cid, phase, p)]
     if phase == "EXECUTE":
-        scope = k.parse_scope(k.ledger_dir(root, cid) / "scope.txt")
+        directory = k.ledger_dir(root, cid)
+        scope = k.canonical_ledger.load_intent(directory)["scope"] if (directory / "intent.json").is_file() else k.parse_scope(directory / "scope.txt")
         return [p for p in paths if p.startswith(f".keel/ledger/{cid}/") or not k.scope_match(p, scope)]
     return []
 
@@ -212,7 +213,9 @@ def _pre_tool(k: Any, root: Path, cid: str | None, q: KernelQuery, profile: Any)
         if phase in {"DISCUSS", "PLAN"}:
             bad = [p for p in paths if not _phase_write_allowed(root, cid, phase, p)]
         elif phase == "EXECUTE":
-            try: scope = k.parse_scope(k.ledger_dir(root, cid) / "scope.txt")
+            try:
+                directory = k.ledger_dir(root, cid)
+                scope = k.canonical_ledger.load_intent(directory)["scope"] if (directory / "intent.json").is_file() else k.parse_scope(directory / "scope.txt")
             except Exception as exc: return _deny(f"trusted KEEL scope unavailable: {exc}", profile)
             bad = [p for p in paths if p.startswith(f".keel/ledger/{cid}/") or not k.scope_match(p, scope)]
         elif phase in {"VERIFY", "SHIP"}: bad = list(paths)
@@ -245,9 +248,9 @@ def _post_tool(k: Any, root: Path, cid: str | None, q: KernelQuery, profile: Any
     if not cid:
         try: paths = [normalize_path(root, str(p)) for p in k.changed_paths(root, k.head_commit(root))]
         except Exception as exc: return _deny(f"post-effect repository observation failed: {exc}", profile, post=True)
-        material = [p for p in paths if p and not p.startswith((".keel/", ".control-plane/"))]
+        material = [p for p in paths if p and not p.startswith((".keel/",))]
         if material: return _deny("post-effect observation found ungoverned changes: " + ", ".join(material[:8]), profile, post=True)
-        return KernelOutcome(OutcomeKind.OBSERVE, reason="post-tool observation found no policy violation; effects cannot be undone by this hook",
+        return KernelOutcome(OutcomeKind.OBSERVE, reason="post-tool observation found no policy violation; this hook cannot undo effects; effects cannot be undone",
             profile_digest=ra.runtime_profile_digest(profile), coverage=profile.tool_coverage, effect_already_occurred=True)
     try: phase = str(k.state(root, cid).get("phase"))
     except Exception as exc: return _deny(f"post-effect lifecycle observation failed: {exc}", profile, post=True)
@@ -259,7 +262,7 @@ def _post_tool(k: Any, root: Path, cid: str | None, q: KernelQuery, profile: Any
             ok, message = k.current_verified(root, cid)
             if not ok: bad.append(str(message))
     except Exception as exc: return _deny(f"post-effect policy observation failed: {exc}", profile, post=True)
-    reason = ("post-effect policy violation (the hook cannot undo executed effects): " + "; ".join(bad[:12])) if bad else "post-tool observation passed; effects cannot be undone by this hook"
+    reason = ("post-effect policy violation (the hook cannot undo executed effects): " + "; ".join(bad[:12])) if bad else "post-tool observation passed; this hook cannot undo effects; effects cannot be undone"
     return KernelOutcome(OutcomeKind.OBSERVE, reason=reason, profile_digest=ra.runtime_profile_digest(profile), coverage=profile.tool_coverage, effect_already_occurred=True)
 
 

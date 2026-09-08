@@ -1,0 +1,12 @@
+{
+  "base_commit": "46bc820083a82da36cc02d4adafdd4f80071c297",
+  "change_id": "compatibility-retirement-m6",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "d8a9b70a4715d6fbd23c642de7a2123964e003abce3447b9cbb8043d7d0432dc",
+    "last_event_digest": "036bd5f0013294619382bb951a0b0c91a09bcf6cd620f9deb2561580821e885f"
+  }
+}
