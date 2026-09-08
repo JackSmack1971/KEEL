@@ -413,6 +413,18 @@
       "argv": [
         "python",
         "-B",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "cwd": ".",
+      "id": "fact-graph-tests",
+      "provenance": ".keel/tests/test_fact_graph.py",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
         ".keel/tests/test_semantic_kernel.py"
       ],
       "cwd": ".",

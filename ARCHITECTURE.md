@@ -34,6 +34,13 @@ See [docs/control-plane/ARCHITECTURE_ENFORCEMENT.md](docs/control-plane/ARCHITEC
 
 Repository discovery and context compilation are derived views. They may summarize evidence and route agents toward relevant source-of-truth artifacts, but they never replace Git-tracked policy, KEEL ledger intent, architecture contracts, or verification evidence.
 
+Repository understanding now has one implementation authority: the dependency-free
+FactGraph in `.keel/lib/fact_graph.py`. Read-only filesystem, Git, repository-structure,
+ecosystem-candidate, Python-AST, and CODEOWNERS adapters emit normalized Facts and
+Edges; repository intelligence, maps, capabilities, context inputs, and impact are
+compatibility projections over that graph. Heuristic facts remain candidates and never
+activate policy or authorize/execute a discovered command.
+
 ## Canonical semantic and planning boundary
 
 A dependency-free semantic model defines the kernel's eleven canonical primitive records, orthogonal state dimensions, strict identity/provenance/resource rules, and deterministic serialization/content digests in `.keel/lib/semantic_kernel.py`. Canonical planning now composes those records into one authoritative `ChangeGraph`: work dependencies exist only as typed edges, effects remain requests rather than grants, resource overlap affects later scheduling rather than validity, and frontier is a pure projection over supplied state. Mission v1/v2 documents remain read-compatible only through explicit normalization adapters. Repository-intelligence, evidence, runtime, lifecycle-ledger, seal, and anchor subsystems retain their existing behavior until separately migrated under `KEEL-KERNEL-REDESIGN-v1`.

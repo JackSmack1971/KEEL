@@ -21,6 +21,13 @@ This prevents KEEL from pretending its built-in extension list defines every lan
 
 The output also includes `source_classification.counts` and a bounded `unknown_paths` list. Explicit source/non-source disagreements are emitted as `CONFLICT` records with the path and competing globs; the conflict is visible even though classification precedence remains deterministic. Evidence is bounded by `capability_resolver.max_evidence_per_capability` and paths are sorted before matching, so repeated discovery is reproducible.
 
+The resolver is now a compatibility projection over canonical FactGraph
+`capability-candidate` and `source-class` facts. Ecosystem filename/glob rules live in
+the repository adapter, identify candidates only, and do not declare commands, activate
+policy, or imply runtime support. Unsupported formats remain explicit
+`UNKNOWN`/`UNSUPPORTED` facts, and conflicting observations remain present in the graph
+even when the v2 compatibility projection applies deterministic precedence.
+
 ## Safety rules
 
 - Discovery never edits `CAPABILITY_REGISTRY.md` automatically.

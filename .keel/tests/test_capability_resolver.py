@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import importlib.util
+import sys
 import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / ".keel" / "lib"))
 SPEC = importlib.util.spec_from_file_location("capability_resolver", ROOT / ".keel/lib/capability_resolver.py")
 RESOLVER = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader

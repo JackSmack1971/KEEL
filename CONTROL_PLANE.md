@@ -36,4 +36,9 @@ Universal coverage does not mean universal tooling. Every domain is represented,
 
 ## Adaptive intelligence kernel
 
-KEEL adds four deterministic primitives above the execution-integrity kernel: a Capability Resolver (`DETECTED/LIKELY/UNKNOWN/CONFLICT` evidence only), a bounded Context Compiler, a requirements/acceptance Evidence Graph, and KEELBench for paired empirical evaluation. These mechanisms increase decision quality without silently changing project policy.
+Repository evidence flows through read-only adapters into the canonical FactGraph;
+capability resolution (`DETECTED/LIKELY/UNKNOWN/CONFLICT` evidence only), bounded
+context, repository maps, and impact are projections rather than parallel repository
+models. Requirements/acceptance Evidence Graph and KEELBench retain their current
+separate migration-stage behavior. These mechanisms increase decision quality without
+silently changing project policy.

@@ -13,6 +13,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+import fact_graph
+
 SCHEMA_ID = "keel.repository-intelligence"
 SCHEMA_VERSION = 1
 SCHEMA = f"{SCHEMA_ID}/v{SCHEMA_VERSION}"
@@ -266,7 +268,21 @@ def generated_artifact(artifact: str, *, producer: str | None, input_digest: str
 
 
 def collect(root: Path, *, paths: Iterable[str] = ()) -> dict[str, Any]:
-    files = sorted(repo_path(root, path) for path in paths)
-    nodes = [node(".", "repository", "VERIFIED", provenance(None, "repository", "repository-intelligence", fact_kind="DIRECT"))]
-    for path in files: nodes.append(node(path, "file", "VERIFIED", provenance(path, "repository-file", "repository-intelligence", fact_kind="DIRECT")))
-    return canonical({"schema_id": SCHEMA_ID, "schema_version": SCHEMA_VERSION, "nodes": nodes, "edges": [], "policy": "advisory-evidence-only"})
+    requested = sorted(repo_path(root, path) for path in paths)
+    graph = fact_graph.build(root)
+    resources = {fact.subject: fact for fact in graph.select("resource") if not requested or fact.subject in requested or fact.subject == "."}
+    nodes = []
+    for path, fact in sorted(resources.items()):
+        source_type = "repository" if path == "." else "repository-file"
+        nodes.append(node(path, "repository" if path == "." else "file", "VERIFIED", provenance(fact.provenance.source, source_type, fact.provenance.adapter, fact_kind="DIRECT", source_digest=fact.provenance.source_digest)))
+    edges = []
+    for relation in graph.edges:
+        if relation.relation != "depends-on" or (requested and relation.source not in requested):
+            continue
+        if relation.source not in resources:
+            continue
+        if relation.target not in resources:
+            resources[relation.target] = None
+            nodes.append(node(relation.target, "package" if relation.target.startswith("external:") else "file", "UNKNOWN" if relation.target.startswith("external:") else "VERIFIED", provenance(relation.provenance.source, "dependency", relation.provenance.adapter, fact_kind="NORMALIZED", source_digest=relation.provenance.source_digest)))
+        edges.append(edge(relation.source, relation.target, "depends-on", "VERIFIED" if relation.knowledge == "KNOWN" else "PARTIAL", provenance(relation.provenance.source, "dependency", relation.provenance.adapter, fact_kind="NORMALIZED", source_digest=relation.provenance.source_digest)))
+    return canonical({"schema_id": SCHEMA_ID, "schema_version": SCHEMA_VERSION, "nodes": nodes, "edges": edges, "policy": "advisory-evidence-only", "canonical_source": fact_graph.SCHEMA, "canonical_source_digest": graph.source_digest})
