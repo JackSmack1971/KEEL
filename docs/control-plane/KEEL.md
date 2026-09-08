@@ -1,116 +1,31 @@
-# KEEL — Spec-Anchored Change Control Plane
+# KEEL canonical change ledger
 
-Status: `INSTALLED`; runtime enforcement is `CONDITIONAL` until project trust + hook trust + Python/Git smoke tests are observed.
-
-KEEL is the repository's per-change governance spine. It layers under the broader control plane: repository legibility tells an agent where truth lives; KEEL anchors each write change to a delta/scope/risk/evidence record; architecture/CI/security/release/operations supply domain checks; Symphony-style orchestration may later schedule isolated KEEL changes.
-
-## Ledger
-Each active change owns:
+KEEL is the repository's per-change governance spine. The canonical layout for new changes is:
 
 ```text
 .keel/ledger/<change-id>/
-  state.json           # deterministic phase/mode/base commit
-  proposal.md          # WHY / objective / non-goals / success evidence
-  delta.md             # WHAT: ADDED / MODIFIED / REMOVED
-  requirements.json    # machine-readable REQ-* behavioral obligations
-  acceptance.json      # AC-* criteria -> deterministic evidence edges
-  scope.txt            # machine-checkable repo-relative files/globs
-  risk.json            # risk level + control-plane/sensitive flags
-  effects.json         # declared external/irreversible side effects
-  authorization.json   # script-owned legacy evidence; its boolean is not a CapabilityGrant
-  gate-log.jsonl       # append-only-in-normal-use gate/audit events
-  verification.json    # structured command/exit-code/digest evidence
-  verification.md      # concise human/agent-readable summary
-  evidence-plan.json  # requirement/impact-selected verifier plan
-  evidence-receipts.json # exact-subject authoritative verifier receipts
-  evidence-graph.json  # temporary compatibility projection
-  evidence/            # bounded/redacted command excerpts when produced
-  risk-review.md       # required for high/control-plane/sensitive changes
+  intent.json       # sole editable change-intent authority
+  events.jsonl      # kernel-owned causal transition/decision records
+  grants/           # kernel-owned CapabilityGrant records
+  receipts/         # kernel-owned exact-subject EvidenceReceipts
+  attestations/     # kernel-owned candidate/landed attestations
+  views/            # generated, non-authoritative Markdown/JSON projections
 ```
 
-`gate-log.jsonl` is mechanically written by KEEL scripts/hooks in normal operation. Like any working-tree file it can be edited by a sufficiently privileged actor, so integrity ultimately comes from landed Git history + independent verification + remote protections where required.
+`intent.json` contains the canonical objective, Requirements, non-goals, scope, WorkUnits/edge or graph references as applicable, risk/consequence declarations, EffectRequests, EvidenceRequirements, Decisions, and source provenance. No proposal, delta, requirements, acceptance, scope, risk, effects, or authorization file is a separate editable authority.
 
-## Delta format
+## Causality and ownership
+Each significant event has a stable digest identity and the previous event digest. Validation rejects changed identities and broken local chains. This is tamper-evidence, not immutability: privileged actors can rewrite files and refs; committed Git history plus independent exact-subject verification is the durable integrity substrate.
 
-```markdown
-## ADDED
-- ...
+Humans edit intent during permitted phases. The kernel alone appends events and writes grants, receipts, attestations, and views. Generated views carry source digests and explicit non-authoritative markers. Adapters, hooks, dashboards, context packets, and CLI output consume this model and never become alternate authority.
 
-## MODIFIED
-- ...
+## Lifecycle
+DISCUSS validates a meaningful objective. PLAN validates canonical requirements, EvidenceRequirements, scope, risk/consequences, EffectRequests, and required review/ExecPlan. EXECUTE enforces canonical scope. VERIFY derives an EvidencePlan and exact-subject receipts from canonical EvidenceRequirements. SHIP means candidate eligibility only. Seal and anchor independently bind candidate and landed Git subjects.
 
-## REMOVED
-- ...
-```
+Planning and effect declaration never grant authority. CapabilityGrants are separate issuer-attributed, subject/effect/scope/condition-bound records. Legacy authorization booleans migrate only as explicitly labelled historical evidence, never as CapabilityGrants.
 
-At least one section must contain a real bullet. The prose delta states behavior; `scope.txt` exists separately because free-form Markdown is a poor enforcement interface.
+## Historical compatibility
+The versioned `keel.legacy-ledger/v1` reader continues to audit existing sealed/landed ledgers. `keel.py ledger migrate` is additive, deterministic, idempotent, source-digesting, and loss-preserving; missing requirements, authorization, acceptance, or evidence remain explicitly absent. Legacy source bytes are preserved in migration provenance and are never deleted by migration. Old templates and readers remain until corpus and hostile fixtures prove all supported states and M6 authorizes retirement.
 
-## Gates
-
-- `DISCUSS`: proposal is meaningful.
-- `PLAN`: delta, requirements, acceptance criteria, scope, risk, and effects are structurally valid; KEEL synchronizes authorization shape without granting permission; high-risk work has a risk review and ExecPlan where required.
-- `EXECUTE`: writes may occur only in declared scope; direct file tools are pre-checked and all Git diff paths are post/stop checked.
-- `VERIFY`: scope and required authorization pass, canonical project checks run, every required property resolves through sufficient exact-subject receipts, literal exit status is recorded, and the verified digest covers both changed content and stable intent artifacts.
-- `SHIP`: verified content is eligible for authorized integration only after implementation acceptance passes (or an explicit planning-only change completes through readiness); planning readiness alone never reaches this phase. It is not authorization itself.
-
-After Plan passes, intent/scope changes require `keel.py replan`; re-plan invalidates prior effect authorization. After verification, implementation changes require `keel.py reopen`. This prevents silent spec drift.
-
-Direct mutation permissions are phase-specific: DISCUSS permits only `proposal.md`; PLAN permits proposal/delta/requirements/acceptance/scope/risk/effects/risk-review plus the matching active ExecPlan; authorization/state/gate/verification records are script-owned; EXECUTE permits only declared implementation scope; VERIFY/SHIP permit no direct content writes without reopen/replan.
-
-Hooks do not provide total confinement. The thin Codex adapter sends delivered local and MCP function events to the deterministic kernel query, but specialized tools, alternate clients, direct processes, or runtime/configuration drift may bypass delivery. `PostToolUse` can report or block continuation but cannot undo an already-executed effect. Therefore `keel verify` independently rechecks the Git diff and Codex sandbox/approval/rules/domain controls remain load-bearing.
-
-Canonical runtime/effect decisions consume conservative `RuntimeProfile` and
-intent-bound `CapabilityGrant` objects. Legacy effects normalize to independent
-`EffectRequest` objects; legacy authorization becomes only a non-authoritative
-observation and never silently creates a grant. An adapter/receipt states whether
-an effect boundary is `MEDIATED`, `OBSERVED`, or `UNCONFINED`. Planning remains
-valid without a grant while execution readiness waits. No scheduler or provider
-effect executor is implemented.
-
-## Modes
-- `standard`: full lifecycle.
-- `trivial`: only for localized, reversible, low-risk writes. `start --mode trivial --summary ... --scope ...` creates/passes Discuss+Plan deterministically, then normal Execute/Verify/Ship still applies.
-- read-only: no ledger needed because no mutation occurs.
-- emergency: operator exports `KEEL_BYPASS_REASON` before launching Codex. Hooks stop blocking but append a bypass event and create `retro-<change-id>` process debt; if no change-id was active, KEEL creates a deterministic `retro-emergency-*` debt entry instead. The variable must come from the parent process; putting it inside a proposed shell command does not authorize the parent hook runtime.
-
-## Emergency safety invariant
-KEEL bypass never changes Codex permission mode, sandbox, rules, hook trust, host authorization, secrets policy, deployment permissions, or application authorization. It bypasses only KEEL's phase/scope stop behavior. See [KEEL_EMERGENCY.md](KEEL_EMERGENCY.md).
-
-## Sealed candidates and Git anchors
-After verification, commit the candidate in its worktree and run `seal`. KEEL recomputes the content+intent digest from the **commit tree**, requires the committed material diff to match the verified changed-path set, and creates:
-
-- `refs/keel/candidates/<change-id>` -> exact verified candidate commit.
-- `refs/keel/attestations/candidates/<change-id>` -> canonical
-  `CandidateAttestation` blob binding work/base and candidate commit/tree identity,
-  independent material and intent digests, combined content digest, EvidencePlan
-  digest, supporting EvidenceReceipt identities/digests, and available policy/runtime
-  profile digest.
-
-An integration checkout can then merge that exact ref. After landing, use `anchor` to create:
-- `refs/keel/ledger/<change-id>` -> landed commit;
-- `refs/notes/keel` note on the landed commit.
-
-Anchoring requires the sealed candidate, re-reads the landed ledger, and recomputes the candidate's verified changed-path + intent digest from the landed Git tree. This permits unrelated mainline changes and supports either candidate ancestry or content-equivalent squash/rebase landing while refusing candidate-content drift. The operation refuses collisions to a different commit/note. Refs/notes are mutable Git metadata, not an immutable ledger; protected remote history/audit systems are required when stronger tamper resistance matters.
-
-The Git blob is the payload and refs/notes are mutable indexes/anchors; none is claimed
-immutable. Existing anchor behavior continues unchanged at the integration boundary.
-The future Landing Transaction is not implemented by this subsystem.
-
-## Definition of KEEL-ready
-1. Git repository exists with an initial baseline commit.
-2. `python3 .keel/bin/keel.py doctor` passes.
-3. Project `.codex/` layer is trusted.
-4. `.codex/hooks.json` exact definition has been reviewed/trusted through Codex `/hooks` (or managed policy supplies equivalent enforcement).
-5. A live runtime smoke test (not a static fixture) demonstrates SessionStart/UserPrompt context, delivered local/MCP tool observation, and a blocked out-of-phase write/Stop gate.
-6. Once substantive source exists, `.keel/config.json` contains real canonical verification commands.
-
-Until those are observed, report KEEL as installed but not fully runtime-validated.
-
-## Adaptive intelligence primitives
-
-- `keel.py discover` emits evidence-backed capability suggestions without silently activating policy. See [CAPABILITY_RESOLUTION.md](CAPABILITY_RESOLUTION.md).
-- `keel.py context` compiles a bounded derived context packet for the current decision surface. See [CONTEXT_COMPILATION.md](CONTEXT_COMPILATION.md).
-- `keel.py next` reports the next legal action and blockers for the active change; it is read-only guidance and never advances lifecycle state.
-- Required `REQ-*`/`AC-*` contracts derive EvidenceRequirements, a selected EvidencePlan, and authoritative EvidenceReceipts. `evidence-graph.json` is a compatibility projection. See [ACCEPTANCE_EVIDENCE.md](ACCEPTANCE_EVIDENCE.md).
-- `.keel/bench/` provides KEELBench paired-run schemas and scoring. See [KEELBENCH.md](KEELBENCH.md).
-- `keel change-graph` and the stable `keel mission` alias validate or normalize canonical planning graphs and report a read-only frontier from typed hard-dependency edges plus explicitly supplied state. Mission v1/v2 reads pass through compatibility adapters; the hidden `mission-v2` alias is temporary. Planning does not schedule, dispatch, observe runtime state, or grant requested effects.
+## Boundaries
+Hash chains and Git refs are not immutable security controls. Hooks are not confinement. SHIP is not permission to push, merge, release, deploy, migrate, or mutate an external system. Candidate and landed verification remain distinct; this change does not implement the future landing transaction.

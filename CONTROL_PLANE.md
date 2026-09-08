@@ -6,7 +6,7 @@ The control plane is the repository's information architecture, change-governanc
 
 ## Layer map
 1. Repository legibility — thin entry points, indexed durable knowledge.
-2. KEEL spec ledger — delta-native proposal/scope/risk/effects/evidence per write change.
+2. KEEL canonical ledger — one authoritative intent model plus causal events, grants, exact-subject receipts, attestations, and generated views.
 3. Architectural enforcement — stable invariants become tested mechanical checks.
 4. Capability extension — repo skills and narrow subagents.
 5. Runtime legibility — logs/metrics/traces/browser/hardware evidence when relevant.

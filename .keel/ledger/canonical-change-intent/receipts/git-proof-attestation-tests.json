@@ -1,0 +1,83 @@
+{
+  "ended_at": "2026-09-08T18:33:05.087303+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [
+    "ER-REQ-7"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_git_attestation_lifecycle.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 22071,
+      "excerpt": "Git proof tests PASS\nCandidate attestation tests PASS\nGit attestation lifecycle tests PASS",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_git_attestation_lifecycle.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "30750c1c6e7914723a083c8995075e7a33000661b7c116c6b4735d99d0934ad2",
+  "receipt_id": "git-proof-attestation-tests",
+  "record_digest": "c54c03fc0a3734d57b1884e5d950f1280416895a063b44de66afc9d5bb03e044",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T18:32:43.016133+00:00",
+  "subject": {
+    "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "changed_paths": [
+      ".agents/skills/keel-change-lifecycle/SKILL.md",
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/lib/context_compiler.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/lifecycle.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_ledger_migration.py",
+      ".keel/tests/test_p0_contract.py",
+      "AGENTS.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/canonical-change-intent.md"
+    ],
+    "content_digest": "0ae072343688b74e1e78679e2bca5863721cad36c90e7fcb70c2d56ab46b5e6b",
+    "head_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "git-proof-attestation-tests",
+    "provenance": ".keel/tests/test_git_attestation_lifecycle.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

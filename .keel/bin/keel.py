@@ -20,6 +20,7 @@ import effect_inference as effects
 import schema_migrations as migrations
 import telemetry
 import p0_contract
+import canonical_ledger
 
 
 def main() -> int:
@@ -43,6 +44,7 @@ def main() -> int:
     p = sub.add_parser("entropy"); p.add_argument("action", choices=["scan"])
     sub.add_parser("compat")
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true"); p.add_argument("--plan", type=Path)
+    p = sub.add_parser("ledger"); p.add_argument("action", choices=["migrate","project","validate"]); p.add_argument("--change", required=True); p.add_argument("--output", type=Path)
     p = sub.add_parser("init"); p.add_argument("--check", action="store_true")
     p = sub.add_parser("review"); p.add_argument("--change")
     p = sub.add_parser("ship"); p.add_argument("--change")
@@ -128,6 +130,13 @@ def main() -> int:
             print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "entropy":
             result = fe.entropy_scan(root); print(json.dumps(result, indent=2)); return 0
+        if args.cmd == "ledger":
+            d=k.ledger_dir(root,args.change)
+            if args.action == "migrate": result=canonical_ledger.migrate_legacy(d,args.output.resolve() if args.output else None)
+            elif args.action == "project": canonical_ledger.project_views(d); result={"status":"PROJECTED","change":args.change}
+            else:
+                errors=canonical_ledger.validate_intent(canonical_ledger.load_intent(d),require_planned=False); canonical_ledger.read_events(d); result={"status":"PASS" if not errors else "FAIL","errors":errors}
+            print(json.dumps(result,indent=2)); return 0 if result.get("status") not in {"FAIL"} else 1
         if args.cmd == "migrate" and args.plan:
             result = migrations.preflight(args.plan.resolve()); print(json.dumps(result, indent=2)); return 0
         if args.cmd == "compat" or args.cmd == "migrate":
@@ -154,8 +163,8 @@ def main() -> int:
         if args.cmd == "evidence":
             cid = args.change or k.active_change(root)
             if not cid: raise RuntimeError("no active KEEL change")
-            p = k.ledger_dir(root, cid) / "evidence-receipts.json"
-            if not p.is_file(): raise RuntimeError("evidence-receipts.json missing; run verify first")
+            d = k.ledger_dir(root, cid); p = d / "views" / "evidence-receipts.json" if (d / "intent.json").is_file() else d / "evidence-receipts.json"
+            if not p.is_file(): raise RuntimeError("evidence receipts missing; run verify first")
             print(p.read_text(encoding="utf-8"), end=""); return 0
         if args.cmd == "status": print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
         if args.cmd == "next": print(json.dumps(k.next_action(root, args.change), indent=2)); return 0

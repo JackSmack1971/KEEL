@@ -79,6 +79,8 @@ with tempfile.TemporaryDirectory() as directory:
     subprocess.run(["git", "add", ".keel/templates"], cwd=root, check=True)
     subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.com", "commit", "--allow-empty", "-qm", "baseline"], cwd=root, check=True)
     k.start_change(root, "line-ending-regression", "standard")
-    for name in ("proposal.md", "delta.md", "requirements.json", "acceptance.json", "scope.txt", "risk.json", "effects.json", "authorization.json", "risk-review.md", "state.json", "gate-log.jsonl"):
-        assert b"\r" not in (root / ".keel/ledger/line-ending-regression" / name).read_bytes()
+    ledger = root / ".keel/ledger/line-ending-regression"
+    for name in ("intent.json", "events.jsonl", "views/summary.md", "views/status.json"):
+        assert b"\r" not in (ledger / name).read_bytes()
+    assert not any((ledger / name).exists() for name in ("proposal.md", "requirements.json", "scope.txt", "authorization.json", "state.json"))
 print(json.dumps({"status": "PASS", "checks": ["portable-resolution", "git-bootstrap", "artifact-boundary", "compatibility", "attestation", "negative-cases"]}))

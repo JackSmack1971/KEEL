@@ -1,0 +1,85 @@
+{
+  "ended_at": "2026-09-08T18:36:04.351921+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [
+    "ER-REQ-1",
+    "ER-REQ-2",
+    "ER-REQ-3"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_canonical_ledger.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 227,
+      "excerpt": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.014s\n\nOK",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_canonical_ledger.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "d5a1f1c70e57f96b86e88ae1460446854c91b8360773f3aae60eda0cfea5c4ce",
+  "receipt_id": "d5a1f1c70e57f96b86e88ae1460446854c91b8360773f3aae60eda0cfea5c4ce",
+  "record_digest": "d2f8dd95731bf2e3aa5f7582025bcdb6cbe9aa9dad18024f01c9cefa04a982dd",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T18:36:04.124795+00:00",
+  "subject": {
+    "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "changed_paths": [
+      ".agents/skills/keel-change-lifecycle/SKILL.md",
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/lib/context_compiler.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/lifecycle.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_ledger_migration.py",
+      ".keel/tests/test_p0_contract.py",
+      "AGENTS.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/canonical-change-intent.md"
+    ],
+    "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+    "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "canonical-ledger-tests",
+    "provenance": ".keel/tests/test_canonical_ledger.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

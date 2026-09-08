@@ -1579,6 +1579,92 @@
         ]
       },
       "version": "1"
+    },
+    {
+      "applicability": {
+        "paths": [
+          "**"
+        ],
+        "risk_levels": [
+          "low",
+          "standard",
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "canonical-ledger-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_canonical_ledger.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_canonical_ledger.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "security",
+          "migration",
+          "performance",
+          "architecture",
+          "documentation"
+        ]
+      },
+      "version": "1"
+    },
+    {
+      "applicability": {
+        "paths": [
+          "**"
+        ],
+        "risk_levels": [
+          "low",
+          "standard",
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "ledger-migration-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_ledger_migration.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_ledger_migration.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "security",
+          "migration",
+          "performance",
+          "architecture",
+          "documentation"
+        ]
+      },
+      "version": "1"
     }
   ]
 }

@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 import capability_resolver
+import canonical_ledger
 
 CORE_CAPABILITIES = ["repository-legibility", "keel-spec-ledger", "security", "provenance-audit", "autonomy-permissions"]
 
@@ -71,7 +72,9 @@ def compile_packet(root: Path, change_id: str, state: dict, config: dict, ledger
     else:
         discovery=capability_resolver.resolve(root, config)
     registry=_parse_registry(root)
-    scope=_read(ledger_dir/"scope.txt", 3000)
+    canonical=(ledger_dir/"intent.json").is_file()
+    intent=canonical_ledger.load_intent(ledger_dir) if canonical else None
+    scope="\n".join(intent["scope"]) if canonical else _read(ledger_dir/"scope.txt", 3000)
     relevant=[]
     for cid in CORE_CAPABILITIES:
         relevant.append({"id":cid,"reason":"always relevant to governed writes","registry_status":registry.get(cid,"UNKNOWN")})
@@ -96,10 +99,10 @@ def compile_packet(root: Path, change_id: str, state: dict, config: dict, ledger
         for d in mapping.get(row["id"],[]):
             if d not in docs: docs.append(d)
 
-    proposal=" ".join(_material_lines(_read(ledger_dir/"proposal.md", 5000),8))
-    delta="\n".join(_material_lines(_read(ledger_dir/"delta.md", 5000),12))
-    risk=_read(ledger_dir/"risk.json",2000).strip(); effects=_read(ledger_dir/"effects.json",2000).strip()
-    acceptance=_read(ledger_dir/"acceptance.json",3500).strip()
+    proposal=intent["objective"] if canonical else " ".join(_material_lines(_read(ledger_dir/"proposal.md", 5000),8))
+    delta=json.dumps(intent.get("work",{}),sort_keys=True) if canonical else "\n".join(_material_lines(_read(ledger_dir/"delta.md", 5000),12))
+    risk=json.dumps(intent["risk"],sort_keys=True) if canonical else _read(ledger_dir/"risk.json",2000).strip(); effects=json.dumps(intent["effect_requests"],sort_keys=True) if canonical else _read(ledger_dir/"effects.json",2000).strip()
+    acceptance=json.dumps(intent["evidence_requirements"],sort_keys=True) if canonical else _read(ledger_dir/"acceptance.json",3500).strip()
     lines=[
         f"# KEEL Context Packet — {change_id}","",
         f"Phase: `{state.get('phase')}`  Base: `{state.get('base_commit')}`  Mode: `{state.get('mode')}`","",
@@ -116,7 +119,7 @@ def compile_packet(root: Path, change_id: str, state: dict, config: dict, ledger
     lines += ["", "## Load next (only if needed)"] + [f"- `{d}`" for d in docs]
     if changed_paths:
         lines += ["", "## Current changed paths"] + [f"- `{p}`" for p in changed_paths[:30]]
-    lines += ["", "## Decision reminder", "Use repository evidence, not remembered assumptions. Before a consequential transition, re-read the current ledger artifacts and obtain the evidence required by acceptance.json. Keep raw command/log output outside the main orchestration thread."]
+    lines += ["", "## Decision reminder", "Use repository evidence, not remembered assumptions. Before a consequential transition, re-read the current ledger artifacts and obtain the EvidenceRequirements in canonical intent.json. Keep raw command/log output outside the main orchestration thread."]
     text="\n".join(lines)+"\n"
     max_chars=int((config.get("context_compiler",{}) or {}).get("max_chars",12000))
     if len(text)>max_chars:
