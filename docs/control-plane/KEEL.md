@@ -94,4 +94,4 @@ Until those are observed, report KEEL as installed but not fully runtime-validat
 - `keel.py next` reports the next legal action and blockers for the active change; it is read-only guidance and never advances lifecycle state.
 - Required `REQ-*`/`AC-*` contracts are evaluated through `evidence-graph.json`. See [ACCEPTANCE_EVIDENCE.md](ACCEPTANCE_EVIDENCE.md).
 - `.keel/bench/` provides KEELBench paired-run schemas and scoring. See [KEELBENCH.md](KEELBENCH.md).
-- `keel mission` validates objective-level dependency graphs and reports a runnable frontier without replacing per-change ledgers or acting as a scheduler.
+- `keel change-graph` and the stable `keel mission` alias validate or normalize canonical planning graphs and report a read-only frontier from typed hard-dependency edges plus explicitly supplied state. Mission v1/v2 reads pass through compatibility adapters; the hidden `mission-v2` alias is temporary. Planning does not schedule, dispatch, observe runtime state, or grant requested effects.

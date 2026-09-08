@@ -10,6 +10,7 @@ import keel_core as k
 import upgrade_kernel as uk
 import mission_graph as mg
 import mission_v2 as mv2
+import change_graph as cg
 import repository_map as rm
 import topology_router as tr
 import feedback_entropy as fe
@@ -23,15 +24,19 @@ import p0_contract
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="KEEL spec-ledger control plane")
-    sub = ap.add_subparsers(dest="cmd", required=True)
+    sub = ap.add_subparsers(dest="cmd", required=True, metavar="COMMAND")
     sub.add_parser("doctor")
     p = sub.add_parser("bootstrap"); p.add_argument("action", choices=["status"]); p.add_argument("--requires-git", action="store_true")
     p = sub.add_parser("manifest"); p.add_argument("--write", action="store_true")
     sub.add_parser("version")
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
-    p = sub.add_parser("mission"); p.add_argument("action", choices=["validate", "frontier", "status", "dispatch"]); p.add_argument("path", type=Path)
-    p = sub.add_parser("mission-v2"); p.add_argument("action", choices=["validate", "frontier", "normalize-v1"]); p.add_argument("path", type=Path)
+    for name in ("change-graph", "mission"):
+        p = sub.add_parser(name); p.add_argument("action", choices=["validate", "frontier", "status", "normalize", "serialize"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path)
+    # Temporary read-compatibility alias, accepted but intentionally omitted
+    # from the normal public command listing.
+    p = argparse.ArgumentParser(prog="keel.py mission-v2"); p.add_argument("action", choices=["validate", "frontier", "normalize-v1"]); p.add_argument("path", type=Path)
+    sub._name_parser_map["mission-v2"] = p
     p = sub.add_parser("map"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("route"); p.add_argument("path", type=Path); p.add_argument("--change")
     p = sub.add_parser("feedback"); p.add_argument("action", choices=["validate", "status", "queue"]); p.add_argument("path", type=Path)
@@ -79,14 +84,21 @@ def main() -> int:
         if args.cmd == "reconcile": print(json.dumps(uk.reconcile(root, args.change), indent=2)); return 0
         if args.cmd == "contracts":
             result = uk.contract_report(root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
-        if args.cmd == "mission":
-            mission = mg.load(args.path.resolve())
-            if args.action == "validate":
-                errors = mg.validate(mission); result = {"status": "PASS" if not errors else "FAIL", "errors": errors}
-            elif args.action == "dispatch":
-                result = mg.dispatch_plan(root, mission)
-            else:
-                result = mg.plan(root, mission)
+        if args.cmd in {"change-graph", "mission"}:
+            source = cg.load(args.path.resolve())
+            try:
+                graph = cg.normalize(source)
+                if args.action == "validate":
+                    errors = cg.validate(graph); result = {"status": "PASS" if not errors else "FAIL", "errors": errors, "identity": cg.IDENTITY}
+                elif args.action in {"frontier", "status"}:
+                    state = cg.load(args.state.resolve()) if args.state else None
+                    result = cg.frontier(graph, state)
+                elif args.action == "normalize":
+                    result = graph
+                else:
+                    sys.stdout.write(cg.serialize(graph)); return 0
+            except (cg.GraphError, ValueError, TypeError) as exc:
+                result = {"status": "INVALID", "errors": [str(exc)]}
             print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
         if args.cmd == "mission-v2":
             source = mv2.load(args.path.resolve()) if hasattr(mv2, "load") else json.loads(args.path.resolve().read_text(encoding="utf-8"))

@@ -1,0 +1,16 @@
+.keel/lib/change_graph.py
+.keel/lib/mission_v2.py
+.keel/lib/mission_graph.py
+.keel/lib/topology_router.py
+.keel/bin/keel.py
+.keel/tests/test_change_graph.py
+.keel/tests/test_mission_v2.py
+.keel/tests/test_mission_work_graph.py
+.keel/tests/test_topology_routing.py
+.keel/tests/fixtures/mission-v2/**
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+ARCHITECTURE.md
+docs/control-plane/KEEL.md
+docs/control-plane/COMMANDS.md
+docs/exec-plans/active/canonical-change-graph.md

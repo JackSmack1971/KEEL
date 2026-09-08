@@ -1,20 +1,19 @@
-import copy
 import json
 import sys
 from pathlib import Path
+
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / ".keel" / "lib"))
+sys.path.insert(0, str(ROOT / ".keel/lib"))
 import topology_router
-mission = {"schema_version": 1, "mission_id": "routing", "objective": "Route work", "success_criteria": ["stable"], "work": {"tiny": {"risk": "trivial", "depends_on": []}, "normal": {"risk": "standard", "depends_on": []}, "complex": {"risk": "standard", "depends_on": ["tiny", "normal"]}, "critical": {"risk": "high", "depends_on": ["tiny", "normal", "complex"]}}}
+
+mission = json.loads((ROOT / ".keel/tests/fixtures/mission-v2/v1.json").read_text())
 before = json.dumps(mission, sort_keys=True)
 result = topology_router.recommend(mission)
-assert result["status"] == "PASS"
-assert result["recommendations"]["tiny"]["complexity"] == "trivial"
-assert result["recommendations"]["normal"]["effort_capability"] == "balanced"
-assert result["recommendations"]["complex"]["complexity"] == "complex"
-assert result["recommendations"]["critical"]["complexity"] == "critical"
-assert all("model" not in json.dumps(row).lower() for row in result["recommendations"].values())
+assert result["status"] == "PASS" and result["read_only"] is True
+assert result["policy"] == "read-only-constraints-no-scheduling"
+b = result["constraints"]["keel:work-unit:legacy.b"]
+assert b["hard_dependencies"] == ["keel:work-unit:legacy.a"]
+assert not ({"roles", "agent", "model", "effort", "schedule", "dispatch", "complexity"} & set(json.dumps(result).lower().replace('"', '').split()))
 assert json.dumps(mission, sort_keys=True) == before
-invalid = copy.deepcopy(mission); invalid["work"]["tiny"]["risk"] = "unknown"
-assert topology_router.recommend(invalid)["status"] == "INVALID"
-print(json.dumps({"status": "PASS", "checks": ["complexity", "capability-only", "deterministic", "read-only"]}))
+assert topology_router.recommend(mission, "missing")["status"] == "INVALID"
+print(json.dumps({"status": "PASS", "checks": ["canonical-adapter", "constraints-only", "deterministic", "read-only"]}))

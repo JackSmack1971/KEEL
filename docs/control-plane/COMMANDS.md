@@ -39,16 +39,23 @@ Environment contract inspection:
 python3 .keel/bin/keel.py environment status
 ```
 
-Mission dependency inspection:
+Canonical change-graph inspection:
 
 ```text
+python3 .keel/bin/keel.py change-graph validate <plan.json>
+python3 .keel/bin/keel.py change-graph normalize <plan.json>
+python3 .keel/bin/keel.py change-graph serialize <plan.json>
+python3 .keel/bin/keel.py change-graph frontier <plan.json> [--state <state.json>]
 python3 .keel/bin/keel.py mission validate <mission.json>
 python3 .keel/bin/keel.py mission frontier <mission.json>
-python3 .keel/bin/keel.py mission status <mission.json>
-python3 .keel/bin/keel.py mission dispatch <mission.json>
 ```
 
-These commands are read-only. A mission planner validates a dependency DAG, projects child KEEL ledger phases, and emits advisory dispatch contracts; it does not dispatch agents, create worktrees, or transition changes.
+These stable commands are read-only and normalize canonical, mission-v1, or
+mission-v2 input into one `ChangeGraph`. Dependencies are typed edges only;
+frontier uses those edges plus optional caller-supplied completion state. It
+does not inspect lifecycle ledgers, resolve resource conflicts, schedule or
+dispatch agents, execute effects, or grant authorization. `mission-v2`
+remains a hidden temporary read-compatibility alias during migration.
 
 Repository mapping:
 
@@ -61,13 +68,15 @@ python3 .keel/bin/keel.py map
 
 The map includes Python AST import facts when Python sources are present. It also parses a literal `CODEOWNERS`, `.github/CODEOWNERS`, or `docs/CODEOWNERS` source when present; otherwise ownership is explicitly `UNAVAILABLE`. Facts carry analyzer/source provenance and are navigation evidence, not architecture or authorization decisions.
 
-Advisory topology routing:
+Read-only work-constraint projection:
 
 ```text
 python3 .keel/bin/keel.py route <mission.json> [--change <change-id>]
 ```
 
-This emits model-independent complexity, effort capability, role, and verification recommendations; it does not launch agents or select models.
+The temporary `route` surface emits only canonical hard-dependency, resource,
+effect-request, and evidence-requirement constraints. It makes no complexity,
+effort, persona, model, schedule, or dispatch decision.
 
 Lifecycle compatibility:
 

@@ -390,6 +390,18 @@
       "argv": [
         "python",
         "-B",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "cwd": ".",
+      "id": "change-graph-tests",
+      "provenance": ".keel/tests/test_change_graph.py",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
         ".keel/tests/test_mission_v2.py"
       ],
       "cwd": ".",
