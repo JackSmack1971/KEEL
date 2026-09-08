@@ -1,0 +1,167 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-001",
+      "requirement_id": "REQ-RUNTIME-001",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-002",
+      "requirement_id": "REQ-RUNTIME-002",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-003",
+      "requirement_id": "REQ-RUNTIME-003",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-004",
+      "requirement_id": "REQ-RUNTIME-004",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-005",
+      "requirement_id": "REQ-RUNTIME-005",
+      "verifier_id": "provider-effect-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-006",
+      "requirement_id": "REQ-RUNTIME-006",
+      "verifier_id": "runtime-authorization-tests"
+    }
+  ],
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/runtime_authorization.py",
+    ".keel/lib/semantic_kernel.py",
+    ".keel/tests/test_runtime_authorization.py",
+    ".keel/tests/test_semantic_kernel.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/DECISION_MODEL.md",
+    "docs/control-plane/KEEL.md",
+    "docs/exec-plans/active/runtime-trust-authorization-model.md"
+  ],
+  "errors": [],
+  "plan_digest": "c32de98ff412a251d62f4e16f88ecf464b5af7dd6e0adcf141d80f79be6dd4ca",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-RUNTIME-005"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_provider_effect_contracts.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "provider-effect-contract-tests"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-RUNTIME-001",
+        "ER-REQ-RUNTIME-002",
+        "ER-REQ-RUNTIME-003",
+        "ER-REQ-RUNTIME-004",
+        "ER-REQ-RUNTIME-006"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_runtime_authorization.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "runtime-authorization-tests"
+    }
+  ]
+}

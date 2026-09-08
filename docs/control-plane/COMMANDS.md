@@ -15,6 +15,12 @@ python3 .keel/bin/keel.py next
 
 `keel next` is a read-only advisor. It reports the active change phase, blockers, and the next legal command; it never advances a gate, records authorization, seals a candidate, or anchors a commit.
 
+Runtime trust and grant evaluation currently expose a pure Python contract in
+`.keel/lib/runtime_authorization.py`, not a provider observation or execution
+command. Callers supply observation evidence and evaluation time; repository
+configuration cannot establish live Codex version, sandbox posture, hook trust,
+tool coverage, network mediation, or provider availability.
+
 Portable bootstrap and generated-state checks:
 
 ```text

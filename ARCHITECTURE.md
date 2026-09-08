@@ -56,3 +56,14 @@ indexed by `refs/keel/attestations/candidates/<change-id>` and also recorded in 
 audit output. Candidate, attestation, landed, and note refs are mutable indexes/anchors,
 not immutable policy or the sole attestation payload. This boundary deliberately does
 not implement the future Landing Transaction.
+
+## Runtime trust and authorization boundary
+
+The dependency-free `.keel/lib/runtime_authorization.py` implements the M4
+runtime-policy boundary over canonical `RuntimeProfile`, `EffectRequest`, and
+`CapabilityGrant` records. Profiles retain explicit negative observations rather
+than deriving trust from configuration. Grants bind subject, work/change, action,
+resource, constraints, intent digest, issuer evidence, validity, and use limits.
+Effect adapters classify boundaries as `MEDIATED`, `OBSERVED`, or `UNCONFINED`;
+none currently executes provider effects. Planning validity remains independent
+from execution readiness. This does not implement a scheduler or hook confinement.

@@ -1,0 +1,55 @@
+{
+  "change_type": "implementation",
+  "criteria": [],
+  "errors": [],
+  "implementation_status": "PASS",
+  "projection_of": "evidence-receipts.json",
+  "requirement_coverage": [
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-001",
+      "requirement_id": "REQ-RUNTIME-001",
+      "status": "PASS",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-002",
+      "requirement_id": "REQ-RUNTIME-002",
+      "status": "PASS",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-003",
+      "requirement_id": "REQ-RUNTIME-003",
+      "status": "PASS",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-004",
+      "requirement_id": "REQ-RUNTIME-004",
+      "status": "PASS",
+      "verifier_id": "runtime-authorization-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-005",
+      "requirement_id": "REQ-RUNTIME-005",
+      "status": "PASS",
+      "verifier_id": "provider-effect-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-RUNTIME-006",
+      "requirement_id": "REQ-RUNTIME-006",
+      "status": "PASS",
+      "verifier_id": "runtime-authorization-tests"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 6,
+    "required": 6,
+    "requirements_covered": 6,
+    "requirements_passing": 6,
+    "requirements_total": 6
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

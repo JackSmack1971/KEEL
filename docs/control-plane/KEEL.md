@@ -17,7 +17,7 @@ Each active change owns:
   scope.txt            # machine-checkable repo-relative files/globs
   risk.json            # risk level + control-plane/sensitive flags
   effects.json         # declared external/irreversible side effects
-  authorization.json   # script-owned, effects-bound record of permission already obtained when required
+  authorization.json   # script-owned legacy evidence; its boolean is not a CapabilityGrant
   gate-log.jsonl       # append-only-in-normal-use gate/audit events
   verification.json    # structured command/exit-code/digest evidence
   verification.md      # concise human/agent-readable summary
@@ -58,6 +58,14 @@ After Plan passes, intent/scope changes require `keel.py replan`; re-plan invali
 Direct mutation permissions are phase-specific: DISCUSS permits only `proposal.md`; PLAN permits proposal/delta/requirements/acceptance/scope/risk/effects/risk-review plus the matching active ExecPlan; authorization/state/gate/verification records are script-owned; EXECUTE permits only declared implementation scope; VERIFY/SHIP permit no direct content writes without reopen/replan.
 
 Hooks do not provide total confinement. Specialized tool paths may bypass hook coverage; therefore `keel verify` rechecks the Git diff independently and Codex sandbox/approval/rules/domain controls remain load-bearing.
+
+Canonical runtime/effect decisions consume conservative `RuntimeProfile` and
+intent-bound `CapabilityGrant` objects. Legacy effects normalize to independent
+`EffectRequest` objects; legacy authorization becomes only a non-authoritative
+observation and never silently creates a grant. An adapter/receipt states whether
+an effect boundary is `MEDIATED`, `OBSERVED`, or `UNCONFINED`. Planning remains
+valid without a grant while execution readiness waits. No scheduler or provider
+effect executor is implemented.
 
 ## Modes
 - `standard`: full lifecycle.

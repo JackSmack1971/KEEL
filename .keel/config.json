@@ -1422,6 +1422,57 @@
         ]
       },
       "version": "1"
+    },
+    {
+      "applicability": {
+        "paths": [
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_runtime_authorization.py",
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/DECISION_MODEL.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/COMMANDS.md"
+        ],
+        "risk_levels": [
+          "low",
+          "standard",
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "runtime-authorization-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_runtime_authorization.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_runtime_authorization.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "security",
+          "migration",
+          "performance",
+          "architecture",
+          "documentation"
+        ]
+      },
+      "version": "1"
     }
   ]
 }

@@ -1,0 +1,3 @@
+# Risk review
+
+This M4 control-plane/security migration changes how KEEL represents permission and computes autonomy. Primary hazards are accidentally upgrading configuration or legacy booleans into trust, allowing a mismatched/stale/exhausted grant, conflating observation with mediation, or making planning invalid merely because permission is absent. Mitigations are strict canonical schemas, explicit UNKNOWN/UNSUPPORTED classifications, intent-digest binding, pure deterministic policy evaluation, hostile fixtures for every mismatch and ceiling reduction, preserved legacy readers, and no actual effect execution. The implementation remains local and reversible; no provider, network, deployment, migration, scheduler, or external mutation is performed.

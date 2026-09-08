@@ -1,6 +1,6 @@
 # Codex Control Plane
 
-State: `BOOTSTRAPPED_WITH_KEEL_ENFORCEMENT_PENDING_RUNTIME_TRUST_VALIDATION`
+State: `BOOTSTRAPPED_WITH_CONSERVATIVE_RUNTIME_TRUST_MODEL`; live Codex/hook enforcement remains pending per-session observation.
 
 The control plane is the repository's information architecture, change-governance spine, and feedback system. It remains stack-neutral until project evidence activates specialized domains.
 
@@ -41,3 +41,9 @@ capability resolution (`DETECTED/LIKELY/UNKNOWN/CONFLICT` evidence only), bounde
 context, repository maps, and impact are projections rather than parallel repository
 models. Requirement-to-receipt verification is authoritative; legacy evidence-graph views are compatibility projections. KEELBench retains its separate evaluation behavior. These mechanisms increase decision quality without
 silently changing project policy.
+
+Runtime trust and authorization now have a canonical M4 policy boundary:
+`RuntimeProfile` preserves observed and negative states, `CapabilityGrant`
+replaces boolean permission semantics, and effect contracts distinguish mediated,
+observed, and unconfined boundaries. This is not proof that a session is confined,
+and it supplies neither an effect executor nor a scheduler.
