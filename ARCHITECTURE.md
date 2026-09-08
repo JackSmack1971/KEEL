@@ -1,6 +1,6 @@
 # Architecture
 
-Status: `GREENFIELD / NOT YET CHOSEN`
+Status: `APPLICATION GREENFIELD / KEEL KERNEL REDESIGN AUTHORIZED FOR PLANNING`
 
 This file is the durable map of verified system structure. At bootstrap there is intentionally no invented stack.
 
@@ -9,6 +9,10 @@ This file is the durable map of verified system structure. At bootstrap there is
 - Control-plane doctrine sources: `control-plane-engineering-bible.md` and `control-plane-kb.md`.
 - Repository-owned control-plane scaffold exists.
 - Application/runtime architecture is not yet established.
+
+## KEEL target architecture
+
+[`docs/control-plane/KERNEL_REDESIGN.md`](docs/control-plane/KERNEL_REDESIGN.md) is the sole authoritative target architecture and migration contract for the KEEL kernel. The landed implementation remains current behavior until separately migrated; this link does not implement or authorize the target.
 
 ## Architecture contract
 When architecture is introduced, record:

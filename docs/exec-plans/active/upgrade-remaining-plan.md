@@ -1,8 +1,8 @@
 # KEEL upgrade remaining plan
 
-Status: `AUTHORITATIVE PROGRAM ROADMAP`
+Status: `FROZEN / SUBORDINATE TO KERNEL MIGRATION AUTHORITY`
 
-Requirement and status authority is [`docs/control-plane/UPGRADE_AUDIT.md`](../../control-plane/UPGRADE_AUDIT.md). Workstream execution plans are subordinate and do not replace this roadmap.
+The sole forward authority is [`docs/control-plane/KERNEL_REDESIGN.md`](../../control-plane/KERNEL_REDESIGN.md). This roadmap preserves landed P0/P1/P2 and prior sequencing as historical planning evidence. P3-P7 and D1 feature expansion is frozen; later work must use an M1-M6 migration stage and may not resume this sequence directly.
 
 ## Execution sequence
 
@@ -20,12 +20,12 @@ P6 → P7
 - P0 → **VERIFIED COMPLETE**, landed under `p0-portable-verification-bootstrap-contract`.
 - P1 → **VERIFIED COMPLETE / LANDED**, under KEEL change `p1-repository-intelligence-foundation`, anchored at `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`.
 - P2 → **VERIFIED COMPLETE / LANDED**, under KEEL change `p2-mission-schema-planning`; schema/planning is complete and execution remains excluded.
-- P3 → **FUTURE**, with no dependency shortcut.
-- P4 → **BLOCKED** until an authorized runtime/provider and operator authorization exist.
-- P5 → **FUTURE**, unavailable through dependency shortcuts.
-- P6 → **FUTURE**, requires P1 + P2 + P5.
-- P7 → **FUTURE**, requires P6.
-- D1 → **DEFERRED**, not an active prerequisite.
+- P3 → **FROZEN**, superseded as feature expansion; runtime-profile work may occur only in an authorized migration stage.
+- P4 → **BLOCKED** and **FROZEN**, with no execution authority; landing/runtime work may occur only under the redesign migration contract and required authorization.
+- P5 → **FROZEN**, unavailable as feature expansion.
+- P6 → **FROZEN**, unavailable as feature expansion.
+- P7 → **FROZEN**, unavailable as feature expansion.
+- D1 → **DEFERRED** and **FROZEN**, not an active prerequisite or authorized expansion.
 
 ## Workstream boundaries
 
@@ -42,4 +42,4 @@ Plans do not authorize implementation merely by existing. Every implementation p
 
 ## Current handoff
 
-P1 is landed and P2 schema/planning is implemented under its subordinate plan with completion evidence. No execution runtime is activated by this reconciliation: P4 remains blocked, P5–P7 remain future/locked, and D1 remains deferred.
+P0, P1, and P2 are landed compatibility baselines. All feature expansion above P2 is frozen. The next eligible work is M1 contract-fixture migration planning under `KEEL-KERNEL-REDESIGN-v1`; this roadmap grants no implementation or integration authorization.

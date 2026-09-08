@@ -1,0 +1,294 @@
+{
+  "change_type": "planning_only",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/control-plane/KERNEL_REDESIGN.md",
+          "passed": true,
+          "path": "docs/control-plane/KERNEL_REDESIGN.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "changed-path",
+      "id": "AC-KR-001",
+      "implementation_matches": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KR-001",
+      "statement": "The authoritative contract contains all named ownership, primitive, state, graph, authorization, resource, identity, verification, hook, trust, compatibility, and single-authority invariants.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/control-plane/KERNEL_REDESIGN.md",
+          "passed": true,
+          "path": "docs/control-plane/KERNEL_REDESIGN.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "changed-path",
+      "id": "AC-KR-002",
+      "implementation_matches": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KR-002",
+      "statement": "The contract contains a repository-evidenced file-level migration matrix and explicit staged migration/compatibility gates while making no kernel implementation change.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/control-plane/UPGRADE_AUDIT.md",
+          "passed": true,
+          "path": "docs/control-plane/UPGRADE_AUDIT.md",
+          "provider": "changed_path"
+        },
+        {
+          "detail": "matched=docs/exec-plans/active/upgrade-remaining-plan.md",
+          "passed": true,
+          "path": "docs/exec-plans/active/upgrade-remaining-plan.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "changed-path",
+      "id": "AC-KR-003",
+      "implementation_matches": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KR-003",
+      "statement": "The audit and active roadmap freeze P3-P7 feature expansion and defer to the redesign authority.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "matched=ARCHITECTURE.md",
+          "passed": true,
+          "path": "ARCHITECTURE.md",
+          "provider": "changed_path"
+        },
+        {
+          "detail": "matched=CONTROL_PLANE.md",
+          "passed": true,
+          "path": "CONTROL_PLANE.md",
+          "provider": "changed_path"
+        },
+        {
+          "detail": "matched=docs/INDEX.md",
+          "passed": true,
+          "path": "docs/INDEX.md",
+          "provider": "changed_path"
+        },
+        {
+          "detail": "matched=docs/exec-plans/active/kernel-redesign-migration-authority.md",
+          "passed": true,
+          "path": "docs/exec-plans/active/kernel-redesign-migration-authority.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "changed-path",
+      "id": "AC-KR-004",
+      "implementation_matches": [
+        "ARCHITECTURE.md",
+        "CONTROL_PLANE.md",
+        "docs/INDEX.md",
+        "docs/exec-plans/active/kernel-redesign-migration-authority.md"
+      ],
+      "implementation_paths": [
+        "ARCHITECTURE.md",
+        "CONTROL_PLANE.md",
+        "docs/INDEX.md",
+        "docs/exec-plans/active/kernel-redesign-migration-authority.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KR-004",
+      "statement": "Primary navigation and architecture surfaces link to the sole migration authority and a subordinate ExecPlan records the handoff.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "p0-contract-tests",
+          "detail": "check=p0-contract-tests exit=1",
+          "passed": false,
+          "provider": "command"
+        },
+        {
+          "check_id": "manifest-producer-check",
+          "detail": "check=manifest-producer-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "automated-test",
+      "id": "AC-KR-005",
+      "implementation_matches": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KR-004",
+      "statement": "Canonical control-plane checks validate documentation/bootstrap integrity after the planning change.",
+      "status": "FAIL"
+    }
+  ],
+  "errors": [
+    "acceptance criterion failed: AC-KR-005"
+  ],
+  "implementation_status": "NOT_APPLICABLE",
+  "planning_status": "FAIL",
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-KR-001"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-KR-001",
+      "type": "architecture"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-KR-002"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-KR-002",
+      "type": "migration"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-KR-003"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-KR-003",
+      "type": "documentation"
+    },
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-KR-004",
+        "AC-KR-005"
+      ],
+      "implementation_paths": [
+        "ARCHITECTURE.md",
+        "CONTROL_PLANE.md",
+        "docs/INDEX.md",
+        "docs/exec-plans/active/kernel-redesign-migration-authority.md"
+      ],
+      "passed": false,
+      "priority": "must",
+      "requirement_id": "REQ-KR-004",
+      "type": "documentation"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-KR-001",
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "priority": "must",
+      "source": "operator kernel redesign directive",
+      "statement": "Establish one authoritative redesign document defining the North Star, Codex/KEEL ownership boundary, canonical primitives, orthogonal state dimensions, single dependency graph, and all requested authorization, resource, evidence, verification, hook, runtime-trust, compatibility, and semantic-authority invariants.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-KR-002",
+      "implementation_paths": [
+        "docs/control-plane/KERNEL_REDESIGN.md"
+      ],
+      "priority": "must",
+      "source": "operator kernel redesign directive",
+      "statement": "Classify every landed component family at file-level granularity as PRESERVE, REWORK, REMOVE-AFTER-MIGRATION, or MOVE-OUT-OF-CORE, and define deterministic compatibility and staged migration gates without implementing them.",
+      "type": "migration"
+    },
+    {
+      "id": "REQ-KR-003",
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "priority": "must",
+      "source": "operator kernel redesign directive",
+      "statement": "Freeze feature expansion above landed P2 and make existing audit/roadmap authorities explicitly subordinate for future redesign work without rewriting historical evidence.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-KR-004",
+      "implementation_paths": [
+        "ARCHITECTURE.md",
+        "CONTROL_PLANE.md",
+        "docs/INDEX.md",
+        "docs/exec-plans/active/kernel-redesign-migration-authority.md"
+      ],
+      "priority": "must",
+      "source": "repository documentation contract",
+      "statement": "Make the migration authority mechanically discoverable from primary architecture and documentation navigation and record a subordinate planning-only ExecPlan.",
+      "type": "documentation"
+    }
+  ],
+  "schema_version": 1,
+  "status": "FAIL",
+  "summary": {
+    "passed_required": 4,
+    "required": 5,
+    "requirements_covered": 4,
+    "requirements_passing": 3,
+    "requirements_total": 4
+  },
+  "verification_class": "PLAN_READINESS"
+}

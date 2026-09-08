@@ -15,7 +15,12 @@ The control plane is the repository's information architecture, change-governanc
 8. Production feedback — reviewed traces/corrections -> findings -> evals -> bounded tasks.
 9. Entropy control — recurring docs/quality gardening and promotion of repeated feedback into rules.
 
+## Kernel transition freeze
+
+Feature expansion above landed P2 is frozen. [`docs/control-plane/KERNEL_REDESIGN.md`](docs/control-plane/KERNEL_REDESIGN.md) is the sole forward architecture and migration authority; existing P0/P1/P2 surfaces remain governing current behavior until deterministic migration lands.
+
 ## Core maps
+- [KEEL kernel redesign and migration authority](docs/control-plane/KERNEL_REDESIGN.md)
 - [KEEL control plane](docs/control-plane/KEEL.md)
 - [Capability registry](docs/control-plane/CAPABILITY_REGISTRY.md)
 - [Decision and autonomy model](docs/control-plane/DECISION_MODEL.md)

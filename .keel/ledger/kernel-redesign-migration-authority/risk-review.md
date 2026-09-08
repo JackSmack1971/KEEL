@@ -1,0 +1,5 @@
+# Risk review
+
+This is a high-blast-radius control-plane and migration-planning change because it replaces the forward architectural authority and freezes the existing roadmap. It changes no executable behavior, schema, hook, runtime, authorization, migration, or external system. The principal risks are an incomplete inventory, accidental conflict with landed compatibility surfaces, ambiguous authority, and plan text being mistaken for permission or implementation.
+
+Mitigations are: repository-evidenced inventory; one explicitly named normative document; historical ledgers and landed P0/P1/P2 formats preserved; explicit planning-only evidence class; old-reader compatibility gates before removal; primary-index links; canonical checks; independent diff review; exact candidate sealing. Any later implementation requires a separate standard KEEL change, its own acceptance evidence, and authorization appropriate to its effects. GitHub PR creation is an external effect authorized by the operator's explicit instruction for this turn; merge/push/remote landing is not independently assumed.

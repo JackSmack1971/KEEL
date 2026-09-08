@@ -1,0 +1,9 @@
+{
+  "base_commit": "810c40b4a3b8bd0acfb3d9fe49cf286f6348181f",
+  "change_id": "kernel-redesign-migration-authority",
+  "created_at": "2026-09-08T14:56:33+00:00",
+  "mode": "standard",
+  "phase": "EXECUTE",
+  "schema_version": 1,
+  "updated_at": "2026-09-08T15:04:58+00:00"
+}
