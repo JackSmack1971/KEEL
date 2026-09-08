@@ -1,0 +1,162 @@
+{
+  "change_type": "implementation",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/control-plane/UPGRADE_AUDIT.md",
+          "passed": true,
+          "path": "docs/control-plane/UPGRADE_AUDIT.md",
+          "provider": "changed_path"
+        },
+        {
+          "detail": "matched=docs/exec-plans/active/upgrade-remaining-plan.md",
+          "passed": true,
+          "path": "docs/exec-plans/active/upgrade-remaining-plan.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "changed-path",
+      "id": "AC-RECON-001",
+      "implementation_matches": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-RECON-001",
+      "statement": "Audit and roadmap state cite anchored P1 completion and preserve P2 not instantiated, P4 blocked, P5/P6/P7 locked, and D1 deferred.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "detail": "matched=docs/exec-plans/completed/p1-repository-intelligence-foundation.md",
+          "passed": true,
+          "path": "docs/exec-plans/completed/p1-repository-intelligence-foundation.md",
+          "provider": "changed_path"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "changed-path",
+      "id": "AC-RECON-002",
+      "implementation_matches": [
+        "docs/exec-plans/active/README.md",
+        "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/completed/p1-repository-intelligence-foundation.md"
+      ],
+      "implementation_paths": [
+        "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/completed/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/active/README.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-RECON-002",
+      "statement": "The P1 plan exists only in the completed archive and active navigation no longer presents it as active.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "automated-test",
+      "id": "AC-RECON-003",
+      "implementation_matches": [
+        "docs/control-plane/UPGRADE_AUDIT.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-RECON-001",
+      "statement": "The anchored P1 ledger remains independently verifiable and strict control-plane checks pass.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "implementation_status": "NOT_VERIFIED",
+  "planning_status": "PASS",
+  "requirement_coverage": [
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-RECON-001",
+        "AC-RECON-003"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-RECON-001",
+      "type": "documentation"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-RECON-002"
+      ],
+      "implementation_paths": [
+        "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/completed/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/active/README.md"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-RECON-002",
+      "type": "documentation"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-RECON-001",
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "priority": "must",
+      "source": "post-landing P1 lifecycle requirement",
+      "statement": "Reconcile the audit and roadmap to the anchored P1 implementation while preserving all downstream dependency locks and deferred states.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-RECON-002",
+      "implementation_paths": [
+        "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/completed/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/active/README.md"
+      ],
+      "priority": "must",
+      "source": "post-landing P1 lifecycle requirement",
+      "statement": "Archive the completed P1 subordinate ExecPlan only after landed completion evidence exists, retaining its contract and evidence references.",
+      "type": "documentation"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 2,
+    "requirements_passing": 2,
+    "requirements_total": 2
+  },
+  "verification_class": "PLAN_READINESS"
+}

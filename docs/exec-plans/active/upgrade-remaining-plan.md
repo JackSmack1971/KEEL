@@ -18,8 +18,8 @@ P6 → P7
 ## Workstream state
 
 - P0 → **VERIFIED COMPLETE**, landed under `p0-portable-verification-bootstrap-contract`.
-- P1 → **CURRENT AUTHORIZED WORKSTREAM**, implementation not started, under `p1-repository-intelligence-foundation`.
-- P2 → **NOT INSTANTIATED**, blocked on independently verified P1 completion.
+- P1 → **VERIFIED COMPLETE / LANDED**, under KEEL change `p1-repository-intelligence-foundation`, anchored at `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`.
+- P2 → **NOT INSTANTIATED / LOCKED**, requires a separate authorized workstream and must not be inferred from P1 completion.
 - P3 → **FUTURE**, with no dependency shortcut.
 - P4 → **BLOCKED** until an authorized runtime/provider and operator authorization exist.
 - P5 → **FUTURE**, unavailable through dependency shortcuts.
@@ -42,4 +42,4 @@ Plans do not authorize implementation merely by existing. Every implementation p
 
 ## Current handoff
 
-P1 is the only current authorized workstream. Its subordinate plan records the implementation contract and readiness boundary. P2 remains uninstantiated, P4 remains blocked, and D1 remains deferred until the dependency and evidence rules above are satisfied.
+P1 is landed and its subordinate plan is archived with its completion evidence. No downstream workstream is activated by this reconciliation: P2 remains uninstantiated/locked, P4 remains blocked, P5–P7 remain future/locked, and D1 remains deferred.

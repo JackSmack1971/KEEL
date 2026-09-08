@@ -1,0 +1,10 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+docs/control-plane/UPGRADE_AUDIT.md
+.control-plane/bootstrap-manifest.json
+.keel/tests/test_p1_plan_contract.py
+docs/exec-plans/active/README.md
+docs/exec-plans/active/upgrade-remaining-plan.md
+docs/exec-plans/active/p1-repository-intelligence-foundation.md
+docs/exec-plans/completed/p1-repository-intelligence-foundation.md
+docs/exec-plans/active/p1-repository-intelligence-reconciliation.md
+docs/exec-plans/completed/p1-repository-intelligence-reconciliation.md

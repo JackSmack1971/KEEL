@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "change_type": "implementation",
+  "requirements": [
+    {"id":"REQ-RECON-001","type":"documentation","priority":"must","statement":"Reconcile the audit and roadmap to the anchored P1 implementation while preserving all downstream dependency locks and deferred states.","source":"post-landing P1 lifecycle requirement","implementation_paths":["docs/control-plane/UPGRADE_AUDIT.md","docs/exec-plans/active/upgrade-remaining-plan.md"]},
+    {"id":"REQ-RECON-002","type":"documentation","priority":"must","statement":"Archive the completed P1 subordinate ExecPlan only after landed completion evidence exists, retaining its contract and evidence references.","source":"post-landing P1 lifecycle requirement","implementation_paths":["docs/exec-plans/active/p1-repository-intelligence-foundation.md","docs/exec-plans/completed/p1-repository-intelligence-foundation.md","docs/exec-plans/active/README.md"]}
+  ]
+}

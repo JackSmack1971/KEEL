@@ -10,12 +10,12 @@ This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Ever
 | 4 | Effect capabilities and authorization semantics | PARTIAL | P6 | `.keel/contracts.json` and effect checks exist; richer effect ontology and runtime enforcement remain. |
 | 5 | Mission execution through a governed runtime | BLOCKED | P4 | No authorized runtime/provider and operator authorization are evidenced. |
 | 6–7 | Mission graph semantics and deterministic decomposition/planning | PARTIAL | P2 | `keel mission` validates contracts and computes a read-only frontier; richer decomposition remains. |
-| 8 | Repository intelligence and codebase mapping | PARTIAL | P1 | `keel map` emits deterministic provenance-bearing repository facts; deeper semantic intelligence remains. |
+| 8 | Repository intelligence and codebase mapping | COMPLETE (P1 FOUNDATION) | — | `.keel/lib/repository_intelligence.py`, independent P1 fixtures/tests, and landed KEEL evidence at `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d` / `refs/keel/ledger/p1-repository-intelligence-foundation`. |
 | 9 | Query-driven context compilation | PARTIAL | P5 | `keel context` compiles bounded provenance-aware context; query/topology-aware behavior remains. |
 | 10 | Avoid redundant context/prompt injection | PARTIAL | P5 | Bounded context compilation exists; broader adaptive context-budget policy remains. |
 | 11 | First-class adaptive workflow engine | PARTIAL | P5 | Routed workflow/protocol capabilities exist; deterministic adaptive workflow obligations remain. |
-| 12 | Dynamically activated domain intelligence | PARTIAL | P1 | Capability registry and discovery exist; deeper domain activation/intelligence remains. |
-| 13 | Executable repository command discovery | PARTIAL | P1 | `keel map` exposes command facts; broader reliable command provenance remains. |
+| 12 | Dynamically activated domain intelligence | PARTIAL | P3 | P1 supplies evidence-backed static domain/adapter facts; runtime activation remains outside P1. |
+| 13 | Executable repository command discovery | COMPLETE (P1 FOUNDATION) | — | P1 command registry preserves existence, source class, provenance, support, runtime availability, authorization, precedence, and negative states in the landed repository-intelligence contract. |
 | 14–15 | Portable verification and extracted-package behavior | COMPLETE | — | P0 provides repository-relative provenance-bearing command resolution, explicit unavailable/ambiguous/unproven/unauthorized states, and non-Git copied/extracted bootstrap classification; canonical config has no creator-machine path or D1 check. |
 | 16–17 | Installation, upgrade, and compatibility contract | COMPLETE | — | P0 adds deterministic compatible/incompatible/unsupported/missing-metadata/migration-required foundations while preserving read-only preflight, authorized apply, backup, rollback, and installer/live orchestration boundaries. |
 | 18 | Runtime capability detection and trust handshake | PARTIAL | P3 | Static/project capability evidence exists; actual runtime capability, trust, and hook readiness remain unobserved. |
@@ -35,12 +35,12 @@ This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Ever
 | 35–36 | Property-based lifecycle invariants and formal lifecycle state machine | PARTIAL | P6 | Lifecycle mechanisms and tests exist; property/state-machine coverage remains. |
 | 37–38 | Rich effect ontology and tool-semantic inference | PARTIAL | P6 | Contracts and conservative argv inference exist; semantic tool/API inference remains. |
 | 39–40 | Reproducible environment and supply-chain attestation | COMPLETE | — | P0 provides deterministic repository-relative file attestation with provenance and explicit `UNVERIFIED_RUNTIME` when runtime evidence is unavailable; no supply-chain or D1 claim is fabricated. |
-| 41 | Brownfield repository intelligence | PARTIAL | P1 | Repository mapping exists; deeper brownfield intelligence remains. |
+| 41 | Brownfield repository intelligence | COMPLETE (P1 FOUNDATION) | — | P1 landed read-only brownfield graph, authority, dependency, impact, changed-path, and generated-provenance evidence with independent negative fixtures. |
 | 42 | Continuously refreshed project context | PARTIAL | P5 | Bounded context compilation exists; continuous refresh remains. |
 | 43–44 | Self-improvement and reviewed mistake handling | PARTIAL | P7 | Observation validation and entropy scans exist; reviewed promotion/scheduling remains. |
 | 45 | Policy compiler | PARTIAL | P7 | Policy doctrine exists; compiled policy capability remains. |
 | 46 | Invariant ownership | PARTIAL | P7 | Maintenance/control-plane ownership exists; broader invariant ownership remains. |
-| 47–49 | Architecture enforcement, impact analysis, and Git-history learning | PARTIAL | P1 | Architecture maps and repository facts exist; executable dependency/impact/history analysis remains. |
+| 47–49 | Architecture enforcement, impact analysis, and Git-history learning | PARTIAL | P7 | P1 landed architecture-source, dependency, and changed-path impact evidence; broader enforcement and Git-history learning remain outside P1. |
 | 50–51 | Evidence-derived risk and explicit uncertainty | PARTIAL | P5 | Risk/evidence contracts exist; richer evidence-derived uncertainty remains. |
 | 52–53 | Reversible execution and experiment changes | PARTIAL | P2 | Planning and effects boundaries exist; richer reversible/experiment contracts remain. |
 | 54–57 | Semantic diff, verification-quality protection, independent verification, and scope laundering detection | PARTIAL | P6 | Scope and lifecycle verification exist; semantic and independent verification strengthening remains. |
@@ -63,3 +63,7 @@ This cross-cutting row is not a second source-section count: it is the explicitl
 ## Authority boundaries
 
 Unresolved executable rows map to exactly one P0–P7 owner, except explicitly BLOCKED P4 and DEFERRED D1 rows. This document is requirement/status authority; [upgrade-remaining-plan.md](../exec-plans/active/upgrade-remaining-plan.md) is program sequence/dependency authority; and each subordinate active workstream ExecPlan is bounded execution authority. Historical ExecPlans under `docs/exec-plans/completed/` and `.keel/ledger/*` are evidence only and never prove broader upgrade completion. A workstream plan must not supersede or replace the global roadmap.
+
+## Landed P1 evidence
+
+P1 implementation acceptance passed independently before commit `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`; the candidate was sealed and the landed tree was anchored at `refs/keel/ledger/p1-repository-intelligence-foundation` with `LANDED_COMPLETION`. The active roadmap remains the program authority; this reconciliation does not instantiate P2–P7 or execute D1.

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {"id":"AC-RECON-001","requirement_id":"REQ-RECON-001","evidence_class":"PLAN_READINESS","evidence_type":"changed-path","statement":"Audit and roadmap state cite anchored P1 completion and preserve P2 not instantiated, P4 blocked, P5/P6/P7 locked, and D1 deferred.","required":true,"policy":"all","implementation_paths":["docs/control-plane/UPGRADE_AUDIT.md","docs/exec-plans/active/upgrade-remaining-plan.md"],"evidence":[{"provider":"changed_path","path":"docs/control-plane/UPGRADE_AUDIT.md"},{"provider":"changed_path","path":"docs/exec-plans/active/upgrade-remaining-plan.md"}]},
+    {"id":"AC-RECON-002","requirement_id":"REQ-RECON-002","evidence_class":"PLAN_READINESS","evidence_type":"changed-path","statement":"The P1 plan exists only in the completed archive and active navigation no longer presents it as active.","required":true,"policy":"all","implementation_paths":["docs/exec-plans/active/p1-repository-intelligence-foundation.md","docs/exec-plans/completed/p1-repository-intelligence-foundation.md","docs/exec-plans/active/README.md"],"evidence":[{"provider":"changed_path","path":"docs/exec-plans/completed/p1-repository-intelligence-foundation.md"}]},
+    {"id":"AC-RECON-003","requirement_id":"REQ-RECON-001","evidence_class":"PLAN_READINESS","evidence_type":"automated-test","statement":"The anchored P1 ledger remains independently verifiable and strict control-plane checks pass.","required":true,"policy":"all","implementation_paths":["docs/control-plane/UPGRADE_AUDIT.md"],"evidence":[{"provider":"command","check_id":"control-plane-doctor"}]}
+  ]
+}

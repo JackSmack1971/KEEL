@@ -1,6 +1,6 @@
 # P1 — Repository Intelligence Foundation
 
-Status: `IMPLEMENTATION IN PROGRESS`
+Status: `COMPLETE / LANDED`
 
 ## Authority and lifecycle boundary
 
@@ -164,6 +164,10 @@ The required behavioral domains are graph/schema serialization and negative grap
 4. Independently review the evidence graph, commit the verified tree, seal, and later anchor only through KEEL after implementation acceptance passes.
 
 P1 is complete only when every required acceptance edge is proven against the committed tree and KEEL reports `LANDED_COMPLETION`. The active roadmap remains in place throughout this execution.
+
+## Completion evidence
+
+Implementation acceptance passed for all required criteria before commit `c31dc0ff9e48135f9ce7fe2746df1684f68f4a5d`. KEEL sealed the candidate and anchored the landed tree at `refs/keel/ledger/p1-repository-intelligence-foundation`; the reconciliation is recorded by the separate post-landing ledger change.
 
 ## Failure and blocker rules
 
