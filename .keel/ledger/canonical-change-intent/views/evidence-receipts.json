@@ -1,0 +1,747 @@
+{
+  "generated": true,
+  "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+  "receipts": [
+    {
+      "ended_at": "2026-09-08T18:36:04.123393+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 320,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "4374f36a60673fa9c1e0e4d7fd9bb8cfde8cb592ad5c7409cbf1b6a840a1ce4f",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:03.802699+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:04.351921+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-1",
+        "ER-REQ-2",
+        "ER-REQ-3"
+      ],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_canonical_ledger.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 227,
+          "excerpt": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.014s\n\nOK",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_canonical_ledger.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "d5a1f1c70e57f96b86e88ae1460446854c91b8360773f3aae60eda0cfea5c4ce",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:04.124795+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "canonical-ledger-tests",
+        "provenance": ".keel/tests/test_canonical_ledger.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:04.739526+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 381,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "fb7a9a20e8ca10b81acf9c960f1e55f6ed4325d237f0b9bb4660c02ede686ff6",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:04.357795+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:04.872258+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-6"
+      ],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_evidence_system.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 132,
+          "excerpt": "{\"status\": \"PASS\", \"hostile_checks\": [\"duplicates\", \"authority\", \"applicability\", \"determinism\", \"unrelated-green\", \"subject-drift\", \"tamper\", \"config\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_evidence_system.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "3bcbac368dbbf556c01f6e752b997c9bced13346cb15e7bc117b5392d50cfec3",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:04.739923+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "evidence-system-tests",
+        "provenance": ".keel/tests/test_evidence_system.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:26.446823+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-7"
+      ],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_git_attestation_lifecycle.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 21574,
+          "excerpt": "Git proof tests PASS\nCandidate attestation tests PASS\nGit attestation lifecycle tests PASS",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_git_attestation_lifecycle.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "06a31f2ac427f2d0dea986fbdbdd9eb4b4b20200d64eff3813e5b6f130dc3afb",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:04.872630+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "git-proof-attestation-tests",
+        "provenance": ".keel/tests/test_git_attestation_lifecycle.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:26.669433+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-4"
+      ],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_ledger_migration.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 220,
+          "excerpt": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.023s\n\nOK",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_ledger_migration.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "3d98deb7bd5ff52c0277bfa684ad3323a43ddfd20c71aa3fa486bdee991a3a4e",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:26.448625+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "ledger-migration-tests",
+        "provenance": ".keel/tests/test_ledger_migration.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:26.814136+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [
+        "ER-REQ-5"
+      ],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_lifecycle_compatibility.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 144,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_lifecycle_compatibility.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "8edc79a8ac45c948a4380f4ea1e56a6d19f7c16b1f26e8de5af0cbc67f1292b7",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:26.669847+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "lifecycle-compatibility-tests",
+        "provenance": ".keel/config.json",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:27.119260+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 304,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"822f0cac0285e42a682a80990c997237f835b5307e4cf6f5e00c6a6f0e5be294\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "926e1c09fdc34fc3a13b4fa93853bc3c968ec81245c70455965b5c213732e4af",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:26.814558+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T18:36:27.561538+00:00",
+      "environment": {
+        "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+        "executable": "python3",
+        "machine": "x86_64",
+        "os": "posix",
+        "platform": "Linux",
+        "python": "3.14.4"
+      },
+      "establishes": [],
+      "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 441,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "832c85db6670ae87f9aa307a6b41ff54ec4105fbce1ccc7de29fb76d00116bc6",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T18:36:27.119634+00:00",
+      "subject": {
+        "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+        "changed_paths": [
+          ".agents/skills/keel-change-lifecycle/SKILL.md",
+          ".control-plane/bootstrap-manifest.json",
+          ".keel/bin/keel.py",
+          ".keel/config.json",
+          ".keel/lib/candidate_attestation.py",
+          ".keel/lib/canonical_ledger.py",
+          ".keel/lib/context_compiler.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/lifecycle.py",
+          ".keel/tests/test_canonical_ledger.py",
+          ".keel/tests/test_ledger_migration.py",
+          ".keel/tests/test_p0_contract.py",
+          "AGENTS.md",
+          "CONTROL_PLANE.md",
+          "WORKFLOW.md",
+          "docs/control-plane/KEEL.md",
+          "docs/control-plane/KERNEL_REDESIGN.md",
+          "docs/exec-plans/active/canonical-change-intent.md"
+        ],
+        "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+        "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "changed_paths": [
+      ".agents/skills/keel-change-lifecycle/SKILL.md",
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/lib/context_compiler.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/lifecycle.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_ledger_migration.py",
+      ".keel/tests/test_p0_contract.py",
+      "AGENTS.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/canonical-change-intent.md"
+    ],
+    "content_digest": "84358e457da06c505e735fb4561bad15cf1097f80f15d6f0ff5f8fa70d9a3be7",
+    "head_commit": "53e9b3b67195a742bfe0a033aef83d0f025c356a",
+    "kind": "git-worktree"
+  }
+}

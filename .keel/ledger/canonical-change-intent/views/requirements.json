@@ -1,0 +1,41 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "source": "user",
+      "statement": "New changes have exactly one authoritative intent.json containing objective, requirements, non-goals, scope, work graph references, risk/consequences, EffectRequests, and EvidenceRequirements."
+    },
+    {
+      "id": "REQ-2",
+      "source": "user",
+      "statement": "Significant transitions and decisions are causal events with stable identity and local previous-event digest tamper evidence without immutability claims."
+    },
+    {
+      "id": "REQ-3",
+      "source": "user",
+      "statement": "Grants, exact-subject evidence receipts, and Git-bound attestations are distinct script-owned records; generated views are non-authoritative."
+    },
+    {
+      "id": "REQ-4",
+      "source": "user",
+      "statement": "Migration from every supported legacy ledger is deterministic, idempotent, provenance-preserving, lossless for unknown data, and never invents missing authority or evidence."
+    },
+    {
+      "id": "REQ-5",
+      "source": "user",
+      "statement": "Sealed and landed historical changes remain auditable through canonical migration or a versioned historical reader."
+    },
+    {
+      "id": "REQ-6",
+      "source": "user",
+      "statement": "Lifecycle, scope enforcement, context, evidence planning, verification, candidate attestations, and status queries consume canonical ledger semantics."
+    },
+    {
+      "id": "REQ-7",
+      "source": "user",
+      "statement": "Legacy readers and templates remain until migration and hostile fixtures prove all supported states, and durable control-plane documentation reflects the landed authority model."
+    }
+  ],
+  "schema_version": 1
+}

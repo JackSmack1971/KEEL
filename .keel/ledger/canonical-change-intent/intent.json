@@ -1,0 +1,329 @@
+{
+  "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+  "change_id": "canonical-change-intent",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-ledger-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-1",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "Canonical ledger schema and creation tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-ledger-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-2",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Causal identity, ordering, and tamper tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-ledger-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-3",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "Generated ownership and exact-subject record tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "ledger-migration-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-4",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "Migration round-trip, determinism, absence, unknown-field, and hostile tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "lifecycle-compatibility-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-5",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Historical reader and Git lifecycle compatibility tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-system-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-6",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "All canonical consumers and full regressions pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "git-proof-attestation-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "ER-AC-7",
+      "policy": "all",
+      "provenance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Repository policy and documentation checks pass"
+    }
+  ],
+  "mode": "standard",
+  "non_goals": [
+    "No immutability claim for hash chains or Git refs.",
+    "No deletion of legacy readers, historical ledgers, or templates.",
+    "No future landing transaction, scheduler, provider effect executor, or unauthorized remote integration.",
+    "No invented authorization, requirements, evidence, or runtime observations."
+  ],
+  "objective": "KEEL currently distributes change intent and authority across proposal, delta, requirements, acceptance, scope, risk, effects, authorization, state, and gate-log files. Independent editable authorities can diverge, obscure provenance, and complicate causal audit and migration.\nImplement authority `KEEL-KERNEL-REDESIGN-v1` stages M2-M4 for change ledgers: one canonical versioned intent document; hash-chained causal lifecycle events; separate grants, receipts, and attestations; generated Markdown/compatibility views; deterministic loss-preserving legacy migration; and canonical consumers for lifecycle, context, evidence, candidate attestations, and status.\nDo not claim append-only files or Git refs are immutable. Do not delete legacy readers, historical ledgers, templates, or implement the future landing transaction. Do not manufacture missing grants, requirements, acceptance criteria, receipts, or runtime observations during migration. Do not execute external effects or merge a pull request without separate authorization.\nAutomated fixtures prove canonical validation, stable identity and event-chain tamper detection, deterministic/idempotent legacy migration, uncertainty preservation, hostile-input rejection, generated-view provenance, legacy historical readability, canonical lifecycle transitions, context/evidence/status consumption, and exact-subject candidate attestation behavior. Full KEEL regression and repository verification pass.\nNone. The user supplied the target authority boundary; compatibility readers remain versioned and legacy authority files are accepted only as migration inputs for historical ledgers.",
+  "provenance": {
+    "authority_id": "KEEL-KERNEL-REDESIGN-v1",
+    "kind": "legacy-migration",
+    "preserved_legacy": {
+      "acceptance.json": {
+        "content": "{\n  \"schema_version\": 1,\n  \"criteria\": [\n    {\n      \"id\": \"AC-1\",\n      \"requirement_id\": \"REQ-1\",\n      \"statement\": \"Canonical ledger schema and creation tests pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"p0-contract-tests\"\n        }\n      ]\n    },\n    {\n      \"id\": \"AC-2\",\n      \"requirement_id\": \"REQ-2\",\n      \"statement\": \"Causal identity, ordering, and tamper tests pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"semantic-kernel-tests\"\n        }\n      ]\n    },\n    {\n      \"id\": \"AC-3\",\n      \"requirement_id\": \"REQ-3\",\n      \"statement\": \"Generated ownership and exact-subject record tests pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"runtime-authorization-tests\"\n        }\n      ]\n    },\n    {\n      \"id\": \"AC-4\",\n      \"requirement_id\": \"REQ-4\",\n      \"statement\": \"Migration round-trip, determinism, absence, unknown-field, and hostile tests pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"schema-migration-tests\"\n        }\n      ]\n    },\n    {\n      \"id\": \"AC-5\",\n      \"requirement_id\": \"REQ-5\",\n      \"statement\": \"Historical reader and Git lifecycle compatibility tests pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"lifecycle-compatibility-tests\"\n        }\n      ]\n    },\n    {\n      \"id\": \"AC-6\",\n      \"requirement_id\": \"REQ-6\",\n      \"statement\": \"All canonical consumers and full regressions pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"evidence-system-tests\"\n        }\n      ]\n    },\n    {\n      \"id\": \"AC-7\",\n      \"requirement_id\": \"REQ-7\",\n      \"statement\": \"Repository policy and documentation checks pass\",\n      \"required\": true,\n      \"policy\": \"all\",\n      \"evidence\": [\n        {\n          \"provider\": \"unit_test\",\n          \"check_id\": \"git-proof-attestation-tests\"\n        }\n      ]\n    }\n  ]\n}\n",
+        "encoding": "utf-8",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e"
+      },
+      "authorization.json": {
+        "content": "{\n  \"authority\": \"\",\n  \"authorized\": false,\n  \"effects_digest\": \"8d008a61b0c7fbecae96db8c05f4008b3fba77431e54c218c717704d5c0f611e\",\n  \"evidence_reference\": \"\",\n  \"required\": false,\n  \"scope\": \"\"\n}\n",
+        "encoding": "utf-8",
+        "sha256": "9bef43b8c01f6435cc06833843654aef8225ccb2f92e92efddeee0162ac3d317"
+      },
+      "delta.md": {
+        "content": "## ADDED\n- A versioned canonical change intent schema/API, stable causal event identities with previous-event digest chaining, grant/receipt/attestation stores, and generated views.\n- Deterministic, idempotent, loss-preserving legacy ledger migration plus hostile and historical fixtures.\n\n## MODIFIED\n- Lifecycle creation/transitions, evidence planning and recording, context compilation, status/inspection, Codex adapter policy, candidate sealing/anchoring, compatibility inventory, templates, tests, and control-plane documentation consume canonical authority.\n- Current active change migrates to the canonical representation before final verification.\n\n## REMOVED\n- Separately editable proposal, delta, requirements, acceptance, scope, risk, effects, authorization, state, and gate-log authorities from newly written ledgers; Markdown exists only as generated views.\n",
+        "encoding": "utf-8",
+        "sha256": "8135e008d3331490a19fbf0714dd7cd4823cd158445c301920d4841a16059375"
+      },
+      "effects.json": {
+        "content": "{\n  \"external_effects\": [],\n  \"effect_capabilities\": [],\n  \"irreversible\": false,\n  \"authorization_required\": false\n}\n",
+        "encoding": "utf-8",
+        "sha256": "a03ff87e64ec4c6e8b3d98b7cbd5b180afd1aa1f917c0cb0af070b310869f145"
+      },
+      "gate-log.jsonl": {
+        "content": "{\"details\": {\"base_commit\": \"10fd05cc6d043ad763e20d112d9b6fa2a30fcabb\", \"mode\": \"standard\"}, \"event\": \"START\", \"result\": \"PASS\", \"ts\": \"2026-09-08T18:19:13+00:00\"}\n{\"event\": \"DISCUSS\", \"result\": \"PASS\", \"ts\": \"2026-09-08T18:19:42+00:00\"}\n{\"details\": {\"errors\": [\"acceptance AC-1 command evidence requires check_id\", \"acceptance AC-2 command evidence requires check_id\", \"acceptance AC-3 command evidence requires check_id\", \"acceptance AC-4 command evidence requires check_id\", \"acceptance AC-5 command evidence requires check_id\", \"acceptance AC-5 command evidence requires check_id\", \"acceptance AC-6 command evidence requires check_id\", \"acceptance AC-7 command evidence requires check_id\", \"acceptance AC-7 command evidence requires check_id\"]}, \"event\": \"PLAN\", \"result\": \"FAIL\", \"ts\": \"2026-09-08T18:21:06+00:00\"}\n{\"event\": \"PLAN\", \"result\": \"PASS\", \"ts\": \"2026-09-08T18:21:26+00:00\"}\n",
+        "encoding": "utf-8",
+        "sha256": "df2f229ce69d2c2d8dbb483ea51ee021569773ca265203fe9068457b50354381"
+      },
+      "proposal.md": {
+        "content": "# Proposal\n\n## Problem / why\nKEEL currently distributes change intent and authority across proposal, delta, requirements, acceptance, scope, risk, effects, authorization, state, and gate-log files. Independent editable authorities can diverge, obscure provenance, and complicate causal audit and migration.\n\n## Objective\nImplement authority `KEEL-KERNEL-REDESIGN-v1` stages M2-M4 for change ledgers: one canonical versioned intent document; hash-chained causal lifecycle events; separate grants, receipts, and attestations; generated Markdown/compatibility views; deterministic loss-preserving legacy migration; and canonical consumers for lifecycle, context, evidence, candidate attestations, and status.\n\n## Non-goals\nDo not claim append-only files or Git refs are immutable. Do not delete legacy readers, historical ledgers, templates, or implement the future landing transaction. Do not manufacture missing grants, requirements, acceptance criteria, receipts, or runtime observations during migration. Do not execute external effects or merge a pull request without separate authorization.\n\n## Success evidence\nAutomated fixtures prove canonical validation, stable identity and event-chain tamper detection, deterministic/idempotent legacy migration, uncertainty preservation, hostile-input rejection, generated-view provenance, legacy historical readability, canonical lifecycle transitions, context/evidence/status consumption, and exact-subject candidate attestation behavior. Full KEEL regression and repository verification pass.\n\n## Open decisions\nNone. The user supplied the target authority boundary; compatibility readers remain versioned and legacy authority files are accepted only as migration inputs for historical ledgers.\n",
+        "encoding": "utf-8",
+        "sha256": "15cfbba02effe3c029651e042c5efd23d1ffebaf2fc1fc1c9b909be8732bd51a"
+      },
+      "requirements.json": {
+        "content": "{\n  \"schema_version\": 1,\n  \"change_type\": \"implementation\",\n  \"requirements\": [\n    {\"id\":\"REQ-1\",\"statement\":\"New changes have exactly one authoritative intent.json containing objective, requirements, non-goals, scope, work graph references, risk/consequences, EffectRequests, and EvidenceRequirements.\",\"source\":\"user\"},\n    {\"id\":\"REQ-2\",\"statement\":\"Significant transitions and decisions are causal events with stable identity and local previous-event digest tamper evidence without immutability claims.\",\"source\":\"user\"},\n    {\"id\":\"REQ-3\",\"statement\":\"Grants, exact-subject evidence receipts, and Git-bound attestations are distinct script-owned records; generated views are non-authoritative.\",\"source\":\"user\"},\n    {\"id\":\"REQ-4\",\"statement\":\"Migration from every supported legacy ledger is deterministic, idempotent, provenance-preserving, lossless for unknown data, and never invents missing authority or evidence.\",\"source\":\"user\"},\n    {\"id\":\"REQ-5\",\"statement\":\"Sealed and landed historical changes remain auditable through canonical migration or a versioned historical reader.\",\"source\":\"user\"},\n    {\"id\":\"REQ-6\",\"statement\":\"Lifecycle, scope enforcement, context, evidence planning, verification, candidate attestations, and status queries consume canonical ledger semantics.\",\"source\":\"user\"},\n    {\"id\":\"REQ-7\",\"statement\":\"Legacy readers and templates remain until migration and hostile fixtures prove all supported states, and durable control-plane documentation reflects the landed authority model.\",\"source\":\"user\"}\n  ]\n}\n",
+        "encoding": "utf-8",
+        "sha256": "044ec8a6f98215bbd38b356f723cbda76cf799b6994c83cf6a92d4bcd1e272d9"
+      },
+      "risk-review.md": {
+        "content": "# Risk review\n\n## Consequences\nThis changes the authority model for every future KEEL write and readers used to audit historical work. A faulty migration could silently lose obligations, overstate authorization, or invalidate candidate proof.\n\n## Controls\n- Keep all legacy readers and templates until fixtures cover every supported shape.\n- Migrate by adding canonical records; never mutate/delete historical inputs by default.\n- Preserve unknown legacy fields and explicit absence/uncertainty.\n- Bind events by stable content identity and prior digest, while stating that Git remains the durable integrity substrate.\n- Require exact-subject receipts and attestations and reject tampered chains, path traversal, identity collisions, malformed JSON, and invented grants/evidence.\n- Independently review the resulting diff and run the complete regression suite.\n\n## Rollback / recovery\nThe legacy reader remains available and migration is additive by default. Canonical migrations record source digests and can be reproduced byte-for-byte from preserved legacy input. A failed migration writes through staging/atomic replacement and leaves source artifacts untouched.\n",
+        "encoding": "utf-8",
+        "sha256": "8ff6bc894263f34154f57208a7e2e27c74cb2b325f6d3e86c63329a8c2bbe98e"
+      },
+      "risk.json": {
+        "content": "{\n  \"risk_level\": \"high\",\n  \"control_plane_change\": true,\n  \"security_privacy_sensitive\": false,\n  \"migration_or_release_sensitive\": true,\n  \"high_blast_radius\": true,\n  \"requires_exec_plan\": true\n}\n",
+        "encoding": "utf-8",
+        "sha256": "c63e699ed42109fa5b28ad9e8a0e0f10334d385d30017c68ee35a7a0b013439a"
+      },
+      "scope.txt": {
+        "content": ".keel/bin/keel.py\n.keel/lib/**\n.keel/templates/**\n.keel/tests/**\n.keel/contracts.json\n.keel/config.json\n.keel/ledger/canonical-change-intent/**\n.control-plane/bootstrap-manifest.json\nAGENTS.md\nARCHITECTURE.md\nCONTROL_PLANE.md\nWORKFLOW.md\ndocs/INDEX.md\ndocs/control-plane/**\ndocs/exec-plans/active/canonical-change-intent.md\n.agents/skills/keel-change-lifecycle/SKILL.md\n",
+        "encoding": "utf-8",
+        "sha256": "247ea4037750bdd6ca743ff677d34a4422d2bdfd126fb6b4633edd7830e267e2"
+      },
+      "state.json": {
+        "content": "{\n  \"base_commit\": \"10fd05cc6d043ad763e20d112d9b6fa2a30fcabb\",\n  \"change_id\": \"canonical-change-intent\",\n  \"created_at\": \"2026-09-08T18:19:13+00:00\",\n  \"mode\": \"standard\",\n  \"phase\": \"EXECUTE\",\n  \"schema_version\": 1,\n  \"updated_at\": \"2026-09-08T18:21:26+00:00\"\n}\n",
+        "encoding": "utf-8",
+        "sha256": "c705890d042025fecf401a8cc562a49d1ea45b5328f3b7f7c2e5483488cd11ff"
+      }
+    },
+    "reader": "keel.legacy-ledger/v1",
+    "source_digest": "65e9e1e973cda17c2d2ff2a814f4329afdc2abde9618e7a49e7041ab73041db6",
+    "sources": {
+      "acceptance": {
+        "knowledge": "KNOWN",
+        "sha256": "be00e863dc95540db8ce154ae356c173d70e495543ea2a12abafe8171649597e",
+        "source": "acceptance.json"
+      },
+      "authorization": {
+        "knowledge": "KNOWN",
+        "sha256": "9bef43b8c01f6435cc06833843654aef8225ccb2f92e92efddeee0162ac3d317",
+        "source": "authorization.json"
+      },
+      "effects": {
+        "knowledge": "KNOWN",
+        "sha256": "a03ff87e64ec4c6e8b3d98b7cbd5b180afd1aa1f917c0cb0af070b310869f145",
+        "source": "effects.json"
+      },
+      "requirements": {
+        "knowledge": "KNOWN",
+        "sha256": "044ec8a6f98215bbd38b356f723cbda76cf799b6994c83cf6a92d4bcd1e272d9",
+        "source": "requirements.json"
+      },
+      "risk": {
+        "knowledge": "KNOWN",
+        "sha256": "c63e699ed42109fa5b28ad9e8a0e0f10334d385d30017c68ee35a7a0b013439a",
+        "source": "risk.json"
+      },
+      "state": {
+        "knowledge": "KNOWN",
+        "sha256": "c705890d042025fecf401a8cc562a49d1ea45b5328f3b7f7c2e5483488cd11ff",
+        "source": "state.json"
+      }
+    },
+    "stage": [
+      "M2",
+      "M3",
+      "M4-ledger-adapters"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "source": "user",
+      "statement": "New changes have exactly one authoritative intent.json containing objective, requirements, non-goals, scope, work graph references, risk/consequences, EffectRequests, and EvidenceRequirements."
+    },
+    {
+      "id": "REQ-2",
+      "source": "user",
+      "statement": "Significant transitions and decisions are causal events with stable identity and local previous-event digest tamper evidence without immutability claims."
+    },
+    {
+      "id": "REQ-3",
+      "source": "user",
+      "statement": "Grants, exact-subject evidence receipts, and Git-bound attestations are distinct script-owned records; generated views are non-authoritative."
+    },
+    {
+      "id": "REQ-4",
+      "source": "user",
+      "statement": "Migration from every supported legacy ledger is deterministic, idempotent, provenance-preserving, lossless for unknown data, and never invents missing authority or evidence."
+    },
+    {
+      "id": "REQ-5",
+      "source": "user",
+      "statement": "Sealed and landed historical changes remain auditable through canonical migration or a versioned historical reader."
+    },
+    {
+      "id": "REQ-6",
+      "source": "user",
+      "statement": "Lifecycle, scope enforcement, context, evidence planning, verification, candidate attestations, and status queries consume canonical ledger semantics."
+    },
+    {
+      "id": "REQ-7",
+      "source": "user",
+      "statement": "Legacy readers and templates remain until migration and hostile fixtures prove all supported states, and durable control-plane documentation reflects the landed authority model."
+    }
+  ],
+  "risk": {
+    "consequences": [
+      "Changes authority and audit semantics for every future KEEL write.",
+      "Incorrect migration could lose obligations or inflate authorization.",
+      "Candidate proof must continue to audit old and new ledgers."
+    ],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": true,
+    "requires_exec_plan": true,
+    "review": "# Risk review\n\n## Consequences\nThis changes the authority model for every future KEEL write and readers used to audit historical work. A faulty migration could silently lose obligations, overstate authorization, or invalidate candidate proof.\n\n## Controls\n- Keep all legacy readers and templates until fixtures cover every supported shape.\n- Migrate by adding canonical records; never mutate/delete historical inputs by default.\n- Preserve unknown legacy fields and explicit absence/uncertainty.\n- Bind events by stable content identity and prior digest, while stating that Git remains the durable integrity substrate.\n- Require exact-subject receipts and attestations and reject tampered chains, path traversal, identity collisions, malformed JSON, and invented grants/evidence.\n- Independently review the resulting diff and run the complete regression suite.\n\n## Rollback / recovery\nThe legacy reader remains available and migration is additive by default. Canonical migrations record source digests and can be reproduced byte-for-byte from preserved legacy input. A failed migration writes through staging/atomic replacement and leaves source artifacts untouched.\n",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    ".keel/bin/keel.py",
+    ".keel/lib/**",
+    ".keel/templates/**",
+    ".keel/tests/**",
+    ".keel/contracts.json",
+    ".keel/config.json",
+    ".keel/ledger/canonical-change-intent/**",
+    ".control-plane/bootstrap-manifest.json",
+    "AGENTS.md",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/INDEX.md",
+    "docs/control-plane/**",
+    "docs/exec-plans/active/canonical-change-intent.md",
+    ".agents/skills/keel-change-lifecycle/SKILL.md"
+  ],
+  "work": {
+    "edges": [],
+    "graph_references": [
+      "docs/exec-plans/active/canonical-change-intent.md"
+    ],
+    "legacy_delta": {
+      "content": "## ADDED\n- A versioned canonical change intent schema/API, stable causal event identities with previous-event digest chaining, grant/receipt/attestation stores, and generated views.\n- Deterministic, idempotent, loss-preserving legacy ledger migration plus hostile and historical fixtures.\n\n## MODIFIED\n- Lifecycle creation/transitions, evidence planning and recording, context compilation, status/inspection, Codex adapter policy, candidate sealing/anchoring, compatibility inventory, templates, tests, and control-plane documentation consume canonical authority.\n- Current active change migrates to the canonical representation before final verification.\n\n## REMOVED\n- Separately editable proposal, delta, requirements, acceptance, scope, risk, effects, authorization, state, and gate-log authorities from newly written ledgers; Markdown exists only as generated views.\n",
+      "knowledge": "KNOWN"
+    },
+    "units": [
+      {
+        "id": "WU-CANONICAL-LEDGER",
+        "objective": "Implement canonical change-ledger authority and compatibility migration",
+        "scope_reference": "intent.scope"
+      }
+    ]
+  }
+}

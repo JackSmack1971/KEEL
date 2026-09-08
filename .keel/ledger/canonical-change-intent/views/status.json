@@ -1,0 +1,12 @@
+{
+  "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+  "change_id": "canonical-change-intent",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "eb1ba067706180f81fe9539ca6e733c66b04afecf43418390a6f02e6b280742b",
+    "last_event_digest": "207af48704f01b381a90f75cd0c88f1d17d5261bc210a148b1c5b5d3a8d12458"
+  }
+}

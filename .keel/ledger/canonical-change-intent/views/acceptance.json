@@ -1,0 +1,96 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-ledger-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-1",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "Canonical ledger schema and creation tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-ledger-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-2",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Causal identity, ordering, and tamper tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "canonical-ledger-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-3",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "Generated ownership and exact-subject record tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "ledger-migration-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-4",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "Migration round-trip, determinism, absence, unknown-field, and hostile tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "lifecycle-compatibility-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-5",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Historical reader and Git lifecycle compatibility tests pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "evidence-system-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-6",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "All canonical consumers and full regressions pass"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "git-proof-attestation-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-AC-7",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Repository policy and documentation checks pass"
+    }
+  ],
+  "schema_version": 1
+}

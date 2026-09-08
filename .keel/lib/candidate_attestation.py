@@ -85,8 +85,10 @@ def _digest_boundary(root: Path, commit: str, change_id: str, paths: list[str], 
 def build(root: Path, change_id: str, commit: str, state: dict, verification: dict,
           intent_files: tuple[str, ...]) -> CandidateAttestation:
     sha = git_proof.resolve_commit(root, commit); paths = sorted(verification["changed_paths"])
-    plan = git_proof.show_json(root, sha, _path(change_id, "evidence-plan.json"))
-    receipts_doc = git_proof.show_json(root, sha, _path(change_id, "evidence-receipts.json"))
+    canonical = intent_files == ("intent.json",)
+    prefix = "views/" if canonical else ""
+    plan = git_proof.show_json(root, sha, _path(change_id, prefix + "evidence-plan.json"))
+    receipts_doc = git_proof.show_json(root, sha, _path(change_id, prefix + "evidence-receipts.json"))
     if plan.get("plan_digest") != verification.get("evidence_plan_digest"):
         raise RuntimeError("committed EvidencePlan digest differs from verification")
     intent_value = {name: git_proof.tree_entry(root, sha, _path(change_id, name))[1].decode("utf-8", errors="surrogateescape")

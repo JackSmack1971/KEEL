@@ -1,0 +1,81 @@
+{
+  "ended_at": "2026-09-08T18:32:42.872001+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "doctor"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 323,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "0cd15ec151921d148ee91e2d0ad1556628d920456adf43142d2fa595de2ecdc5",
+  "receipt_id": "control-plane-doctor",
+  "record_digest": "1bea109bed865992cd8f26570e71bf39df7a39f53017b1beaab2829519632190",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T18:32:42.548701+00:00",
+  "subject": {
+    "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "changed_paths": [
+      ".agents/skills/keel-change-lifecycle/SKILL.md",
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/lib/context_compiler.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/lifecycle.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_ledger_migration.py",
+      ".keel/tests/test_p0_contract.py",
+      "AGENTS.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/canonical-change-intent.md"
+    ],
+    "content_digest": "0ae072343688b74e1e78679e2bca5863721cad36c90e7fcb70c2d56ab46b5e6b",
+    "head_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "control-plane-doctor",
+    "provenance": ".keel/config.json",
+    "provider": "command",
+    "version": "1"
+  }
+}

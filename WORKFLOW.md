@@ -1,84 +1,28 @@
 # Development Workflow — KEEL-governed
 
-KEEL is the default write-change lifecycle. It is a thin governance spine around capable agent judgment, not a reason to force ceremony onto read-only exploration or genuine emergencies.
+KEEL is the default write lifecycle. Repository evidence and canonical records, not chat memory or generated views, determine state.
 
-## Mode selection
+## Modes
+Read-only work creates no ledger. Localized reversible low-risk writes may use `trivial`; all other writes use `standard`. Control-plane, security/privacy, migration/release, external-effect, and high-blast-radius work cannot use trivial mode. Emergency bypass requires an operator-provided `KEEL_BYPASS_REASON` and creates auditable process debt without bypassing runtime/application authorization.
 
-| Mode | Use | Required control |
-|---|---|---|
-| Read-only | Investigation, explanation, evidence gathering | No ledger; no writes |
-| Trivial | Localized, reversible, low-coupling write with no external/security/migration/release effect | One-command proposal/delta/scope fast path + normal scope/verification |
-| Standard | Normal feature/fix/refactor/docs/control-plane changes | Discuss -> Plan -> Execute -> Verify -> Ship |
-| Emergency bypass | Time-critical incident where normal gates materially increase harm | Operator-owned bypass reason; audit + retro ledger; all non-KEEL safety boundaries remain |
+## Canonical ledger
+`keel.py start <id>` creates `.keel/ledger/<id>/intent.json`, `events.jsonl`, and `grants/`, `receipts/`, `attestations/`, and `views/`. `intent.json` is the sole editable authority for objective, requirements, non-goals, scope, work/graph references, risk/consequences, EffectRequests, and EvidenceRequirements. Edit it only in the legal DISCUSS/PLAN phases. Markdown and JSON under `views/` are generated, non-authoritative projections.
 
-If uncertain between trivial and standard, use standard. High-risk/control-plane/external/migration/security changes cannot use trivial mode.
+Events record significant transitions/decisions with stable content identity and a previous-event digest. This detects local discontinuity; it does **not** make the ledger immutable. Committed Git history and independently verified Git subjects remain the durable integrity substrate. Grants, receipts, attestations, events, and views are kernel-owned records and must not be manually edited.
 
 ## Standard lifecycle
+1. **Discuss:** write the objective and non-goals in `intent.json`; run `python3 .keel/bin/keel.py gate discuss`.
+2. **Plan:** complete canonical requirements, scope, work references, risk/consequences, effect requests, and evidence requirements. High-risk work includes `risk.review` and an ExecPlan. Run `keel.py gate plan`.
+3. **Execute:** edit only canonical scope. Use `replan` when intent changes and `reopen` after verification when implementation changes. Replanning invalidates prior effect grants.
+4. **Verify:** `keel.py verify` selects verifiers from EvidenceRequirements and writes exact-subject immutable-content records under `receipts/`; generated compatibility reports go under `views/`. A green unrelated command cannot establish a requirement.
+5. **Commit and seal:** commit the verified tree, then `keel.py seal --change <id> --commit HEAD`. Seal independently recomputes committed material and canonical intent digests and creates a Git-bound candidate attestation/ref.
+6. **Integrate and anchor:** SHIP is eligibility, not authorization. After separately authorized integration, `keel.py anchor --change <id> --commit <landed-sha>` independently checks landed equivalence and records the landed Git anchor.
 
-### 1. Start / Discuss
-`python3 .keel/bin/keel.py start <change-id>` creates a ledger rooted at `.keel/ledger/<change-id>/` and records the current Git baseline commit. Use `keel.py context` plus a generic explorer only when unresolved repository facts justify it. Write a concrete `proposal.md`: problem, objective, non-goals, success evidence, unresolved decisions.
+## Authorization
+An EffectRequest is not permission. Only a valid, issuer-attributed, intent/effect/subject-bound CapabilityGrant can authorize an attempt, and effective autonomy is also limited by observed RuntimeProfile and external controls. Hooks are adapters, not confinement. Pushes, merges, releases, deployments, migrations, communications, and other external effects need explicit authorization.
 
-Pass: `python3 .keel/bin/keel.py gate discuss`.
+## Compatibility and migration
+`keel.py ledger migrate --change <id> [--output <dir>]` deterministically reads supported v1 ledgers. Migration preserves source bytes/digests and unknown fields, represents missing data as absent/unknown, never creates grants or receipts from absence, and does not delete source files. Existing historical ledgers remain readable through `keel.legacy-ledger/v1`. Legacy templates/readers remain until fixtures prove all supported states and a later removal decision passes its gate.
 
-### 2. Plan
-Use bounded kernel context and repository evidence for planning; a generic explorer may gather missing facts but does not decide lifecycle or policy. Maintain:
-- `delta.md` — ADDED / MODIFIED / REMOVED behavior;
-- `scope.txt` — exact repo-relative files/globs the implementation may touch;
-- `risk.json` — risk level and consequential-change flags;
-- `effects.json` — declared external/irreversible effects, if any;
-- `authorization.json` — legacy KEEL-owned evidence record for permission reported as obtained when `effects.json` requires it. Do **not** hand-edit it; its boolean is not a canonical grant and cannot independently authorize an effect;
-- durable ExecPlan when risk/cross-cutting criteria require one.
-
-Pass: `python3 .keel/bin/keel.py gate plan`.
-
-### 3. Execute
-Trace the actual code/data/runtime path before editing. One primary write owner edits only declared scope inside the change's worktree. Read-heavy exploration/review/test-log analysis may fan out to subagents and should return distilled summaries rather than raw dumps.
-
-If proposal/delta/scope/risk/effects intent must change after Plan passes, run `python3 .keel/bin/keel.py replan` and pass Plan again before continuing. Re-plan invalidates previously recorded effect authorization. After verification, use `keel.py reopen` for implementation edits or `replan` for intent changes.
-
-### 4. Verify
-Run `python3 .keel/bin/keel.py verify`. KEEL performs structural/scope checks, derives an impact- and requirement-selected EvidencePlan from the verifier registry, executes selected verifiers, and records exact-subject EvidenceReceipts. Compatibility projections remain in `verification.json` / `verification.md`; receipt coverage is authoritative and an unrelated green command cannot satisfy a requirement. Required external/irreversible authorization must be recorded before the legacy Verify path can pass; the record is effects-bound evidence, but its boolean is not a `CapabilityGrant`. Effect execution additionally requires a valid intent-bound grant and sufficient observed runtime enforcement. Within Codex, the pre-tool hook blocks agent-initiated `record-authorization` unless the parent session explicitly carries `KEEL_AUTHORIZATION_CHANGE=<exact-change-id>`; an operator may also run the recorder directly outside the agent session.
-
-Select the generic reviewer when evidence requirements, impact, or risk call for independent interpretation. Its prose is not the source of pass/fail truth; authoritative receipts come from `keel.py verify` / `keel.py evidence`.
-
-### 5. Seal / Ship / handoff
-`SHIP` means the working content is verified and eligible to become a candidate; it does not itself grant permission to push, merge, release, deploy, migrate, or mutate external systems. A task may stop at review/handoff.
-
-Commit the verified change in its write worktree, then seal the exact commit:
-
-```text
-python3 .keel/bin/keel.py seal --change <id> --commit HEAD
-```
-
-`seal` independently recomputes the verification digest from the committed Git tree, requires the candidate commit's material diff to equal `verification.json.changed_paths`, and creates collision-checked `refs/keel/candidates/<id>`. It does not modify the candidate commit after sealing.
-
-Seal also creates a formal, canonical `CandidateAttestation` Git blob, indexed by
-`refs/keel/attestations/candidates/<id>`. It binds the change/base identity, candidate
-commit and tree, independent material and intent digests, combined content digest,
-EvidencePlan digest, supporting EvidenceReceipt identities/digests, and the available
-policy/runtime-profile digest. The candidate ref remains commit-compatible; neither ref
-is an immutability guarantee or the sole attestation payload.
-
-An integration checkout with no active change may merge only a simple sealed-candidate ref (`git merge ... refs/keel/candidates/<id>`) through the KEEL hook path. This makes the handoff exact without forcing one global merge strategy; normal repository review/branch rules still decide whether merge, squash, rebase, PR, or another authorized integration mechanism is used.
-
-After landing, run `keel.py anchor --change <id> --commit <landed-sha>`. Anchoring requires the sealed candidate, re-reads the landed ledger, and independently recomputes the candidate's verified material+intent digest from the **landed Git tree**. Unrelated commits since the change's base are ignored; any changed candidate path or intent artifact must remain byte-equivalent. This supports ordinary merge ancestry and content-equivalent squash/rebase landing while detecting post-verification drift. Only then does KEEL create `refs/keel/ledger/<id>` plus the `refs/notes/keel` note.
-
-This remains the existing anchor operation, not the future Landing Transaction.
-
-Candidate/landed refs and notes are versioned Git anchors, not immutable security policy; protect remote history separately when required.
-
-## Parallel work
-One change-id = one worktree = one primary writer. Separate changes may run in separate worktrees. Do not use subagent concurrency for write-heavy edits in the same tree. Runtime-detected batch-agent facilities may be used for bounded read-heavy fan-out or worktree-isolated rows only.
-
-## Context discipline
-The main thread keeps requirements, decisions, gate state, and final evidence. Exploration/log/test detail belongs in bounded subagent/tool artifacts. KEEL session/prompt hooks request a bounded decision-relevant projection from the kernel when trusted. Generic explorer/reviewer/risk-reviewer invocation is dynamic: unresolved facts, evidence requirements, and consequence/risk determine whether they are useful. Agent prompts, memories, and injected context remain supplementary adapters rather than policy authority.
-
-## Integration authorization
-Local investigation/edits/commits are generally reversible. Remote pushes, PR transitions/merges, releases, deployments, migrations, issue changes, cloud/hardware operations, and other external effects follow explicit user/domain authorization and the active risk contract.
-
-## Adaptive intelligence and evaluation
-
-- Run `keel.py discover` after meaningful project structure appears; treat results as advisory evidence only.
-- Run `keel.py context` to compile minimal current-change context before consequential decisions.
-- Standard changes require requirement/acceptance contracts; `keel verify` must satisfy required evidence edges.
-- Use KEELBench for repeated baseline-vs-KEEL evaluation; deterministic mechanism tests never substitute for empirical uplift.
+## Parallel work and context
+One change-id has one primary writer in one worktree. Read-heavy agents may fan out; parallel writers need separate worktrees/change IDs. `keel.py context` is a bounded generated projection of canonical intent, repository facts, and relevant docs—not authority.

@@ -1,0 +1,20 @@
+{
+  "generated": true,
+  "intent_digest": "17533935cda721d28002aea5330f0f6761ab5f296f6a140380b4cbad4ae771f0",
+  "preserved_files": [
+    "acceptance.json",
+    "authorization.json",
+    "delta.md",
+    "effects.json",
+    "gate-log.jsonl",
+    "proposal.md",
+    "requirements.json",
+    "risk-review.md",
+    "risk.json",
+    "scope.txt",
+    "state.json"
+  ],
+  "recovery": "Retain legacy inputs and rerun the keel.legacy-ledger/v1 reader.",
+  "schema": "keel.legacy-migration-receipt/v1",
+  "source_digest": "65e9e1e973cda17c2d2ff2a814f4329afdc2abde9618e7a49e7041ab73041db6"
+}

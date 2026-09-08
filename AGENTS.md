@@ -27,7 +27,7 @@ Build and maintain **KEEL-v2** as a legible, verifiable engineering repository. 
 ## Change entry points
 - Read-only investigation: no KEEL ledger required; return concise evidence.
 - Trivial write: `python3 .keel/bin/keel.py start <id> --mode trivial --summary "..." --scope <path-or-glob>`.
-- Standard write: start a change, produce proposal + delta + requirements/acceptance + scope + risk/effects state, pass discuss/plan gates, execute, verify receipt-authoritative requirement coverage, commit the verified tree, `keel.py seal`, then authorized integration/handoff and landed `anchor`. Re-plan if intent/scope/acceptance changes; do not hand-edit authorization/state/gate/verification records.
+- Standard write: start a change, complete canonical `intent.json`, pass discuss/plan gates, execute, verify receipt-authoritative requirement coverage, commit the verified tree, `keel.py seal`, then authorized integration/handoff and landed `anchor`. Re-plan if intent changes; do not hand-edit events, grants, receipts, attestations, or generated views.
 - Emergency: operator launches Codex with `KEEL_BYPASS_REASON`; KEEL gates become audit-only and create retro process debt. This never bypasses Codex/runtime/application authorization.
 
 ## Adaptive helpers

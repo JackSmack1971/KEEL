@@ -11,13 +11,13 @@ Read root `AGENTS.md`, `WORKFLOW.md`, and `docs/control-plane/KEEL.md`.
 
 ## Mandatory
 1. For a write change, ensure Git has a baseline commit and start/resume exactly one KEEL change-id.
-2. Standard mode calls deterministic kernel operations in order: proposal -> discuss gate -> delta + requirements/acceptance + scope/risk/effects -> plan gate -> execute -> `keel verify` / `keel evidence` receipt coverage -> commit verified tree -> `keel seal` -> authorized integration -> landed `anchor`. This skill is routing knowledge, not lifecycle authority.
+2. Standard mode calls deterministic kernel operations in order: canonical intent objective -> discuss gate -> requirements/non-goals/scope/work/risk/effects/evidence requirements -> plan gate -> execute -> `keel verify` / `keel evidence` receipt coverage -> commit verified tree -> `keel seal` -> authorized integration -> landed `anchor`. This skill is routing knowledge, not lifecycle authority.
 3. One primary writer per worktree. Dynamically use generic explorer/reviewer/risk-reviewer roles only when missing facts, evidence requirements, impact, or risk justify them. Delegate only read-heavy bounded work unless each writer has a separate worktree/change; agent output never grants permission or changes lifecycle state.
-4. Never edit outside `scope.txt`; update/re-gate the plan if scope legitimately changes.
-5. High/control-plane/security/privacy/migration/release/high-blast-radius work requires substantive risk review; require ExecPlan when `risk.json` says so.
-6. Verification truth comes from `.keel/ledger/<id>/verification.json` plus `evidence-graph.json`, not model prose. Every required AC must resolve through deterministic evidence before PASS. Before integration, seal the exact committed tree; final anchor independently re-hashes the landed tree for the verified paths+intent.
+4. Never edit outside canonical `intent.json.scope`; update/re-gate the plan if scope legitimately changes.
+5. High/control-plane/security/privacy/migration/release/high-blast-radius work requires substantive risk review; require ExecPlan when canonical `intent.json.risk.requires_exec_plan` says so.
+6. Verification truth comes from exact-subject records in `.keel/ledger/<id>/receipts/`, not model prose. Every required AC must resolve through deterministic evidence before PASS. Before integration, seal the exact committed tree; final anchor independently re-hashes the landed tree for the verified paths+intent.
 7. `SHIP` is eligibility, not permission for external/irreversible operations.
-8. `authorization.json`, `state.json`, gate logs, and verification records are script-owned. Never hand-edit them. Re-plan invalidates prior effect authorization.
+8. Events, grants, receipts, attestations, and generated views are script-owned. Never hand-edit them. Re-plan invalidates prior effect authorization.
 
 ## Trivial fast path
 Use only when all are true: localized, reversible, low coupling, no control-plane/security/privacy/migration/release/external effect/high blast radius, and verification is straightforward. Start with `--mode trivial --summary ... --scope ...`; normal scope and verification still apply.

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import canonical_ledger
 from pathlib import Path
 
 SUPPORTED = {"framework": "0.1.0", "config_schema": 2, "contract_schema": 1, "ledger_schema": 1, "skill_schema": 1, "bootstrap_manifest_schema": 2}
@@ -24,8 +25,12 @@ def inventory(root: Path) -> dict:
         findings.append({"kind": "manifest-schema", "path": ".control-plane/bootstrap-manifest.json", "expected": SUPPORTED["bootstrap_manifest_schema"], "actual": manifest.get("schema_version"), "action": "regenerate or migrate the bootstrap manifest"})
     ledger_root = root / ".keel/ledger"
     if ledger_root.is_dir():
-        for state_path in sorted(ledger_root.glob("*/state.json")):
-            state = _json(state_path); row = {"change_id": state_path.parent.name, "schema_version": state.get("schema_version"), "phase": state.get("phase")}; ledgers.append(row)
+        ledger_dirs = sorted({p.parent for p in ledger_root.glob("*/state.json")} | {p.parent for p in ledger_root.glob("*/intent.json")})
+        for directory in ledger_dirs:
+            if (directory / "intent.json").is_file():
+                intent=canonical_ledger.load_intent(directory); canonical_ledger.read_events(directory); row={"change_id":intent["change_id"],"schema_version":2,"phase":canonical_ledger.phase(directory),"reader":"canonical"}; ledgers.append(row); continue
+            state_path=directory / "state.json"
+            state = _json(state_path); row = {"change_id": state_path.parent.name, "schema_version": state.get("schema_version"), "phase": state.get("phase"), "reader":"keel.legacy-ledger/v1"}; ledgers.append(row)
             if state.get("schema_version") != SUPPORTED["ledger_schema"]:
                 findings.append({"kind": "ledger-schema", "path": state_path.relative_to(root).as_posix(), "expected": SUPPORTED["ledger_schema"], "actual": state.get("schema_version"), "action": "migrate this ledger under a dedicated KEEL change"})
     for skill_path in sorted((root / ".agents/skills").glob("*/SKILL.md")):

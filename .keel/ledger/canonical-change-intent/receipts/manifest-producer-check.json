@@ -1,0 +1,81 @@
+{
+  "ended_at": "2026-09-08T18:33:05.806090+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "08a99f1536e585d835659ba0a7431dedcbfa394e1c3bcadfafef152c6c098a4f",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 336,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"23a1c82d9481b7ce373cbd7f51d10f3833eeb25b9f09b92517cc667b82a91ff2\"\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "c876fc95dead64f0b1be0debf6d3c2620fafbafd6679aca1203b78aeb04f3a36",
+  "receipt_id": "manifest-producer-check",
+  "record_digest": "fcbdfafad158f00f5a22fcd28637a848325bc890d48ddc6d69dc25cb19d87039",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T18:33:05.469278+00:00",
+  "subject": {
+    "base_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "changed_paths": [
+      ".agents/skills/keel-change-lifecycle/SKILL.md",
+      ".control-plane/bootstrap-manifest.json",
+      ".keel/bin/keel.py",
+      ".keel/config.json",
+      ".keel/lib/candidate_attestation.py",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/lib/context_compiler.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/lifecycle.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_ledger_migration.py",
+      ".keel/tests/test_p0_contract.py",
+      "AGENTS.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/canonical-change-intent.md"
+    ],
+    "content_digest": "0ae072343688b74e1e78679e2bca5863721cad36c90e7fcb70c2d56ab46b5e6b",
+    "head_commit": "10fd05cc6d043ad763e20d112d9b6fa2a30fcabb",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "manifest-producer-check",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

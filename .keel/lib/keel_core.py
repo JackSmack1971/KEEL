@@ -17,6 +17,7 @@ import evidence_graph
 import evidence_system
 import git_proof
 import candidate_attestation
+import canonical_ledger
 import p0_contract
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
@@ -24,7 +25,11 @@ PLACEHOLDER_RE = re.compile(r"<!--\s*FILL\b|\{\{[A-Z0-9_]+\}\}")
 INTEGRATION_PREFIXES = (
     "git push", "git merge", "gh pr create", "gh pr merge", "gh release", "git tag -s", "git tag -a",
 )
-INTENT_FILES = ("proposal.md", "delta.md", "requirements.json", "acceptance.json", "scope.txt", "risk.json", "effects.json", "authorization.json", "risk-review.md")
+LEGACY_INTENT_FILES = ("proposal.md", "delta.md", "requirements.json", "acceptance.json", "scope.txt", "risk.json", "effects.json", "authorization.json", "risk-review.md")
+INTENT_FILES = LEGACY_INTENT_FILES  # historical-reader compatibility
+
+def intent_files(root: Path, change_id: str) -> tuple[str, ...]:
+    return ("intent.json",) if (ledger_dir(root, change_id) / "intent.json").is_file() else LEGACY_INTENT_FILES
 CONTROL_PLANE_PREFIXES = (".codex/", ".keel/", ".agents/skills/")
 CONTROL_PLANE_FILES = {"AGENTS.md", "CONTROL_PLANE.md", "WORKFLOW.md"}
 CANDIDATE_REF_PREFIX = "refs/keel/candidates/"
@@ -97,19 +102,35 @@ def active_change(root: Path) -> str | None:
 
 
 def state(root: Path, change_id: str):
-    return read_json(ledger_dir(root, change_id) / "state.json")
+    d = ledger_dir(root, change_id)
+    if (d / "intent.json").is_file():
+        intent = canonical_ledger.load_intent(d)
+        result = {"schema_version": 2, "change_id": change_id, "mode": intent["mode"], "phase": canonical_ledger.phase(d), "base_commit": intent["base_commit"]}
+        view = d / "views" / "verification.json"
+        if view.is_file() and read_json(view).get("status") == "PASS": result["verified_content_digest"] = read_json(view).get("content_digest")
+        return result
+    return read_json(d / "state.json")
 
 
 def write_state(root: Path, change_id: str, st: dict) -> None:
+    d = ledger_dir(root, change_id)
+    if (d / "intent.json").is_file():
+        canonical_ledger.project_views(d)
+        return
     st["updated_at"] = now()
-    write_json(ledger_dir(root, change_id) / "state.json", st)
+    write_json(d / "state.json", st)
 
 
 def append_event(root: Path, change_id: str, event: str, result: str, details: dict | None = None) -> None:
+    d = ledger_dir(root, change_id)
+    if (d / "intent.json").is_file():
+        canonical_ledger.append_event(d, "VERIFY_PASS" if event == "VERIFY" and result == "PASS" else "VERIFY_FAIL" if event == "VERIFY" else event, result, details)
+        canonical_ledger.project_views(d)
+        return
     row = {"ts": now(), "event": event, "result": result}
     if details:
         row["details"] = details
-    p = ledger_dir(root, change_id) / "gate-log.jsonl"
+    p = d / "gate-log.jsonl"
     p.parent.mkdir(parents=True, exist_ok=True)
     with p.open("a", encoding="utf-8", newline="") as f:
         f.write(json.dumps(row, sort_keys=True) + "\n")
@@ -183,6 +204,15 @@ def scope_match(rel: str, patterns: list[str]) -> bool:
         if not any(c in pat for c in "*?[") and (rel == pat or rel.startswith(pat.rstrip("/") + "/")):
             return True
     return False
+
+
+def risk_valid_value(r: dict, scope: list[str]) -> tuple[bool, str, dict]:
+    if r.get("risk_level") not in {"trivial", "standard", "high"}: return False, "risk_level must be trivial|standard|high", r
+    for k in ("control_plane_change", "security_privacy_sensitive", "migration_or_release_sensitive", "high_blast_radius", "requires_exec_plan"):
+        if not isinstance(r.get(k), bool): return False, f"{k} must be boolean", r
+    touches_cp = any(p in CONTROL_PLANE_FILES or p.startswith(CONTROL_PLANE_PREFIXES) for p in scope)
+    if touches_cp and not r.get("control_plane_change"): return False, "scope touches control-plane files but control_plane_change=false", r
+    return True, "ok", r
 
 
 def risk_valid(path: Path, scope: list[str]) -> tuple[bool, str, dict]:
@@ -294,6 +324,11 @@ def sync_authorization_shape(root: Path, change_id: str, invalidate: bool = Fals
 
 def authorization_ship_errors(root: Path, change_id: str) -> list[str]:
     d = ledger_dir(root, change_id)
+    if (d / "intent.json").is_file():
+        intent=canonical_ledger.load_intent(d); requested=[r for r in intent.get("effect_requests",[]) if r.get("authorization_required") is True]
+        if not requested: return []
+        grants=list((d/"grants").glob("*.json"))
+        return [] if grants else ["effect requests require a script-recorded CapabilityGrant"]
     ok, msg, e = effects_valid(d / "effects.json")
     if not ok:
         return [msg]
@@ -321,6 +356,18 @@ def risk_requires_review(r: dict) -> bool:
 
 def validate_plan(root: Path, change_id: str) -> list[str]:
     d = ledger_dir(root, change_id)
+    if (d / "intent.json").is_file():
+        intent = canonical_ledger.load_intent(d); errors = canonical_ledger.validate_intent(intent, require_planned=True)
+        requirements, acceptance = canonical_ledger.contracts(intent)
+        # Reuse the stable legacy contract validator through ephemeral in-memory-equivalent files in views.
+        write_json(d / "views" / "requirements.json", requirements); write_json(d / "views" / "acceptance.json", acceptance)
+        errors.extend(evidence_graph.validate_contract(d / "views" / "requirements.json", d / "views" / "acceptance.json", require_nonempty=(intent["mode"] != "trivial"), contracts_path=root / ".keel" / "contracts.json"))
+        r=canonical_ledger.risk(intent); scope=intent["scope"]
+        ok,msg,r=risk_valid_value(r,scope)
+        if not ok: errors.append(msg)
+        if risk_requires_review(r) and len(str(intent.get("risk",{}).get("review","")).strip()) < 40: errors.append("high/control-plane/sensitive change requires substantive intent risk.review")
+        if r.get("requires_exec_plan") and not (root / "docs" / "exec-plans" / "active" / f"{change_id}.md").is_file(): errors.append(f"required ExecPlan missing: docs/exec-plans/active/{change_id}.md")
+        return errors
     errors = []
     ok, msg = meaningful_proposal(d / "proposal.md")
     if not ok: errors.append(msg)
@@ -369,7 +416,8 @@ def diff_scope_errors(root: Path, change_id: str) -> tuple[list[str], list[str]]
     base = st.get("base_commit")
     if not base:
         return ["state missing base_commit"], []
-    scope = parse_scope(ledger_dir(root, change_id) / "scope.txt")
+    d = ledger_dir(root, change_id)
+    scope = canonical_ledger.load_intent(d)["scope"] if (d / "intent.json").is_file() else parse_scope(d / "scope.txt")
     paths = changed_paths(root, base)
     material = [p for p in paths if not is_system_artifact(p, change_id)]
     bad = [p for p in material if not scope_match(p, scope)]
@@ -387,7 +435,7 @@ def content_digest(root: Path, change_id: str) -> str:
         h.update(mode.encode()); h.update(b"\0"); h.update(data)
         h.update(b"\0")
     d = ledger_dir(root, change_id)
-    for name in INTENT_FILES:
+    for name in intent_files(root, change_id):
         h.update(("intent:" + name).encode()); h.update(b"\0")
         rel = f".keel/ledger/{change_id}/{name}"
         mode, data = worktree_entry(root, rel)
@@ -418,7 +466,7 @@ def tree_digest(root: Path, change_id: str, commit: str, material_paths: list[st
         h.update(("material:" + rel).encode()); h.update(b"\0")
         mode, data = git_tree_entry(root, commit, rel)
         h.update(mode.encode()); h.update(b"\0"); h.update(data); h.update(b"\0")
-    for name in INTENT_FILES:
+    for name in intent_files(root, change_id):
         rel = f".keel/ledger/{change_id}/{name}"
         h.update(("intent:" + name).encode()); h.update(b"\0")
         mode, data = git_tree_entry(root, commit, rel)
@@ -434,8 +482,20 @@ def verify_commit_tree(root: Path, change_id: str, commit: str, require_exact_di
     """Verify a committed tree against KEEL evidence; optionally require its whole diff to be the candidate."""
     validate_id(change_id)
     sha = git_proof.resolve_commit(root, commit)
-    st = show_commit_json(root, sha, change_id, "state.json")
-    ver = show_commit_json(root, sha, change_id, "verification.json")
+    canonical = run_git(root, ["cat-file", "-e", f"{sha}:.keel/ledger/{change_id}/intent.json"], check=False).returncode == 0
+    if canonical:
+        intent = show_commit_json(root, sha, change_id, "intent.json")
+        events_raw = run_git(root, ["show", f"{sha}:.keel/ledger/{change_id}/events.jsonl"]).stdout
+        events = [json.loads(line) for line in events_raw.splitlines() if line]
+        current = None
+        mapping = {"START":"DISCUSS","DISCUSS":"PLAN","PLAN":"EXECUTE","REPLAN":"PLAN","REOPEN":"EXECUTE","VERIFY_PASS":"SHIP","VERIFY_FAIL":"EXECUTE"}
+        for event in events:
+            if event.get("kind") in mapping and (event.get("result") in {"PASS","RECORDED"} or event.get("kind") in {"START","REPLAN","REOPEN","VERIFY_PASS","VERIFY_FAIL"}): current = mapping[event["kind"]]
+        ver = show_commit_json(root, sha, change_id, "views/verification.json")
+        st = {"change_id":change_id,"base_commit":intent["base_commit"],"phase":current,"verified_content_digest":ver.get("content_digest")}
+    else:
+        st = show_commit_json(root, sha, change_id, "state.json")
+        ver = show_commit_json(root, sha, change_id, "verification.json")
     if st.get("change_id") != change_id:
         raise RuntimeError("committed state change_id mismatch")
     if st.get("phase") != "SHIP":
@@ -476,7 +536,7 @@ def candidate_status(root: Path, change_id: str) -> dict:
     attestation_exists = run_git(root, ["show-ref", "--verify", attestation_ref], check=False).returncode == 0
     if attestation_exists:
         attestation = candidate_attestation.read_attestation(root, change_id)
-        expected = candidate_attestation.build(root, change_id, sha, st, ver, INTENT_FILES)
+        expected = candidate_attestation.build(root, change_id, sha, st, ver, intent_files(root, change_id))
         if attestation.digest != expected.digest:
             raise RuntimeError("sealed CandidateAttestation differs from committed candidate proof")
         result.update({"attestation_ref": attestation_ref, "attestation_digest": attestation.digest})
@@ -495,7 +555,7 @@ def seal_candidate(root: Path, change_id: str, commit: str) -> dict:
     old = run_git(root, ["show-ref", "--hash", "--verify", ref], check=False)
     if old.returncode == 0 and old.stdout.strip() != sha:
         raise RuntimeError(f"KEEL candidate ref collision: {ref} already points to {old.stdout.strip()}")
-    attestation = candidate_attestation.build(root, change_id, sha, committed_state, committed_verification, INTENT_FILES)
+    attestation = candidate_attestation.build(root, change_id, sha, committed_state, committed_verification, intent_files(root, change_id))
     attestation_ref = candidate_attestation.ATTESTATION_REF_PREFIX + change_id
     candidate_attestation.write_attestation_object(root, attestation, attestation_ref)
     if old.returncode != 0:
@@ -634,37 +694,13 @@ def start_change(root: Path, change_id: str, mode: str = "standard", summary: st
     if dirty:
         raise RuntimeError("refusing to absorb pre-existing worktree changes into a new KEEL change: " + ", ".join(dirty[:12]))
     d = ledger_dir(root, change_id)
-    if d.exists() and (d / "state.json").exists():
+    if d.exists() and any(d.iterdir()):
         raise RuntimeError(f"ledger already exists: {change_id}; resume it instead of recreating")
-    d.mkdir(parents=True, exist_ok=True)
-    templates = root / ".keel" / "templates"
-    atomic_write(d / "proposal.md", (templates / "proposal.md").read_text(encoding="utf-8"))
-    atomic_write(d / "delta.md", (templates / "delta.md").read_text(encoding="utf-8"))
-    atomic_write(d / "requirements.json", (templates / "requirements.json").read_text(encoding="utf-8"))
-    atomic_write(d / "acceptance.json", (templates / "acceptance.json").read_text(encoding="utf-8"))
-    atomic_write(d / "scope.txt", "# One repo-relative file/glob per line. No absolute paths or '..'.\n")
-    atomic_write(d / "risk.json", (templates / "risk.json").read_text(encoding="utf-8"))
-    atomic_write(d / "effects.json", (templates / "effects.json").read_text(encoding="utf-8"))
-    atomic_write(d / "authorization.json", (templates / "authorization.json").read_text(encoding="utf-8"))
-    atomic_write(d / "risk-review.md", (templates / "risk-review.md").read_text(encoding="utf-8"))
-    st = {"schema_version": 1, "change_id": change_id, "mode": mode, "phase": "DISCUSS", "base_commit": base, "created_at": now(), "updated_at": now()}
-    write_json(d / "state.json", st)
+    intent = canonical_ledger.blank_intent(change_id, base, mode, summary, scopes)
+    canonical_ledger.create(d, intent)
     atomic_write(active_file(root), change_id + "\n")
-    append_event(root, change_id, "START", "PASS", {"mode": mode, "base_commit": base})
+    st = state(root, change_id)
     if mode == "trivial":
-        proposal = f"# Proposal\n\n## Problem / why\nLocalized low-risk change.\n\n## Objective\n{summary.strip()}\n\n## Non-goals\nNo architecture, security/privacy, migration/release, external-effect, or broad refactor change.\n\n## Success evidence\nScoped diff plus project verification for the affected behavior.\n\n## Open decisions\nNone known.\n"
-        delta = f"## ADDED\n\n## MODIFIED\n- {summary.strip()}\n\n## REMOVED\n"
-        atomic_write(d / "proposal.md", proposal)
-        atomic_write(d / "delta.md", delta)
-        atomic_write(d / "scope.txt", "\n".join(scopes) + "\n")
-        write_json(d / "requirements.json", {"schema_version": 1, "requirements": [{"id": "REQ-TRIVIAL", "statement": summary.strip(), "source": "trivial-fast-path"}]})
-        write_json(d / "acceptance.json", {"schema_version": 1, "criteria": [{"id": "AC-TRIVIAL", "requirement_id": "REQ-TRIVIAL", "statement": "At least one declared scoped path is materially changed", "required": True, "policy": "any", "evidence": [{"provider": "changed_path", "path": x} for x in scopes]}]})
-        risk = read_json(d / "risk.json"); risk["risk_level"] = "trivial"; write_json(d / "risk.json", risk)
-        sync_authorization_shape(root, change_id, invalidate=True)
-        errs = validate_plan(root, change_id)
-        if errs:
-            raise RuntimeError("trivial fast path invalid: " + "; ".join(errs))
-        st["phase"] = "EXECUTE"; write_state(root, change_id, st)
         append_event(root, change_id, "DISCUSS", "PASS", {"mode": "trivial-fast-path"})
         append_event(root, change_id, "PLAN", "PASS", {"mode": "trivial-fast-path"})
 
@@ -675,14 +711,14 @@ def gate(root: Path, change_id: str, which: str) -> None:
     which = which.lower()
     if which == "discuss":
         if st.get("phase") != "DISCUSS": raise RuntimeError(f"discuss gate requires DISCUSS, got {st.get('phase')}")
-        ok, msg = meaningful_proposal(d / "proposal.md")
+        ok, msg = ((len(canonical_ledger.load_intent(d).get("objective","").strip()) >= 12), "intent objective is too thin") if (d / "intent.json").is_file() else meaningful_proposal(d / "proposal.md")
         if not ok: append_event(root, change_id, "DISCUSS", "FAIL", {"reason": msg}); raise RuntimeError(msg)
         st["phase"] = "PLAN"; write_state(root, change_id, st); append_event(root, change_id, "DISCUSS", "PASS")
     elif which == "plan":
         if st.get("phase") != "PLAN": raise RuntimeError(f"plan gate requires PLAN, got {st.get('phase')}")
         # The model may declare effects during PLAN, but permission state is script-owned.
         # Synchronization can only clear/invalidate authorization; it never grants it.
-        sync_authorization_shape(root, change_id, invalidate=False)
+        if not (d / "intent.json").is_file(): sync_authorization_shape(root, change_id, invalidate=False)
         errs = validate_plan(root, change_id)
         if errs: append_event(root, change_id, "PLAN", "FAIL", {"errors": errs}); raise RuntimeError("; ".join(errs))
         st["phase"] = "EXECUTE"; write_state(root, change_id, st); append_event(root, change_id, "PLAN", "PASS")
@@ -698,16 +734,17 @@ def replan(root: Path, change_id: str) -> None:
     st["phase"] = "PLAN"
     st.pop("verified_content_digest", None)
     write_state(root, change_id, st)
+    d = ledger_dir(root, change_id)
+    cleanup = d / "views" if (d / "intent.json").is_file() else d
     for n in ("verification.json", "verification.md", "evidence-graph.json", "evidence-plan.json", "evidence-receipts.json"):
-        p = ledger_dir(root, change_id) / n
+        p = cleanup / n
         if p.exists(): p.unlink()
-    # Any change to intent/scope requires fresh consequence authorization.
-    try:
-        sync_authorization_shape(root, change_id, invalidate=True)
-    except Exception:
-        # The PLAN phase may intentionally contain temporarily invalid effects while being edited.
-        ap = ledger_dir(root, change_id) / "authorization.json"
-        write_json(ap, {"required": False, "authorized": False, "authority": "", "scope": "", "evidence_reference": "", "effects_digest": ""})
+    if (d / "intent.json").is_file():
+        for grant in (d / "grants").glob("*.json"): grant.unlink()
+    else:
+        # Any legacy intent/scope change requires fresh consequence authorization.
+        try: sync_authorization_shape(root, change_id, invalidate=True)
+        except Exception: write_json(d / "authorization.json", {"required": False, "authorized": False, "authority": "", "scope": "", "evidence_reference": "", "effects_digest": ""})
     append_event(root, change_id, "REPLAN", "PASS")
 
 
@@ -744,17 +781,19 @@ def verify_change(root: Path, change_id: str) -> dict:
     d = ledger_dir(root, change_id); cfg = read_json(root / ".keel/config.json")
     registry = cfg.get("verifier_registry", [])
     registry_errors = evidence_system.validate_registry(registry); errs.extend(registry_errors)
-    requirements = read_json(d / "requirements.json"); acceptance = read_json(d / "acceptance.json")
+    intent = canonical_ledger.load_intent(d) if (d / "intent.json").is_file() else None
+    requirements, acceptance = canonical_ledger.contracts(intent) if intent else (read_json(d / "requirements.json"), read_json(d / "acceptance.json"))
     ers = evidence_system.evidence_requirements(requirements, acceptance)
-    risk = read_json(d / "risk.json").get("risk_level", "standard")
+    risk = canonical_ledger.risk(intent).get("risk_level", "standard") if intent else read_json(d / "risk.json").get("risk_level", "standard")
     plan_value = evidence_system.plan(registry, ers, material, risk, {"source_change": source_change_present(root, change_id)})
-    write_json(d / "evidence-plan.json", plan_value)
+    plan_path = d / "views" / "evidence-plan.json" if intent else d / "evidence-plan.json"
+    write_json(plan_path, plan_value)
     if plan_value["status"] != "PASS": errs.extend(plan_value["errors"])
     digest = None
     if not scope_errs:
         try: digest = content_digest(root, change_id)
         except Exception as e: errs.append(f"content digest failed: {e}")
-    intent_value = {name: worktree_entry(root, f".keel/ledger/{change_id}/{name}")[1].decode("utf-8", errors="surrogateescape") for name in INTENT_FILES}
+    intent_value = {name: worktree_entry(root, f".keel/ledger/{change_id}/{name}")[1].decode("utf-8", errors="surrogateescape") for name in intent_files(root, change_id)}
     intent_digest = evidence_system.canonical_digest(intent_value)
     head = run_git(root, ["rev-parse", "HEAD"], check=False).stdout.strip()
     subject = {"kind":"git-worktree","base_commit":st["base_commit"],"head_commit":head,"content_digest":digest,"changed_paths":material}
@@ -783,18 +822,21 @@ def verify_change(root: Path, change_id: str) -> dict:
         observations=[{"kind":"command-result","exit_code":code,"duration_ms":elapsed,"excerpt":excerpt,"resolution":resolution}]
         receipts.append(evidence_system.receipt(v,executed_step,subject,intent_digest,literal,observations,started,ended))
         results.append({"id":v["id"],"argv":argv,"cwd":runtime.get("cwd","."),"exit_code":code,"duration_ms":elapsed,"required":True,"excerpt":excerpt,"resolution":resolution})
-    write_json(d / "evidence-receipts.json", {"schema_version":1,"subject":subject,"intent_digest":intent_digest,"receipts":receipts})
+    if intent:
+        for n, receipt in enumerate(receipts): canonical_ledger.record(d, "receipts", {**receipt, "receipt_id": receipt.get("receipt_digest") or f"receipt-{n+1}"}, "receipt_id")
+        write_json(d / "views" / "evidence-receipts.json", {"schema_version":1,"subject":subject,"intent_digest":intent_digest,"receipts":receipts,"generated":True})
+    else: write_json(d / "evidence-receipts.json", {"schema_version":1,"subject":subject,"intent_digest":intent_digest,"receipts":receipts})
     evaluation=evidence_system.evaluate(plan_value,receipts,ers,subject,intent_digest)
     if evaluation["status"] != "PASS": errs.extend(evaluation["errors"] or ["receipt evidence is inconclusive"])
     # Compatibility only: old consumers may read these projections, but they grant no authority.
     graph_projection={"schema_version":2,"projection_of":"evidence-receipts.json","status":"PASS" if evaluation["status"]=="PASS" else "FAIL","change_type":requirements.get("change_type","implementation"),"verification_class":"IMPLEMENTATION_ACCEPTANCE","implementation_status":"PASS" if evaluation["status"]=="PASS" else "NOT_VERIFIED","errors":evaluation["errors"],"criteria":[],"requirement_coverage":evaluation["coverage"],"summary":{"required":evaluation["summary"]["required"],"passed_required":evaluation["summary"]["established"],"requirements_total":len(ers),"requirements_covered":evaluation["summary"]["established"],"requirements_passing":evaluation["summary"]["established"]}}
-    write_json(d / "evidence-graph.json", graph_projection)
+    write_json(d / "views" / "evidence-graph.json" if intent else d / "evidence-graph.json", graph_projection)
     status="PASS" if not errs else "FAIL"; change_type=requirements.get("change_type","implementation"); implementation_status="PASS" if evaluation["status"]=="PASS" else "NOT_VERIFIED"
     evidence={"schema_version":4,"authority":"evidence-receipts.json","compatibility_projection":True,"change_id":change_id,"base_commit":st["base_commit"],"verified_at":now(),"status":status,"verification_class":"IMPLEMENTATION_ACCEPTANCE","change_type":change_type,"implementation_status":implementation_status,"content_digest":digest,"intent_digest":intent_digest,"evidence_plan_digest":plan_value["plan_digest"],"changed_paths":material,"errors":sorted(set(errs)),"checks":results,"acceptance":graph_projection["summary"]}
-    write_json(d / "verification.json",evidence)
+    write_json(d / "views" / "verification.json" if intent else d / "verification.json",evidence)
     md=["# Verification","",f"Status: `{status}`",f"Authority: `evidence-receipts.json`",f"Subject digest: `{digest or 'UNAVAILABLE'}`",f"Intent digest: `{intent_digest}`","","## Selected verifiers"]+[f"- `{r['id']}` exit `{r['exit_code']}` ({r['duration_ms']} ms)" for r in results]+["","## Receipt coverage"]+[f"- `{c['evidence_requirement_id']}` `{c['status']}` via `{c['verifier_id']}`" for c in evaluation["coverage"]]
     if errs: md += ["","## Blockers"]+[f"- {e}" for e in sorted(set(errs))]
-    atomic_write(d / "verification.md","\n".join(md)+"\n")
+    atomic_write(d / "views" / "verification.md" if intent else d / "verification.md","\n".join(md)+"\n")
     append_event(root,change_id,"EXECUTE","PASS" if not scope_errs else "FAIL",{"changed_paths":material,"scope_errors":scope_errs}); append_event(root,change_id,"VERIFY",status,{"content_digest":digest,"errors":sorted(set(errs)),"evidence_plan_digest":plan_value["plan_digest"]})
     authority=status=="PASS" and (change_type=="planning_only" or implementation_status=="PASS")
     if authority: st["phase"]="SHIP"; st["verified_content_digest"]=digest
@@ -805,7 +847,8 @@ def verify_change(root: Path, change_id: str) -> dict:
 def current_verified(root: Path, change_id: str) -> tuple[bool, str]:
     st = state(root, change_id)
     if st.get("phase") != "SHIP": return False, f"phase is {st.get('phase')}, not SHIP"
-    vpath = ledger_dir(root, change_id) / "verification.json"
+    d = ledger_dir(root, change_id)
+    vpath = d / "views" / "verification.json" if (d / "intent.json").is_file() else d / "verification.json"
     if not vpath.is_file(): return False, "verification.json missing"
     v = read_json(vpath)
     if v.get("status") != "PASS": return False, "verification status is not PASS"
