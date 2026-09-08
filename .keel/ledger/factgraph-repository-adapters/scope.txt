@@ -1,0 +1,18 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.keel/lib/fact_graph.py
+.keel/lib/repository_intelligence.py
+.keel/lib/repository_map.py
+.keel/lib/capability_resolver.py
+.keel/lib/context_compiler.py
+.keel/tests/test_fact_graph.py
+.keel/tests/test_repository_intelligence.py
+.keel/tests/test_repository_map.py
+.keel/tests/test_capability_resolver.py
+.keel/tests/test_context_compiler.py
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+ARCHITECTURE.md
+CONTROL_PLANE.md
+docs/control-plane/CAPABILITY_RESOLUTION.md
+docs/control-plane/CONTEXT_COMPILATION.md
+docs/exec-plans/active/factgraph-repository-adapters.md

@@ -1,0 +1,356 @@
+{
+  "change_type": "implementation",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "fact-graph-tests",
+          "detail": "provider=unit_test check=fact-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-001",
+      "implementation_matches": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-001",
+      "statement": "FactGraph tests prove generic adapter registration, normalized Fact/Edge identities/provenance, and byte-stable construction.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "fact-graph-tests",
+          "detail": "provider=unit_test check=fact-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-002",
+      "implementation_matches": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-002",
+      "statement": "Cross-stack fixtures prove filesystem/Git/Python support and conservative UNKNOWN/UNSUPPORTED results for unsupported ecosystems.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "fact-graph-tests",
+          "detail": "provider=unit_test check=fact-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-003",
+      "implementation_matches": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-003",
+      "statement": "FactGraph tests prove conflicts remain visible, precedence is explicit, and source digest changes produce stale observations.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "fact-graph-tests",
+          "detail": "provider=unit_test check=fact-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "repository-map-tests",
+          "detail": "provider=unit_test check=repository-map-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "capability-resolver-tests",
+          "detail": "provider=unit_test check=capability-resolver-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "context-compiler-tests",
+          "detail": "provider=unit_test check=context-compiler-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-004",
+      "implementation_matches": [
+        ".keel/lib/capability_resolver.py",
+        ".keel/lib/fact_graph.py",
+        ".keel/lib/repository_intelligence.py",
+        ".keel/lib/repository_map.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/fact_graph.py",
+        ".keel/lib/repository_intelligence.py",
+        ".keel/lib/repository_map.py",
+        ".keel/lib/capability_resolver.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-004",
+      "statement": "FactGraph and legacy suites prove impact/capabilities/context/map/intelligence are graph-derived compatibility projections.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "fact-graph-tests",
+          "detail": "provider=unit_test check=fact-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-005",
+      "implementation_matches": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/fact_graph.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-005",
+      "statement": "Tests prove candidates and declarations are separate and adapter discovery does not execute candidate commands or activate policy.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "fact-graph-tests",
+          "detail": "provider=unit_test check=fact-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-006",
+      "implementation_matches": [
+        ".keel/lib/capability_resolver.py",
+        ".keel/lib/fact_graph.py",
+        ".keel/lib/repository_intelligence.py",
+        ".keel/lib/repository_map.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/fact_graph.py",
+        ".keel/lib/repository_intelligence.py",
+        ".keel/lib/repository_map.py",
+        ".keel/lib/capability_resolver.py",
+        ".keel/tests/test_fact_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-006",
+      "statement": "Cross-stack and compatibility tests prove portable deterministic paths and legacy behavior without reconciler or EvidencePlanner surfaces.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "manifest-producer-check",
+          "detail": "check=manifest-producer-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "automated-test",
+      "id": "AC-007",
+      "implementation_matches": [
+        ".control-plane/bootstrap-manifest.json",
+        ".keel/config.json"
+      ],
+      "implementation_paths": [
+        ".keel/config.json",
+        ".control-plane/bootstrap-manifest.json"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-006",
+      "statement": "Doctor and manifest provenance checks pass for the governed tree.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "implementation_status": "PASS",
+  "planning_status": "PASS",
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-001"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-002"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-003"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-004"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-004",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-005"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-005",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 2,
+      "criterion_ids": [
+        "AC-006",
+        "AC-007"
+      ],
+      "implementation_paths": [],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-006",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "source": "user-goal/KEEL-KERNEL-REDESIGN-v1:M2-M3",
+      "statement": "A generic read-only repository adapter SPI shall emit normalized provenance-bearing Facts and Edges into one deterministic canonical FactGraph."
+    },
+    {
+      "id": "REQ-002",
+      "source": "user-goal",
+      "statement": "Filesystem, Git, supported repository metadata, and practical Python semantic dependency behavior shall be implemented as adapters while unsupported ecosystems remain explicitly UNKNOWN or UNSUPPORTED."
+    },
+    {
+      "id": "REQ-003",
+      "source": "user-goal",
+      "statement": "The graph shall retain conflicting evidence, apply explicit source precedence only in projections, and expose freshness/staleness tied to source digests."
+    },
+    {
+      "id": "REQ-004",
+      "source": "user-goal/KEEL-KERNEL-REDESIGN-v1:M3",
+      "statement": "Impact, capability, context, repository-map, and repository-intelligence compatibility outputs shall be projections over canonical graph facts and edges rather than independent repository models."
+    },
+    {
+      "id": "REQ-005",
+      "source": "user-goal",
+      "statement": "Discovered command candidates shall remain distinct from declared commands; discovery shall be read-only, execute no discovered command, and never silently activate policy from filename heuristics."
+    },
+    {
+      "id": "REQ-006",
+      "source": "user-goal/KEEL-KERNEL-REDESIGN-v1",
+      "statement": "The migration shall preserve portable paths, deterministic canonical output, legacy compatibility, and shall not implement a reconciler or EvidencePlanner."
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 7,
+    "required": 7,
+    "requirements_covered": 6,
+    "requirements_passing": 6,
+    "requirements_total": 6
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "change_type": "implementation",
+  "requirements": [
+    {"id":"REQ-001","statement":"A generic read-only repository adapter SPI shall emit normalized provenance-bearing Facts and Edges into one deterministic canonical FactGraph.","source":"user-goal/KEEL-KERNEL-REDESIGN-v1:M2-M3"},
+    {"id":"REQ-002","statement":"Filesystem, Git, supported repository metadata, and practical Python semantic dependency behavior shall be implemented as adapters while unsupported ecosystems remain explicitly UNKNOWN or UNSUPPORTED.","source":"user-goal"},
+    {"id":"REQ-003","statement":"The graph shall retain conflicting evidence, apply explicit source precedence only in projections, and expose freshness/staleness tied to source digests.","source":"user-goal"},
+    {"id":"REQ-004","statement":"Impact, capability, context, repository-map, and repository-intelligence compatibility outputs shall be projections over canonical graph facts and edges rather than independent repository models.","source":"user-goal/KEEL-KERNEL-REDESIGN-v1:M3"},
+    {"id":"REQ-005","statement":"Discovered command candidates shall remain distinct from declared commands; discovery shall be read-only, execute no discovered command, and never silently activate policy from filename heuristics.","source":"user-goal"},
+    {"id":"REQ-006","statement":"The migration shall preserve portable paths, deterministic canonical output, legacy compatibility, and shall not implement a reconciler or EvidencePlanner.","source":"user-goal/KEEL-KERNEL-REDESIGN-v1"}
+  ]
+}

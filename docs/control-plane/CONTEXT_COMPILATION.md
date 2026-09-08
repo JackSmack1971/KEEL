@@ -2,6 +2,10 @@
 
 KEEL compiles task context instead of accumulating the whole repository control plane into every turn.
 
+Capability inputs are derived from the canonical FactGraph through the compatibility
+resolver. The packet remains a bounded navigation projection; it is not repository,
+policy, command, or authorization authority.
+
 Run:
 
 ```text
