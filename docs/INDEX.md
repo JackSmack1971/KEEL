@@ -18,6 +18,9 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [generated/](generated/README.md)
 - [references/](references/README.md)
 
+## Authoritative kernel transition
+- [KEEL kernel redesign and migration authority](control-plane/KERNEL_REDESIGN.md) — sole target architecture; freezes expansion above landed P2.
+
 ## Control-plane detail
 - [Capability registry](control-plane/CAPABILITY_REGISTRY.md)
 - [Capability resolution](control-plane/CAPABILITY_RESOLUTION.md)

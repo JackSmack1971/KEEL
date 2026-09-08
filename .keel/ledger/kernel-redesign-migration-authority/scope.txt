@@ -1,0 +1,8 @@
+ARCHITECTURE.md
+CONTROL_PLANE.md
+docs/INDEX.md
+docs/control-plane/KERNEL_REDESIGN.md
+docs/control-plane/UPGRADE_AUDIT.md
+docs/exec-plans/active/upgrade-remaining-plan.md
+docs/exec-plans/active/kernel-redesign-migration-authority.md
+.control-plane/bootstrap-manifest.json

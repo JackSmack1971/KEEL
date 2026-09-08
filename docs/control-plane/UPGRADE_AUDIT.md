@@ -1,5 +1,9 @@
 # KEEL upgrade audit
 
+Status: `FROZEN LANDED-STATE EVIDENCE — SUBORDINATE`
+
+[`KERNEL_REDESIGN.md`](KERNEL_REDESIGN.md) is the sole forward architecture and migration authority. This audit remains authoritative only for its landed P0/P1/P2 evidence mapping; all unresolved P3-P7 and D1 feature expansion is frozen and may proceed only as an explicitly staged migration under that contract.
+
 This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Every numbered source section is accounted for exactly once below, either as an executable requirement, contextual/strategic material, superseded material, or explicitly deferred/out-of-scope material. Status is based on repository evidence, not plan or ledger phase.
 
 ## Authoritative requirement matrix
@@ -62,7 +66,7 @@ This cross-cutting row is not a second source-section count: it is the explicitl
 
 ## Authority boundaries
 
-Unresolved executable rows map to exactly one P0–P7 owner, except explicitly BLOCKED P4 and DEFERRED D1 rows. This document is requirement/status authority; [upgrade-remaining-plan.md](../exec-plans/active/upgrade-remaining-plan.md) is program sequence/dependency authority; and each subordinate active workstream ExecPlan is bounded execution authority. Historical ExecPlans under `docs/exec-plans/completed/` and `.keel/ledger/*` are evidence only and never prove broader upgrade completion. A workstream plan must not supersede or replace the global roadmap.
+Unresolved executable rows map to exactly one P0–P7 owner, except explicitly BLOCKED P4 and DEFERRED D1 rows. For landed P0/P1/P2 this document is requirement/status evidence; for all future work `KERNEL_REDESIGN.md` is authority. Previously, this document was requirement/status authority; [upgrade-remaining-plan.md](../exec-plans/active/upgrade-remaining-plan.md) is program sequence/dependency authority; and each subordinate active workstream ExecPlan is bounded execution authority. Historical ExecPlans under `docs/exec-plans/completed/` and `.keel/ledger/*` are evidence only and never prove broader upgrade completion. A workstream plan must not supersede or replace the global roadmap.
 
 ## Landed P1 evidence
 

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "change_type": "planning_only",
+  "requirements": [
+    {"id":"REQ-KR-001","type":"architecture","priority":"must","statement":"Establish one authoritative redesign document defining the North Star, Codex/KEEL ownership boundary, canonical primitives, orthogonal state dimensions, single dependency graph, and all requested authorization, resource, evidence, verification, hook, runtime-trust, compatibility, and semantic-authority invariants.","source":"operator kernel redesign directive","implementation_paths":["docs/control-plane/KERNEL_REDESIGN.md"]},
+    {"id":"REQ-KR-002","type":"migration","priority":"must","statement":"Classify every landed component family at file-level granularity as PRESERVE, REWORK, REMOVE-AFTER-MIGRATION, or MOVE-OUT-OF-CORE, and define deterministic compatibility and staged migration gates without implementing them.","source":"operator kernel redesign directive","implementation_paths":["docs/control-plane/KERNEL_REDESIGN.md"]},
+    {"id":"REQ-KR-003","type":"documentation","priority":"must","statement":"Freeze feature expansion above landed P2 and make existing audit/roadmap authorities explicitly subordinate for future redesign work without rewriting historical evidence.","source":"operator kernel redesign directive","implementation_paths":["docs/control-plane/UPGRADE_AUDIT.md","docs/exec-plans/active/upgrade-remaining-plan.md"]},
+    {"id":"REQ-KR-004","type":"documentation","priority":"must","statement":"Make the migration authority mechanically discoverable from primary architecture and documentation navigation and record a subordinate planning-only ExecPlan.","source":"repository documentation contract","implementation_paths":["ARCHITECTURE.md","CONTROL_PLANE.md","docs/INDEX.md","docs/exec-plans/active/kernel-redesign-migration-authority.md"]}
+  ]
+}
