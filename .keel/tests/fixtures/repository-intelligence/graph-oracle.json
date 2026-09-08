@@ -1,0 +1,8 @@
+{
+  "normalized_paths": ["src/a.py", "src/b.py"],
+  "invalid_path_status": "UNKNOWN",
+  "cycle_representable": true,
+  "unsupported_status": "UNSUPPORTED",
+  "malformed_status": "FAILED",
+  "missing_optional_status": "UNKNOWN"
+}

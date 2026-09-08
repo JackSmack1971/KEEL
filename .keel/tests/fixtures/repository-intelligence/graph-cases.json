@@ -1,0 +1,8 @@
+{
+  "paths": ["src/./a.py", "src/b.py"],
+  "invalid_path": "../outside.py",
+  "cycle": true,
+  "unsupported_ecosystem": "haskell",
+  "malformed_metadata": true,
+  "missing_optional": true
+}

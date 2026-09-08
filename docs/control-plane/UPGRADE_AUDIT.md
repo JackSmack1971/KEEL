@@ -62,4 +62,4 @@ This cross-cutting row is not a second source-section count: it is the explicitl
 
 ## Authority boundaries
 
-Unresolved executable rows map to exactly one P0–P7 owner, except explicitly BLOCKED P4 and DEFERRED D1 rows. Historical ExecPlans under `docs/exec-plans/completed/` and `.keel/ledger/*` are evidence only; neither proves broader upgrade completion. The sole active roadmap is [upgrade-remaining-plan.md](../exec-plans/active/upgrade-remaining-plan.md).
+Unresolved executable rows map to exactly one P0–P7 owner, except explicitly BLOCKED P4 and DEFERRED D1 rows. This document is requirement/status authority; [upgrade-remaining-plan.md](../exec-plans/active/upgrade-remaining-plan.md) is program sequence/dependency authority; and each subordinate active workstream ExecPlan is bounded execution authority. Historical ExecPlans under `docs/exec-plans/completed/` and `.keel/ledger/*` are evidence only and never prove broader upgrade completion. A workstream plan must not supersede or replace the global roadmap.

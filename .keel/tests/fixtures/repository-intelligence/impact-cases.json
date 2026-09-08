@@ -1,0 +1,5 @@
+{
+  "unsupported_ecosystem": "haskell",
+  "malformed": [{"source":"a.py","status":"FAILED","kind":"UNSUPPORTED_SOURCE"}],
+  "dependencies": [{"source":"a.py","target":"b.py","status":"VERIFIED","kind":"DIRECT_PARSED"},{"source":"b.py","target":"a.py","status":"VERIFIED","kind":"DIRECT_PARSED"},{"source":"a.py","target":"vendor.pkg","status":"PARTIAL","kind":"EXTERNAL"},{"source":"generated.py","target":"missing.py","status":"PARTIAL","kind":"UNRESOLVED"}]
+}

@@ -1,0 +1,735 @@
+{
+  "acceptance": {
+    "passed_required": 8,
+    "required": 8,
+    "requirements_covered": 8,
+    "requirements_passing": 8,
+    "requirements_total": 8
+  },
+  "base_commit": "881531c21abff5b7cbce06d154534f1628837d6e",
+  "change_id": "p1-repository-intelligence-foundation",
+  "change_type": "implementation",
+  "changed_paths": [
+    ".control-plane/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/contracts.json",
+    ".keel/ledger/verification-evidence-class-separation/acceptance.json",
+    ".keel/ledger/verification-evidence-class-separation/authorization.json",
+    ".keel/ledger/verification-evidence-class-separation/delta.md",
+    ".keel/ledger/verification-evidence-class-separation/effects.json",
+    ".keel/ledger/verification-evidence-class-separation/evidence-graph.json",
+    ".keel/ledger/verification-evidence-class-separation/gate-log.jsonl",
+    ".keel/ledger/verification-evidence-class-separation/proposal.md",
+    ".keel/ledger/verification-evidence-class-separation/requirements.json",
+    ".keel/ledger/verification-evidence-class-separation/risk-review.md",
+    ".keel/ledger/verification-evidence-class-separation/risk.json",
+    ".keel/ledger/verification-evidence-class-separation/scope.txt",
+    ".keel/ledger/verification-evidence-class-separation/state.json",
+    ".keel/ledger/verification-evidence-class-separation/verification.json",
+    ".keel/ledger/verification-evidence-class-separation/verification.md",
+    ".keel/lib/evidence_graph.py",
+    ".keel/lib/keel_core.py",
+    ".keel/lib/repository_intelligence.py",
+    ".keel/templates/requirements.json",
+    ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+    ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+    ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+    ".keel/tests/test_evidence_class_lifecycle.py",
+    ".keel/tests/test_p1_plan_contract.py",
+    ".keel/tests/test_repository_intelligence.py",
+    "docs/control-plane/KEEL.md",
+    "docs/control-plane/UPGRADE_AUDIT.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/README.md",
+    "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
+    "docs/exec-plans/active/upgrade-remaining-plan.md",
+    "docs/exec-plans/active/verification-evidence-class-separation.md",
+    "docs/exec-plans/completed/upgrade-remaining-plan.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--ignore-space-at-eol",
+        "881531c21abff5b7cbce06d154534f1628837d6e",
+        "--",
+        ".",
+        ":(exclude).keel/ledger/p1-repository-intelligence-foundation/**"
+      ],
+      "duration_ms": 0,
+      "excerpt": "",
+      "exit_code": 0,
+      "id": "git-diff-check"
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 471,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p0_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 863,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}\n\nwarning: in the working copy of '.keel/templates/acceptance.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/authorization.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/delta.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/effects.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/proposal.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/requirements.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/risk-review.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.keel/templates/risk.json', LF will be replaced by CRLF the next time Git touches it",
+      "exit_code": 0,
+      "id": "p0-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "manifest"
+      ],
+      "cwd": ".",
+      "duration_ms": 302,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"1cdf9e02b6fb29e08183f65a673666fd1f6924d62cdae7975658bf793381d5a7\"\n}",
+      "exit_code": 0,
+      "id": "manifest-producer-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": ".keel/bin/keel.py",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "compat"
+      ],
+      "cwd": ".",
+      "duration_ms": 287,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "id": "canonical-config-portability",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": ".keel/bin/keel.py",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "6b0414d61395db0067d593dd5aa578efb74697d8",
+        "--",
+        "."
+      ],
+      "cwd": ".",
+      "duration_ms": 94,
+      "excerpt": "",
+      "exit_code": 0,
+      "id": "remediation-diff-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "6b0414d61395db0067d593dd5aa578efb74697d8",
+          "--",
+          "."
+        ],
+        "provenance": ".keel/config.json",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_capability_resolver.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 173,
+      "excerpt": "Capability resolver tests PASS",
+      "exit_code": 0,
+      "id": "capability-resolver-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_capability_resolver.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_context_compiler.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 214,
+      "excerpt": "Context compiler tests PASS",
+      "exit_code": 0,
+      "id": "context-compiler-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_context_compiler.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 144,
+      "excerpt": "Evidence graph tests PASS",
+      "exit_code": 0,
+      "id": "evidence-graph-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_evidence_graph.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_next_action.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 1915,
+      "excerpt": "Next-action tests PASS",
+      "exit_code": 0,
+      "id": "next-action-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_next_action.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_worktree_lifecycle.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 921,
+      "excerpt": "Worktree lifecycle tests PASS",
+      "exit_code": 0,
+      "id": "worktree-lifecycle-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_worktree_lifecycle.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_environment_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 180,
+      "excerpt": "Environment contract tests PASS",
+      "exit_code": 0,
+      "id": "environment-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_environment_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_upgrade_kernel.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 1366,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"contracts\", \"version\", \"reconcile\"]}",
+      "exit_code": 0,
+      "id": "upgrade-kernel-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_upgrade_kernel.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 156,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"cycle\", \"frontier\", \"dispatch-contract\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "mission-work-graph-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_mission_work_graph.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_repository_map.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 1096,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"deterministic\", \"provenance\", \"semantic-imports\", \"ownership-source\", \"ignored-directories\", \"derived-only\"]}",
+      "exit_code": 0,
+      "id": "repository-map-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_repository_map.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_topology_routing.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 101,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"complexity\", \"capability-only\", \"deterministic\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "topology-routing-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_topology_routing.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_provider_effect_contracts.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 196,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provider-binding\", \"provider-failure\", \"schema-adapter\", \"effect-vocabulary\", \"authorization-preserved\"]}",
+      "exit_code": 0,
+      "id": "provider-effect-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_provider_effect_contracts.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_feedback_entropy.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 139,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"provenance\", \"review-gate\", \"goal-record\", \"deterministic-scan\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "feedback-entropy-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_feedback_entropy.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_lifecycle_compatibility.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 145,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"version-inventory\", \"stale-detection\", \"migration-plan\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "lifecycle-compatibility-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_lifecycle_compatibility.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_developer_ux.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 4390,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"init\", \"review\", \"eligibility-boundary\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "developer-ux-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_developer_ux.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_effect_inference.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 115,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"mapping\", \"unknown-neutrality\", \"advisory-boundary\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "effect-inference-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_effect_inference.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_schema_migrations.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 151,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"preflight\", \"atomic-apply\", \"backup\", \"rollback\", \"unsupported-version\"]}",
+      "exit_code": 0,
+      "id": "schema-migration-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_schema_migrations.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_telemetry.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 106,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"aggregation\", \"unavailable-metrics\", \"missing-input\", \"read-only\"]}",
+      "exit_code": 0,
+      "id": "lifecycle-telemetry-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_telemetry.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_hook_event_compatibility.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 111,
+      "excerpt": "{'status': 'PASS', 'checks': ['SessionStart', 'UserPromptSubmit', 'strict-unrelated-event']}",
+      "exit_code": 0,
+      "id": "hook-event-compatibility-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_hook_event_compatibility.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_class_lifecycle.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 355,
+      "excerpt": "Evidence-class lifecycle tests PASS",
+      "exit_code": 0,
+      "id": "evidence-class-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_evidence_class_lifecycle.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_evidence_class_lifecycle.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 380,
+      "excerpt": "Evidence-class lifecycle tests PASS",
+      "exit_code": 0,
+      "id": "evidence-class-lifecycle-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_evidence_class_lifecycle.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 155,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"schema\", \"determinism\", \"provenance\", \"commands\", \"authority\", \"dependencies\", \"impact\", \"generated\", \"negative-cases\", \"read-only\", \"independent-oracles\"]}",
+      "exit_code": 0,
+      "id": "p1-repository-intelligence-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_repository_intelligence.py"
+        ],
+        "provenance": ".keel/tests/test_repository_intelligence.py",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p1_plan_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 77,
+      "excerpt": "{'status': 'PASS', 'checks': ['authority', 'schema', 'negative-matrix', 'downstream-locks']}",
+      "exit_code": 0,
+      "id": "p1-plan-contract-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p1_plan_contract.py"
+        ],
+        "provenance": ".keel/tests/test_p1_plan_contract.py",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "content_digest": "ef14d5dd48eb0f14306aa2932364697b470ec5b833f0c0194bd0ec64bd2165bb",
+  "errors": [],
+  "implementation_status": "PASS",
+  "schema_version": 3,
+  "status": "PASS",
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE",
+  "verified_at": "2026-09-08T05:21:27+00:00"
+}

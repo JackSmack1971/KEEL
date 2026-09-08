@@ -1,0 +1,9 @@
+{
+  "zero_status": "UNKNOWN",
+  "candidate_status": "UNVERIFIED_RUNTIME",
+  "unsupported_status": "UNSUPPORTED",
+  "conflict_status": "CONFLICTING",
+  "unavailable_runtime": "UNAVAILABLE",
+  "unauthorized": "UNAUTHORIZED",
+  "nonportable": false
+}

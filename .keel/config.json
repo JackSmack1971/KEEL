@@ -318,6 +318,22 @@
       "id": "evidence-class-lifecycle-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_repository_intelligence.py"],
+      "cwd": ".",
+      "id": "p1-repository-intelligence-tests",
+      "required": true,
+      "timeout_sec": 120,
+      "provenance": ".keel/tests/test_repository_intelligence.py"
+    },
+    {
+      "argv": ["python", "-B", ".keel/tests/test_p1_plan_contract.py"],
+      "cwd": ".",
+      "id": "p1-plan-contract-check",
+      "required": true,
+      "timeout_sec": 120,
+      "provenance": ".keel/tests/test_p1_plan_contract.py"
     }
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "verified": {"artifact":"out.json","producer":"build","input_digest":"same","artifact_digest":"same"},
+  "stale": {"artifact":"out.json","producer":"build","input_digest":"new","artifact_digest":"old"},
+  "missing": {"artifact":"out.json","producer":null,"input_digest":"a","artifact_digest":"a"},
+  "conflict": {"artifact":"out.json","producer":"build","input_digest":"a","artifact_digest":"a","producer_conflict":true},
+  "hand_maintained": {"artifact":"notes.md","producer":null,"claimed_generated":false}
+}

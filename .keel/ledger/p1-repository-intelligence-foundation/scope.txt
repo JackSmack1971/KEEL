@@ -1,0 +1,21 @@
+# One repo-relative file/glob per line. No absolute paths or '..'.
+.control-plane/bootstrap-manifest.json
+.keel/config.json
+.keel/contracts.json
+.keel/lib/repository_intelligence.py
+.keel/tests/test_repository_intelligence.py
+.keel/tests/test_p1_plan_contract.py
+.keel/tests/fixtures/repository-intelligence/**
+.keel/ledger/verification-evidence-class-separation/**
+.keel/lib/evidence_graph.py
+.keel/lib/keel_core.py
+.keel/templates/requirements.json
+.keel/tests/test_evidence_class_lifecycle.py
+docs/control-plane/UPGRADE_AUDIT.md
+docs/control-plane/KEEL.md
+docs/control-plane/VERIFICATION.md
+docs/exec-plans/active/p1-repository-intelligence-foundation.md
+docs/exec-plans/active/README.md
+docs/exec-plans/active/upgrade-remaining-plan.md
+docs/exec-plans/active/verification-evidence-class-separation.md
+docs/exec-plans/completed/upgrade-remaining-plan.md

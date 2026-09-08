@@ -1,0 +1,565 @@
+{
+  "change_type": "implementation",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+          "fixture": ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-001",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-001",
+      "statement": "Graph/schema serialization, path normalization, provenance, determinism, validation, cycles, and graph negative states pass independent P1 tests.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+          "fixture": ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-002",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-002",
+      "statement": "Command intelligence proves independent fields, source precedence, zero commands, ambiguous candidates, unsupported metadata, unverified runtime, unavailable, unauthorized, conflict, and nonportable command outcomes.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+          "fixture": ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-003",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-003",
+      "statement": "Ownership, architecture, freshness, authority precedence, overlap, conflict, no-source, descriptive-vs-explicit, historical, and stale outcomes pass independent tests.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+          "fixture": ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-004",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-004",
+      "statement": "Bounded dependency adapters prove direct, parsed, derived, unresolved, external, generated, unsupported, malformed, incomplete, and cyclic dependency outcomes.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+          "fixture": ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-005",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-005",
+      "statement": "Changed-path normalization and advisory impact preserve direct relationships, uncertainty, conflict, ownership, architecture, dependency, generated provenance, unknown paths, and unsupported subsystems without mutation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+          "fixture": ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-006",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-006",
+      "statement": "Generated-artifact provenance and drift tests prove verified, stale, missing/blocked, conflicting, and rejected hand-maintained classifications without mutation.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "manifest-producer-check",
+          "detail": "check=manifest-producer-check exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "p1-plan-contract-check",
+          "detail": "check=p1-plan-contract-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_class": "PLAN_READINESS",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-007",
+      "implementation_matches": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/p1-repository-intelligence-foundation.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md"
+      ],
+      "implementation_paths": [
+        "docs/control-plane/UPGRADE_AUDIT.md",
+        "docs/exec-plans/active/upgrade-remaining-plan.md",
+        "docs/exec-plans/active/p1-repository-intelligence-foundation.md"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-007",
+      "statement": "The authority hierarchy, roadmap state, P1 scope/effects boundary, and downstream locks remain documented and strict control-plane/doctor checks pass.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p1-repository-intelligence-tests",
+          "detail": "provider=unit_test check=p1-repository-intelligence-tests exit=0",
+          "expected": "independent oracle comparison and read-only assertions",
+          "fixture": ".keel/tests/fixtures/repository-intelligence",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "remediation-diff-check",
+          "detail": "check=remediation-diff-check exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-P1-008",
+      "implementation_matches": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/authority-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/authority-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/command-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/command-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/generated-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/graph-oracle.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-cases.json",
+        ".keel/tests/fixtures/repository-intelligence/impact-oracle.json",
+        ".keel/tests/test_repository_intelligence.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-P1-008",
+      "statement": "The focused P1 suite uses independent fixtures/oracles and all required regressions, drift checks, strict validation, and diff checks pass.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "implementation_status": "PASS",
+  "planning_status": "PASS",
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-001"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-001",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-002"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-003"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-003",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-004"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-004",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-005"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-005",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-006"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-006",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-007"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-007",
+      "type": "architecture"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-P1-008"
+      ],
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-P1-008",
+      "type": "quality"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-P1-001",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan canonical repository-intelligence contract",
+      "statement": "Implement the keel.repository-intelligence/v1 canonical graph with repository-relative identities, deterministic UTF-8 JSON serialization, typed relationships, direct/normalized/derived provenance, validation, and representable cycles.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P1-002",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan command contract",
+      "statement": "Implement evidence-backed command intelligence with independent existence, source class, provenance, support, runtime availability, authorization, precedence, and exact negative classifications.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P1-003",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan authority and freshness contract",
+      "statement": "Implement ownership, architecture-source, and freshness intelligence with authority precedence, conflict/ambiguity handling, historical classification, and no invented owners or authority.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P1-004",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan dependency contract",
+      "statement": "Implement bounded dependency intelligence using only evidenced adapters, preserving direct/derived/external/generated/unresolved/unsupported distinctions, malformed failures, incomplete evidence, and cycles.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P1-005",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan changed-path and impact contract",
+      "statement": "Implement normalized changed-path and read-only impact intelligence that preserves uncertainty, conflicts, ownership, architecture, dependency, and generated provenance without authorizing effects.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P1-006",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan generated-dependent closure",
+      "statement": "Implement generated-artifact producer provenance and drift classification, rejecting hand-maintained generated claims and preserving missing, stale, and conflicting producer outcomes without mutation.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-P1-007",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan scope and effects boundary",
+      "statement": "Keep P1 stack-agnostic and read-only, never fabricate unsupported facts, never use machine-local identities, and do not instantiate P2\u2013P7 or execute D1/runtime/external effects.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-P1-008",
+      "implementation_paths": [
+        ".keel/lib/repository_intelligence.py",
+        ".keel/tests/test_repository_intelligence.py",
+        ".keel/tests/fixtures/repository-intelligence/**"
+      ],
+      "priority": "must",
+      "source": "P1 ExecPlan implementation acceptance boundary",
+      "statement": "Provide independent behavioral fixtures and expected-output oracles covering every required positive and negative P1 classification, and pass repository-native regressions and strict lifecycle verification.",
+      "type": "quality"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 8,
+    "required": 8,
+    "requirements_covered": 8,
+    "requirements_passing": 8,
+    "requirements_total": 8
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

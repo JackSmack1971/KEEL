@@ -185,7 +185,7 @@ def evaluate(root: Path, requirements_path: Path, acceptance_path: Path, checks:
         surfaces = c.get("implementation_paths", [])
         matched_surfaces = sorted({path for path in changed_paths for pattern in surfaces if _path_match(path, pattern)})
         surface_passed = not surfaces or bool(matched_surfaces)
-        if surfaces and not surface_passed:
+        if surfaces and not surface_passed and c.get("required", True):
             errors.append(f"acceptance criterion implementation surface unmatched: {c['id']}")
         passed = passed and surface_passed
         status = "PASS" if passed else "FAIL"

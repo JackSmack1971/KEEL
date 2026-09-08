@@ -1,0 +1,8 @@
+{
+  "none": "UNKNOWN",
+  "conflict": "CONFLICTING",
+  "descriptive": "VERIFIED",
+  "historical": "HISTORICAL/SUPERSEDED",
+  "stale": "STALE",
+  "overlap": "AMBIGUOUS"
+}
