@@ -1,0 +1,6 @@
+keel-change-id: verification-evidence-class-separation
+sealed-candidate: efdb61c475a43c3ae712c6f768ac7e79fb292f71
+landed-commit: efdb61c475a43c3ae712c6f768ac7e79fb292f71
+integration-relation: candidate-ancestor
+verification-class: LANDED_COMPLETION
+verified-content-digest: 7f703201d6d8a8b74b5ae9fb78037dfabd83f837c793fbe03213d8b66463de99
