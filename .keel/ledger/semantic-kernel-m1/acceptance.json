@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "AC-KERNEL-001",
+      "requirement_id": "REQ-KERNEL-001",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "statement": "Independent tests instantiate, serialize, and decode every canonical primitive and prove all five state dimensions are separate enum types.",
+      "required": true,
+      "policy": "all",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/tests/test_semantic_kernel.py"
+      ],
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "semantic-kernel-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-KERNEL-002",
+      "requirement_id": "REQ-KERNEL-002",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "statement": "Tests prove byte-identical canonical serialization and digests across reordered maps and strict rejection of unknown fields, wrong schemas, and unsupported versions.",
+      "required": true,
+      "policy": "all",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/tests/test_semantic_kernel.py"
+      ],
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "semantic-kernel-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-KERNEL-003",
+      "requirement_id": "REQ-KERNEL-003",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "statement": "Hostile tests reject malformed and duplicate identities, invalid repository resources, host-specific portable intent values, dangling references, and defective provenance while validation performs no I/O.",
+      "required": true,
+      "policy": "all",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/tests/test_semantic_kernel.py"
+      ],
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "semantic-kernel-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-KERNEL-004",
+      "requirement_id": "REQ-KERNEL-004",
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "statement": "All configured legacy P0/P1/P2/lifecycle checks pass unchanged alongside the new isolated semantic-kernel check.",
+      "required": true,
+      "policy": "all",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/config.json",
+        ".keel/lib/p0_contract.py"
+      ],
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "semantic-kernel-tests"
+        },
+        {
+          "provider": "command",
+          "check_id": "control-plane-doctor"
+        },
+        {
+          "provider": "command",
+          "check_id": "p0-contract-tests"
+        },
+        {
+          "provider": "command",
+          "check_id": "p1-repository-intelligence-tests"
+        },
+        {
+          "provider": "command",
+          "check_id": "p2-mission-v2-tests"
+        },
+        {
+          "provider": "command",
+          "check_id": "mission-work-graph-tests"
+        }
+      ]
+    }
+  ]
+}

@@ -4,11 +4,13 @@ import hashlib
 import json
 import shutil
 import subprocess
+import re
 from pathlib import Path
 
 
 PASS = "VERIFIED"
 UNVERIFIED_RUNTIME = "UNVERIFIED_RUNTIME"
+WINDOWS_ABSOLUTE_RE = re.compile(r"^[A-Za-z]:[\\/]")
 
 
 def _finding(status: str, reason: str, **details) -> dict:
@@ -30,7 +32,7 @@ def resolve_command(root: Path, declaration: dict | None = None, candidates: lis
         ok, reason = _literal_argv(argv)
         if not ok:
             return _finding("FAILED", reason, source="declared")
-        if any(Path(part).is_absolute() for part in argv):
+        if any(Path(part).is_absolute() or WINDOWS_ABSOLUTE_RE.match(part) for part in argv):
             return _finding("FAILED", "absolute creator-machine command path is not portable", source="declared", argv=argv)
         if declaration.get("requires_authorization") and not authorized:
             return _finding("BLOCKED", "command authorization is required", source="declared", argv=argv)
@@ -65,7 +67,7 @@ def resolve_command(root: Path, declaration: dict | None = None, candidates: lis
         if not ok or not provenance or candidate.get("repository_owned") is not True:
             unproven.append(candidate)
             continue
-        if any(Path(part).is_absolute() for part in argv):
+        if any(Path(part).is_absolute() or WINDOWS_ABSOLUTE_RE.match(part) for part in argv):
             unproven.append(candidate)
             continue
         available = shutil.which(argv[0]) is not None or (argv[0].startswith(".") and (root / argv[0]).is_file())

@@ -1,0 +1,10 @@
+{"details": {"base_commit": "cd5974e5ab5a4b4b9bb37c9fb77101bcf448555b", "mode": "standard"}, "event": "START", "result": "PASS", "ts": "2026-09-08T15:14:12+00:00"}
+{"event": "DISCUSS", "result": "PASS", "ts": "2026-09-08T15:14:32+00:00"}
+{"details": {"errors": ["requirement REQ-KERNEL-004 type must be one of ['architecture', 'behavior', 'documentation', 'migration', 'performance', 'quality', 'security']"]}, "event": "PLAN", "result": "FAIL", "ts": "2026-09-08T15:16:25+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-08T15:16:34+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/config.json", ".keel/lib/semantic_kernel.py", ".keel/tests/test_semantic_kernel.py", "ARCHITECTURE.md", "docs/exec-plans/active/semantic-kernel-m1.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-08T15:23:10+00:00"}
+{"details": {"content_digest": "638b2980750e0d095f8ee0eec2d6a8c15c22bc383cb159e3bd0c0b8ef75e8d4a", "errors": ["verification command failed: p0-contract-tests exit=1", "acceptance criterion failed: AC-KERNEL-004"]}, "event": "VERIFY", "result": "FAIL", "ts": "2026-09-08T15:23:10+00:00"}
+{"event": "REPLAN", "result": "PASS", "ts": "2026-09-08T15:23:43+00:00"}
+{"event": "PLAN", "result": "PASS", "ts": "2026-09-08T15:23:46+00:00"}
+{"details": {"changed_paths": [".control-plane/bootstrap-manifest.json", ".keel/config.json", ".keel/lib/p0_contract.py", ".keel/lib/semantic_kernel.py", ".keel/tests/test_semantic_kernel.py", "ARCHITECTURE.md", "docs/exec-plans/active/semantic-kernel-m1.md"], "scope_errors": []}, "event": "EXECUTE", "result": "PASS", "ts": "2026-09-08T15:24:22+00:00"}
+{"details": {"content_digest": "e2baab7d7359aec64a87e74c20e4d606c098dbd6bf350a94a55b6ff3f15693f3", "errors": []}, "event": "VERIFY", "result": "PASS", "ts": "2026-09-08T15:24:22+00:00"}

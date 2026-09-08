@@ -1,0 +1,10 @@
+{
+  "base_commit": "cd5974e5ab5a4b4b9bb37c9fb77101bcf448555b",
+  "change_id": "semantic-kernel-m1",
+  "created_at": "2026-09-08T15:14:12+00:00",
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema_version": 1,
+  "updated_at": "2026-09-08T15:24:22+00:00",
+  "verified_content_digest": "e2baab7d7359aec64a87e74c20e4d606c098dbd6bf350a94a55b6ff3f15693f3"
+}
