@@ -1,0 +1,78 @@
+{
+  "ended_at": "2026-09-08T23:30:49.242952+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-9"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/smoke_scheduler.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 326,
+      "excerpt": "{\"external_effects\": false, \"isolated_workunits\": 2, \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/smoke_scheduler.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "d941c16ebeb7eca58cd48bf605a860611879e2abec80351a89f4c9f9b1cd8f50",
+  "receipt_id": "d941c16ebeb7eca58cd48bf605a860611879e2abec80351a89f4c9f9b1cd8f50",
+  "record_digest": "aa0d3ca9994400c313d19451e7102e257775110c6fa907c5d924163e00e221af",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:30:48.916484+00:00",
+  "subject": {
+    "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/change_graph.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_p0_contract.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/desired-state-reconciler.md"
+    ],
+    "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+    "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "RUNTIME_OBSERVED",
+    "id": "scheduler-smoke",
+    "provenance": ".keel/tests/smoke_scheduler.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

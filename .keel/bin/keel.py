@@ -15,6 +15,7 @@ import schema_migrations as migrations
 import telemetry
 import p0_contract
 import canonical_ledger
+import scheduler
 
 
 def main() -> int:
@@ -27,6 +28,7 @@ def main() -> int:
     p = sub.add_parser("reconcile"); p.add_argument("--change")
     sub.add_parser("contracts")
     p = sub.add_parser("change-graph"); p.add_argument("action", choices=["validate", "frontier", "status", "normalize", "serialize"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path)
+    p = sub.add_parser("scheduler"); p.add_argument("action", choices=["frontier", "status"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path); p.add_argument("--max-concurrency", type=int, default=1)
     sub.add_parser("facts")
     sub.add_parser("compat")
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true"); p.add_argument("--plan", type=Path)
@@ -85,6 +87,11 @@ def main() -> int:
             except (cg.GraphError, ValueError, TypeError) as exc:
                 result = {"status": "INVALID", "errors": [str(exc)]}
             print(json.dumps(result, indent=2)); return 0 if result.get("status") not in {"FAIL", "INVALID"} else 1
+        if args.cmd == "scheduler":
+            graph = cg.normalize(cg.load(args.path.resolve()))
+            persisted = scheduler.StateStore(args.state.resolve()).load() if args.state else None
+            result = scheduler.frontier_report(graph, persisted, args.max_concurrency)
+            print(json.dumps(result, indent=2)); return 0 if result.get("status") != "INVALID" else 1
         if args.cmd == "facts":
             print(fact_graph.build(root).serialize(), end=""); return 0
         if args.cmd == "ledger":

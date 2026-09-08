@@ -16,6 +16,8 @@ landed tree. SHIP eligibility is not external permission.
 ## Canonical model queries
 
 - `change-graph validate|frontier|status|normalize|serialize <path> [--state <path>]`
+- `scheduler frontier|status <path> [--state <path>] [--max-concurrency N]` — read-only
+  bounded scheduler frontier projection; dispatch requires a library adapter.
 - `facts` — serialize the read-only canonical FactGraph.
 - `discover` — evidence-backed capability candidates.
 - `effects`, `telemetry` — read-only boundary/evidence queries.

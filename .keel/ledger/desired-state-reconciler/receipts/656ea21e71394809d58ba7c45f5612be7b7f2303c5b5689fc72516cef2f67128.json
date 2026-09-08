@@ -1,0 +1,75 @@
+{
+  "ended_at": "2026-09-08T23:29:01.495586+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "a66e59923305dfdca9f6f4e7b702b69211feb2183ddecb5ebbc561cd18096010",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "compat"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 386,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "656ea21e71394809d58ba7c45f5612be7b7f2303c5b5689fc72516cef2f67128",
+  "receipt_id": "656ea21e71394809d58ba7c45f5612be7b7f2303c5b5689fc72516cef2f67128",
+  "record_digest": "8f0da75c264d09f38e4b567713a413214618915d80a4aa7edb5605e8b6c23820",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:29:01.108629+00:00",
+  "subject": {
+    "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/change_graph.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/desired-state-reconciler.md"
+    ],
+    "content_digest": "2cd4e2cdeef6dbb602055eab23a9910e45a723b9d76a15ab5045859fb06dea64",
+    "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "canonical-config-portability",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

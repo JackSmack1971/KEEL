@@ -1,5 +1,4 @@
 import json
-import shutil
 import sys
 import subprocess
 import tempfile
@@ -72,11 +71,7 @@ with tempfile.TemporaryDirectory() as directory:
 
 with tempfile.TemporaryDirectory() as directory:
     root = Path(directory)
-    (root / ".keel/templates").mkdir(parents=True)
-    for template in (ROOT / ".keel/templates").iterdir():
-        shutil.copyfile(template, root / ".keel/templates" / template.name)
     subprocess.run(["git", "init", "-q"], cwd=root, check=True)
-    subprocess.run(["git", "add", ".keel/templates"], cwd=root, check=True)
     subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.com", "commit", "--allow-empty", "-qm", "baseline"], cwd=root, check=True)
     k.start_change(root, "line-ending-regression", "standard")
     ledger = root / ".keel/ledger/line-ending-regression"

@@ -1,0 +1,84 @@
+{
+  "ended_at": "2026-09-08T23:30:49.623536+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-1",
+    "ER-REQ-2",
+    "ER-REQ-3",
+    "ER-REQ-4",
+    "ER-REQ-5",
+    "ER-REQ-6",
+    "ER-REQ-7"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_scheduler.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 376,
+      "excerpt": "{\"checks\": [\"frontier\", \"dependencies\", \"resources\", \"bounded-concurrency\", \"isolation\", \"stale\", \"resume\", \"duplicate-dispatch\", \"recovery\", \"adapter-boundary\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "0617c7becc4452b6171f7068bf760195eb8f54b93025c86d4f3994a9537ab764",
+  "receipt_id": "0617c7becc4452b6171f7068bf760195eb8f54b93025c86d4f3994a9537ab764",
+  "record_digest": "a9fbaed5d74e2cb212ed0c1a9734ca842547d1661bb47de9e0719d6e8f68f1f1",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:30:49.246695+00:00",
+  "subject": {
+    "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/change_graph.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_p0_contract.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/desired-state-reconciler.md"
+    ],
+    "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+    "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "scheduler-tests",
+    "provenance": ".keel/tests/test_scheduler.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

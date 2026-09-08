@@ -1,0 +1,134 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-1",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "The scheduler reconciles desired graph state into a deterministic legal frontier without lifecycle choreography."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-2",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Hard, ordering-only, artifact, review, verification, and resource constraints are enforced with bounded shared/exclusive concurrency."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-3",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "One primary writer per write worktree and persistent isolated WorkUnit workspace identity are enforced."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-4",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "Stale work is detected and resume is idempotent with duplicate dispatch prevented."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-5",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Failures are classified and recovery retries are bounded, strategy/evidence aware, and escalated when policy requires."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-6",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "Dispatch remains an adapter boundary and no automatic final landing or external effect is performed."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "scheduler-smoke",
+          "provider": "command"
+        }
+      ],
+      "id": "AC-7",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Deterministic simulated-adapter scheduler tests and a repository-local isolated progression smoke path pass."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "change-graph-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "runtime-authorization-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "worktree-lifecycle-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-8",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-8",
+      "statement": "Existing KEEL graph, lifecycle, authorization, worktree, and full regression checks remain passing."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-smoke",
+          "provider": "command"
+        }
+      ],
+      "id": "AC-9",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-9",
+      "statement": "The repository-local smoke path observes isolated WorkUnit progression across persisted resume without external effects."
+    }
+  ],
+  "schema_version": 1
+}

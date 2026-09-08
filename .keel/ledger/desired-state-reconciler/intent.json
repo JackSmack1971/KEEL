@@ -1,0 +1,75 @@
+{
+  "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+  "change_id": "desired-state-reconciler",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {"id":"ER-1","requirement_id":"REQ-1","statement":"The scheduler reconciles desired graph state into a deterministic legal frontier without lifecycle choreography.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"ER-2","requirement_id":"REQ-2","statement":"Hard, ordering-only, artifact, review, verification, and resource constraints are enforced with bounded shared/exclusive concurrency.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"ER-3","requirement_id":"REQ-3","statement":"One primary writer per write worktree and persistent isolated WorkUnit workspace identity are enforced.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"ER-4","requirement_id":"REQ-4","statement":"Stale work is detected and resume is idempotent with duplicate dispatch prevented.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"ER-5","requirement_id":"REQ-5","statement":"Failures are classified and recovery retries are bounded, strategy/evidence aware, and escalated when policy requires.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"ER-6","requirement_id":"REQ-6","statement":"Dispatch remains an adapter boundary and no automatic final landing or external effect is performed.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"ER-7","requirement_id":"REQ-7","statement":"Deterministic simulated-adapter scheduler tests and a repository-local isolated progression smoke path pass.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"scheduler-tests"},{"provider":"command","check_id":"scheduler-smoke"}]},
+    {"id":"ER-8","requirement_id":"REQ-8","statement":"Existing KEEL graph, lifecycle, authorization, worktree, and full regression checks remain passing.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"change-graph-tests"},{"provider":"unit_test","check_id":"runtime-authorization-tests"},{"provider":"unit_test","check_id":"worktree-lifecycle-tests"}]},
+    {"id":"ER-9","requirement_id":"REQ-9","statement":"The repository-local smoke path observes isolated WorkUnit progression across persisted resume without external effects.","required":true,"policy":"all","evidence":[{"provider":"command","check_id":"scheduler-smoke"}]}
+  ],
+  "mode": "standard",
+  "non_goals": [
+    "Do not implement a second generic agent runtime; Codex/runtime adapters remain the worker harness boundary.",
+    "Do not automatically land, merge, push, release, deploy, or perform external effects.",
+    "Do not replace canonical intent, ChangeGraph, evidence receipts, RuntimeProfile, CapabilityGrants, or existing safe integration semantics.",
+    "Do not add unbounded retries, speculative providers, or a fixed lifecycle choreography as orchestration authority."
+  ],
+  "objective": "Implement desired-state reconciliation and bounded WorkUnit scheduling",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {"id":"REQ-1","source":"user","statement":"Implement a desired-state control loop that observes actual state, compares it with desired state, derives unmet conditions, computes a legal/runnable frontier, dispatches bounded actions through adapters, observes/classifies results, and can reconcile again without fixed lifecycle choreography."},
+    {"id":"REQ-2","source":"user","statement":"Support hard dependency edges, supported ordering-only constraints, artifact/data dependencies, review/verification dependencies, resource claims, shared versus exclusive resources, bounded concurrency, one primary writer per write worktree, and safe read-heavy concurrency."},
+    {"id":"REQ-3","source":"user","statement":"Persist isolated WorkUnit/workspace identity and enforce workspace ownership so work can resume idempotently and write worktrees have one primary writer."},
+    {"id":"REQ-4","source":"user","statement":"Detect stale work and prevent duplicate dispatch, including when resuming persisted scheduler state."},
+    {"id":"REQ-5","source":"user","statement":"Classify failures using the requested explicit classifications and apply bounded recovery; unchanged evidence and strategy must not cause infinite retries, and policy blockers must escalate."},
+    {"id":"REQ-6","source":"user","statement":"Keep Codex as the worker harness and do not implement automatic final landing beyond existing safe integration semantics."},
+    {"id":"REQ-7","source":"user","statement":"Provide deterministic simulated-adapter scheduler tests and at least one repository-local smoke path proving isolated WorkUnit progression without external effects."},
+    {"id":"REQ-8","source":"user","statement":"Use existing KEEL governance and preserve canonical semantic, repository, evidence, runtime authorization, ledger, verification, commit, seal, integration, and anchor boundaries."},
+    {"id":"REQ-9","source":"user","statement":"Provide repository-local smoke evidence that isolated WorkUnits progress and resume without external effects."}
+  ],
+  "risk": {
+    "consequences": [
+      "Scheduler mistakes could duplicate work, violate write isolation, or suppress runnable work.",
+      "Incorrect recovery classification could repeat failed actions or conceal authorization and specification blockers.",
+      "The control-plane boundary must remain compatible with existing canonical lifecycle, evidence, and worktree guarantees."
+    ],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": false,
+    "requires_exec_plan": true,
+    "review": "Independent review must inspect scheduler invariants, adapter boundaries, persistence/isolation behavior, failure recovery, duplicate-dispatch prevention, and the complete deterministic regression evidence.",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    ".keel/lib/scheduler.py",
+    ".keel/lib/change_graph.py",
+    ".keel/tests/test_scheduler.py",
+    ".keel/tests/test_p0_contract.py",
+    ".keel/tests/smoke_scheduler.py",
+    ".keel/bin/keel.py",
+    ".keel/config.json",
+    ".keel/bootstrap-manifest.json",
+    "ARCHITECTURE.md",
+    "docs/control-plane/ORCHESTRATION.md",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/VERIFICATION.md"
+    ,"docs/exec-plans/active/desired-state-reconciler.md"
+  ],
+  "work": {
+    "edges": [],
+    "graph_references": ["docs/exec-plans/active/desired-state-reconciler.md"],
+    "units": [{"id":"WU-SCHEDULER","objective":"Implement and verify the desired-state reconciler, bounded scheduler, simulated adapters, and isolated repository-local smoke path","scope_reference":"intent.scope"}]
+  }
+}

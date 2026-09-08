@@ -1,0 +1,51 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "source": "user",
+      "statement": "Implement a desired-state control loop that observes actual state, compares it with desired state, derives unmet conditions, computes a legal/runnable frontier, dispatches bounded actions through adapters, observes/classifies results, and can reconcile again without fixed lifecycle choreography."
+    },
+    {
+      "id": "REQ-2",
+      "source": "user",
+      "statement": "Support hard dependency edges, supported ordering-only constraints, artifact/data dependencies, review/verification dependencies, resource claims, shared versus exclusive resources, bounded concurrency, one primary writer per write worktree, and safe read-heavy concurrency."
+    },
+    {
+      "id": "REQ-3",
+      "source": "user",
+      "statement": "Persist isolated WorkUnit/workspace identity and enforce workspace ownership so work can resume idempotently and write worktrees have one primary writer."
+    },
+    {
+      "id": "REQ-4",
+      "source": "user",
+      "statement": "Detect stale work and prevent duplicate dispatch, including when resuming persisted scheduler state."
+    },
+    {
+      "id": "REQ-5",
+      "source": "user",
+      "statement": "Classify failures using the requested explicit classifications and apply bounded recovery; unchanged evidence and strategy must not cause infinite retries, and policy blockers must escalate."
+    },
+    {
+      "id": "REQ-6",
+      "source": "user",
+      "statement": "Keep Codex as the worker harness and do not implement automatic final landing beyond existing safe integration semantics."
+    },
+    {
+      "id": "REQ-7",
+      "source": "user",
+      "statement": "Provide deterministic simulated-adapter scheduler tests and at least one repository-local smoke path proving isolated WorkUnit progression without external effects."
+    },
+    {
+      "id": "REQ-8",
+      "source": "user",
+      "statement": "Use existing KEEL governance and preserve canonical semantic, repository, evidence, runtime authorization, ledger, verification, commit, seal, integration, and anchor boundaries."
+    },
+    {
+      "id": "REQ-9",
+      "source": "user",
+      "statement": "Provide repository-local smoke evidence that isolated WorkUnits progress and resume without external effects."
+    }
+  ],
+  "schema_version": 1
+}

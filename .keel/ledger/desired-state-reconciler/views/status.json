@@ -1,0 +1,12 @@
+{
+  "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+  "change_id": "desired-state-reconciler",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "6169ca60d24573cf2f654ba70a369555c4b2cc82080b3656fd7ce3ce67dc5dcf",
+    "last_event_digest": "c70bd0bdffba502ac25663a833e50811897f9bc866cab62bb5803ea32b65ad30"
+  }
+}

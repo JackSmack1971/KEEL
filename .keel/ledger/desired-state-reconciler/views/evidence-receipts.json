@@ -1,0 +1,624 @@
+{
+  "generated": true,
+  "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+  "receipts": [
+    {
+      "ended_at": "2026-09-08T23:30:45.904589+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 358,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "f994b28e7efd5d4e41f8fc9dd425929007b2b81b9c09dc0fac29d091564c72e8",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:45.545588+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:46.588955+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-8"
+      ],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_change_graph.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 562,
+          "excerpt": "{\"checks\": [\"authority\", \"identities\", \"endpoints\", \"duplicate-edges\", \"self-dependency\", \"cycles\", \"resources\", \"requirements\", \"evidence\", \"provenance\", \"serialization\", \"frontier\", \"cli\"], \"status\": \"PASS\"}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_change_graph.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "c913568985c1c7ed15175964816bb2d64ff3262e7385bbed80b409a31cf89810",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:46.026781+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "change-graph-tests",
+        "provenance": ".keel/tests/test_change_graph.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:46.693105+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 100,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_compatibility_retirement.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "a173ca96b01d64fd5e5c6356b824f79ace1e6ce5363333060733c2dd4a1e131b",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:46.592146+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "compatibility-retirement-tests",
+        "provenance": ".keel/tests/test_compatibility_retirement.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:47.113639+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 417,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "bf64bbaf73d9ac81f4b5d979992203d5d86b31be552a4aea6188b5e90e67fcc2",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:46.696282+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:47.650737+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 534,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"ef7867487a00cba2325e2744855e649d340143ce4284a35c1d0756a702c0ff5d\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "da146fe34f5b8a56cd27a4c47b14107fe657a2dd3054f466efb3c6cdef732bc3",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:47.116120+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:48.912984+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 1255,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "2a843fcada61f0040f987c0dbda2dc6659edc2f0ba50f18b23a7c2f55a3d7646",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:47.657909+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:49.242952+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-9"
+      ],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/smoke_scheduler.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 326,
+          "excerpt": "{\"external_effects\": false, \"isolated_workunits\": 2, \"status\": \"PASS\"}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/smoke_scheduler.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "d941c16ebeb7eca58cd48bf605a860611879e2abec80351a89f4c9f9b1cd8f50",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:48.916484+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "RUNTIME_OBSERVED",
+        "id": "scheduler-smoke",
+        "provenance": ".keel/tests/smoke_scheduler.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-08T23:30:49.623536+00:00",
+      "environment": {
+        "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+        "executable": "python3.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-1",
+        "ER-REQ-2",
+        "ER-REQ-3",
+        "ER-REQ-4",
+        "ER-REQ-5",
+        "ER-REQ-6",
+        "ER-REQ-7"
+      ],
+      "intent_digest": "5c0adcf14ad5008998cc4dd7ba570911ce9c2b84681949a4ee4a7ab53d56d9cd",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 376,
+          "excerpt": "{\"checks\": [\"frontier\", \"dependencies\", \"resources\", \"bounded-concurrency\", \"isolation\", \"stale\", \"resume\", \"duplicate-dispatch\", \"recovery\", \"adapter-boundary\"], \"status\": \"PASS\"}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_scheduler.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "0617c7becc4452b6171f7068bf760195eb8f54b93025c86d4f3994a9537ab764",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-08T23:30:49.246695+00:00",
+      "subject": {
+        "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/config.json",
+          ".keel/lib/change_graph.py",
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/tests/test_p0_contract.py",
+          ".keel/tests/test_scheduler.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/COMMANDS.md",
+          "docs/control-plane/ORCHESTRATION.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/desired-state-reconciler.md"
+        ],
+        "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+        "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "scheduler-tests",
+        "provenance": ".keel/tests/test_scheduler.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/change_graph.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_p0_contract.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/desired-state-reconciler.md"
+    ],
+    "content_digest": "8488650e090967dde0656576a7225fe76f058a65d59c2d4f43de5e3424b6da06",
+    "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "kind": "git-worktree"
+  }
+}

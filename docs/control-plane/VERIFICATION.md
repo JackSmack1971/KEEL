@@ -6,6 +6,11 @@ A change is not complete because an edit or command succeeded. Verification auth
 
 A green command suite is insufficient while any required property is unestablished.
 
+Scheduler changes additionally require deterministic simulated-adapter evidence
+for frontier legality, dependency/resource/workspace isolation, bounded recovery,
+stale/resume behavior, and duplicate-dispatch prevention, plus a repository-local
+smoke path that exercises isolated WorkUnit progression without external effects.
+
 ## Authority model
 
 Evidence strength is ordered: `ASSERTED < INSPECTED < TESTED < RUNTIME_OBSERVED < INDEPENDENTLY_REVIEWED < FORMALLY_VERIFIED`. A requirement declares `minimum_evidence_authority`. A verifier and its receipt cannot establish a stronger or unrelated property than its registry declaration permits. Unsupported, weak, stale, mismatched, or missing evidence is `INCONCLUSIVE`, never an optimistic pass.

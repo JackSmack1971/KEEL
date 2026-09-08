@@ -1321,6 +1321,20 @@
         ]
       },
       "version": "1"
+    },
+    {
+      "applicability": {"paths": [".keel/lib/scheduler.py", ".keel/lib/change_graph.py", ".keel/tests/test_scheduler.py", ".keel/tests/smoke_scheduler.py", ".keel/bin/keel.py", "ARCHITECTURE.md", "docs/control-plane/**"], "risk_levels": ["high"]},
+      "authority": "TESTED", "id": "scheduler-tests", "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_scheduler.py", "provider": "unit_test",
+      "runtime": {"argv": ["python", "-B", ".keel/tests/test_scheduler.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "architecture", "security"]}, "version": "1"
+    },
+    {
+      "applicability": {"paths": [".keel/lib/scheduler.py", ".keel/tests/smoke_scheduler.py"], "risk_levels": ["high"]},
+      "authority": "RUNTIME_OBSERVED", "id": "scheduler-smoke", "mandatory_kernel": false,
+      "provenance": ".keel/tests/smoke_scheduler.py", "provider": "command",
+      "runtime": {"argv": ["python", "-B", ".keel/tests/smoke_scheduler.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["command", "unit_test"], "requirement_types": ["behavior", "quality", "architecture"]}, "version": "1"
     }
   ]
 }

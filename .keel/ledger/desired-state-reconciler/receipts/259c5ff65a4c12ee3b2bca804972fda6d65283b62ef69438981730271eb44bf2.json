@@ -1,0 +1,75 @@
+{
+  "ended_at": "2026-09-08T23:27:58.077569+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "27c0efb5641de080546783ceb6bd30e67f84971da3f613974371e22bdb749fa3",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_p0_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 527,
+      "excerpt": "Traceback (most recent call last):\n  File \"G:\\KEEL\\.keel\\tests\\test_p0_contract.py\", line 76, in <module>\n    for template in (ROOT / \".keel/templates\").iterdir():\n                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\click\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\Lib\\pathlib\\__init__.py\", line 836, in iterdir\n    with os.scandir(root_dir) as scandir_it:\n         ~~~~~~~~~~^^^^^^^^^^\nFileNotFoundError: [WinError 3] The system cannot find the path specified: 'G:\\\\KEEL\\\\.keel\\\\templates'",
+      "exit_code": 1,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "259c5ff65a4c12ee3b2bca804972fda6d65283b62ef69438981730271eb44bf2",
+  "receipt_id": "259c5ff65a4c12ee3b2bca804972fda6d65283b62ef69438981730271eb44bf2",
+  "record_digest": "298c6f50103cff2780da59e4d31ca6348fffdc72792884434bba4daa123bc778",
+  "result": "FAIL",
+  "schema_version": 1,
+  "started_at": "2026-09-08T23:27:57.550397+00:00",
+  "subject": {
+    "base_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/change_graph.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/desired-state-reconciler.md"
+    ],
+    "content_digest": "237582928a4f4be60e306606e8244cd01289d9fdf82b765458d4eb36a30a3af2",
+    "head_commit": "3fe02f5455ff249ff51bd044d8d2a95bce073d9d",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "p0-contract-tests",
+    "provenance": ".keel/tests/test_p0_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

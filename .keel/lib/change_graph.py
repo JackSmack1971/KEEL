@@ -20,7 +20,7 @@ SCHEMA_ID = "keel.change-graph"
 SCHEMA_VERSION = 1
 IDENTITY = "keel.change-graph/v1"
 GRAPH_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,127}$")
-EDGE_TYPES = {"HARD_DEPENDENCY", "IMPLEMENTS", "REQUIRES_EVIDENCE", "REQUESTS_EFFECT"}
+EDGE_TYPES = {"HARD_DEPENDENCY", "ORDERING_ONLY", "ARTIFACT", "REQUIRES_REVIEW", "REQUIRES_VERIFICATION", "IMPLEMENTS", "REQUIRES_EVIDENCE", "REQUESTS_EFFECT"}
 PLAN_KINDS = {"requirement", "work-unit", "edge", "effect-request", "evidence-requirement"}
 CLAIM_MODES = {"SHARED", "EXCLUSIVE"}
 
@@ -120,7 +120,7 @@ def validate(document: Any) -> list[str]:
     hard: dict[str, set[str]] = {identity: set() for identity in work_ids}
     for record in records:
         if isinstance(record, sk.WorkUnit):
-            allowed = {"requirements", "scope_claims", "resource_claims", "effect_requests", "evidence_requirements", "risk_policy", "retry_policy", "recovery_policy", "uncertainty"}
+            allowed = {"requirements", "scope_claims", "resource_claims", "effect_requests", "evidence_requirements", "risk_policy", "retry_policy", "recovery_policy", "workspace_id", "write_worktree", "artifacts", "uncertainty"}
             unknown = set(record.attributes) - allowed
             if unknown: errors.append(f"{record.identity}: prohibited or unknown work-local fields: {', '.join(sorted(unknown))}")
             for field, kind in (("requirements", "requirement"), ("effect_requests", "effect-request"), ("evidence_requirements", "evidence-requirement")):
