@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "change_type": "implementation",
+  "requirements": [
+    {"id":"REQ-GRAPH-001","type":"architecture","priority":"must","statement":"Make one canonical ChangeGraph authoritative for planning, with WorkUnit-local intent and typed Edge records as the only dependency authority.","source":"User goal; KEEL-KERNEL-REDESIGN-v1 sections 4 and 6","implementation_paths":[".keel/lib/change_graph.py",".keel/tests/test_change_graph.py"]},
+    {"id":"REQ-GRAPH-002","type":"behavior","priority":"must","statement":"Deterministically validate graph/node/edge identities, endpoints, duplicate and self hard dependencies, hard cycles, resource identities, requirements, evidence requirements, provenance, and canonical serialization without rejecting resource conflicts.","source":"User goal","implementation_paths":[".keel/lib/change_graph.py",".keel/tests/test_change_graph.py"]},
+    {"id":"REQ-GRAPH-003","type":"migration","priority":"must","statement":"Read supported mission v1/v2 only through explicit deterministic adapters into ChangeGraph while preserving uncertainty and never inventing grants, runtime observations, scheduler decisions, lifecycle state, or personas.","source":"User goal; KEEL-KERNEL-REDESIGN-v1 section 10","implementation_paths":[".keel/lib/mission_graph.py",".keel/lib/mission_v2.py",".keel/tests/test_mission_v2.py",".keel/tests/test_mission_work_graph.py"]},
+    {"id":"REQ-GRAPH-004","type":"behavior","priority":"must","statement":"Expose stable mission/change-graph validation, normalization, serialization, and read-only frontier interfaces; keep only required migration aliases and remove dispatch/scheduler/persona projections from mission-facing routes.","source":"User goal","implementation_paths":[".keel/bin/keel.py",".keel/lib/topology_router.py",".keel/tests/test_change_graph.py",".keel/tests/test_topology_routing.py","docs/control-plane/KEEL.md","docs/control-plane/COMMANDS.md"]}
+  ]
+}

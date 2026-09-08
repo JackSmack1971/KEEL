@@ -1,0 +1,276 @@
+{
+  "change_type": "implementation",
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "change-graph-tests",
+          "detail": "provider=unit_test check=change-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-GRAPH-001",
+      "implementation_matches": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-GRAPH-001",
+      "statement": "Canonical graph tests prove WorkUnit locality and edge-only dependency authority.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "change-graph-tests",
+          "detail": "provider=unit_test check=change-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-GRAPH-002",
+      "implementation_matches": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-GRAPH-002",
+      "statement": "Hostile validation and deterministic round-trip tests cover every requested graph invariant including non-invalidating resource conflicts.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "p2-mission-v2-tests",
+          "detail": "provider=unit_test check=p2-mission-v2-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "mission-work-graph-tests",
+          "detail": "provider=unit_test check=mission-work-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-GRAPH-003",
+      "implementation_matches": [
+        ".keel/lib/mission_graph.py",
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_graph.py",
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-GRAPH-003",
+      "statement": "Minimal v1/v2 fixtures normalize deterministically with provenance and uncertainty and contain no invented grants, observations, dispatch, personas, or lifecycle state.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "change-graph-tests",
+          "detail": "provider=unit_test check=change-graph-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "topology-routing-tests",
+          "detail": "provider=unit_test check=topology-routing-tests exit=0",
+          "passed": true,
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "control-plane-doctor",
+          "detail": "check=control-plane-doctor exit=0",
+          "passed": true,
+          "provider": "command"
+        },
+        {
+          "check_id": "semantic-kernel-tests",
+          "detail": "check=semantic-kernel-tests exit=0",
+          "passed": true,
+          "provider": "command"
+        }
+      ],
+      "evidence_class": "IMPLEMENTATION_ACCEPTANCE",
+      "evidence_type": "automated-test",
+      "id": "AC-GRAPH-004",
+      "implementation_matches": [
+        ".keel/bin/keel.py",
+        ".keel/config.json",
+        ".keel/lib/topology_router.py",
+        ".keel/tests/test_change_graph.py",
+        ".keel/tests/test_topology_routing.py"
+      ],
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/topology_router.py",
+        ".keel/tests/test_change_graph.py",
+        ".keel/tests/test_topology_routing.py",
+        ".keel/config.json"
+      ],
+      "implementation_surface_passed": true,
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-GRAPH-004",
+      "statement": "CLI contract tests prove stable canonical surfaces, compatibility aliases, and absence of dispatch, scheduler, or persona projection while the full canonical suite passes.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "implementation_status": "PASS",
+  "planning_status": "FAIL",
+  "requirement_coverage": [
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-GRAPH-001"
+      ],
+      "implementation_paths": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-GRAPH-001",
+      "type": "architecture"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-GRAPH-002"
+      ],
+      "implementation_paths": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-GRAPH-002",
+      "type": "behavior"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-GRAPH-003"
+      ],
+      "implementation_paths": [
+        ".keel/lib/mission_graph.py",
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-GRAPH-003",
+      "type": "migration"
+    },
+    {
+      "criterion_count": 1,
+      "criterion_ids": [
+        "AC-GRAPH-004"
+      ],
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/topology_router.py",
+        ".keel/tests/test_change_graph.py",
+        ".keel/tests/test_topology_routing.py",
+        "docs/control-plane/KEEL.md",
+        "docs/control-plane/COMMANDS.md"
+      ],
+      "passed": true,
+      "priority": "must",
+      "requirement_id": "REQ-GRAPH-004",
+      "type": "behavior"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-GRAPH-001",
+      "implementation_paths": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "priority": "must",
+      "source": "User goal; KEEL-KERNEL-REDESIGN-v1 sections 4 and 6",
+      "statement": "Make one canonical ChangeGraph authoritative for planning, with WorkUnit-local intent and typed Edge records as the only dependency authority.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-GRAPH-002",
+      "implementation_paths": [
+        ".keel/lib/change_graph.py",
+        ".keel/tests/test_change_graph.py"
+      ],
+      "priority": "must",
+      "source": "User goal",
+      "statement": "Deterministically validate graph/node/edge identities, endpoints, duplicate and self hard dependencies, hard cycles, resource identities, requirements, evidence requirements, provenance, and canonical serialization without rejecting resource conflicts.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-GRAPH-003",
+      "implementation_paths": [
+        ".keel/lib/mission_graph.py",
+        ".keel/lib/mission_v2.py",
+        ".keel/tests/test_mission_v2.py",
+        ".keel/tests/test_mission_work_graph.py"
+      ],
+      "priority": "must",
+      "source": "User goal; KEEL-KERNEL-REDESIGN-v1 section 10",
+      "statement": "Read supported mission v1/v2 only through explicit deterministic adapters into ChangeGraph while preserving uncertainty and never inventing grants, runtime observations, scheduler decisions, lifecycle state, or personas.",
+      "type": "migration"
+    },
+    {
+      "id": "REQ-GRAPH-004",
+      "implementation_paths": [
+        ".keel/bin/keel.py",
+        ".keel/lib/topology_router.py",
+        ".keel/tests/test_change_graph.py",
+        ".keel/tests/test_topology_routing.py",
+        "docs/control-plane/KEEL.md",
+        "docs/control-plane/COMMANDS.md"
+      ],
+      "priority": "must",
+      "source": "User goal",
+      "statement": "Expose stable mission/change-graph validation, normalization, serialization, and read-only frontier interfaces; keep only required migration aliases and remove dispatch/scheduler/persona projections from mission-facing routes.",
+      "type": "behavior"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 4,
+    "required": 4,
+    "requirements_covered": 4,
+    "requirements_passing": 4,
+    "requirements_total": 4
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}
