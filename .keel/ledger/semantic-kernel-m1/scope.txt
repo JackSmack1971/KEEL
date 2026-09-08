@@ -1,0 +1,7 @@
+.keel/lib/semantic_kernel.py
+.keel/lib/p0_contract.py
+.keel/tests/test_semantic_kernel.py
+.keel/config.json
+.control-plane/bootstrap-manifest.json
+ARCHITECTURE.md
+docs/exec-plans/active/semantic-kernel-m1.md

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-KERNEL-001",
+      "type": "architecture",
+      "priority": "must",
+      "statement": "Implement exactly the eleven canonical primitive kinds with explicit schema identity/version, canonical identity, and orthogonal validity, knowledge, support, readiness, and lifecycle dimensions.",
+      "source": "KEEL-KERNEL-REDESIGN-v1 sections 4-5; user request",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/tests/test_semantic_kernel.py"
+      ]
+    },
+    {
+      "id": "REQ-KERNEL-002",
+      "type": "quality",
+      "priority": "must",
+      "statement": "Provide deterministic UTF-8 canonical JSON and stable SHA-256 content digests independent of mapping insertion order, with strict unknown-field rejection for authoritative schemas.",
+      "source": "KEEL-KERNEL-REDESIGN-v1 sections 4, 8, 10; user request",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/tests/test_semantic_kernel.py"
+      ]
+    },
+    {
+      "id": "REQ-KERNEL-003",
+      "type": "behavior",
+      "priority": "must",
+      "statement": "Validate portable canonical identities, repository-relative path/resource identities, references, duplicate IDs, and provenance that distinguishes direct observation, normalization, derivation, and runtime observation without filesystem or external effects.",
+      "source": "KEEL-KERNEL-REDESIGN-v1 sections 4, 6, 8-10; user request",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/tests/test_semantic_kernel.py"
+      ]
+    },
+    {
+      "id": "REQ-KERNEL-004",
+      "type": "migration",
+      "priority": "must",
+      "statement": "Keep existing P0/P1/P2 and lifecycle public behavior unchanged by exposing the model only as an isolated library with no default writer or consumer migration.",
+      "source": "KEEL-KERNEL-REDESIGN-v1 sections 10-11; user request",
+      "implementation_paths": [
+        ".keel/lib/semantic_kernel.py",
+        ".keel/config.json",
+        ".keel/lib/p0_contract.py"
+      ]
+    }
+  ]
+}

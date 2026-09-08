@@ -396,6 +396,18 @@
       "id": "p2-mission-v2-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_semantic_kernel.py"
+      ],
+      "cwd": ".",
+      "id": "semantic-kernel-tests",
+      "provenance": ".keel/tests/test_semantic_kernel.py",
+      "required": true,
+      "timeout_sec": 120
     }
   ]
 }

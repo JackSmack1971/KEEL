@@ -33,3 +33,7 @@ See [docs/control-plane/ARCHITECTURE_ENFORCEMENT.md](docs/control-plane/ARCHITEC
 ## Control-plane intelligence boundary
 
 Repository discovery and context compilation are derived views. They may summarize evidence and route agents toward relevant source-of-truth artifacts, but they never replace Git-tracked policy, KEEL ledger intent, architecture contracts, or verification evidence.
+
+## Canonical semantic model boundary
+
+A dependency-free M1 semantic model now defines the target kernel's eleven canonical primitive records, orthogonal state dimensions, strict identity/provenance/resource rules, and deterministic serialization/content digests in `.keel/lib/semantic_kernel.py`. It is an isolated contract layer, not yet a persistent authority or default reader/writer: the landed mission, repository-intelligence, evidence, runtime, lifecycle-ledger, seal, and anchor subsystems retain their existing behavior until separately migrated under `KEEL-KERNEL-REDESIGN-v1`.
