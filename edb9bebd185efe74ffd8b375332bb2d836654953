@@ -1,0 +1,6 @@
+keel-change-id: p1-repository-intelligence-reconciliation
+sealed-candidate: edb9bebd185efe74ffd8b375332bb2d836654953
+landed-commit: edb9bebd185efe74ffd8b375332bb2d836654953
+integration-relation: candidate-ancestor
+verification-class: LANDED_COMPLETION
+verified-content-digest: 4b811d0487cb46768f1aed40c08eb5480ca2d12fde41f18b7d36dc4f729bb9cc
