@@ -1,0 +1,1 @@
+{"parent_scope":"src/checkout","child_scope":"src/checkout/child","inherit":["uncertainty","forbidden effects"],"child_id_rule":"parent/child"}

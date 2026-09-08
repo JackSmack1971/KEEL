@@ -1,0 +1,1 @@
+{"cases":["cycle","missing dependency","duplicate dependency","self dependency","invalid dependency type","resource conflict","unsupported capability","invalid scope","invalid acceptance","blocked dependency"]}

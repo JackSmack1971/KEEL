@@ -1,0 +1,1 @@
+{"prohibited":["dispatch","provider invocation","worktree allocation","lock acquisition","execution","authorization grant","seal","merge","external effects"]}
