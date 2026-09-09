@@ -1,0 +1,232 @@
+{
+  "acceptance": {
+    "passed_required": 9,
+    "required": 9,
+    "requirements_covered": 9,
+    "requirements_passing": 9,
+    "requirements_total": 9
+  },
+  "authority": "evidence-receipts.json",
+  "base_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+  "change_id": "governed-delegation-boundary",
+  "change_type": "implementation",
+  "changed_paths": [
+    ".keel/bootstrap-manifest.json",
+    ".keel/lib/codex_app_server_adapter.py",
+    ".keel/lib/scheduler.py",
+    ".keel/tests/smoke_scheduler.py",
+    ".keel/tests/test_codex_app_server_adapter.py",
+    ".keel/tests/test_scheduler.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "docs/control-plane/CODEX_NATIVE.md",
+    "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+    "docs/control-plane/ORCHESTRATION.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/governed-delegation-boundary.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "compat"
+      ],
+      "cwd": ".",
+      "duration_ms": 462,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "id": "canonical-config-portability",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_codex_app_server_adapter.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 338,
+      "excerpt": "{\"checks\": [\"handshake\", \"account\", \"thread-create\", \"thread-resume\", \"bounded-turn-events\", \"cost-gate\", \"malformed-frame\", \"idempotent-shutdown\", \"transport-policy\", \"scheduler-boundary\", \"governed-dispatch\", \"workspace-cwd\", \"observation-only\", \"objective-only-rejected\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "id": "codex-app-server-adapter-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_codex_app_server_adapter.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_compatibility_retirement.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 102,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "id": "compatibility-retirement-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 463,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": [],\n  \"autonomous_codex\": {\n    \"status\": \"BLOCKED\",\n    \"reason\": \"managed entitlement observations are unavailable; autonomous Codex execution is paused\",\n    \"resumable\": false,\n    \"resume_when\": \"\"\n  }\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_documentation_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 79,
+      "excerpt": "Documentation contract tests PASS",
+      "exit_code": 0,
+      "id": "documentation-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "manifest"
+      ],
+      "cwd": ".",
+      "duration_ms": 505,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"ec29f1c02b34d094c02cc1f9ab536c43552423d6eac5ce802ec9bf77a688b095\"\n}",
+      "exit_code": 0,
+      "id": "manifest-producer-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p0_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 512,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+      "exit_code": 0,
+      "id": "p0-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_scheduler.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 1340,
+      "excerpt": "{\"checks\": [\"governed-envelope\", \"exact-workspace\", \"objective-only-rejected\", \"observation-not-completion\", \"exact-verification\", \"identity-mismatch-matrix\", \"observation-recovery\", \"resources\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "id": "scheduler-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "compatibility_projection": true,
+  "content_digest": "2daf5f445755577327fd077bf803a8ea6b72657373b8ab9bb6a4a880da51b1cc",
+  "errors": [],
+  "evidence_plan_digest": "211212bf9c9270847c0ecbb64c0b670ca615f4a197af34eff8bdbeb3c03f750f",
+  "implementation_status": "PASS",
+  "intent_digest": "2e00760372d905392fd7ea84cbf2a0f162d9ce0ba370b2e04cee4c97de41a27c",
+  "schema_version": 4,
+  "status": "PASS",
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE",
+  "verified_at": "2026-09-09T15:32:18+00:00"
+}

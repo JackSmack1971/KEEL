@@ -69,3 +69,13 @@ Before `turn/start`, the adapter calls the existing `runtime_authorization`
 model execution. No Platform/API client, credential input, paid continuation,
 provider fallback, credit operation, account rotation, or experimental transport
 or process-control dependency is introduced.
+
+### Governed turn semantics
+
+Scheduler injection accepts only a complete `DispatchEnvelope`. Objective-only
+calls are invalid. Before `thread/start`, KEEL resolves the envelope's workspace
+to the exact registered Git worktree and subject; the adapter then uses the
+validated absolute path as `cwd` and sends the full bounded governed context.
+`turn/completed` is transport evidence only. The adapter emits an
+`ExecutionObservation` and never asserts requirement satisfaction or WorkUnit
+completion; KEEL evidence evaluation owns that transition.

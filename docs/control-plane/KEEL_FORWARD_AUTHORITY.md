@@ -85,8 +85,11 @@ does not prove runtime enforcement.
 KEEL owns deterministic WorkGraph reconciliation and resource scheduling:
 desired WorkUnits are compared with persisted actual state, legal readiness is
 computed, compatible resources may be reserved, and bounded dispatch decisions
-may be produced. Codex retains agent/runtime execution: the adapter invokes
-Codex-native execution and reports observed outcomes back to KEEL.
+may be produced. Codex retains agent/runtime execution: KEEL supplies a complete identity-bound
+dispatch envelope, the adapter invokes Codex-native execution in the validated
+worktree, and reports an execution observation back to KEEL. A completed turn is
+transport completion only; it leaves the WorkUnit awaiting exact-subject KEEL
+evidence evaluation, which alone may establish engineering completion.
 
 This resolves the older wording that KEEL “must not implement a second
 scheduler.” That wording remains useful only when it means KEEL must not create

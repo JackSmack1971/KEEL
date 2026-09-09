@@ -1,0 +1,12 @@
+{
+  "base_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+  "change_id": "governed-delegation-boundary",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "7dcc87cb7fc7e26c0e9d5dd20ad33cec1bd527c63cd6084bb7d83fd83c3a0746",
+    "last_event_digest": "e38fef293774353f50236b98ecfca443d6a337d3e72e8d5cbefc4c66d8f57986"
+  }
+}

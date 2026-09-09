@@ -1,0 +1,60 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "required": true,
+      "statement": "Define an immutable canonical DispatchEnvelope binding change, WorkUnit, Git subject/base, validated workspace, intent/graph/authority/runtime/context/evidence identities, objective, requirements, scope/resource claims, and stop/completion protocol.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-02",
+      "required": true,
+      "statement": "Resolve every dispatch workspace to the exact registered KEEL Git worktree and subject, fail closed on unresolved or mismatched identity, and pass its validated path as Codex thread/start cwd.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-03",
+      "required": true,
+      "statement": "Define and persist a bounded ExecutionObservation with Codex thread/turn/runtime/workspace/subject identities, outcome, artifacts/events, and timestamps.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-04",
+      "required": true,
+      "statement": "Treat successful Codex turn/completed solely as execution observation and transition the WorkUnit to AWAITING_VERIFICATION, never COMPLETE.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-05",
+      "required": true,
+      "statement": "Allow COMPLETE only after KEEL accepts successful evidence evaluation bound to the exact WorkUnit and all governed dispatch identities; reject stale or mismatched identity.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-06",
+      "required": true,
+      "statement": "Preserve fail-closed ZERO_INCREMENTAL_COST preflight before any model execution.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-07",
+      "required": true,
+      "statement": "Persist enough dispatch, workspace, thread, turn, and observation identity to support deterministic recovery without confusing transport and engineering state.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-08",
+      "required": true,
+      "statement": "Update architecture, orchestration, Codex-native, and verification documentation and remove stale turn-completion language.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-09",
+      "required": true,
+      "statement": "Preserve stack-neutral KEEL governance, Codex intelligence/runtime ownership, and the bounded non-autonomous keel run surface.",
+      "type": "architecture"
+    }
+  ],
+  "schema_version": 1
+}

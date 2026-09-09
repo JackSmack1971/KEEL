@@ -31,12 +31,14 @@ product path.
 - `.keel/lib/keel_core.py` orchestrates lifecycle transitions. The Codex hook is a
   thin adapter through `.keel/lib/codex_adapter_kernel.py`.
 - `.keel/lib/codex_app_server_adapter.py` is the dependency-free, transport-only
-  adapter for the documented local Codex App Server stdio JSONL surface. It is
-  injected through `SchedulerAdapter`; it is not an agent runtime or a platform
-  API client.
+  adapter for the documented local Codex App Server stdio JSONL surface. It
+  consumes only a complete governed `DispatchEnvelope`, uses the validated KEEL
+  worktree as `thread/start.cwd`, and emits bounded `ExecutionObservation` records.
+  It is not an agent runtime or a platform API client.
 - `.keel/lib/scheduler.py` reconciles desired ChangeGraph WorkUnits with persisted
   actual state and computes/dispatches a bounded legal frontier through injected
-  Codex/runtime adapters.
+  Codex/runtime adapters. Transport completion reaches `AWAITING_VERIFICATION`;
+  only exact-subject KEEL evidence evaluation can establish WorkUnit `COMPLETE`.
 
 ## Boundaries
 

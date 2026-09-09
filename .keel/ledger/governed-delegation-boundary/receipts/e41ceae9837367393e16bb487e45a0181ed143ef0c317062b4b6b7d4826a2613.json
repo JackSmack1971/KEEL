@@ -1,0 +1,76 @@
+{
+  "ended_at": "2026-09-09T15:32:15.304420+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "2e00760372d905392fd7ea84cbf2a0f162d9ce0ba370b2e04cee4c97de41a27c",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_compatibility_retirement.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 102,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "e41ceae9837367393e16bb487e45a0181ed143ef0c317062b4b6b7d4826a2613",
+  "receipt_id": "e41ceae9837367393e16bb487e45a0181ed143ef0c317062b4b6b7d4826a2613",
+  "record_digest": "0deab5b83ca28e72f761587658f00d3bd925c81d3aa933739ef86e701568ff88",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T15:32:15.201362+00:00",
+  "subject": {
+    "base_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/governed-delegation-boundary.md"
+    ],
+    "content_digest": "2daf5f445755577327fd077bf803a8ea6b72657373b8ab9bb6a4a880da51b1cc",
+    "head_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "compatibility-retirement-tests",
+    "provenance": ".keel/tests/test_compatibility_retirement.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

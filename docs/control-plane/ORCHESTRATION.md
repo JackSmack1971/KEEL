@@ -43,3 +43,22 @@ documented initialization metadata and a `STABLE_DOCUMENTED_SURFACE` status,
 validates documented response shapes, and fails closed on missing metadata,
 unknown methods, malformed frames, or rejected requests. A missing separate
 version field is reported as unknown rather than inferred.
+
+## Governed dispatch and completion separation
+
+Every executable scheduler dispatch is a canonical immutable `DispatchEnvelope`,
+not an objective plus a caller-supplied workspace label. The envelope binds the
+change and WorkUnit, exact base and subject, registered worktree identity and
+validated absolute path, intent and graph digests, authority and RuntimeProfile
+identity, bounded context, objective and requirements, scope/resource claims,
+evidence plan, and stop/completion protocol. Envelope construction re-observes
+Git and fails closed unless the path is the exact registered worktree at the
+intended subject.
+
+The Codex adapter passes that validated path as `thread/start.cwd` and submits the
+whole bounded envelope. Its `ExecutionObservation` persists envelope, thread,
+turn, runtime, workspace, subject, timestamps, bounded event, outcome, and
+artifact identity for recovery. A successful `turn/completed` moves a WorkUnit
+only to `AWAITING_VERIFICATION`. External reconciliation cannot claim
+`COMPLETE`; only KEEL's exact-subject verification decision, matching every
+intent/graph/authority/runtime/workspace/evidence identity, may do so.
