@@ -51,6 +51,7 @@
     ".keel/bin/keel.py",
     ".keel/bootstrap-manifest.json",
     ".keel/config.json",
+    ".keel/lib/git_proof.py",
     ".keel/lib/keel_core.py",
     ".keel/tests/test_compatibility_retirement.py",
     ".keel/tests/test_documentation_contract.py",
@@ -67,7 +68,7 @@
     "docs/exec-plans/active/public-ux-portability.md"
   ],
   "errors": [],
-  "plan_digest": "133e39c42de16dd0d61381d62795e6679165deaf16aebc3533ed17c06317dd44",
+  "plan_digest": "cc4e052f80a537632a308a963b4e089bc52bc85d8988406e964541e23a098623",
   "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
   "risk_level": "high",
   "schema_version": 1,

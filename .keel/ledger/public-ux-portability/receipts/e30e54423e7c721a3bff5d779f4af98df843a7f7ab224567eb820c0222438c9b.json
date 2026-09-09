@@ -1,0 +1,82 @@
+{
+  "ended_at": "2026-09-09T00:39:37.491748+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "b7a6374e5f088089c884a375ed796c2081206a262c90fa34af4a38ec12a176c9",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_p0_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 317,
+      "excerpt": "Traceback (most recent call last):\n  File \"G:\\KEEL\\.keel\\tests\\test_p0_contract.py\", line 41, in <module>\n    assert p.generated_artifact_status(ROOT)[\"status\"] == \"VERIFIED\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError",
+      "exit_code": 1,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "e30e54423e7c721a3bff5d779f4af98df843a7f7ab224567eb820c0222438c9b",
+  "receipt_id": "e30e54423e7c721a3bff5d779f4af98df843a7f7ab224567eb820c0222438c9b",
+  "record_digest": "05390d4a9d596f886ac51cbcb6469f6aedbf056ac3cd501db2215bdf5e424ef3",
+  "result": "FAIL",
+  "schema_version": 1,
+  "started_at": "2026-09-09T00:39:37.173960+00:00",
+  "subject": {
+    "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
+    "changed_paths": [
+      ".keel/README.md",
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/git_proof.py",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_compatibility_retirement.py",
+      ".keel/tests/test_documentation_contract.py",
+      ".keel/tests/test_portability_installation.py",
+      ".keel/tests/test_public_cli_contract.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/INDEX.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/public-ux-portability.md"
+    ],
+    "content_digest": "e5cca32e1ab97c94a33c89a82bacc690c99da60bf0c59257aba73c76a6a47b11",
+    "head_commit": "202dc97dadda742f945b7f94cab99c6327bff07b",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "p0-contract-tests",
+    "provenance": ".keel/tests/test_p0_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

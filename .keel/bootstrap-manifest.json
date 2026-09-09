@@ -85,7 +85,7 @@
     ".keel/lib/fact_graph.py": "9d7a3e12dcea2491f40310cd2a55f7fd86e32aaaad1391cb7ae133183450e96c",
     ".keel/lib/evidence_system.py": "31f55ece44605008f90693fd6934094d9cfa914198b0d09a9ce215ae40d6bd44",
     ".keel/lib/runtime_authorization.py": "bebd42085f055c510e5f0b61fd1d71c35d8ce34e7b6df869eec0d08580032cb1",
-    ".keel/lib/git_proof.py": "d41119a82d94ad4b6d5055cf00a9331cd1408c5653b20b4d4240a508fecb607d",
+    ".keel/lib/git_proof.py": "bfc10bc0be5dc3070ecd8f318369ef78be09ca07fa4f66cf8923e9e339c61c5e",
     ".keel/lib/candidate_attestation.py": "36d31bb4eb40ea2558471f0f9eb635bb804846f1fc6e7225f56720b105820ced",
     ".keel/lib/canonical_ledger.py": "63d553f2b09de3c4ca9de4dae36f6a92d0744bcd3d2be1de49b52233dbb056c9",
     ".keel/lib/lifecycle.py": "66310bf3c61235944aee4b63c2968f7aaaea4747f5f66aec178c4a4c8b767675",

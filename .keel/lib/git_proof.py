@@ -165,7 +165,9 @@ def synthetic_integration_tree(root: Path, target: str, candidate: str, strategy
 def materialize_tree(root: Path, tree: str, destination: Path) -> None:
     """Materialize a Git tree in a disposable directory for integration verifiers."""
     import tarfile
-    destination.mkdir(parents=True, exist_ok=False)
+    # Callers may provide TemporaryDirectory-created workspaces; materialization
+    # must populate them without treating their existence as an error.
+    destination.mkdir(parents=True, exist_ok=True)
     archive = run(root, ["archive", "--format=tar", tree], binary=True)
     import io
     with tarfile.open(fileobj=io.BytesIO(archive.stdout), mode="r:") as tar:
