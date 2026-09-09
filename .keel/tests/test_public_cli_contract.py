@@ -22,7 +22,7 @@ for command in ("status", "next", "explain", "audit"):
     assert isinstance(payload.get("schema"), str), payload
 
 status = json.loads(run("status").stdout)
-assert status["lifecycle"] in {"UNSEALED", "SEALED", "INTEGRATING", "LANDED", "STALE", "EXECUTE", "PLAN", "DISCUSS"}, status
+assert status["lifecycle"] in {"IDLE", "UNSEALED", "SEALED", "INTEGRATING", "LANDED", "STALE", "EXECUTE", "PLAN", "DISCUSS"}, status
 assert isinstance(status["readiness"], str), status
 
 run_result = run("run")

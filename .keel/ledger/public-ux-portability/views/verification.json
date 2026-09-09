@@ -39,7 +39,7 @@
         "compat"
       ],
       "cwd": ".",
-      "duration_ms": 351,
+      "duration_ms": 344,
       "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
       "exit_code": 0,
       "id": "canonical-config-portability",
@@ -63,7 +63,7 @@
         ".keel/tests/test_compatibility_retirement.py"
       ],
       "cwd": ".",
-      "duration_ms": 80,
+      "duration_ms": 79,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
       "exit_code": 0,
       "id": "compatibility-retirement-tests",
@@ -87,7 +87,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 348,
+      "duration_ms": 339,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -111,7 +111,7 @@
         ".keel/tests/test_documentation_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 73,
+      "duration_ms": 78,
       "excerpt": "Documentation contract tests PASS",
       "exit_code": 0,
       "id": "documentation-contract-tests",
@@ -159,7 +159,7 @@
         ".keel/tests/test_p0_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 563,
+      "duration_ms": 612,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
       "exit_code": 0,
       "id": "p0-contract-tests",
@@ -183,7 +183,7 @@
         ".keel/tests/test_portability_installation.py"
       ],
       "cwd": ".",
-      "duration_ms": 176,
+      "duration_ms": 190,
       "excerpt": "Portability installation tests PASS",
       "exit_code": 0,
       "id": "portability-installation-tests",
@@ -207,7 +207,7 @@
         ".keel/tests/test_public_cli_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 6434,
+      "duration_ms": 6521,
       "excerpt": "Public CLI contract tests PASS",
       "exit_code": 0,
       "id": "public-cli-contract-tests",
@@ -226,7 +226,7 @@
     }
   ],
   "compatibility_projection": true,
-  "content_digest": "c4ab5a2eff609d6ce779f73c12af567330cdd755b4c5df38eb8ad9ba121c6f2e",
+  "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
   "errors": [],
   "evidence_plan_digest": "cc4e052f80a537632a308a963b4e089bc52bc85d8988406e964541e23a098623",
   "implementation_status": "PASS",
@@ -234,5 +234,5 @@
   "schema_version": 4,
   "status": "PASS",
   "verification_class": "IMPLEMENTATION_ACCEPTANCE",
-  "verified_at": "2026-09-09T00:39:59+00:00"
+  "verified_at": "2026-09-09T00:44:25+00:00"
 }
