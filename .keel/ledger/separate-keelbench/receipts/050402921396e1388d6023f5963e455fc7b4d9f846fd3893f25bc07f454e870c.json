@@ -1,0 +1,88 @@
+{
+  "ended_at": "2026-09-09T01:07:58.665159+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-KB-001",
+    "ER-REQ-KB-002",
+    "ER-REQ-KB-003",
+    "ER-REQ-KB-005"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "7761a4c88432961b10515c6b7ae962b74e615003d5cd9ab94d873a5417e2e487",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      "keelbench/tests/test_keelbench.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 178,
+      "excerpt": "KEELBench tests PASS",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          "keelbench/tests/test_keelbench.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "050402921396e1388d6023f5963e455fc7b4d9f846fd3893f25bc07f454e870c",
+  "receipt_id": "050402921396e1388d6023f5963e455fc7b4d9f846fd3893f25bc07f454e870c",
+  "record_digest": "0d4e167f96c09e9e1e12ff9901f2bb4c34e6dc61b2b801de9b6f26b228f87539",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T01:07:58.486931+00:00",
+  "subject": {
+    "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
+    "changed_paths": [
+      ".keel/bench/README.md",
+      ".keel/bench/corpus.json",
+      ".keel/bench/telemetry-schema.json",
+      ".keel/bench/test_keelbench.py",
+      ".keel/bin/keelbench.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/keel_core.py",
+      "AGENTS.md",
+      "docs/control-plane/CAPABILITY_REGISTRY.md",
+      "docs/control-plane/FEEDBACK_EVALS.md",
+      "docs/control-plane/KEELBENCH.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/separate-keelbench.md",
+      "keelbench/README.md",
+      "keelbench/__init__.py",
+      "keelbench/corpus.json",
+      "keelbench/keelbench.py",
+      "keelbench/telemetry-schema.json",
+      "keelbench/tests/test_keelbench.py"
+    ],
+    "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+    "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "keelbench-tests",
+    "provenance": "keelbench/tests/test_keelbench.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

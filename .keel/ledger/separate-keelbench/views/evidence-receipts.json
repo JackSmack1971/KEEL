@@ -3,7 +3,7 @@
   "intent_digest": "7761a4c88432961b10515c6b7ae962b74e615003d5cd9ab94d873a5417e2e487",
   "receipts": [
     {
-      "ended_at": "2026-09-09T01:06:03.826264+00:00",
+      "ended_at": "2026-09-09T01:07:57.897139+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -25,7 +25,7 @@
       },
       "observations": [
         {
-          "duration_ms": 273,
+          "duration_ms": 241,
           "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -42,15 +42,18 @@
           }
         }
       ],
-      "receipt_digest": "1502e81f86b6f19466e4299da981c7a60c35367f60cb48f22f8480668012a085",
+      "receipt_digest": "7ddff94406d154628160dacee4afc41895afc8b4aacc7b76fe47484ba31e24c8",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:03.552880+00:00",
+      "started_at": "2026-09-09T01:07:57.656021+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -67,8 +70,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -80,7 +83,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T01:06:03.929019+00:00",
+      "ended_at": "2026-09-09T01:07:58.089651+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -102,7 +105,7 @@
       },
       "observations": [
         {
-          "duration_ms": 62,
+          "duration_ms": 71,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -119,15 +122,18 @@
           }
         }
       ],
-      "receipt_digest": "0e58954a12e4b6c538ab07e3b6a1052656d5457ea62e179f9c85f4e79767d874",
+      "receipt_digest": "5645ff0bb7a471adba0dddf9812f253e6632d54cdb164088bd29c09759a05381",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:03.866587+00:00",
+      "started_at": "2026-09-09T01:07:58.018171+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -144,8 +150,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -157,7 +163,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T01:06:04.259055+00:00",
+      "ended_at": "2026-09-09T01:07:58.412192+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -179,7 +185,7 @@
       },
       "observations": [
         {
-          "duration_ms": 328,
+          "duration_ms": 320,
           "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -196,15 +202,18 @@
           }
         }
       ],
-      "receipt_digest": "f23a8d64fd4e5ea4de06ec6eb4afb89641ee8f9bebd47cbc2f78c449471a0818",
+      "receipt_digest": "d4a509a8fe2efcefecc31a8073ce0b94d7bc03841fe3d7e3b21b955ebeb0b3bc",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:03.930944+00:00",
+      "started_at": "2026-09-09T01:07:58.091622+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -221,8 +230,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -234,7 +243,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T01:06:04.331500+00:00",
+      "ended_at": "2026-09-09T01:07:58.484732+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -276,15 +285,18 @@
           }
         }
       ],
-      "receipt_digest": "5e69272da702d95a4d1a66cb86b7b0c180465e5e7a204b2429ebbd8a65c38e89",
+      "receipt_digest": "37e6512862c1d117eca0c8d677d4fb2c2d193b1392a93d76c6653d4955196921",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:04.261435+00:00",
+      "started_at": "2026-09-09T01:07:58.414256+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -301,8 +313,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -314,7 +326,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T01:06:04.495881+00:00",
+      "ended_at": "2026-09-09T01:07:58.665159+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -341,7 +353,7 @@
       },
       "observations": [
         {
-          "duration_ms": 162,
+          "duration_ms": 178,
           "excerpt": "KEELBench tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -358,15 +370,18 @@
           }
         }
       ],
-      "receipt_digest": "5e07bb130c7a6542a21a9e6e2b2d09e5f2447c6f1aaa1c2efda8b3a44d525cc9",
+      "receipt_digest": "050402921396e1388d6023f5963e455fc7b4d9f846fd3893f25bc07f454e870c",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:04.333451+00:00",
+      "started_at": "2026-09-09T01:07:58.486931+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -383,8 +398,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -396,7 +411,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T01:06:04.762320+00:00",
+      "ended_at": "2026-09-09T01:07:58.901147+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -418,7 +433,7 @@
       },
       "observations": [
         {
-          "duration_ms": 264,
+          "duration_ms": 233,
           "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"fe64de2bad19ec868801982db7cc8a402c1975020d5a7d69b12dadc06231d868\"\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -435,15 +450,18 @@
           }
         }
       ],
-      "receipt_digest": "8d7e003c0698604f793aba51e4b84b012c7b7bc4224bdb4a147b3641b6fbc14f",
+      "receipt_digest": "da5866279c5a796adff83b9163808bfe0e8d8c158dd1c697c3dedee95565cf5d",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:04.498188+00:00",
+      "started_at": "2026-09-09T01:07:58.667571+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -460,8 +478,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -473,7 +491,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T01:06:05.336067+00:00",
+      "ended_at": "2026-09-09T01:07:59.475568+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -495,7 +513,7 @@
       },
       "observations": [
         {
-          "duration_ms": 571,
+          "duration_ms": 572,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -512,15 +530,18 @@
           }
         }
       ],
-      "receipt_digest": "ae3ead2f10a96f6bec8b65749e56acaa736959ab95647fc548b046207eeff65a",
+      "receipt_digest": "9d8e6b83d5bcc992057a7c480dc06b5f67bff58db61193a94933359ce7629261",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T01:06:04.764420+00:00",
+      "started_at": "2026-09-09T01:07:58.903260+00:00",
       "subject": {
         "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
         "changed_paths": [
           ".keel/bench/README.md",
+          ".keel/bench/corpus.json",
           ".keel/bench/telemetry-schema.json",
+          ".keel/bench/test_keelbench.py",
+          ".keel/bin/keelbench.py",
           ".keel/bootstrap-manifest.json",
           ".keel/config.json",
           ".keel/lib/keel_core.py",
@@ -537,8 +558,8 @@
           "keelbench/telemetry-schema.json",
           "keelbench/tests/test_keelbench.py"
         ],
-        "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-        "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+        "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+        "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -555,7 +576,10 @@
     "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
     "changed_paths": [
       ".keel/bench/README.md",
+      ".keel/bench/corpus.json",
       ".keel/bench/telemetry-schema.json",
+      ".keel/bench/test_keelbench.py",
+      ".keel/bin/keelbench.py",
       ".keel/bootstrap-manifest.json",
       ".keel/config.json",
       ".keel/lib/keel_core.py",
@@ -572,8 +596,8 @@
       "keelbench/telemetry-schema.json",
       "keelbench/tests/test_keelbench.py"
     ],
-    "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
-    "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+    "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
+    "head_commit": "2390692fdde3c00db0c43d6a053fa930e88dc9ca",
     "kind": "git-worktree"
   }
 }

@@ -12,7 +12,10 @@
   "change_type": "implementation",
   "changed_paths": [
     ".keel/bench/README.md",
+    ".keel/bench/corpus.json",
     ".keel/bench/telemetry-schema.json",
+    ".keel/bench/test_keelbench.py",
+    ".keel/bin/keelbench.py",
     ".keel/bootstrap-manifest.json",
     ".keel/config.json",
     ".keel/lib/keel_core.py",
@@ -37,7 +40,7 @@
         "compat"
       ],
       "cwd": ".",
-      "duration_ms": 273,
+      "duration_ms": 241,
       "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
       "exit_code": 0,
       "id": "canonical-config-portability",
@@ -61,7 +64,7 @@
         ".keel/tests/test_compatibility_retirement.py"
       ],
       "cwd": ".",
-      "duration_ms": 62,
+      "duration_ms": 71,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
       "exit_code": 0,
       "id": "compatibility-retirement-tests",
@@ -85,7 +88,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 328,
+      "duration_ms": 320,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -133,7 +136,7 @@
         "keelbench/tests/test_keelbench.py"
       ],
       "cwd": ".",
-      "duration_ms": 162,
+      "duration_ms": 178,
       "excerpt": "KEELBench tests PASS",
       "exit_code": 0,
       "id": "keelbench-tests",
@@ -157,7 +160,7 @@
         "manifest"
       ],
       "cwd": ".",
-      "duration_ms": 264,
+      "duration_ms": 233,
       "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"fe64de2bad19ec868801982db7cc8a402c1975020d5a7d69b12dadc06231d868\"\n}",
       "exit_code": 0,
       "id": "manifest-producer-check",
@@ -181,7 +184,7 @@
         ".keel/tests/test_p0_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 571,
+      "duration_ms": 572,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
       "exit_code": 0,
       "id": "p0-contract-tests",
@@ -200,13 +203,13 @@
     }
   ],
   "compatibility_projection": true,
-  "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
+  "content_digest": "5e23b75a51ad0d58a919406c8626773e440fa175a8f7d82ed45d78dbad5f9c77",
   "errors": [],
-  "evidence_plan_digest": "71d577d0ada34d60b6671a1ec397f3c5015f48aa7bd6c6d69d6c7118a9696aa0",
+  "evidence_plan_digest": "60273ebe88e4e59bbf6db9be5b1abfd495dce6e43018dd995bdc401006f27c48",
   "implementation_status": "PASS",
   "intent_digest": "7761a4c88432961b10515c6b7ae962b74e615003d5cd9ab94d873a5417e2e487",
   "schema_version": 4,
   "status": "PASS",
   "verification_class": "IMPLEMENTATION_ACCEPTANCE",
-  "verified_at": "2026-09-09T01:06:05+00:00"
+  "verified_at": "2026-09-09T01:07:59+00:00"
 }
