@@ -1,0 +1,55 @@
+{
+  "change_type": "implementation",
+  "criteria": [],
+  "errors": [],
+  "implementation_status": "PASS",
+  "projection_of": "evidence-receipts.json",
+  "requirement_coverage": [
+    {
+      "evidence_requirement_id": "ER-REQ-KB-001",
+      "requirement_id": "REQ-KB-001",
+      "status": "PASS",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-002",
+      "requirement_id": "REQ-KB-002",
+      "status": "PASS",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-003",
+      "requirement_id": "REQ-KB-003",
+      "status": "PASS",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-004",
+      "requirement_id": "REQ-KB-004",
+      "status": "PASS",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-005",
+      "requirement_id": "REQ-KB-005",
+      "status": "PASS",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-006",
+      "requirement_id": "REQ-KB-006",
+      "status": "PASS",
+      "verifier_id": "documentation-contract-tests"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 6,
+    "required": 6,
+    "requirements_covered": 6,
+    "requirements_passing": 6,
+    "requirements_total": 6
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

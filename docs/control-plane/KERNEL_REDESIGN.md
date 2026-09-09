@@ -179,7 +179,7 @@ Rows use exact files where practical and bounded globs only for homogeneous fixt
 | `.keel/lib/schema_migrations.py`, `.keel/lib/p0_contract.py` | REWORK | Become compatibility/migration adapters with deterministic subject digests, recovery, and legacy readers. |
 | `.keel/lib/upgrade_kernel.py` | RETIRED-M6 | Contract/version/reconcile queries are consolidated in lifecycle/kernel modules. |
 | `.keel/bin/keel.py` | REWORK | Remain CLI adapter/API facade; commands become projections/transactions over kernel interfaces, not embedded semantic authority. |
-| `.keel/bin/keelbench.py`, `.keel/bench/**` | MOVE-OUT-OF-CORE | Evaluation harness/corpus remains separate from deterministic correctness and authorization. |
+| `keelbench/**` | OPTIONAL-FIRST-PARTY | Evaluation harness/corpus remains outside the portable runtime and separate from deterministic correctness and authorization. |
 | `.keel/hooks/keel_hook.py`, `.codex/hooks.json` | MOVE-OUT-OF-CORE | Codex runtime adapters/guardrails driven by RuntimeProfile and kernel policy; never confinement claims. |
 | `.codex/config.toml`, `.codex/rules/**`, `.codex/agents/**` | MOVE-OUT-OF-CORE | Codex-native runtime configuration, rules and role prompts; preserve least privilege and treat activation as observed facts. |
 | `.agents/skills/**` | MOVE-OUT-OF-CORE | Codex workflow knowledge/adapters; may cite kernel contracts but cannot own lifecycle semantics. |

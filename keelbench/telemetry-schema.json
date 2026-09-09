@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_types": [
+    "run_started", "routing_decision", "context_compiled", "capability_detected", "change_started",
+    "gate_result", "tool_invocation", "verification_check", "acceptance_result", "scope_violation",
+    "authorization_event", "failure_detected", "recovery_action", "candidate_sealed", "change_anchored",
+    "run_completed"
+  ],
+  "run_metrics": [
+    "task_success", "acceptance_coverage", "requirements_satisfied", "requirements_missed", "introduced_regressions",
+    "escaped_defects", "scope_violations", "unauthorized_effect_attempts", "unauthorized_effects",
+    "unauthorized_effects_executed", "false_governance_blocks", "recovery_success", "integration_regressions",
+    "attestation_reproducibility", "human_interventions", "tokens", "cost", "wall_time_sec", "tool_calls",
+    "commands", "retries", "merge_conflicts", "ci_failures", "review_findings", "context_volume",
+    "cross_stack_portability"
+  ],
+  "metadata": ["scenario_id", "rubric_version", "seed", "start_state_id", "start_state_digest", "environment_id", "environment_digest", "stack_id", "condition", "replicate"],
+  "comparison_rule": "Preserve equivalent starting state, task/scenario, fixed rubric, seed/environment metadata, and repeated baseline and KEEL conditions. Never infer empirical uplift from deterministic self-tests or incomplete/mismatched trials."
+}
+

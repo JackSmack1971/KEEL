@@ -1,0 +1,56 @@
+{
+  "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
+  "change_id": "separate-keelbench",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {"id":"AC-KB-001","requirement_id":"REQ-KB-001","statement":"Core installation and manifest/runtime verification do not include KEELBench; the optional package is independently runnable.","required":true,"evidence":[{"provider":"unit_test","check_id":"portability-installation-tests"},{"provider":"unit_test","check_id":"keelbench-tests"}]},
+    {"id":"AC-KB-002","requirement_id":"REQ-KB-002","statement":"The evaluation schema declares the requested outcome dimensions and environment metadata.","required":true,"evidence":[{"provider":"unit_test","check_id":"keelbench-tests"}]},
+    {"id":"AC-KB-003","requirement_id":"REQ-KB-003","statement":"Paired trial creation and validation preserve matching scenario, rubric, seed, starting state, environment metadata, and replicate pairs.","required":true,"evidence":[{"provider":"unit_test","check_id":"keelbench-tests"}]},
+    {"id":"AC-KB-004","requirement_id":"REQ-KB-004","statement":"Documentation distinguishes deterministic mechanism tests from empirical evaluation and states superiority is blocked/unvalidated without representative repeated trials.","required":true,"evidence":[{"provider":"unit_test","check_id":"documentation-contract-tests"}]},
+    {"id":"AC-KB-005","requirement_id":"REQ-KB-005","statement":"Incomplete, duplicated, or mismatched trial data causes validation/scoring failure.","required":true,"evidence":[{"provider":"unit_test","check_id":"keelbench-tests"}]},
+    {"id":"AC-KB-006","requirement_id":"REQ-KB-006","statement":"Core doctor, manifest, portability, documentation, and optional KEELBench checks pass.","required":true,"evidence":[{"provider":"command","check_id":"control-plane-doctor"},{"provider":"command","check_id":"manifest-producer-check"},{"provider":"unit_test","check_id":"portability-installation-tests"},{"provider":"unit_test","check_id":"documentation-contract-tests"},{"provider":"unit_test","check_id":"keelbench-tests"}]}
+  ],
+  "mode": "standard",
+  "non_goals": [
+    "Do not claim empirical superiority or fabricate corpus authority, baseline runs, competitor results, or repeated-trial outcomes.",
+    "Do not make KEELBench a dependency of the portable KEEL runtime or its mandatory installation and verification path.",
+    "Do not change KEEL lifecycle authorization, deterministic mechanism verification, or unrelated historical ledger records."
+  ],
+  "objective": "Separate KEELBench from the mandatory portable KEEL runtime and redesign it as an optional first-party empirical evaluation package",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {"id":"REQ-KB-001","statement":"KEELBench is an optional first-party empirical evaluation package outside the mandatory portable .keel runtime, and the core installation/manifest/runtime verification path does not require it.","type":"architecture","required":true},
+    {"id":"REQ-KB-002","statement":"The evaluation contract represents autonomous completion, interventions, requirements satisfied or missed, escaped defects, unauthorized-effect attempts and executions, false governance blocks, injected-failure recovery, integration regressions, attestation reproducibility, wall-clock time, observable token/tool/cost usage, context volume, and cross-stack portability.","type":"behavior","required":true},
+    {"id":"REQ-KB-003","statement":"Paired trials preserve equivalent starting state, task/scenario, rubric, seed/environment metadata, and repeated baseline/KEEL trials, with comparisons limited to reproducible conditions.","type":"behavior","required":true},
+    {"id":"REQ-KB-004","statement":"Deterministic KEEL mechanism tests remain separate from empirical evaluation evidence, and missing evaluation authority or repeated representative trial infrastructure leaves empirical superiority explicitly blocked/unvalidated.","type":"documentation","required":true},
+    {"id":"REQ-KB-005","statement":"Incomplete, duplicated, or mismatched trial manifests and run records fail closed before scoring or comparison output is treated as valid.","type":"behavior","required":true},
+    {"id":"REQ-KB-006","statement":"The separated package remains compatible and its contract, scoring integrity, documentation, and core-runtime independence are verified by focused tests and repository checks.","type":"quality","required":true}
+  ],
+  "risk": {
+    "consequences": ["Moving the evaluation package changes documented commands and generated bootstrap-manifest membership.", "Scoring must remain fail-closed so incomplete or mismatched trials cannot support comparison claims.", "This is a control-plane/package-boundary change requiring independent review."],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": true,
+    "requires_exec_plan": true,
+    "review": "Independent review of package separation, compatibility, scoring integrity, and fail-closed trial handling is required.",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    "**"
+  ],
+  "work": {
+    "edges": [],
+    "graph_references": ["docs/control-plane/KEELBENCH.md", "docs/control-plane/KERNEL_REDESIGN.md"],
+    "units": [
+      {"id":"WU-KB-1","title":"Move KEELBench to optional package and remove core dependencies","paths":["keelbench/**",".keel/bin/keel.py",".keel/lib/**",".keel/bootstrap-manifest.json",".keel/bench/**"]},
+      {"id":"WU-KB-2","title":"Harden evaluation schema, scoring, and focused tests","paths":["keelbench/**"]},
+      {"id":"WU-KB-3","title":"Synchronize architecture, capability, and evaluation documentation","paths":["AGENTS.md","ARCHITECTURE.md","CONTROL_PLANE.md","docs/control-plane/**","docs/INDEX.md"]}
+    ]
+  }
+}

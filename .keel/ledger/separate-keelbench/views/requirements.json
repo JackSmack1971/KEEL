@@ -1,0 +1,42 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-KB-001",
+      "required": true,
+      "statement": "KEELBench is an optional first-party empirical evaluation package outside the mandatory portable .keel runtime, and the core installation/manifest/runtime verification path does not require it.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-KB-002",
+      "required": true,
+      "statement": "The evaluation contract represents autonomous completion, interventions, requirements satisfied or missed, escaped defects, unauthorized-effect attempts and executions, false governance blocks, injected-failure recovery, integration regressions, attestation reproducibility, wall-clock time, observable token/tool/cost usage, context volume, and cross-stack portability.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-KB-003",
+      "required": true,
+      "statement": "Paired trials preserve equivalent starting state, task/scenario, rubric, seed/environment metadata, and repeated baseline/KEEL trials, with comparisons limited to reproducible conditions.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-KB-004",
+      "required": true,
+      "statement": "Deterministic KEEL mechanism tests remain separate from empirical evaluation evidence, and missing evaluation authority or repeated representative trial infrastructure leaves empirical superiority explicitly blocked/unvalidated.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-KB-005",
+      "required": true,
+      "statement": "Incomplete, duplicated, or mismatched trial manifests and run records fail closed before scoring or comparison output is treated as valid.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-KB-006",
+      "required": true,
+      "statement": "The separated package remains compatible and its contract, scoring integrity, documentation, and core-runtime independence are verified by focused tests and repository checks.",
+      "type": "quality"
+    }
+  ],
+  "schema_version": 1
+}

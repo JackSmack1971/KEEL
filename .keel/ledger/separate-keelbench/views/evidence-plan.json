@@ -1,0 +1,191 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-KB-001",
+      "requirement_id": "REQ-KB-001",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-002",
+      "requirement_id": "REQ-KB-002",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-003",
+      "requirement_id": "REQ-KB-003",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-004",
+      "requirement_id": "REQ-KB-004",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-005",
+      "requirement_id": "REQ-KB-005",
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-KB-006",
+      "requirement_id": "REQ-KB-006",
+      "verifier_id": "documentation-contract-tests"
+    }
+  ],
+  "changed_paths": [
+    ".keel/bench/README.md",
+    ".keel/bench/corpus.json",
+    ".keel/bench/telemetry-schema.json",
+    ".keel/bench/test_keelbench.py",
+    ".keel/bin/keelbench.py",
+    ".keel/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/keel_core.py",
+    "AGENTS.md",
+    "docs/control-plane/CAPABILITY_REGISTRY.md",
+    "docs/control-plane/FEEDBACK_EVALS.md",
+    "docs/control-plane/KEELBENCH.md",
+    "docs/control-plane/KERNEL_REDESIGN.md",
+    "docs/exec-plans/active/separate-keelbench.md",
+    "keelbench/README.md",
+    "keelbench/__init__.py",
+    "keelbench/corpus.json",
+    "keelbench/keelbench.py",
+    "keelbench/telemetry-schema.json",
+    "keelbench/tests/test_keelbench.py"
+  ],
+  "errors": [],
+  "plan_digest": "60273ebe88e4e59bbf6db9be5b1abfd495dce6e43018dd995bdc401006f27c48",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-KB-004",
+        "ER-REQ-KB-006"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-KB-001",
+        "ER-REQ-KB-002",
+        "ER-REQ-KB-003",
+        "ER-REQ-KB-005"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          "keelbench/tests/test_keelbench.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "keelbench-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}

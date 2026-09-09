@@ -1,0 +1,83 @@
+{
+  "ended_at": "2026-09-09T01:04:20.848310+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "7761a4c88432961b10515c6b7ae962b74e615003d5cd9ab94d873a5417e2e487",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 267,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"fe64de2bad19ec868801982db7cc8a402c1975020d5a7d69b12dadc06231d868\"\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "92409f44f9ee772f3f515b656535fdf00eb0db0e75dc57ef1945dbd2d4381d24",
+  "receipt_id": "92409f44f9ee772f3f515b656535fdf00eb0db0e75dc57ef1945dbd2d4381d24",
+  "record_digest": "52d8a7fcd1bcd0846f320840e1d7439b08d962d862b15fdfb14f2ff70416471c",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T01:04:20.580927+00:00",
+  "subject": {
+    "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
+    "changed_paths": [
+      ".keel/bench/README.md",
+      ".keel/bench/corpus.json",
+      ".keel/bench/telemetry-schema.json",
+      ".keel/bench/test_keelbench.py",
+      ".keel/bin/keelbench.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/keel_core.py",
+      "AGENTS.md",
+      "docs/control-plane/CAPABILITY_REGISTRY.md",
+      "docs/control-plane/FEEDBACK_EVALS.md",
+      "docs/control-plane/KEELBENCH.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/separate-keelbench.md",
+      "keelbench/README.md",
+      "keelbench/__init__.py",
+      "keelbench/corpus.json",
+      "keelbench/keelbench.py",
+      "keelbench/telemetry-schema.json",
+      "keelbench/tests/test_keelbench.py"
+    ],
+    "content_digest": "f84e61cb1c210b5b094c691d92c840dcdc12506796da802cad8b2f8cde79e193",
+    "head_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "manifest-producer-check",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

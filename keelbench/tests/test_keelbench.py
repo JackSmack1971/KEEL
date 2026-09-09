@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SPEC = importlib.util.spec_from_file_location("keelbench", ROOT / ".keel/bin/keelbench.py")
+SPEC = importlib.util.spec_from_file_location("keelbench", ROOT / "keelbench/keelbench.py")
 KEELBENCH = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader
 SPEC.loader.exec_module(KEELBENCH)
@@ -18,7 +18,7 @@ def complete_trial(trial_dir: Path) -> None:
         path = trial_dir / entry["path"]
         run = json.loads(path.read_text())
         run["status"] = "COMPLETE"
-        run["metrics"] = {key: (True if key == "task_success" else 1) for key in KEELBENCH.REQUIRED_METRICS}
+        run["metrics"] = {key: (True if key in KEELBENCH.BOOLEAN_METRICS else 1) for key in KEELBENCH.REQUIRED_METRICS}
         run["events"] = [{"type": "run_completed", "sequence": 1}]
         path.write_text(json.dumps(run, indent=2, sort_keys=True) + "\n")
 
@@ -30,20 +30,23 @@ def copy_trial(source: Path, target: Path) -> None:
 
 
 def main() -> int:
+    manifest = json.loads((ROOT / ".keel/bootstrap-manifest.json").read_text())
+    assert not any(path.startswith(".keel/bench/") or path == ".keel/bin/keelbench.py" for path in manifest["files"])
+    assert not (ROOT / ".keel/bin/keelbench.py").exists()
     with tempfile.TemporaryDirectory(prefix="keelbench-test-") as raw:
         root = Path(raw)
-        (root / ".keel/bench").mkdir(parents=True)
+        (root / "keelbench").mkdir(parents=True)
         for name in ("corpus.json", "telemetry-schema.json"):
-            (root / ".keel/bench" / name).write_text((ROOT / ".keel/bench" / name).read_text())
+            (root / "keelbench" / name).write_text((ROOT / "keelbench" / name).read_text())
 
         trial = root / "trial-a"
-        KEELBENCH.new_trial(root, "KB-01-bugfix", 2, "seed-1", "state-1", "digest-1", trial)
+        KEELBENCH.new_trial(root, "KB-01-bugfix", 2, "seed-1", "state-1", "digest-1", trial, "env-1", "env-digest-1", "stack-1")
         complete_trial(trial)
         valid = KEELBENCH.validate_trial(trial, root)
         assert valid["status"] == "PASS", valid
         scored = KEELBENCH.score_trials([trial], root)
         assert scored["status"] == "PASS" and scored["comparison"]["paired_trial_count"] == 1
-        assert scored["empirical_claim"] == "UNVALIDATED"
+        assert scored["empirical_claim"] == "BLOCKED_UNVALIDATED"
 
         broken = root / "trial-b"
         copy_trial(trial, broken)
@@ -63,8 +66,8 @@ def main() -> int:
         assert invalid["status"] == "FAIL" and any("start_state_digest" in error for error in invalid["errors"])
 
         first, second = root / "trial-d1", root / "trial-d2"
-        KEELBENCH.new_trial(root, "KB-01-bugfix", 1, "seed-2", "state-2", "digest-2", first)
-        KEELBENCH.new_trial(root, "KB-01-bugfix", 1, "seed-2", "state-2", "digest-2", second)
+        KEELBENCH.new_trial(root, "KB-01-bugfix", 1, "seed-2", "state-2", "digest-2", first, "env-1", "env-digest-1", "stack-1")
+        KEELBENCH.new_trial(root, "KB-01-bugfix", 1, "seed-2", "state-2", "digest-2", second, "env-1", "env-digest-1", "stack-1")
         assert (first / "trial.json").read_text() == (second / "trial.json").read_text()
     print("KEELBench tests PASS")
     return 0

@@ -39,7 +39,7 @@ Every consequential project specialty must map here or be added as a new domain.
 | subagents-skills | Narrow delegated roles and reusable workflows | ACTIVE | Baseline subagents + maintenance skill exist | Routing/boundary and tool/sandbox limits documented |
 | external-integrations-mcp | MCP/plugins/CLIs/external systems | CONDITIONAL | Activate when a real integration is required | Least privilege + auth/secrets + failure behavior |
 | orchestration | Ticket-driven unattended agent scheduling | DEFERRED | Tracker + agent runtime + workspace policy + demand exist | Containment, claim/reconcile, blockers, retries, observability |
-| feedback-self-improvement | Production corrections/traces -> evals -> bounded tasks | DEFERRED | KEELBench harness exists; activate learning loop only after repeated reviewed production evidence exists | Provenance + clustered findings + target/regression evals + paired baseline evidence |
+| feedback-self-improvement | Production corrections/traces -> evals -> bounded tasks | DEFERRED | Optional `keelbench/` evaluation package exists; activate learning loop only after repeated reviewed production evidence exists | Provenance + clustered findings + target/regression evals + paired baseline evidence |
 | entropy-doc-gardening | Recurring drift/documentation/quality maintenance | ACTIVE | Policy + maintenance skill exist | Scheduled/manual cadence once scheduler exists; quality trend |
 | provenance-audit | Evidence/source/decision traceability | ACTIVE | Seed/manifest/source docs exist | Source dates/versions + manifest + evidence links |
 | autonomy-permissions | Risk-scaled permission and side-effect boundaries | ACTIVE | Decision model exists | External/irreversible actions gated by authorization/evidence |

@@ -10,10 +10,12 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve()
-ROOT_DEFAULT = HERE.parents[2]
+ROOT_DEFAULT = HERE.parents[1]
+PACKAGE_ROOT = HERE.parent
 CONDITIONS = ("baseline", "keel")
 REQUIRED_SCENARIOS = {"bugfix", "feature", "refactor", "dependency-upgrade", "migration", "security-remediation", "frontend-change", "performance-regression", "brownfield-investigation", "multi-service-change", "release", "failure-recovery"}
-REQUIRED_METRICS = {"task_success", "acceptance_coverage", "introduced_regressions", "scope_violations", "unauthorized_effects", "human_interventions", "tokens", "wall_time_sec", "tool_calls", "commands", "retries", "merge_conflicts", "ci_failures", "review_findings"}
+REQUIRED_METRICS = {"task_success", "acceptance_coverage", "requirements_satisfied", "requirements_missed", "introduced_regressions", "escaped_defects", "scope_violations", "unauthorized_effect_attempts", "unauthorized_effects", "unauthorized_effects_executed", "false_governance_blocks", "recovery_success", "integration_regressions", "attestation_reproducibility", "human_interventions", "tokens", "cost", "wall_time_sec", "tool_calls", "commands", "retries", "merge_conflicts", "ci_failures", "review_findings", "context_volume", "cross_stack_portability"}
+BOOLEAN_METRICS = {"task_success", "recovery_success", "attestation_reproducibility", "cross_stack_portability"}
 
 
 def load(path: Path):
@@ -21,7 +23,7 @@ def load(path: Path):
 
 
 def _scenario(root: Path, scenario_id: str) -> dict:
-    corpus = load(root / ".keel/bench/corpus.json")
+    corpus = load(root / "keelbench" / "corpus.json")
     row = next((x for x in corpus.get("scenarios", []) if x.get("id") == scenario_id), None)
     if row is None:
         raise RuntimeError(f"unknown scenario id: {scenario_id}")
@@ -31,11 +33,11 @@ def _scenario(root: Path, scenario_id: str) -> dict:
 def validate(root: Path) -> list[str]:
     errors = []
     try:
-        corpus = load(root / ".keel/bench/corpus.json")
+        corpus = load(root / "keelbench" / "corpus.json")
     except Exception as exc:
         return [f"corpus invalid: {exc}"]
     try:
-        schema = load(root / ".keel/bench/telemetry-schema.json")
+        schema = load(root / "keelbench" / "telemetry-schema.json")
     except Exception as exc:
         return [f"telemetry schema invalid: {exc}"]
     scenarios = [x for x in corpus.get("scenarios", []) if isinstance(x, dict)]
@@ -70,6 +72,9 @@ def _run_payload(trial: dict, condition: str, replicate: int) -> dict:
         "seed": trial["seed"],
         "start_state_id": trial["start_state_id"],
         "start_state_digest": trial["start_state_digest"],
+        "environment_id": trial["environment_id"],
+        "environment_digest": trial["environment_digest"],
+        "stack_id": trial["stack_id"],
         "rubric_version": trial["rubric_version"],
         "status": "PENDING",
         "metrics": {key: None for key in sorted(REQUIRED_METRICS)},
@@ -79,12 +84,15 @@ def _run_payload(trial: dict, condition: str, replicate: int) -> dict:
     }
 
 
-def new_trial(root: Path, scenario_id: str, replicates: int, seed: str, start_state_id: str, start_state_digest: str, out: Path) -> None:
+def new_trial(root: Path, scenario_id: str, replicates: int, seed: str, start_state_id: str, start_state_digest: str, out: Path, environment_id: str = "", environment_digest: str = "", stack_id: str = "") -> None:
     if replicates < 1:
         raise RuntimeError("replicates must be >= 1")
     scenario = _scenario(root, scenario_id)
     rubric = str(scenario.get("rubric_version", "1"))
-    trial = {"schema_version": 2, "trial_id": _trial_id(scenario_id, seed, start_state_id, rubric), "scenario_id": scenario_id, "scenario_type": scenario["type"], "rubric_version": rubric, "seed": seed, "replicates": replicates, "start_state_id": start_state_id, "start_state_digest": start_state_digest, "conditions": list(CONDITIONS), "status": "PLANNED", "runs": []}
+    required_metadata = {"environment_id": environment_id, "environment_digest": environment_digest, "stack_id": stack_id}
+    if any(not value.strip() for value in required_metadata.values()):
+        raise RuntimeError("environment_id, environment_digest, and stack_id are required")
+    trial = {"schema_version": 2, "trial_id": _trial_id(scenario_id, seed, start_state_id, rubric), "scenario_id": scenario_id, "scenario_type": scenario["type"], "rubric_version": rubric, "seed": seed, "replicates": replicates, "start_state_id": start_state_id, "start_state_digest": start_state_digest, **required_metadata, "conditions": list(CONDITIONS), "status": "PLANNED", "runs": []}
     out.mkdir(parents=True, exist_ok=True)
     for replicate in range(1, replicates + 1):
         for condition in CONDITIONS:
@@ -95,9 +103,9 @@ def new_trial(root: Path, scenario_id: str, replicates: int, seed: str, start_st
     (out / "trial.json").write_text(json.dumps(trial, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def new_run(root: Path, scenario: str, condition: str, out: Path, trial_id: str | None = None, replicate: int | None = None, seed: str | None = None, start_state_id: str = "", start_state_digest: str = "") -> None:
+def new_run(root: Path, scenario: str, condition: str, out: Path, trial_id: str | None = None, replicate: int | None = None, seed: str | None = None, start_state_id: str = "", start_state_digest: str = "", environment_id: str = "", environment_digest: str = "", stack_id: str = "") -> None:
     row = _scenario(root, scenario)
-    payload = {"schema_version": 2, "run_id": out.stem, "trial_id": trial_id, "scenario_id": scenario, "scenario_type": row["type"], "condition": condition, "replicate": replicate, "seed": seed, "start_state_id": start_state_id, "start_state_digest": start_state_digest, "rubric_version": str(row.get("rubric_version", "1")), "status": "PENDING", "metrics": {key: None for key in sorted(REQUIRED_METRICS)}, "events": [], "critical_violation": False, "notes": ""}
+    payload = {"schema_version": 2, "run_id": out.stem, "trial_id": trial_id, "scenario_id": scenario, "scenario_type": row["type"], "condition": condition, "replicate": replicate, "seed": seed, "start_state_id": start_state_id, "start_state_digest": start_state_digest, "environment_id": environment_id, "environment_digest": environment_digest, "stack_id": stack_id, "rubric_version": str(row.get("rubric_version", "1")), "status": "PENDING", "metrics": {key: None for key in sorted(REQUIRED_METRICS)}, "events": [], "critical_violation": False, "notes": ""}
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -113,12 +121,12 @@ def _safe_run_path(trial_dir: Path, rel: str) -> Path:
 
 def validate_trial(trial_dir: Path, root: Path) -> dict:
     errors = []
-    event_types = set(load(root / ".keel/bench/telemetry-schema.json").get("event_types", []))
+    event_types = set(load(root / "keelbench" / "telemetry-schema.json").get("event_types", []))
     try:
         trial = load(trial_dir / "trial.json")
     except Exception as exc:
         return {"status": "FAIL", "errors": [f"trial manifest invalid: {exc}"]}
-    required = ("trial_id", "scenario_id", "scenario_type", "rubric_version", "seed", "replicates", "start_state_id", "start_state_digest", "conditions", "runs")
+    required = ("trial_id", "scenario_id", "scenario_type", "rubric_version", "seed", "replicates", "start_state_id", "start_state_digest", "environment_id", "environment_digest", "stack_id", "conditions", "runs")
     errors.extend(f"trial manifest missing {key}" for key in required if key not in trial)
     if errors:
         return {"status": "FAIL", "errors": errors}
@@ -138,6 +146,9 @@ def validate_trial(trial_dir: Path, root: Path) -> dict:
         errors.append("trial start_state_id is required")
     if not isinstance(trial.get("start_state_digest"), str) or not trial["start_state_digest"].strip():
         errors.append("trial start_state_digest is required")
+    for metadata in ("environment_id", "environment_digest", "stack_id"):
+        if not isinstance(trial.get(metadata), str) or not trial[metadata].strip():
+            errors.append(f"trial {metadata} is required")
     entries = trial.get("runs") if isinstance(trial.get("runs"), list) else []
     expected = {(condition, replicate) for replicate in range(1, trial.get("replicates", 0) + 1) for condition in CONDITIONS}
     seen, runs = set(), []
@@ -155,7 +166,7 @@ def validate_trial(trial_dir: Path, root: Path) -> dict:
             errors.append(f"run {entry.get('run_id')} invalid: {exc}")
             continue
         runs.append(run)
-        for key_name in ("trial_id", "scenario_id", "scenario_type", "seed", "start_state_id", "start_state_digest", "rubric_version"):
+        for key_name in ("trial_id", "scenario_id", "scenario_type", "seed", "start_state_id", "start_state_digest", "environment_id", "environment_digest", "stack_id", "rubric_version"):
             if run.get(key_name) != trial.get(key_name):
                 errors.append(f"run {run.get('run_id')} {key_name} disagrees with trial")
         if run.get("condition") not in CONDITIONS or run.get("replicate") not in range(1, trial["replicates"] + 1):
@@ -168,7 +179,7 @@ def validate_trial(trial_dir: Path, root: Path) -> dict:
             errors.append(f"run {run.get('run_id')} missing metrics: {', '.join(missing)}")
         elif any(metrics[key] is None for key in REQUIRED_METRICS):
             errors.append(f"run {run.get('run_id')} contains incomplete metrics")
-        elif not isinstance(metrics.get("task_success"), bool) or any(isinstance(metrics[key], bool) or not isinstance(metrics[key], (int, float)) for key in REQUIRED_METRICS - {"task_success"}):
+        elif any(not isinstance(metrics[key], bool) for key in BOOLEAN_METRICS) or any(isinstance(metrics[key], bool) or not isinstance(metrics[key], (int, float)) for key in REQUIRED_METRICS - BOOLEAN_METRICS):
             errors.append(f"run {run.get('run_id')} contains incorrectly typed metrics")
         events = run.get("events")
         if not isinstance(events, list):
@@ -209,7 +220,7 @@ def score_trials(paths: list[Path], root: Path) -> dict:
         baseline_rows = [runs[("baseline", r)] for r in range(1, result["replicates"] + 1)]
         keel_rows = [runs[("keel", r)] for r in range(1, result["replicates"] + 1)]
         trial_results.append({"trial_id": result["trial_id"], "scenario_id": result["scenario_id"], "replicates": result["replicates"], "pairs": pairs, "conditions": {"baseline": _metric_summary(baseline_rows), "keel": _metric_summary(keel_rows)}})
-    output = {"schema_version": 2, "status": "PASS" if not errors else "FAIL", "errors": errors, "trials": trial_results, "empirical_claim": "UNVALIDATED"}
+    output = {"schema_version": 2, "status": "PASS" if not errors else "FAIL", "errors": errors, "trials": trial_results, "empirical_claim": "BLOCKED_UNVALIDATED", "claim_blockers": ["No approved representative corpus or authority was supplied", "No real repeated trial results were supplied"]}
     if trial_results:
         baseline_rate = statistics.mean(t["conditions"]["baseline"]["task_success_rate"] for t in trial_results)
         keel_rate = statistics.mean(t["conditions"]["keel"]["task_success_rate"] for t in trial_results)
@@ -228,7 +239,7 @@ def legacy_score(paths: list[Path]) -> dict:
             except Exception:
                 pass
     groups = {condition: [row.get("metrics") or {} for row in rows if row.get("condition") == condition] for condition in CONDITIONS}
-    output = {"schema_version": 1, "runs": {key: len(value) for key, value in groups.items()}, "conditions": {}, "empirical_claim": "UNVALIDATED", "legacy_unpaired": True}
+    output = {"schema_version": 1, "runs": {key: len(value) for key, value in groups.items()}, "conditions": {}, "empirical_claim": "BLOCKED_UNVALIDATED", "legacy_unpaired": True}
     for condition, values in groups.items():
         successes = [1.0 if value.get("task_success") is True else 0.0 for value in values if value.get("task_success") is not None]
         output["conditions"][condition] = {"task_success_rate": None if not successes else sum(successes) / len(successes)}
@@ -245,9 +256,9 @@ def main() -> int:
     sub = parser.add_subparsers(dest="cmd", required=True)
     sub.add_parser("validate")
     trial = sub.add_parser("new-trial")
-    trial.add_argument("--scenario", required=True); trial.add_argument("--replicates", type=int, default=1); trial.add_argument("--seed", required=True); trial.add_argument("--start-state-id", required=True); trial.add_argument("--start-state-digest", required=True); trial.add_argument("--out", type=Path, required=True)
+    trial.add_argument("--scenario", required=True); trial.add_argument("--replicates", type=int, default=1); trial.add_argument("--seed", required=True); trial.add_argument("--start-state-id", required=True); trial.add_argument("--start-state-digest", required=True); trial.add_argument("--environment-id", required=True); trial.add_argument("--environment-digest", required=True); trial.add_argument("--stack-id", required=True); trial.add_argument("--out", type=Path, required=True)
     run = sub.add_parser("new-run")
-    run.add_argument("--scenario", required=True); run.add_argument("--condition", choices=CONDITIONS, required=True); run.add_argument("--out", type=Path, required=True); run.add_argument("--trial-id"); run.add_argument("--replicate", type=int); run.add_argument("--seed"); run.add_argument("--start-state-id", default=""); run.add_argument("--start-state-digest", default="")
+    run.add_argument("--scenario", required=True); run.add_argument("--condition", choices=CONDITIONS, required=True); run.add_argument("--out", type=Path, required=True); run.add_argument("--trial-id"); run.add_argument("--replicate", type=int); run.add_argument("--seed"); run.add_argument("--start-state-id", default=""); run.add_argument("--start-state-digest", default=""); run.add_argument("--environment-id", default=""); run.add_argument("--environment-digest", default=""); run.add_argument("--stack-id", default="")
     score = sub.add_parser("score"); score.add_argument("paths", nargs="+", type=Path)
     check = sub.add_parser("validate-trial"); check.add_argument("trial", type=Path)
     args = parser.parse_args(); root = args.root.resolve()
@@ -255,9 +266,9 @@ def main() -> int:
         if args.cmd == "validate":
             errors = validate(root); print(json.dumps({"status": "PASS" if not errors else "FAIL", "errors": errors}, indent=2)); return 0 if not errors else 1
         if args.cmd == "new-trial":
-            new_trial(root, args.scenario, args.replicates, args.seed, args.start_state_id, args.start_state_digest, args.out); print(args.out); return 0
+            new_trial(root, args.scenario, args.replicates, args.seed, args.start_state_id, args.start_state_digest, args.out, args.environment_id, args.environment_digest, args.stack_id); print(args.out); return 0
         if args.cmd == "new-run":
-            new_run(root, args.scenario, args.condition, args.out, args.trial_id, args.replicate, args.seed, args.start_state_id, args.start_state_digest); print(args.out); return 0
+            new_run(root, args.scenario, args.condition, args.out, args.trial_id, args.replicate, args.seed, args.start_state_id, args.start_state_digest, args.environment_id, args.environment_digest, args.stack_id); print(args.out); return 0
         if args.cmd == "validate-trial":
             result = validate_trial(args.trial.resolve(), root); print(json.dumps(result, indent=2)); return 0 if result["status"] == "PASS" else 1
         if args.cmd == "score":

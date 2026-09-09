@@ -1,0 +1,103 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "portability-installation-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-KB-001",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KB-001",
+      "statement": "Core installation and manifest/runtime verification do not include KEELBench; the optional package is independently runnable."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-KB-002",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KB-002",
+      "statement": "The evaluation schema declares the requested outcome dimensions and environment metadata."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-KB-003",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KB-003",
+      "statement": "Paired trial creation and validation preserve matching scenario, rubric, seed, starting state, environment metadata, and replicate pairs."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-KB-004",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KB-004",
+      "statement": "Documentation distinguishes deterministic mechanism tests from empirical evaluation and states superiority is blocked/unvalidated without representative repeated trials."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "keelbench-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-KB-005",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KB-005",
+      "statement": "Incomplete, duplicated, or mismatched trial data causes validation/scoring failure."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "control-plane-doctor",
+          "provider": "command"
+        },
+        {
+          "check_id": "manifest-producer-check",
+          "provider": "command"
+        },
+        {
+          "check_id": "portability-installation-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "keelbench-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-KB-006",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-KB-006",
+      "statement": "Core doctor, manifest, portability, documentation, and optional KEELBench checks pass."
+    }
+  ],
+  "schema_version": 1
+}

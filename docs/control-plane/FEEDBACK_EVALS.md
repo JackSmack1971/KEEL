@@ -32,4 +32,11 @@ Entropy scanning treats an explicitly headed `# Long-horizon goal:` record as a 
 
 ## KEELBench baseline gate
 
-The repository ships a benchmark contract under `.keel/bench/`. Use paired repeated runs from equivalent starting states to measure task success, acceptance coverage, regressions, scope/authorization violations, human intervention and execution cost. Deterministic KEEL self-tests demonstrate mechanism behavior only; G5 empirical value remains unvalidated until KEELBench or an equivalent representative baseline comparison demonstrates material uplift. See [KEELBENCH.md](KEELBENCH.md).
+The repository ships optional first-party KEELBench tooling under `keelbench/`.
+Use paired repeated runs from equivalent starting states to measure autonomous
+completion, requirements, defects, authorization outcomes, interventions,
+recovery, regressions, reproducibility, time, observable usage, context, and
+portability. Deterministic KEEL self-tests demonstrate mechanism behavior only;
+KEEL's superiority remains a hypothesis and empirical claims are blocked until
+approved representative repeated trials demonstrate material value. See
+[KEELBENCH.md](KEELBENCH.md).

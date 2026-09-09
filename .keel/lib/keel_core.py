@@ -668,7 +668,7 @@ def preexisting_worktree_changes(root: Path) -> list[str]:
 
 def doctor(root: Path) -> list[str]:
     errors = []
-    for rel in ("AGENTS.md", ".codex/hooks.json", ".codex/config.toml", ".keel/config.json", ".keel/bin/keel.py", ".keel/hooks/keel_hook.py", ".keel/lib/capability_resolver.py", ".keel/lib/context_compiler.py", ".keel/lib/evidence_graph.py", ".keel/lib/evidence_system.py", ".keel/bin/keelbench.py"):
+    for rel in ("AGENTS.md", ".codex/hooks.json", ".codex/config.toml", ".keel/config.json", ".keel/bin/keel.py", ".keel/hooks/keel_hook.py", ".keel/lib/capability_resolver.py", ".keel/lib/context_compiler.py", ".keel/lib/evidence_graph.py", ".keel/lib/evidence_system.py"):
         if not (root / rel).is_file(): errors.append(f"missing {rel}")
     try:
         head_commit(root)

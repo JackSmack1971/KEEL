@@ -35,7 +35,7 @@ Build and maintain **KEEL-v2** as a legible, verifiable engineering repository. 
 - `python3 .keel/bin/keel.py context` — compile a bounded current-change context packet.
 - `python3 .keel/bin/keel.py evidence` — inspect the latest evidence receipts.
 - Generic explorer/reviewer/risk-reviewer roles may be selected dynamically from unresolved facts, evidence requirements, impact, and risk; they never replace kernel decisions.
-- `python3 .keel/bin/keelbench.py validate` — validate the paired-evaluation corpus; benchmark results are separate from deterministic self-tests.
+- `python3 keelbench/keelbench.py validate` — optional KEELBench contract validation; benchmark results remain separate from deterministic self-tests and are not required by core KEEL.
 
 ## Before declaring done
 - Inspect KEEL status and diff scope.

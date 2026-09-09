@@ -1,0 +1,12 @@
+{
+  "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
+  "change_id": "separate-keelbench",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "bc33a022fbbd08b65965e7ddcc1d78246cd2356413f7d980480a728ccb632194",
+    "last_event_digest": "f888608633c0d4dc16b1906dbf0698c3086e020a9415501c3d94eb78ac8a65b8"
+  }
+}
