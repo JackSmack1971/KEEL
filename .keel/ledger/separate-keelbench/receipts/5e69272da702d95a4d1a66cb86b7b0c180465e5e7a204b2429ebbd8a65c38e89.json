@@ -1,0 +1,83 @@
+{
+  "ended_at": "2026-09-09T01:06:04.331500+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-KB-004",
+    "ER-REQ-KB-006"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "7761a4c88432961b10515c6b7ae962b74e615003d5cd9ab94d873a5417e2e487",
+  "invocation": {
+    "argv": [
+      "python3",
+      "-B",
+      ".keel/tests/test_documentation_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 70,
+      "excerpt": "Documentation contract tests PASS",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "5e69272da702d95a4d1a66cb86b7b0c180465e5e7a204b2429ebbd8a65c38e89",
+  "receipt_id": "5e69272da702d95a4d1a66cb86b7b0c180465e5e7a204b2429ebbd8a65c38e89",
+  "record_digest": "8338cd53a13d918fec8eed8832adef566fb42c3c606b2a01f0521e94a8fc2511",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T01:06:04.261435+00:00",
+  "subject": {
+    "base_commit": "16ad8f70f09dd1114a3e79533e8b04c91f4e273c",
+    "changed_paths": [
+      ".keel/bench/README.md",
+      ".keel/bench/telemetry-schema.json",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/keel_core.py",
+      "AGENTS.md",
+      "docs/control-plane/CAPABILITY_REGISTRY.md",
+      "docs/control-plane/FEEDBACK_EVALS.md",
+      "docs/control-plane/KEELBENCH.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/separate-keelbench.md",
+      "keelbench/README.md",
+      "keelbench/__init__.py",
+      "keelbench/corpus.json",
+      "keelbench/keelbench.py",
+      "keelbench/telemetry-schema.json",
+      "keelbench/tests/test_keelbench.py"
+    ],
+    "content_digest": "26909502b1cbad2b6a525d62cd0157f78052a3e29d54c490e43eefadbaf87a63",
+    "head_commit": "56c09a45fd45c0e4dff9ed1c28b3286a7c97be20",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "documentation-contract-tests",
+    "provenance": ".keel/tests/test_documentation_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

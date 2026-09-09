@@ -7,6 +7,6 @@
   "schema": "keel.change-status-view/v1",
   "source": {
     "intent_digest": "bc33a022fbbd08b65965e7ddcc1d78246cd2356413f7d980480a728ccb632194",
-    "last_event_digest": "f888608633c0d4dc16b1906dbf0698c3086e020a9415501c3d94eb78ac8a65b8"
+    "last_event_digest": "2c9d2c74cd8356f59a71c78b71e0ee4a24dea546f20817599ff06910ad22d1a4"
   }
 }

@@ -33,10 +33,7 @@
   ],
   "changed_paths": [
     ".keel/bench/README.md",
-    ".keel/bench/corpus.json",
     ".keel/bench/telemetry-schema.json",
-    ".keel/bench/test_keelbench.py",
-    ".keel/bin/keelbench.py",
     ".keel/bootstrap-manifest.json",
     ".keel/config.json",
     ".keel/lib/keel_core.py",
@@ -54,7 +51,7 @@
     "keelbench/tests/test_keelbench.py"
   ],
   "errors": [],
-  "plan_digest": "60273ebe88e4e59bbf6db9be5b1abfd495dce6e43018dd995bdc401006f27c48",
+  "plan_digest": "71d577d0ada34d60b6671a1ec397f3c5015f48aa7bd6c6d69d6c7118a9696aa0",
   "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
   "risk_level": "high",
   "schema_version": 1,
