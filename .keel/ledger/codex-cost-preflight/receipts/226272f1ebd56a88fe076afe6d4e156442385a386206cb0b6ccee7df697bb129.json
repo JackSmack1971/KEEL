@@ -1,0 +1,78 @@
+{
+  "ended_at": "2026-09-09T03:40:52.986774+00:00",
+  "environment": {
+    "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+    "executable": "python.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-01",
+    "ER-REQ-03"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_codex_adapter_kernel.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 143,
+      "excerpt": "Codex cost preflight hostile matrix PASS\n{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_adapter_kernel.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "226272f1ebd56a88fe076afe6d4e156442385a386206cb0b6ccee7df697bb129",
+  "receipt_id": "226272f1ebd56a88fe076afe6d4e156442385a386206cb0b6ccee7df697bb129",
+  "record_digest": "f6b8c6055b0f82ea3e02e92a84a6200fbe0c6d9b223dde11618fc3761901c317",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T03:40:52.843014+00:00",
+  "subject": {
+    "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/codex_adapter_kernel.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/runtime_authorization.py",
+      ".keel/lib/semantic_kernel.py",
+      ".keel/tests/test_codex_adapter_kernel.py",
+      ".keel/tests/test_codex_cost_preflight.py",
+      ".keel/tests/test_public_cli_contract.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/codex-cost-preflight.md"
+    ],
+    "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+    "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "codex-adapter-tests",
+    "provenance": ".keel/tests/test_codex_adapter_kernel.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

@@ -32,7 +32,7 @@
         "compat"
       ],
       "cwd": ".",
-      "duration_ms": 258,
+      "duration_ms": 244,
       "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
       "exit_code": 0,
       "id": "canonical-config-portability",
@@ -56,7 +56,7 @@
         ".keel/tests/test_codex_adapter_kernel.py"
       ],
       "cwd": ".",
-      "duration_ms": 148,
+      "duration_ms": 143,
       "excerpt": "Codex cost preflight hostile matrix PASS\n{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
       "exit_code": 0,
       "id": "codex-adapter-tests",
@@ -80,7 +80,7 @@
         ".keel/tests/test_compatibility_retirement.py"
       ],
       "cwd": ".",
-      "duration_ms": 67,
+      "duration_ms": 65,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
       "exit_code": 0,
       "id": "compatibility-retirement-tests",
@@ -104,7 +104,7 @@
         "doctor"
       ],
       "cwd": ".",
-      "duration_ms": 263,
+      "duration_ms": 265,
       "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": [],\n  \"autonomous_codex\": {\n    \"status\": \"BLOCKED\",\n    \"reason\": \"managed entitlement observations are unavailable; autonomous Codex execution is paused\",\n    \"resumable\": false,\n    \"resume_when\": \"\"\n  }\n}",
       "exit_code": 0,
       "id": "control-plane-doctor",
@@ -128,7 +128,7 @@
         ".keel/tests/test_documentation_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 90,
+      "duration_ms": 71,
       "excerpt": "Documentation contract tests PASS",
       "exit_code": 0,
       "id": "documentation-contract-tests",
@@ -152,7 +152,7 @@
         "manifest"
       ],
       "cwd": ".",
-      "duration_ms": 212,
+      "duration_ms": 240,
       "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"48dffab1afd86a4ce68378cc2776344fd6e508a2272f1183dc404e695015a8e3\"\n}",
       "exit_code": 0,
       "id": "manifest-producer-check",
@@ -176,7 +176,7 @@
         ".keel/tests/test_p0_contract.py"
       ],
       "cwd": ".",
-      "duration_ms": 540,
+      "duration_ms": 568,
       "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
       "exit_code": 0,
       "id": "p0-contract-tests",
@@ -203,5 +203,5 @@
   "schema_version": 4,
   "status": "PASS",
   "verification_class": "IMPLEMENTATION_ACCEPTANCE",
-  "verified_at": "2026-09-09T03:38:42+00:00"
+  "verified_at": "2026-09-09T03:40:54+00:00"
 }
