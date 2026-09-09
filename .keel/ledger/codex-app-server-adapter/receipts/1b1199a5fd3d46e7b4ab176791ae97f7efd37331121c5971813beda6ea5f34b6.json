@@ -1,0 +1,72 @@
+{
+  "ended_at": "2026-09-09T04:33:09.228374+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "659e2e7deda7cadc8a0cb13d54b61f5f228511daec3511e2aacdede175b444a9",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 215,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"d577222c540e0455473c402d30ed036c96c5f5885455d86ebe1a017ec6581514\"\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "1b1199a5fd3d46e7b4ab176791ae97f7efd37331121c5971813beda6ea5f34b6",
+  "receipt_id": "1b1199a5fd3d46e7b4ab176791ae97f7efd37331121c5971813beda6ea5f34b6",
+  "record_digest": "75ff1313863ff4814bba16da480d2b34e7234bc377aed8061d1d9dc426fd94d5",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:33:09.012900+00:00",
+  "subject": {
+    "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/exec-plans/active/codex-app-server-adapter.md"
+    ],
+    "content_digest": "fbe12611df295ceb14847d56f96564fd4b31cae4b47dbe10787ad66ac29f63a3",
+    "head_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "manifest-producer-check",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

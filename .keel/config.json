@@ -112,9 +112,43 @@
       "id": "documentation-contract-tests",
       "required": true,
       "timeout_sec": 120
+    },
+    {
+      "argv": ["python3", "-B", ".keel/tests/test_codex_app_server_adapter.py"],
+      "cwd": ".",
+      "id": "codex-app-server-adapter-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": ["python3", "-B", ".keel/tests/smoke_codex_app_server.py"],
+      "cwd": ".",
+      "id": "codex-app-server-smoke",
+      "required": true,
+      "timeout_sec": 120
     }
   ],
   "verifier_registry": [
+    {
+      "applicability": {"paths": [".keel/tests/smoke_codex_app_server.py"], "risk_levels": ["high"]},
+      "authority": "RUNTIME_OBSERVED",
+      "id": "codex-app-server-smoke",
+      "provenance": ".keel/tests/smoke_codex_app_server.py",
+      "provider": "command",
+      "runtime": {"argv": ["python3", "-B", ".keel/tests/smoke_codex_app_server.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["command"], "requirement_types": ["behavior", "quality", "architecture", "security"]},
+      "version": "1"
+    },
+    {
+      "applicability": {"paths": ["**"], "risk_levels": ["high"]},
+      "authority": "TESTED",
+      "id": "codex-app-server-adapter-tests",
+      "provenance": ".keel/tests/test_codex_app_server_adapter.py",
+      "provider": "unit_test",
+      "runtime": {"argv": ["python3", "-B", ".keel/tests/test_codex_app_server_adapter.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "security", "architecture", "documentation"]},
+      "version": "1"
+    },
     {
       "applicability": {"paths": [".keel/bin/keel.py", ".keel/lib/**", ".keel/tests/**", "docs/control-plane/**", "ARCHITECTURE.md", "CONTROL_PLANE.md", "WORKFLOW.md"], "risk_levels": ["high"]},
       "authority": "TESTED",

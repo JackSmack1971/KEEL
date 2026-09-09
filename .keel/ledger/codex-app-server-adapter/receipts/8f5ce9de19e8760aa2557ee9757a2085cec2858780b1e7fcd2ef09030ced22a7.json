@@ -1,0 +1,75 @@
+{
+  "ended_at": "2026-09-09T04:37:12.565185+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-07"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "c97fde76c561767784bec1719be13df35b552d137b63a4b0b1568749b2429b34",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_scheduler.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 292,
+      "excerpt": "{\"checks\": [\"frontier\", \"dependencies\", \"resources\", \"bounded-concurrency\", \"isolation\", \"stale\", \"resume\", \"duplicate-dispatch\", \"recovery\", \"adapter-boundary\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "8f5ce9de19e8760aa2557ee9757a2085cec2858780b1e7fcd2ef09030ced22a7",
+  "receipt_id": "8f5ce9de19e8760aa2557ee9757a2085cec2858780b1e7fcd2ef09030ced22a7",
+  "record_digest": "f43cbc3ec393e11bd46dd9aa73efa0a5b2c241633a0a9bdd6a19948271c8232c",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:37:12.272946+00:00",
+  "subject": {
+    "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/exec-plans/active/codex-app-server-adapter.md",
+      "docs/exec-plans/completed/codex-app-server-adapter.md"
+    ],
+    "content_digest": "82f70d0745894579ab012347638549e213bc1333603db5b6e09210905c97e201",
+    "head_commit": "e744d72e8e4a9358fa47fa30c77a22063d7d3f02",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "scheduler-tests",
+    "provenance": ".keel/tests/test_scheduler.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

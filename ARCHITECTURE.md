@@ -30,6 +30,10 @@ product path.
   the narrow `keel.legacy-ledger/v1` migration reader.
 - `.keel/lib/keel_core.py` orchestrates lifecycle transitions. The Codex hook is a
   thin adapter through `.keel/lib/codex_adapter_kernel.py`.
+- `.keel/lib/codex_app_server_adapter.py` is the dependency-free, transport-only
+  adapter for the documented local Codex App Server stdio JSONL surface. It is
+  injected through `SchedulerAdapter`; it is not an agent runtime or a platform
+  API client.
 - `.keel/lib/scheduler.py` reconciles desired ChangeGraph WorkUnits with persisted
   actual state and computes/dispatches a bounded legal frontier through injected
   Codex/runtime adapters.

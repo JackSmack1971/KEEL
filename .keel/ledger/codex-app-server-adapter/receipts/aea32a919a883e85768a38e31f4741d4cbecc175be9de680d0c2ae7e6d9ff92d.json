@@ -1,0 +1,72 @@
+{
+  "ended_at": "2026-09-09T04:31:50.883642+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "659e2e7deda7cadc8a0cb13d54b61f5f228511daec3511e2aacdede175b444a9",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_compatibility_retirement.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 71,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "aea32a919a883e85768a38e31f4741d4cbecc175be9de680d0c2ae7e6d9ff92d",
+  "receipt_id": "aea32a919a883e85768a38e31f4741d4cbecc175be9de680d0c2ae7e6d9ff92d",
+  "record_digest": "2d111e07d907632b6677c21616bcd867d2c1bd0e6c2131c742d30dc0ca1918eb",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:31:50.812136+00:00",
+  "subject": {
+    "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/exec-plans/active/codex-app-server-adapter.md"
+    ],
+    "content_digest": "819be949ea3a8c2958a82948c643122c695e5654f92b2bb936bd1156c0fa2f3a",
+    "head_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "compatibility-retirement-tests",
+    "provenance": ".keel/tests/test_compatibility_retirement.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+  "change_id": "codex-app-server-adapter",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {"id":"AC-01","requirement_id":"REQ-01","statement":"A distinct Codex App Server transport adapter is invoked only through the scheduler's existing injected-adapter boundary; scheduler and deterministic kernel modules contain no Codex transport code.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"},{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"AC-02","requirement_id":"REQ-02","statement":"The adapter completes documented stdio initialization and observes initialization metadata and account state against an installed compatible runtime, or emits explicit UNVERIFIED_RUNTIME with reasoning when unavailable.","required":true,"evidence":[{"provider":"command","check_id":"codex-app-server-smoke"}]},
+    {"id":"AC-03","requirement_id":"REQ-03","statement":"The adapter creates a new thread and resumes an existing thread using documented stable methods.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-04","requirement_id":"REQ-04","statement":"The adapter submits a bounded turn and deterministically parses turn lifecycle and item notifications through turn completion.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-05","requirement_id":"REQ-05","statement":"Process, pipe, timeout, malformed-frame, truncated-frame, and unexpected-exit paths release resources and leave no adapter-owned process running.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-06","requirement_id":"REQ-06","statement":"Unsupported or malformed initialization metadata, capability, or documented-method responses produce explicit fail-safe mismatch states.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-07","requirement_id":"REQ-07","statement":"Without an App Server, native KEEL CLI behavior and the existing blocked run path remain unchanged.","required":true,"evidence":[{"provider":"unit_test","check_id":"cli-regression-tests"},{"provider":"unit_test","check_id":"scheduler-tests"}]},
+    {"id":"AC-08","requirement_id":"REQ-08","statement":"The change introduces no Platform/API client, credential or key surface, paid fallback, credit purchase, account rotation, or rate-limit evasion.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-09","requirement_id":"REQ-09","statement":"The baseline uses only documented local stdio transport and does not require experimental transport or experimental process-control APIs.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-10","requirement_id":"REQ-10","statement":"Any adapter operation that submits a model turn is blocked unless ZERO_INCREMENTAL_COST preflight is SUPPORTED.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]},
+    {"id":"AC-11","requirement_id":"REQ-11","statement":"keel run remains bounded to existing scheduler/adapter substrate and does not become an autonomous engineering loop.","required":true,"evidence":[{"provider":"unit_test","check_id":"cli-regression-tests"},{"provider":"unit_test","check_id":"codex-app-server-adapter-tests"}]}
+  ],
+  "mode": "standard",
+  "non_goals": ["Do not implement an agent runtime, reasoning, tools, approvals, sandboxing, or thread storage inside KEEL.","Do not add OpenAI Platform/API integration, API keys, billing, paid/provider fallback, credit purchase, account rotation, or rate-limit evasion.","Do not use WebSocket, dynamic tools, experimental process-control, or external-token auth as the baseline path.","Do not turn keel run into autonomous engineering or alter native behavior when App Server is absent.","Do not manually edit kernel-owned receipts, grants, events, views, or attestations."],
+  "objective": "Add a local Codex App Server stdio adapter with bounded lifecycle, safe compatibility handling, cost gating, tests, and docs",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {"id":"REQ-01","statement":"Implement the adapter as a distinct component through SchedulerAdapter injection without embedding Codex transport in scheduler or deterministic kernel modules.","type":"architecture","required":true},
+    {"id":"REQ-02","statement":"Implement documented local stdio app-server launch/connect, initialize/initialized handshake, initialization observation, account/read inspection, and truthful live smoke reporting.","type":"behavior","required":true},
+    {"id":"REQ-03","statement":"Implement documented thread/start and thread/resume operations.","type":"behavior","required":true},
+    {"id":"REQ-04","statement":"Implement bounded turn/start submission and deterministic lifecycle/item event parsing.","type":"behavior","required":true},
+    {"id":"REQ-05","statement":"Implement fail-safe timeout, malformed/partial frame, unexpected-exit, and clean shutdown handling.","type":"quality","required":true},
+    {"id":"REQ-06","statement":"Detect and surface protocol/method/capability mismatches without silent continuation or crash.","type":"quality","required":true},
+    {"id":"REQ-07","statement":"Preserve native KEEL behavior when App Server is unavailable.","type":"quality","required":true},
+    {"id":"REQ-08","statement":"Preserve ZERO_INCREMENTAL_COST and prohibit credential, API, billing, fallback, rotation, and evasion surfaces.","type":"security","required":true},
+    {"id":"REQ-09","statement":"Keep experimental transport/process-control paths absent from the load-bearing baseline.","type":"security","required":true},
+    {"id":"REQ-10","statement":"Gate every model-executing adapter action with runtime_authorization ZERO_INCREMENTAL_COST preflight.","type":"security","required":true},
+    {"id":"REQ-11","statement":"Keep keel run bounded to its existing substrate and document the canonical adapter and superseded active plan state.","type":"documentation","required":true}
+  ],
+  "risk": {
+    "consequences": ["A protocol adapter can mis-handle runtime state or accidentally trigger model execution if compatibility and cost gates are weak.","Changes to the scheduler injection boundary and canonical architecture documentation can misdirect future execution if separation is not preserved."],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": false,
+    "requires_exec_plan": true,
+    "review": "Independent review of transport isolation, fail-closed runtime behavior, cost gating, hostile-process cleanup, and documentation authority is required.",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [".keel/lib/codex_app_server_adapter.py",".keel/lib/scheduler.py",".keel/tests/test_codex_app_server_adapter.py",".keel/tests/smoke_codex_app_server.py",".keel/config.json",".keel/bootstrap-manifest.json","ARCHITECTURE.md","docs/control-plane/ORCHESTRATION.md","docs/control-plane/CODEX_NATIVE.md","docs/exec-plans/active/codex-app-server-adapter.md","docs/exec-plans/completed/codex-app-server-adapter.md"],
+  "work": {
+    "edges": [],
+    "graph_references": [".keel/lib/scheduler.py",".keel/lib/runtime_authorization.py","docs/control-plane/ORCHESTRATION.md","docs/control-plane/CODEX_NATIVE.md"],
+    "units": [
+      {"id":"WU-01","title":"Implement documented local stdio transport and fail-safe protocol model","paths":[".keel/lib/codex_app_server_adapter.py"]},
+      {"id":"WU-02","title":"Wire the adapter only through the existing scheduler injection boundary without changing scheduler semantics","paths":[".keel/lib/scheduler.py"]},
+      {"id":"WU-03","title":"Add fixture, hostile-process, regression, cost-gate, and conditional live-smoke verification","paths":[".keel/tests/test_codex_app_server_adapter.py",".keel/tests/smoke_codex_app_server.py"]},
+      {"id":"WU-04","title":"Document canonical component, protocol evidence limits, and completed plan state","paths":["ARCHITECTURE.md","docs/control-plane/ORCHESTRATION.md","docs/control-plane/CODEX_NATIVE.md","docs/exec-plans/active/codex-app-server-adapter.md","docs/exec-plans/completed/codex-app-server-adapter.md"]}
+    ]
+  }
+}

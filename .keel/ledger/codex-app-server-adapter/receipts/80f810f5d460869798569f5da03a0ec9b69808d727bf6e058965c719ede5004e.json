@@ -1,0 +1,73 @@
+{
+  "ended_at": "2026-09-09T04:34:27.396789+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "659e2e7deda7cadc8a0cb13d54b61f5f228511daec3511e2aacdede175b444a9",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_p0_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 582,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "80f810f5d460869798569f5da03a0ec9b69808d727bf6e058965c719ede5004e",
+  "receipt_id": "80f810f5d460869798569f5da03a0ec9b69808d727bf6e058965c719ede5004e",
+  "record_digest": "0df62e02071a83b1c7bcb090fb6bc3021312b5b0b257d1516ba489f5f7d43aae",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:34:26.814225+00:00",
+  "subject": {
+    "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/exec-plans/active/codex-app-server-adapter.md",
+      "docs/exec-plans/completed/codex-app-server-adapter.md"
+    ],
+    "content_digest": "4d01aac2b4b5ee42f209d58321a9f028f4a487f76ac2d00fb31ef2c4730dfb4e",
+    "head_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "p0-contract-tests",
+    "provenance": ".keel/tests/test_p0_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

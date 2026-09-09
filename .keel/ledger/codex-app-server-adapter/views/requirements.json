@@ -1,0 +1,72 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "required": true,
+      "statement": "Implement the adapter as a distinct component through SchedulerAdapter injection without embedding Codex transport in scheduler or deterministic kernel modules.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-02",
+      "required": true,
+      "statement": "Implement documented local stdio app-server launch/connect, initialize/initialized handshake, initialization observation, account/read inspection, and truthful live smoke reporting.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-03",
+      "required": true,
+      "statement": "Implement documented thread/start and thread/resume operations.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-04",
+      "required": true,
+      "statement": "Implement bounded turn/start submission and deterministic lifecycle/item event parsing.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-05",
+      "required": true,
+      "statement": "Implement fail-safe timeout, malformed/partial frame, unexpected-exit, and clean shutdown handling.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-06",
+      "required": true,
+      "statement": "Detect and surface protocol/method/capability mismatches without silent continuation or crash.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-07",
+      "required": true,
+      "statement": "Preserve native KEEL behavior when App Server is unavailable.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-08",
+      "required": true,
+      "statement": "Preserve ZERO_INCREMENTAL_COST and prohibit credential, API, billing, fallback, rotation, and evasion surfaces.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-09",
+      "required": true,
+      "statement": "Keep experimental transport/process-control paths absent from the load-bearing baseline.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-10",
+      "required": true,
+      "statement": "Gate every model-executing adapter action with runtime_authorization ZERO_INCREMENTAL_COST preflight.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-11",
+      "required": true,
+      "statement": "Keep keel run bounded to its existing substrate and document the canonical adapter and superseded active plan state.",
+      "type": "documentation"
+    }
+  ],
+  "schema_version": 1
+}

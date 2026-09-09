@@ -28,3 +28,18 @@ scheduler does not grant capabilities, execute external effects, merge/push,
 or perform automatic final landing. Existing KEEL lifecycle gates, evidence
 receipts, worktree proof, authorization, seal, integration, and anchor semantics
 remain authoritative.
+
+`.keel/lib/codex_app_server_adapter.py` is the canonical local Codex transport
+adapter. It launches `codex app-server --listen stdio://` (or accepts an already
+connected equivalent), speaks the documented newline-delimited JSON-RPC surface,
+and exposes only initialization/account inspection, thread start/resume, and a
+bounded turn/event observation. It is passed to `Scheduler` through the existing
+`SchedulerAdapter` injection boundary; no Codex transport belongs in this
+deterministic scheduler.
+
+The current App Server documentation does not define a separate protocol-version
+or server-capability enumeration response. The adapter therefore reports the
+documented initialization metadata and a `STABLE_DOCUMENTED_SURFACE` status,
+validates documented response shapes, and fails closed on missing metadata,
+unknown methods, malformed frames, or rejected requests. A missing separate
+version field is reported as unknown rather than inferred.
