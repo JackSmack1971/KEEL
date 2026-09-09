@@ -9,6 +9,7 @@ Build and maintain **KEEL-v2** as a legible, verifiable engineering repository. 
 3. [ARCHITECTURE.md](ARCHITECTURE.md) — verified architecture facts and boundaries.
 4. [docs/INDEX.md](docs/INDEX.md) — progressive-disclosure map.
 5. [docs/control-plane/KEEL.md](docs/control-plane/KEEL.md) — spec ledger, gates, fast path, bypass, worktrees.
+6. [docs/control-plane/KEEL_FORWARD_AUTHORITY.md](docs/control-plane/KEEL_FORWARD_AUTHORITY.md) — sole forward architecture, product contract, and roadmap authority.
 
 ## Persistent invariants
 - Repository evidence beats assumption; never invent project facts or commands.

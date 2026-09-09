@@ -1,6 +1,10 @@
 KEEL v2 — Competitive Architecture Audit and Upgrade Strategy
 =============================================================
 
+> **SUPERSEDED HISTORICAL RESEARCH.** Its product direction and upgrade
+> strategy are retained for historical reasoning only. The current forward
+> authority is [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md).
+
 Executive conclusion
 --------------------
 

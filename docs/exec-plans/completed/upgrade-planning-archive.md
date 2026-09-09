@@ -1,6 +1,9 @@
 # Upgrade planning archive
 
-Documents in this directory are historical implementation slices or superseded planning reasoning. They cannot authorize or direct current implementation. The only active top-level upgrade authority is [`../active/upgrade-remaining-plan.md`](../active/upgrade-remaining-plan.md), with requirement classifications in [`../../control-plane/UPGRADE_AUDIT.md`](../../control-plane/UPGRADE_AUDIT.md).
+Documents in this directory are historical implementation slices or superseded
+planning reasoning. They cannot authorize or direct current implementation.
+The current forward authority is
+[`../../control-plane/KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md).
 
 ## Completed bounded slices
 

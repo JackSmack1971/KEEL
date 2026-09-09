@@ -1,5 +1,8 @@
 # Desired-state reconciler and bounded scheduler
 
+Status: `COMPLETE / LANDED IN CURRENT TREE — HISTORICAL LEDGER RETAINED`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
+
 ## Objective
 
 Add a repository-local, deterministic scheduler for canonical ChangeGraph

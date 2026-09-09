@@ -16,8 +16,9 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [generated/](generated/README.md)
 - [references/](references/README.md)
 
-## Authoritative kernel transition
-- [KEEL kernel redesign and migration authority](control-plane/KERNEL_REDESIGN.md) — sole target architecture; freezes expansion above landed P2.
+## Forward authority
+- [KEEL forward architecture, product contract, and roadmap](control-plane/KEEL_FORWARD_AUTHORITY.md) — sole forward authority for North Star, ownership, operating surfaces, cost invariant, verification boundary, and NS0–NS11.
+- [KEEL kernel redesign and migration authority](control-plane/KERNEL_REDESIGN.md) — superseded historical migration authority; retained for landed and historical evidence.
 
 ## Control-plane detail
 - [Public command surface](control-plane/COMMANDS.md) — stable CLI, lifecycle states, ownership, and remote refs.

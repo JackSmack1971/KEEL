@@ -1,5 +1,8 @@
 # Separate KEELBench
 
+Status: `COMPLETE / LANDED IN CURRENT TREE — HISTORICAL LEDGER RETAINED`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
+
 ## Objective
 
 Move KEELBench out of the mandatory `.keel` runtime into an optional,

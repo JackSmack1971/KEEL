@@ -1,5 +1,9 @@
 # Architecture
 
+Forward authority: [KEEL forward architecture, product contract, and roadmap](docs/control-plane/KEEL_FORWARD_AUTHORITY.md).
+This file records verified current implementation boundaries; it is not a
+separate forward roadmap authority.
+
 Status: `VERIFIED — CANONICAL KEEL KERNEL`
 
 KEEL is a dependency-free, repository-local change-governance kernel. Its public

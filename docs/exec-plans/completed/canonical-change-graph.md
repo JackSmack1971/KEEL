@@ -1,6 +1,7 @@
 # ExecPlan: Canonical ChangeGraph planning model
 
-Status: `ACTIVE`
+Status: `COMPLETE / LANDED — HISTORICAL PLAN`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
 Authority: `KEEL-KERNEL-REDESIGN-v1`, stages `M2 — Read compatibility` and bounded `M3 — Canonical kernel`
 
 ## Objective and success evidence

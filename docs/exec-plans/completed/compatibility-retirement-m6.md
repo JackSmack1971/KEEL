@@ -1,6 +1,7 @@
 # M6 compatibility retirement and repository cleanup
 
-Status: `ACTIVE`
+Status: `COMPLETE / LANDED IN CURRENT TREE — HISTORICAL LEDGER RETAINED`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
 Authority: `KEEL-KERNEL-REDESIGN-v1`, M6
 
 ## Purpose

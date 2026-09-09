@@ -1,0 +1,24 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "required": true,
+      "statement": "Create one coherent forward architecture/product-contract/roadmap authority satisfying AC-01 through AC-09 and separating landed capability from aspiration.",
+      "type": "architecture"
+    },
+    {
+      "id": "REQ-02",
+      "required": true,
+      "statement": "Supersede conflicting prior forward documents and reconcile stale active plan records while preserving historical evidence, satisfying AC-10 and AC-11.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-03",
+      "required": true,
+      "statement": "Keep the change documentation-only or plan-metadata-only and verify no implementation behavior changes, satisfying AC-12.",
+      "type": "quality"
+    }
+  ],
+  "schema_version": 1
+}

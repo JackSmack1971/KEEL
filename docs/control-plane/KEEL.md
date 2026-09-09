@@ -1,5 +1,9 @@
 # KEEL canonical change ledger
 
+Forward architecture, product contract, and roadmap authority:
+[`KEEL_FORWARD_AUTHORITY.md`](KEEL_FORWARD_AUTHORITY.md). This ledger document
+defines lifecycle mechanics and does not create a competing roadmap.
+
 KEEL is the repository's per-change governance spine. The canonical layout for new changes is:
 
 ```text

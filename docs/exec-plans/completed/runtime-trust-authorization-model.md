@@ -1,6 +1,7 @@
 # ExecPlan: Runtime trust and authorization model
 
-Status: `ACTIVE`
+Status: `COMPLETE / LANDED — HISTORICAL PLAN`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
 Authority: `KEEL-KERNEL-REDESIGN-v1`, stage `M4 — Runtime/evidence adapters`
 
 ## Objective and success evidence

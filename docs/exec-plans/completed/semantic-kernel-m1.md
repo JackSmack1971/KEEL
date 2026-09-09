@@ -1,6 +1,7 @@
 # ExecPlan: Canonical KEEL semantic kernel M1
 
-Status: `ACTIVE`
+Status: `COMPLETE / LANDED — HISTORICAL PLAN`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
 Authority: `KEEL-KERNEL-REDESIGN-v1`, stage `M1 — Contract fixtures`
 
 ## Objective and success evidence

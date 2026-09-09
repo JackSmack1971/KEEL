@@ -1,5 +1,12 @@
 # KEEL kernel redesign and migration authority
 
+> **SUPERSEDED — HISTORICAL EVIDENCE ONLY.** The forward architecture, product
+> contract, ownership boundary, and roadmap are now governed by
+> [KEEL_FORWARD_AUTHORITY.md](KEEL_FORWARD_AUTHORITY.md). This document is
+> retained for migration history, landed evidence, and rationale. Its
+> forward-looking claims, including the old scheduler prohibition and North
+> Star, do not authorize or sequence future work.
+
 Status: `AUTHORITATIVE TARGET ARCHITECTURE — M2/M3 CANONICAL CHANGE LEDGER IMPLEMENTED`
 Authority ID: `KEEL-KERNEL-REDESIGN-v1`
 Baseline: landed P2 tree at `810c40b4a3b8bd0acfb3d9fe49cf286f6348181f`
@@ -88,7 +95,11 @@ KEEL autonomy may not exceed observed runtime trust. The effective autonomy ceil
 
 Hooks are runtime adapters and guardrails, not assumed confinement. They translate kernel context/policy into Codex hook events and collect observations where supported. Specialized tools, alternate clients, direct processes, configuration drift, or untrusted project hooks may bypass them. Independent reconciliation and verification remain mandatory; sandbox, approvals, host controls, provider authorization, and protected Git infrastructure remain load-bearing.
 
-Codex-native subagents and workspaces are runtime resources. KEEL may express work ownership, isolation requirements, resource conflicts, and evidence expectations, but MUST NOT implement a second agent scheduler or workspace authority.
+Codex-native subagents and workspaces are runtime resources. This historical
+document's “second agent scheduler” wording is superseded by the forward
+authority's distinction: KEEL may reconcile WorkGraph desired state and
+resources, while Codex retains agent/runtime execution and workspace runtime
+authority.
 
 ## 8. Exact subjects, evidence, and verification boundaries
 
@@ -160,7 +171,7 @@ Rows use exact files where practical and bounded globs only for homogeneous fixt
 |---|---|---|
 | `AGENTS.md`, `WORKFLOW.md`, `docs/control-plane/KEEL.md` | REWORK | Preserve current governance during migration; rewrite only when canonical primitives/lifecycle are landed and compatibility is proven. |
 | `ARCHITECTURE.md`, `CONTROL_PLANE.md`, `docs/INDEX.md` | PRESERVE | Remain thin navigation/current-fact surfaces pointing here; never duplicate target semantics. |
-| `docs/control-plane/KERNEL_REDESIGN.md` | PRESERVE | Sole forward architecture/migration authority; amend only through governed architectural decision. |
+| `docs/control-plane/KERNEL_REDESIGN.md` | PRESERVE | Superseded historical migration evidence; forward claims defer to `KEEL_FORWARD_AUTHORITY.md`. |
 | `docs/references/research/UPGRADE_AUDIT.md`, completed upgrade plans | HISTORICAL | Archived non-authoritative migration research and evidence maps. |
 | `docs/exec-plans/active/p2-mission-schema-planning.md`, `docs/exec-plans/completed/**`, `.keel/ledger/**` | PRESERVE | Historical/current evidence; keep readable and Git-bound. Completed plans/ledgers never become target authority. |
 | Other `docs/control-plane/*.md`, `docs/{DESIGN,PLANS,QUALITY_SCORE,RELIABILITY,SECURITY,FRONTEND,PRODUCT_SENSE}.md` | REWORK | Reconcile domain policy onto primitives without duplicating state/dependency/authority semantics. Conditional domain controls stay external to the kernel. |

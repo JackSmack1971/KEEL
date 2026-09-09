@@ -2,7 +2,13 @@
 
 Status: `FROZEN LANDED-STATE EVIDENCE — SUBORDINATE`
 
-[`KERNEL_REDESIGN.md`](KERNEL_REDESIGN.md) is the sole forward architecture and migration authority. This audit remains authoritative only for its landed P0/P1/P2 evidence mapping; all unresolved P3-P7 and D1 feature expansion is frozen and may proceed only as an explicitly staged migration under that contract.
+Forward architecture and roadmap claims in this historical audit are
+superseded by [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md).
+This file remains evidence mapping only.
+
+The former `KERNEL_REDESIGN.md` authority is superseded. This audit remains
+authoritative only for its landed evidence mapping; unresolved feature
+expansion is governed by the new forward authority.
 
 This is the authoritative section-level matrix for `docs/KEEL_UPGRADES.md`. Every numbered source section is accounted for exactly once below, either as an executable requirement, contextual/strategic material, superseded material, or explicitly deferred/out-of-scope material. Status is based on repository evidence, not plan or ledger phase.
 
