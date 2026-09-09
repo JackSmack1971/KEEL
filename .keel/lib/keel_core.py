@@ -1406,7 +1406,7 @@ def public_status(root: Path, change_id: str | None = None) -> dict:
     """Stable user-facing lifecycle projection over canonical evidence."""
     cid = change_id or active_change(root)
     result = {"schema": "keel.public-status/v1", "status": "IDLE", "change_id": cid,
-              "lifecycle": "IDLE", "evidence": {}}
+              "lifecycle": "IDLE", "readiness": "WAITING", "evidence": {}}
     if not cid:
         return result
     result["status"] = "ACTIVE"
@@ -1418,14 +1418,17 @@ def public_status(root: Path, change_id: str | None = None) -> dict:
         landing = None
     if landing is not None:
         result["lifecycle"] = "LANDED" if landing.status == "LANDED" else "INTEGRATING" if landing.status == "PREPARED" else "STALE"
+        result["readiness"] = result["lifecycle"]
         result["evidence"]["landing_attestation"] = {"status": landing.status, "digest": landing.digest, "strategy": landing.strategy}
     elif phase == "SHIP":
         try:
             candidate = candidate_status(root, cid)
             result["lifecycle"] = "SEALED"
+            result["readiness"] = "LANDABLE"
             result["evidence"]["candidate"] = {"commit": candidate["commit"], "digest": candidate["content_digest"]}
         except RuntimeError:
             result["lifecycle"] = "UNSEALED"
+            result["readiness"] = "WAITING"
     else:
         result["lifecycle"] = phase or "UNKNOWN"
     return result

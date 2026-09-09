@@ -1,0 +1,84 @@
+{
+  "ended_at": "2026-09-09T00:28:40.113653+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-5",
+    "ER-REQ-9"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "b7a6374e5f088089c884a375ed796c2081206a262c90fa34af4a38ec12a176c9",
+  "invocation": {
+    "argv": [
+      "python3",
+      "-B",
+      ".keel/tests/test_portability_installation.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 270,
+      "excerpt": "Portability installation tests PASS",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_portability_installation.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "e541e3539c6e0960aa83e86c2c9f093c27e236d3f4cdffc2840f9028df5352e8",
+  "receipt_id": "e541e3539c6e0960aa83e86c2c9f093c27e236d3f4cdffc2840f9028df5352e8",
+  "record_digest": "4efdcc475a9a487ce28c3565c87090f2b4ca91120052d32fbfe92f70d1010e1f",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T00:28:39.842650+00:00",
+  "subject": {
+    "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
+    "changed_paths": [
+      ".keel/README.md",
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_compatibility_retirement.py",
+      ".keel/tests/test_documentation_contract.py",
+      ".keel/tests/test_portability_installation.py",
+      ".keel/tests/test_public_cli_contract.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/INDEX.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/public-ux-portability.md"
+    ],
+    "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+    "head_commit": "81cdd4c0d162027164f7f565dddf39d927060fff",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "portability-installation-tests",
+    "provenance": ".keel/tests/test_portability_installation.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}
