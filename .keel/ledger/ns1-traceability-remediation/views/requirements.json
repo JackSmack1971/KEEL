@@ -1,0 +1,30 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "required": true,
+      "statement": "Improve hostile-matrix and forbidden-operation traceability without weakening aggregate assertions.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-02",
+      "required": true,
+      "statement": "Record and independently reproduce the cp1252 baseline failures at the main baseline.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-03",
+      "required": true,
+      "statement": "Preserve preflight, RuntimeProfile, and public CLI behavior.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-04",
+      "required": true,
+      "statement": "Produce KEEL verification evidence for the exact candidate and landing verification.",
+      "type": "quality"
+    }
+  ],
+  "schema_version": 1
+}

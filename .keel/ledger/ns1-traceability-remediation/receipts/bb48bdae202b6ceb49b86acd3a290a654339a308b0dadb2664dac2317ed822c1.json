@@ -1,0 +1,70 @@
+{
+  "ended_at": "2026-09-09T04:01:28.960602+00:00",
+  "environment": {
+    "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+    "executable": "python.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-01",
+    "ER-REQ-02",
+    "ER-REQ-03",
+    "ER-REQ-04"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_codex_adapter_kernel.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 153,
+      "excerpt": "scenario managed-chatgpt-auth PASS (INVOKED)\nscenario api-key-auth PASS (BLOCKED)\nscenario unknown-auth PASS (BLOCKED)\nscenario unsupported-provider-auth PASS (BLOCKED)\nscenario exhausted-limit PASS (BLOCKED)\nscenario available-reset-credit PASS (BLOCKED)\nscenario ambiguous-paid-continuation PASS (BLOCKED)\nscenario malformed-or-missing-observations PASS (BLOCKED)\nscenario mid-session-auth-mode-change PASS (INVOKED then BLOCKED)\nforbidden operation credit-purchase PASS\nforbidden operation rate-limit-reset-consumption PASS\nforbidden operation identity-rotation PASS\nforbidden operation secondary-provider-fallback PASS\nforbidden operation exception-path PASS\nCodex cost preflight hostile matrix PASS\n{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_adapter_kernel.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "bb48bdae202b6ceb49b86acd3a290a654339a308b0dadb2664dac2317ed822c1",
+  "receipt_id": "bb48bdae202b6ceb49b86acd3a290a654339a308b0dadb2664dac2317ed822c1",
+  "record_digest": "63e4014b7c019261f4d7acab68afda194dbb69b92b076f9080959f6f77ce99cb",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:01:28.807057+00:00",
+  "subject": {
+    "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+    "changed_paths": [
+      ".keel/tests/test_codex_cost_preflight.py",
+      "docs/exec-plans/active/ns1-traceability-remediation.md"
+    ],
+    "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+    "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "codex-adapter-tests",
+    "provenance": ".keel/tests/test_codex_adapter_kernel.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

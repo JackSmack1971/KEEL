@@ -1,0 +1,74 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-01",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "The hostile matrix has nine individually identifiable scenario cases with distinguishable pass/fail results."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-02",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Forbidden credit purchase, rate-limit reset consumption, identity rotation, and secondary-provider fallback operations are asserted independently, including a passing genuine preflight exception path."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-03",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "A durable repository artifact records the exact cp1252 baseline reproduction commands, baseline revision, environment, and observed two failures, independently rerun for this change."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-04",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "Preflight decision behavior, RuntimeProfile integration, and the confirmed public status/explain/audit CLI behavior remain unchanged."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-05",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-04",
+      "statement": "KEEL verification and landing verification both pass for the sealed candidate."
+    }
+  ],
+  "schema_version": 1
+}

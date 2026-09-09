@@ -1,0 +1,65 @@
+{
+  "ended_at": "2026-09-09T04:00:51.623448+00:00",
+  "environment": {
+    "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+    "executable": "python.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_p0_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 651,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "ca1fc96a39170d3d0cef28ec052c1d85f51d658de5e454c260924c4f181e45e4",
+  "receipt_id": "ca1fc96a39170d3d0cef28ec052c1d85f51d658de5e454c260924c4f181e45e4",
+  "record_digest": "d2a7c1d38ebc1fa51061f020f63b6099e0e0bc247976d5d6cccec7d969298bd2",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:00:50.971431+00:00",
+  "subject": {
+    "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+    "changed_paths": [
+      ".keel/tests/test_codex_cost_preflight.py",
+      "docs/exec-plans/active/ns1-traceability-remediation.md"
+    ],
+    "content_digest": "9e7638e6e9cbfc58816c7bcdd08cd7c3e013204e38fdc7f0717c4e8490b8a8f7",
+    "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "p0-contract-tests",
+    "provenance": ".keel/tests/test_p0_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}
