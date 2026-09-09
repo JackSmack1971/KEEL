@@ -1,0 +1,394 @@
+{
+  "generated": true,
+  "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+  "receipts": [
+    {
+      "ended_at": "2026-09-09T04:01:28.764130+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 309,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "6f56d7cc817527af5f35c79997a38e81a66435eac996b6a6cbed00696f748230",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T04:01:28.454923+00:00",
+      "subject": {
+        "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "changed_paths": [
+          ".keel/tests/test_codex_cost_preflight.py",
+          "docs/exec-plans/active/ns1-traceability-remediation.md"
+        ],
+        "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+        "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T04:01:28.960602+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-01",
+        "ER-REQ-02",
+        "ER-REQ-03",
+        "ER-REQ-04"
+      ],
+      "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_adapter_kernel.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 153,
+          "excerpt": "scenario managed-chatgpt-auth PASS (INVOKED)\nscenario api-key-auth PASS (BLOCKED)\nscenario unknown-auth PASS (BLOCKED)\nscenario unsupported-provider-auth PASS (BLOCKED)\nscenario exhausted-limit PASS (BLOCKED)\nscenario available-reset-credit PASS (BLOCKED)\nscenario ambiguous-paid-continuation PASS (BLOCKED)\nscenario malformed-or-missing-observations PASS (BLOCKED)\nscenario mid-session-auth-mode-change PASS (INVOKED then BLOCKED)\nforbidden operation credit-purchase PASS\nforbidden operation rate-limit-reset-consumption PASS\nforbidden operation identity-rotation PASS\nforbidden operation secondary-provider-fallback PASS\nforbidden operation exception-path PASS\nCodex cost preflight hostile matrix PASS\n{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_codex_adapter_kernel.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "bb48bdae202b6ceb49b86acd3a290a654339a308b0dadb2664dac2317ed822c1",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T04:01:28.807057+00:00",
+      "subject": {
+        "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "changed_paths": [
+          ".keel/tests/test_codex_cost_preflight.py",
+          "docs/exec-plans/active/ns1-traceability-remediation.md"
+        ],
+        "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+        "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "codex-adapter-tests",
+        "provenance": ".keel/tests/test_codex_adapter_kernel.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T04:01:29.025275+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 62,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_compatibility_retirement.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "69e42af6d9b693561cb125e4ae1ead812885be500b666e6a39b73bb054421539",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T04:01:28.962922+00:00",
+      "subject": {
+        "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "changed_paths": [
+          ".keel/tests/test_codex_cost_preflight.py",
+          "docs/exec-plans/active/ns1-traceability-remediation.md"
+        ],
+        "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+        "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "compatibility-retirement-tests",
+        "provenance": ".keel/tests/test_compatibility_retirement.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T04:01:29.392124+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 364,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": [],\n  \"autonomous_codex\": {\n    \"status\": \"BLOCKED\",\n    \"reason\": \"managed entitlement observations are unavailable; autonomous Codex execution is paused\",\n    \"resumable\": false,\n    \"resume_when\": \"\"\n  }\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "17dafd196df49009143fb415c12829e653918f4356e7444037c89636740daf34",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T04:01:29.027305+00:00",
+      "subject": {
+        "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "changed_paths": [
+          ".keel/tests/test_codex_cost_preflight.py",
+          "docs/exec-plans/active/ns1-traceability-remediation.md"
+        ],
+        "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+        "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T04:01:29.692589+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 298,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"48dffab1afd86a4ce68378cc2776344fd6e508a2272f1183dc404e695015a8e3\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "5dae60347b774fa3bf52136c374f85a42f5d62fb36b571258f7665d099adbc4d",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T04:01:29.394301+00:00",
+      "subject": {
+        "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "changed_paths": [
+          ".keel/tests/test_codex_cost_preflight.py",
+          "docs/exec-plans/active/ns1-traceability-remediation.md"
+        ],
+        "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+        "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T04:01:30.333370+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "2651253deebb3b8ff11733f7bc3c2c454d36efafc434ad807e25b3afd4d6f065",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 638,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "8ef5376a80325a747e1b41c6dfaf7cbbba929abaf93d301f81d47eaab8bc2ad6",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T04:01:29.695076+00:00",
+      "subject": {
+        "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "changed_paths": [
+          ".keel/tests/test_codex_cost_preflight.py",
+          "docs/exec-plans/active/ns1-traceability-remediation.md"
+        ],
+        "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+        "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+    "changed_paths": [
+      ".keel/tests/test_codex_cost_preflight.py",
+      "docs/exec-plans/active/ns1-traceability-remediation.md"
+    ],
+    "content_digest": "c40be6ff3c639cc3008d152556611ad8a9a23b611ffc4d3677d1f2f063f0ec23",
+    "head_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+    "kind": "git-worktree"
+  }
+}

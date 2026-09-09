@@ -1,0 +1,43 @@
+{
+  "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+  "change_id": "ns1-traceability-remediation",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {"id":"AC-01","requirement_id":"REQ-01","statement":"The hostile matrix has nine individually identifiable scenario cases with distinguishable pass/fail results.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-02","requirement_id":"REQ-01","statement":"Forbidden credit purchase, rate-limit reset consumption, identity rotation, and secondary-provider fallback operations are asserted independently, including a passing genuine preflight exception path.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-03","requirement_id":"REQ-02","statement":"A durable repository artifact records the exact cp1252 baseline reproduction commands, baseline revision, environment, and observed two failures, independently rerun for this change.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-04","requirement_id":"REQ-03","statement":"Preflight decision behavior, RuntimeProfile integration, and the confirmed public status/explain/audit CLI behavior remain unchanged.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"},{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"AC-05","requirement_id":"REQ-04","statement":"KEEL verification and landing verification both pass for the sealed candidate.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]}
+  ],
+  "mode": "standard",
+  "non_goals": ["Do not change preflight decision logic, RuntimeProfile integration, or public CLI output.","Do not modify the two cp1252-failing attestation tests or their implementation files.","Do not merge to main without separate authorization."],
+  "objective": "Close NS1 traceability evidence gaps without changing behavior",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {"id":"REQ-01","statement":"Improve hostile-matrix and forbidden-operation traceability without weakening aggregate assertions.","type":"quality","required":true},
+    {"id":"REQ-02","statement":"Record and independently reproduce the cp1252 baseline failures at the main baseline.","type":"documentation","required":true},
+    {"id":"REQ-03","statement":"Preserve preflight, RuntimeProfile, and public CLI behavior.","type":"quality","required":true},
+    {"id":"REQ-04","statement":"Produce KEEL verification evidence for the exact candidate and landing verification.","type":"quality","required":true}
+  ],
+  "work": {"edges":[],"graph_references":[".keel/tests/test_codex_cost_preflight.py",".keel/tests/test_public_cli_contract.py","docs/exec-plans/active/ns1-traceability-remediation.md"],"units":[{"id":"WU-01","title":"Add named scenario and forbidden-operation assertions","paths":[".keel/tests/test_codex_cost_preflight.py"]},{"id":"WU-02","title":"Record cp1252 baseline reproduction","paths":["docs/exec-plans/active/ns1-traceability-remediation.md"]},{"id":"WU-03","title":"Retain CLI contract coverage and verify candidate","paths":[".keel/tests/test_public_cli_contract.py"]}]},
+  "risk": {
+    "consequences": ["Incorrect test traceability could create false audit confidence; documentation must accurately preserve baseline failure evidence."],
+    "control_plane_change": true,
+    "high_blast_radius": false,
+    "level": "standard",
+    "migration_or_release_sensitive": false,
+    "requires_exec_plan": true,
+    "review": "Independent diff and verification review of test-only/documentation-only scope is required.",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    ".keel/tests/test_codex_cost_preflight.py",
+    ".keel/tests/test_public_cli_contract.py",
+    "docs/exec-plans/active/ns1-traceability-remediation.md"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "base_commit": "8b995eb15d89862f847e9aa62f8485553b07e40f",
+  "change_id": "ns1-traceability-remediation",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "3d976a12446d4a3a4343410c73b4af2582a668a4136842feff8683b8e0e51ce1",
+    "last_event_digest": "9ceb8d7f71e81dc97b9a54ff51b29a547260ece8aeb7e16b8f40d1892c242d5f"
+  }
+}
