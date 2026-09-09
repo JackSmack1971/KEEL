@@ -1,0 +1,75 @@
+{
+  "ended_at": "2026-09-09T04:37:10.299865+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-02"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "c97fde76c561767784bec1719be13df35b552d137b63a4b0b1568749b2429b34",
+  "invocation": {
+    "argv": [
+      "python3",
+      "-B",
+      ".keel/tests/smoke_codex_app_server.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 998,
+      "excerpt": "{\"account_state_observed\": true, \"capability_status\": \"STABLE_DOCUMENTED_SURFACE\", \"protocol_version\": null, \"runtime\": \"codex-cli 0.153.4\", \"status\": \"PASS\", \"thread_id_observed\": true}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/smoke_codex_app_server.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "06a83bb5f479afa0f330b1514c6d7e889f7f1d4010148da1941d3541d8312cbf",
+  "receipt_id": "06a83bb5f479afa0f330b1514c6d7e889f7f1d4010148da1941d3541d8312cbf",
+  "record_digest": "09dba907ee659f72b3ecc4e230855db98fbc088658a4c37effbb06ee28d9426b",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:37:09.301768+00:00",
+  "subject": {
+    "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/exec-plans/active/codex-app-server-adapter.md",
+      "docs/exec-plans/completed/codex-app-server-adapter.md"
+    ],
+    "content_digest": "82f70d0745894579ab012347638549e213bc1333603db5b6e09210905c97e201",
+    "head_commit": "e744d72e8e4a9358fa47fa30c77a22063d7d3f02",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "RUNTIME_OBSERVED",
+    "id": "codex-app-server-smoke",
+    "provenance": ".keel/tests/smoke_codex_app_server.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

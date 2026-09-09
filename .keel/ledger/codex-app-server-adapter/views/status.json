@@ -1,0 +1,12 @@
+{
+  "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+  "change_id": "codex-app-server-adapter",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "5cee6238ab18aa2ea8c1888f2002f14ce7233699463530f9d8bc371c70424650",
+    "last_event_digest": "426e4d4de38f69f1cd7ee5bb5d5b4b4e1137a52f163a9e80d68154016ef7a83d"
+  }
+}

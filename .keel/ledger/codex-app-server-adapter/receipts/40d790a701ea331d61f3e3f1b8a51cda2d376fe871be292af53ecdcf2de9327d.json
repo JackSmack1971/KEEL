@@ -1,0 +1,82 @@
+{
+  "ended_at": "2026-09-09T04:33:07.930550+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [
+    "ER-REQ-01",
+    "ER-REQ-03",
+    "ER-REQ-04",
+    "ER-REQ-05",
+    "ER-REQ-06",
+    "ER-REQ-08",
+    "ER-REQ-09",
+    "ER-REQ-10",
+    "ER-REQ-11"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "659e2e7deda7cadc8a0cb13d54b61f5f228511daec3511e2aacdede175b444a9",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_codex_app_server_adapter.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 157,
+      "excerpt": "{\"checks\": [\"handshake\", \"account\", \"thread-create\", \"thread-resume\", \"bounded-turn-events\", \"cost-gate\", \"malformed-frame\", \"idempotent-shutdown\", \"transport-policy\", \"scheduler-boundary\", \"injected-dispatch\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_app_server_adapter.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "40d790a701ea331d61f3e3f1b8a51cda2d376fe871be292af53ecdcf2de9327d",
+  "receipt_id": "40d790a701ea331d61f3e3f1b8a51cda2d376fe871be292af53ecdcf2de9327d",
+  "record_digest": "8891048c97eca54aa90819fed97c0b5c4f8e293c1a063da10f4962ccf76b6fa5",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T04:33:07.773478+00:00",
+  "subject": {
+    "base_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/exec-plans/active/codex-app-server-adapter.md"
+    ],
+    "content_digest": "fbe12611df295ceb14847d56f96564fd4b31cae4b47dbe10787ad66ac29f63a3",
+    "head_commit": "04908d6ba2122b73e7045b862608e319c4f630e8",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "codex-adapter-tests",
+    "provenance": ".keel/tests/test_codex_app_server_adapter.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

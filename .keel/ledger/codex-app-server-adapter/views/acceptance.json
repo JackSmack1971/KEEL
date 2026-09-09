@@ -1,0 +1,160 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-01",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "A distinct Codex App Server transport adapter is invoked only through the scheduler's existing injected-adapter boundary; scheduler and deterministic kernel modules contain no Codex transport code."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-smoke",
+          "provider": "command"
+        }
+      ],
+      "id": "AC-02",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "The adapter completes documented stdio initialization and observes initialization metadata and account state against an installed compatible runtime, or emits explicit UNVERIFIED_RUNTIME with reasoning when unavailable."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-03",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "The adapter creates a new thread and resumes an existing thread using documented stable methods."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-04",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-04",
+      "statement": "The adapter submits a bounded turn and deterministically parses turn lifecycle and item notifications through turn completion."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-05",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-05",
+      "statement": "Process, pipe, timeout, malformed-frame, truncated-frame, and unexpected-exit paths release resources and leave no adapter-owned process running."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-06",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-06",
+      "statement": "Unsupported or malformed initialization metadata, capability, or documented-method responses produce explicit fail-safe mismatch states."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "cli-regression-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-07",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-07",
+      "statement": "Without an App Server, native KEEL CLI behavior and the existing blocked run path remain unchanged."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-08",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-08",
+      "statement": "The change introduces no Platform/API client, credential or key surface, paid fallback, credit purchase, account rotation, or rate-limit evasion."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-09",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-09",
+      "statement": "The baseline uses only documented local stdio transport and does not require experimental transport or experimental process-control APIs."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-10",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-10",
+      "statement": "Any adapter operation that submits a model turn is blocked unless ZERO_INCREMENTAL_COST preflight is SUPPORTED."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "cli-regression-tests",
+          "provider": "unit_test"
+        },
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-11",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-11",
+      "statement": "keel run remains bounded to existing scheduler/adapter substrate and does not become an autonomous engineering loop."
+    }
+  ],
+  "schema_version": 1
+}

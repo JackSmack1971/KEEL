@@ -44,3 +44,28 @@ Invoke explorer for unresolved facts, reviewer for requirement/evidence or impac
 Do not put `[profiles.*]` in project `.codex/config.toml`; current repository evidence says project-local profile selection is unavailable. Named user profiles belong outside the repo. KEEL emergency behavior requires parent-provided `KEEL_BYPASS_REASON` so repository files cannot self-authorize it.
 
 For `codex exec`, default to read-only and grant workspace write only when required. A headless write still uses the same kernel lifecycle. A controlled runner that bypasses hooks must validate adapter sources and preserve equivalent independent verification rather than claiming hook enforcement.
+
+## Local App Server adapter
+
+`.keel/lib/codex_app_server_adapter.py` is a separate, dependency-free transport
+adapter used through the scheduler's injected adapter boundary. Its load-bearing
+path is local `codex app-server --listen stdio://` with newline-delimited JSON
+messages and the documented stable `initialize`, `initialized`, `account/read`,
+`thread/start`, `thread/resume`, and `turn/start` operations. It observes
+`turn/*` and `item/*` notifications through bounded reads and closes process and
+pipes on timeout, malformed frames, and crashes.
+
+The published protocol documentation specifies initialization metadata and client
+capability options, but does not specify a standalone protocol-version or
+capability-discovery response. KEEL does not invent one: the adapter reports
+`protocol_version: null`, labels its validated stable contract
+`STABLE_DOCUMENTED_SURFACE`, and turns missing or unexpected documented fields
+into an explicit compatibility failure. Fixture tests prove wire handling only;
+the conditional smoke command is the installed-runtime evidence and reports
+`UNVERIFIED_RUNTIME` when `codex` is absent or unreachable.
+
+Before `turn/start`, the adapter calls the existing `runtime_authorization`
+`ZERO_INCREMENTAL_COST` preflight. A blocked or incomplete observation prevents
+model execution. No Platform/API client, credential input, paid continuation,
+provider fallback, credit operation, account rotation, or experimental transport
+or process-control dependency is introduced.

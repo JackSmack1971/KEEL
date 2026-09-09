@@ -1,0 +1,229 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-01",
+      "requirement_id": "REQ-01",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-02",
+      "requirement_id": "REQ-02",
+      "verifier_id": "codex-app-server-smoke"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-03",
+      "requirement_id": "REQ-03",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-04",
+      "requirement_id": "REQ-04",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-05",
+      "requirement_id": "REQ-05",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-06",
+      "requirement_id": "REQ-06",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-07",
+      "requirement_id": "REQ-07",
+      "verifier_id": "scheduler-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-08",
+      "requirement_id": "REQ-08",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-09",
+      "requirement_id": "REQ-09",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-10",
+      "requirement_id": "REQ-10",
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-11",
+      "requirement_id": "REQ-11",
+      "verifier_id": "codex-app-server-adapter-tests"
+    }
+  ],
+  "changed_paths": [
+    ".keel/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/codex_app_server_adapter.py",
+    ".keel/tests/smoke_codex_app_server.py",
+    ".keel/tests/test_codex_app_server_adapter.py",
+    "ARCHITECTURE.md",
+    "docs/control-plane/CODEX_NATIVE.md",
+    "docs/control-plane/ORCHESTRATION.md",
+    "docs/exec-plans/active/codex-app-server-adapter.md",
+    "docs/exec-plans/completed/codex-app-server-adapter.md"
+  ],
+  "errors": [],
+  "plan_digest": "f477f04e8dda3f1651c015d4873b4dd6342572b9a12a21dfd54ab41f584ffd2e",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-01",
+        "ER-REQ-03",
+        "ER-REQ-04",
+        "ER-REQ-05",
+        "ER-REQ-06",
+        "ER-REQ-08",
+        "ER-REQ-09",
+        "ER-REQ-10",
+        "ER-REQ-11"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_codex_app_server_adapter.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "codex-app-server-adapter-tests"
+    },
+    {
+      "authority": "RUNTIME_OBSERVED",
+      "establishes": [
+        "ER-REQ-02"
+      ],
+      "mandatory_kernel": false,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/smoke_codex_app_server.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "codex-app-server-smoke"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-07"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "scheduler-tests"
+    }
+  ]
+}
