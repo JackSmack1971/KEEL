@@ -185,6 +185,9 @@ def attest(root: Path, paths: list[str], runtime_available: bool = True) -> dict
 
 
 def manifest_producer(root: Path, write: bool = False) -> dict:
+    def content_sha256(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
     path = root / ".keel" / "bootstrap-manifest.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     data["producer"] = {"command": ["python", ".keel/bin/keel.py", "manifest", "--write"], "source": ".keel/lib/p0_contract.py"}
@@ -194,12 +197,12 @@ def manifest_producer(root: Path, write: bool = False) -> dict:
         target = root / rel
         if not target.is_file():
             return _finding("FAILED", "manifest-listed input is missing", path=rel)
-        data["files"][rel] = hashlib.sha256(target.read_bytes()).hexdigest()
+        data["files"][rel] = content_sha256(target)
     for seed in data.get("seed_sources", []):
         target = root / seed["path"]
         if not target.is_file():
             return _finding("FAILED", "manifest-listed seed input is missing", path=seed["path"])
-        seed["sha256"] = hashlib.sha256(target.read_bytes()).hexdigest()
+        seed["sha256"] = content_sha256(target)
     encoded = json.dumps(data, indent=2, sort_keys=False) + "\n"
     current = path.read_text(encoding="utf-8")
     if write:

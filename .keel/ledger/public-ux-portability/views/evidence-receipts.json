@@ -3,7 +3,7 @@
   "intent_digest": "b7a6374e5f088089c884a375ed796c2081206a262c90fa34af4a38ec12a176c9",
   "receipts": [
     {
-      "ended_at": "2026-09-09T00:44:17.140780+00:00",
+      "ended_at": "2026-09-09T00:47:24.085085+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -25,7 +25,7 @@
       },
       "observations": [
         {
-          "duration_ms": 344,
+          "duration_ms": 227,
           "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -42,10 +42,10 @@
           }
         }
       ],
-      "receipt_digest": "4b11aecf39b00d709757a156c0abfa13ee5d09a10312af026d8c2ab7243d9dac",
+      "receipt_digest": "3cc31f6ee5633f8ed8d9145222cf807c985b94c48ba12adef59402b966ed0c1c",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:16.796026+00:00",
+      "started_at": "2026-09-09T00:47:23.857752+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -55,6 +55,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -69,8 +70,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -82,7 +83,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:17.327113+00:00",
+      "ended_at": "2026-09-09T00:47:24.199383+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -104,7 +105,7 @@
       },
       "observations": [
         {
-          "duration_ms": 79,
+          "duration_ms": 64,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -121,10 +122,10 @@
           }
         }
       ],
-      "receipt_digest": "9754d9a4007ed1c2412d8487820b09ced5ab68fe4c0d88fc4824a86d8ab58afb",
+      "receipt_digest": "46b43c550103c432009493ae57d86903196823ddd22612a5710da60608447a58",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:17.247274+00:00",
+      "started_at": "2026-09-09T00:47:24.134812+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -134,6 +135,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -148,8 +150,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -161,7 +163,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:17.668289+00:00",
+      "ended_at": "2026-09-09T00:47:24.479413+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -183,7 +185,7 @@
       },
       "observations": [
         {
-          "duration_ms": 339,
+          "duration_ms": 278,
           "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -200,10 +202,10 @@
           }
         }
       ],
-      "receipt_digest": "e0f69b972e4bfad684703053231ecb3388128cd721c3a0b308e490e0ddd3a4e1",
+      "receipt_digest": "3fff854e2529dbf8b440f9ef3ef1b00338325147da60c00e532d925af35d0036",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:17.329148+00:00",
+      "started_at": "2026-09-09T00:47:24.201273+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -213,6 +215,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -227,8 +230,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -240,7 +243,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:17.748656+00:00",
+      "ended_at": "2026-09-09T00:47:24.547539+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -266,7 +269,7 @@
       },
       "observations": [
         {
-          "duration_ms": 78,
+          "duration_ms": 66,
           "excerpt": "Documentation contract tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -283,10 +286,10 @@
           }
         }
       ],
-      "receipt_digest": "13baf0fa90cddd9b4bceb8810d9d11f97964f7937492134f28d83f66cecaf55e",
+      "receipt_digest": "1b210d97000b63f62c1e0f97a1899196cbba8010c513da89cb0e7639e40435c4",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:17.670641+00:00",
+      "started_at": "2026-09-09T00:47:24.481492+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -296,6 +299,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -310,8 +314,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -323,7 +327,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:18.015787+00:00",
+      "ended_at": "2026-09-09T00:47:24.778172+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -345,8 +349,8 @@
       },
       "observations": [
         {
-          "duration_ms": 265,
-          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"751668f1b052f9b9a553ece75fc32e0dee438760525553338802f40ef3f9e444\"\n}",
+          "duration_ms": 228,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"0f25c099add0a48bbc4f2d24249f18da0186c91fa4c81ef3e1d757f589376e9d\"\n}",
           "exit_code": 0,
           "kind": "command-result",
           "resolution": {
@@ -362,10 +366,10 @@
           }
         }
       ],
-      "receipt_digest": "fc5e4b8e2745bb408cd60b5ed4c45491080538187c6b950de4a135f971937415",
+      "receipt_digest": "8e8b635f1a56068dcd3dcf4e14feb1b920794abc58c8f16efb4e90747fd3f169",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:17.750683+00:00",
+      "started_at": "2026-09-09T00:47:24.549825+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -375,6 +379,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -389,8 +394,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -402,7 +407,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:18.630048+00:00",
+      "ended_at": "2026-09-09T00:47:25.320559+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -424,7 +429,7 @@
       },
       "observations": [
         {
-          "duration_ms": 612,
+          "duration_ms": 540,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -441,10 +446,10 @@
           }
         }
       ],
-      "receipt_digest": "cfc55f29f1f29bbc75ec07a5a619558d6bba1c487b679762a9face5350a078ce",
+      "receipt_digest": "bd700b4eb7d99338b35b187bde9547527f7c7fde4a200e66fdeae916c05642ae",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:18.017712+00:00",
+      "started_at": "2026-09-09T00:47:24.780330+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -454,6 +459,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -468,8 +474,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -481,7 +487,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:18.822628+00:00",
+      "ended_at": "2026-09-09T00:47:25.519169+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -506,7 +512,7 @@
       },
       "observations": [
         {
-          "duration_ms": 190,
+          "duration_ms": 196,
           "excerpt": "Portability installation tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -523,10 +529,10 @@
           }
         }
       ],
-      "receipt_digest": "c3a1a51e3851250bcc0bea07d9f81dcc01c39a3456666d4b28c6b522dd63e7ef",
+      "receipt_digest": "9387b80e399681d30e92c464b903e161ba01f23d3bea12cf580e42a9fc249780",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:18.631965+00:00",
+      "started_at": "2026-09-09T00:47:25.322750+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -536,6 +542,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -550,8 +557,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -563,7 +570,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:44:25.346089+00:00",
+      "ended_at": "2026-09-09T00:47:31.511919+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -590,7 +597,7 @@
       },
       "observations": [
         {
-          "duration_ms": 6521,
+          "duration_ms": 5990,
           "excerpt": "Public CLI contract tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -607,10 +614,10 @@
           }
         }
       ],
-      "receipt_digest": "b09c3c294d7a81b751d672efcf4a22ec5b20aecf9b1ba9d764c16a5222d5c7bf",
+      "receipt_digest": "fc525078c5de9d943eabb23eb9c32d0a206f4b7901fe22afad12a5544b404b93",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:44:18.824569+00:00",
+      "started_at": "2026-09-09T00:47:25.521128+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -620,6 +627,7 @@
           ".keel/config.json",
           ".keel/lib/git_proof.py",
           ".keel/lib/keel_core.py",
+          ".keel/lib/p0_contract.py",
           ".keel/tests/test_compatibility_retirement.py",
           ".keel/tests/test_documentation_contract.py",
           ".keel/tests/test_portability_installation.py",
@@ -634,8 +642,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-        "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+        "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+        "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -657,6 +665,7 @@
       ".keel/config.json",
       ".keel/lib/git_proof.py",
       ".keel/lib/keel_core.py",
+      ".keel/lib/p0_contract.py",
       ".keel/tests/test_compatibility_retirement.py",
       ".keel/tests/test_documentation_contract.py",
       ".keel/tests/test_portability_installation.py",
@@ -671,8 +680,8 @@
       "docs/control-plane/VERIFICATION.md",
       "docs/exec-plans/active/public-ux-portability.md"
     ],
-    "content_digest": "023e38312df22f2170b0cfef1bd226ba52cf905fdf74ace485833299fac2995f",
-    "head_commit": "7a2e702f81657eccee73aeed34a8e1647bf55ded",
+    "content_digest": "841e0739a824ae46c5c980505d842b5c34afa4702b43d7280bcc7806ca29621c",
+    "head_commit": "85f34d16ac9ce0e4ff1eb7eb71141817050c870c",
     "kind": "git-worktree"
   }
 }

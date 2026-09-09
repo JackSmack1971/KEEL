@@ -53,6 +53,7 @@
     ".keel/config.json",
     ".keel/lib/git_proof.py",
     ".keel/lib/keel_core.py",
+    ".keel/lib/p0_contract.py",
     ".keel/tests/test_compatibility_retirement.py",
     ".keel/tests/test_documentation_contract.py",
     ".keel/tests/test_portability_installation.py",
@@ -68,7 +69,7 @@
     "docs/exec-plans/active/public-ux-portability.md"
   ],
   "errors": [],
-  "plan_digest": "cc4e052f80a537632a308a963b4e089bc52bc85d8988406e964541e23a098623",
+  "plan_digest": "7758b0d975b0cc94f8c265279e2219b1bc8de8e94d0e305952f01e3d54acbd62",
   "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
   "risk_level": "high",
   "schema_version": 1,
