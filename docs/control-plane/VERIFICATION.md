@@ -62,3 +62,13 @@ Candidate sealing semantics remain unchanged: sealing consumes the compatibility
 ## Completion blockers
 
 Missing evidence, uncovered requirements, insufficient authority, `FAIL` or `INCONCLUSIVE` receipts, subject/intent drift, invalid registry/plan/receipt integrity, missing authorization, out-of-scope changes, or unauthorized effects block completion.
+
+## Hosted CI evidence boundary
+
+The Linux/Windows deterministic workflow is a clean-environment repository-behavior
+proof surface. Its static Codex fixtures and hook wire-contract tests prove only
+repository contracts. Its runtime smoke path is deliberately non-executing and
+reports `UNVERIFIED_RUNTIME`; therefore hosted CI is not evidence of live Codex
+availability, project/hook trust, hook delivery, enforcement, or model execution.
+Those claims still require separate per-runtime observation under the runtime trust
+contract.

@@ -127,6 +127,13 @@
       "required": true,
       "timeout_sec": 120
     }
+    ,{
+      "argv": ["python3", "-B", ".keel/tests/test_deterministic_ci.py"],
+      "cwd": ".",
+      "id": "deterministic-ci-contract-tests",
+      "required": true,
+      "timeout_sec": 120
+    }
   ],
   "verifier_registry": [
     {
@@ -1560,6 +1567,17 @@
       "provider": "unit_test",
       "runtime": {"argv": ["python", "-B", "keelbench/tests/test_keelbench.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
       "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "architecture", "documentation"]},
+      "version": "1"
+    }
+    ,{
+      "applicability": {"paths": [".github/workflows/deterministic-kernel.yml", ".keel/ci/**", ".keel/tests/test_deterministic_ci.py", "ARCHITECTURE.md", "CONTROL_PLANE.md", "docs/control-plane/**"], "risk_levels": ["high"]},
+      "authority": "TESTED",
+      "id": "deterministic-ci-contract-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_deterministic_ci.py",
+      "provider": "unit_test",
+      "runtime": {"argv": ["python3", "-B", ".keel/tests/test_deterministic_ci.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "security", "architecture", "documentation"]},
       "version": "1"
     }
   ]

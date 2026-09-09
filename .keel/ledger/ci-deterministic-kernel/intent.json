@@ -1,0 +1,332 @@
+{
+  "base_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+  "change_id": "ci-deterministic-kernel",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {
+      "id": "AC-01",
+      "requirement_id": "REQ-01",
+      "statement": "Hosted GitHub Actions runs the fresh-checkout deterministic suite on Linux and Windows; macOS exclusion is reasoned from current portability evidence.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-02",
+      "requirement_id": "REQ-02",
+      "statement": "The CI suite visibly exercises public CLI, ledger/kernel, scheduler, evidence, Git proof/candidate/landing, portability/install, documentation/contracts, hook wire-contract, and Codex App Server fixture categories.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-03",
+      "requirement_id": "REQ-03",
+      "statement": "The runtime-dependent Codex smoke reports PASS, a genuine failure, or UNVERIFIED_RUNTIME and never converts runtime absence into live verification.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-04",
+      "requirement_id": "REQ-04",
+      "statement": "CI makes no model/API calls, uses no paid-service credential, and adds no incremental AI-cost mechanism.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-05",
+      "requirement_id": "REQ-05",
+      "statement": "CI fails when the generated bootstrap manifest or validated configuration drifts from its declared source.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-06",
+      "requirement_id": "REQ-06",
+      "statement": "CI performs deterministic cache, temporary-artifact, and Python bytecode hygiene checks.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-07",
+      "requirement_id": "REQ-07",
+      "statement": "The workflow YAML remains thin and delegates validation to repository-owned Python tooling.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-08",
+      "requirement_id": "REQ-08",
+      "statement": "Authoritative documentation explicitly limits hosted CI proof to repository behavior and excludes live Codex hook/runtime activation.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-09",
+      "requirement_id": "REQ-09",
+      "statement": "A fresh checkout of the candidate executes the full deterministic suite successfully.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-10",
+      "requirement_id": "REQ-10",
+      "statement": "A temporary deliberately failing kernel-test probe makes the repository-owned CI command fail and is not landed.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-11",
+      "requirement_id": "REQ-11",
+      "statement": "Hosted-CI Codex runtime absence is explicitly reported as UNVERIFIED_RUNTIME.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-12",
+      "requirement_id": "REQ-12",
+      "statement": "Canonical serialization, path handling, Git proof, and ledger validation have equivalent pass/fail behavior on Linux and Windows.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    },
+    {
+      "id": "AC-13",
+      "requirement_id": "REQ-13",
+      "statement": "Affected plans and architecture/control-plane/verification documentation are reconciled without advancing a later North-Star stage.",
+      "required": true,
+      "evidence": [
+        {
+          "provider": "unit_test",
+          "check_id": "deterministic-ci-contract-tests"
+        }
+      ]
+    }
+  ],
+  "mode": "standard",
+  "non_goals": [
+    "Do not activate or invoke a live Codex/model runtime in hosted CI.",
+    "Do not add API keys, paid credentials, provider fallbacks, credit purchase, account rotation, or rate-limit evasion.",
+    "Do not redesign kernel lifecycle, authorization, scheduler, evidence, or Git landing semantics.",
+    "Do not implement or mark any later North-Star roadmap stage complete.",
+    "Do not add macOS unless the complete dependency-free suite is proven credential-free and portable."
+  ],
+  "objective": "Establish deterministic zero-incremental-cost hosted Linux and Windows CI proof for the existing portable KEEL kernel, with truthful runtime boundaries and no control-plane redesign beyond CI verifiability.",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "statement": "Hosted GitHub Actions runs the fresh-checkout deterministic suite on Linux and Windows; macOS exclusion is reasoned from current portability evidence.",
+      "type": "behavior",
+      "required": true
+    },
+    {
+      "id": "REQ-02",
+      "statement": "The CI suite visibly exercises public CLI, ledger/kernel, scheduler, evidence, Git proof/candidate/landing, portability/install, documentation/contracts, hook wire-contract, and Codex App Server fixture categories.",
+      "type": "behavior",
+      "required": true
+    },
+    {
+      "id": "REQ-03",
+      "statement": "The runtime-dependent Codex smoke reports PASS, a genuine failure, or UNVERIFIED_RUNTIME and never converts runtime absence into live verification.",
+      "type": "behavior",
+      "required": true
+    },
+    {
+      "id": "REQ-04",
+      "statement": "CI makes no model/API calls, uses no paid-service credential, and adds no incremental AI-cost mechanism.",
+      "type": "security",
+      "required": true
+    },
+    {
+      "id": "REQ-05",
+      "statement": "CI fails when the generated bootstrap manifest or validated configuration drifts from its declared source.",
+      "type": "quality",
+      "required": true
+    },
+    {
+      "id": "REQ-06",
+      "statement": "CI performs deterministic cache, temporary-artifact, and Python bytecode hygiene checks.",
+      "type": "quality",
+      "required": true
+    },
+    {
+      "id": "REQ-07",
+      "statement": "The workflow YAML remains thin and delegates validation to repository-owned Python tooling.",
+      "type": "quality",
+      "required": true
+    },
+    {
+      "id": "REQ-08",
+      "statement": "Authoritative documentation explicitly limits hosted CI proof to repository behavior and excludes live Codex hook/runtime activation.",
+      "type": "documentation",
+      "required": true
+    },
+    {
+      "id": "REQ-09",
+      "statement": "A fresh checkout of the candidate executes the full deterministic suite successfully.",
+      "type": "behavior",
+      "required": true
+    },
+    {
+      "id": "REQ-10",
+      "statement": "A temporary deliberately failing kernel-test probe makes the repository-owned CI command fail and is not landed.",
+      "type": "quality",
+      "required": true
+    },
+    {
+      "id": "REQ-11",
+      "statement": "Hosted-CI Codex runtime absence is explicitly reported as UNVERIFIED_RUNTIME.",
+      "type": "behavior",
+      "required": true
+    },
+    {
+      "id": "REQ-12",
+      "statement": "Canonical serialization, path handling, Git proof, and ledger validation have equivalent pass/fail behavior on Linux and Windows.",
+      "type": "quality",
+      "required": true
+    },
+    {
+      "id": "REQ-13",
+      "statement": "Affected plans and architecture/control-plane/verification documentation are reconciled without advancing a later North-Star stage.",
+      "type": "documentation",
+      "required": true
+    }
+  ],
+  "risk": {
+    "level": "high",
+    "control_plane_change": true,
+    "security_privacy_sensitive": false,
+    "migration_or_release_sensitive": true,
+    "high_blast_radius": true,
+    "requires_exec_plan": true,
+    "consequences": [
+      "A falsely green workflow could misrepresent cross-platform kernel correctness or live runtime activation.",
+      "A CI command that reaches Codex or credentials could violate ZERO_INCREMENTAL_COST.",
+      "Platform-specific command or path behavior could silently diverge."
+    ],
+    "review": "Independent review must inspect OS equivalence, test-category coverage, zero-cost/runtime boundaries, drift and hygiene failure modes, thin YAML, and documentation truth."
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    ".github/workflows/deterministic-kernel.yml",
+    ".keel/ci/verify.py",
+    ".keel/config.json",
+    ".keel/bootstrap-manifest.json",
+    ".keel/lib/canonical_ledger.py",
+    ".keel/tests/smoke_codex_app_server.py",
+    ".keel/tests/test_canonical_ledger.py",
+    ".keel/tests/test_deterministic_ci.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "docs/control-plane/TESTING_CI_GENERATED.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/ci-deterministic-kernel.md",
+    "docs/exec-plans/completed/ci-deterministic-kernel.md"
+  ],
+  "work": {
+    "graph_references": [
+      "docs/control-plane/TESTING_CI_GENERATED.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/control-plane/CODEX_NATIVE.md"
+    ],
+    "edges": [],
+    "units": [
+      {
+        "id": "WU-01",
+        "title": "Add a repository-owned deterministic cross-platform CI verifier and its contract tests",
+        "paths": [
+          ".keel/ci/verify.py",
+          ".keel/tests/test_deterministic_ci.py"
+        ]
+      },
+      {
+        "id": "WU-02",
+        "title": "Add a thin least-privilege Linux and Windows GitHub Actions workflow",
+        "paths": [
+          ".github/workflows/deterministic-kernel.yml"
+        ]
+      },
+      {
+        "id": "WU-03",
+        "title": "Register exact KEEL verification and generated-manifest provenance",
+        "paths": [
+          ".keel/config.json",
+          ".keel/bootstrap-manifest.json"
+        ]
+      },
+      {
+        "id": "WU-04",
+        "title": "Document CI trust boundary and reconcile plan/architecture status",
+        "paths": [
+          "ARCHITECTURE.md",
+          "CONTROL_PLANE.md",
+          "docs/control-plane/TESTING_CI_GENERATED.md",
+          "docs/control-plane/VERIFICATION.md",
+          "docs/exec-plans/active/ci-deterministic-kernel.md"
+        ]
+      }
+    ]
+  }
+}

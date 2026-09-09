@@ -1,0 +1,97 @@
+{
+  "change_type": "implementation",
+  "criteria": [],
+  "errors": [],
+  "implementation_status": "PASS",
+  "projection_of": "evidence-receipts.json",
+  "requirement_coverage": [
+    {
+      "evidence_requirement_id": "ER-REQ-01",
+      "requirement_id": "REQ-01",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-02",
+      "requirement_id": "REQ-02",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-03",
+      "requirement_id": "REQ-03",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-04",
+      "requirement_id": "REQ-04",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-05",
+      "requirement_id": "REQ-05",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-06",
+      "requirement_id": "REQ-06",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-07",
+      "requirement_id": "REQ-07",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-08",
+      "requirement_id": "REQ-08",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-09",
+      "requirement_id": "REQ-09",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-10",
+      "requirement_id": "REQ-10",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-11",
+      "requirement_id": "REQ-11",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-12",
+      "requirement_id": "REQ-12",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-13",
+      "requirement_id": "REQ-13",
+      "status": "PASS",
+      "verifier_id": "deterministic-ci-contract-tests"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 13,
+    "required": 13,
+    "requirements_covered": 13,
+    "requirements_passing": 13,
+    "requirements_total": 13
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

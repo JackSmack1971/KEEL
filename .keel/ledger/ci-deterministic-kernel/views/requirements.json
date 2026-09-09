@@ -1,0 +1,84 @@
+{
+  "change_type": "implementation",
+  "requirements": [
+    {
+      "id": "REQ-01",
+      "required": true,
+      "statement": "Hosted GitHub Actions runs the fresh-checkout deterministic suite on Linux and Windows; macOS exclusion is reasoned from current portability evidence.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-02",
+      "required": true,
+      "statement": "The CI suite visibly exercises public CLI, ledger/kernel, scheduler, evidence, Git proof/candidate/landing, portability/install, documentation/contracts, hook wire-contract, and Codex App Server fixture categories.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-03",
+      "required": true,
+      "statement": "The runtime-dependent Codex smoke reports PASS, a genuine failure, or UNVERIFIED_RUNTIME and never converts runtime absence into live verification.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-04",
+      "required": true,
+      "statement": "CI makes no model/API calls, uses no paid-service credential, and adds no incremental AI-cost mechanism.",
+      "type": "security"
+    },
+    {
+      "id": "REQ-05",
+      "required": true,
+      "statement": "CI fails when the generated bootstrap manifest or validated configuration drifts from its declared source.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-06",
+      "required": true,
+      "statement": "CI performs deterministic cache, temporary-artifact, and Python bytecode hygiene checks.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-07",
+      "required": true,
+      "statement": "The workflow YAML remains thin and delegates validation to repository-owned Python tooling.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-08",
+      "required": true,
+      "statement": "Authoritative documentation explicitly limits hosted CI proof to repository behavior and excludes live Codex hook/runtime activation.",
+      "type": "documentation"
+    },
+    {
+      "id": "REQ-09",
+      "required": true,
+      "statement": "A fresh checkout of the candidate executes the full deterministic suite successfully.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-10",
+      "required": true,
+      "statement": "A temporary deliberately failing kernel-test probe makes the repository-owned CI command fail and is not landed.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-11",
+      "required": true,
+      "statement": "Hosted-CI Codex runtime absence is explicitly reported as UNVERIFIED_RUNTIME.",
+      "type": "behavior"
+    },
+    {
+      "id": "REQ-12",
+      "required": true,
+      "statement": "Canonical serialization, path handling, Git proof, and ledger validation have equivalent pass/fail behavior on Linux and Windows.",
+      "type": "quality"
+    },
+    {
+      "id": "REQ-13",
+      "required": true,
+      "statement": "Affected plans and architecture/control-plane/verification documentation are reconciled without advancing a later North-Star stage.",
+      "type": "documentation"
+    }
+  ],
+  "schema_version": 1
+}
