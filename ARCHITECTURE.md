@@ -2,10 +2,11 @@
 
 Status: `VERIFIED — CANONICAL KEEL KERNEL`
 
-KEEL is a dependency-free, repository-local change-governance kernel. It has one
-normal CLI (`.keel/bin/keel.py`), one canonical change ledger, and one semantic
-vocabulary. Historical v1 *ledgers* are inputs to a versioned migration reader; there
-is no v1 mission/runtime product path.
+KEEL is a dependency-free, repository-local change-governance kernel. Its public
+contract is a small JSON CLI projection over one canonical change ledger; schema
+versions and subsystem history are compatibility implementation details. Historical
+v1 *ledgers* are inputs to a versioned migration reader; there is no v1 mission/runtime
+product path.
 
 ## Canonical components
 
@@ -28,6 +29,13 @@ is no v1 mission/runtime product path.
   Codex/runtime adapters.
 
 ## Boundaries
+
+The public UX is intentionally stack-neutral: KEEL governs intent, authorization,
+evidence, and Git state but never invents a consumer build/test/runtime architecture.
+KEEL-owned runtime and ledger files, project-owned policy/configuration, generated
+cache/state, and durable historical ledger/ref/note data have separate ownership and
+retention rules. Policy packs under `policies/templates/` are opt-in consumer
+scaffolding, not KEEL runtime policy.
 
 Facts and generated views do not become policy. Plans and EffectRequests do not grant
 permission. Hooks are not confinement. SHIP is eligibility rather than integration

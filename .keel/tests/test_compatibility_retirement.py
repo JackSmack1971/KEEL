@@ -25,10 +25,11 @@ retired = [
 assert all(not (ROOT / path).exists() for path in retired)
 
 cli_source = (ROOT / ".keel/bin/keel.py").read_text()
-for obsolete in ("mission", "mission-v2", "route", "map", "feedback", "entropy", "init", "review", "ship"):
+for obsolete in ("mission", "mission-v2", "route", "map", "feedback", "entropy", "review", "ship"):
     assert f'add_parser("{obsolete}")' not in cli_source
+assert 'add_parser("init"' in cli_source
 for canonical in ("change-graph", "facts", "ledger", "verify", "seal", "anchor"):
-    assert f'add_parser("{canonical}")' in cli_source
+    assert f'add_parser("{canonical}"' in cli_source
 
 manifest = json.loads((ROOT / ".keel/bootstrap-manifest.json").read_text())
 assert manifest["producer"]["source"] == ".keel/lib/p0_contract.py"

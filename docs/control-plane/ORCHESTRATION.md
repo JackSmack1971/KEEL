@@ -1,5 +1,8 @@
 # Bounded WorkUnit orchestration
 
+Orchestration remains optional and stack-neutral. It does not infer a consumer
+project architecture or create commands that the repository has not declared.
+
 `.keel/lib/scheduler.py` provides a repository-local desired-state reconciler and
 bounded scheduler over canonical `ChangeGraph` WorkUnits. Each reconciliation
 observes actual state, compares it with the desired graph, derives unmet

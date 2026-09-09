@@ -11,6 +11,11 @@
 ## Trust and authority
 File presence or fixture success does not prove activation. Verify project trust, hook trust, Python/Git runtime, delivered events, and actual allow/deny behavior before reporting KEEL hooks active. The hook, rule, skill, and agent surfaces do not independently decide lifecycle, scope, evidence sufficiency, or permission.
 
+The public interaction remains the stable JSON CLI (`init`, `doctor`, `start`,
+`status`, `next`, `run`, `verify`, `land`, `explain`, and `audit`). Codex hooks are
+adapters over that contract; they do not expose schema-specific ledger commands as a
+second authority.
+
 ## Declared hook and tool coverage
 When an installed Codex runtime trusts and supports this definition, the project requests:
 - `SessionStart` and `UserPromptSubmit`: bounded decision-relevant kernel context;

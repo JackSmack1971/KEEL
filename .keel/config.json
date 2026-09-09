@@ -79,7 +79,75 @@
     "explicit_non_source_globs": [],
     "explicit_source_globs": []
   },
+  "verification_commands": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_public_cli_contract.py"
+      ],
+      "cwd": ".",
+      "id": "public-cli-contract-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_portability_installation.py"
+      ],
+      "cwd": ".",
+      "id": "portability-installation-tests",
+      "required": true,
+      "timeout_sec": 120
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_documentation_contract.py"
+      ],
+      "cwd": ".",
+      "id": "documentation-contract-tests",
+      "required": true,
+      "timeout_sec": 120
+    }
+  ],
   "verifier_registry": [
+    {
+      "applicability": {"paths": [".keel/bin/keel.py", ".keel/lib/**", ".keel/tests/**", "docs/control-plane/**", "ARCHITECTURE.md", "CONTROL_PLANE.md", "WORKFLOW.md"], "risk_levels": ["high"]},
+      "authority": "TESTED",
+      "id": "public-cli-contract-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_public_cli_contract.py",
+      "provider": "unit_test",
+      "runtime": {"argv": ["python3", "-B", ".keel/tests/test_public_cli_contract.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test"], "requirement_types": ["behavior", "quality", "architecture", "documentation", "migration"]},
+      "version": "1"
+    },
+    {
+      "applicability": {"paths": [".keel/lib/**", ".keel/tests/**", ".keel/config.json", ".keel/bootstrap-manifest.json", "docs/control-plane/**"], "risk_levels": ["high"]},
+      "authority": "TESTED",
+      "id": "portability-installation-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_portability_installation.py",
+      "provider": "unit_test",
+      "runtime": {"argv": ["python3", "-B", ".keel/tests/test_portability_installation.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test"], "requirement_types": ["migration", "quality", "behavior"]},
+      "version": "1"
+    },
+    {
+      "applicability": {"paths": ["AGENTS.md", "ARCHITECTURE.md", "CONTROL_PLANE.md", "WORKFLOW.md", "docs/control-plane/**", "policies/**"], "risk_levels": ["high"]},
+      "authority": "TESTED",
+      "id": "documentation-contract-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_documentation_contract.py",
+      "provider": "unit_test",
+      "runtime": {"argv": ["python3", "-B", ".keel/tests/test_documentation_contract.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
+      "supports": {"evidence_providers": ["unit_test"], "requirement_types": ["documentation", "architecture", "quality"]},
+      "version": "1"
+    },
     {
       "applicability": {
         "paths": [
@@ -1323,25 +1391,131 @@
       "version": "1"
     },
     {
-      "applicability": {"paths": [".keel/lib/scheduler.py", ".keel/lib/change_graph.py", ".keel/tests/test_scheduler.py", ".keel/tests/smoke_scheduler.py", ".keel/bin/keel.py", "ARCHITECTURE.md", "docs/control-plane/**"], "risk_levels": ["high"]},
-      "authority": "TESTED", "id": "scheduler-tests", "mandatory_kernel": false,
-      "provenance": ".keel/tests/test_scheduler.py", "provider": "unit_test",
-      "runtime": {"argv": ["python", "-B", ".keel/tests/test_scheduler.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
-      "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "architecture", "security"]}, "version": "1"
+      "applicability": {
+        "paths": [
+          ".keel/lib/scheduler.py",
+          ".keel/lib/change_graph.py",
+          ".keel/tests/test_scheduler.py",
+          ".keel/tests/smoke_scheduler.py",
+          ".keel/bin/keel.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/**"
+        ],
+        "risk_levels": [
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "scheduler-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_scheduler.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "architecture",
+          "security"
+        ]
+      },
+      "version": "1"
     },
     {
-      "applicability": {"paths": [".keel/lib/**", ".keel/bin/keel.py", ".keel/tests/**", "ARCHITECTURE.md", "WORKFLOW.md", "CONTROL_PLANE.md", "docs/control-plane/**"], "risk_levels": ["high"]},
-      "authority": "TESTED", "id": "landing-transaction-tests", "mandatory_kernel": false,
-      "provenance": ".keel/tests/test_landing_transaction.py", "provider": "unit_test",
-      "runtime": {"argv": ["python", "-B", ".keel/tests/test_landing_transaction.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
-      "supports": {"evidence_providers": ["unit_test", "command"], "requirement_types": ["behavior", "quality", "architecture", "security", "documentation"]}, "version": "1"
+      "applicability": {
+        "paths": [
+          ".keel/lib/**",
+          ".keel/bin/keel.py",
+          ".keel/tests/**",
+          "ARCHITECTURE.md",
+          "WORKFLOW.md",
+          "CONTROL_PLANE.md",
+          "docs/control-plane/**"
+        ],
+        "risk_levels": [
+          "high"
+        ]
+      },
+      "authority": "TESTED",
+      "id": "landing-transaction-tests",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/test_landing_transaction.py",
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_landing_transaction.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "unit_test",
+          "command"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "architecture",
+          "security",
+          "documentation"
+        ]
+      },
+      "version": "1"
     },
     {
-      "applicability": {"paths": [".keel/lib/scheduler.py", ".keel/tests/smoke_scheduler.py"], "risk_levels": ["high"]},
-      "authority": "RUNTIME_OBSERVED", "id": "scheduler-smoke", "mandatory_kernel": false,
-      "provenance": ".keel/tests/smoke_scheduler.py", "provider": "command",
-      "runtime": {"argv": ["python", "-B", ".keel/tests/smoke_scheduler.py"], "cwd": ".", "kind": "command", "timeout_sec": 120},
-      "supports": {"evidence_providers": ["command", "unit_test"], "requirement_types": ["behavior", "quality", "architecture"]}, "version": "1"
+      "applicability": {
+        "paths": [
+          ".keel/lib/scheduler.py",
+          ".keel/tests/smoke_scheduler.py"
+        ],
+        "risk_levels": [
+          "high"
+        ]
+      },
+      "authority": "RUNTIME_OBSERVED",
+      "id": "scheduler-smoke",
+      "mandatory_kernel": false,
+      "provenance": ".keel/tests/smoke_scheduler.py",
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/smoke_scheduler.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "supports": {
+        "evidence_providers": [
+          "command",
+          "unit_test"
+        ],
+        "requirement_types": [
+          "behavior",
+          "quality",
+          "architecture"
+        ]
+      },
+      "version": "1"
     }
   ]
 }

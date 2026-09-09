@@ -1,0 +1,79 @@
+{
+  "ended_at": "2026-09-09T00:15:16.869172+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "b7a6374e5f088089c884a375ed796c2081206a262c90fa34af4a38ec12a176c9",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_compatibility_retirement.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 96,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "ce6962154cc1cb2e971b2dec72340d153650e2f56282155df307065e71c4c9f0",
+  "receipt_id": "ce6962154cc1cb2e971b2dec72340d153650e2f56282155df307065e71c4c9f0",
+  "record_digest": "1c8cd8b39e8b031663514cf6533b94fb841d9d2a85e95ea941d5e1fece3a9096",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T00:15:16.773115+00:00",
+  "subject": {
+    "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
+    "changed_paths": [
+      ".keel/README.md",
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/config.json",
+      ".keel/lib/keel_core.py",
+      ".keel/tests/test_compatibility_retirement.py",
+      ".keel/tests/test_documentation_contract.py",
+      ".keel/tests/test_portability_installation.py",
+      ".keel/tests/test_public_cli_contract.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "WORKFLOW.md",
+      "docs/control-plane/COMMANDS.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/public-ux-portability.md"
+    ],
+    "content_digest": "ba33bc8d092b2fba29dee4547112007b023019cd7805530f9ee5a20398614f25",
+    "head_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "compatibility-retirement-tests",
+    "provenance": ".keel/tests/test_compatibility_retirement.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

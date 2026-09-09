@@ -2,22 +2,24 @@
 
 Repository-local deterministic change ledger and phase/scope/verification guardrails for Codex. Runtime scripts use Python 3 standard library plus Git.
 
-Primary commands:
+Public commands:
 ```sh
+python3 .keel/bin/keel.py init --check
 python3 .keel/bin/keel.py doctor
+python3 .keel/bin/keel.py start "<objective>" --id <change-id>
 python3 .keel/bin/keel.py status
-python3 .keel/bin/keel.py start <change-id>
-python3 .keel/bin/keel.py gate discuss
-python3 .keel/bin/keel.py gate plan
+python3 .keel/bin/keel.py next
+python3 .keel/bin/keel.py explain
+python3 .keel/bin/keel.py audit
+python3 .keel/bin/keel.py run
 python3 .keel/bin/keel.py verify
-python3 .keel/bin/keel.py replan
-python3 .keel/bin/keel.py reopen
-python3 .keel/bin/keel.py record-authorization --authority <who> --scope <approved-action> --evidence-reference <chat/ticket/change-record>
-python3 .keel/bin/keel.py seal --change <id> --commit HEAD
-python3 .keel/bin/keel.py candidate-status --change <id>
-python3 .keel/bin/keel.py landing prepare --change <id> --target-ref <ref>
-python3 .keel/bin/keel.py landing integrate --change <id>
+python3 .keel/bin/keel.py land prepare --change <id> --target-ref <ref>
+python3 .keel/bin/keel.py land integrate --change <id>
 ```
+
+Internal lifecycle and compatibility commands are retained for automation and
+historical migration but are not the normal user interface. `run` is deliberately
+blocked unless a project-owned executor and applicable authorization exist.
 
 `authorization.json` is script-owned. The Plan gate derives its required/not-required shape from `effects.json`; `record-authorization` records permission already obtained and binds it to those effects. It does not create authorization. Re-plan invalidates prior authorization. Within Codex, agent-initiated recording is blocked unless the operator has explicitly enabled the exact change in the parent environment.
 

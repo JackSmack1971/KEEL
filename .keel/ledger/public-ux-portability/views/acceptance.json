@@ -1,0 +1,122 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-1",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-1",
+      "statement": "The normal CLI exposes a small stable user surface and keeps schema/versioned subsystem commands compatibility-only."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-2",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-2",
+      "statement": "Public JSON output has stable top-level status and machine-readable contract fields across lifecycle commands."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-3",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-3",
+      "statement": "Explain reports why an action is allowed, blocked, waiting, stale, or escalated, and audit reconstructs intended through landed provenance."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-4",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-4",
+      "statement": "Lifecycle status distinguishes SEALED, LANDABLE or INTEGRATING, and LANDED."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "portability-installation-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-5",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-5",
+      "statement": "Installation, initialization, upgrade, and migration are deterministic, safe, additive, and preserve historical data and ownership boundaries."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-6",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-6",
+      "statement": "Fresh disposable repositories remain stack-neutral and do not require invented project commands or architecture."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-7",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-7",
+      "statement": "Documentation describes KEEL architecture and public workflow, artifact ownership, upgrades, remote custom-ref replication, and current terminology accurately."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-8",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-8",
+      "statement": "The named control-plane documents and indexes match landed behavior and do not present obsolete lifecycle terminology as the public workflow."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "portability-installation-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-REQ-9",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-9",
+      "statement": "Disposable-repository installation tests demonstrate stack-neutral behavior without invented project commands or architecture."
+    }
+  ],
+  "schema_version": 1
+}
