@@ -54,6 +54,22 @@ class KernelOutcome:
     effect_already_occurred: bool = False
 
 
+@dataclass(frozen=True)
+class AutonomousInvocation:
+    status: str
+    reason: str
+    resumable: bool = False
+
+
+def invoke_autonomous_codex(profile: Any, observations: Mapping[str, Any] | None, invoke: Any) -> AutonomousInvocation:
+    """The sole adapter seam that may call a Codex invoker; preflight precedes it."""
+    profiled, result = ra.apply_codex_cost_preflight(profile, observations)
+    if not result.supported:
+        return AutonomousInvocation("BLOCKED", result.reason, result.resumable)
+    invoke(profiled)
+    return AutonomousInvocation("INVOKED", result.reason)
+
+
 def normalize_query(payload: Mapping[str, Any], expected_event: str) -> KernelQuery:
     actual = payload.get("hook_event_name")
     if actual is not None and str(actual) != expected_event:

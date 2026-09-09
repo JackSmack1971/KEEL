@@ -1,0 +1,207 @@
+{
+  "acceptance": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  },
+  "authority": "evidence-receipts.json",
+  "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+  "change_id": "codex-cost-preflight",
+  "change_type": "implementation",
+  "changed_paths": [
+    ".keel/bin/keel.py",
+    ".keel/bootstrap-manifest.json",
+    ".keel/lib/codex_adapter_kernel.py",
+    ".keel/lib/keel_core.py",
+    ".keel/lib/runtime_authorization.py",
+    ".keel/lib/semantic_kernel.py",
+    ".keel/tests/test_codex_adapter_kernel.py",
+    ".keel/tests/test_codex_cost_preflight.py",
+    ".keel/tests/test_public_cli_contract.py",
+    "ARCHITECTURE.md",
+    "docs/control-plane/KEEL.md",
+    "docs/exec-plans/active/codex-cost-preflight.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "compat"
+      ],
+      "cwd": ".",
+      "duration_ms": 244,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "id": "canonical-config-portability",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_codex_adapter_kernel.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 143,
+      "excerpt": "Codex cost preflight hostile matrix PASS\n{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
+      "exit_code": 0,
+      "id": "codex-adapter-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_adapter_kernel.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_compatibility_retirement.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 65,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "id": "compatibility-retirement-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 265,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": [],\n  \"autonomous_codex\": {\n    \"status\": \"BLOCKED\",\n    \"reason\": \"managed entitlement observations are unavailable; autonomous Codex execution is paused\",\n    \"resumable\": false,\n    \"resume_when\": \"\"\n  }\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_documentation_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 71,
+      "excerpt": "Documentation contract tests PASS",
+      "exit_code": 0,
+      "id": "documentation-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "manifest"
+      ],
+      "cwd": ".",
+      "duration_ms": 240,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"48dffab1afd86a4ce68378cc2776344fd6e508a2272f1183dc404e695015a8e3\"\n}",
+      "exit_code": 0,
+      "id": "manifest-producer-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p0_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 568,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+      "exit_code": 0,
+      "id": "p0-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "compatibility_projection": true,
+  "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+  "errors": [],
+  "evidence_plan_digest": "cae1aa2a4f2fd579262eefd165a1b17c1b2573804e2ecee4841a4666f6f68267",
+  "implementation_status": "PASS",
+  "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+  "schema_version": 4,
+  "status": "PASS",
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE",
+  "verified_at": "2026-09-09T03:40:54+00:00"
+}

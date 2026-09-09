@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import runpy
 import sys
 import tempfile
 from pathlib import Path
@@ -88,4 +89,5 @@ hook_source = (ROOT / ".keel/hooks/keel_hook.py").read_text()
 for forbidden in ("scope_match(", "current_verified(", "phase_write_allowed", "evidence-graph"):
     assert forbidden not in hook_source
 assert "reconciler" not in (ROOT / ".keel/lib/codex_adapter_kernel.py").read_text().lower()
+runpy.run_path(str(ROOT / ".keel/tests/test_codex_cost_preflight.py"))
 print(json.dumps({"status":"PASS", "checks":["normalization", "runtime-policy", "bounded-context", "local-mcp-coverage", "post-effect-honesty", "thin-hook", "dynamic-agents", "no-reconciler"]}))

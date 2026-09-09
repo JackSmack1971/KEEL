@@ -24,6 +24,8 @@ for command in ("status", "next", "explain", "audit"):
 status = json.loads(run("status").stdout)
 assert status["lifecycle"] in {"IDLE", "UNSEALED", "SEALED", "INTEGRATING", "LANDED", "STALE", "EXECUTE", "PLAN", "DISCUSS"}, status
 assert isinstance(status["readiness"], str), status
+assert status["autonomous_codex"]["status"] == "BLOCKED", status
+assert json.loads(run("explain").stdout)["decision"] == "BLOCKED"
 
 run_result = run("run")
 assert run_result.returncode == 1

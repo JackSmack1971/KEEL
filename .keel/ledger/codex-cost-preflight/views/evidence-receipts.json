@@ -1,0 +1,536 @@
+{
+  "generated": true,
+  "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+  "receipts": [
+    {
+      "ended_at": "2026-09-09T03:40:52.758511+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 244,
+          "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "compat"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "cd12ec8ca612cf0d8561a30bb925ef1f8732d03c73cb74dc7c5b64350ad3a57f",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:52.514341+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "canonical-config-portability",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T03:40:52.986774+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-01",
+        "ER-REQ-03"
+      ],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_codex_adapter_kernel.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 143,
+          "excerpt": "Codex cost preflight hostile matrix PASS\n{\"status\": \"PASS\", \"checks\": [\"normalization\", \"runtime-policy\", \"bounded-context\", \"local-mcp-coverage\", \"post-effect-honesty\", \"thin-hook\", \"dynamic-agents\", \"no-reconciler\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_codex_adapter_kernel.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "226272f1ebd56a88fe076afe6d4e156442385a386206cb0b6ccee7df697bb129",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:52.843014+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "codex-adapter-tests",
+        "provenance": ".keel/tests/test_codex_adapter_kernel.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T03:40:53.054164+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 65,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_compatibility_retirement.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "df66a858ea051c2b52bf006413e29957bd690dd2e5d7b7872636f1fb29cd297b",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:52.988774+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "compatibility-retirement-tests",
+        "provenance": ".keel/tests/test_compatibility_retirement.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T03:40:53.321582+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 265,
+          "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": [],\n  \"autonomous_codex\": {\n    \"status\": \"BLOCKED\",\n    \"reason\": \"managed entitlement observations are unavailable; autonomous Codex execution is paused\",\n    \"resumable\": false,\n    \"resume_when\": \"\"\n  }\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "doctor"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "d589eec0d83edb4a8e525db69e413397c1662dcd716e42de43553ff43ba96e0e",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:53.056135+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "control-plane-doctor",
+        "provenance": ".keel/config.json",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T03:40:53.395398+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [
+        "ER-REQ-02"
+      ],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 71,
+          "excerpt": "Documentation contract tests PASS",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python3",
+              "-B",
+              ".keel/tests/test_documentation_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "0ad151fbdff71468bc1c159775fe6e9a39b91bfec16364fe45bc91d4b2ea8fdb",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:53.323582+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "documentation-contract-tests",
+        "provenance": ".keel/tests/test_documentation_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T03:40:53.638975+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 240,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"48dffab1afd86a4ce68378cc2776344fd6e508a2272f1183dc404e695015a8e3\"\n}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              ".keel/bin/keel.py",
+              "manifest"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "5dee76c954709b46c1307733c45a73eee812687b3c99f50a7310a0529b550580",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:53.398594+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "INSPECTED",
+        "id": "manifest-producer-check",
+        "provenance": ".keel/bin/keel.py",
+        "provider": "command",
+        "version": "1"
+      }
+    },
+    {
+      "ended_at": "2026-09-09T03:40:54.209290+00:00",
+      "environment": {
+        "digest": "cc3b43e809f71eacfef46e65f7a86ae8cb45f97509cdf1daca1302051e2864e4",
+        "executable": "python.exe",
+        "machine": "AMD64",
+        "os": "nt",
+        "platform": "Windows",
+        "python": "3.14.3"
+      },
+      "establishes": [],
+      "intent_digest": "4b93599280e025f9a095fc7e485a7859f3794b87646b489b048bb8f1614b6630",
+      "invocation": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "timeout_sec": 120
+      },
+      "observations": [
+        {
+          "duration_ms": 568,
+          "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+          "exit_code": 0,
+          "kind": "command-result",
+          "resolution": {
+            "argv": [
+              "python",
+              "-B",
+              ".keel/tests/test_p0_contract.py"
+            ],
+            "provenance": "runtime contract",
+            "reason": "declared repository-relative command is executable",
+            "source": "declared",
+            "status": "VERIFIED"
+          }
+        }
+      ],
+      "receipt_digest": "c415c0749411ea8d8d7a00173d96d251f292ff23c31e9fbfe709eec4a011c895",
+      "result": "PASS",
+      "schema_version": 1,
+      "started_at": "2026-09-09T03:40:53.641043+00:00",
+      "subject": {
+        "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+        "changed_paths": [
+          ".keel/bin/keel.py",
+          ".keel/bootstrap-manifest.json",
+          ".keel/lib/codex_adapter_kernel.py",
+          ".keel/lib/keel_core.py",
+          ".keel/lib/runtime_authorization.py",
+          ".keel/lib/semantic_kernel.py",
+          ".keel/tests/test_codex_adapter_kernel.py",
+          ".keel/tests/test_codex_cost_preflight.py",
+          ".keel/tests/test_public_cli_contract.py",
+          "ARCHITECTURE.md",
+          "docs/control-plane/KEEL.md",
+          "docs/exec-plans/active/codex-cost-preflight.md"
+        ],
+        "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+        "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+        "kind": "git-worktree"
+      },
+      "verifier": {
+        "declared_authority": "TESTED",
+        "id": "p0-contract-tests",
+        "provenance": ".keel/tests/test_p0_contract.py",
+        "provider": "unit_test",
+        "version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": {
+    "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+    "changed_paths": [
+      ".keel/bin/keel.py",
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/codex_adapter_kernel.py",
+      ".keel/lib/keel_core.py",
+      ".keel/lib/runtime_authorization.py",
+      ".keel/lib/semantic_kernel.py",
+      ".keel/tests/test_codex_adapter_kernel.py",
+      ".keel/tests/test_codex_cost_preflight.py",
+      ".keel/tests/test_public_cli_contract.py",
+      "ARCHITECTURE.md",
+      "docs/control-plane/KEEL.md",
+      "docs/exec-plans/active/codex-cost-preflight.md"
+    ],
+    "content_digest": "47e34e7b97dea9e25b21dab0bacec9d77e57456a59cdf4821d0f7506512dd40a",
+    "head_commit": "7248783bc72a23fbb0b842da5066aa8f25b54ac1",
+    "kind": "git-worktree"
+  }
+}

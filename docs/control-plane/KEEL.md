@@ -33,3 +33,26 @@ The versioned `keel.legacy-ledger/v1` reader continues to audit existing sealed/
 
 ## Boundaries
 Hash chains and Git refs are not immutable security controls. Hooks are not confinement. SHIP is not permission to push, merge, release, deploy, migrate, or mutate an external system. Candidate and landed verification remain distinct; landing integration requires explicit authorization and exact resulting-state equivalence for merge, squash, or rebase strategies.
+
+## ZERO_INCREMENTAL_COST Codex preflight
+
+Before a KEEL-autonomous Codex invocation, the runtime authorization boundary
+requires a complete documented observation of managed ChatGPT/Codex entitlement:
+managed ChatGPT authentication, the Codex provider, included entitlement,
+available normal allowance, and explicit absence of paid continuation and
+rate-limit-reset credit. The kernel classifies this as `SUPPORTED` only when all
+values match; missing, malformed, contradictory, unsupported, changed, or
+opaque observations are `BLOCKED`. An exhausted limit is resumable and is
+re-evaluated later; KEEL does not terminate governance or attempt recovery by
+changing identity, consuming credits, purchasing access, or selecting another
+provider.
+
+The local Codex surface can prove only the observations it documents and
+delivers to KEEL for the current preflight. It cannot prove an account's full
+billing ledger, future pricing, hidden provider-side charging rules, or that an
+undelivered runtime path will remain within an allowance. Therefore no
+unsupported account/provider signal can establish eligibility, and no email,
+account identifier, credential, or sensitive account detail is required or
+persisted merely to make this decision. Doctor, status, explain, and run report
+the same kernel result; human-directed governance remains available when
+autonomous execution is blocked.

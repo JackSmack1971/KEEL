@@ -1,0 +1,61 @@
+{
+  "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+  "change_id": "codex-cost-preflight",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {"id":"AC-01","requirement_id":"REQ-01","statement":"Every autonomous Codex execution entry point performs a deterministic preflight and proceeds only for SUPPORTED; UNKNOWN is BLOCKED.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-02","requirement_id":"REQ-01","statement":"Only observed managed ChatGPT/Codex entitlement is SUPPORTED; API-key, unknown, unsupported-provider, ambiguous, missing, or malformed observations are BLOCKED.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-03","requirement_id":"REQ-01","statement":"BLOCKED preflight prevents autonomous execution and performs no auth, provider, credit, or fallback continuation.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-04","requirement_id":"REQ-02","statement":"BLOCKED eligibility is included in existing doctor, public status, and explain projections with actionable remediation.","required":true,"evidence":[{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"AC-05","requirement_id":"REQ-03","statement":"The preflight has no API-key input, persistence, or pass-through and requires no user email or persisted sensitive account detail.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-06","requirement_id":"REQ-03","statement":"Forbidden credit purchase/nudge, reset-credit consumption, identity rotation, and secondary-provider operations are never invoked, including failures.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-07","requirement_id":"REQ-01","statement":"Documented account, plan, and rate-limit observations are consumed conservatively; partial, contradictory, malformed, or missing observations are BLOCKED.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-08","requirement_id":"REQ-01","statement":"Limit exhaustion yields resumable BLOCKED state without bypass action and resumes after entitlement is restored.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-09","requirement_id":"REQ-02","statement":"Non-autonomous status, explain, and audit governance remains usable while autonomous execution is BLOCKED.","required":true,"evidence":[{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"AC-10","requirement_id":"REQ-03","statement":"Eligibility decision state contains no email, account identifier, credential, or other sensitive persisted field.","required":true,"evidence":[{"provider":"unit_test","check_id":"codex-adapter-tests"}]},
+    {"id":"AC-11","requirement_id":"REQ-01","statement":"Eligibility extends RuntimeProfile and capability/authorization readiness semantics without a parallel authority.","required":true,"evidence":[{"provider":"unit_test","check_id":"runtime-authorization-tests"}]},
+    {"id":"AC-12","requirement_id":"REQ-02","statement":"Authoritative runtime documentation states exactly what local Codex observations can and cannot prove about billing and allowance boundaries.","required":true,"evidence":[{"provider":"unit_test","check_id":"documentation-contract-tests"}]}
+  ],
+  "mode": "standard",
+  "non_goals": ["Do not add OpenAI API-key or provider authentication.","Do not call billing, credit-purchase, nudge, reset, identity-rotation, or fallback-provider operations.","Do not add a second runtime, scheduler, public reporting mechanism, or account API integration.","Do not change WorkUnit scheduler internals, KEELBench, or unrelated behavior.","Do not merge, push, or close a PR without separate authorization."],
+  "objective": "Add fail-closed ZERO_INCREMENTAL_COST Codex runtime preflight",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {"id":"REQ-01","statement":"Implement a deterministic fail-closed ZERO_INCREMENTAL_COST preflight in RuntimeProfile/capability/authorization integration and autonomous Codex entry points, satisfying AC-01, AC-02, AC-03, AC-07, AC-08, and AC-11.","type":"behavior","required":true},
+    {"id":"REQ-02","statement":"Surface blocked eligibility through existing doctor/status/explain and document proven versus unprovable billing boundaries, satisfying AC-04, AC-09, and AC-12.","type":"documentation","required":true},
+    {"id":"REQ-03","statement":"Prove forbidden cost/auth continuation paths are absent and non-sensitive, satisfying AC-05, AC-06, and AC-10.","type":"security","required":true}
+  ],
+  "risk": {
+    "consequences": ["Changes authorization semantics for autonomous Codex execution and must fail closed under opaque or changing runtime evidence.","A false allow could create an incremental AI charge or bypass a limit; a false block must preserve resumable governance."],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": false,
+    "requires_exec_plan": true,
+    "review": "Independent review of preflight classification, forbidden-operation non-invocation, authorization integration, and proof-limit documentation is required.",
+    "security_privacy_sensitive": true
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/**",
+    ".keel/tests/**",
+    ".keel/bin/keel.py",
+    ".keel/hooks/**",
+    "docs/control-plane/**",
+    "docs/exec-plans/active/**",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/INDEX.md"
+  ],
+  "work": {
+    "edges": [],
+    "graph_references": ["docs/control-plane/KEEL_FORWARD_AUTHORITY.md",".keel/lib/runtime_authorization.py",".keel/lib/codex_adapter_kernel.py",".keel/lib/keel_core.py"],
+    "units": [{"id":"WU-01","title":"Implement runtime eligibility preflight and RuntimeProfile integration","paths":[".keel/lib/**"]},{"id":"WU-02","title":"Gate autonomous Codex entry points and preserve resumable block state","paths":[".keel/lib/**",".keel/bin/keel.py",".keel/hooks/**"]},{"id":"WU-03","title":"Add hostile matrix and governance-surface tests","paths":[".keel/tests/**"]},{"id":"WU-04","title":"Document guarantees and epistemic limits","paths":["docs/control-plane/**","ARCHITECTURE.md","CONTROL_PLANE.md","WORKFLOW.md","docs/INDEX.md"]}]
+  }
+}

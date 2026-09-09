@@ -21,7 +21,9 @@ product path.
   capability candidates, impact, and freshness. `keel.py facts` is its direct CLI view.
 - `.keel/lib/evidence_system.py` owns EvidencePlans and exact-subject receipts.
 - `.keel/lib/runtime_authorization.py` owns RuntimeProfile observations and
-  CapabilityGrant evaluation without claiming confinement or executing effects.
+  CapabilityGrant evaluation without claiming confinement or executing effects;
+  its ZERO_INCREMENTAL_COST preflight is the fail-closed eligibility boundary
+  for autonomous Codex invocation.
 - `.keel/lib/git_proof.py` and `.keel/lib/candidate_attestation.py` own repository,
   worktree, tree, commit, candidate, landing, landed, ref, note, and attestation proof.
 - `.keel/lib/canonical_ledger.py` owns intent/events/grants/receipts/attestations and
@@ -49,6 +51,12 @@ isolation are enforced mechanically. A sealed candidate attests only to its own
 verified material. A LandingAttestation separately binds target base T0, synthetic
 integration tree I, integration evidence, and the expected landing mechanism;
 landing completion is recorded only after the actual landed tree matches I.
+
+Autonomous Codex execution additionally requires the RuntimeProfile cost
+preflight to observe included managed ChatGPT/Codex entitlement. The preflight
+does not handle billing credentials or billing APIs and cannot prove hidden
+billing state; insufficient or changing evidence blocks and preserves
+resumability.
 
 Optional maintenance lives under `.keel/maintenance/`. Reusable consumer-project
 policy templates live under `policies/templates/`. Historical bootstrap research
