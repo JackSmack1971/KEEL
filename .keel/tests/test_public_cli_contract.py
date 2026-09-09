@@ -21,6 +21,10 @@ for command in ("status", "next", "explain", "audit"):
     payload = json.loads(result.stdout)
     assert isinstance(payload.get("schema"), str), payload
 
+status = json.loads(run("status").stdout)
+assert status["lifecycle"] in {"UNSEALED", "SEALED", "INTEGRATING", "LANDED", "STALE", "EXECUTE", "PLAN", "DISCUSS"}, status
+assert isinstance(status["readiness"], str), status
+
 run_result = run("run")
 assert run_result.returncode == 1
 assert json.loads(run_result.stdout)["status"] == "BLOCKED"

@@ -3,7 +3,7 @@
   "intent_digest": "b7a6374e5f088089c884a375ed796c2081206a262c90fa34af4a38ec12a176c9",
   "receipts": [
     {
-      "ended_at": "2026-09-09T00:21:08.681525+00:00",
+      "ended_at": "2026-09-09T00:27:34.054282+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -25,7 +25,7 @@
       },
       "observations": [
         {
-          "duration_ms": 336,
+          "duration_ms": 715,
           "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -42,10 +42,10 @@
           }
         }
       ],
-      "receipt_digest": "9e40fc7be4918107bb9de2923daf39e21a3b242e903bc7e59a4a3c2347129b50",
+      "receipt_digest": "a8bc4959a19cacf9d25017453b8d8720489b0477753790db963519874eb2a236",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:08.344691+00:00",
+      "started_at": "2026-09-09T00:27:33.338290+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -68,8 +68,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -81,7 +81,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:08.878879+00:00",
+      "ended_at": "2026-09-09T00:27:34.318038+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -103,7 +103,7 @@
       },
       "observations": [
         {
-          "duration_ms": 86,
+          "duration_ms": 99,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -120,10 +120,10 @@
           }
         }
       ],
-      "receipt_digest": "ec3bbbecd9df7e82928e96c9d5aa21ab91cd9a6a047779ac6b608266fc9f08c5",
+      "receipt_digest": "1df046a51659127693cae7ac64a1e34b8fd5039c1e8e4b789b55986287ef434d",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:08.792446+00:00",
+      "started_at": "2026-09-09T00:27:34.218807+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -146,8 +146,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -159,7 +159,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:09.265876+00:00",
+      "ended_at": "2026-09-09T00:27:34.760934+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -181,7 +181,7 @@
       },
       "observations": [
         {
-          "duration_ms": 384,
+          "duration_ms": 440,
           "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": []\n}",
           "exit_code": 0,
           "kind": "command-result",
@@ -198,10 +198,10 @@
           }
         }
       ],
-      "receipt_digest": "2f1057125ac325a810c6d4ed7482aeb4dcd8df112f281d103ab8f348c7dc945d",
+      "receipt_digest": "8cc4c446c5c7e2548066a31ba3810e88f94b9a54b378a32828eaf560bd1c355c",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:08.881075+00:00",
+      "started_at": "2026-09-09T00:27:34.320323+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -224,8 +224,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -237,7 +237,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:09.361022+00:00",
+      "ended_at": "2026-09-09T00:27:34.868097+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -263,7 +263,7 @@
       },
       "observations": [
         {
-          "duration_ms": 92,
+          "duration_ms": 105,
           "excerpt": "Documentation contract tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -280,10 +280,10 @@
           }
         }
       ],
-      "receipt_digest": "abab2c4a5ccad2d19c666e93cc7310ed700f8af2c24227dc37bd497f0fe5b6b6",
+      "receipt_digest": "87f577767b37fae6f6a42aae7d1fba63c6200481c64da365812c2e7c5aef0e3d",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:09.268210+00:00",
+      "started_at": "2026-09-09T00:27:34.763017+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -306,8 +306,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -319,7 +319,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:09.687132+00:00",
+      "ended_at": "2026-09-09T00:27:35.254476+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -341,8 +341,8 @@
       },
       "observations": [
         {
-          "duration_ms": 323,
-          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"b86d732c5f6751f30e0ac59299a00c6a236c3d194e14ce5e900e494ca8a05bd3\"\n}",
+          "duration_ms": 384,
+          "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"0a013b5a6efd68fc7c751c97579bf916bf1cabc723779863db4724a249ccbd87\"\n}",
           "exit_code": 0,
           "kind": "command-result",
           "resolution": {
@@ -358,10 +358,10 @@
           }
         }
       ],
-      "receipt_digest": "583d9d6ea62bdf9f369fc248588a8acc8b5305bdf4e0cbe916c36d35278a9384",
+      "receipt_digest": "44af7b9cbe3bd9daada3268d032b644cb4033c6430386e08c89008ca16eb301d",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:09.363156+00:00",
+      "started_at": "2026-09-09T00:27:34.870460+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -384,8 +384,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -397,7 +397,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:10.419032+00:00",
+      "ended_at": "2026-09-09T00:27:36.110882+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -419,7 +419,7 @@
       },
       "observations": [
         {
-          "duration_ms": 729,
+          "duration_ms": 853,
           "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
           "exit_code": 0,
           "kind": "command-result",
@@ -436,10 +436,10 @@
           }
         }
       ],
-      "receipt_digest": "6ab89cdcc95c547576587a35bcd35a425f10a3a58d2f3a41006b48ca6aa4865d",
+      "receipt_digest": "4c627fcc2a9fe0c070f01ad562aab4edc2f682e79b4a932cd3a0c776b86b7ab2",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:09.689405+00:00",
+      "started_at": "2026-09-09T00:27:35.256941+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -462,8 +462,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -475,7 +475,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:10.649986+00:00",
+      "ended_at": "2026-09-09T00:27:36.383781+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -500,7 +500,7 @@
       },
       "observations": [
         {
-          "duration_ms": 228,
+          "duration_ms": 270,
           "excerpt": "Portability installation tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -517,10 +517,10 @@
           }
         }
       ],
-      "receipt_digest": "61fd84ca10a461414b007c9bad54f803bb5db877f163c276fbcd9001254b0cfd",
+      "receipt_digest": "6116326ec5312579d9a0456ce4195182b3c171b9d86a32429fe97eb5988cf8a4",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:10.421221+00:00",
+      "started_at": "2026-09-09T00:27:36.113148+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -543,8 +543,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -556,7 +556,7 @@
       }
     },
     {
-      "ended_at": "2026-09-09T00:21:18.073596+00:00",
+      "ended_at": "2026-09-09T00:27:45.517728+00:00",
       "environment": {
         "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
         "executable": "python3.exe",
@@ -583,7 +583,7 @@
       },
       "observations": [
         {
-          "duration_ms": 7421,
+          "duration_ms": 9131,
           "excerpt": "Public CLI contract tests PASS",
           "exit_code": 0,
           "kind": "command-result",
@@ -600,10 +600,10 @@
           }
         }
       ],
-      "receipt_digest": "132f16185af7ba1e8d4dad8ca2c7c107a93c87fc8b0cb167d352d48a67b3bc2b",
+      "receipt_digest": "3c535891bceb39ac241f6b27e1b822cfaf25f5ca79b1aa4a54c386c08f8119ad",
       "result": "PASS",
       "schema_version": 1,
-      "started_at": "2026-09-09T00:21:10.652419+00:00",
+      "started_at": "2026-09-09T00:27:36.385968+00:00",
       "subject": {
         "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
         "changed_paths": [
@@ -626,8 +626,8 @@
           "docs/control-plane/VERIFICATION.md",
           "docs/exec-plans/active/public-ux-portability.md"
         ],
-        "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-        "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+        "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+        "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
         "kind": "git-worktree"
       },
       "verifier": {
@@ -662,8 +662,8 @@
       "docs/control-plane/VERIFICATION.md",
       "docs/exec-plans/active/public-ux-portability.md"
     ],
-    "content_digest": "4af91ce2ab0fa0ed12923d4c60cc4948868057707675fc73d93f462729ee605f",
-    "head_commit": "3d0bb22bd5e2f0cbb7411fc71d3cb324cd2d8f99",
+    "content_digest": "9044d43af369cf69f60b1f965ec245ac4557eac8251feaacc22e1fc10f47cf53",
+    "head_commit": "4d63793060dda62bfd54e63463642e2b84bc37f9",
     "kind": "git-worktree"
   }
 }
