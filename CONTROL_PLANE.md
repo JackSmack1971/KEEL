@@ -4,6 +4,11 @@ State: `CANONICAL_KERNEL_M6`; live Codex/hook enforcement remains pending per-se
 
 The control plane is the repository's information architecture, change-governance spine, and feedback system. It remains stack-neutral until project evidence activates specialized domains. Candidate and landing attestations report only properties established by exact evidence; they are not proof of behavioral correctness.
 
+The forward architecture, product contract, and roadmap authority is
+[KEEL_FORWARD_AUTHORITY.md](docs/control-plane/KEEL_FORWARD_AUTHORITY.md).
+This document is an operating-model summary and must not introduce a competing
+forward roadmap.
+
 The stable public surface is the JSON CLI: `init`, `doctor`, `start`, `status`,
 `next`, `run`, `verify`, `land`, `explain`, and `audit`. Internal schema and
 subsystem commands are compatibility surfaces, not normal user workflow.
@@ -24,6 +29,7 @@ subsystem commands are compatibility surfaces, not normal user workflow.
 The `KEEL-KERNEL-REDESIGN-v1` migration is complete through M6. Canonical semantics, ChangeGraph, FactGraph, receipt planning, runtime authorization, Codex adaptation, Git attestations, and the canonical ledger are the only active product path. Versioned v1 ledger reading exists solely for audit and migration.
 
 ## Core maps
+- [KEEL forward architecture, product contract, and roadmap authority](docs/control-plane/KEEL_FORWARD_AUTHORITY.md)
 - [KEEL kernel redesign and migration authority](docs/control-plane/KERNEL_REDESIGN.md)
 - [KEEL control plane](docs/control-plane/KEEL.md)
 - [Capability registry](docs/control-plane/CAPABILITY_REGISTRY.md)
@@ -50,7 +56,9 @@ Runtime trust and authorization now have a canonical M4 policy boundary:
 `RuntimeProfile` preserves observed and negative states, `CapabilityGrant`
 replaces boolean permission semantics, and effect contracts distinguish mediated,
 observed, and unconfined boundaries. This is not proof that a session is confined,
-and it supplies neither an effect executor nor a scheduler.
+and it supplies neither an effect executor nor an agent/runtime scheduler.
+Deterministic WorkGraph reconciliation and resource scheduling remain KEEL
+responsibilities as defined by the forward authority.
 Codex hook/rule/skill/agent surfaces are adapters over that boundary: the hook queries
 the kernel, generic read-only roles are selected from evidence/risk, and no adapter is
 an independent lifecycle, scope, evidence, or permission authority. Live hook trust and

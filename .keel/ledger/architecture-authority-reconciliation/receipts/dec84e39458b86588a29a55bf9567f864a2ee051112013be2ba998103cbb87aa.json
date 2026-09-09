@@ -1,0 +1,90 @@
+{
+  "ended_at": "2026-09-09T03:17:18.268440+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "3e7d3a0b6388a5cc20bfcf34201e71cde6a4c793ea985921c2c6e0c1de83a27d",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "compat"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 234,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "dec84e39458b86588a29a55bf9567f864a2ee051112013be2ba998103cbb87aa",
+  "receipt_id": "dec84e39458b86588a29a55bf9567f864a2ee051112013be2ba998103cbb87aa",
+  "record_digest": "d1af8070f9babfb09fafd49dfac4b6ed3e27c8acd3f4b2903a4ed2367029a888",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T03:17:18.033552+00:00",
+  "subject": {
+    "base_commit": "8ee0ca057d7614bfad1d7a9169e21a96c4bfd07c",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/INDEX.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/compatibility-retirement-m6.md",
+      "docs/exec-plans/active/desired-state-reconciler.md",
+      "docs/exec-plans/active/landing-transaction.md",
+      "docs/exec-plans/active/public-ux-portability.md",
+      "docs/exec-plans/active/separate-keelbench.md",
+      "docs/exec-plans/completed/architecture-authority-reconciliation.md",
+      "docs/exec-plans/completed/canonical-change-graph.md",
+      "docs/exec-plans/completed/compatibility-retirement-m6.md",
+      "docs/exec-plans/completed/desired-state-reconciler.md",
+      "docs/exec-plans/completed/kernel-redesign-migration-authority.md",
+      "docs/exec-plans/completed/landing-transaction.md",
+      "docs/exec-plans/completed/public-ux-portability.md",
+      "docs/exec-plans/completed/runtime-trust-authorization-model.md",
+      "docs/exec-plans/completed/semantic-kernel-m1.md",
+      "docs/exec-plans/completed/separate-keelbench.md",
+      "docs/exec-plans/completed/upgrade-planning-archive.md",
+      "docs/exec-plans/completed/upgrade-remaining-plan.md",
+      "docs/references/research/KEEL_UPGRADES.md",
+      "docs/references/research/UPGRADE_AUDIT.md"
+    ],
+    "content_digest": "b3927c8fd9f04312c6e48ef5e95e4fae553bb6203547f0a2fb73a5a5597fe28d",
+    "head_commit": "8ee0ca057d7614bfad1d7a9169e21a96c4bfd07c",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "canonical-config-portability",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

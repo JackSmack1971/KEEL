@@ -1,0 +1,89 @@
+{
+  "ended_at": "2026-09-09T03:05:44.855275+00:00",
+  "environment": {
+    "digest": "3a581d176b491abb3fdcb0617e20e41c794c056d895e443b26967eaa93c2d8d7",
+    "executable": "python3.exe",
+    "machine": "AMD64",
+    "os": "nt",
+    "platform": "Windows",
+    "python": "3.14.3"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "796721f2ef008d6c0f9de22fe528030b956757469064e9a89d02f11d66100c62",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_p0_contract.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 257,
+      "excerpt": "Traceback (most recent call last):\n  File \"G:\\KEEL\\.keel\\tests\\test_p0_contract.py\", line 41, in <module>\n    assert p.generated_artifact_status(ROOT)[\"status\"] == \"VERIFIED\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError",
+      "exit_code": 1,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "be0aa116a6eafa647a1b54c73a19b08041478b6dd9bce2ccd372b2c9ca31e8c8",
+  "receipt_id": "be0aa116a6eafa647a1b54c73a19b08041478b6dd9bce2ccd372b2c9ca31e8c8",
+  "record_digest": "2306b48a9a7d7193fab07887d73b63590060ef75fe93cbba35651d04c4a28877",
+  "result": "FAIL",
+  "schema_version": 1,
+  "started_at": "2026-09-09T03:05:44.598085+00:00",
+  "subject": {
+    "base_commit": "8ee0ca057d7614bfad1d7a9169e21a96c4bfd07c",
+    "changed_paths": [
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/INDEX.md",
+      "docs/control-plane/KEEL.md",
+      "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+      "docs/control-plane/KERNEL_REDESIGN.md",
+      "docs/exec-plans/active/architecture-authority-reconciliation.md",
+      "docs/exec-plans/active/compatibility-retirement-m6.md",
+      "docs/exec-plans/active/desired-state-reconciler.md",
+      "docs/exec-plans/active/landing-transaction.md",
+      "docs/exec-plans/active/public-ux-portability.md",
+      "docs/exec-plans/active/separate-keelbench.md",
+      "docs/exec-plans/completed/canonical-change-graph.md",
+      "docs/exec-plans/completed/compatibility-retirement-m6.md",
+      "docs/exec-plans/completed/desired-state-reconciler.md",
+      "docs/exec-plans/completed/kernel-redesign-migration-authority.md",
+      "docs/exec-plans/completed/landing-transaction.md",
+      "docs/exec-plans/completed/public-ux-portability.md",
+      "docs/exec-plans/completed/runtime-trust-authorization-model.md",
+      "docs/exec-plans/completed/semantic-kernel-m1.md",
+      "docs/exec-plans/completed/separate-keelbench.md",
+      "docs/exec-plans/completed/upgrade-planning-archive.md",
+      "docs/exec-plans/completed/upgrade-remaining-plan.md",
+      "docs/references/research/KEEL_UPGRADES.md",
+      "docs/references/research/UPGRADE_AUDIT.md"
+    ],
+    "content_digest": "a91673798820bf946b4799f52f513ed440510c479f75f8b0872ed21ee01a7baf",
+    "head_commit": "8ee0ca057d7614bfad1d7a9169e21a96c4bfd07c",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "p0-contract-tests",
+    "provenance": ".keel/tests/test_p0_contract.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

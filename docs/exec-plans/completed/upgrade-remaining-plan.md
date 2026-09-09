@@ -2,7 +2,9 @@
 
 Status: `HISTORICAL COPY — NOT AUTHORITATIVE`
 
-This is a preserved historical copy of the roadmap. Its sequence and boundaries are historical context only. The current authoritative roadmap is [`../active/upgrade-remaining-plan.md`](../active/upgrade-remaining-plan.md); the current P1 plan is subordinate to it.
+This is a preserved historical copy of the roadmap. Its sequence and
+boundaries are historical context only. The current authoritative roadmap is
+[`../../control-plane/KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md).
 
 ## Execution sequence
 

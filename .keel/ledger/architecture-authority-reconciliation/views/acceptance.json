@@ -1,0 +1,161 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-01",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "A designated authority states the North Star that KEEL is the portable, repository-native trust/control plane making high-autonomy Codex engineering governable, evidence-backed, recoverable, traceable, and delegable within the user's existing Codex/ChatGPT entitlement."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-02",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "The authority states the fixed Codex and KEEL ownership boundary exactly."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-03",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "The authority states exactly two legitimate KEEL operating surfaces and prohibits a second LLM runtime, model provider, generic conversation engine, or sandbox implementation."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-04",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "ZERO_INCREMENTAL_COST is permanent and explicitly prohibits API keys, API billing, paid AI fallback, purchased-credit initiation, rate-limit circumvention, and KEEL-created AI billing paths."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-05",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "The authority documents stable-versus-experimental Codex integration, safe degradation for unsupported stable capabilities, and no load-bearing experimental API dependency without separately authorized isolation."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-06",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "The authority contains an ordered post-migration NS0-NS11 roadmap with NS0 as this reconciliation and NS1-NS11 derived from landed capability and ownership boundaries."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-07",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "The authority resolves scheduler ownership by assigning deterministic WorkGraph reconciliation/resource scheduling to KEEL while Codex retains agent/runtime execution, explaining the prior contradiction."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-08",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Authoritative documents describe hooks only as guardrails/adapters and never as complete confinement."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-09",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Authoritative documents distinguish exact candidate verification from exact landed-state verification."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-10",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "Every conflicting prior forward architecture/product-contract/roadmap document is marked superseded with a pointer while historical evidence is preserved."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-11",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "Plans for the landed kernel migration, canonical ledger, RuntimeProfile/CapabilityGrant, desired-state scheduler, exact Git proof, candidate/landing attestations, public lifecycle UX, and separated KEELBench are reconciled to landed status using repository conventions."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-12",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "No implementation behavior or non-documentation/non-plan-metadata file changes are made."
+    }
+  ],
+  "schema_version": 1
+}

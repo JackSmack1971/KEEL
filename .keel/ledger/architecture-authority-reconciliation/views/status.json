@@ -1,0 +1,12 @@
+{
+  "base_commit": "8ee0ca057d7614bfad1d7a9169e21a96c4bfd07c",
+  "change_id": "architecture-authority-reconciliation",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "7fa3a49193e980f0bc5ff6da37e9820b25e12c848297ed875e3a0bd735180445",
+    "last_event_digest": "69e1e1b36bd044396bdc1b7a7be4bdbb827e64123c022e6e501c7521823e727c"
+  }
+}

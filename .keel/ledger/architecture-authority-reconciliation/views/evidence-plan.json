@@ -1,0 +1,162 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-01",
+      "requirement_id": "REQ-01",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-02",
+      "requirement_id": "REQ-02",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-03",
+      "requirement_id": "REQ-03",
+      "verifier_id": "documentation-contract-tests"
+    }
+  ],
+  "changed_paths": [
+    ".keel/bootstrap-manifest.json",
+    "AGENTS.md",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "docs/INDEX.md",
+    "docs/control-plane/KEEL.md",
+    "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+    "docs/control-plane/KERNEL_REDESIGN.md",
+    "docs/exec-plans/active/architecture-authority-reconciliation.md",
+    "docs/exec-plans/active/compatibility-retirement-m6.md",
+    "docs/exec-plans/active/desired-state-reconciler.md",
+    "docs/exec-plans/active/landing-transaction.md",
+    "docs/exec-plans/active/public-ux-portability.md",
+    "docs/exec-plans/active/separate-keelbench.md",
+    "docs/exec-plans/completed/canonical-change-graph.md",
+    "docs/exec-plans/completed/compatibility-retirement-m6.md",
+    "docs/exec-plans/completed/desired-state-reconciler.md",
+    "docs/exec-plans/completed/kernel-redesign-migration-authority.md",
+    "docs/exec-plans/completed/landing-transaction.md",
+    "docs/exec-plans/completed/public-ux-portability.md",
+    "docs/exec-plans/completed/runtime-trust-authorization-model.md",
+    "docs/exec-plans/completed/semantic-kernel-m1.md",
+    "docs/exec-plans/completed/separate-keelbench.md",
+    "docs/exec-plans/completed/upgrade-planning-archive.md",
+    "docs/exec-plans/completed/upgrade-remaining-plan.md",
+    "docs/references/research/KEEL_UPGRADES.md",
+    "docs/references/research/UPGRADE_AUDIT.md"
+  ],
+  "errors": [],
+  "plan_digest": "0a8b25f513df9e3550474884bf595ff638264682bc4b7ba5dcc9cc656abc593e",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-01",
+        "ER-REQ-02",
+        "ER-REQ-03"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}

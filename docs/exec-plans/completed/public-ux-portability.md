@@ -1,5 +1,8 @@
 # ExecPlan: public UX and portability
 
+Status: `COMPLETE / LANDED IN CURRENT TREE — HISTORICAL LEDGER RETAINED`
+Forward authority: [`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md)
+
 ## Objective
 
 Refactor KEEL's public command surface, documentation, packaging, and portability

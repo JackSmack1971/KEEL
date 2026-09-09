@@ -1,6 +1,9 @@
 # ExecPlan: KEEL kernel redesign migration authority
 
-Status: `ACTIVE — PLANNING ONLY`
+Status: `SUPERSEDED — HISTORICAL PLANNING EVIDENCE`
+
+The forward architecture, product contract, and roadmap are now governed by
+[`KEEL_FORWARD_AUTHORITY.md`](../../control-plane/KEEL_FORWARD_AUTHORITY.md).
 
 ## Objective and success evidence
 Publish one authoritative target-architecture and migration contract, freeze expansion above landed P2, classify the landed tree for migration, update navigation/roadmap authority, pass planning-readiness verification, and seal the exact candidate.
@@ -51,7 +54,8 @@ Base commit: `810c40b4a3b8bd0acfb3d9fe49cf286f6348181f`. `keel doctor` passed be
 - 2026-09-08: inspected governing docs, repository inventory, canonical checks, Codex configuration, CLI surfaces, tests, P0/P1/P2 plans and ledgers, Git log/refs/notes, and bootstrap manifest.
 
 ## Decision log
-- Use a new control-plane architecture document as sole forward authority; retain the audit and roadmap as subordinate landed-state/history maps.
+- Use `KEEL_FORWARD_AUTHORITY.md` as the sole forward authority; retain this
+  plan, audit, and older roadmap as subordinate landed-state/history maps.
 - Treat the change as planning-only despite migration sensitivity; no executable artifact is in scope.
 
 ## Failure branches / blockers
