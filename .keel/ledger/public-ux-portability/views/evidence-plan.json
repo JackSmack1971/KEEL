@@ -1,0 +1,225 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-1",
+      "requirement_id": "REQ-1",
+      "verifier_id": "public-cli-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-2",
+      "requirement_id": "REQ-2",
+      "verifier_id": "public-cli-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-3",
+      "requirement_id": "REQ-3",
+      "verifier_id": "public-cli-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-4",
+      "requirement_id": "REQ-4",
+      "verifier_id": "public-cli-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-5",
+      "requirement_id": "REQ-5",
+      "verifier_id": "portability-installation-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-6",
+      "requirement_id": "REQ-6",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-7",
+      "requirement_id": "REQ-7",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-8",
+      "requirement_id": "REQ-8",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-9",
+      "requirement_id": "REQ-9",
+      "verifier_id": "portability-installation-tests"
+    }
+  ],
+  "changed_paths": [
+    ".keel/README.md",
+    ".keel/bin/keel.py",
+    ".keel/bootstrap-manifest.json",
+    ".keel/config.json",
+    ".keel/lib/keel_core.py",
+    ".keel/tests/test_compatibility_retirement.py",
+    ".keel/tests/test_documentation_contract.py",
+    ".keel/tests/test_portability_installation.py",
+    ".keel/tests/test_public_cli_contract.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    "docs/INDEX.md",
+    "docs/control-plane/CODEX_NATIVE.md",
+    "docs/control-plane/COMMANDS.md",
+    "docs/control-plane/ORCHESTRATION.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/public-ux-portability.md"
+  ],
+  "errors": [],
+  "plan_digest": "133e39c42de16dd0d61381d62795e6679165deaf16aebc3533ed17c06317dd44",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-6",
+        "ER-REQ-7",
+        "ER-REQ-8"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_documentation_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-5",
+        "ER-REQ-9"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_portability_installation.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "portability-installation-tests"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-1",
+        "ER-REQ-2",
+        "ER-REQ-3",
+        "ER-REQ-4"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_public_cli_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "public-cli-contract-tests"
+    }
+  ]
+}

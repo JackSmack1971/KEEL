@@ -20,6 +20,7 @@ Start at root `AGENTS.md`; load detail only when relevant.
 - [KEEL kernel redesign and migration authority](control-plane/KERNEL_REDESIGN.md) — sole target architecture; freezes expansion above landed P2.
 
 ## Control-plane detail
+- [Public command surface](control-plane/COMMANDS.md) — stable CLI, lifecycle states, ownership, and remote refs.
 - [Capability registry](control-plane/CAPABILITY_REGISTRY.md)
 - [Capability resolution](control-plane/CAPABILITY_RESOLUTION.md)
 - [Context compilation](control-plane/CONTEXT_COMPILATION.md)

@@ -1223,6 +1223,7 @@ def next_action(root: Path, change_id: str | None = None) -> dict:
     cid = change_id or active_change(root)
     if not cid:
         return {
+            "schema": "keel.next/v1",
             "schema_version": 1,
             "status": "IDLE",
             "change_id": None,
@@ -1234,6 +1235,7 @@ def next_action(root: Path, change_id: str | None = None) -> dict:
     st = state(root, cid)
     phase = st.get("phase")
     result = {
+        "schema": "keel.next/v1",
         "schema_version": 1,
         "status": "ACTIONABLE",
         "change_id": cid,
@@ -1397,4 +1399,93 @@ def status_summary(root: Path, change_id: str | None = None) -> dict:
             errs, paths = diff_scope_errors(root, cid); result["changed_paths"] = paths; result["scope_errors"] = errs
         except Exception as e:
             result["scope_errors"] = [str(e)]
+    return result
+
+
+def public_status(root: Path, change_id: str | None = None) -> dict:
+    """Stable user-facing lifecycle projection over canonical evidence."""
+    cid = change_id or active_change(root)
+    result = {"schema": "keel.public-status/v1", "status": "IDLE", "change_id": cid,
+              "lifecycle": "IDLE", "evidence": {}}
+    if not cid:
+        return result
+    result["status"] = "ACTIVE"
+    result["change"] = status_summary(root, cid)
+    phase = state(root, cid).get("phase")
+    try:
+        landing = candidate_attestation.read_landing_attestation(root, cid)
+    except RuntimeError:
+        landing = None
+    if landing is not None:
+        result["lifecycle"] = "LANDED" if landing.status == "LANDED" else "INTEGRATING" if landing.status == "PREPARED" else "STALE"
+        result["evidence"]["landing_attestation"] = {"status": landing.status, "digest": landing.digest, "strategy": landing.strategy}
+    elif phase == "SHIP":
+        try:
+            candidate = candidate_status(root, cid)
+            result["lifecycle"] = "SEALED"
+            result["evidence"]["candidate"] = {"commit": candidate["commit"], "digest": candidate["content_digest"]}
+        except RuntimeError:
+            result["lifecycle"] = "UNSEALED"
+    else:
+        result["lifecycle"] = phase or "UNKNOWN"
+    return result
+
+
+def public_explain(root: Path, subject: str | None = None, change_id: str | None = None) -> dict:
+    """Explain the current decision using only observable kernel evidence."""
+    cid = change_id or active_change(root)
+    nxt = next_action(root, cid)
+    result = {"schema": "keel.explain/v1", "subject": subject or "next-action", "change_id": cid,
+              "decision": "WAITING", "reason": "no active change", "evidence": [], "next": None}
+    if not cid:
+        return result
+    result["next"] = nxt.get("recommended_action")
+    result["evidence"].append({"kind": "next-action", "status": nxt.get("status"), "phase": nxt.get("phase")})
+    try:
+        landing = candidate_attestation.read_landing_attestation(root, cid)
+    except RuntimeError:
+        landing = None
+    if landing is not None and landing.status == "STALE":
+        result.update({"decision": "STALE", "reason": landing.stale_reason or "landing attestation is stale"})
+    elif nxt.get("status") == "BLOCKED":
+        result.update({"decision": "BLOCKED", "reason": "; ".join(x.get("detail", x.get("id", "blocked")) for x in nxt.get("blockers", []))})
+    elif nxt.get("recommended_action"):
+        result.update({"decision": "ALLOWED", "reason": nxt["recommended_action"]["reason"]})
+    else:
+        result.update({"decision": "WAITING", "reason": "no legal next action is currently evidenced"})
+    return result
+
+
+def public_audit(root: Path, change_id: str | None = None) -> dict:
+    """Reconstruct the lifecycle provenance without treating projections as authority."""
+    cid = change_id or active_change(root)
+    stages = {name: {"status": "ABSENT", "records": []} for name in ("intended", "authorized", "executed", "verified", "integrated", "landed")}
+    result = {"schema": "keel.audit/v1", "change_id": cid, "provenance": stages}
+    if not cid:
+        return result
+    d = ledger_dir(root, cid)
+    intent = d / "intent.json"
+    if intent.is_file():
+        stages["intended"] = {"status": "RECORDED", "records": [{"path": str(intent.relative_to(root)).replace("\\", "/"), "digest": canonical_ledger.intent_digest(d)}]}
+    mapping = {"AUTHORIZATION": "authorized", "EXECUTE": "executed", "VERIFY_PASS": "verified"}
+    for event in canonical_ledger.read_events(d):
+        stage = mapping.get(event.get("kind"))
+        if stage:
+            stages[stage]["status"] = "RECORDED" if event.get("result") in {"PASS", "RECORDED"} else "FAILED"
+            stages[stage]["records"].append({"kind": event.get("kind"), "result": event.get("result"), "sequence": event.get("sequence")})
+    try:
+        candidate = candidate_status(root, cid)
+        stages["verified"]["status"] = "RECORDED"
+        stages["integrated"]["status"] = "LANDABLE"
+        stages["integrated"]["records"].append({"kind": "CandidateAttestation", "digest": candidate.get("attestation_digest"), "commit": candidate["commit"]})
+    except RuntimeError:
+        pass
+    try:
+        landing = candidate_attestation.read_landing_attestation(root, cid)
+        stages["integrated"]["status"] = "RECORDED" if landing.status == "LANDED" else landing.status
+        stages["integrated"]["records"].append({"kind": "LandingAttestation", "status": landing.status, "digest": landing.digest})
+        if landing.status == "LANDED":
+            stages["landed"] = {"status": "RECORDED", "records": [{"commit": landing.landed_commit, "digest": landing.digest}]}
+    except RuntimeError:
+        pass
     return result

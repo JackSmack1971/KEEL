@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import argparse, json, sys
+import re
 sys.dont_write_bytecode = True
 from pathlib import Path
 
@@ -21,48 +22,57 @@ import scheduler
 def main() -> int:
     ap = argparse.ArgumentParser(description="KEEL spec-ledger control plane")
     sub = ap.add_subparsers(dest="cmd", required=True, metavar="COMMAND")
-    sub.add_parser("doctor")
-    p = sub.add_parser("bootstrap"); p.add_argument("action", choices=["status"]); p.add_argument("--requires-git", action="store_true")
+    sub.add_parser("doctor", help="check local KEEL and Git readiness")
+    p = sub.add_parser("init", help="inspect deterministic initialization readiness"); p.add_argument("--check", action="store_true"); p.add_argument("--requires-git", action="store_true")
+    p = sub.add_parser("bootstrap", help=argparse.SUPPRESS); p.add_argument("action", choices=["status"]); p.add_argument("--requires-git", action="store_true")
     p = sub.add_parser("manifest"); p.add_argument("--write", action="store_true")
-    sub.add_parser("version")
+    sub.add_parser("version", help=argparse.SUPPRESS)
     p = sub.add_parser("reconcile"); p.add_argument("--change")
-    sub.add_parser("contracts")
+    sub.add_parser("contracts", help=argparse.SUPPRESS)
     p = sub.add_parser("change-graph"); p.add_argument("action", choices=["validate", "frontier", "status", "normalize", "serialize"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path)
     p = sub.add_parser("scheduler"); p.add_argument("action", choices=["frontier", "status"]); p.add_argument("path", type=Path); p.add_argument("--state", type=Path); p.add_argument("--max-concurrency", type=int, default=1)
-    sub.add_parser("facts")
-    sub.add_parser("compat")
+    sub.add_parser("facts", help=argparse.SUPPRESS)
+    sub.add_parser("compat", help=argparse.SUPPRESS)
     p = sub.add_parser("migrate"); p.add_argument("--check", action="store_true"); p.add_argument("--plan", type=Path)
     p = sub.add_parser("ledger"); p.add_argument("action", choices=["migrate","project","validate"]); p.add_argument("--change", required=True); p.add_argument("--output", type=Path)
     p = sub.add_parser("effects"); p.add_argument("--change")
     p = sub.add_parser("telemetry"); p.add_argument("--change")
-    sub.add_parser("discover")
+    sub.add_parser("discover", help=argparse.SUPPRESS)
     p = sub.add_parser("context"); p.add_argument("--change"); p.add_argument("--stdout", action="store_true")
     p = sub.add_parser("evidence"); p.add_argument("--change")
-    p = sub.add_parser("status"); p.add_argument("--change")
-    p = sub.add_parser("next"); p.add_argument("--change")
+    p = sub.add_parser("status", help="show stable lifecycle status"); p.add_argument("--change")
+    p = sub.add_parser("next", help="show the next legal action"); p.add_argument("--change")
+    p = sub.add_parser("explain", help="explain why the next action is allowed or blocked"); p.add_argument("subject", nargs="?"); p.add_argument("--change")
+    p = sub.add_parser("audit", help="reconstruct lifecycle provenance"); p.add_argument("subject", nargs="?"); p.add_argument("--change")
+    p = sub.add_parser("run", help="run an authorized change executor when one is configured"); p.add_argument("--change")
+    p = sub.add_parser("verify", help="verify the current change"); p.add_argument("--change")
     p = sub.add_parser("worktree"); p.add_argument("action", choices=["create", "status", "retire"]); p.add_argument("change", nargs="?"); p.add_argument("--path"); p.add_argument("--commit", default="HEAD"); p.add_argument("--force", action="store_true")
     p = sub.add_parser("environment"); p.add_argument("action", choices=["status"])
-    p = sub.add_parser("start"); p.add_argument("change"); p.add_argument("--mode", choices=["standard","trivial"], default="standard"); p.add_argument("--summary"); p.add_argument("--scope", action="append", default=[])
+    p = sub.add_parser("start", help="start a change objective"); p.add_argument("objective"); p.add_argument("--id"); p.add_argument("--mode", choices=["standard","trivial"], default="standard"); p.add_argument("--summary"); p.add_argument("--scope", action="append", default=[])
     p = sub.add_parser("gate"); p.add_argument("gate", choices=["discuss","plan"]); p.add_argument("--change")
-    p = sub.add_parser("verify"); p.add_argument("--change")
     p = sub.add_parser("reopen"); p.add_argument("--change")
     p = sub.add_parser("replan"); p.add_argument("--change")
     p = sub.add_parser("record-authorization"); p.add_argument("--change"); p.add_argument("--authority", required=True); p.add_argument("--scope", required=True); p.add_argument("--evidence-reference", required=True)
     p = sub.add_parser("seal"); p.add_argument("--change"); p.add_argument("--commit", default="HEAD")
-    p = sub.add_parser("candidate-status"); p.add_argument("--change", required=True)
+    p = sub.add_parser("candidate-status", help=argparse.SUPPRESS); p.add_argument("--change", required=True)
     p = sub.add_parser("anchor"); p.add_argument("--change", required=True); p.add_argument("--commit", required=True)
-    p = sub.add_parser("landing"); p.add_argument("action", choices=["prepare", "integrate", "verify"]); p.add_argument("--change", required=True); p.add_argument("--target-ref"); p.add_argument("--strategy", choices=["merge", "squash", "rebase"], default="merge"); p.add_argument("--commit")
+    p = sub.add_parser("landing", help=argparse.SUPPRESS); p.add_argument("action", choices=["prepare", "integrate", "verify"]); p.add_argument("--change", required=True); p.add_argument("--target-ref"); p.add_argument("--strategy", choices=["merge", "squash", "rebase"], default="merge"); p.add_argument("--commit")
+    p = sub.add_parser("land", help="prepare or integrate a sealed change"); p.add_argument("action", choices=["prepare", "integrate", "verify"]); p.add_argument("--change", required=True); p.add_argument("--target-ref"); p.add_argument("--strategy", choices=["merge", "squash", "rebase"], default="merge"); p.add_argument("--commit")
     p = sub.add_parser("config-add-check"); p.add_argument("--id", required=True); p.add_argument("--cwd", default="."); p.add_argument("--timeout", type=int, default=600); p.add_argument("argv", nargs=argparse.REMAINDER)
+    hidden = {"bootstrap", "version", "contracts", "change-graph", "scheduler", "facts", "compat", "migrate", "ledger", "effects", "telemetry", "discover", "context", "evidence", "worktree", "environment", "gate", "reopen", "replan", "record-authorization", "seal", "candidate-status", "landing", "anchor", "config-add-check"}
+    sub._choices_actions[:] = [action for action in sub._choices_actions if action.dest not in hidden]
     args = ap.parse_args()
     try:
         try:
             root = k.git_root(Path.cwd())
         except RuntimeError:
-            if args.cmd != "bootstrap":
+            if args.cmd not in {"bootstrap", "init"}:
                 raise
             root = Path.cwd().resolve()
         if args.cmd == "doctor":
             errs = k.doctor(root); print(json.dumps({"status":"PASS" if not errs else "FAIL", "errors":errs}, indent=2)); return 0 if not errs else 1
+        if args.cmd == "init":
+            result = p0_contract.classify_bootstrap(root, args.requires_git); print(json.dumps({"schema":"keel.init/v1", **result}, indent=2)); return 0 if result["status"] in {"VALID_GIT_REPOSITORY", "COPIED_EXTRACTED_FRAMEWORK", "NOT_A_GIT_REPOSITORY"} else 1
         if args.cmd == "bootstrap":
             result = p0_contract.classify_bootstrap(root, args.requires_git); print(json.dumps(result, indent=2)); return 0 if result["status"] in {"VALID_GIT_REPOSITORY", "COPIED_EXTRACTED_FRAMEWORK", "NOT_A_GIT_REPOSITORY"} else 1
         if args.cmd == "manifest":
@@ -126,8 +136,11 @@ def main() -> int:
             d = k.ledger_dir(root, cid); p = d / "views" / "evidence-receipts.json" if (d / "intent.json").is_file() else d / "evidence-receipts.json"
             if not p.is_file(): raise RuntimeError("evidence receipts missing; run verify first")
             print(p.read_text(encoding="utf-8"), end=""); return 0
-        if args.cmd == "status": print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
+        if args.cmd == "status": print(json.dumps(k.public_status(root, args.change), indent=2)); return 0
         if args.cmd == "next": print(json.dumps(k.next_action(root, args.change), indent=2)); return 0
+        if args.cmd == "explain": print(json.dumps(k.public_explain(root, args.subject, args.change), indent=2)); return 0
+        if args.cmd == "audit": print(json.dumps(k.public_audit(root, args.change), indent=2)); return 0
+        if args.cmd == "run": print(json.dumps({"schema":"keel.run/v1","status":"BLOCKED","change_id":args.change or k.active_change(root),"reason":"no authorized execution adapter is configured","next":"configure a project-owned executor and obtain an applicable capability grant"}, indent=2)); return 1
         if args.cmd == "worktree":
             if args.action == "status": print(json.dumps({"worktrees": k.worktree_records(root)}, indent=2)); return 0
             if not args.path: raise RuntimeError("worktree create/retire requires --path")
@@ -139,7 +152,11 @@ def main() -> int:
             print(json.dumps(result, indent=2)); return 0
         if args.cmd == "environment":
             result = k.environment_contract(root); print(json.dumps(result, indent=2)); return 0 if result["status"] != "INVALID" else 1
-        if args.cmd == "start": k.start_change(root, args.change, args.mode, args.summary, args.scope); print(json.dumps(k.status_summary(root, args.change), indent=2)); return 0
+        if args.cmd == "start":
+            objective = args.objective.strip()
+            change_id = args.id or re.sub(r"[^a-z0-9]+", "-", objective.lower()).strip("-")[:48].rstrip("-") or "change"
+            summary = args.summary or (objective if args.id else None)
+            k.start_change(root, change_id, args.mode, summary, args.scope); print(json.dumps(k.public_status(root, change_id), indent=2)); return 0
         cid = getattr(args, "change", None) or k.active_change(root)
         if args.cmd in {"gate","verify","reopen","replan","record-authorization","seal"} and not cid: raise RuntimeError("no active KEEL change")
         if args.cmd == "gate": k.gate(root, cid, args.gate); print(json.dumps(k.status_summary(root, cid), indent=2)); return 0
@@ -152,7 +169,7 @@ def main() -> int:
             result = k.seal_candidate(root, cid, args.commit); print(json.dumps({"status":"SEALED", **result}, indent=2)); return 0
         if args.cmd == "candidate-status":
             print(json.dumps(k.candidate_status(root, args.change), indent=2)); return 0
-        if args.cmd == "landing":
+        if args.cmd in {"landing", "land"}:
             if args.action == "prepare":
                 if not args.target_ref: raise RuntimeError("landing prepare requires --target-ref")
                 result = k.prepare_landing(root, args.change, args.target_ref, args.strategy)

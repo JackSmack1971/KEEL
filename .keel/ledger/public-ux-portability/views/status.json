@@ -1,0 +1,12 @@
+{
+  "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
+  "change_id": "public-ux-portability",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "4d73f8937a9005dda5fac9f6c7991ec5d184d396827738cee7646651ffa3e766",
+    "last_event_digest": "f1f2479b9c908072ae3d72c47b4c447cd16acec72c4bbedbdff29803d581c9ba"
+  }
+}

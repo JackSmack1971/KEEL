@@ -44,7 +44,12 @@ Every executed verifier emits a receipt in `evidence-receipts.json` containing:
 
 Receipt evaluation rechecks integrity, exact subject, intent, result, declared authority, and planned establishment scope. A passing verifier cannot satisfy a requirement it was not selected and authorized to establish.
 
-## KEEL write-change rule
+## Public lifecycle and KEEL write-change rule
+
+The user-facing lifecycle reports `SEALED`, `LANDABLE`, `INTEGRATING`, and `LANDED`.
+These are evidence states, not proof of behavioral correctness: `SEALED` binds a
+verified candidate, `INTEGRATING` binds a landing transaction, and `LANDED` means the
+resulting tree matched the landing attestation.
 
 `python3 .keel/bin/keel.py verify` validates governance/scope/authorization, derives the plan, executes only selected verifiers, emits receipts, evaluates requirement coverage, and reaches `SHIP` only when every required property is established. Changed implementation or intent invalidates the exact subject and requires fresh receipts.
 

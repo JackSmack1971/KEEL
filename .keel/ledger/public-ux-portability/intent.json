@@ -1,0 +1,72 @@
+{
+  "base_commit": "a05d912a1f6eab0f4c69082832e114494b39233c",
+  "change_id": "public-ux-portability",
+  "decisions": [],
+  "effect_requests": [],
+  "evidence_requirements": [
+    {"id":"ER-REQ-1","requirement_id":"REQ-1","statement":"The normal CLI exposes a small stable user surface and keeps schema/versioned subsystem commands compatibility-only.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"ER-REQ-2","requirement_id":"REQ-2","statement":"Public JSON output has stable top-level status and machine-readable contract fields across lifecycle commands.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"ER-REQ-3","requirement_id":"REQ-3","statement":"Explain reports why an action is allowed, blocked, waiting, stale, or escalated, and audit reconstructs intended through landed provenance.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"ER-REQ-4","requirement_id":"REQ-4","statement":"Lifecycle status distinguishes SEALED, LANDABLE or INTEGRATING, and LANDED.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"public-cli-contract-tests"}]},
+    {"id":"ER-REQ-5","requirement_id":"REQ-5","statement":"Installation, initialization, upgrade, and migration are deterministic, safe, additive, and preserve historical data and ownership boundaries.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"portability-installation-tests"}]},
+    {"id":"ER-REQ-6","requirement_id":"REQ-6","statement":"Fresh disposable repositories remain stack-neutral and do not require invented project commands or architecture.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"documentation-contract-tests"}]},
+    {"id":"ER-REQ-7","requirement_id":"REQ-7","statement":"Documentation describes KEEL architecture and public workflow, artifact ownership, upgrades, remote custom-ref replication, and current terminology accurately.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"documentation-contract-tests"}]},
+    {"id":"ER-REQ-8","requirement_id":"REQ-8","statement":"The named control-plane documents and indexes match landed behavior and do not present obsolete lifecycle terminology as the public workflow.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"documentation-contract-tests"}]},
+    {"id":"ER-REQ-9","requirement_id":"REQ-9","statement":"Disposable-repository installation tests demonstrate stack-neutral behavior without invented project commands or architecture.","required":true,"policy":"all","evidence":[{"provider":"unit_test","check_id":"portability-installation-tests"}]}
+  ],
+  "mode": "standard",
+  "non_goals": [
+    "Do not remove historical readers, ledgers, refs, notes, attestations, or migration provenance.",
+    "Do not execute remote pushes, merges, releases, deployments, or migrations in consumer repositories.",
+    "Do not invent project-language, framework, build, test, or deployment commands for stack-neutral repositories.",
+    "Do not manually edit kernel-owned events, grants, receipts, attestations, or generated views."
+  ],
+  "objective": "Refactor KEEL public UX, documentation, packaging, portability, and installation around the redesigned kernel",
+  "provenance": {
+    "authority_id": null,
+    "kind": "human-authored"
+  },
+  "requirements": [
+    {"id":"REQ-1","statement":"The normal CLI converges on init, doctor, start, status, next, run, verify, land, explain, and audit; internal schema/versioned subsystem commands are compatibility-only or hidden from normal help.","source":"user","type":"behavior","minimum_evidence_authority":"TESTED","implementation_paths":[".keel/bin/keel.py",".keel/lib/**"]},
+    {"id":"REQ-2","statement":"Public commands emit stable machine-readable JSON contracts with explicit status and no schema-history-shaped normal interface.","source":"user","type":"behavior","minimum_evidence_authority":"TESTED","implementation_paths":[".keel/bin/keel.py",".keel/tests/**"]},
+    {"id":"REQ-3","statement":"keel explain exposes why an action is allowed, blocked, waiting, stale, or escalated, and keel audit reconstructs intended -> authorized -> executed -> verified -> integrated -> landed provenance.","source":"user","type":"behavior","minimum_evidence_authority":"TESTED","implementation_paths":[".keel/bin/keel.py",".keel/lib/keel_core.py",".keel/tests/**"]},
+    {"id":"REQ-4","statement":"Public lifecycle status clearly distinguishes SEALED, LANDABLE or INTEGRATING, and LANDED.","source":"user","type":"behavior","minimum_evidence_authority":"TESTED","implementation_paths":[".keel/bin/keel.py",".keel/lib/keel_core.py",".keel/tests/**"]},
+    {"id":"REQ-5","statement":"Installation is deterministic; ownership classes distinguish KEEL-owned files, project-owned policy/config, generated cache/state, and durable historical ledger data; upgrades and migrations are safe and loss-preserving.","source":"user","type":"migration","minimum_evidence_authority":"TESTED","implementation_paths":[".keel/lib/p0_contract.py",".keel/lib/schema_migrations.py",".keel/tests/**","docs/control-plane/**"]},
+    {"id":"REQ-6","statement":"Remote replication guidance documents KEEL custom refs, notes, and attestations where needed.","source":"user","type":"documentation","minimum_evidence_authority":"TESTED","implementation_paths":["docs/control-plane/**"]},
+    {"id":"REQ-7","statement":"AGENTS.md remains a short navigational entry point; ARCHITECTURE.md describes KEEL itself; generic target-project policy scaffolding is explicit templates or policy packs.","source":"user","type":"documentation","minimum_evidence_authority":"TESTED","implementation_paths":["AGENTS.md","ARCHITECTURE.md","policies/**"]},
+    {"id":"REQ-8","statement":"CONTROL_PLANE.md, WORKFLOW.md, CODEX_NATIVE.md, VERIFICATION.md, ORCHESTRATION.md, and indexes match landed behavior and do not present obsolete Discuss/Plan/Execute/Verify/Ship terminology as the public user workflow.","source":"user","type":"documentation","minimum_evidence_authority":"TESTED","implementation_paths":["CONTROL_PLANE.md","WORKFLOW.md","docs/control-plane/**","docs/INDEX.md"]},
+    {"id":"REQ-9","statement":"Fresh installation is tested in representative disposable repositories and KEEL remains stack-neutral without inventing project commands or architecture.","source":"user","type":"quality","minimum_evidence_authority":"TESTED","implementation_paths":[".keel/tests/**",".keel/lib/**"]}
+  ],
+  "risk": {
+    "consequences": ["Changes the public command contract, compatibility boundary, installation behavior, and durable control-plane documentation."],
+    "control_plane_change": true,
+    "high_blast_radius": true,
+    "level": "high",
+    "migration_or_release_sensitive": true,
+    "requires_exec_plan": true,
+    "review": "Independently review public CLI compatibility, JSON contracts, lifecycle explanations and provenance, safe migration and ownership boundaries, fresh-install portability, remote ref guidance, and documentation consistency.",
+    "security_privacy_sensitive": false
+  },
+  "schema": "keel.change-intent/v2",
+  "scope": [
+    "AGENTS.md",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "WORKFLOW.md",
+    ".keel/bin/keel.py",
+    ".keel/lib/**",
+    ".keel/tests/**",
+    ".keel/config.json",
+    ".keel/bootstrap-manifest.json",
+    ".keel/README.md",
+    "docs/INDEX.md",
+    "docs/control-plane/**",
+    "docs/exec-plans/active/**",
+    "policies/**"
+  ],
+  "work": {
+    "edges": [],
+    "graph_references": [],
+    "units": []
+  }
+}

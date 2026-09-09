@@ -10,6 +10,13 @@ Read-only work creates no ledger. Localized reversible low-risk writes may use `
 
 Events record significant transitions/decisions with stable content identity and a previous-event digest. This detects local discontinuity; it does **not** make the ledger immutable. Committed Git history and independently verified Git subjects remain the durable integrity substrate. Grants, receipts, attestations, events, and views are kernel-owned records and must not be manually edited.
 
+## Public workflow and internal lifecycle
+
+Users begin with `keel init`/`keel doctor`, then use `keel start`, `keel status`,
+`keel next`, `keel explain`, `keel audit`, `keel verify`, and `keel land`. The
+kernel's Discuss/Plan/Execute/Verify/Ship phases remain internal gate names and
+are exposed only to compatibility automation.
+
 ## Standard lifecycle
 1. **Discuss:** write the objective and non-goals in `intent.json`; run `python3 .keel/bin/keel.py gate discuss`.
 2. **Plan:** complete canonical requirements, scope, work references, risk/consequences, effect requests, and evidence requirements. High-risk work includes `risk.review` and an ExecPlan. Run `keel.py gate plan`.

@@ -1,44 +1,40 @@
-# Canonical commands
+# Public command surface
 
-Run commands from the repository root with `python3 .keel/bin/keel.py`.
+Run `python3 .keel/bin/keel.py` from a repository root. Public commands return
+JSON with a stable `schema` identifier:
 
-## Lifecycle
+- `init [--check]` and `doctor` inspect local installation and Git readiness.
+- `start <objective> [--id <change-id>]` begins a governed change.
+- `status`, `next`, `explain [subject]`, and `audit [subject]` provide lifecycle,
+  decision, and provenance projections.
+- `run` reports the fail-closed execution boundary when no authorized executor is
+  configured; KEEL does not invent project commands.
+- `verify` establishes exact-subject evidence; `land prepare|integrate|verify`
+  performs the authorized landing transaction.
 
-- `start`, `gate discuss`, `gate plan`, `replan`, `reopen`
-- `status`, `next`, `context`, `evidence`
-- `verify`, `seal`, `candidate-status`, `landing prepare|integrate|verify`, `anchor`
-- `worktree create|status|retire`, `environment status`
+The public lifecycle is `UNSEALED` (verified work has no candidate yet), `SEALED`
+(candidate is verified and sealed), `LANDABLE`
+(candidate is ready for a landing transaction), `INTEGRATING` (a landing
+attestation exists), and `LANDED` (the resulting target was independently checked).
 
-These commands query or transition the canonical ledger. `verify` writes exact-subject
-receipts. `seal` binds the committed candidate; `landing prepare` binds a target
-base and synthetic integration tree, while `landing integrate` uses compare-and-
-swap and independently checks the actual landed tree before anchoring. SHIP
-eligibility is not external permission.
+Detailed gates, ledger migration, graph, scheduler, and compatibility commands are
+internal support surfaces. They remain available for automation and historical
+compatibility but are intentionally absent from normal help.
 
-## Canonical model queries
+## Distribution and ownership
 
-- `change-graph validate|frontier|status|normalize|serialize <path> [--state <path>]`
-- `scheduler frontier|status <path> [--state <path>] [--max-concurrency N]` — read-only
-  bounded scheduler frontier projection; dispatch requires a library adapter.
-- `facts` — serialize the read-only canonical FactGraph.
-- `discover` — evidence-backed capability candidates.
-- `effects`, `telemetry` — read-only boundary/evidence queries.
+`.keel/` is KEEL-owned runtime and canonical ledger data. Project-owned policy and
+configuration are explicit under `policies/` and the project portions of config.
+Generated cache/state belongs under ignored runtime directories; durable historical
+ledger data, Git refs, notes, and attestations must be retained and replicated when
+history is shared.
 
-There are no mission, mission-v2, topology route, repository-map, or developer-UX
-aliases. Historical compatibility applies only to ledgers.
+KEEL custom refs (custom-ref names under `refs/keel/candidates/*`, `refs/keel/attestations/*`,
+`refs/keel/ledger/*`), and the
+`keel` Git notes ref are not included by ordinary branch pushes. Replicate them with
+explicit refspecs and notes configuration when remote auditability is required, for
+example `git push origin refs/keel/candidates/* refs/keel/attestations/* refs/keel/ledger/*`
+and `git push origin refs/notes/keel`.
 
-## Compatibility and distribution
-
-- `ledger migrate|project|validate --change <id> [--output <dir>]`
-- `compat`, `version`, `contracts`, `reconcile [--change <id>]`
-- `bootstrap status [--requires-git]`
-- `manifest [--write]`
-- `doctor`
-
-`manifest --write` is the sole producer for `.keel/bootstrap-manifest.json`; plain
-`manifest` verifies deterministic freshness. `ledger migrate` is additive and uses the
-versioned `keel.legacy-ledger/v1` reader. It never deletes historical input or creates
-missing authority.
-
-Optional gardening is intentionally separate: run
-`python3 .keel/maintenance/keel_maintenance.py --help`.
+Migration is additive and loss-preserving: use the internal `ledger migrate` reader
+for historical v1 ledgers, retain the source, and verify the resulting provenance.

@@ -4,6 +4,10 @@ State: `CANONICAL_KERNEL_M6`; live Codex/hook enforcement remains pending per-se
 
 The control plane is the repository's information architecture, change-governance spine, and feedback system. It remains stack-neutral until project evidence activates specialized domains. Candidate and landing attestations report only properties established by exact evidence; they are not proof of behavioral correctness.
 
+The stable public surface is the JSON CLI: `init`, `doctor`, `start`, `status`,
+`next`, `run`, `verify`, `land`, `explain`, and `audit`. Internal schema and
+subsystem commands are compatibility surfaces, not normal user workflow.
+
 ## Layer map
 1. Repository legibility — thin entry points, indexed durable knowledge.
 2. KEEL canonical ledger — one authoritative intent model plus causal events, grants, exact-subject receipts, attestations, and generated views.
