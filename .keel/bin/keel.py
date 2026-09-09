@@ -70,7 +70,7 @@ def main() -> int:
                 raise
             root = Path.cwd().resolve()
         if args.cmd == "doctor":
-            errs = k.doctor(root); print(json.dumps({"status":"PASS" if not errs else "FAIL", "errors":errs}, indent=2)); return 0 if not errs else 1
+            errs = k.doctor(root); print(json.dumps({"status":"PASS" if not errs else "FAIL", "errors":errs, "autonomous_codex":k.codex_preflight_report()}, indent=2)); return 0 if not errs else 1
         if args.cmd == "init":
             result = p0_contract.classify_bootstrap(root, args.requires_git); print(json.dumps({"schema":"keel.init/v1", **result}, indent=2)); return 0 if result["status"] in {"VALID_GIT_REPOSITORY", "COPIED_EXTRACTED_FRAMEWORK", "NOT_A_GIT_REPOSITORY"} else 1
         if args.cmd == "bootstrap":
@@ -140,7 +140,8 @@ def main() -> int:
         if args.cmd == "next": print(json.dumps(k.next_action(root, args.change), indent=2)); return 0
         if args.cmd == "explain": print(json.dumps(k.public_explain(root, args.subject, args.change), indent=2)); return 0
         if args.cmd == "audit": print(json.dumps(k.public_audit(root, args.change), indent=2)); return 0
-        if args.cmd == "run": print(json.dumps({"schema":"keel.run/v1","status":"BLOCKED","change_id":args.change or k.active_change(root),"reason":"no authorized execution adapter is configured","next":"configure a project-owned executor and obtain an applicable capability grant"}, indent=2)); return 1
+        if args.cmd == "run":
+            preflight = k.codex_preflight_report(); print(json.dumps({"schema":"keel.run/v1","status":"BLOCKED","change_id":args.change or k.active_change(root),"reason":preflight["reason"],"autonomous_codex":preflight,"next":"restore included managed Codex entitlement and re-run preflight; no fallback is attempted"}, indent=2)); return 1
         if args.cmd == "worktree":
             if args.action == "status": print(json.dumps({"worktrees": k.worktree_records(root)}, indent=2)); return 0
             if not args.path: raise RuntimeError("worktree create/retire requires --path")

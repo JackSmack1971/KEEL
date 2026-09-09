@@ -1,0 +1,37 @@
+{
+  "change_type": "implementation",
+  "criteria": [],
+  "errors": [],
+  "implementation_status": "PASS",
+  "projection_of": "evidence-receipts.json",
+  "requirement_coverage": [
+    {
+      "evidence_requirement_id": "ER-REQ-01",
+      "requirement_id": "REQ-01",
+      "status": "PASS",
+      "verifier_id": "codex-adapter-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-02",
+      "requirement_id": "REQ-02",
+      "status": "PASS",
+      "verifier_id": "documentation-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-03",
+      "requirement_id": "REQ-03",
+      "status": "PASS",
+      "verifier_id": "codex-adapter-tests"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS",
+  "summary": {
+    "passed_required": 3,
+    "required": 3,
+    "requirements_covered": 3,
+    "requirements_passing": 3,
+    "requirements_total": 3
+  },
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE"
+}

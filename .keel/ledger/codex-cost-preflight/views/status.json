@@ -1,0 +1,12 @@
+{
+  "base_commit": "1473ea005c633fc0f99f5b8b631ba4825856b1fc",
+  "change_id": "codex-cost-preflight",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "b3fc6827da223a4ee5bd955bc8264be2ce17713ec686ee6dfa6ae6aa60f96e5c",
+    "last_event_digest": "69ac433889b70d1143a040c01197cfdd0171aa784f33c9faaf8220f844ead243"
+  }
+}

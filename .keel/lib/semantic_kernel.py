@@ -364,6 +364,8 @@ class RuntimeProfile(Record):
     tools: tuple[str, ...] = ()
     unsupported_surfaces: tuple[str, ...] = ()
     unobservable_surfaces: tuple[str, ...] = ()
+    cost_status: str = "UNOBSERVED"
+    cost_reason: str = ""
 
     def __post_init__(self) -> None:
         super().__post_init__(); _nonempty(self.runtime, "runtime")
@@ -373,7 +375,9 @@ class RuntimeProfile(Record):
         if any(not isinstance(k, str) or not k.strip() or v not in allowed for k, v in self.surfaces.items()):
             raise ModelError("runtime surfaces require named conservative observation states")
         for values, label in ((self.observations, "observations"), (self.hook_coverage, "hook_coverage"), (self.tool_coverage, "tool_coverage"), (self.providers, "providers"), (self.tools, "tools"), (self.unsupported_surfaces, "unsupported_surfaces"), (self.unobservable_surfaces, "unobservable_surfaces")):
-            if len(set(values)) != len(values) or any(not isinstance(v, str) or not v.strip() for v in values): raise ModelError(f"runtime {label} must contain unique non-empty strings")
+              if len(set(values)) != len(values) or any(not isinstance(v, str) or not v.strip() for v in values): raise ModelError(f"runtime {label} must contain unique non-empty strings")
+        if self.cost_status not in {"UNOBSERVED", "SUPPORTED", "BLOCKED"} or not isinstance(self.cost_reason, str):
+            raise ModelError("runtime cost eligibility must be UNOBSERVED, SUPPORTED, or BLOCKED")
         object.__setattr__(self, "surfaces", _freeze(self.surfaces))
 
 

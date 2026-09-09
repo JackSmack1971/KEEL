@@ -21,6 +21,7 @@ import git_proof
 import candidate_attestation
 import canonical_ledger
 import p0_contract
+import runtime_authorization
 
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
 PLACEHOLDER_RE = re.compile(r"<!--\s*FILL\b|\{\{[A-Z0-9_]+\}\}")
@@ -1387,6 +1388,11 @@ def environment_contract(root: Path) -> dict:
     return {"schema_version": 1, "status": status, "contract": contract, "errors": errors}
 
 
+def codex_preflight_report() -> dict:
+    _, result = runtime_authorization.default_codex_cost_preflight()
+    return result.to_dict()
+
+
 def status_summary(root: Path, change_id: str | None = None) -> dict:
     cid = change_id or active_change(root)
     if not cid: return {"active_change": None, "keel": "IDLE"}
@@ -1406,7 +1412,8 @@ def public_status(root: Path, change_id: str | None = None) -> dict:
     """Stable user-facing lifecycle projection over canonical evidence."""
     cid = change_id or active_change(root)
     result = {"schema": "keel.public-status/v1", "status": "IDLE", "change_id": cid,
-              "lifecycle": "IDLE", "readiness": "WAITING", "evidence": {}}
+              "lifecycle": "IDLE", "readiness": "WAITING", "evidence": {},
+              "autonomous_codex": codex_preflight_report()}
     if not cid:
         return result
     result["status"] = "ACTIVE"
@@ -1439,11 +1446,18 @@ def public_explain(root: Path, subject: str | None = None, change_id: str | None
     cid = change_id or active_change(root)
     nxt = next_action(root, cid)
     result = {"schema": "keel.explain/v1", "subject": subject or "next-action", "change_id": cid,
-              "decision": "WAITING", "reason": "no active change", "evidence": [], "next": None}
+              "decision": "WAITING", "reason": "no active change", "evidence": [], "next": None,
+              "autonomous_codex": codex_preflight_report()}
     if not cid:
+        result["decision"] = "BLOCKED"
+        result["reason"] = result["autonomous_codex"]["reason"]
         return result
     result["next"] = nxt.get("recommended_action")
     result["evidence"].append({"kind": "next-action", "status": nxt.get("status"), "phase": nxt.get("phase")})
+    if result["autonomous_codex"]["status"] == "BLOCKED":
+        result.update({"decision": "BLOCKED", "reason": result["autonomous_codex"]["reason"]})
+        result["evidence"].append({"kind": "codex-cost-preflight", **result["autonomous_codex"]})
+        return result
     try:
         landing = candidate_attestation.read_landing_attestation(root, cid)
     except RuntimeError:

@@ -13,12 +13,36 @@ from enum import Enum
 from typing import Any, Mapping, Protocol
 
 import semantic_kernel as sk
+from dataclasses import replace
 
 
 REQUIRED_RUNTIME_SURFACES = (
     "repository", "git", "sandbox_permissions", "hook_trust",
     "workspace_isolation", "network_mediation", "external_effect_mediation",
 )
+
+CODEX_COST_KEYS = ("auth_mode", "provider", "entitlement", "rate_limit", "paid_continuation", "reset_credit")
+
+
+class CostEligibility(str, Enum):
+    SUPPORTED = "SUPPORTED"
+    BLOCKED = "BLOCKED"
+
+
+@dataclass(frozen=True)
+class CostPreflight:
+    status: CostEligibility
+    reason: str
+    resumable: bool = False
+    resume_when: str = ""
+
+    @property
+    def supported(self) -> bool:
+        return self.status is CostEligibility.SUPPORTED
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"status": self.status.value, "reason": self.reason,
+                "resumable": self.resumable, "resume_when": self.resume_when}
 
 
 class AutonomyDecision(str, Enum):
@@ -123,6 +147,37 @@ def observe_runtime(*, identity: str, runtime: str, source: str,
         knowledge=knowledge, support=support)
 
 
+def codex_cost_preflight(profile: sk.RuntimeProfile, observations: Mapping[str, Any] | None) -> CostPreflight:
+    """Classify only a complete, documented local observation; never performs continuation."""
+    if not isinstance(observations, Mapping):
+        return CostPreflight(CostEligibility.BLOCKED, "managed entitlement observations are unavailable; autonomous Codex execution is paused")
+    if set(observations) != set(CODEX_COST_KEYS):
+        return CostPreflight(CostEligibility.BLOCKED, "managed entitlement observations have an unsupported or incomplete schema; autonomous Codex execution is paused")
+    values = {key: observations.get(key) for key in CODEX_COST_KEYS}
+    if any(not isinstance(value, str) or not value.strip() for value in values.values()):
+        return CostPreflight(CostEligibility.BLOCKED, "managed entitlement observations are missing or malformed; autonomous Codex execution is paused")
+    if profile.runtime != "codex":
+        return CostPreflight(CostEligibility.BLOCKED, "runtime is not the documented Codex runtime")
+    if values["rate_limit"] == "EXHAUSTED":
+        return CostPreflight(CostEligibility.BLOCKED, "normal Codex entitlement limit is exhausted; execution is paused", True, "re-run preflight after included entitlement is available")
+    if values["reset_credit"] == "AVAILABLE":
+        return CostPreflight(CostEligibility.BLOCKED, "rate-limit-reset credit is not an included entitlement continuation path")
+    expected = {"auth_mode":"MANAGED_CHATGPT", "provider":"CODEX", "entitlement":"INCLUDED", "rate_limit":"AVAILABLE", "paid_continuation":"UNAVAILABLE", "reset_credit":"UNAVAILABLE"}
+    if values != expected:
+        return CostPreflight(CostEligibility.BLOCKED, "runtime authentication, provider, entitlement, limit, or paid-continuation evidence is unsupported or ambiguous")
+    return CostPreflight(CostEligibility.SUPPORTED, "observed managed ChatGPT/Codex entitlement with no paid continuation path")
+
+
+def apply_codex_cost_preflight(profile: sk.RuntimeProfile, observations: Mapping[str, Any] | None) -> tuple[sk.RuntimeProfile, CostPreflight]:
+    result = codex_cost_preflight(profile, observations)
+    return replace(profile, cost_status=result.status.value, cost_reason=result.reason), result
+
+
+def default_codex_cost_preflight() -> tuple[sk.RuntimeProfile, CostPreflight]:
+    profile = observe_runtime(identity="keel:runtime-profile:codex-cost-preflight", runtime="codex", source="local-documented-observations", observations={})
+    return apply_codex_cost_preflight(profile, None)
+
+
 def runtime_profile_digest(profile: sk.RuntimeProfile) -> str:
     return sk.content_digest(profile)
 
@@ -207,6 +262,8 @@ def execution_readiness(request: sk.EffectRequest, profile: sk.RuntimeProfile,
     blockers = []
     if grant_evaluation is None or not grant_evaluation.valid: blockers.append("valid capability grant required")
     if profile.knowledge is not sk.Knowledge.KNOWN: blockers.append("runtime profile is not fully known")
+    if profile.cost_status != CostEligibility.SUPPORTED.value:
+        blockers.append(profile.cost_reason or "ZERO_INCREMENTAL_COST preflight is BLOCKED")
     return {"planning_valid": True, "execution_ready": not blockers, "blockers": blockers}
 
 

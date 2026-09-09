@@ -1,0 +1,161 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-01",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Every autonomous Codex execution entry point performs a deterministic preflight and proceeds only for SUPPORTED; UNKNOWN is BLOCKED."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-02",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Only observed managed ChatGPT/Codex entitlement is SUPPORTED; API-key, unknown, unsupported-provider, ambiguous, missing, or malformed observations are BLOCKED."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-03",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "BLOCKED preflight prevents autonomous execution and performs no auth, provider, credit, or fallback continuation."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-04",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "BLOCKED eligibility is included in existing doctor, public status, and explain projections with actionable remediation."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-05",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "The preflight has no API-key input, persistence, or pass-through and requires no user email or persisted sensitive account detail."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-06",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "Forbidden credit purchase/nudge, reset-credit consumption, identity rotation, and secondary-provider operations are never invoked, including failures."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-07",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Documented account, plan, and rate-limit observations are consumed conservatively; partial, contradictory, malformed, or missing observations are BLOCKED."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-08",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Limit exhaustion yields resumable BLOCKED state without bypass action and resumes after entitlement is restored."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "public-cli-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-09",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "Non-autonomous status, explain, and audit governance remains usable while autonomous execution is BLOCKED."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-10",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "Eligibility decision state contains no email, account identifier, credential, or other sensitive persisted field."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "runtime-authorization-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-11",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Eligibility extends RuntimeProfile and capability/authorization readiness semantics without a parallel authority."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-12",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "Authoritative runtime documentation states exactly what local Codex observations can and cannot prove about billing and allowance boundaries."
+    }
+  ],
+  "schema_version": 1
+}
