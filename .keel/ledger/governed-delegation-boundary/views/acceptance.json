@@ -1,0 +1,122 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-01",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Define an immutable canonical DispatchEnvelope binding change, WorkUnit, Git subject/base, validated workspace, intent/graph/authority/runtime/context/evidence identities, objective, requirements, scope/resource claims, and stop/completion protocol."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-02",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "Resolve every dispatch workspace to the exact registered KEEL Git worktree and subject, fail closed on unresolved or mismatched identity, and pass its validated path as Codex thread/start cwd."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-03",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "Define and persist a bounded ExecutionObservation with Codex thread/turn/runtime/workspace/subject identities, outcome, artifacts/events, and timestamps."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-04",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-04",
+      "statement": "Treat successful Codex turn/completed solely as execution observation and transition the WorkUnit to AWAITING_VERIFICATION, never COMPLETE."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-05",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-05",
+      "statement": "Allow COMPLETE only after KEEL accepts successful evidence evaluation bound to the exact WorkUnit and all governed dispatch identities; reject stale or mismatched identity."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "codex-app-server-adapter-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-06",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-06",
+      "statement": "Preserve fail-closed ZERO_INCREMENTAL_COST preflight before any model execution."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "scheduler-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-07",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-07",
+      "statement": "Persist enough dispatch, workspace, thread, turn, and observation identity to support deterministic recovery without confusing transport and engineering state."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-08",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-08",
+      "statement": "Update architecture, orchestration, Codex-native, and verification documentation and remove stale turn-completion language."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "documentation-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-09",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-09",
+      "statement": "Preserve stack-neutral KEEL governance, Codex intelligence/runtime ownership, and the bounded non-autonomous keel run surface."
+    }
+  ],
+  "schema_version": 1
+}

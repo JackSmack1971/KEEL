@@ -204,8 +204,8 @@ class CodexAppServerAdapter:
             raise MalformedMessage("thread/resume response has unexpected thread.id")
         return thread_id
 
-    def submit_turn(self, thread_id: str, text: str, *, profile: Any, cost_observations: Mapping[str, Any] | None, timeout: float | None = None, max_events: int = 1024) -> TurnObservation:
-        if not thread_id or not text or max_events < 1:
+    def submit_turn(self, thread_id: str, text: str, *, profile: Any, cost_observations: Mapping[str, Any] | None, timeout: float | None = None, max_events: int = 1024, max_event_bytes: int = 262144) -> TurnObservation:
+        if not thread_id or not text or max_events < 1 or max_event_bytes < 1:
             raise ValueError("thread_id, text, and positive max_events are required")
         eligibility = runtime_authorization.codex_cost_preflight(profile, cost_observations)
         if not eligibility.supported:
@@ -216,6 +216,7 @@ class CodexAppServerAdapter:
             raise MalformedMessage("turn/start response lacks turn.id")
         turn_id = turn["id"]
         events: list[Mapping[str, Any]] = []
+        event_bytes = 0
         deadline = time.monotonic() + (self.request_timeout if timeout is None else timeout)
         while len(events) < max_events:
             remaining = deadline - time.monotonic()
@@ -229,6 +230,9 @@ class CodexAppServerAdapter:
                 raise message
             if not isinstance(message, Mapping) or not isinstance(message.get("method"), str):
                 raise MalformedMessage("turn event is not a notification")
+            event_bytes += len(json.dumps(message, sort_keys=True, separators=(",", ":")).encode())
+            if event_bytes > max_event_bytes:
+                raise MalformedMessage("turn events exceeded bounded observation size")
             events.append(message)
             if message["method"] == "turn/completed":
                 params = message.get("params")
@@ -238,18 +242,39 @@ class CodexAppServerAdapter:
                 return TurnObservation({"threadId": thread_id, "text": text}, tuple(events), completed)
         raise RequestTimeout(f"turn exceeded max_events before completion: {turn_id}")
 
-    def dispatch(self, unit: Any, workspace_id: str) -> Any:
-        """Implement the scheduler injection seam as one bounded WorkUnit turn."""
-        from scheduler import DispatchResult, FailureClass
+    def dispatch(self, envelope: Any) -> Any:
+        """Execute one complete governed envelope and report transport observation only."""
+        from scheduler import DispatchEnvelope, DispatchResult, ExecutionObservation, FailureClass
+        if not isinstance(envelope, DispatchEnvelope):
+            raise ValueError("dispatch requires a complete DispatchEnvelope")
+        started_at = time.time()
         try:
+            actual_profile = self.runtime_profile
+            actual_identity = getattr(actual_profile, "identity", "")
+            actual_digest = runtime_authorization.runtime_profile_digest(actual_profile) if actual_profile is not None else ""
+            if actual_identity != envelope.runtime_profile_id or actual_digest != envelope.runtime_profile_digest:
+                raise AdapterError("runtime profile identity does not match governed dispatch")
             if not self._initialized:
                 self.initialize_and_inspect()
-            thread_id = self.start_thread()
-            turn = self.submit_turn(thread_id, unit.objective, profile=getattr(self, "runtime_profile", None),
-                                    cost_observations=getattr(self, "cost_observations", None))
-            return DispatchResult("COMPLETE" if turn.completed.get("status") == "completed" else "FAILED",
-                                  evidence_fingerprint=json.dumps(turn.completed, sort_keys=True),
-                                  message="bounded app-server turn completed")
+            # The validated worktree is load-bearing: never create an unbound thread.
+            thread_id = self.start_thread(cwd=envelope.workspace.path)
+            prompt = json.dumps(envelope.to_dict(), sort_keys=True, separators=(",", ":"))
+            turn = self.submit_turn(thread_id, prompt, profile=self.runtime_profile,
+                                    cost_observations=self.cost_observations)
+            turn_id = str(turn.completed.get("id", ""))
+            observation = ExecutionObservation(
+                envelope.identity, envelope.change_id, envelope.work_unit_id, envelope.subject,
+                envelope.workspace.identity, envelope.workspace.path, envelope.runtime_profile_id,
+                envelope.runtime_profile_digest, thread_id, turn_id,
+                str(turn.completed.get("status", "UNKNOWN")).upper(), started_at, time.time(),
+                tuple(json.dumps(event, sort_keys=True, separators=(",", ":")) for event in turn.events),
+                tuple(sorted({str(event.get("params", {}).get("item", {}).get("id"))
+                              for event in turn.events if isinstance(event.get("params"), Mapping)
+                              and isinstance(event.get("params", {}).get("item"), Mapping)
+                              and event.get("params", {}).get("item", {}).get("id")})))
+            return DispatchResult("OBSERVED", evidence_fingerprint=envelope.identity,
+                                  message="Codex execution observed; KEEL verification required",
+                                  artifacts=observation.artifacts, observation=observation)
         except AdapterError as exc:
             return DispatchResult("FAILED", failure_class=FailureClass.AUTHORIZATION_BLOCK if "ZERO_INCREMENTAL_COST" in str(exc) else FailureClass.AGENT_FAILURE, message=str(exc))
 

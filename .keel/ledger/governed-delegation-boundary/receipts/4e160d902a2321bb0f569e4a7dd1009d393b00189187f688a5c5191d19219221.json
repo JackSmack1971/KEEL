@@ -1,0 +1,76 @@
+{
+  "ended_at": "2026-09-09T15:32:16.354841+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "2e00760372d905392fd7ea84cbf2a0f162d9ce0ba370b2e04cee4c97de41a27c",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 505,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"ec29f1c02b34d094c02cc1f9ab536c43552423d6eac5ce802ec9bf77a688b095\"\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "4e160d902a2321bb0f569e4a7dd1009d393b00189187f688a5c5191d19219221",
+  "receipt_id": "4e160d902a2321bb0f569e4a7dd1009d393b00189187f688a5c5191d19219221",
+  "record_digest": "48eea7d1624c2e40cf127dd6a78806725861cb6bd556255888b9da28569e41ea",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T15:32:15.849197+00:00",
+  "subject": {
+    "base_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/governed-delegation-boundary.md"
+    ],
+    "content_digest": "2daf5f445755577327fd077bf803a8ea6b72657373b8ab9bb6a4a880da51b1cc",
+    "head_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "manifest-producer-check",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

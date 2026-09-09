@@ -1,0 +1,82 @@
+{
+  "ended_at": "2026-09-09T15:32:18.208652+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [
+    "ER-REQ-01",
+    "ER-REQ-03",
+    "ER-REQ-04",
+    "ER-REQ-05",
+    "ER-REQ-07"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "2e00760372d905392fd7ea84cbf2a0f162d9ce0ba370b2e04cee4c97de41a27c",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_scheduler.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 1340,
+      "excerpt": "{\"checks\": [\"governed-envelope\", \"exact-workspace\", \"objective-only-rejected\", \"observation-not-completion\", \"exact-verification\", \"identity-mismatch-matrix\", \"observation-recovery\", \"resources\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_scheduler.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "53e5c10de0878180315e5ab20d13c03302606791049ba12e17be516cd4dc418d",
+  "receipt_id": "53e5c10de0878180315e5ab20d13c03302606791049ba12e17be516cd4dc418d",
+  "record_digest": "0dec8676a13d5e11b599abad3849ef09479edde4b116ea66c740c2ec5ac2fa11",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T15:32:16.867836+00:00",
+  "subject": {
+    "base_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/governed-delegation-boundary.md"
+    ],
+    "content_digest": "2daf5f445755577327fd077bf803a8ea6b72657373b8ab9bb6a4a880da51b1cc",
+    "head_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "scheduler-tests",
+    "provenance": ".keel/tests/test_scheduler.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

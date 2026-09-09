@@ -72,3 +72,14 @@ reports `UNVERIFIED_RUNTIME`; therefore hosted CI is not evidence of live Codex
 availability, project/hook trust, hook delivery, enforcement, or model execution.
 Those claims still require separate per-runtime observation under the runtime trust
 contract.
+
+## Delegated WorkUnit verification
+
+Codex execution observations are inputs to governance, not EvidenceReceipts and
+not completion authority. `turn/completed` can establish only that a particular
+thread and turn ended for the runtime/workspace/subject-bound dispatch envelope.
+The scheduler records `AWAITING_VERIFICATION` until KEEL evaluates a successful
+receipt bound to the same change, WorkUnit, Git subject, workspace, intent,
+graph, authority, RuntimeProfile, and EvidencePlan identities. Any stale or
+mismatched identity fails closed; externally reported `COMPLETE` state is
+ignored.

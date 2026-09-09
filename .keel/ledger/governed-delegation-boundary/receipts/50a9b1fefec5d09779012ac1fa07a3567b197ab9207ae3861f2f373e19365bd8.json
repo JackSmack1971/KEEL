@@ -1,0 +1,79 @@
+{
+  "ended_at": "2026-09-09T15:32:04.080545+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [
+    "ER-REQ-02",
+    "ER-REQ-06"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "2e00760372d905392fd7ea84cbf2a0f162d9ce0ba370b2e04cee4c97de41a27c",
+  "invocation": {
+    "argv": [
+      "python3",
+      "-B",
+      ".keel/tests/test_codex_app_server_adapter.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 349,
+      "excerpt": "{\"checks\": [\"handshake\", \"account\", \"thread-create\", \"thread-resume\", \"bounded-turn-events\", \"cost-gate\", \"malformed-frame\", \"idempotent-shutdown\", \"transport-policy\", \"scheduler-boundary\", \"governed-dispatch\", \"workspace-cwd\", \"observation-only\", \"objective-only-rejected\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_codex_app_server_adapter.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "50a9b1fefec5d09779012ac1fa07a3567b197ab9207ae3861f2f373e19365bd8",
+  "receipt_id": "50a9b1fefec5d09779012ac1fa07a3567b197ab9207ae3861f2f373e19365bd8",
+  "record_digest": "49fd155856ff0dd1afd2a04fad93a2ff1b57661b9e50d37cc8ebc47f4a0871d3",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T15:32:03.730535+00:00",
+  "subject": {
+    "base_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "changed_paths": [
+      ".keel/bootstrap-manifest.json",
+      ".keel/lib/codex_app_server_adapter.py",
+      ".keel/lib/scheduler.py",
+      ".keel/tests/smoke_scheduler.py",
+      ".keel/tests/test_codex_app_server_adapter.py",
+      ".keel/tests/test_scheduler.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/CODEX_NATIVE.md",
+      "docs/control-plane/KEEL_FORWARD_AUTHORITY.md",
+      "docs/control-plane/ORCHESTRATION.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/completed/governed-delegation-boundary.md"
+    ],
+    "content_digest": "b087a1f206c6bdc505015eedf9136194ae9e9d966ab5982d5cd07a4c23aba715",
+    "head_commit": "766de783bb846957b7011a38a9b7ffbb71b8e038",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "codex-app-server-adapter-tests",
+    "provenance": ".keel/tests/test_codex_app_server_adapter.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

@@ -8,6 +8,8 @@ sys.path.insert(0, str(Path(__file__).parents[1] / "lib"))
 
 import codex_app_server_adapter as adapter
 import runtime_authorization as ra
+import scheduler
+import git_proof
 
 
 class FakeStdout:
@@ -122,10 +124,43 @@ def test_transport_policy_and_scheduler_boundary():
     assert "subprocess" not in scheduler
 
 
-def test_scheduler_injection_dispatch_is_bounded_and_cost_gated():
+def envelope():
+    subject = git_proof.head_commit(Path(__file__).resolve().parents[2])
+    workspace = scheduler.WorkspaceBinding("workspace-1", str(Path(__file__).resolve().parents[2]), subject)
+    return scheduler.DispatchEnvelope("change-1", "work-1", subject, subject, workspace,
+        "intent-1", "graph-1", "authority-1", profile().identity, ra.runtime_profile_digest(profile()),
+        "context-1", "bounded governed context", "implement governed work", ("REQ-1",),
+        (".keel/lib/**",), (("repo:.keel/lib", "EXCLUSIVE"),), ("AC-1",),
+        "evidence-plan-1", "stop on drift", "report observation; KEEL verifies")
+
+
+def test_governed_dispatch_uses_workspace_and_observes_only():
     process = FakeProcess()
-    client = adapter.CodexAppServerAdapter(process, request_timeout=1)
-    result = client.dispatch(type("Unit", (), {"objective": "one bounded turn"})(), "workspace")
+    client = adapter.CodexAppServerAdapter(process, request_timeout=1, runtime_profile=profile(), cost_observations=included_cost())
+    governed = envelope(); result = client.dispatch(governed)
+    assert result.outcome == "OBSERVED" and result.observation is not None
+    assert result.observation.thread_id == "thr_test" and result.observation.turn_id == "turn_test"
+    thread = next(item for item in process.writes if item.get("method") == "thread/start")
+    assert thread["params"]["cwd"] == governed.workspace.path
+    turn = next(item for item in process.writes if item.get("method") == "turn/start")
+    payload = json.loads(turn["params"]["input"][0]["text"])
+    assert payload == governed.to_dict() and payload["objective"] != turn["params"]["input"][0]["text"]
+    client.close()
+
+
+def test_runtime_profile_mismatch_fails_before_thread_creation():
+    process=FakeProcess(); client=adapter.CodexAppServerAdapter(process,request_timeout=1,runtime_profile=profile(),cost_observations=included_cost())
+    result=client.dispatch(scheduler.DispatchEnvelope(**{**envelope().__dict__,"runtime_profile_digest":"stale"}))
+    assert result.outcome=="FAILED" and not any(item.get("method")=="thread/start" for item in process.writes)
+    client.close()
+
+
+def test_objective_only_dispatch_is_impossible_and_preflight_precedes_model():
+    process = FakeProcess(); client = adapter.CodexAppServerAdapter(process, request_timeout=1, runtime_profile=profile())
+    try: client.dispatch(type("Unit", (), {"objective":"only"})())
+    except ValueError: pass
+    else: assert False, "objective-only dispatch must be rejected"
+    result = client.dispatch(envelope())
     assert result.outcome == "FAILED" and result.failure_class.value == "AUTHORIZATION_BLOCK"
     assert not any(item.get("method") == "turn/start" for item in process.writes)
     client.close()
@@ -136,5 +171,7 @@ if __name__ == "__main__":
     test_cost_preflight_blocks_before_turn_request()
     test_malformed_frame_timeout_and_cleanup()
     test_transport_policy_and_scheduler_boundary()
-    test_scheduler_injection_dispatch_is_bounded_and_cost_gated()
-    print(json.dumps({"status": "PASS", "checks": ["handshake", "account", "thread-create", "thread-resume", "bounded-turn-events", "cost-gate", "malformed-frame", "idempotent-shutdown", "transport-policy", "scheduler-boundary", "injected-dispatch"]}, sort_keys=True))
+    test_governed_dispatch_uses_workspace_and_observes_only()
+    test_runtime_profile_mismatch_fails_before_thread_creation()
+    test_objective_only_dispatch_is_impossible_and_preflight_precedes_model()
+    print(json.dumps({"status": "PASS", "checks": ["handshake", "account", "thread-create", "thread-resume", "bounded-turn-events", "cost-gate", "malformed-frame", "idempotent-shutdown", "transport-policy", "scheduler-boundary", "governed-dispatch", "workspace-cwd", "observation-only", "objective-only-rejected"]}, sort_keys=True))

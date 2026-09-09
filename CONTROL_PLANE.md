@@ -57,8 +57,10 @@ Runtime trust and authorization now have a canonical M4 policy boundary:
 replaces boolean permission semantics, and effect contracts distinguish mediated,
 observed, and unconfined boundaries. This is not proof that a session is confined,
 and it supplies neither an effect executor nor an agent/runtime scheduler.
-Deterministic WorkGraph reconciliation and resource scheduling remain KEEL
-responsibilities as defined by the forward authority.
+Deterministic WorkGraph reconciliation, governed dispatch-envelope construction,
+resource scheduling, and exact-subject completion decisions remain KEEL
+responsibilities as defined by the forward authority. Codex turn completion is
+recorded only as an execution observation and never as engineering completion.
 Codex hook/rule/skill/agent surfaces are adapters over that boundary: the hook queries
 the kernel, generic read-only roles are selected from evidence/risk, and no adapter is
 an independent lifecycle, scope, evidence, or permission authority. Live hook trust and
