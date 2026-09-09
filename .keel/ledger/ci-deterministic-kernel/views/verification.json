@@ -1,0 +1,184 @@
+{
+  "acceptance": {
+    "passed_required": 13,
+    "required": 13,
+    "requirements_covered": 13,
+    "requirements_passing": 13,
+    "requirements_total": 13
+  },
+  "authority": "evidence-receipts.json",
+  "base_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+  "change_id": "ci-deterministic-kernel",
+  "change_type": "implementation",
+  "changed_paths": [
+    ".github/workflows/deterministic-kernel.yml",
+    ".keel/bootstrap-manifest.json",
+    ".keel/ci/verify.py",
+    ".keel/config.json",
+    ".keel/lib/canonical_ledger.py",
+    ".keel/tests/smoke_codex_app_server.py",
+    ".keel/tests/test_canonical_ledger.py",
+    ".keel/tests/test_deterministic_ci.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "docs/control-plane/TESTING_CI_GENERATED.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/ci-deterministic-kernel.md"
+  ],
+  "checks": [
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "compat"
+      ],
+      "cwd": ".",
+      "duration_ms": 483,
+      "excerpt": "    {\n      \"skill\": \"control-plane-maintenance\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"engineering-protocols\",\n      \"version\": \"1\"\n    },\n    {\n      \"skill\": \"keel-change-lifecycle\",\n      \"version\": \"1\"\n    }\n  ],\n  \"external\": {\n    \"codex_version\": \"UNVERIFIED\",\n    \"runtime_hooks\": \"UNVERIFIED\"\n  },\n  \"findings\": [],\n  \"read_only\": true\n}",
+      "exit_code": 0,
+      "id": "canonical-config-portability",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_compatibility_retirement.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 114,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "id": "compatibility-retirement-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "doctor"
+      ],
+      "cwd": ".",
+      "duration_ms": 545,
+      "excerpt": "{\n  \"status\": \"PASS\",\n  \"errors\": [],\n  \"autonomous_codex\": {\n    \"status\": \"BLOCKED\",\n    \"reason\": \"managed entitlement observations are unavailable; autonomous Codex execution is paused\",\n    \"resumable\": false,\n    \"resume_when\": \"\"\n  }\n}",
+      "exit_code": 0,
+      "id": "control-plane-doctor",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        ".keel/tests/test_deterministic_ci.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 1131,
+      "excerpt": "{\"kind\": \"hygiene_result\", \"offenders\": [\"tmp3qvjj305/__pycache__\"], \"status\": \"FAIL\"}\n{\"kind\": \"hygiene_result\", \"offenders\": [], \"status\": \"PASS\"}\n{\"argv\": [\"/root/.pyenv/versions/3.14.4/bin/python3\", \"-c\", \"raise SystemExit(7)\"], \"category\": \"intentional-regression-probe\", \"kind\": \"check_start\"}\n{\"category\": \"intentional-regression-probe\", \"exit_code\": 7, \"kind\": \"check_result\", \"status\": \"FAIL\"}\n{\"argv\": [\"/root/.pyenv/versions/3.14.4/bin/python3\", \"-B\", \".keel/bin/keel.py\", \"manifest\"], \"category\": \"manifest-drift-probe\", \"kind\": \"check_start\"}\n{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"e8b1269d2ce094e13e5d907bacb05a935353966b75743b21dd754e021f7a69c9\"\n}\n{\"category\": \"manifest-drift-probe\", \"exit_code\": 0, \"kind\": \"check_result\", \"status\": \"PASS\"}\n{\"checks\": [\"category-coverage\", \"linux-windows-matrix\", \"thin-yaml\", \"zero-credential-surface\", \"runtime-unverified\", \"hygiene-failure-probe\", \"regression-failure-probe\", \"manifest-drift-check\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "id": "deterministic-ci-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_deterministic_ci.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        ".keel/bin/keel.py",
+        "manifest"
+      ],
+      "cwd": ".",
+      "duration_ms": 487,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"e8b1269d2ce094e13e5d907bacb05a935353966b75743b21dd754e021f7a69c9\"\n}",
+      "exit_code": 0,
+      "id": "manifest-producer-check",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".keel/tests/test_p0_contract.py"
+      ],
+      "cwd": ".",
+      "duration_ms": 542,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"portable-resolution\", \"git-bootstrap\", \"artifact-boundary\", \"compatibility\", \"attestation\", \"negative-cases\"]}",
+      "exit_code": 0,
+      "id": "p0-contract-tests",
+      "required": true,
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "compatibility_projection": true,
+  "content_digest": "5a6dfbaa09d44c5cf3da84a43580ff0fafb1cc62f615ffd2a8bc7219dc7e8d19",
+  "errors": [],
+  "evidence_plan_digest": "4bf56148f160034e8a45e9bf0c654d8c0d55346d74a340dd0a7e8042544d2ca1",
+  "implementation_status": "PASS",
+  "intent_digest": "3fb98f607fba662b8a749fa635d22a1ecae9d9bc65cb2c24d84ac211d64925b3",
+  "schema_version": 4,
+  "status": "PASS",
+  "verification_class": "IMPLEMENTATION_ACCEPTANCE",
+  "verified_at": "2026-09-09T14:34:23+00:00"
+}

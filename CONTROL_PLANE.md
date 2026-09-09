@@ -63,3 +63,12 @@ Codex hook/rule/skill/agent surfaces are adapters over that boundary: the hook q
 the kernel, generic read-only roles are selected from evidence/risk, and no adapter is
 an independent lifecycle, scope, evidence, or permission authority. Live hook trust and
 coverage still require per-runtime observation.
+
+## Hosted deterministic verification
+
+GitHub-hosted Linux and Windows jobs continuously exercise the repository-owned
+deterministic kernel suite. Their trust boundary ends at verified checkout behavior:
+static hooks/fixtures and an explicit `UNVERIFIED_RUNTIME` smoke result do not prove
+live Codex hook loading, trust, delivery, enforcement, or runtime activation. The
+workflow carries no model credentials and performs no model execution, preserving
+`ZERO_INCREMENTAL_COST`.

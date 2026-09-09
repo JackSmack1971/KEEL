@@ -1,0 +1,90 @@
+{
+  "ended_at": "2026-09-09T14:34:22.042868+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [
+    "ER-REQ-01",
+    "ER-REQ-02",
+    "ER-REQ-03",
+    "ER-REQ-04",
+    "ER-REQ-05",
+    "ER-REQ-06",
+    "ER-REQ-07",
+    "ER-REQ-08",
+    "ER-REQ-09",
+    "ER-REQ-10",
+    "ER-REQ-11",
+    "ER-REQ-12",
+    "ER-REQ-13"
+  ],
+  "generated_by": "keel-kernel",
+  "intent_digest": "3fb98f607fba662b8a749fa635d22a1ecae9d9bc65cb2c24d84ac211d64925b3",
+  "invocation": {
+    "argv": [
+      "python3",
+      "-B",
+      ".keel/tests/test_deterministic_ci.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 1131,
+      "excerpt": "{\"kind\": \"hygiene_result\", \"offenders\": [\"tmp3qvjj305/__pycache__\"], \"status\": \"FAIL\"}\n{\"kind\": \"hygiene_result\", \"offenders\": [], \"status\": \"PASS\"}\n{\"argv\": [\"/root/.pyenv/versions/3.14.4/bin/python3\", \"-c\", \"raise SystemExit(7)\"], \"category\": \"intentional-regression-probe\", \"kind\": \"check_start\"}\n{\"category\": \"intentional-regression-probe\", \"exit_code\": 7, \"kind\": \"check_result\", \"status\": \"FAIL\"}\n{\"argv\": [\"/root/.pyenv/versions/3.14.4/bin/python3\", \"-B\", \".keel/bin/keel.py\", \"manifest\"], \"category\": \"manifest-drift-probe\", \"kind\": \"check_start\"}\n{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"e8b1269d2ce094e13e5d907bacb05a935353966b75743b21dd754e021f7a69c9\"\n}\n{\"category\": \"manifest-drift-probe\", \"exit_code\": 0, \"kind\": \"check_result\", \"status\": \"PASS\"}\n{\"checks\": [\"category-coverage\", \"linux-windows-matrix\", \"thin-yaml\", \"zero-credential-surface\", \"runtime-unverified\", \"hygiene-failure-probe\", \"regression-failure-probe\", \"manifest-drift-check\"], \"status\": \"PASS\"}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_deterministic_ci.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "3b4bb361a2967592df720aea4d51292188359190dac78ac345ec53e858030b1d",
+  "receipt_id": "3b4bb361a2967592df720aea4d51292188359190dac78ac345ec53e858030b1d",
+  "record_digest": "1d1ec10e27c967a15789b2889c3a34aa3dd38ff45e9a50a8bce4a20f8944c862",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T14:34:20.911318+00:00",
+  "subject": {
+    "base_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+    "changed_paths": [
+      ".github/workflows/deterministic-kernel.yml",
+      ".keel/bootstrap-manifest.json",
+      ".keel/ci/verify.py",
+      ".keel/config.json",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_deterministic_ci.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/TESTING_CI_GENERATED.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/ci-deterministic-kernel.md"
+    ],
+    "content_digest": "5a6dfbaa09d44c5cf3da84a43580ff0fafb1cc62f615ffd2a8bc7219dc7e8d19",
+    "head_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "deterministic-ci-contract-tests",
+    "provenance": ".keel/tests/test_deterministic_ci.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

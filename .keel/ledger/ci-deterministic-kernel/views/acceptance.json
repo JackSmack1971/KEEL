@@ -1,0 +1,174 @@
+{
+  "criteria": [
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-01",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-01",
+      "statement": "Hosted GitHub Actions runs the fresh-checkout deterministic suite on Linux and Windows; macOS exclusion is reasoned from current portability evidence."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-02",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-02",
+      "statement": "The CI suite visibly exercises public CLI, ledger/kernel, scheduler, evidence, Git proof/candidate/landing, portability/install, documentation/contracts, hook wire-contract, and Codex App Server fixture categories."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-03",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-03",
+      "statement": "The runtime-dependent Codex smoke reports PASS, a genuine failure, or UNVERIFIED_RUNTIME and never converts runtime absence into live verification."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-04",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-04",
+      "statement": "CI makes no model/API calls, uses no paid-service credential, and adds no incremental AI-cost mechanism."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-05",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-05",
+      "statement": "CI fails when the generated bootstrap manifest or validated configuration drifts from its declared source."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-06",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-06",
+      "statement": "CI performs deterministic cache, temporary-artifact, and Python bytecode hygiene checks."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-07",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-07",
+      "statement": "The workflow YAML remains thin and delegates validation to repository-owned Python tooling."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-08",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-08",
+      "statement": "Authoritative documentation explicitly limits hosted CI proof to repository behavior and excludes live Codex hook/runtime activation."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-09",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-09",
+      "statement": "A fresh checkout of the candidate executes the full deterministic suite successfully."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-10",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-10",
+      "statement": "A temporary deliberately failing kernel-test probe makes the repository-owned CI command fail and is not landed."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-11",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-11",
+      "statement": "Hosted-CI Codex runtime absence is explicitly reported as UNVERIFIED_RUNTIME."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-12",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-12",
+      "statement": "Canonical serialization, path handling, Git proof, and ledger validation have equivalent pass/fail behavior on Linux and Windows."
+    },
+    {
+      "evidence": [
+        {
+          "check_id": "deterministic-ci-contract-tests",
+          "provider": "unit_test"
+        }
+      ],
+      "id": "AC-13",
+      "policy": "all",
+      "required": true,
+      "requirement_id": "REQ-13",
+      "statement": "Affected plans and architecture/control-plane/verification documentation are reconciled without advancing a later North-Star stage."
+    }
+  ],
+  "schema_version": 1
+}

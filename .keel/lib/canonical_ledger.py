@@ -43,7 +43,7 @@ def validate_intent(v,require_planned=False):
  else:
   for x in v["scope"]:
    p=PurePosixPath(str(x).replace("\\","/"))
-   if not isinstance(x,str) or not x or p.is_absolute() or ".." in p.parts or x.startswith(".git"):e.append(f"unsafe scope pattern: {x}")
+   if not isinstance(x,str) or not x or p.is_absolute() or ".." in p.parts or x == ".git" or x.startswith(".git/"):e.append(f"unsafe scope pattern: {x}")
  for field in ("requirements","non_goals","effect_requests","evidence_requirements","decisions"):
   if not isinstance(v.get(field),list):e.append(f"intent {field} must be a list")
  ids=[]

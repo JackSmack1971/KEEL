@@ -1,0 +1,12 @@
+{
+  "base_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+  "change_id": "ci-deterministic-kernel",
+  "generated": true,
+  "mode": "standard",
+  "phase": "SHIP",
+  "schema": "keel.change-status-view/v1",
+  "source": {
+    "intent_digest": "bae3348134c30390872517dd6f051c94d7534213d96aa3fe0fa7c7407cacb9c6",
+    "last_event_digest": "7a7db9313b3408c395f965788c5bf930560bdb9fee46bd1f6a9eaaca8bd08f87"
+  }
+}

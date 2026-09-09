@@ -1,0 +1,208 @@
+{
+  "assignments": [
+    {
+      "evidence_requirement_id": "ER-REQ-01",
+      "requirement_id": "REQ-01",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-02",
+      "requirement_id": "REQ-02",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-03",
+      "requirement_id": "REQ-03",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-04",
+      "requirement_id": "REQ-04",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-05",
+      "requirement_id": "REQ-05",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-06",
+      "requirement_id": "REQ-06",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-07",
+      "requirement_id": "REQ-07",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-08",
+      "requirement_id": "REQ-08",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-09",
+      "requirement_id": "REQ-09",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-10",
+      "requirement_id": "REQ-10",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-11",
+      "requirement_id": "REQ-11",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-12",
+      "requirement_id": "REQ-12",
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "evidence_requirement_id": "ER-REQ-13",
+      "requirement_id": "REQ-13",
+      "verifier_id": "deterministic-ci-contract-tests"
+    }
+  ],
+  "changed_paths": [
+    ".github/workflows/deterministic-kernel.yml",
+    ".keel/bootstrap-manifest.json",
+    ".keel/ci/verify.py",
+    ".keel/config.json",
+    ".keel/lib/canonical_ledger.py",
+    ".keel/tests/smoke_codex_app_server.py",
+    ".keel/tests/test_canonical_ledger.py",
+    ".keel/tests/test_deterministic_ci.py",
+    "ARCHITECTURE.md",
+    "CONTROL_PLANE.md",
+    "docs/control-plane/TESTING_CI_GENERATED.md",
+    "docs/control-plane/VERIFICATION.md",
+    "docs/exec-plans/active/ci-deterministic-kernel.md"
+  ],
+  "errors": [],
+  "plan_digest": "4bf56148f160034e8a45e9bf0c654d8c0d55346d74a340dd0a7e8042544d2ca1",
+  "repository_facts_digest": "00ce32b55a07c32d56a4b643757b3d6c09cd0f8e0cba0690478c6d259473312c",
+  "risk_level": "high",
+  "schema_version": 1,
+  "status": "PASS",
+  "steps": [
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "compat"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "canonical-config-portability"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "compatibility-retirement-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "doctor"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "control-plane-doctor"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [
+        "ER-REQ-01",
+        "ER-REQ-02",
+        "ER-REQ-03",
+        "ER-REQ-04",
+        "ER-REQ-05",
+        "ER-REQ-06",
+        "ER-REQ-07",
+        "ER-REQ-08",
+        "ER-REQ-09",
+        "ER-REQ-10",
+        "ER-REQ-11",
+        "ER-REQ-12",
+        "ER-REQ-13"
+      ],
+      "mandatory_kernel": false,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python3",
+          "-B",
+          ".keel/tests/test_deterministic_ci.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "deterministic-ci-contract-tests"
+    },
+    {
+      "authority": "INSPECTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "command",
+      "runtime": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "manifest-producer-check"
+    },
+    {
+      "authority": "TESTED",
+      "establishes": [],
+      "mandatory_kernel": true,
+      "provider": "unit_test",
+      "runtime": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_p0_contract.py"
+        ],
+        "cwd": ".",
+        "kind": "command",
+        "timeout_sec": 120
+      },
+      "verifier_id": "p0-contract-tests"
+    }
+  ]
+}

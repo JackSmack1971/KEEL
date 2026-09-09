@@ -1,0 +1,76 @@
+{
+  "ended_at": "2026-09-09T14:34:20.365063+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "3fb98f607fba662b8a749fa635d22a1ecae9d9bc65cb2c24d84ac211d64925b3",
+  "invocation": {
+    "argv": [
+      "python",
+      "-B",
+      ".keel/tests/test_compatibility_retirement.py"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 114,
+      "excerpt": "{\"status\": \"PASS\", \"checks\": [\"retired-paths\", \"single-cli\", \"canonical-manifest\", \"optional-maintenance\", \"policy-packs\", \"protected-invariants\", \"legacy-ledger-reader\"]}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          "-B",
+          ".keel/tests/test_compatibility_retirement.py"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "ddea1e3db96caa8d363485f95326461b8d8b0176d3eb5b68defb5c21f3259401",
+  "receipt_id": "ddea1e3db96caa8d363485f95326461b8d8b0176d3eb5b68defb5c21f3259401",
+  "record_digest": "3b1bc0b4bb7a173dab9782c070c17c29a46acc4be495143a730252f0de518496",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T14:34:20.250720+00:00",
+  "subject": {
+    "base_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+    "changed_paths": [
+      ".github/workflows/deterministic-kernel.yml",
+      ".keel/bootstrap-manifest.json",
+      ".keel/ci/verify.py",
+      ".keel/config.json",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_deterministic_ci.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/TESTING_CI_GENERATED.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/ci-deterministic-kernel.md"
+    ],
+    "content_digest": "5a6dfbaa09d44c5cf3da84a43580ff0fafb1cc62f615ffd2a8bc7219dc7e8d19",
+    "head_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "TESTED",
+    "id": "compatibility-retirement-tests",
+    "provenance": ".keel/tests/test_compatibility_retirement.py",
+    "provider": "unit_test",
+    "version": "1"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "ended_at": "2026-09-09T14:34:22.530932+00:00",
+  "environment": {
+    "digest": "a0946c2b89b6ffaa36212f07677a551ef6878cde09cce141f535e41c5c161ab4",
+    "executable": "python3",
+    "machine": "x86_64",
+    "os": "posix",
+    "platform": "Linux",
+    "python": "3.14.4"
+  },
+  "establishes": [],
+  "generated_by": "keel-kernel",
+  "intent_digest": "3fb98f607fba662b8a749fa635d22a1ecae9d9bc65cb2c24d84ac211d64925b3",
+  "invocation": {
+    "argv": [
+      "python",
+      ".keel/bin/keel.py",
+      "manifest"
+    ],
+    "cwd": ".",
+    "timeout_sec": 120
+  },
+  "observations": [
+    {
+      "duration_ms": 487,
+      "excerpt": "{\n  \"status\": \"VERIFIED\",\n  \"producer\": {\n    \"command\": [\n      \"python\",\n      \".keel/bin/keel.py\",\n      \"manifest\",\n      \"--write\"\n    ],\n    \"source\": \".keel/lib/p0_contract.py\"\n  },\n  \"digest\": \"e8b1269d2ce094e13e5d907bacb05a935353966b75743b21dd754e021f7a69c9\"\n}",
+      "exit_code": 0,
+      "kind": "command-result",
+      "resolution": {
+        "argv": [
+          "python",
+          ".keel/bin/keel.py",
+          "manifest"
+        ],
+        "provenance": "runtime contract",
+        "reason": "declared repository-relative command is executable",
+        "source": "declared",
+        "status": "VERIFIED"
+      }
+    }
+  ],
+  "receipt_digest": "90c5a144637586367f58ebd7d05ad4ae1642077661126ad86ed850ca2b16a91f",
+  "receipt_id": "90c5a144637586367f58ebd7d05ad4ae1642077661126ad86ed850ca2b16a91f",
+  "record_digest": "8206a58b156ccc920fd00bff34245cbd4fbf64145252537ba9829134fe1b9a86",
+  "result": "PASS",
+  "schema_version": 1,
+  "started_at": "2026-09-09T14:34:22.043752+00:00",
+  "subject": {
+    "base_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+    "changed_paths": [
+      ".github/workflows/deterministic-kernel.yml",
+      ".keel/bootstrap-manifest.json",
+      ".keel/ci/verify.py",
+      ".keel/config.json",
+      ".keel/lib/canonical_ledger.py",
+      ".keel/tests/smoke_codex_app_server.py",
+      ".keel/tests/test_canonical_ledger.py",
+      ".keel/tests/test_deterministic_ci.py",
+      "ARCHITECTURE.md",
+      "CONTROL_PLANE.md",
+      "docs/control-plane/TESTING_CI_GENERATED.md",
+      "docs/control-plane/VERIFICATION.md",
+      "docs/exec-plans/active/ci-deterministic-kernel.md"
+    ],
+    "content_digest": "5a6dfbaa09d44c5cf3da84a43580ff0fafb1cc62f615ffd2a8bc7219dc7e8d19",
+    "head_commit": "d9498d5acbebd533d1707642089e7f624c275884",
+    "kind": "git-worktree"
+  },
+  "verifier": {
+    "declared_authority": "INSPECTED",
+    "id": "manifest-producer-check",
+    "provenance": ".keel/bin/keel.py",
+    "provider": "command",
+    "version": "1"
+  }
+}

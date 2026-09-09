@@ -65,3 +65,13 @@ resumability.
 Optional maintenance lives under `.keel/maintenance/`. Reusable consumer-project
 policy templates live under `policies/templates/`. Historical bootstrap research
 lives under `docs/references/research/`; neither surface is product authority.
+
+## Hosted verification boundary
+
+The repository's GitHub Actions matrix delegates deterministic verification to
+`.keel/ci/verify.py` on Linux and Windows. This adds a clean hosted proof surface for
+the existing kernel; it does not add a runtime component, change a kernel boundary,
+or advance a North-Star stage. Hosted success proves repository behavior only.
+Live Codex hook/runtime activation remains unverified unless separately observed in
+an installed, trusted runtime; the CI smoke branch reports `UNVERIFIED_RUNTIME` and
+never starts Codex.

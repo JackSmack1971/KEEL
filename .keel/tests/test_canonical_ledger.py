@@ -16,6 +16,10 @@ class CanonicalLedgerTests(unittest.TestCase):
    with self.assertRaisesRegex(RuntimeError,"integrity"):c.read_events(d)
   x=self.intent();x["scope"]=["../escape"]
   self.assertTrue(any("unsafe scope" in e for e in c.validate_intent(x)))
+  x=self.intent();x["scope"]=[".github/workflows/ci.yml"]
+  self.assertEqual(c.validate_intent(x),[])
+  x["scope"]=[".git/config"]
+  self.assertTrue(any("unsafe scope" in e for e in c.validate_intent(x)))
  def test_stable_event_identity(self):
   with tempfile.TemporaryDirectory() as a,tempfile.TemporaryDirectory() as b:
    for td in (a,b):

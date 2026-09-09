@@ -10,6 +10,9 @@ from codex_app_server_adapter import CodexAppServerAdapter, AdapterError
 
 
 def main():
+    if "--no-live-runtime" in sys.argv:
+        print(json.dumps({"status": "UNVERIFIED_RUNTIME", "reason": "live Codex runtime is intentionally disabled in deterministic CI"}, sort_keys=True))
+        return 0
     executable = shutil.which("codex")
     if executable is None:
         print(json.dumps({"status": "UNVERIFIED_RUNTIME", "reason": "codex executable is not installed or reachable"}, sort_keys=True))
